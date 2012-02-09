@@ -1,3 +1,4 @@
 # Ignorando los directorios y archivos listados a continuación:
 
 build/
+bin/
