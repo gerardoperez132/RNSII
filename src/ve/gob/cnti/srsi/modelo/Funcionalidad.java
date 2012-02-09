@@ -18,7 +18,6 @@ public class Funcionalidad {
 	public Funcionalidad(int id, int funcionalidad, int servicio_informacion,
 			String nombre, String descripcion, int status, Date fecha_creado,
 			Date fecha_modificado) {
-		super();
 		this.id = id;
 		this.funcionalidad = funcionalidad;
 		this.servicio_informacion = servicio_informacion;
