@@ -94,4 +94,13 @@ public class EntradaSalida {
 		this.fecha_modificado = fecha_modificado;
 	}
 
+	@Override
+	public String toString() {
+		return "EntradaSalida [id=" + id + ", entrada_salida=" + entrada_salida
+				+ ", funcionalidad=" + funcionalidad + ", tipo=" + tipo
+				+ ", formato=" + formato + ", status=" + status
+				+ ", fecha_creado=" + fecha_creado + ", fecha_modificado="
+				+ fecha_modificado + "]";
+	}
+
 }
