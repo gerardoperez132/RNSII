@@ -17,19 +17,6 @@ public class EntradaSalida {
 
 	}
 
-	public EntradaSalida(int id, int entrada_salida, int funcionalidad,
-			int tipo, String formato, int status, Date fecha_creado,
-			Date fecha_modificado) {
-		this.id = id;
-		this.entrada_salida = entrada_salida;
-		this.funcionalidad = funcionalidad;
-		this.tipo = tipo;
-		this.formato = formato;
-		this.status = status;
-		this.fecha_creado = fecha_creado;
-		this.fecha_modificado = fecha_modificado;
-	}
-
 	public int getId() {
 		return id;
 	}

@@ -15,19 +15,6 @@ public class Funcionalidad {
 	public Funcionalidad() {
 	}
 
-	public Funcionalidad(int id, int funcionalidad, int servicio_informacion,
-			String nombre, String descripcion, int status, Date fecha_creado,
-			Date fecha_modificado) {
-		this.id = id;
-		this.funcionalidad = funcionalidad;
-		this.servicio_informacion = servicio_informacion;
-		this.nombre = nombre;
-		this.descripcion = descripcion;
-		this.status = status;
-		this.fecha_creado = fecha_creado;
-		this.fecha_modificado = fecha_modificado;
-	}
-
 	public int getId() {
 		return id;
 	}
