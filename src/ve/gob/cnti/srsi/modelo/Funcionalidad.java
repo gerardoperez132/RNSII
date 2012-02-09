@@ -92,4 +92,13 @@ public class Funcionalidad {
 		this.fecha_modificado = fecha_modificado;
 	}
 
+	@Override
+	public String toString() {
+		return "Funcionalidad [id=" + id + ", funcionalidad=" + funcionalidad
+				+ ", servicio_informacion=" + servicio_informacion
+				+ ", nombre=" + nombre + ", descripcion=" + descripcion
+				+ ", status=" + status + ", fecha_creado=" + fecha_creado
+				+ ", fecha_modificado=" + fecha_modificado + "]";
+	}
+
 }
