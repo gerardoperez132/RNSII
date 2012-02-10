@@ -7,7 +7,7 @@ public class EntradaSalida {
 	private int id;
 	private int entrada_salida;
 	private int funcionalidad;
-	private int tipo;
+	private int tipo; //Tipo Entrada o Salida
 	private String formato;
 	private int status;
 	private Date fecha_creado;
