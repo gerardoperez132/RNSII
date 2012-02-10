@@ -4,8 +4,8 @@ import java.util.Date;
 
 public class Funcionalidad {
 	private int id;
-	private int funcionalidad;
-	private int servicio_informacion;
+	private int id_funcionalidad;
+	private int id_servicio_informacion;
 	private String nombre;
 	private String descripcion;
 	private int status;
@@ -19,24 +19,24 @@ public class Funcionalidad {
 		return id;
 	}
 
-	protected void setId(int id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
-	public int getFuncionalidad() {
-		return funcionalidad;
+	public int getId_funcionalidad() {
+		return id_funcionalidad;
 	}
 
-	public void setFuncionalidad(int funcionalidad) {
-		this.funcionalidad = funcionalidad;
+	public void setId_funcionalidad(int id_funcionalidad) {
+		this.id_funcionalidad = id_funcionalidad;
 	}
 
-	public int getServicio_informacion() {
-		return servicio_informacion;
+	public int getId_servicio_informacion() {
+		return id_servicio_informacion;
 	}
 
-	public void setServicio_informacion(int servicio_informacion) {
-		this.servicio_informacion = servicio_informacion;
+	public void setId_servicio_informacion(int id_servicio_informacion) {
+		this.id_servicio_informacion = id_servicio_informacion;
 	}
 
 	public String getNombre() {
@@ -81,11 +81,12 @@ public class Funcionalidad {
 
 	@Override
 	public String toString() {
-		return "Funcionalidad [id=" + id + ", funcionalidad=" + funcionalidad
-				+ ", servicio_informacion=" + servicio_informacion
-				+ ", nombre=" + nombre + ", descripcion=" + descripcion
-				+ ", status=" + status + ", fecha_creado=" + fecha_creado
-				+ ", fecha_modificado=" + fecha_modificado + "]";
+		return "Funcionalidad [id=" + id + ", id_funcionalidad="
+				+ id_funcionalidad + ", id_servicio_informacion="
+				+ id_servicio_informacion + ", nombre=" + nombre
+				+ ", descripcion=" + descripcion + ", status=" + status
+				+ ", fecha_creado=" + fecha_creado + ", fecha_modificado="
+				+ fecha_modificado + "]";
 	}
 
 }
