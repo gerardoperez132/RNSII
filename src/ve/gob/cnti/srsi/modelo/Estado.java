@@ -4,7 +4,11 @@ import java.util.Date;
 
 /**
  * 
+ * Esta clase contendrá los tipos de estados que tiene un servicio de
+ * información, hasta el momento son en desarrollo e implementado.
+ * 
  * @author Richard Ricciardelli
+ * 
  * 
  * */
 public class Estado {
