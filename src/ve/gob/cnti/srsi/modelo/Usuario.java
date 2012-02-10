@@ -6,7 +6,7 @@ public class Usuario {
 
 	private int id;	
 	private int id_usuario;
-	private int ente;
+	private int id_ente;
 	private String nombre;
 	private String apellido;
 	private String cedula;
@@ -35,11 +35,11 @@ public class Usuario {
 	}
 
 	public int getEnte() {
-		return ente;
+		return id_ente;
 	}
 
-	public void setEnte(int ente) {
-		this.ente = ente;
+	public void setEnte(int id_ente) {
+		this.id_ente = id_ente;
 	}
 
 	public String getNombre() {
@@ -101,7 +101,7 @@ public class Usuario {
 	@Override
 	public String toString() {
 		return "usuario [id=" + id + ", id_usuario=" + id_usuario + ", ente="
-				+ ente + ", nombre=" + nombre + ", apellido=" + apellido
+				+ id_ente + ", nombre=" + nombre + ", apellido=" + apellido
 				+ ", cedula=" + cedula + ", clave=" + clave + ", status="
 				+ status + ", fecha_creado=" + fecha_creado
 				+ ", fecha_modificado=" + fecha_modificado + "]";
