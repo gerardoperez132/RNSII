@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+		<property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/srsi</property>
+		<property name="hibernate.connection.username">postgres</property>
+		<property name="hibernate.connection.password">postgres</property>
+		<property name="hibernate.connection.pool_size">1</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+		<property name="show_sql">true</property>
+		<property name="hbm2ddl.auto">update</property>
+		<mapping class="ve.gob.cnti.srsi.modelo.Area" />
+		<mapping class="ve.gob.cnti.srsi.modelo.Arquitectura" />
+		<mapping class="ve.gob.cnti.srsi.modelo.Dato" />
+		<mapping class="ve.gob.cnti.srsi.modelo.EntradaSalida" />
+		<mapping class="ve.gob.cnti.srsi.modelo.Estado" />
+		<mapping class="ve.gob.cnti.srsi.modelo.Funcionalidad" />
+		<mapping class="ve.gob.cnti.srsi.modelo.Suscrito" />
+		<mapping class="ve.gob.cnti.srsi.modelo.TipoDato" />
+	</session-factory>
+</hibernate-configuration>
