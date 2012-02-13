@@ -2,6 +2,12 @@ package ve.gob.cnti.srsi.modelo;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * Esta clase contendrá los tipos de estados que tiene un servicio de
  * información, hasta el momento son en desarrollo e implementado.
@@ -10,8 +16,12 @@ import java.util.Date;
  * 
  * 
  * */
+@Entity
+@Table(name = "estados")
 public class Estado {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private long id_estado;
 	private String nombre;
