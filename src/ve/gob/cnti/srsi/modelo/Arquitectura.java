@@ -2,28 +2,35 @@ package ve.gob.cnti.srsi.modelo;
 
 import java.util.Date;
 
+/**
+ * El tipo de arquitectura del servicio. Puede ser Web Semántica, Servicio Web u
+ * otro tipo que sería generalmente la combinación de ambas.
+ * 
+ * @author Richard Ricciardelli
+ * 
+ */
 public class Arquitectura {
 
-	private int id;
-	private int id_arquitectura;
+	private long id;
+	private long id_arquitectura;
 	private String nombre;
 	private int status;
 	private Date fecha_creado;
 	private Date fecha_modificado;
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
-	public int getId_arquitectura() {
+	public long getId_arquitectura() {
 		return id_arquitectura;
 	}
 
-	public void setId_arquitectura(int id_arquitectura) {
+	public void setId_arquitectura(long id_arquitectura) {
 		this.id_arquitectura = id_arquitectura;
 	}
 
