@@ -2,6 +2,12 @@ package ve.gob.cnti.srsi.modelo;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * Esta clase indica las diferentes entradas y salidas que tiene una
  * Funcionalidad.
@@ -10,8 +16,12 @@ import java.util.Date;
  * @author Richard Ricciardelli
  * 
  */
+@Entity
+@Table(name = "entradas_salidas")
 public class EntradaSalida {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private long id_entrada_salida;
 	private long id_funcionalidad; // FK
