@@ -3,7 +3,6 @@ package ve.gob.cnti.srsi.modelo;
 import java.util.Date;
 
 /**
- * 
  * Esta clase contendrá los tipos de estados que tiene un servicio de
  * información, hasta el momento son en desarrollo e implementado.
  * 
@@ -13,26 +12,26 @@ import java.util.Date;
  * */
 public class Estado {
 
-	private int id;
-	private int id_estado;
+	private long id;
+	private long id_estado;
 	private String nombre;
 	private int status;
 	private Date fecha_creado;
 	private Date fecha_modificado;
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
-	public int getId_estado() {
+	public long getId_estado() {
 		return id_estado;
 	}
 
-	public void setId_estado(int id_estado) {
+	public void setId_estado(long id_estado) {
 		this.id_estado = id_estado;
 	}
 
