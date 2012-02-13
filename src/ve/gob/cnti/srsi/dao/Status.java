@@ -1,4 +1,4 @@
-package ve.gob.cnti.srsi.modelo;
+package ve.gob.cnti.srsi.dao;
 
 /**
  * Interfaz de estados de registro.
