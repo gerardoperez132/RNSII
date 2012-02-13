@@ -1,9 +1,30 @@
 package ve.gob.cnti.srsi.modelo;
 
+/****
+*
+* @author joaquin
+* 
+* Clase modelo que tiene la relación muchos a muchos entre:
+* 
+* usuarios - roles
+* 
+* 
+*/
+
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="union_usuarios_roles")
 public class Union_usuario_rol {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;	
 	private int id_sector;	
 	private int id_ente;

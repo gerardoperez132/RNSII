@@ -1,9 +1,27 @@
 package ve.gob.cnti.srsi.modelo;
 
+/****
+ *
+ * @author joaquin
+ * 
+ * Clase modelo con los atributos de la tabla teléfonos 
+ *
+ */
+
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="telefonos")
 public class Telefono {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private int id_telefono;
 	private int id_padre;

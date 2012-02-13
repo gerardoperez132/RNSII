@@ -2,8 +2,26 @@ package ve.gob.cnti.srsi.modelo;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+/****
+ * 
+ * @author joaquin
+ * 
+ * Clase modelo con los atributos de los servicios de información del estado Venezolano
+ *
+ */
+
+@Entity
+@Table(name="servicios_de_informacion")
 public class Servicio_Informacion {
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private int id_servicio_informacion;
 	private int id_ente;	
@@ -13,6 +31,7 @@ public class Servicio_Informacion {
 	private int status;
 	private Date fecha_creado;
 	private Date fecha_modificado;
+	private boolean publicado;
 	private int id_estado;
 	private int id_aspectos_legales;
 	private int id_nivel_seguridad;
@@ -99,6 +118,14 @@ public class Servicio_Informacion {
 
 	public void setId_estado(int id_estado) {
 		this.id_estado = id_estado;
+	}
+
+	public boolean isPublicado() {
+		return publicado;
+	}
+
+	public void setPublicado(boolean publicado) {
+		this.publicado = publicado;
 	}
 
 	public int getId_aspectos_legales() {
