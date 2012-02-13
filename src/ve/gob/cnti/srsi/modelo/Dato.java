@@ -2,6 +2,9 @@ package ve.gob.cnti.srsi.modelo;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 /**
  * La clase dato guarda la relación del dato que tiene una entrada o salida y,
  * para conocer el tipo de dato de que se trata, obtiene la información de la
@@ -14,6 +17,8 @@ import java.util.Date;
  * @author Richard Ricciardelli
  * 
  */
+@Entity
+@Table(name = "datos")
 public class Dato {
 	private long id;
 	private long id_dato;
