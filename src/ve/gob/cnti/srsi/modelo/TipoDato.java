@@ -2,30 +2,48 @@ package ve.gob.cnti.srsi.modelo;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+/**
+ * Tipo de dato que se está utilizando. Entre ellos están los datos tipo
+ * {@link String}, {@link Integer}, Compuestos, entre otros.
+ * 
+ * @author Richard Ricciardelli
+ * 
+ */
+@Entity
+@Table(name = "tipos_datos")
 public class TipoDato {
 
-	private int id;
-	private int id_tipo_dato;
-	private int clase_dato; // Simple o compuesto
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
+	private long id_tipo_dato;
+	/** Simple o compuesto. */
+	private int clase_dato;
 	private String nombre;
 	private String descripcion;
 	private int status;
 	private Date fecha_creado;
 	private Date fecha_modificado;
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
-	public int getId_tipo_dato() {
+	public long getId_tipo_dato() {
 		return id_tipo_dato;
 	}
 
-	public void setId_tipo_dato(int id_tipo_dato) {
+	public void setId_tipo_dato(long id_tipo_dato) {
 		this.id_tipo_dato = id_tipo_dato;
 	}
 
