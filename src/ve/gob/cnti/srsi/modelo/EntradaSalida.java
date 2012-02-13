@@ -2,11 +2,19 @@ package ve.gob.cnti.srsi.modelo;
 
 import java.util.Date;
 
+/**
+ * Esta clase indica las diferentes entradas y salidas que tiene una
+ * Funcionalidad.
+ * 
+ * @see Funcionalidad
+ * @author Richard Ricciardelli
+ * 
+ */
 public class EntradaSalida {
 
-	private int id;
-	private int id_entrada_salida;
-	private int id_funcionalidad; // FK
+	private long id;
+	private long id_entrada_salida;
+	private long id_funcionalidad; // FK
 	private int tipo; // Tipo Entrada o Salida (0 ó 1)
 	private String formato; // ¿Codificación?
 	private int status;
@@ -16,27 +24,27 @@ public class EntradaSalida {
 	public EntradaSalida() {
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
-	public int getId_entrada_salida() {
+	public long getId_entrada_salida() {
 		return id_entrada_salida;
 	}
 
-	public void setId_entrada_salida(int id_entrada_salida) {
+	public void setId_entrada_salida(long id_entrada_salida) {
 		this.id_entrada_salida = id_entrada_salida;
 	}
 
-	public int getId_funcionalidad() {
+	public long getId_funcionalidad() {
 		return id_funcionalidad;
 	}
 
-	public void setId_funcionalidad(int id_funcionalidad) {
+	public void setId_funcionalidad(long id_funcionalidad) {
 		this.id_funcionalidad = id_funcionalidad;
 	}
 

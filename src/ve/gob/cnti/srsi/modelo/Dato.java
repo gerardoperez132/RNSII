@@ -8,6 +8,9 @@ import java.util.Date;
  * tabla TipoDato. Un dato puede tener un padre si el padre es de tipo
  * compuesto.
  * 
+ * @see TipoDato
+ * @see EntradaSalida
+ * 
  * @author Richard Ricciardelli
  * 
  */
