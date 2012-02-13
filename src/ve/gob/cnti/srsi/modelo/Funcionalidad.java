@@ -2,10 +2,18 @@ package ve.gob.cnti.srsi.modelo;
 
 import java.util.Date;
 
+/**
+ * Una funcionalidad es igual a una operación en un servicio web. Un servicio de
+ * información puede tener muchas funcionalidades.
+ * 
+ * @see ServicioInformacion
+ * @author Richard Ricciardelli
+ * 
+ */
 public class Funcionalidad {
-	private int id;
-	private int id_funcionalidad;
-	private int id_servicio_informacion;
+	private long id;
+	private long id_funcionalidad;
+	private long id_servicio_informacion;
 	private String nombre;
 	private String descripcion;
 	private int status;
@@ -15,27 +23,27 @@ public class Funcionalidad {
 	public Funcionalidad() {
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
-	public int getId_funcionalidad() {
+	public long getId_funcionalidad() {
 		return id_funcionalidad;
 	}
 
-	public void setId_funcionalidad(int id_funcionalidad) {
+	public void setId_funcionalidad(long id_funcionalidad) {
 		this.id_funcionalidad = id_funcionalidad;
 	}
 
-	public int getId_servicio_informacion() {
+	public long getId_servicio_informacion() {
 		return id_servicio_informacion;
 	}
 
-	public void setId_servicio_informacion(int id_servicio_informacion) {
+	public void setId_servicio_informacion(long id_servicio_informacion) {
 		this.id_servicio_informacion = id_servicio_informacion;
 	}
 
