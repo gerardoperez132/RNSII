@@ -2,45 +2,65 @@ package ve.gob.cnti.srsi.modelo;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+/**
+ * Entes suscritos a servicios de información de otros entes.
+ * 
+ * @see Ente
+ * @see ServicioInformacion
+ * @author Richard Ricciardelli
+ * 
+ */
+@Entity
+@Table(name = "suscritos")
 public class Suscrito {
-	private int id;
-	private int id_suscrito;
-	private int id_ente; // Ente que está suscrito.
-	private int id_servicio_informacion; // Servicio de información al cual está
-											// suscrito.
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
+	private long id_suscrito;
+	/** Ente que está suscrito. */
+	private long id_ente;
+	/** Servicio de información al cual está suscrito. */
+	private long id_servicio_informacion;
 	private int status;
 	private Date fecha_creado;
 	private Date fecha_modificado;
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
-	public int getId_suscrito() {
+	public long getId_suscrito() {
 		return id_suscrito;
 	}
 
-	public void setId_suscrito(int id_suscrito) {
+	public void setId_suscrito(long id_suscrito) {
 		this.id_suscrito = id_suscrito;
 	}
 
-	public int getId_ente() {
+	public long getId_ente() {
 		return id_ente;
 	}
 
-	public void setId_ente(int id_ente) {
+	public void setId_ente(long id_ente) {
 		this.id_ente = id_ente;
 	}
 
-	public int getId_servicio_informacion() {
+	public long getId_servicio_informacion() {
 		return id_servicio_informacion;
 	}
 
-	public void setId_servicio_informacion(int id_servicio_informacion) {
+	public void setId_servicio_informacion(long id_servicio_informacion) {
 		this.id_servicio_informacion = id_servicio_informacion;
 	}
 
