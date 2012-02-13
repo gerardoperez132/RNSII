@@ -2,47 +2,57 @@ package ve.gob.cnti.srsi.modelo;
 
 import java.util.Date;
 
+/**
+ * La clase dato guarda la relación del dato que tiene una entrada o salida y,
+ * para conocer el tipo de dato de que se trata, obtiene la información de la
+ * tabla TipoDato. Un dato puede tener un padre si el padre es de tipo
+ * compuesto.
+ * 
+ * @author Richard Ricciardelli
+ * 
+ */
 public class Dato {
-	private int id;
-	private int id_dato;
-	private int id_entrada_salida;
-	private int id_padre; // Tendrá padre si y sólo si, es un dato compuesto.
+	private long id;
+	private long id_dato;
+	private long id_entrada_salida;
+	private long id_padre; // Tendrá padre si y sólo si, el padre es un dato
+							// compuesto.
 	private String nombre;
 	private String descripcion;
-	private String longitud; // ¿Qué se guarda aquí?
+	private String longitud; // ¿Qué se guarda aquí? Definir.
 	private int status;
 	private Date fecha_creado;
 	private Date fecha_modificado;
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
-	public int getId_dato() {
+	public long getId_dato() {
 		return id_dato;
 	}
 
-	public void setId_dato(int id_dato) {
+	public void setId_dato(long id_dato) {
 		this.id_dato = id_dato;
 	}
 
-	public int getId_entrada_salida() {
+	public long getId_entrada_salida() {
 		return id_entrada_salida;
 	}
 
-	public void setId_entrada_salida(int id_entrada_salida) {
+	public void setId_entrada_salida(long id_entrada_salida) {
 		this.id_entrada_salida = id_entrada_salida;
 	}
 
-	public int getId_padre() {
+	public long getId_padre() {
 		return id_padre;
 	}
 
-	public void setId_padre(int id_padre) {
+	public void setId_padre(long id_padre) {
 		this.id_padre = id_padre;
 	}
 
