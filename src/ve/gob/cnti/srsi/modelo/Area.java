@@ -22,7 +22,7 @@ public class Area {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	private int id_area;
+	private long id_area;
 	private String nombre;
 	private int status;
 	private Date fecha_creado;
@@ -36,11 +36,11 @@ public class Area {
 		this.id = id;
 	}
 
-	public int getId_area() {
+	public long getId_area() {
 		return id_area;
 	}
 
-	public void setId_area(int id_area) {
+	public void setId_area(long id_area) {
 		this.id_area = id_area;
 	}
 
