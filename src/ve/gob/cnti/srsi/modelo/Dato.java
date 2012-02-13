@@ -18,8 +18,8 @@ public class Dato {
 	private long id;
 	private long id_dato;
 	private long id_entrada_salida;
-	private long id_padre; // Tendrá padre si y sólo si, el padre es un dato
-							// compuesto.
+	/** Tendrá padre solamente si éste es de tipo compuesto */
+	private long id_padre;
 	private String nombre;
 	private String descripcion;
 	private String longitud; // ¿Qué se guarda aquí? Definir.
