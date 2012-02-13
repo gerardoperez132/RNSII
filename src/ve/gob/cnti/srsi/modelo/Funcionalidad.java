@@ -2,6 +2,12 @@ package ve.gob.cnti.srsi.modelo;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * Una funcionalidad es igual a una operación en un servicio web. Un servicio de
  * información puede tener muchas funcionalidades.
@@ -10,7 +16,12 @@ import java.util.Date;
  * @author Richard Ricciardelli
  * 
  */
+@Entity
+@Table(name = "funcionalidades")
 public class Funcionalidad {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private long id_funcionalidad;
 	private long id_servicio_informacion;
