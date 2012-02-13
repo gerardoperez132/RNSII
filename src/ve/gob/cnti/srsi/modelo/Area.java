@@ -2,20 +2,37 @@ package ve.gob.cnti.srsi.modelo;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+/**
+ * 
+ * Esta es la área que es igual a "orientado a" en el modelo.
+ * 
+ * @author Richard Ricciardelli
+ * 
+ */
+@Entity
+@Table(name = "areas")
 public class Area {
 
-	private int id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
 	private int id_area;
 	private String nombre;
 	private int status;
 	private Date fecha_creado;
 	private Date fecha_modificado;
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
