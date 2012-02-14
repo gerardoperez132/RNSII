@@ -33,6 +33,9 @@ public class Suscrito {
 	private Date fecha_creado;
 	private Date fecha_modificado;
 
+	public Suscrito() {
+	}
+
 	public long getId() {
 		return id;
 	}
