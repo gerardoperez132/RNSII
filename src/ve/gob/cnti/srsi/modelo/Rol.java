@@ -1,13 +1,5 @@
 package ve.gob.cnti.srsi.modelo;
 
-/****
- *
- * @author joaquin
- * 
- * Clase modelo con los atributos de la tabla roles
- *
- */
-
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -16,35 +8,41 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * Clase modelo con los atributos de la tabla roles.
+ * 
+ * @author Joaquín Pereira
+ * 
+ */
 @Entity
-@Table(name="roles")
+@Table(name = "roles")
 public class Rol {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;	
-	private int id_rol;	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
+	private long id_rol;
 	private String nombre;
 	private int status;
 	private Date fecha_creado;
 	private Date fecha_modificado;
-	
-	public Rol() {	
+
+	public Rol() {
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
-	public int getId_rol() {
+	public long getId_rol() {
 		return id_rol;
 	}
 
-	public void setId_rol(int id_rol) {
+	public void setId_rol(long id_rol) {
 		this.id_rol = id_rol;
 	}
 
@@ -86,6 +84,4 @@ public class Rol {
 				+ ", status=" + status + ", fecha_creado=" + fecha_creado
 				+ ", fecha_modificado=" + fecha_modificado + "]";
 	}
-	
-	
 }
