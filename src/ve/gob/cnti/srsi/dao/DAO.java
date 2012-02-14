@@ -5,7 +5,14 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-public class DAO {
+/**
+ * Clase DAO de la cual heredan los métodos todos los demás controladores.
+ * 
+ * @author Joaquín Pereira
+ * @author Richard Ricciardelli
+ * 
+ */
+public class DAO implements CRUD {
 
 	private static Session session;
 	private static Transaction transaction;
@@ -57,6 +64,31 @@ public class DAO {
 			closeConnection();
 		}
 		return id;
+	}
+
+	@Override
+	public void create(Object model) {
+		startConnection();
+		session.save(model);
+		closeConnection();
+	}
+
+	@Override
+	public void read() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void delete() {
+		// TODO Auto-generated method stub
+
 	}
 
 }
