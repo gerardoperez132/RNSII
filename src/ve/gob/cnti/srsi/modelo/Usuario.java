@@ -1,13 +1,5 @@
 package ve.gob.cnti.srsi.modelo;
 
-/****
- *
- * @author joaquin
- * 
- * Clase modelo con los atributos de la tabla usuarios 
- *
- */
-
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -16,13 +8,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * Clase modelo con los atributos de la tabla usuarios.
+ * 
+ * @author Joaquín Pereira
+ */
 @Entity
-@Table(name="usuarios")
+@Table(name = "usuarios")
 public class Usuario {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 	private int id_usuario;
 	private int id_ente;
 	private String nombre;
@@ -32,8 +29,8 @@ public class Usuario {
 	private int status;
 	private Date fecha_creado;
 	private Date fecha_modificado;
-	
-	public Usuario() {	
+
+	public Usuario() {
 	}
 
 	public int getId() {
@@ -124,5 +121,4 @@ public class Usuario {
 				+ status + ", fecha_creado=" + fecha_creado
 				+ ", fecha_modificado=" + fecha_modificado + "]";
 	}
-		
 }
