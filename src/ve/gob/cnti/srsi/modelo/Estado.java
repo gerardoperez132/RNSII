@@ -13,7 +13,7 @@ import javax.persistence.Table;
  * información, hasta el momento son en desarrollo e implementado.
  * 
  * @author Richard Ricciardelli
- * */
+ */
 @Entity
 @Table(name = "estados")
 public class Estado {
