@@ -70,6 +70,7 @@ public class DAO implements CRUD {
 	public void create(Object model) {
 		startConnection();
 		session.save(model);
+		transaction.commit();
 		closeConnection();
 	}
 
