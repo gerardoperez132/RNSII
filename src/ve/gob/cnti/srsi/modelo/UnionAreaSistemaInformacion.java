@@ -13,6 +13,8 @@ import javax.persistence.Table;
  * Información.
  * 
  * @author Richard Ricciardelli
+ * @see Area
+ * @see SistemaInformacion
  * 
  */
 @Entity
