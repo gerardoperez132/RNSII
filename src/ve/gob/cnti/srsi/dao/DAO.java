@@ -81,9 +81,8 @@ public class DAO implements CRUD {
 	}
 
 	@Override
-	public void update() {
+	public void update(Object model) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override

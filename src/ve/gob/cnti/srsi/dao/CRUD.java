@@ -5,7 +5,7 @@ public interface CRUD {
 
 	public void read();
 
-	public void update();
+	public void update(Object model);
 
 	public void delete();
 }
