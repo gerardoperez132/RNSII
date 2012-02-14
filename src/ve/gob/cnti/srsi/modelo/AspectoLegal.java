@@ -28,6 +28,9 @@ public class AspectoLegal {
 	private Date fecha_creado;
 	private Date fecha_modificado;
 
+	public AspectoLegal() {
+	}
+
 	public long getId() {
 		return id;
 	}

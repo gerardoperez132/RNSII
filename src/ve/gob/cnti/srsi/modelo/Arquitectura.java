@@ -28,6 +28,9 @@ public class Arquitectura {
 	private Date fecha_creado;
 	private Date fecha_modificado;
 
+	public Arquitectura() {
+	}
+
 	public long getId() {
 		return id;
 	}

@@ -28,6 +28,9 @@ public class Area {
 	private Date fecha_creado;
 	private Date fecha_modificado;
 
+	public Area() {
+	}
+
 	public long getId() {
 		return id;
 	}
