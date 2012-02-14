@@ -19,9 +19,9 @@ public class Usuario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	private int id_usuario;
-	private int id_ente;
+	private long id;
+	private long id_usuario;
+	private long id_ente;
 	private String nombre;
 	private String apellido;
 	private String cedula;
@@ -33,27 +33,27 @@ public class Usuario {
 	public Usuario() {
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
-	public int getId_usuario() {
+	public long getId_usuario() {
 		return id_usuario;
 	}
 
-	public void setId_usuario(int id_usuario) {
+	public void setId_usuario(long id_usuario) {
 		this.id_usuario = id_usuario;
 	}
 
-	public int getEnte() {
+	public long getId_ente() {
 		return id_ente;
 	}
 
-	public void setEnte(int id_ente) {
+	public void setId_ente(long id_ente) {
 		this.id_ente = id_ente;
 	}
 
@@ -115,10 +115,10 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return "usuario [id=" + id + ", id_usuario=" + id_usuario + ", ente="
-				+ id_ente + ", nombre=" + nombre + ", apellido=" + apellido
-				+ ", cedula=" + cedula + ", clave=" + clave + ", status="
-				+ status + ", fecha_creado=" + fecha_creado
+		return "Usuario [id=" + id + ", id_usuario=" + id_usuario
+				+ ", id_ente=" + id_ente + ", nombre=" + nombre + ", apellido="
+				+ apellido + ", cedula=" + cedula + ", clave=" + clave
+				+ ", status=" + status + ", fecha_creado=" + fecha_creado
 				+ ", fecha_modificado=" + fecha_modificado + "]";
 	}
 }
