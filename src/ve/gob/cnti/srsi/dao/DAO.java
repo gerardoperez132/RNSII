@@ -50,7 +50,7 @@ public class DAO implements CRUD {
 	}
 
 	public static long getNextId(String table, String column) {
-		long id = 0;
+		long id = 1;
 		try {
 			startConnection();
 			Query query = session.createSQLQuery("SELECT MAX(" + column
