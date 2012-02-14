@@ -9,26 +9,21 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * Clase resultante de la relación de muchos a muchos entre entes y servicio de
- * información. Entes suscritos a servicios de información de otros entes.
+ * Clase resultante de la relación de muchos a muchos entre Área y Servicios de
+ * Información.
  * 
- * @see Ente
- * @see ServicioInformacion
  * @author Richard Ricciardelli
  * 
  */
 @Entity
-@Table(name = "suscritos")
-public class Suscrito {
+@Table(name = "union_area_sistema_informacion")
+public class UnionAreaSistemaInformacion {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	private long id_suscrito;
-	/** Ente que está suscrito. */
-	private long id_ente;
-	/** Servicio de información al cual está suscrito. */
 	private long id_servicio_informacion;
+	private long id_area;
 	private int status;
 	private Date fecha_creado;
 	private Date fecha_modificado;
@@ -41,28 +36,20 @@ public class Suscrito {
 		this.id = id;
 	}
 
-	public long getId_suscrito() {
-		return id_suscrito;
-	}
-
-	public void setId_suscrito(long id_suscrito) {
-		this.id_suscrito = id_suscrito;
-	}
-
-	public long getId_ente() {
-		return id_ente;
-	}
-
-	public void setId_ente(long id_ente) {
-		this.id_ente = id_ente;
-	}
-
 	public long getId_servicio_informacion() {
 		return id_servicio_informacion;
 	}
 
 	public void setId_servicio_informacion(long id_servicio_informacion) {
 		this.id_servicio_informacion = id_servicio_informacion;
+	}
+
+	public long getId_area() {
+		return id_area;
+	}
+
+	public void setId_area(long id_area) {
+		this.id_area = id_area;
 	}
 
 	public int getStatus() {
@@ -91,10 +78,11 @@ public class Suscrito {
 
 	@Override
 	public String toString() {
-		return "Suscrito [id=" + id + ", id_suscrito=" + id_suscrito
-				+ ", id_ente=" + id_ente + ", id_servicio_informacion="
-				+ id_servicio_informacion + ", status=" + status
+		return "UnionAreaSistemaInformacion [id=" + id
+				+ ", id_servicio_informacion=" + id_servicio_informacion
+				+ ", id_area=" + id_area + ", status=" + status
 				+ ", fecha_creado=" + fecha_creado + ", fecha_modificado="
 				+ fecha_modificado + "]";
 	}
+
 }
