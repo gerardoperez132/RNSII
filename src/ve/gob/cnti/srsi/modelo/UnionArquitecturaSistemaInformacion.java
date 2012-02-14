@@ -18,7 +18,7 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name = "union_arquitectura_sistema_informacion")
+@Table(name = "union_arquitecturas_sistema_informacion")
 public class UnionArquitecturaSistemaInformacion {
 
 	@Id

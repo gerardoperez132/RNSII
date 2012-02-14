@@ -16,7 +16,7 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name = "union_area_sistema_informacion")
+@Table(name = "union_areas_sistema_informacion")
 public class UnionAreaSistemaInformacion {
 
 	@Id
@@ -27,6 +27,9 @@ public class UnionAreaSistemaInformacion {
 	private int status;
 	private Date fecha_creado;
 	private Date fecha_modificado;
+
+	public UnionAreaSistemaInformacion() {
+	}
 
 	public long getId() {
 		return id;
