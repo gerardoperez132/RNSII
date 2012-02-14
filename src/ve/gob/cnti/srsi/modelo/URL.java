@@ -8,15 +8,20 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * URL.
+ * @author Joaquín Pereira
+ *
+ */
 @Entity
 @Table(name = "url")
 public class URL {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	private int id_url;
-	private int id_ente;
+	private long id;
+	private long id_url;
+	private long id_ente;
 	private String url;
 	private int status;
 	private Date fecha_creado;
@@ -25,27 +30,27 @@ public class URL {
 	public URL() {
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
-	public int getId_url() {
+	public long getId_url() {
 		return id_url;
 	}
 
-	public void setId_url(int id_url) {
+	public void setId_url(long id_url) {
 		this.id_url = id_url;
 	}
 
-	public int getId_ente() {
+	public long getId_ente() {
 		return id_ente;
 	}
 
-	public void setId_ente(int id_ente) {
+	public void setId_ente(long id_ente) {
 		this.id_ente = id_ente;
 	}
 
@@ -83,8 +88,9 @@ public class URL {
 
 	@Override
 	public String toString() {
-		return "Url [id=" + id + ", id_url=" + id_url + ", id_ente=" + id_ente
+		return "URL [id=" + id + ", id_url=" + id_url + ", id_ente=" + id_ente
 				+ ", url=" + url + ", status=" + status + ", fecha_creado="
 				+ fecha_creado + ", fecha_modificado=" + fecha_modificado + "]";
 	}
+
 }
