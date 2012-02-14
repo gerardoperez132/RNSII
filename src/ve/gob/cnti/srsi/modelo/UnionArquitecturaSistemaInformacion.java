@@ -30,6 +30,9 @@ public class UnionArquitecturaSistemaInformacion {
 	private Date fecha_creado;
 	private Date fecha_modificado;
 
+	public UnionArquitecturaSistemaInformacion() {
+	}
+
 	public long getId() {
 		return id;
 	}
