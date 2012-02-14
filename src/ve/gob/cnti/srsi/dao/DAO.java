@@ -68,10 +68,15 @@ public class DAO implements CRUD {
 
 	@Override
 	public void create(Object model) {
-		startConnection();
-		session.save(model);
-		transaction.commit();
-		closeConnection();
+		try {
+			startConnection();
+			session.save(model);
+			transaction.commit();
+		} catch (HibernateException he) {
+			handleException(he);
+		} finally {
+			closeConnection();
+		}
 	}
 
 	@Override
