@@ -1,16 +1,5 @@
 package ve.gob.cnti.srsi.modelo;
 
-/****
-*
-* @author joaquin
-* 
-* Clase modelo que tiene la relación muchos a muchos entre las tablas:
-*  
-* setores - entes
-* 
-* 
-*/
-
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -19,43 +8,52 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * Clase modelo que tiene la relación muchos a muchos entre las tablas sectores
+ * y entes.
+ * 
+ * @author Joaquín Pereira
+ * @see Sector
+ * @see Ente
+ * 
+ */
 @Entity
-@Table(name="union_sectores_entes")
-public class Union_sector_ente {
+@Table(name = "union_sectores_entes")
+public class UnionSectorEnte {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;	
-	private int id_sector;	
-	private int id_ente;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
+	private long id_sector;
+	private long id_ente;
 	private int status;
 	private Date fecha_creado;
 	private Date fecha_modificado;
-	
-	public Union_sector_ente() {	
+
+	public UnionSectorEnte() {
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
-	public int getId_sector() {
+	public long getId_sector() {
 		return id_sector;
 	}
 
-	public void setId_sector(int id_sector) {
+	public void setId_sector(long id_sector) {
 		this.id_sector = id_sector;
 	}
 
-	public int getId_ente() {
+	public long getId_ente() {
 		return id_ente;
 	}
 
-	public void setId_ente(int id_ente) {
+	public void setId_ente(long id_ente) {
 		this.id_ente = id_ente;
 	}
 
@@ -85,10 +83,9 @@ public class Union_sector_ente {
 
 	@Override
 	public String toString() {
-		return "Union_sector_ente [id=" + id + ", id_sector=" + id_sector
+		return "UnionSectorEnte [id=" + id + ", id_sector=" + id_sector
 				+ ", id_ente=" + id_ente + ", status=" + status
 				+ ", fecha_creado=" + fecha_creado + ", fecha_modificado="
 				+ fecha_modificado + "]";
 	}
-		
 }
