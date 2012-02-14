@@ -2,6 +2,12 @@ package ve.gob.cnti.srsi.modelo;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * Clase resultante de la relación de muchos a muchos entre dato y tipo de dato.
  * 
@@ -10,8 +16,12 @@ import java.util.Date;
  * @see TipoDato
  * 
  */
+@Entity
+@Table(name = "union_dato_tipo_dato")
 public class UnionDatoTipoDato {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private long id_dato;
 	private long id_tipo_dato;
