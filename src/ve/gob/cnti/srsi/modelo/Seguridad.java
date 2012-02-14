@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * Especificas los niveles de seguridad de un servicio de información.
+ * Especifica los niveles de seguridad de un servicio de información.
  * 
  * @author Richard Ricciardelli
  * 
@@ -26,6 +26,9 @@ public class Seguridad {
 	private int status;
 	private Date fecha_creado;
 	private Date fecha_modificado;
+
+	public Seguridad() {
+	}
 
 	public long getId() {
 		return id;
