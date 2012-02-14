@@ -1,5 +1,8 @@
 package ve.gob.cnti.srsi.dao;
 
+import java.util.Iterator;
+import java.util.List;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -66,6 +69,18 @@ public class DAO implements CRUD {
 		return id;
 	}
 
+	public static void saveModel(Object model) {
+		try {
+			startConnection();
+			session.save(model);
+			transaction.commit();
+		} catch (HibernateException he) {
+			handleException(he);
+		} finally {
+			closeConnection();
+		}
+	}
+
 	@Override
 	public void create(Object model) {
 		try {
@@ -79,15 +94,57 @@ public class DAO implements CRUD {
 		}
 	}
 
-	@Override
-	public void read() {
-		// TODO Auto-generated method stub
+	public static void readModel(String table, String column, long id) {
+		try {
+			startConnection();
+			Query query = session.createSQLQuery("SELECT * FROM " + table
+					+ " WHERE " + column + " = " + id);
+			List list = query.list();
+			Iterator iterator = list.listIterator();
+			while (iterator.hasNext()) {
+				System.out.print("READ METHOD = >" + list.get(0));
+			}
 
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
 	}
 
 	@Override
-	public void update(Object model) {
-		// TODO Auto-generated method stub
+	public void read(String table, String column, long id) {
+		try {
+			startConnection();
+			Query query = session.createSQLQuery("SELECT * FROM " + table
+					+ " WHERE " + column + " = " + id);
+			if (query.uniqueResult() != null)
+				System.out.print("READ METHOD = >" + query.uniqueResult());
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+	}
+
+	@Override
+	public void update(Object model, String table, String column, long id) {
+		try {
+			startConnection();
+			Query query = session.createSQLQuery("SELECT * FROM " + table
+					+ " WHERE " + column + " = " + id);
+			if (query.uniqueResult() != null) {
+				System.out.println("Query result => " + query.uniqueResult());
+			}
+			session.update(model);
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
 	}
 
 	@Override
