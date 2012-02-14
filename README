@@ -3,3 +3,5 @@ README
 Tips:
 
 No se utilizaron los nombres de variables estandarizados en los modelos porque queremos que se creen con ese nombre en la base de datos.
+
+Debe decidirse si la relación de Dato y TipoDato será 1:1 o 1:N
