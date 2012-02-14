@@ -12,14 +12,29 @@
 		<property name="hibernate.connection.pool_size">1</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
 		<property name="show_sql">true</property>
-		<property name="hbm2ddl.auto">update</property>
+		<property name="hbm2ddl.auto">create-drop</property>
 		<mapping class="ve.gob.cnti.srsi.modelo.Area" />
 		<mapping class="ve.gob.cnti.srsi.modelo.Arquitectura" />
+		<mapping class="ve.gob.cnti.srsi.modelo.AspectoLegal" />
+		<mapping class="ve.gob.cnti.srsi.modelo.Correo" />
 		<mapping class="ve.gob.cnti.srsi.modelo.Dato" />
+		<mapping class="ve.gob.cnti.srsi.modelo.Ente" />
 		<mapping class="ve.gob.cnti.srsi.modelo.EntradaSalida" />
 		<mapping class="ve.gob.cnti.srsi.modelo.Estado" />
 		<mapping class="ve.gob.cnti.srsi.modelo.Funcionalidad" />
+		<mapping class="ve.gob.cnti.srsi.modelo.Rol" />
+		<mapping class="ve.gob.cnti.srsi.modelo.Sector" />
+		<mapping class="ve.gob.cnti.srsi.modelo.Seguridad" />
+		<mapping class="ve.gob.cnti.srsi.modelo.ServicioInformacion" />
 		<mapping class="ve.gob.cnti.srsi.modelo.Suscrito" />
+		<mapping class="ve.gob.cnti.srsi.modelo.Telefono" />
 		<mapping class="ve.gob.cnti.srsi.modelo.TipoDato" />
+		<mapping class="ve.gob.cnti.srsi.modelo.UnionAreaSistemaInformacion" />
+		<mapping class="ve.gob.cnti.srsi.modelo.UnionArquitecturaSistemaInformacion" />
+		<mapping class="ve.gob.cnti.srsi.modelo.UnionDatoTipoDato" />
+		<mapping class="ve.gob.cnti.srsi.modelo.UnionSectorEnte" />
+		<mapping class="ve.gob.cnti.srsi.modelo.UnionUsuarioRol" />
+		<mapping class="ve.gob.cnti.srsi.modelo.URL" />
+		<mapping class="ve.gob.cnti.srsi.modelo.Usuario" />
 	</session-factory>
 </hibernate-configuration>
