@@ -1,13 +1,5 @@
 package ve.gob.cnti.srsi.modelo;
 
-/****
- *
- * @author joaquin
- * 
- * Clase modelo con los atributos de la tabla sectores
- *
- */
-
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -16,35 +8,40 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * Clase modelo con los atributos de la tabla sectores.
+ * 
+ * @author Joaquín Pereira
+ */
 @Entity
-@Table(name="sectores")
+@Table(name = "sectores")
 public class Sector {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;	
-	private int id_sector;	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
+	private long id_sector;
 	private String nombre;
 	private int status;
 	private Date fecha_creado;
 	private Date fecha_modificado;
-	
-	public Sector() {	
+
+	public Sector() {
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
-	public int getId_sector() {
+	public long getId_sector() {
 		return id_sector;
 	}
 
-	public void setId_sector(int id_sector) {
+	public void setId_sector(long id_sector) {
 		this.id_sector = id_sector;
 	}
 
@@ -86,6 +83,5 @@ public class Sector {
 				+ nombre + ", status=" + status + ", fecha_creado="
 				+ fecha_creado + ", fecha_modificado=" + fecha_modificado + "]";
 	}
-	
-	
+
 }
