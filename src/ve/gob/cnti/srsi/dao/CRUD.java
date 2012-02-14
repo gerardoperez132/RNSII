@@ -1,7 +1,7 @@
 package ve.gob.cnti.srsi.dao;
 
 public interface CRUD {
-	public void create();
+	public void create(Object model);
 
 	public void read();
 
