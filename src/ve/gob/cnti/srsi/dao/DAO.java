@@ -1,7 +1,6 @@
 package ve.gob.cnti.srsi.dao;
 
-import java.util.Iterator;
-import java.util.List;
+import java.util.ArrayList;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -69,18 +68,6 @@ public class DAO implements CRUD {
 		return id;
 	}
 
-	public static void saveModel(Object model) {
-		try {
-			startConnection();
-			session.save(model);
-			transaction.commit();
-		} catch (HibernateException he) {
-			handleException(he);
-		} finally {
-			closeConnection();
-		}
-	}
-
 	@Override
 	public void create(Object model) {
 		try {
@@ -94,17 +81,17 @@ public class DAO implements CRUD {
 		}
 	}
 
-	public static void readModel(String table, String column, long id) {
+	@Override
+	public Object read(Object model, long id) {
 		try {
 			startConnection();
-			Query query = session.createSQLQuery("SELECT * FROM " + table
-					+ " WHERE " + column + " = " + id);
-			List list = query.list();
-			Iterator iterator = list.listIterator();
-			while (iterator.hasNext()) {
-				System.out.print("READ METHOD = >" + list.get(0));
-			}
-
+			return session.createQuery(
+					"FROM "
+							+ model.getClass().getName().toString()
+							+ " WHERE "
+							+ model.getClass().getMethods()[8].getName()
+									.toString().replace("get", "")
+									.toLowerCase() + " = " + id).uniqueResult();
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;
@@ -114,37 +101,16 @@ public class DAO implements CRUD {
 	}
 
 	@Override
-	public void read(String table, String column, long id) {
-		try {
-			startConnection();
-			Query query = session.createSQLQuery("SELECT * FROM " + table
-					+ " WHERE " + column + " = " + id);
-			if (query.uniqueResult() != null)
-				System.out.print("READ METHOD = >" + query.uniqueResult());
-		} catch (HibernateException he) {
-			handleException(he);
-			throw he;
-		} finally {
-			closeConnection();
-		}
+	public ArrayList<Object> read(Object model) {
+		return null;
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
 	public void update(Object model, String table, String column, long id) {
-		try {
-			startConnection();
-			Query query = session.createSQLQuery("SELECT * FROM " + table
-					+ " WHERE " + column + " = " + id);
-			if (query.uniqueResult() != null) {
-				System.out.println("Query result => " + query.uniqueResult());
-			}
-			session.update(model);
-		} catch (HibernateException he) {
-			handleException(he);
-			throw he;
-		} finally {
-			closeConnection();
-		}
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
