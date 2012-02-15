@@ -1,5 +1,6 @@
 package ve.gob.cnti.srsi.dao;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 import org.hibernate.HibernateException;
@@ -121,10 +122,73 @@ public class DAO implements CRUD {
 		}
 	}
 
+	public static void updateSomething(Object model, long id) {
+		try {
+			startConnection();
+			session.createSQLQuery("UPDATE "
+					+ model.getClass().getName().toString() + " SET status = "
+					+ Status.MODIFICADO + " WHERE id = " + id);
+			session.save(model);
+			transaction.commit();
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+	}
+
+	public static long getNext(Object model) {
+		long id = 1;
+		try {
+			startConnection();
+			Query query = session.createQuery("SELECT MAX(" + "id_sector"
+					+ ") FROM " + model.getClass().getSimpleName().toString());
+			if (query.uniqueResult() != null)
+				id = Long.parseLong(String.valueOf(query.uniqueResult())) + 1;
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+		return id;
+	}
+
 	@Override
 	public void update(Object model, long id) {
-		// TODO Auto-generated method stub
+		try {
+			startConnection();
+			session.createSQLQuery("UPDATE FROM "
+					+ model.getClass().getName().toString() + " SET status = "
+					+ Status.MODIFICADO + " WHERE id = " + id);
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+	}
 
+	public static String getField(Object model) {
+		for (Method method : model.getClass().getMethods()) {
+			String pattern = method
+					.getName()
+					.toString()
+					.replace(
+							"getId_"
+									+ model.getClass().getSimpleName()
+											.toLowerCase(),
+							"getId_"
+									+ model.getClass().getSimpleName()
+											.toLowerCase()
+									+ " DIOS NO JUEGA A LOS DADOS");
+			if (!method.getName().toString().equals(pattern)) {
+				return method.getName().toString().replace("get", "")
+						.toString().toLowerCase();
+			}
+		}
+		return null;
 	}
 
 	@Override

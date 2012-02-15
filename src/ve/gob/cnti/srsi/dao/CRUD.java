@@ -67,4 +67,11 @@ public interface CRUD {
 	 * @return id Es el id lógico correspondiente.
 	 */
 	public long getNextId(Object model);
+	
+	/**
+	 * Permite obtener el campo que se de
+	 * @param model
+	 * @return
+	 */
+	public String getField(Object model);
 }

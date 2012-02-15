@@ -27,6 +27,9 @@ public class Estado {
 	private Date fecha_creado;
 	private Date fecha_modificado;
 
+	public Estado() {
+	}
+
 	public long getId() {
 		return id;
 	}
