@@ -94,7 +94,25 @@ public class DAO implements CRUD {
 							+ " WHERE "
 							+ model.getClass().getMethods()[8].getName()
 									.toString().replace("get", "")
-									.toLowerCase() + " = " + id).uniqueResult();
+									.toLowerCase() + " = " + id
+							+ " AND status = " + Status.ACTIVO).uniqueResult();
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public ArrayList<Object> read(Object model) {
+		try {
+			startConnection();
+			return (ArrayList<Object>) session.createQuery(
+					"FROM " + model.getClass().getName().toString()
+							+ " WHERE status = " + Status.ACTIVO).list();
+
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;
@@ -104,20 +122,13 @@ public class DAO implements CRUD {
 	}
 
 	@Override
-	public ArrayList<Object> read(Object model) {
-		return null;
+	public void update(Object model, long id) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void update(Object model, String table, String column, long id) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void delete() {
+	public void delete(Object model, long id) {
 		// TODO Auto-generated method stub
 
 	}
