@@ -23,13 +23,22 @@ public class SectorDAO extends DAO {
 				"Legislativo, Contraloría y Auditoría", "Judicial",
 				"Comunicación e Información" };
 		Sector sector = new Sector();
-		for (short i = 0; i < sectores.length; i++) {
-			// sector.setId_sector(getNextId(sector));
-			sector.setNombre(sectores[i]);
-			sector.setStatus(Status.ACTIVO);
-			sector.setFecha_creado(fecha);
-			sector.setFecha_modificado(fecha);
-			// saveSector(sector);
-		}
+		// for (short i = 0; i < sectores.length; i++) {
+		// // sector.setId_sector(getNextId(sector));
+		// sector.setNombre(sectores[i]);
+		// sector.setStatus(Status.ACTIVO);
+		// sector.setFecha_creado(fecha);
+		// sector.setFecha_modificado(fecha);
+		// // saveSector(sector);
+		// }
+
+		// ArrayList<Sector> listaSectores = (ArrayList<Sector>)
+		// getSectores(sector);
+		// Iterator iterator = listaSectores.iterator();
+		// while (iterator.hasNext()) {
+		// sector = (Sector) iterator.next();
+		// System.out.println("SECTOR => " + sector.getNombre());
+		// }
+
 	}
 }
