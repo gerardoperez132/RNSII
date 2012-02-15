@@ -1,5 +1,7 @@
 package ve.gob.cnti.srsi.dao;
 
+import java.util.ArrayList;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -68,21 +70,47 @@ public class DAO implements CRUD {
 
 	@Override
 	public void create(Object model) {
-		startConnection();
-		session.save(model);
-		transaction.commit();
-		closeConnection();
+		try {
+			startConnection();
+			session.save(model);
+			transaction.commit();
+		} catch (HibernateException he) {
+			handleException(he);
+		} finally {
+			closeConnection();
+		}
 	}
 
 	@Override
-	public void read() {
+	public Object read(Object model, long id) {
+		try {
+			startConnection();
+			return session.createQuery(
+					"FROM "
+							+ model.getClass().getName().toString()
+							+ " WHERE "
+							+ model.getClass().getMethods()[8].getName()
+									.toString().replace("get", "")
+									.toLowerCase() + " = " + id).uniqueResult();
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+	}
+
+	@Override
+	public ArrayList<Object> read(Object model) {
+		return null;
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void update(Object model) {
+	public void update(Object model, String table, String column, long id) {
 		// TODO Auto-generated method stub
+
 	}
 
 	@Override
@@ -90,5 +118,4 @@ public class DAO implements CRUD {
 		// TODO Auto-generated method stub
 
 	}
-
 }
