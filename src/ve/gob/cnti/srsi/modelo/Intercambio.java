@@ -15,6 +15,7 @@ import javax.persistence.Table;
  * el tipo de intercambio en lote.
  * 
  * @author Richard Ricciardelli
+ * @see ServicioInformacion
  * 
  */
 @Entity
@@ -26,7 +27,6 @@ public class Intercambio {
 	private long id;
 	private long id_intercambio;
 	private long id_padre;
-	private long id_hijo;
 	private String nombre;
 	private int status;
 	private Date fecha_creado;
@@ -57,14 +57,6 @@ public class Intercambio {
 
 	public void setId_padre(long id_padre) {
 		this.id_padre = id_padre;
-	}
-
-	public long getId_hijo() {
-		return id_hijo;
-	}
-
-	public void setId_hijo(long id_hijo) {
-		this.id_hijo = id_hijo;
 	}
 
 	public String getNombre() {
@@ -102,10 +94,9 @@ public class Intercambio {
 	@Override
 	public String toString() {
 		return "Intercambio [id=" + id + ", id_intercambio=" + id_intercambio
-				+ ", id_padre=" + id_padre + ", id_hijo=" + id_hijo
-				+ ", nombre=" + nombre + ", status=" + status
-				+ ", fecha_creado=" + fecha_creado + ", fecha_modificado="
-				+ fecha_modificado + "]";
+				+ ", id_padre=" + id_padre + ", nombre=" + nombre + ", status="
+				+ status + ", fecha_creado=" + fecha_creado
+				+ ", fecha_modificado=" + fecha_modificado + "]";
 	}
 
 }
