@@ -1,5 +1,7 @@
 package ve.gob.cnti.srsi.dao;
 
+import java.util.ArrayList;
+
 public interface CRUD {
 
 	/**
@@ -10,7 +12,9 @@ public interface CRUD {
 	 */
 	public void create(Object model);
 
-	public void read(String table, String column, long id);
+	public Object read(Object model, long id);
+
+	public ArrayList<Object> read(Object model);
 
 	public void update(Object model, String table, String column, long id);
 
