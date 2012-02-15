@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <!-- CSS (required) -->
-<link rel="stylesheet" type="text/css" href="RECURSOS/css/estilos.css">
+<link rel="stylesheet" type="text/css" href="res/css/styles.css">
 
 
 <title>SRSI - Inicio</title>
