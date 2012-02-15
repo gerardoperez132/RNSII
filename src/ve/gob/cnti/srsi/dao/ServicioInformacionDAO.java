@@ -22,8 +22,5 @@ public class ServicioInformacionDAO extends DAO {
 		estado.setStatus(Status.ACTIVO);
 		estado.setFecha_creado(fecha);
 		estado.setFecha_modificado(fecha);
-		saveModel(estado);
-		readModel("estados", "id_estado", 1);
 	}
-
 }
