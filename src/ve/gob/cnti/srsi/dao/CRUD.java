@@ -19,4 +19,6 @@ public interface CRUD {
 	public void update(Object model, String table, String column, long id);
 
 	public void delete();
+
+	public long getNextId(Object model);
 }

@@ -51,12 +51,15 @@ public class DAO implements CRUD {
 		session.close();
 	}
 
-	public static long getNextId(String table, String column) {
+	@Override
+	public long getNextId(Object model) {
 		long id = 1;
 		try {
 			startConnection();
-			Query query = session.createSQLQuery("SELECT MAX(" + column
-					+ ") FROM " + table);
+			Query query = session.createSQLQuery("SELECT MAX("
+					+ model.getClass().getMethods()[8].getName().toString()
+							.replace("get", "").toLowerCase() + ") FROM "
+					+ model.getClass().getName().toString());
 			if (query.uniqueResult() != null)
 				id = Long.parseLong(String.valueOf(query.uniqueResult())) + 1;
 		} catch (HibernateException he) {
