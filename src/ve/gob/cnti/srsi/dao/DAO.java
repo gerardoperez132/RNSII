@@ -57,10 +57,8 @@ public class DAO implements CRUD {
 		long id = 1;
 		try {
 			startConnection();
-			Query query = session.createSQLQuery("SELECT MAX("
-					+ model.getClass().getMethods()[8].getName().toString()
-							.replace("get", "").toLowerCase() + ") FROM "
-					+ model.getClass().getName().toString());
+			Query query = session.createQuery("SELECT MAX(" + getField(model)
+					+ ") FROM " + model.getClass().getSimpleName().toString());
 			if (query.uniqueResult() != null)
 				id = Long.parseLong(String.valueOf(query.uniqueResult())) + 1;
 		} catch (HibernateException he) {
@@ -138,23 +136,6 @@ public class DAO implements CRUD {
 		}
 	}
 
-	public static long getNext(Object model) {
-		long id = 1;
-		try {
-			startConnection();
-			Query query = session.createQuery("SELECT MAX(" + "id_sector"
-					+ ") FROM " + model.getClass().getSimpleName().toString());
-			if (query.uniqueResult() != null)
-				id = Long.parseLong(String.valueOf(query.uniqueResult())) + 1;
-		} catch (HibernateException he) {
-			handleException(he);
-			throw he;
-		} finally {
-			closeConnection();
-		}
-		return id;
-	}
-
 	@Override
 	public void update(Object model, long id) {
 		try {
@@ -170,18 +151,15 @@ public class DAO implements CRUD {
 		}
 	}
 
-	public static String getField(Object model) {
+	@Override
+	public String getField(Object model) {
 		for (Method method : model.getClass().getMethods()) {
 			String pattern = method
 					.getName()
 					.toString()
 					.replace(
-							"getId_"
-									+ model.getClass().getSimpleName()
-											.toLowerCase(),
-							"getId_"
-									+ model.getClass().getSimpleName()
-											.toLowerCase()
+							"getId" + getSuffix(model),
+							"getId" + getSuffix(model)
 									+ " DIOS NO JUEGA A LOS DADOS");
 			if (!method.getName().toString().equals(pattern)) {
 				return method.getName().toString().replace("get", "")
@@ -189,6 +167,21 @@ public class DAO implements CRUD {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public String getSuffix(Object model) {
+		ArrayList<Character> newString = new ArrayList<Character>();
+		for (int i = 0; i < model.getClass().getSimpleName().length(); i++) {
+			if (model.getClass().getSimpleName().codePointAt(i) < 97) {
+				newString.add('_');
+			}
+			newString.add(model.getClass().getSimpleName().charAt(i));
+		}
+		String result = "";
+		for (char c : newString)
+			result = result + c;
+		return result.toString().toLowerCase();
 	}
 
 	@Override
