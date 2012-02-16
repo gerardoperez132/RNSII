@@ -10,7 +10,6 @@
 }
 
 #header {
-	background-color: orange;
 	height: 186px;
 }
 
@@ -22,7 +21,7 @@
 	height: 450px;
 }
 
-#menus {
+#menu {
 	background: url("../img/fondo_menu.png") repeat-x;
 	float: left;
 	width: 100%;
