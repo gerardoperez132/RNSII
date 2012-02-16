@@ -10,12 +10,13 @@ import javax.persistence.Table;
 
 /**
  * URL.
+ * 
  * @author Joaquín Pereira
- *
+ * 
  */
 @Entity
 @Table(name = "url")
-public class URL {
+public class Url {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +28,7 @@ public class URL {
 	private Date fecha_creado;
 	private Date fecha_modificado;
 
-	public URL() {
+	public Url() {
 	}
 
 	public long getId() {
