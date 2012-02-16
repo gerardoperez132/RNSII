@@ -34,7 +34,12 @@
 			<div id="sidebar"></div>
 
 			<!-- Este es el div de contenidos -->
-			<div id="content"></div>
+			<div id="content">
+				<br>		
+				<s:url id="registrarServicioInformacion" action="prepararRegistroServicioInformacion"></s:url>
+        		<s:a href="%{registrarServicioInformacion}">Registrar Servicio de Información</s:a>
+        		
+			</div>
 
 			<!-- Este es el pie de página -->
 			<div id="footer"></div>
