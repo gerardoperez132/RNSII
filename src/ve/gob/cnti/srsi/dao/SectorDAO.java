@@ -2,10 +2,7 @@ package ve.gob.cnti.srsi.dao;
 
 import java.util.Date;
 
-import ve.gob.cnti.srsi.modelo.Correo;
-import ve.gob.cnti.srsi.modelo.Estado;
 import ve.gob.cnti.srsi.modelo.Sector;
-import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 
 /**
  * Controlador de los sectores a los que pertenecen los entes o los servicios de
@@ -38,21 +35,40 @@ public class SectorDAO extends DAO {
 		// + sector.getClass().getMethods()[i].toString());
 		// }
 		//
-		Estado estado = new Estado();
 		//
 		// for (int i = 0; i < estado.getClass().getMethods().length; i++) {
 		// System.out.println("MÉTODO DE ESTADO => "
 		// + estado.getClass().getMethods()[i].toString());
 		// }
 
-		System.out.println("SECTOR => " + getField(sector));
-		System.out.println("ESTADO => " + getField(estado));
+		// System.out.println("FIELD => " + getField(new Area()));
+		// System.out.println("FIELD => " + getField(new Arquitectura()));
+		// System.out.println("FIELD => " + getField(new AspectoLegal()));
+		// System.out.println("FIELD => " + getField(new Correo()));
+		// System.out.println("FIELD => " + getField(new Dato()));
+		// System.out.println("FIELD => " + getField(new Ente()));
+		// System.out.println("FIELD => " + getField(new EntradaSalida()));
+		// System.out.println("FIELD => " + getField(new Estado()));
+		// System.out.println("FIELD => " + getField(new Funcionalidad()));
+		// System.out.println("FIELD => " + getField(new Intercambio()));
+		// System.out.println("FIELD => " + getField(new Rol()));
+		// System.out.println("FIELD => " + getField(new Sector()));
+		// System.out.println("FIELD => " + getField(new Seguridad()));
+		// System.out.println("FIELD => " + getField(new
+		// ServicioInformacion()));
+		// System.out.println("FIELD => " + getField(new Suscrito()));
+		// System.out.println("FIELD => " + getField(new Telefono()));
+		// System.out.println("FIELD => " + getField(new TipoDato()));
+		// System.out.println("FIELD => "
+		// + getField(new UnionAreaSistemaInformacion()));
+		// System.out.println("FIELD => "
+		// + getField(new UnionArquitecturaSistemaInformacion()));
+		// System.out.println("FIELD => " + getField(new UnionDatoTipoDato()));
+		// System.out.println("FIELD => " + getField(new UnionSectorEnte()));
+		// System.out.println("FIELD => " + getField(new UnionUsuarioRol()));
+		// System.out.println("FIELD => " + getField(new Url()));
+		// System.out.println("FIELD => " + getField(new Usuario()));
 
-		ServicioInformacion servicio = new ServicioInformacion();
-		System.out.println("SERVICIO => " + getField(servicio));
-
-		Correo correo = new Correo();
-		System.out.println("CORREO => " + getField(correo));
 		// getField(estado);
 		// updateSomething(sector, 17);
 
