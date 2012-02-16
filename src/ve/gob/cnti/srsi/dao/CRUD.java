@@ -33,7 +33,7 @@ public interface CRUD {
 	 *            consulta.
 	 * @return Una lista de objetos del modelo dado con sus atributos.
 	 */
-	public ArrayList<Object> read(Object model);
+	public ArrayList<?> read(Object model);
 
 	/**
 	 * Permite modificar el registro especificado por id del modelo dado.

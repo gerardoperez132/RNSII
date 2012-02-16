@@ -56,10 +56,10 @@ public class DAO implements CRUD {
 		long id = 1;
 		try {
 			startConnection();
-			Query query = session.createSQLQuery("SELECT MAX("
+			Query query = session.createQuery("SELECT MAX("
 					+ model.getClass().getMethods()[8].getName().toString()
 							.replace("get", "").toLowerCase() + ") FROM "
-					+ model.getClass().getName().toString());
+					+ model.getClass().getSimpleName().toString());
 			if (query.uniqueResult() != null)
 				id = Long.parseLong(String.valueOf(query.uniqueResult())) + 1;
 		} catch (HibernateException he) {
@@ -106,7 +106,7 @@ public class DAO implements CRUD {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public ArrayList<Object> read(Object model) {
+	public ArrayList<?> read(Object model) {
 		try {
 			startConnection();
 			return (ArrayList<Object>) session.createQuery(
