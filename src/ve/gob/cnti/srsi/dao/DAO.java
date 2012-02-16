@@ -15,7 +15,7 @@ import org.hibernate.Transaction;
  * @author Richard Ricciardelli
  * 
  */
-public class DAO implements CRUD {
+public abstract class DAO implements CRUD {
 
 	private static Session session;
 	private static Transaction transaction;
