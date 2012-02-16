@@ -9,8 +9,7 @@
 	background-color: #ddd;
 }
 
-#header {
-	background-color: orange;
+#header {	
 	height: 186px;
 }
 
@@ -22,7 +21,7 @@
 	height: 450px;
 }
 
-#menus {
+#menu {
 	background: url("../img/fondo_menu.png") repeat-x;
 	float: left;
 	width: 100%;
@@ -58,4 +57,28 @@
 	margin-top: 16px;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+#formulario{
+	margin-bottom: 5px;
+	margin-left: 5px;
+}
+
+#resaltar{
+	background-color: white;
+	width: 95%;
+	margin-left: 5px;
+	padding: 1px 0px 5px 5px;float: left;
+}
+
+#resaltar:hover{
+	background-color: #CCCCCC;	
+}
+
+#mensaje{visibility: hidden; border:1px solid #ddd;;float: right;
+	width: 40%; margin-right: 3px;}
+
+#resaltar:hover #mensaje{
+	visibility: visible; border: 1px solid #ddd;;float: right;
+	width: 40%;margin-right: 3px;
 }
