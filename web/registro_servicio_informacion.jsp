@@ -35,51 +35,36 @@
 			
 			<h3>Registro de Servicio de Información</h3>
 			
+			<hr>
+			<h5 id="formulario">Sector:</h5>
+			<s:select list="sectores" listKey="id_sector" listValue="nombre" headerKey="-1" headerValue="Seleccione un sector"></s:select>
+			
+			<br>
+			<h5 id="formulario">Nombre:</h5>
+			<s:textfield labelposition="top"  name="nombre"  />
+			
+			<br>
+			<h5 id="formulario">Descripción:</h5>
+			<s:textarea name="descripcion" cols="40" rows="10" />
+			
+			<br>
+			<h5 id="formulario">Orientado a:</h5>
+			<s:checkboxlist list="areas" listKey="id_area" listValue="nombre" name="area" /> 
+				
+			<br>
+			<h5 id="formulario">Estado del Servicio:</h5>
+			<s:select list="estados" listKey="id_estado" listValue="nombre" headerKey="-1" headerValue="Seleccione" ></s:select>
+						
+			<br>
+			<h5 id="formulario">Seguridad:</h5>
+			<s:select list="seguridad" listKey="id_seguridad" listValue="nombre" headerKey="-1" headerValue="Seleccione"></s:select>
+			
+			<br>
+			<h5 id="formulario">Arquitectura:</h5>
+			<s:checkboxlist list="arquitecturas" listKey="id_arquitectura" listValue="nombre" name="arquitectura" required="true" />
+				
 			<br><br>
-			<s:select list="sectores" listKey="id_sector" listValue="nombre" label="Sector" headerKey="-1" headerValue="Seleccione un sector"></s:select>
 			
-			<br><br>
-			<s:textfield label="Nombre" labelposition="top"  name="nombre"  />
-			
-			<br><br>
-			<div id="resaltar">
-				<h5 id="formulario">Descripción</h5>
-				<s:textarea name="descripcion" cols="40" rows="10" />
-				<div id="mensaje">
-					<p>Por favor introduzca una breve descripción del servicio de información a registrar.</p>
-				</div>
-			</div>
-			
-			<br><br>
-			<div id="resaltar">
-				<h5 id="formulario">Descripción</h5>
-				<s:checkboxlist list="areas" listKey="id_area" listValue="nombre" name="area" label="Orientado a" /> 
-				<div id="mensaje">
-					<p>Por favor introduzca una breve descripción del servicio de información a registrar.</p>
-				</div>
-			</div>
-			
-			
-			<br><br>
-				<div id="resaltar">
-				<h5 id="formulario">Descripción</h5>
-				<s:select list="estados" listKey="id_estado" listValue="nombre" label="Estado de desarrollo" headerKey="-1" headerValue="Seleccione"></s:select>
-				<div id="mensaje">
-					<p>Por favor introduzca una breve descripción del servicio de información a registrar.</p>
-				</div>
-			</div>
-			
-			
-			<br><br>
-			<div id="resaltar">
-				<h5 id="formulario">Descripción</h5>
-				<s:select list="seguridad" listKey="id_seguridad" listValue="nombre" label="Nivel de Seguridad" headerKey="-1" headerValue="Seleccione"></s:select>
-				<br><br>
-				<s:checkboxlist list="arquitecturas" listKey="id_arquitectura" listValue="nombre" name="arquitectura" label="Arquitectura" required="true" />
-				<div id="mensaje">
-					<p>Por favor introduzca una breve descripción del servicio de información a registrar.</p>
-				</div>
-			</div>
 			
 			</div>
 
