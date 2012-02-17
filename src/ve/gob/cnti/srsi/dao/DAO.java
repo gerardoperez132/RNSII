@@ -91,8 +91,7 @@ public abstract class DAO implements CRUD {
 					"FROM "
 							+ model.getClass().getName().toString()
 							+ " WHERE "
-							+ model.getClass().getMethods()[8].getName()
-									.toString().replace("get", "")
+							+ getField(model).toString().replace("get", "")
 									.toLowerCase() + " = " + id
 							+ " AND status = " + Status.ACTIVO).uniqueResult();
 		} catch (HibernateException he) {
@@ -111,7 +110,6 @@ public abstract class DAO implements CRUD {
 			return (ArrayList<Object>) session.createQuery(
 					"FROM " + model.getClass().getName().toString()
 							+ " WHERE status = " + Status.ACTIVO).list();
-
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;
@@ -120,21 +118,21 @@ public abstract class DAO implements CRUD {
 		}
 	}
 
-	public static void updateSomething(Object model, long id) {
-		try {
-			startConnection();
-			session.createSQLQuery("UPDATE "
-					+ model.getClass().getName().toString() + " SET status = "
-					+ Status.MODIFICADO + " WHERE id = " + id);
-			session.save(model);
-			transaction.commit();
-		} catch (HibernateException he) {
-			handleException(he);
-			throw he;
-		} finally {
-			closeConnection();
-		}
-	}
+	// public static void updateSomething(Object model, long id) {
+	// try {
+	// startConnection();
+	// session.createSQLQuery("UPDATE "
+	// + model.getClass().getName().toString() + " SET status = "
+	// + Status.MODIFICADO + " WHERE id = " + id);
+	// session.save(model);
+	// transaction.commit();
+	// } catch (HibernateException he) {
+	// handleException(he);
+	// throw he;
+	// } finally {
+	// closeConnection();
+	// }
+	// }
 
 	@Override
 	public void update(Object model, long id) {
