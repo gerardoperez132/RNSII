@@ -92,40 +92,38 @@
 
 				<br>
 
-				<s:select list="intercambiosPadres" listKey="id" listValue="nombre"
-					headerKey="-1" headerValue="Seleccione"></s:select>
-				<s:select list="intercambiosHijos" listKey="id" listValue="nombre"
-					headerKey="-1" headerValue="Seleccione"></s:select>
 				
-				<s:select list="intercambios" listKey="id" listValue="nombre"
-					headerKey="-1" headerValue="Seleccione"></s:select>
-
-
-
-
 				<h5 id="formulario">Tipo de Intercambio:</h5>
-				<s:select list="{}">
+				
+			
+				
+				
+				<select>
+				<optgroup></optgroup> 
+				<option value="-1">Seleccione</option>
 				<s:iterator value="intercambiosPadres">
 					
 					<s:set name="padre" value="id_intercambio"></s:set>
 					<s:set name="nombrePadre" value="nombre"></s:set>
-					<s:iterator value="intercambiosHijos">
-						
-						<s:if test="%{#padre == id_padre}">
-						
-							<input value="id_intercambio" name="intercambio" type="radio" />
+					<optgroup label="<s:property value="nombre"/>"> 
+					
+					<s:iterator value="intercambiosHijos">						
+						<s:if test="%{#padre == id_padre}">	
+							
+							<option value="<s:property value="id_intercambio"/>">
+								<s:property value="nombre"/>
+							</option>		
 							
 						</s:if>
 					</s:iterator>
-				
+					</optgroup>
 				</s:iterator>
-				</s:select>
+				</select>
+				
+			
 				
 				
-				
-				<s:select list="{}">
-				<s:optgroup  list="intercambiosHijos" listKey="id_intercambio" listValue="nombre" />
-				</s:select>
+		
 
 
 
