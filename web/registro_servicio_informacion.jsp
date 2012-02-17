@@ -32,72 +32,104 @@
 
 			<!-- Este es el div de contenidos -->
 			<div id="content">
-			
-			
-			<h3>Registro de Servicio de Información</h3>
-			
-			<hr>
-			<p>Descripción General del Servicio</p>			
-			
-			<h5 id="formulario">Sector:</h5>
-			<s:select list="sectores" listKey="id_sector" listValue="nombre" headerKey="-1" headerValue="Seleccione un sector"></s:select>
-			
-			<br>
-			<h5 id="formulario">Nombre:</h5>
-			<s:textfield labelposition="top"  name="nombre"  />
-			
-			<br>
-			<h5 id="formulario">Descripción:</h5>
-			<s:textarea name="descripcion" cols="40" rows="10" />
-			
-			<br>
-			<h5 id="formulario">Estado del Servicio:</h5>
-			<s:select list="estados" listKey="id_estado" listValue="nombre" headerKey="-1" headerValue="Seleccione" ></s:select>
-			
-			<br><br><hr>
-			
-			<p id="formulario">Aspectos legales que rigen al servicio</p>
-			<small>Incluir documento de acuerdo de nivel de servicio(SLA) por el qué se regirá este Servicio de Información.</small>
-			
-			<h5 id="formulario">Nombre del Documento:</h5>
-			<s:textfield labelposition="top"  name="nombre_documento"  />		
-			
-			<h5 id="formulario">Adjuntar SLA:</h5>	
-			<s:file name="documento"></s:file>	
+
+
+				<h3>Registro de Servicio de Información</h3>
+
+				<hr>
+				<p>Descripción General del Servicio</p>
+
+				<h5 id="formulario">Sector:</h5>
+				<s:select list="sectores" listKey="id_sector" listValue="nombre"
+					headerKey="-1" headerValue="Seleccione un sector"></s:select>
+
+				<br>
+				<h5 id="formulario">Nombre:</h5>
+				<s:textfield labelposition="top" name="nombre" />
+
+				<br>
+				<h5 id="formulario">Descripción:</h5>
+				<s:textarea name="descripcion" cols="40" rows="10" />
+
+				<br>
+				<h5 id="formulario">Estado del Servicio:</h5>
+				<s:select list="estados" listKey="id_estado" listValue="nombre"
+					headerKey="-1" headerValue="Seleccione"></s:select>
+
+				<br> <br>
+				<hr>
+
+				<p id="formulario">Aspectos legales que rigen al servicio</p>
+				<small>Incluir documento de acuerdo de nivel de
+					servicio(SLA) por el qué se regirá este Servicio de Información.</small>
+
+				<h5 id="formulario">Nombre del Documento:</h5>
+				<s:textfield labelposition="top" name="nombre_documento" />
+
+				<h5 id="formulario">Adjuntar SLA:</h5>
+				<s:file name="documento"></s:file>
+
+				<br> <br>
+				<hr>
+
+				<p id="formulario">Descripción técnica del servicio</p>
+				<small>Especificaciones del intercambio de Información</small>
+
+				<h5 id="formulario">Orientado a:</h5>
+				<s:checkboxlist list="areas" listKey="id_area" listValue="nombre"
+					name="area" />
+
+
+				<br>
+				<h5 id="formulario">Seguridad:</h5>
+				<s:select list="seguridad" listKey="id_seguridad" listValue="nombre"
+					headerKey="-1" headerValue="Seleccione"></s:select>
+
+				<br>
+				<h5 id="formulario">Arquitectura:</h5>
+				<s:checkboxlist list="arquitecturas" listKey="id_arquitectura"
+					listValue="nombre" name="arquitectura" required="true" />
+
+				<br>
+
+				<s:select list="intercambiosPadres" listKey="id" listValue="nombre"
+					headerKey="-1" headerValue="Seleccione"></s:select>
+				<s:select list="intercambiosHijos" listKey="id" listValue="nombre"
+					headerKey="-1" headerValue="Seleccione"></s:select>
 				
-			<br><br><hr>	
+				<s:select list="intercambios" listKey="id" listValue="nombre"
+					headerKey="-1" headerValue="Seleccione"></s:select>
+
+
+
+
+				<h5 id="formulario">Tipo de Intercambio:</h5>
+				<s:select list="{}">
+				<s:iterator value="intercambiosPadres">
 					
-			<p id="formulario">Descripción técnica del servicio</p>
-			<small>Especificaciones del intercambio de Información</small>
+					<s:set name="padre" value="id_intercambio"></s:set>
+					<s:set name="nombrePadre" value="nombre"></s:set>
+					<s:iterator value="intercambiosHijos">
 						
-			<h5 id="formulario">Orientado a:</h5>
-			<s:checkboxlist list="areas" listKey="id_area" listValue="nombre" name="area" /> 
-				
-			
+						<s:if test="%{#padre == id_padre}">
 						
-			<br>
-			<h5 id="formulario">Seguridad:</h5>
-			<s:select list="seguridad" listKey="id_seguridad" listValue="nombre" headerKey="-1" headerValue="Seleccione"></s:select>
-			
-			<br>
-			<h5 id="formulario">Arquitectura:</h5>
-			<s:checkboxlist list="arquitecturas" listKey="id_arquitectura" listValue="nombre" name="arquitectura" required="true" />
-			
-			<br>
-			
-			<s:select list="intercambiosPadres" listKey="id" listValue="nombre" headerKey="-1" headerValue="Seleccione"></s:select>
-			<s:select list="intercambiosHijos" listKey="id" listValue="nombre" headerKey="-1" headerValue="Seleccione"></s:select>
-			
-			<h5 id="formulario">Tipo de Intercambio:</h5>
-			<s:doubleselect doubleList="intercambiosHijos" list="intercambiosPadres" 
-			doubleName="intercambio" name="inter" accesskey=""
-			doubleListKey="id_intercambio" doubleListValue="nombre"
-			listKey="id_intercambio" listValue="nombre"
-			></s:doubleselect>
+							<input value="id_intercambio" name="intercambio" type="radio" />
+							
+						</s:if>
+					</s:iterator>
 				
-			<br><br><br><br>
-			
-			
+				</s:iterator>
+				</s:select>
+				
+				
+				
+				<s:select list="{}">
+				<s:optgroup  list="intercambiosHijos" listKey="id_intercambio" listValue="nombre" />
+				</s:select>
+
+
+
+
 			</div>
 
 			<!-- Este es el pie de página -->
