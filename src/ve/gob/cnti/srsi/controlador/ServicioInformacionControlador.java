@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.struts2.convention.annotation.Namespace;
-import org.apache.struts2.convention.annotation.Result;
-
 import com.opensymphony.xwork2.ActionSupport;
 
 
