@@ -28,7 +28,15 @@
 			<div id="menu"></div>
 
 			<!-- Esta es la barra lateral -->
-			<div id="sidebar"></div>
+			<div id="sidebar">
+				
+				<small>Paso 1 Registro de Servicio de Información</small><br><br>
+				<small>Paso 2 Registro de Funcionalidad(es)</small>	<br>		<br>	
+				<small>Paso 3 Registro de Entradas/Salidas</small><br><br>
+				<small>Paso 4 Verificar y guardar</small>
+				
+			
+			</div>
 
 			<!-- Este es el div de contenidos -->
 			<div id="content">
