@@ -84,11 +84,16 @@
 			<s:checkboxlist list="arquitecturas" listKey="id_arquitectura" listValue="nombre" name="arquitectura" required="true" />
 			
 			<br>
+			
+			<s:select list="intercambiosPadres" listKey="id" listValue="nombre" headerKey="-1" headerValue="Seleccione"></s:select>
+			<s:select list="intercambiosHijos" listKey="id" listValue="nombre" headerKey="-1" headerValue="Seleccione"></s:select>
+			
 			<h5 id="formulario">Tipo de Intercambio:</h5>
-			<s:doubleselect doubleList="intercambios" list="intercambios" 
-			doubleName="nombre" 
-			listKey="id_intercambio" doubleListKey="id_padre" 
-			listValue="nombre" doubleListValue="nombre"></s:doubleselect>
+			<s:doubleselect doubleList="intercambiosHijos" list="intercambiosPadres" 
+			doubleName="intercambio" name="inter" accesskey=""
+			doubleListKey="id_intercambio" doubleListValue="nombre"
+			listKey="id_intercambio" listValue="nombre"
+			></s:doubleselect>
 				
 			<br><br><br><br>
 			

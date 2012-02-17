@@ -19,8 +19,10 @@ public class ServicioInformacionControlador extends ActionSupport{
 	private List<Arquitectura> arquitecturas = new ArrayList<Arquitectura>();
 	private List<Sector> sectores = new ArrayList<Sector>();
 	private List<Intercambio> intercambios = new ArrayList<Intercambio>();	
-	private List<TipoIntercambio> tiposdeIntercambios = new ArrayList<TipoIntercambio>(); 
-		
+	private List<Intercambio> intercambiosPadres = new ArrayList<Intercambio>();
+	private List<Intercambio> intercambiosHijos = new ArrayList<Intercambio>();
+	
+ 	
 	private DAO dao = new DAO();
 	
 	
@@ -41,27 +43,24 @@ public class ServicioInformacionControlador extends ActionSupport{
 		sectores = (List<Sector>) dao.read(sector);
 		
 		intercambios = (List<Intercambio>) dao.read(intercambio);		
-		Iterator<Intercambio> iterador = intercambios.iterator();
-		Iterator<Intercambio> iterador2 = intercambios.iterator();
-		
-		
-		List<String> padres = new ArrayList<String>();
+		Iterator<Intercambio> iterador = intercambios.iterator();	
+						
 		while(iterador.hasNext()){
 			intercambio = iterador.next();
-			if(intercambio.getId_padre()==0){			
-				padres.add(intercambio.getNombre());
+			if(intercambio.getId_padre()==0){				
+				intercambiosPadres.add(intercambio);
 			}
 		}
+				
+		iterador = intercambios.iterator();
 		
-		List<String> hijos = new ArrayList<String>();
 		while(iterador.hasNext()){
 			intercambio = iterador.next();
 			if(intercambio.getId_padre()!=0){			
-				hijos.add(intercambio.getNombre());
+				intercambiosHijos.add(intercambio);
 			}
 		}
-		
-				
+						
 		return "SUCCESS";
 	}
 	
@@ -116,32 +115,92 @@ public class ServicioInformacionControlador extends ActionSupport{
 		this.intercambios = intercambios;
 	}
 
-	public List<TipoIntercambio> getTiposdeIntercambios() {
-		return tiposdeIntercambios;
+	public List<Intercambio> getIntercambiosPadres() {
+		return intercambiosPadres;
 	}
 
-	public void setTiposdeIntercambios(List<TipoIntercambio> tiposdeIntercambios) {
-		this.tiposdeIntercambios = tiposdeIntercambios;
+	public void setIntercambiosPadres(List<Intercambio> intercambiosPadres) {
+		this.intercambiosPadres = intercambiosPadres;
+	}
+
+	public List<Intercambio> getIntercambiosHijos() {
+		return intercambiosHijos;
+	}
+
+	public void setIntercambiosHijos(List<Intercambio> intercambiosHijos) {
+		this.intercambiosHijos = intercambiosHijos;
 	}
 	
 }
 
-class TipoIntercambio{
+class Padres{
 	
-	 private String nombre;  
-     private List<String> hijos;  
-   
-     public TipoIntercambio(String nombre, List<String> hijos) {  
-         this.nombre = nombre;  
-         this.hijos = hijos;  
-     }  
-   
-     public String getNombre() {  
-         return nombre;  
-     }  
-   
-     public List<String> getCanciones() {  
-         return hijos;  
-     } 
+	private long id;
+	private String nombre;  
+		     
+	public Padres(long id, String nombre) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+	}
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	@Override
+	public String toString() {
+		return "Padres [id=" + id + ", nombre=" + nombre + "]";
+	}
+    
+	
 }
+
+class Hijos{
+	
+	private long id;
+	private long id_padre;
+	private String nombre;
+		
+	public Hijos(long id, long id_padre, String nombre) {
+		super();
+		this.id = id;
+		this.id_padre = id_padre;
+		this.nombre = nombre;
+	}
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	public long getId_padre() {
+		return id_padre;
+	}
+	public void setId_padre(long id_padre) {
+		this.id_padre = id_padre;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	@Override
+	public String toString() {
+		return "Hijos [id=" + id + ", id_padre=" + id_padre + ", nombre="
+				+ nombre + "]";
+	}	
+	
+	
+}
+
+
 
