@@ -33,9 +33,12 @@
 			<!-- Este es el div de contenidos -->
 			<div id="content">
 			
+			
 			<h3>Registro de Servicio de Información</h3>
 			
 			<hr>
+			<p>Descripción General del Servicio</p>			
+			
 			<h5 id="formulario">Sector:</h5>
 			<s:select list="sectores" listKey="id_sector" listValue="nombre" headerKey="-1" headerValue="Seleccione un sector"></s:select>
 			
@@ -48,12 +51,29 @@
 			<s:textarea name="descripcion" cols="40" rows="10" />
 			
 			<br>
+			<h5 id="formulario">Estado del Servicio:</h5>
+			<s:select list="estados" listKey="id_estado" listValue="nombre" headerKey="-1" headerValue="Seleccione" ></s:select>
+			
+			<br><br><hr>
+			
+			<p id="formulario">Aspectos legales que rigen al servicio</p>
+			<small>Incluir documento de acuerdo de nivel de servicio(SLA) por el qué se regirá este Servicio de Información.</small>
+			
+			<h5 id="formulario">Nombre del Documento:</h5>
+			<s:textfield labelposition="top"  name="nombre_documento"  />		
+			
+			<h5 id="formulario">Adjuntar SLA:</h5>	
+			<s:file name="documento"></s:file>	
+				
+			<br><br><hr>	
+					
+			<p id="formulario">Descripción técnica del servicio</p>
+			<small>Especificaciones del intercambio de Información</small>
+						
 			<h5 id="formulario">Orientado a:</h5>
 			<s:checkboxlist list="areas" listKey="id_area" listValue="nombre" name="area" /> 
 				
-			<br>
-			<h5 id="formulario">Estado del Servicio:</h5>
-			<s:select list="estados" listKey="id_estado" listValue="nombre" headerKey="-1" headerValue="Seleccione" ></s:select>
+			
 						
 			<br>
 			<h5 id="formulario">Seguridad:</h5>
@@ -62,8 +82,15 @@
 			<br>
 			<h5 id="formulario">Arquitectura:</h5>
 			<s:checkboxlist list="arquitecturas" listKey="id_arquitectura" listValue="nombre" name="arquitectura" required="true" />
+			
+			<br>
+			<h5 id="formulario">Tipo de Intercambio:</h5>
+			<s:doubleselect doubleList="intercambios" list="intercambios" 
+			doubleName="nombre" 
+			listKey="id_intercambio" doubleListKey="id_padre" 
+			listValue="nombre" doubleListValue="nombre"></s:doubleselect>
 				
-			<br><br>
+			<br><br><br><br>
 			
 			
 			</div>

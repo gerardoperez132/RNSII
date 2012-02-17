@@ -8,7 +8,7 @@
 	
 	<action name="prepararRegistroServicioInformacion" 
 			method="prepararRegistroServicioInformacion" 
-			class="ve.gob.cnti.srsi.controlador.ServicioInformacion">	
+			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">	
 			
 			<result name="SUCCESS">registro_servicio_informacion.jsp</result>
 			
