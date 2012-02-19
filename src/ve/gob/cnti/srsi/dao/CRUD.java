@@ -2,6 +2,13 @@ package ve.gob.cnti.srsi.dao;
 
 import java.util.ArrayList;
 
+/**
+ * Definición de métodos para las operaciones en la base de datos.
+ * 
+ * @author Richard Ricciardelli
+ * @see DAO
+ * 
+ */
 public interface CRUD {
 
 	/**
@@ -67,4 +74,26 @@ public interface CRUD {
 	 * @return id Es el id lógico correspondiente.
 	 */
 	public long getNextId(Object model);
+
+	/**
+	 * Permite obtener el campo que será utilizado para obtener el id propio de
+	 * cada modelo.
+	 * 
+	 * @param model
+	 *            Es la clase, modelo o tabla en la cual se realizará la
+	 *            consulta.
+	 * @return
+	 */
+	public String getField(Object model);
+
+	/**
+	 * Permite obtener sufijo para ser agregado al campo que será utilizado para
+	 * la consulta del id de cada modelo.
+	 * 
+	 * @param model
+	 *            Es la clase, modelo o tabla en la cual se realizará la
+	 *            consulta.
+	 * @return
+	 */
+	public String getSuffix(Object model);
 }
