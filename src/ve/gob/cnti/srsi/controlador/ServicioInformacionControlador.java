@@ -44,8 +44,8 @@ public class ServicioInformacionControlador extends ActionSupport {
 
 		intercambiosPadres = (List<Intercambio>) dao.getParents(intercambio);
 		intercambiosHijos = (List<Intercambio>) dao.getChildren(intercambio);
-
-		return "SUCCESS";
+		
+		return SUCCESS;
 	}
 
 	public List<Estado> getEstados() {
