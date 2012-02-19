@@ -29,41 +29,34 @@
 
 			<!-- Esta es la barra lateral -->
 			<div id="sidebar">
-				
-				<small>Paso 1 Registro de Servicio de Información</small><br><br>
-				<small>Paso 2 Registro de Funcionalidad(es)</small>	<br>		<br>	
-				<small>Paso 3 Registro de Entradas/Salidas</small><br><br>
+				<small>Paso 1 Registro de Servicio de Información</small><br> <br>
+				<small>Paso 2 Registro de Funcionalidad(es)</small> <br> <br>
+				<small>Paso 3 Registro de Entradas/Salidas</small><br> <br>
 				<small>Paso 4 Verificar y guardar</small>
-				
-			
 			</div>
 
 			<!-- Este es el div de contenidos -->
 			<div id="content">
-
-
 				<h3>Registro de Servicio de Información</h3>
-
 				<hr>
 				<p>Descripción General del Servicio</p>
 
 				<h5 id="formulario">Sector:</h5>
 				<s:select list="sectores" listKey="id_sector" listValue="nombre"
 					headerKey="-1" headerValue="Seleccione un sector"></s:select>
-
 				<br>
+
 				<h5 id="formulario">Nombre:</h5>
 				<s:textfield labelposition="top" name="nombre" />
-
 				<br>
+
 				<h5 id="formulario">Descripción:</h5>
 				<s:textarea name="descripcion" cols="40" rows="10" />
-
 				<br>
+
 				<h5 id="formulario">Estado del Servicio:</h5>
 				<s:select list="estados" listKey="id_estado" listValue="nombre"
 					headerKey="-1" headerValue="Seleccione"></s:select>
-
 				<br> <br>
 				<hr>
 
@@ -86,58 +79,38 @@
 				<h5 id="formulario">Orientado a:</h5>
 				<s:checkboxlist list="areas" listKey="id_area" listValue="nombre"
 					name="area" />
-
-
 				<br>
+
 				<h5 id="formulario">Seguridad:</h5>
 				<s:select list="seguridad" listKey="id_seguridad" listValue="nombre"
 					headerKey="-1" headerValue="Seleccione"></s:select>
-
 				<br>
+
 				<h5 id="formulario">Arquitectura:</h5>
 				<s:checkboxlist list="arquitecturas" listKey="id_arquitectura"
 					listValue="nombre" name="arquitectura" required="true" />
-
 				<br>
 
-				
 				<h5 id="formulario">Tipo de Intercambio:</h5>
-				
-			
-				
-				
 				<select>
-				<optgroup></optgroup> 
-				<option value="-1">Seleccione</option>
-				<s:iterator value="intercambiosPadres">
-					
-					<s:set name="padre" value="id_intercambio"></s:set>
-					<s:set name="nombrePadre" value="nombre"></s:set>
-					<optgroup label="<s:property value="nombre"/>"> 
-					
-					<s:iterator value="intercambiosHijos">						
-						<s:if test="%{#padre == id_padre}">	
-							
-							<option value="<s:property value="id_intercambio"/>">
-								<s:property value="nombre"/>
-							</option>		
-							
-						</s:if>
+					<optgroup></optgroup>
+					<option value="-1">Seleccione</option>
+					<s:iterator value="intercambiosPadres">
+						<s:set name="padre" value="id_intercambio"></s:set>
+						<s:set name="nombrePadre" value="nombre"></s:set>
+						<optgroup label="<s:property value="nombre"/>">
+							<s:iterator value="intercambiosHijos">
+								<s:if test="%{#padre == id_padre}">
+									<option value="<s:property value="id_intercambio"/>">
+										<s:property value="nombre" />
+									</option>
+								</s:if>
+							</s:iterator>
+						</optgroup>
 					</s:iterator>
-					</optgroup>
-				</s:iterator>
 				</select>
-				
-			
-				
-				
-		
-
-
-
-
 			</div>
-
+			
 			<!-- Este es el pie de página -->
 			<div id="footer"></div>
 		</div>
