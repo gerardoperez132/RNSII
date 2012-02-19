@@ -91,6 +91,40 @@ public class DAO implements CRUD {
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
+	public ArrayList<?> getParents(Object model) {
+		try {
+			startConnection();
+			return (ArrayList<Object>) session.createQuery(
+					"FROM " + model.getClass().getSimpleName().toString()
+							+ " WHERE status = " + Status.ACTIVO
+							+ " AND id_padre = 0").list();
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public ArrayList<?> getChildren(Object model) {
+		try {
+			startConnection();
+			return (ArrayList<Object>) session.createQuery(
+					"FROM " + model.getClass().getSimpleName().toString()
+							+ " WHERE status = " + Status.ACTIVO
+							+ " AND id_padre != 0").list();
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+	}
+
+	@Override
 	public void create(Object model) {
 		try {
 			startConnection();
@@ -128,7 +162,7 @@ public class DAO implements CRUD {
 		try {
 			startConnection();
 			return (ArrayList<Object>) session.createQuery(
-					"FROM " + model.getClass().getName().toString()
+					"FROM " + model.getClass().getSimpleName().toString()
 							+ " WHERE status = " + Status.ACTIVO).list();
 
 		} catch (HibernateException he) {
