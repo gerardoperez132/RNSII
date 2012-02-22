@@ -18,11 +18,24 @@ public class ServicioInformacionControlador extends ActionSupport {
 
 	private List<Area> areas = new ArrayList<Area>();
 	private List<Estado> estados = new ArrayList<Estado>();
-	private List<Seguridad> seguridad = new ArrayList<Seguridad>();
+	private List<Seguridad> l_seguridad = new ArrayList<Seguridad>();
 	private List<Arquitectura> arquitecturas = new ArrayList<Arquitectura>();
 	private List<Sector> sectores = new ArrayList<Sector>();
 	private List<Intercambio> intercambiosPadres = new ArrayList<Intercambio>();
 	private List<Intercambio> intercambiosHijos = new ArrayList<Intercambio>();
+	
+	
+	private String sector;
+	private String nombre;
+	private String descripcion;
+	private String estado;
+	private String aspectoLegal;
+	private String area;
+	private String seguridad;
+	private String arquitectura;
+	private String intercambio;
+	
+	
 
 	private DAO dao = new DAO();
 
@@ -38,7 +51,7 @@ public class ServicioInformacionControlador extends ActionSupport {
 
 		areas = (List<Area>) dao.read(area);
 		estados = (List<Estado>) dao.read(est);
-		seguridad = (List<Seguridad>) dao.read(seg);
+		l_seguridad = (List<Seguridad>) dao.read(seg);
 		arquitecturas = (List<Arquitectura>) dao.read(arq);
 		sectores = (List<Sector>) dao.read(sector);
 
@@ -47,6 +60,27 @@ public class ServicioInformacionControlador extends ActionSupport {
 
 		return SUCCESS;
 	}
+	
+	
+	public String registrarServicioInformacion(){
+		
+		System.out.println(sector);
+		System.out.println(nombre);
+		System.out.println(descripcion);
+		System.out.println(estado);
+		System.out.println(aspectoLegal);
+		System.out.println(area);
+		System.out.println(seguridad);
+		System.out.println(arquitectura);
+		System.out.println(intercambio);
+		System.out.println("******************************************************************");
+		System.out.println();
+		System.out.println();
+		
+		return SUCCESS;
+	}
+	
+	
 
 	public List<Estado> getEstados() {
 		return estados;
@@ -56,13 +90,6 @@ public class ServicioInformacionControlador extends ActionSupport {
 		this.estados = estados;
 	}
 
-	public List<Seguridad> getSeguridad() {
-		return seguridad;
-	}
-
-	public void setSeguridad(List<Seguridad> seguridad) {
-		this.seguridad = seguridad;
-	}
 
 	public List<Area> getAreas() {
 		return areas;
@@ -103,4 +130,87 @@ public class ServicioInformacionControlador extends ActionSupport {
 	public void setIntercambiosHijos(List<Intercambio> intercambiosHijos) {
 		this.intercambiosHijos = intercambiosHijos;
 	}
+	
+	
+	
+	public List<Seguridad> getL_seguridad() {
+		return l_seguridad;
+	}
+
+	public void setL_seguridad(List<Seguridad> l_seguridad) {
+		this.l_seguridad = l_seguridad;
+	}
+
+	public String getSector() {
+		return sector;
+	}
+
+	public void setSector(String sector) {
+		this.sector = sector;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public String getAspectoLegal() {
+		return aspectoLegal;
+	}
+
+	public void setAspectoLegal(String aspectoLegal) {
+		this.aspectoLegal = aspectoLegal;
+	}
+
+	public String getArea() {
+		return area;
+	}
+
+	public void setArea(String area) {
+		this.area = area;
+	}
+
+	public String getSeguridad() {
+		return seguridad;
+	}
+
+	public void setSeguridad(String seguridad) {
+		this.seguridad = seguridad;
+	}
+
+	public String getArquitectura() {
+		return arquitectura;
+	}
+
+	public void setArquitectura(String arquitectura) {
+		this.arquitectura = arquitectura;
+	}
+
+	public String getIntercambio() {
+		return intercambio;
+	}
+
+	public void setIntercambio(String intercambio) {
+		this.intercambio = intercambio;
+	}
+	
 }
