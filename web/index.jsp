@@ -7,8 +7,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <!-- CSS (required) -->
 <link rel="stylesheet" type="text/css" href="res/css/styles.css">
-
-
 <title>SRSI - Inicio</title>
 <!-- Donde dice inicio debería ir una var que identifique el lugar -->
 </head>
@@ -34,7 +32,13 @@
 			<div id="sidebar"></div>
 
 			<!-- Este es el div de contenidos -->
-			<div id="content"></div>
+			<div id="content">
+				<br>
+				<s:url id="registrarServicioInformacion"
+					action="prepararRegistroServicioInformacion"></s:url>
+				<s:a href="%{registrarServicioInformacion}">Registrar Servicio de Información</s:a>
+
+			</div>
 
 			<!-- Este es el pie de página -->
 			<div id="footer"></div>

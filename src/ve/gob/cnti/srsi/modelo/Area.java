@@ -9,8 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * 
- * Esta es la área que es igual a "orientado a" en el modelo.
+ * Esta es la área que es igual a "orientado a" en el modelo. El servicio de
+ * información puede ir dirigido entonces a satisfacer las necesidades del
+ * Ciudadano, Gobierno o Privado.
  * 
  * @author Richard Ricciardelli
  * 
