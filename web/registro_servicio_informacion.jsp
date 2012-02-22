@@ -7,6 +7,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <!-- CSS (required) -->
 <link rel="stylesheet" type="text/css" href="res/css/styles.css">
+<link rel="stylesheet" type="text/css" href="res/css/tabs.css">
+<script type="text/javascript" src="res/js/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="res/js/tabs.js"></script>
+
 <title>SRSI - Inicio</title>
 <!-- Donde dice inicio debería ir una var que identifique el lugar -->
 </head>
@@ -37,103 +41,110 @@
 				
 			
 			</div>
+			
+			
 
 			<!-- Este es el div de contenidos -->
 			<div id="content">
 
-
 				<h3>Registro de Servicio de Información</h3>
 
 				<hr>
-				<p>Descripción General del Servicio</p>
 
-				<h5 id="formulario">Sector:</h5>
-				<s:select list="sectores" listKey="id_sector" listValue="nombre"
-					headerKey="-1" headerValue="Seleccione un sector"></s:select>
-
-				<br>
-				<h5 id="formulario">Nombre:</h5>
-				<s:textfield labelposition="top" name="nombre" />
-
-				<br>
-				<h5 id="formulario">Descripción:</h5>
-				<s:textarea name="descripcion" cols="40" rows="10" />
-
-				<br>
-				<h5 id="formulario">Estado del Servicio:</h5>
-				<s:select list="estados" listKey="id_estado" listValue="nombre"
-					headerKey="-1" headerValue="Seleccione"></s:select>
-
-				<br> <br>
-				<hr>
-
-				<p id="formulario">Aspectos legales que rigen al servicio</p>
-				<small>Incluir documento de acuerdo de nivel de
-					servicio(SLA) por el qué se regirá este Servicio de Información.</small>
-
-				<h5 id="formulario">Nombre del Documento:</h5>
-				<s:textfield labelposition="top" name="nombre_documento" />
-
-				<h5 id="formulario">Adjuntar SLA:</h5>
-				<s:file name="documento"></s:file>
-
-				<br> <br>
-				<hr>
-
-				<p id="formulario">Descripción técnica del servicio</p>
-				<small>Especificaciones del intercambio de Información</small>
-
-				<h5 id="formulario">Orientado a:</h5>
-				<s:checkboxlist list="areas" listKey="id_area" listValue="nombre"
-					name="area" />
-
-
-				<br>
-				<h5 id="formulario">Seguridad:</h5>
-				<s:select list="seguridad" listKey="id_seguridad" listValue="nombre"
-					headerKey="-1" headerValue="Seleccione"></s:select>
-
-				<br>
-				<h5 id="formulario">Arquitectura:</h5>
-				<s:checkboxlist list="arquitecturas" listKey="id_arquitectura"
-					listValue="nombre" name="arquitectura" required="true" />
-
-				<br>
-
-				
-				<h5 id="formulario">Tipo de Intercambio:</h5>
-				
+				<ul class="tabs">
+					<li><a href="#tab1">Descripción General</a></li>
+					<li><a href="#tab2">Aspectos legales</a></li>
+					<li><a href="#tab3">Descripción técnica</a></li>
+					<li><a href="#tab4">Guardar</a></li>					
+				</ul>
 			
-				
-				
-				<select>
-				<optgroup></optgroup> 
-				<option value="-1">Seleccione</option>
-				<s:iterator value="intercambiosPadres">
-					
-					<s:set name="padre" value="id_intercambio"></s:set>
-					<s:set name="nombrePadre" value="nombre"></s:set>
-					<optgroup label="<s:property value="nombre"/>"> 
-					
-					<s:iterator value="intercambiosHijos">						
-						<s:if test="%{#padre == id_padre}">	
-							
-							<option value="<s:property value="id_intercambio"/>">
-								<s:property value="nombre"/>
-							</option>		
-							
-						</s:if>
-					</s:iterator>
-					</optgroup>
-				</s:iterator>
-				</select>
-				
-			
-				
-				
+				<div class="tab_container">
+					<div id="tab1" class="tab_content">
+						
+						<p>Descripción General del Servicio</p>
+
+						<h5 id="formulario">Sector:</h5>
+						<s:select list="sectores" listKey="id_sector" listValue="nombre"
+							headerKey="-1" headerValue="Seleccione un sector"></s:select>
 		
+						<br>
+						<h5 id="formulario">Nombre:</h5>
+						<s:textfield labelposition="top" name="nombre" />
+		
+						<br>
+						<h5 id="formulario">Descripción:</h5>
+						<s:textarea name="descripcion" cols="40" rows="10" />
+		
+						<br>
+						<h5 id="formulario">Estado del Servicio:</h5>
+						<s:select list="estados" listKey="id_estado" listValue="nombre"
+							headerKey="-1" headerValue="Seleccione"></s:select>					
 
 
+					</div>
+					
+					<div id="tab2" class="tab_content">
+					   <p id="formulario">Aspectos legales que rigen al servicio</p>
+						<small>Incluir documento de acuerdo de nivel de
+							servicio(SLA) por el qué se regirá este Servicio de Información.</small>
+		
+						<h5 id="formulario">Nombre del Documento:</h5>
+						<s:textfield labelposition="top" name="nombre_documento" />
+		
+						<h5 id="formulario">Adjuntar SLA:</h5>
+						<s:file name="documento"></s:file>
+					</div>
+					
+					<div id="tab3" class="tab_content">
+
+					   <p id="formulario">Descripción técnica del servicio</p>
+						<small>Especificaciones del intercambio de Información</small>
+		
+						<h5 id="formulario">Orientado a:</h5>
+						<s:checkboxlist list="areas" listKey="id_area" listValue="nombre"
+							name="area" />
+		
+		
+						<br>
+						<h5 id="formulario">Seguridad:</h5>
+						<s:select list="seguridad" listKey="id_seguridad" listValue="nombre"
+							headerKey="-1" headerValue="Seleccione"></s:select>
+		
+						<br>
+						<h5 id="formulario">Arquitectura:</h5>
+						<s:checkboxlist list="arquitecturas" listKey="id_arquitectura"
+							listValue="nombre" name="arquitectura" required="true" />
+		
+						<br>
+						<h5 id="formulario">Tipo de Intercambio:</h5>
+						<select>
+						<optgroup></optgroup> 
+						<option value="-1">Seleccione</option>
+						<s:iterator value="intercambiosPadres">
+							
+							<s:set name="padre" value="id_intercambio"></s:set>
+							<s:set name="nombrePadre" value="nombre"></s:set>
+							<optgroup label="<s:property value="nombre"/>"> 
+							
+							<s:iterator value="intercambiosHijos">						
+								<s:if test="%{#padre == id_padre}">	
+									
+									<option value="<s:property value="id_intercambio"/>">
+										<s:property value="nombre"/>
+									</option>		
+									
+								</s:if>
+							</s:iterator>
+							</optgroup>
+						</s:iterator>
+						</select>
+					</div>
+					
+					<div id="tab4" class="tab_content">
+					   
+					</div>
+					
+				</div>
 
 
 			</div>
