@@ -9,7 +9,7 @@
 	background-color: #ddd;
 }
 
-#header {	
+#header {
 	height: 186px;
 }
 
@@ -59,26 +59,35 @@
 	margin-right: auto;
 }
 
-#formulario{
+#formulario {
 	margin-bottom: 5px;
 	margin-left: 5px;
 }
 
-#resaltar{
+#resaltar {
 	background-color: white;
 	width: 95%;
 	margin-left: 5px;
-	padding: 1px 0px 5px 5px;float: left;
+	padding: 1px 0px 5px 5px;
+	float: left;
 }
 
-#resaltar:hover{
-	background-color: #CCCCCC;	
+#resaltar:hover {
+	background-color: #CCCCCC;
 }
 
-#mensaje{visibility: hidden; border:1px solid #ddd;;float: right;
-	width: 40%; margin-right: 3px;}
+#mensaje {
+	visibility: hidden;
+	border: 1px solid #ddd;;
+	float: right;
+	width: 40%;
+	margin-right: 3px;
+}
 
-#resaltar:hover #mensaje{
-	visibility: visible; border: 1px solid #ddd;;float: right;
-	width: 40%;margin-right: 3px;
+#resaltar:hover #mensaje {
+	visibility: visible;
+	border: 1px solid #ddd;;
+	float: right;
+	width: 40%;
+	margin-right: 3px;
 }

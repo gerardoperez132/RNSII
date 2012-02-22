@@ -9,7 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * Especifica los niveles de seguridad de un servicio de información.
+ * Especifica los niveles de seguridad de un servicio de información. Estos
+ * pueden ser Público, Irrestricto y Autorizable.
  * 
  * @author Richard Ricciardelli
  * 
