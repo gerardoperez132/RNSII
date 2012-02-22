@@ -12,7 +12,7 @@
 		</action>
 		<action name="prepararRegistroFuncionalidad" method="prepararRegistroFuncionalidad"
 			class="ve.gob.cnti.srsi.controlador.FuncionalidadControlador">
-			<result name="success">regitro_funcionalidad.jsp</result>
+			<result name="success">registro_funcionalidad.jsp</result>
 		</action>
 	</package>
 	<constant name="struts.devMode" value="true" />
