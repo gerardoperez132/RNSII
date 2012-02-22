@@ -10,6 +10,10 @@
 			<result name="success">registro_servicio_informacion.jsp</result>
 
 		</action>
+		<action name="prepararRegistroFuncionalidad" method="prepararRegistroFuncionalidad"
+			class="ve.gob.cnti.srsi.controlador.FuncionalidadControlador">
+			<result name="success">regitro_funcionalidad.jsp</result>
+		</action>
 	</package>
 	<constant name="struts.devMode" value="true" />
 	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
