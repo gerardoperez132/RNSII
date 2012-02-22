@@ -35,7 +35,7 @@
 		<mapping class="ve.gob.cnti.srsi.modelo.UnionDatoTipoDato" />
 		<mapping class="ve.gob.cnti.srsi.modelo.UnionSectorEnte" />
 		<mapping class="ve.gob.cnti.srsi.modelo.UnionUsuarioRol" />
-		<mapping class="ve.gob.cnti.srsi.modelo.URL" />
+		<mapping class="ve.gob.cnti.srsi.modelo.Url" />
 		<mapping class="ve.gob.cnti.srsi.modelo.Usuario" />
 	</session-factory>
 </hibernate-configuration>
