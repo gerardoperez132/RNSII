@@ -2,6 +2,7 @@ package ve.gob.cnti.srsi.dao;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -175,13 +176,38 @@ public class DAO implements CRUD {
 
 	@Override
 	public void update(Object model, long id) {
-		// TODO Auto-generated method stub
-
+		try {
+			startConnection();
+			session.createQuery(
+					"UPDATE " + model.getClass().getSimpleName()
+							+ " SET status = 1, fecha_modificado = '"
+							+ new Date() + "' WHERE " + getField(model) + " = "
+							+ id).executeUpdate();
+			session.save(model);
+			transaction.commit();
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
 	}
 
 	@Override
 	public void delete(Object model, long id) {
-		// TODO Auto-generated method stub
-
+		try {
+			startConnection();
+			session.createQuery(
+					"UPDATE " + model.getClass().getSimpleName()
+							+ " SET status = 2, fecha_modificado = '"
+							+ new Date() + "' WHERE status = 0 AND " + getField(model) + " = "
+							+ id).executeUpdate();
+			transaction.commit();
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
 	}
 }
