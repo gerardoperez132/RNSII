@@ -10,6 +10,7 @@ import ve.gob.cnti.srsi.modelo.Estado;
 import ve.gob.cnti.srsi.modelo.Intercambio;
 import ve.gob.cnti.srsi.modelo.Sector;
 import ve.gob.cnti.srsi.modelo.Seguridad;
+import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -23,8 +24,7 @@ public class ServicioInformacionControlador extends ActionSupport {
 	private List<Sector> sectores = new ArrayList<Sector>();
 	private List<Intercambio> intercambiosPadres = new ArrayList<Intercambio>();
 	private List<Intercambio> intercambiosHijos = new ArrayList<Intercambio>();
-	
-	
+
 	private String sector;
 	private String nombre;
 	private String descripcion;
@@ -34,8 +34,9 @@ public class ServicioInformacionControlador extends ActionSupport {
 	private String seguridad;
 	private String arquitectura;
 	private String intercambio;
-	
-	
+	private String responsable;
+	private String telefonoContacto;
+	private String correoContacto;
 
 	private DAO dao = new DAO();
 
@@ -58,12 +59,26 @@ public class ServicioInformacionControlador extends ActionSupport {
 		intercambiosPadres = (List<Intercambio>) dao.getParents(intercambio);
 		intercambiosHijos = (List<Intercambio>) dao.getChildren(intercambio);
 
+		responsable = "Joaquín";
+
 		return SUCCESS;
 	}
-	
-	
-	public String registrarServicioInformacion(){
-		
+
+	public String registrarServicioInformacion() {
+
+		ServicioInformacion si = new ServicioInformacion();
+
+		si.setId_sector(Long.parseLong(sector));
+
+		si.setNombre(nombre);
+		si.setDescripcion(descripcion);
+
+		si.setId_estado(Long.parseLong(estado));
+
+		// int[] a = { area };
+
+		System.out
+				.println("******************************************************************");
 		System.out.println(sector);
 		System.out.println(nombre);
 		System.out.println(descripcion);
@@ -73,14 +88,14 @@ public class ServicioInformacionControlador extends ActionSupport {
 		System.out.println(seguridad);
 		System.out.println(arquitectura);
 		System.out.println(intercambio);
-		System.out.println("******************************************************************");
-		System.out.println();
-		System.out.println();
-		
+		System.out.println(responsable);
+		System.out.println(telefonoContacto);
+		System.out.println(correoContacto);
+		System.out
+				.println("******************************************************************");
+
 		return SUCCESS;
 	}
-	
-	
 
 	public List<Estado> getEstados() {
 		return estados;
@@ -89,7 +104,6 @@ public class ServicioInformacionControlador extends ActionSupport {
 	public void setEstados(List<Estado> estados) {
 		this.estados = estados;
 	}
-
 
 	public List<Area> getAreas() {
 		return areas;
@@ -130,9 +144,7 @@ public class ServicioInformacionControlador extends ActionSupport {
 	public void setIntercambiosHijos(List<Intercambio> intercambiosHijos) {
 		this.intercambiosHijos = intercambiosHijos;
 	}
-	
-	
-	
+
 	public List<Seguridad> getL_seguridad() {
 		return l_seguridad;
 	}
@@ -212,5 +224,29 @@ public class ServicioInformacionControlador extends ActionSupport {
 	public void setIntercambio(String intercambio) {
 		this.intercambio = intercambio;
 	}
-	
+
+	public String getResponsable() {
+		return responsable;
+	}
+
+	public void setResponsable(String responsable) {
+		this.responsable = responsable;
+	}
+
+	public String getTelefonoContacto() {
+		return telefonoContacto;
+	}
+
+	public void setTelefonoContacto(String telefonoContacto) {
+		this.telefonoContacto = telefonoContacto;
+	}
+
+	public String getCorreoContacto() {
+		return correoContacto;
+	}
+
+	public void setCorreoContacto(String correoContacto) {
+		this.correoContacto = correoContacto;
+	}
+
 }
