@@ -9,28 +9,28 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * Clase resultante de la relación de muchos a muchos entre Área y Servicios de
- * Información.
+ * Clase resultante de la relación de muchos a muchos entre Arquitectura y
+ * Servicios de Información.
  * 
  * @author Richard Ricciardelli
- * @see Area
+ * @see Arquitectura
  * @see SistemaInformacion
  * 
  */
 @Entity
-@Table(name = "union_areas_sistema_informacion")
-public class UnionAreaSistemaInformacion {
+@Table(name = "union_arquitecturas_servicios_informacion")
+public class UnionArquitecturaServicioInformacion {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private long id_servicio_informacion;
-	private long id_area;
+	private long id_arquitectura;
 	private int status;
 	private Date fecha_creado;
 	private Date fecha_modificado;
 
-	public UnionAreaSistemaInformacion() {
+	public UnionArquitecturaServicioInformacion() {
 	}
 
 	public long getId() {
@@ -49,12 +49,12 @@ public class UnionAreaSistemaInformacion {
 		this.id_servicio_informacion = id_servicio_informacion;
 	}
 
-	public long getId_area() {
-		return id_area;
+	public long getId_arquitectura() {
+		return id_arquitectura;
 	}
 
-	public void setId_area(long id_area) {
-		this.id_area = id_area;
+	public void setId_arquitectura(long id_arquitectura) {
+		this.id_arquitectura = id_arquitectura;
 	}
 
 	public int getStatus() {
@@ -83,9 +83,9 @@ public class UnionAreaSistemaInformacion {
 
 	@Override
 	public String toString() {
-		return "UnionAreaSistemaInformacion [id=" + id
+		return "UnionArquitecturaServicioInformacion [id=" + id
 				+ ", id_servicio_informacion=" + id_servicio_informacion
-				+ ", id_area=" + id_area + ", status=" + status
+				+ ", id_arquitectura=" + id_arquitectura + ", status=" + status
 				+ ", fecha_creado=" + fecha_creado + ", fecha_modificado="
 				+ fecha_modificado + "]";
 	}

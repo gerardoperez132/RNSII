@@ -55,8 +55,10 @@
 					<li><a href="#tab1">Descripción General</a></li>
 					<li><a href="#tab2">Aspectos legales</a></li>
 					<li><a href="#tab3">Descripción técnica</a></li>
-					<li><a href="#tab4">Guardar</a></li>					
+					<li><a href="#tab4">Descripción de Soporte</a></li>									
 				</ul>
+				
+				<form action="registrarServicioInformacion">
 			
 				<div class="tab_container">
 					<div id="tab1" class="tab_content">
@@ -64,12 +66,12 @@
 						<p>Descripción General del Servicio</p>
 
 						<h5 id="formulario">Sector:</h5>
-						<s:select list="sectores" listKey="id_sector" listValue="nombre"
-							headerKey="-1" headerValue="Seleccione un sector"></s:select>
+						<s:select name="sector" list="sectores" listKey="id_sector" listValue="nombre"
+							headerKey="-1" headerValue="Seleccione un sector" ></s:select>
 		
 						<br>
 						<h5 id="formulario">Nombre:</h5>
-						<s:textfield labelposition="top" name="nombre" />
+						<s:textfield name="nombre" />
 		
 						<br>
 						<h5 id="formulario">Descripción:</h5>
@@ -77,7 +79,7 @@
 		
 						<br>
 						<h5 id="formulario">Estado del Servicio:</h5>
-						<s:select list="estados" listKey="id_estado" listValue="nombre"
+						<s:select name="estado" list="estados" listKey="id_estado" listValue="nombre"
 							headerKey="-1" headerValue="Seleccione"></s:select>					
 
 
@@ -89,7 +91,7 @@
 							servicio(SLA) por el qué se regirá este Servicio de Información.</small>
 		
 						<h5 id="formulario">Nombre del Documento:</h5>
-						<s:textfield labelposition="top" name="nombre_documento" />
+						<s:textfield name="aspectoLegal" labelposition="top"/>
 		
 						<h5 id="formulario">Adjuntar SLA:</h5>
 						<s:file name="documento"></s:file>
@@ -107,17 +109,21 @@
 		
 						<br>
 						<h5 id="formulario">Seguridad:</h5>
-						<s:select list="seguridad" listKey="id_seguridad" listValue="nombre"
-							headerKey="-1" headerValue="Seleccione"></s:select>
+						<s:select list="l_seguridad" listKey="id_seguridad" listValue="nombre"
+							headerKey="-1" headerValue="Seleccione" name="seguridad"></s:select>
 		
 						<br>
 						<h5 id="formulario">Arquitectura:</h5>
 						<s:checkboxlist list="arquitecturas" listKey="id_arquitectura"
 							listValue="nombre" name="arquitectura" required="true" />
+							
+						<br>
+						<h5 id="formulario">Versión:</h5>
+						<s:textfield name="version"/>
 		
 						<br>
 						<h5 id="formulario">Tipo de Intercambio:</h5>
-						<select>
+						<select name="intercambio">
 						<optgroup></optgroup> 
 						<option value="-1">Seleccione</option>
 						<s:iterator value="intercambiosPadres">
@@ -138,15 +144,34 @@
 							</optgroup>
 						</s:iterator>
 						</select>
+						
+						
 					</div>
 					
 					<div id="tab4" class="tab_content">
 					   
+					   	<h5 id="formulario">Responsable del Servicio: <s:label name="responsable" /></h5>
+					   	<s:hidden name="responsable"></s:hidden>					   									
+						<hr>
+						
+						<h4>Soporte Técnico</h4>		
+						<h5 id="formulario">Teléfono de Contacto:</h5>
+						<s:textfield name="telefonoContacto" labelposition="top"/>
+		
+						<h5 id="formulario">Correo de Contacto:</h5>
+						<s:textfield name="correoContacto"></s:textfield>
+						
+						<s:submit value="Registrar"/>
 					</div>
+					
+					
+					
 					
 				</div>
 
-
+				</form>
+				
+				
 			</div>
 
 			<!-- Este es el pie de página -->

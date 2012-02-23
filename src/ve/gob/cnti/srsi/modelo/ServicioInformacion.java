@@ -30,8 +30,10 @@ public class ServicioInformacion {
 	private long id_ente;
 	private long id_usuario;
 	private String nombre;
+	private String descripcion;
 	private String version;
 	private boolean publicado;
+	private long id_sector;
 	private long id_estado;
 	private long id_aspectos_legales;
 	private long id_seguridad;
@@ -155,16 +157,34 @@ public class ServicioInformacion {
 		this.fecha_modificado = fecha_modificado;
 	}
 
+	public long getId_sector() {
+		return id_sector;
+	}
+
+	public void setId_sector(long id_sector) {
+		this.id_sector = id_sector;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
 	@Override
 	public String toString() {
 		return "ServicioInformacion [id=" + id + ", id_servicio_informacion="
 				+ id_servicio_informacion + ", id_ente=" + id_ente
 				+ ", id_usuario=" + id_usuario + ", nombre=" + nombre
-				+ ", version=" + version + ", publicado=" + publicado
+				+ ", descripcion=" + descripcion + ", version=" + version
+				+ ", publicado=" + publicado + ", id_sector=" + id_sector
 				+ ", id_estado=" + id_estado + ", id_aspectos_legales="
-				+ id_aspectos_legales + ", id_nivel_seguridad=" + id_seguridad
+				+ id_aspectos_legales + ", id_seguridad=" + id_seguridad
 				+ ", id_tipo_intercambio=" + id_tipo_intercambio + ", status="
 				+ status + ", fecha_creado=" + fecha_creado
 				+ ", fecha_modificado=" + fecha_modificado + "]";
 	}
+
 }
