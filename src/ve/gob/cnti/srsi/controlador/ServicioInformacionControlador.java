@@ -1,6 +1,7 @@
 package ve.gob.cnti.srsi.controlador;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import ve.gob.cnti.srsi.dao.DAO;
@@ -11,6 +12,8 @@ import ve.gob.cnti.srsi.modelo.Intercambio;
 import ve.gob.cnti.srsi.modelo.Sector;
 import ve.gob.cnti.srsi.modelo.Seguridad;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
+import ve.gob.cnti.srsi.modelo.UnionAreaServicioInformacion;
+import ve.gob.cnti.srsi.modelo.UnionArquitecturaServicioInformacion;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -65,10 +68,12 @@ public class ServicioInformacionControlador extends ActionSupport {
 	}
 
 	public String registrarServicioInformacion() {
+		
+		Date fecha = new Date();
 
 		ServicioInformacion si = new ServicioInformacion();
 		
-		long id = dao.getNextId(si);
+		long id_si = dao.getNextId(si);
 
 		si.setId_sector(Long.parseLong(sector));
 
@@ -76,10 +81,23 @@ public class ServicioInformacionControlador extends ActionSupport {
 		si.setDescripcion(descripcion);
 
 		si.setId_estado(Long.parseLong(estado));
-
-		Area ar = new Area();
+		
+		area = area.replace(",", "");		
+		UnionAreaServicioInformacion unionarea = new UnionAreaServicioInformacion();
 		for(int i = 0; i<area.length();i++){
-			
+			unionarea.setId_area(Long.parseLong(String.valueOf(area.charAt(i))));
+			unionarea.setId_servicio_informacion(id_si);
+			unionarea.setStatus(0);
+			unionarea.setFecha_creado(fecha);
+			unionarea.setFecha_modificado(fecha);			
+		}
+		
+		si.setId_seguridad(Long.parseLong(seguridad));
+		
+		arquitectura = arquitectura.replace(",", "");
+		UnionArquitecturaServicioInformacion unionarquitectura = new UnionArquitecturaServicioInformacion();
+		for(int i = 0; i<arquitectura.length();i++){
+			unionarquitectura.setId_servicio_informacion(Long.parseLong(String.valueOf(arquitectura.charAt(i))))
 		}
 
 		System.out
@@ -96,8 +114,7 @@ public class ServicioInformacionControlador extends ActionSupport {
 		System.out.println(responsable);
 		System.out.println(telefonoContacto);
 		System.out.println(correoContacto);
-		System.out
-				.println("******************************************************************");
+		System.out.println("******************************************************************");
 
 		return SUCCESS;
 	}
