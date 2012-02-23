@@ -10,7 +10,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 /**
- * Clase DAO de la cual heredan los métodos todos los demás controladores.
+ * Clase DAO de la cual se pueden usar los métodos por parte de todos los demás
+ * controladores.
  * 
  * @author Joaquín Pereira
  * @author Richard Ricciardelli
@@ -200,8 +201,8 @@ public class DAO implements CRUD {
 			session.createQuery(
 					"UPDATE " + model.getClass().getSimpleName()
 							+ " SET status = 2, fecha_modificado = '"
-							+ new Date() + "' WHERE status = 0 AND " + getField(model) + " = "
-							+ id).executeUpdate();
+							+ new Date() + "' WHERE status = 0 AND "
+							+ getField(model) + " = " + id).executeUpdate();
 			transaction.commit();
 		} catch (HibernateException he) {
 			handleException(he);
