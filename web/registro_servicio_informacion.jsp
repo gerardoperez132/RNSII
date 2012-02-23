@@ -54,7 +54,8 @@
 				<ul class="tabs">
 					<li><a href="#tab1">Descripción General</a></li>
 					<li><a href="#tab2">Aspectos legales</a></li>
-					<li><a href="#tab3">Descripción técnica</a></li>									
+					<li><a href="#tab3">Descripción técnica</a></li>
+					<li><a href="#tab4">Descripción de Soporte</a></li>									
 				</ul>
 				
 				<form action="registrarServicioInformacion">
@@ -70,7 +71,7 @@
 		
 						<br>
 						<h5 id="formulario">Nombre:</h5>
-						<s:textfield labelposition="top" name="nombre" />
+						<s:textfield name="nombre" />
 		
 						<br>
 						<h5 id="formulario">Descripción:</h5>
@@ -115,6 +116,10 @@
 						<h5 id="formulario">Arquitectura:</h5>
 						<s:checkboxlist list="arquitecturas" listKey="id_arquitectura"
 							listValue="nombre" name="arquitectura" required="true" />
+							
+						<br>
+						<h5 id="formulario">Versión:</h5>
+						<s:textfield name="version"/>
 		
 						<br>
 						<h5 id="formulario">Tipo de Intercambio:</h5>
@@ -140,9 +145,24 @@
 						</s:iterator>
 						</select>
 						
-						<s:submit value="Registrar"/>
+						
 					</div>
 					
+					<div id="tab4" class="tab_content">
+					   
+					   	<h5 id="formulario">Responsable del Servicio: <s:label name="responsable" /></h5>
+					   	<s:hidden name="responsable"></s:hidden>					   									
+						<hr>
+						
+						<h4>Soporte Técnico</h4>		
+						<h5 id="formulario">Teléfono de Contacto:</h5>
+						<s:textfield name="telefonoContacto" labelposition="top"/>
+		
+						<h5 id="formulario">Correo de Contacto:</h5>
+						<s:textfield name="correoContacto"></s:textfield>
+						
+						<s:submit value="Registrar"/>
+					</div>
 					
 					
 					
