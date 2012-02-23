@@ -8,3 +8,170 @@ Debe decidirse si la relación de Dato y TipoDato será 1:1 o 1:N
 
 Debe decir de qué se trata el campo origen en la tabla telefonos.
 Debe decir de qué se trata el campo origen en la tabla correos.
+
+Replicar para cuando se necesite crear la información más estática de la base de datos:
+
+Date date = new Date();
+
+		Area area = new Area();
+		area.setFecha_creado(date);
+		area.setFecha_modificado(date);
+		area.setStatus(Status.ACTIVO);
+
+		area.setId_area(dao.getNextId(area));
+		area.setNombre("Ciudadano");
+		dao.create(area);
+
+		area.setNombre("Gobierno");
+		area.setId_area(dao.getNextId(area));
+		dao.create(area);
+
+		area.setNombre("Privado");
+		area.setId_area(dao.getNextId(area));
+		dao.create(area);
+
+		Estado est = new Estado();
+		est.setFecha_creado(date);
+		est.setFecha_modificado(date);
+		est.setStatus(Status.ACTIVO);
+
+		est.setId_estado(dao.getNextId(est));
+		est.setNombre("En desarrollo");
+		dao.create(est);
+
+		est.setId_estado(dao.getNextId(est));
+		est.setNombre("Implementado");
+		dao.create(est);
+
+		Seguridad seg = new Seguridad();
+		seg.setFecha_creado(date);
+		seg.setFecha_modificado(date);
+		seg.setStatus(Status.ACTIVO);
+
+		seg.setId_seguridad(dao.getNextId(seg));
+		seg.setNombre("Público");
+		dao.create(seg);
+
+		seg.setId_seguridad(dao.getNextId(seg));
+		seg.setNombre("Irrestricto");
+		dao.create(seg);
+
+		seg.setId_seguridad(dao.getNextId(seg));
+		seg.setNombre("Autorizable");
+		dao.create(seg);
+
+		Arquitectura arq = new Arquitectura();
+		arq.setFecha_creado(date);
+		arq.setFecha_modificado(date);
+		arq.setStatus(Status.ACTIVO);
+
+		arq.setId_arquitectura(dao.getNextId(arq));
+		arq.setNombre("Servicio Web");
+		dao.create(arq);
+
+		arq.setId_arquitectura(dao.getNextId(arq));
+		arq.setNombre("Web Semántica");
+		dao.create(arq);
+
+		Intercambio intercambio = new Intercambio();
+		intercambio.setFecha_creado(date);
+		intercambio.setFecha_modificado(date);
+		intercambio.setStatus(Status.ACTIVO);
+
+		intercambio.setId_padre(0);
+		intercambio.setId_intercambio(dao.getNextId(intercambio));
+		intercambio.setNombre("En Línea");
+		dao.create(intercambio);
+
+		intercambio.setId_padre(0);
+		intercambio.setId_intercambio(dao.getNextId(intercambio));
+		intercambio.setNombre("Fuera de Línea");
+		dao.create(intercambio);
+
+		intercambio.setId_padre(1);
+		intercambio.setId_intercambio(dao.getNextId(intercambio));
+		intercambio.setNombre("Síncrono");
+		dao.create(intercambio);
+
+		intercambio.setId_padre(1);
+		intercambio.setId_intercambio(dao.getNextId(intercambio));
+		intercambio.setNombre("Asíncrono");
+		dao.create(intercambio);
+
+		intercambio.setId_padre(2);
+		intercambio.setId_intercambio(dao.getNextId(intercambio));
+		intercambio.setNombre("En Lote");
+		dao.create(intercambio);
+
+		Sector sector = new Sector();
+		sector.setFecha_creado(date);
+		sector.setFecha_modificado(date);
+		sector.setStatus(Status.ACTIVO);
+
+		sector.setId_sector(dao.getNextId(sector));
+		sector.setNombre("Ciencia y Tecnología");
+		dao.create(sector);
+
+		sector.setId_sector(dao.getNextId(sector));
+		sector.setNombre("Salud");
+		dao.create(sector);
+
+		sector.setId_sector(dao.getNextId(sector));
+		sector.setNombre("Educación");
+		dao.create(sector);
+
+		sector.setId_sector(dao.getNextId(sector));
+		sector.setNombre("Transporte");
+		dao.create(sector);
+
+		sector.setId_sector(dao.getNextId(sector));
+		sector.setNombre("Comercio");
+		dao.create(sector);
+
+		sector.setId_sector(dao.getNextId(sector));
+		sector.setNombre("Finanzas, Banca y Seguros");
+		dao.create(sector);
+
+		sector.setId_sector(dao.getNextId(sector));
+		sector.setNombre("Energía y Minas");
+		dao.create(sector);
+
+		sector.setId_sector(dao.getNextId(sector));
+		sector.setNombre("Alimentación");
+		dao.create(sector);
+
+		sector.setId_sector(dao.getNextId(sector));
+		sector.setNombre("Agrícola");
+		dao.create(sector);
+
+		sector.setId_sector(dao.getNextId(sector));
+		sector.setNombre("Cultura");
+		dao.create(sector);
+
+		sector.setId_sector(dao.getNextId(sector));
+		sector.setNombre("Vivienda");
+		dao.create(sector);
+
+		sector.setId_sector(dao.getNextId(sector));
+		sector.setNombre("Ambiente y Turismo");
+		dao.create(sector);
+
+		sector.setId_sector(dao.getNextId(sector));
+		sector.setNombre("Defensa y Política Exterior");
+		dao.create(sector);
+
+		sector.setId_sector(dao.getNextId(sector));
+		sector.setNombre("Protección Social");
+		dao.create(sector);
+
+		sector.setId_sector(dao.getNextId(sector));
+		sector.setNombre("Legislativo, Contraloría y Auditoría");
+		dao.create(sector);
+
+		sector.setId_sector(dao.getNextId(sector));
+		sector.setNombre("Judicial");
+		dao.create(sector);
+
+		sector.setId_sector(dao.getNextId(sector));
+		sector.setNombre("Comunicación e Información");
+		dao.create(sector);
