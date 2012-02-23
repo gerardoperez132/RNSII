@@ -67,6 +67,8 @@ public class ServicioInformacionControlador extends ActionSupport {
 	public String registrarServicioInformacion() {
 
 		ServicioInformacion si = new ServicioInformacion();
+		
+		long id = dao.getNextId(si);
 
 		si.setId_sector(Long.parseLong(sector));
 
@@ -75,7 +77,10 @@ public class ServicioInformacionControlador extends ActionSupport {
 
 		si.setId_estado(Long.parseLong(estado));
 
-		// int[] a = { area };
+		Area ar = new Area();
+		for(int i = 0; i<area.length();i++){
+			
+		}
 
 		System.out
 				.println("******************************************************************");
