@@ -4,6 +4,12 @@ import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 
+/**
+ * Clase con utilidades de Hibernate.
+ * 
+ * @author Richard Ricciardelli
+ * 
+ */
 public class HibernateUtils {
 
 	private static final SessionFactory sessionFactory;
