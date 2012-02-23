@@ -6,10 +6,9 @@
 	<package name="default" extends="struts-default">
 		<action name="prepararRegistroServicioInformacion" method="prepararRegistroServicioInformacion"
 			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
-
 			<result name="success">registro_servicio_informacion.jsp</result>
-
 		</action>
+
 		<action name="prepararRegistroFuncionalidad" method="prepararRegistroFuncionalidad"
 			class="ve.gob.cnti.srsi.controlador.FuncionalidadControlador">
 			<result name="success">registro_funcionalidad.jsp</result>
