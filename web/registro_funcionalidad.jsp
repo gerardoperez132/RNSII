@@ -70,26 +70,27 @@
 						<s:textarea name="descripcion" cols="40" rows="10" />
 						<!-- Descripción de la funcionalidad u operación del servicio. -->
 						<br>
-
-						<div>
-							<p>Funcionalidades cargadas</p>
-							<table border="1">
-								<tr>
-									<th>Número</th>
-									<th>Nombre</th>
-									<th>Fecha</th>
-									<th>Acciones</th>
-								</tr>
-								<s:iterator value="funcionalidades">
+						<s:if test="funcionalidades.size() > 0">
+							<div>
+								<p>Funcionalidades cargadas</p>
+								<table border="1">
 									<tr>
-										<td><s:property value="id_funcionalidad" /></td>
-										<td><s:property value="nombre" /></td>
-										<td><s:property value="fecha_creado" /></td>
-										<td><a href="#">Editar</a> <a href="#">Eliminar</a></td>
+										<th>Número</th>
+										<th>Nombre</th>
+										<th>Fecha</th>
+										<th>Acciones</th>
 									</tr>
-								</s:iterator>
-							</table>
-						</div>
+									<s:iterator value="funcionalidades">
+										<tr>
+											<td><s:property value="id_funcionalidad" /></td>
+											<td><s:property value="nombre" /></td>
+											<td><s:property value="fecha_creado" /></td>
+											<td><a href="#">Editar</a> <a href="#">Eliminar</a></td>
+										</tr>
+									</s:iterator>
+								</table>
+							</div>
+						</s:if>
 					</div>
 
 					<div id="tab2" class="tab_content">
