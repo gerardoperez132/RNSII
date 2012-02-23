@@ -41,6 +41,7 @@ public class ServicioInformacionControlador extends ActionSupport {
 		seguridad = (List<Seguridad>) dao.read(seg);
 		arquitecturas = (List<Arquitectura>) dao.read(arq);
 		sectores = (List<Sector>) dao.read(sector);
+		//Bórrame.
 
 		intercambiosPadres = (List<Intercambio>) dao.getParents(intercambio);
 		intercambiosHijos = (List<Intercambio>) dao.getChildren(intercambio);
