@@ -68,11 +68,11 @@ public class ServicioInformacionControlador extends ActionSupport {
 	}
 
 	public String registrarServicioInformacion() {
-		
+
 		Date fecha = new Date();
 
 		ServicioInformacion si = new ServicioInformacion();
-		
+
 		long id_si = dao.getNextId(si);
 
 		si.setId_sector(Long.parseLong(sector));
@@ -81,23 +81,25 @@ public class ServicioInformacionControlador extends ActionSupport {
 		si.setDescripcion(descripcion);
 
 		si.setId_estado(Long.parseLong(estado));
-		
-		area = area.replace(",", "");		
+
+		area = area.replace(",", "");
 		UnionAreaServicioInformacion unionarea = new UnionAreaServicioInformacion();
-		for(int i = 0; i<area.length();i++){
-			unionarea.setId_area(Long.parseLong(String.valueOf(area.charAt(i))));
+		for (int i = 0; i < area.length(); i++) {
+			unionarea
+					.setId_area(Long.parseLong(String.valueOf(area.charAt(i))));
 			unionarea.setId_servicio_informacion(id_si);
 			unionarea.setStatus(0);
 			unionarea.setFecha_creado(fecha);
-			unionarea.setFecha_modificado(fecha);			
+			unionarea.setFecha_modificado(fecha);
 		}
-		
+
 		si.setId_seguridad(Long.parseLong(seguridad));
-		
+
 		arquitectura = arquitectura.replace(",", "");
 		UnionArquitecturaServicioInformacion unionarquitectura = new UnionArquitecturaServicioInformacion();
-		for(int i = 0; i<arquitectura.length();i++){
-			unionarquitectura.setId_servicio_informacion(Long.parseLong(String.valueOf(arquitectura.charAt(i))))
+		for (int i = 0; i < arquitectura.length(); i++) {
+			unionarquitectura.setId_servicio_informacion(Long.parseLong(String
+					.valueOf(arquitectura.charAt(i))));
 		}
 
 		System.out
@@ -114,7 +116,8 @@ public class ServicioInformacionControlador extends ActionSupport {
 		System.out.println(responsable);
 		System.out.println(telefonoContacto);
 		System.out.println(correoContacto);
-		System.out.println("******************************************************************");
+		System.out
+				.println("******************************************************************");
 
 		return SUCCESS;
 	}
