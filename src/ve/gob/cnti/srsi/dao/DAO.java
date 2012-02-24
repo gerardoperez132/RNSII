@@ -128,9 +128,18 @@ public class DAO implements CRUD {
 
 	@Override
 	public void create(Object model) {
+		Date date = new Date();
+		long id = getNextId(model);
 		try {
 			startConnection();
 			session.save(model);
+			session.createQuery(
+					"UPDATE " + model.getClass().getSimpleName() + " SET "
+							+ getField(model) + " = " + id
+							+ ", fecha_creado = '" + date
+							+ "', fecha_modificado = '" + date
+							+ "', status = 0 WHERE " + getField(model) + " = 0")
+					.executeUpdate();
 			transaction.commit();
 		} catch (HibernateException he) {
 			handleException(he);
