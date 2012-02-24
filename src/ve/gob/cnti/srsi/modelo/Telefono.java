@@ -21,8 +21,9 @@ public class Telefono {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private long id_telefono;
-	private long id_padre;
-	private long origen;
+	private long id_ente;
+	private long id_usuario;
+	private long id_servicio_informacion;
 	private String telefono;
 	private int status;
 	private Date fecha_creado;
@@ -45,22 +46,6 @@ public class Telefono {
 
 	public void setId_telefono(long id_telefono) {
 		this.id_telefono = id_telefono;
-	}
-
-	public long getId_padre() {
-		return id_padre;
-	}
-
-	public void setId_padre(long id_padre) {
-		this.id_padre = id_padre;
-	}
-
-	public long getOrigen() {
-		return origen;
-	}
-
-	public void setOrigen(long origen) {
-		this.origen = origen;
 	}
 
 	public String getTelefono() {
@@ -95,12 +80,38 @@ public class Telefono {
 		this.fecha_modificado = fecha_modificado;
 	}
 
+	public long getId_ente() {
+		return id_ente;
+	}
+
+	public void setId_ente(long id_ente) {
+		this.id_ente = id_ente;
+	}
+
+	public long getId_usuario() {
+		return id_usuario;
+	}
+
+	public void setId_usuario(long id_usuario) {
+		this.id_usuario = id_usuario;
+	}
+
+	public long getId_servicio_informacion() {
+		return id_servicio_informacion;
+	}
+
+	public void setId_servicio_informacion(long id_servicio_informacion) {
+		this.id_servicio_informacion = id_servicio_informacion;
+	}
+
 	@Override
 	public String toString() {
 		return "Telefono [id=" + id + ", id_telefono=" + id_telefono
-				+ ", id_padre=" + id_padre + ", origen=" + origen
+				+ ", id_ente=" + id_ente + ", id_usuario=" + id_usuario
+				+ ", id_servicio_informacion=" + id_servicio_informacion
 				+ ", telefono=" + telefono + ", status=" + status
 				+ ", fecha_creado=" + fecha_creado + ", fecha_modificado="
 				+ fecha_modificado + "]";
 	}
+	
 }

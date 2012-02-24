@@ -22,8 +22,9 @@ public class Correo {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private long id_correo;
-	private long id_padre;
-	private long origen;
+	private long id_ente;
+	private long id_usuario;
+	private long id_servicio_informacion;
 	private String correo;
 	private int status;
 	private Date fecha_creado;
@@ -46,22 +47,6 @@ public class Correo {
 
 	public void setId_correo(long id_correo) {
 		this.id_correo = id_correo;
-	}
-
-	public long getId_padre() {
-		return id_padre;
-	}
-
-	public void setId_padre(long id_padre) {
-		this.id_padre = id_padre;
-	}
-
-	public long getOrigen() {
-		return origen;
-	}
-
-	public void setOrigen(long origen) {
-		this.origen = origen;
 	}
 
 	public String getCorreo() {
@@ -96,12 +81,38 @@ public class Correo {
 		this.fecha_modificado = fecha_modificado;
 	}
 
+	public long getId_ente() {
+		return id_ente;
+	}
+
+	public void setId_ente(long id_ente) {
+		this.id_ente = id_ente;
+	}
+
+	public long getId_usuario() {
+		return id_usuario;
+	}
+
+	public void setId_usuario(long id_usuario) {
+		this.id_usuario = id_usuario;
+	}
+
+	public long getId_servicio_informacion() {
+		return id_servicio_informacion;
+	}
+
+	public void setId_servicio_informacion(long id_servicio_informacion) {
+		this.id_servicio_informacion = id_servicio_informacion;
+	}
+
 	@Override
 	public String toString() {
-		return "Correo [id=" + id + ", id_correo=" + id_correo + ", id_padre="
-				+ id_padre + ", origen=" + origen + ", correo=" + correo
-				+ ", status=" + status + ", fecha_creado=" + fecha_creado
-				+ ", fecha_modificado=" + fecha_modificado + "]";
+		return "Correo [id=" + id + ", id_correo=" + id_correo + ", id_ente="
+				+ id_ente + ", id_usuario=" + id_usuario
+				+ ", id_servicio_informacion=" + id_servicio_informacion
+				+ ", correo=" + correo + ", status=" + status
+				+ ", fecha_creado=" + fecha_creado + ", fecha_modificado="
+				+ fecha_modificado + "]";
 	}
 
 }
