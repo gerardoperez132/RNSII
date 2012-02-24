@@ -35,7 +35,7 @@
 			<div id="content">
 				<br>
 				<s:url id="registrarServicioInformacion"
-					action="registrarServicioInformacion"></s:url>
+					action="prepararRegistroServicioInformacion"></s:url>
 				<s:a href="%{registrarServicioInformacion}">Registrar Servicio de Información</s:a>
 
 			</div>
