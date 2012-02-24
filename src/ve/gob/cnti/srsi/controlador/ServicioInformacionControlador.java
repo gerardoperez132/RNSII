@@ -79,25 +79,29 @@ public class ServicioInformacionControlador extends ActionSupport {
 
 		return SUCCESS;
 	}
-
-	public String registrarServicioInformacion() {
-		
-		Area area1 = new Area();
+	
+	public void validate(){
+		Area area = new Area();
 		Estado est = new Estado();
 		Seguridad seg = new Seguridad();
 		Arquitectura arq = new Arquitectura();
-		Sector sector1 = new Sector();
-		Intercambio intercambio1 = new Intercambio();
+		Sector sector = new Sector();
+		Intercambio intercambio = new Intercambio();
 
-		areas = (List<Area>) dao.read(area1);
+		areas = (List<Area>) dao.read(area);
 		estados = (List<Estado>) dao.read(est);
 		l_seguridad = (List<Seguridad>) dao.read(seg);
 		arquitecturas = (List<Arquitectura>) dao.read(arq);
-		sectores = (List<Sector>) dao.read(sector1);
+		sectores = (List<Sector>) dao.read(sector);
 
 		intercambiosPadres = (List<Intercambio>) dao.getParents(intercambio);
 		intercambiosHijos = (List<Intercambio>) dao.getChildren(intercambio);
-		
+
+		responsable = "Joaquín";
+	}
+
+	public String registrarServicioInformacion() {
+				
 		Date fecha = new Date();
 		ServicioInformacion si = new ServicioInformacion();		
 		long id_si = dao.getNextId(si); 
