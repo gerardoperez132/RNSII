@@ -1,9 +1,9 @@
 package ve.gob.cnti.srsi.controlador;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.io.File;
 
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
@@ -21,7 +21,9 @@ import ve.gob.cnti.srsi.modelo.UnionAreaServicioInformacion;
 import ve.gob.cnti.srsi.modelo.UnionArquitecturaServicioInformacion;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.validator.annotations.FieldExpressionValidator;
 import com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator;
+import com.opensymphony.xwork2.validator.annotations.ValidatorType;
 
 @SuppressWarnings("serial")
 public class ServicioInformacionControlador extends ActionSupport {
@@ -301,7 +303,7 @@ public class ServicioInformacionControlador extends ActionSupport {
 		this.aspectoLegal = aspectoLegal;
 	}
 	
-	@RequiredFieldValidator(message="Seleccione un valor para orientado a:")
+	@RequiredFieldValidator(type = ValidatorType.SIMPLE, fieldName = "area",message="Seleccione un valor para orientado a:" )
 	public String getArea() {
 		return area;
 	}
@@ -310,7 +312,7 @@ public class ServicioInformacionControlador extends ActionSupport {
 		this.area = area;
 	}
 	
-	@RequiredFieldValidator(message="Seleccione un valor para seguridad")
+	@FieldExpressionValidator(expression = "-1", fieldName = "seguridad",message = "seleccione seguridad. ")	
 	public String getSeguridad() {
 		return seguridad;
 	}
@@ -318,7 +320,8 @@ public class ServicioInformacionControlador extends ActionSupport {
 	public void setSeguridad(String seguridad) {
 		this.seguridad = seguridad;
 	}
-
+	
+	@RequiredFieldValidator(type = ValidatorType.SIMPLE, fieldName = "arquitectura",message="Seleccione un valor para arquitectura:" )
 	public String getArquitectura() {
 		return arquitectura;
 	}
