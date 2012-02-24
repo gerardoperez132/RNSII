@@ -137,9 +137,9 @@ public class DAO implements CRUD {
 					"UPDATE " + model.getClass().getSimpleName() + " SET "
 							+ getField(model) + " = " + id
 							+ ", fecha_creado = '" + date
-							+ "', fecha_modificado = '" + date
-							+ "', status = 0 WHERE " + getField(model) + " = 0")
-					.executeUpdate();
+							+ "', fecha_modificado = '" + date + "', status = "
+							+ Status.ACTIVO + " WHERE " + getField(model)
+							+ " = 0").executeUpdate();
 			transaction.commit();
 		} catch (HibernateException he) {
 			handleException(he);
@@ -209,8 +209,9 @@ public class DAO implements CRUD {
 			startConnection();
 			session.createQuery(
 					"UPDATE " + model.getClass().getSimpleName()
-							+ " SET status = 2, fecha_modificado = '"
-							+ new Date() + "' WHERE status = 0 AND "
+							+ " SET status = " + Status.ELIMINADO
+							+ ", fecha_modificado = '" + new Date()
+							+ "' WHERE status = " + Status.ACTIVO + " AND "
 							+ getField(model) + " = " + id).executeUpdate();
 			transaction.commit();
 		} catch (HibernateException he) {
