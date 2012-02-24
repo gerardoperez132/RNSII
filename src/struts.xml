@@ -7,14 +7,14 @@
 	
 		<action name="prepararRegistroServicioInformacion" method="prepararRegistroServicioInformacion"
 			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
-
+			
 			<result name="success">registro_servicio_informacion.jsp</result>
 
 		</action>
 		
 		<action name="registrarServicioInformacion" method="registrarServicioInformacion"
 			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">		
-			
+			<result name="input">registro_servicio_informacion.jsp</result>
 			<result name="success">registro_servicio_informacion.jsp</result>
 
 		</action>	

@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 import java.io.File;
 
+import org.apache.struts2.interceptor.validation.SkipValidation;
+
 import ve.gob.cnti.srsi.dao.DAO;
 import ve.gob.cnti.srsi.modelo.Area;
 import ve.gob.cnti.srsi.modelo.Arquitectura;
@@ -52,6 +54,7 @@ public class ServicioInformacionControlador extends ActionSupport {
 	private DAO dao = new DAO();
 
 	@SuppressWarnings("unchecked")
+	@SkipValidation	
 	public String prepararRegistroServicioInformacion() {
 
 		Area area = new Area();
@@ -76,6 +79,22 @@ public class ServicioInformacionControlador extends ActionSupport {
 	}
 
 	public String registrarServicioInformacion() {
+		
+		Area area1 = new Area();
+		Estado est = new Estado();
+		Seguridad seg = new Seguridad();
+		Arquitectura arq = new Arquitectura();
+		Sector sector1 = new Sector();
+		Intercambio intercambio1 = new Intercambio();
+
+		areas = (List<Area>) dao.read(area1);
+		estados = (List<Estado>) dao.read(est);
+		l_seguridad = (List<Seguridad>) dao.read(seg);
+		arquitecturas = (List<Arquitectura>) dao.read(arq);
+		sectores = (List<Sector>) dao.read(sector1);
+
+		intercambiosPadres = (List<Intercambio>) dao.getParents(intercambio);
+		intercambiosHijos = (List<Intercambio>) dao.getChildren(intercambio);
 		
 		Date fecha = new Date();
 		ServicioInformacion si = new ServicioInformacion();		
@@ -281,7 +300,8 @@ public class ServicioInformacionControlador extends ActionSupport {
 	public void setAspectoLegal(String aspectoLegal) {
 		this.aspectoLegal = aspectoLegal;
 	}
-
+	
+	@RequiredFieldValidator(message="Seleccione un valor para orientado a:")
 	public String getArea() {
 		return area;
 	}
@@ -290,7 +310,7 @@ public class ServicioInformacionControlador extends ActionSupport {
 		this.area = area;
 	}
 	
-	@RequiredFieldValidator(message="Supply a team")
+	@RequiredFieldValidator(message="Seleccione un valor para seguridad")
 	public String getSeguridad() {
 		return seguridad;
 	}

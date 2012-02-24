@@ -103,12 +103,16 @@
 						<small>Especificaciones del intercambio de Información</small>
 		
 						<h5 id="formulario">Orientado a:</h5>
+						<s:fielderror fieldName="area" cssStyle="color:red;"/>	
+						<s:actionerror cssStyle="color:blue;"/>					
 						<s:checkboxlist list="areas" listKey="id_area" listValue="nombre"
 							name="area" />
 		
 		
 						<br>
 						<h5 id="formulario">Seguridad:</h5>
+						<s:fielderror fieldName="seguridad" cssStyle="color:red;" />
+						<s:actionerror cssStyle="color:blue;"/>
 						<s:select list="l_seguridad" listKey="id_seguridad" listValue="nombre"
 							headerKey="-1" headerValue="Seleccione" name="seguridad"></s:select>
 		
