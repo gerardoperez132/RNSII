@@ -65,68 +65,83 @@
 						
 						<p>Descripción General del Servicio</p>
 
-						<h5 id="formulario">Sector:</h5>
+						<h5 class="formulario">Sector:</h5>
+						<s:fielderror> <s:param>sector</s:param> </s:fielderror>
 						<s:select name="sector" list="sectores" listKey="id_sector" listValue="nombre"
 							headerKey="-1" headerValue="Seleccione un sector" ></s:select>
-		
-						<br>
-						<h5 id="formulario">Nombre:</h5>
+						
+							
+						<h5 class="formulario">Nombre:</h5>						
+						<s:fielderror> <s:param>nombre</s:param> </s:fielderror>					
 						<s:textfield name="nombre" />
+						
 		
-						<br>
-						<h5 id="formulario">Descripción:</h5>
+						
+						<h5 class="formulario">Descripción:</h5>
+						<s:fielderror> <s:param>descripcion</s:param> </s:fielderror>
 						<s:textarea name="descripcion" cols="40" rows="10" />
+						
 		
-						<br>
-						<h5 id="formulario">Estado del Servicio:</h5>
+						
+						<h5 class="formulario">Estado del Servicio:</h5>
+						<s:fielderror> <s:param>estado</s:param> </s:fielderror>
 						<s:select name="estado" list="estados" listKey="id_estado" listValue="nombre"
 							headerKey="-1" headerValue="Seleccione"></s:select>					
-
+						
 
 					</div>
 					
 					<div id="tab2" class="tab_content">
-					   <p id="formulario">Aspectos legales que rigen al servicio</p>
+					   <p class="formulario">Aspectos legales que rigen al servicio</p>
 						<small>Incluir documento de acuerdo de nivel de
 							servicio(SLA) por el qué se regirá este Servicio de Información.</small>
 		
-						<h5 id="formulario">Nombre del Documento:</h5>
+						<h5 class="formulario">Nombre del Documento:</h5>
+						<s:fielderror> <s:param>aspectoLegal</s:param> </s:fielderror>
 						<s:textfield name="aspectoLegal" labelposition="top"/>
-		
-						<h5 id="formulario">Adjuntar SLA:</h5>
+						
+						
+						<h5 class="formulario">Adjuntar SLA:</h5>
+						<s:fielderror> <s:param>documento</s:param> </s:fielderror>
 						<s:file name="documento"></s:file>
+						
 					</div>
 					
 					<div id="tab3" class="tab_content">
 
-					   <p id="formulario">Descripción técnica del servicio</p>
+					   <p class="formulario">Descripción técnica del servicio</p>
 						<small>Especificaciones del intercambio de Información</small>
 		
-						<h5 id="formulario">Orientado a:</h5>
-						<s:fielderror fieldName="area" cssStyle="color:red; list-style: none;"/>										
+						<h5 class="formulario">Orientado a:</h5>
+						<s:fielderror> <s:param>area</s:param> </s:fielderror>							
 						<s:checkboxlist list="areas" listKey="id_area" listValue="nombre"
-							name="area" />
-		
-		
-						<br>
-						<h5 id="formulario">Seguridad:</h5>
-						<s:fielderror fieldName="seguridad" cssStyle="color:red; list-style: none;" />
-						<s:actionerror cssStyle="color:blue;"/>
+							name="area" value="area"/>
+						
+						<h5 class="formulario">Seguridad:</h5>
+						<s:fielderror> <s:param>seguridad</s:param> </s:fielderror>						
 						<s:select list="l_seguridad" listKey="id_seguridad" listValue="nombre"
 							headerKey="-1" headerValue="Seleccione" name="seguridad"></s:select>
-		
-						<br>
-						<h5 id="formulario">Arquitectura:</h5>						
+						<s:property value="seguridad"/>	
+						
+						
+						
+						
+						<h5 class="formulario">Arquitectura:</h5>		
+						<s:fielderror> <s:param>arquitectura</s:param> </s:fielderror>							
 						<s:checkboxlist list="arquitecturas" listKey="id_arquitectura"
-							listValue="nombre" name="arquitectura" cssErrorStyle="color:red;" cssStyle="color:red;" />
-							
+							listValue="nombre" name="arquitectura"/>						
+						
 						<br>
-						<h5 id="formulario">Versión:</h5>
+						<h5 class="formulario">Versión:</h5>
+						<s:fielderror> <s:param>version</s:param> </s:fielderror>
 						<s:textfield name="version"/>
+						
 		
 						<br>
-						<h5 id="formulario">Tipo de Intercambio:</h5>
-						<select name="intercambio">
+						 
+						<h5 class="formulario">Tipo de Intercambio:</h5>
+						<s:fielderror> <s:param>intercambio</s:param> </s:fielderror>
+						<select name="intercambio">						
 						<optgroup></optgroup> 
 						<option value="-1">Seleccione</option>
 						<s:iterator value="intercambiosPadres">
@@ -145,7 +160,7 @@
 								</s:if>
 							</s:iterator>
 							</optgroup>
-						</s:iterator>
+						</s:iterator>						
 						</select>
 						
 						
@@ -153,15 +168,17 @@
 					
 					<div id="tab4" class="tab_content">
 					   
-					   	<h5 id="formulario">Responsable del Servicio: <s:label name="responsable" /></h5>
+					   	<h5 class="formulario">Responsable del Servicio: <s:label name="responsable" /></h5>
 					   	<s:hidden name="responsable"></s:hidden>					   									
 						<hr>
 						
 						<h4>Soporte Técnico</h4>		
-						<h5 id="formulario">Teléfono de Contacto:</h5>
+						<h5 class="formulario">Teléfono de Contacto:</h5>
+						<s:fielderror> <s:param>telefonoContacto</s:param> </s:fielderror>
 						<s:textfield name="telefonoContacto" labelposition="top"/>
 		
-						<h5 id="formulario">Correo de Contacto:</h5>
+						<h5 class="formulario">Correo de Contacto:</h5>
+						<s:fielderror> <s:param>correoContacto</s:param> </s:fielderror>						
 						<s:textfield name="correoContacto"></s:textfield>
 						
 						<s:submit value="Registrar"/>

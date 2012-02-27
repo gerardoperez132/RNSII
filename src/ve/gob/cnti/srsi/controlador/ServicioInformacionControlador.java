@@ -23,6 +23,7 @@ import ve.gob.cnti.srsi.modelo.UnionArquitecturaServicioInformacion;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.validator.annotations.FieldExpressionValidator;
 import com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator;
+import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
 import com.opensymphony.xwork2.validator.annotations.ValidatorType;
 
 @SuppressWarnings("serial")
@@ -41,7 +42,7 @@ public class ServicioInformacionControlador extends ActionSupport {
 	private String descripcion;
 	private String estado;
 	private String aspectoLegal;
-	private String area;
+	private List<String> area;
 	private String seguridad;
 	private String version;
 	private String arquitectura;
@@ -138,10 +139,10 @@ public class ServicioInformacionControlador extends ActionSupport {
 		dao.create(si);
 		
 		//Seteando el AREA (FALTA VALIDAR)
-		area = area.replace(", ", "");		
+			
 		UnionAreaServicioInformacion unionarea = new UnionAreaServicioInformacion();
-		for(int i = 0; i<area.length();i++){
-			unionarea.setId_area(Long.parseLong(String.valueOf(area.charAt(i))));
+		for(int i = 0; i<area.size();i++){
+			unionarea.setId_area(Long.parseLong(String.valueOf(area.get(i))));
 			unionarea.setId_servicio_informacion(id_si);
 			unionarea.setStatus(0);
 			unionarea.setFecha_creado(fecha);
@@ -259,6 +260,7 @@ public class ServicioInformacionControlador extends ActionSupport {
 		this.l_seguridad = l_seguridad;
 	}
 
+	@RequiredStringValidator(message="Introduzca la versión del Servicio de Información")
 	public String getVersion() {
 		return version;
 	}
@@ -267,6 +269,7 @@ public class ServicioInformacionControlador extends ActionSupport {
 		this.version = version;
 	}
 
+	@FieldExpressionValidator(expression = "!sector.equals(\"-1\")", message = "Seleccione un valor. ")
 	public String getSector() {
 		return sector;
 	}
@@ -275,6 +278,7 @@ public class ServicioInformacionControlador extends ActionSupport {
 		this.sector = sector;
 	}
 
+	@RequiredStringValidator(message="Introduzca El nombre")
 	public String getNombre() {
 		return nombre;
 	}
@@ -282,7 +286,8 @@ public class ServicioInformacionControlador extends ActionSupport {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
+	
+	@RequiredStringValidator(message="Proporcione una descripción ")
 	public String getDescripcion() {
 		return descripcion;
 	}
@@ -291,6 +296,7 @@ public class ServicioInformacionControlador extends ActionSupport {
 		this.descripcion = descripcion;
 	}
 
+	@FieldExpressionValidator(expression = "!sector.equals(\"-1\")", message = "Seleccione un valor. ")
 	public String getEstado() {
 		return estado;
 	}
@@ -299,6 +305,7 @@ public class ServicioInformacionControlador extends ActionSupport {
 		this.estado = estado;
 	}
 
+	@RequiredStringValidator(message="Proporcione el nombre del documento legal")
 	public String getAspectoLegal() {
 		return aspectoLegal;
 	}
@@ -307,16 +314,16 @@ public class ServicioInformacionControlador extends ActionSupport {
 		this.aspectoLegal = aspectoLegal;
 	}
 	
-	@RequiredFieldValidator(type = ValidatorType.SIMPLE, fieldName = "area",message="Seleccione un valor para orientado a:" )
-	public String getArea() {
+	@FieldExpressionValidator(expression = "!area.isEmpty()", message = "Seleccione un valor. ")
+	public List<String> getArea() {
 		return area;
 	}
 
-	public void setArea(String area) {
+	public void setArea(List<String> area) {
 		this.area = area;
 	}
 	
-	@FieldExpressionValidator(expression = "-1", fieldName = "seguridad",message = "seleccione seguridad. ")	
+	@FieldExpressionValidator(expression = "!seguridad.equals(\"-1\")", message = "Seleccione un valor. ")	
 	public String getSeguridad() {
 		return seguridad;
 	}
@@ -325,7 +332,7 @@ public class ServicioInformacionControlador extends ActionSupport {
 		this.seguridad = seguridad;
 	}
 	
-	@RequiredFieldValidator(type = ValidatorType.SIMPLE, fieldName = "arquitectura",message="Seleccione un valor para arquitectura:" )
+	@RequiredFieldValidator(type = ValidatorType.SIMPLE, message="Seleccione un valor." )
 	public String getArquitectura() {
 		return arquitectura;
 	}
@@ -334,6 +341,7 @@ public class ServicioInformacionControlador extends ActionSupport {
 		this.arquitectura = arquitectura;
 	}
 
+	@FieldExpressionValidator(expression = "!intercambio.equals(\"-1\")", message = "Seleccione un valor. ")
 	public String getIntercambio() {
 		return intercambio;
 	}
@@ -341,7 +349,7 @@ public class ServicioInformacionControlador extends ActionSupport {
 	public void setIntercambio(String intercambio) {
 		this.intercambio = intercambio;
 	}
-
+	
 	public String getResponsable() {
 		return responsable;
 	}
@@ -350,6 +358,7 @@ public class ServicioInformacionControlador extends ActionSupport {
 		this.responsable = responsable;
 	}
 
+	@RequiredStringValidator(message="Proporcione un número telefónico para el soporte técnico ")
 	public String getTelefonoContacto() {
 		return telefonoContacto;
 	}
@@ -358,6 +367,7 @@ public class ServicioInformacionControlador extends ActionSupport {
 		this.telefonoContacto = telefonoContacto;
 	}
 
+	@RequiredStringValidator(message="Proporcione una dirección de correo para el soporte técnico ")
 	public String getCorreoContacto() {
 		return correoContacto;
 	}
