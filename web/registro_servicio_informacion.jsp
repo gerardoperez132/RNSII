@@ -141,10 +141,14 @@
 				<hr>
 
 				<ul class="tabs">
-					<li><a href="#tab1">Descripción General</a></li>
-					<li><a href="#tab2">Aspectos legales</a></li>
-					<li><a href="#tab3">Descripción técnica</a></li>
-					<li><a href="#tab4">Descripción de Soporte</a></li>
+					<li><a href="#tab1">Descripción General</a>
+					</li>
+					<li><a href="#tab2">Aspectos legales</a>
+					</li>
+					<li><a href="#tab3">Descripción técnica</a>
+					</li>
+					<li><a href="#tab4">Descripción de Soporte</a>
+					</li>
 				</ul>
 
 				<form action="registrarServicioInformacion" method="post"
@@ -155,7 +159,7 @@
 
 							<p>Descripción General del Servicio</p>
 							<hr>
-							
+
 							<h5 class="formulario">Sector:</h5>
 							<s:fielderror>
 								<s:param>sector</s:param>
@@ -245,7 +249,8 @@
 							<s:fielderror>
 								<s:param>version</s:param>
 							</s:fielderror>
-							<s:textfield name="version" onkeydown="return soloDinero(this, event);" />			
+							<s:textfield name="version"
+								onkeydown="return soloDinero(this, event);" />
 
 
 							<br>
@@ -292,19 +297,19 @@
 
 							<h4>Soporte Técnico</h4>
 							<h5 class="formulario">Teléfono de Contacto:</h5>
-							
+
 							<h6 class="formulario">Código de Área:</h6>
 							<s:fielderror>
 								<s:param>codigoArea</s:param>
-							</s:fielderror>							
-							<s:textfield name="codigoArea" labelposition="top"
-								size="4" maxlength="3"
+							</s:fielderror>
+							<s:textfield name="codigoArea" labelposition="top" size="4"
+								maxlength="3"
 								onkeyup="var no_digito = /\D/g; this.value = this.value.replace(no_digito , '');" />
-							
+
 							<h6 class="formulario">Número de Teléfono:</h6>
 							<s:fielderror>
 								<s:param>telefonoContacto</s:param>
-							</s:fielderror>						
+							</s:fielderror>
 							<s:textfield name="telefonoContacto" labelposition="top"
 								maxlength="7"
 								onkeyup="var no_digito = /\D/g; this.value = this.value.replace(no_digito , '');" />
