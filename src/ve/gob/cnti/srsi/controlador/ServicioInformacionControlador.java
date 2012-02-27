@@ -206,6 +206,7 @@ public class ServicioInformacionControlador extends ActionSupport implements
 				.getRealPath("/archivos/" + INSTITUCION.toString());
 
 		System.out.println("Server path: " + filePath);
+		System.out.println(archivoFileName);
 		File fileToCreate = new File(filePath, this.archivoFileName);
 
 		FileUtils.copyFile(this.archivo, fileToCreate);
