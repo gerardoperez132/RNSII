@@ -121,10 +121,6 @@
 						<s:fielderror> <s:param>seguridad</s:param> </s:fielderror>						
 						<s:select list="l_seguridad" listKey="id_seguridad" listValue="nombre"
 							headerKey="-1" headerValue="Seleccione" name="seguridad"></s:select>
-						<s:property value="seguridad"/>	
-						
-						
-						
 						
 						<h5 class="formulario">Arquitectura:</h5>		
 						<s:fielderror> <s:param>arquitectura</s:param> </s:fielderror>							

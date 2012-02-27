@@ -45,7 +45,7 @@ public class ServicioInformacionControlador extends ActionSupport {
 	private List<String> area;
 	private String seguridad;
 	private String version;
-	private String arquitectura;
+	private List<String> arquitectura;
 	private String intercambio;
 	private String responsable;
 	private String telefonoContacto;
@@ -81,6 +81,7 @@ public class ServicioInformacionControlador extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void validate(){
 		Area area = new Area();
 		Estado est = new Estado();
@@ -332,12 +333,12 @@ public class ServicioInformacionControlador extends ActionSupport {
 		this.seguridad = seguridad;
 	}
 	
-	@RequiredFieldValidator(type = ValidatorType.SIMPLE, message="Seleccione un valor." )
-	public String getArquitectura() {
+	@FieldExpressionValidator(expression = "!area.isEmpty()", message = "Seleccione un valor. ")
+	public List<String> getArquitectura() {
 		return arquitectura;
 	}
 
-	public void setArquitectura(String arquitectura) {
+	public void setArquitectura(List<String> arquitectura) {
 		this.arquitectura = arquitectura;
 	}
 
