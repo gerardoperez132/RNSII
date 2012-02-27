@@ -22,6 +22,9 @@ public class AspectoLegal {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private long id_aspecto_legal;
+	private long id_servicio_informacion;
+	/** Tipo de documento => Legal (0) o SLA (1) */
+	private int tipo;
 	private String nombre;
 	private String url;
 	private int status;
@@ -45,6 +48,22 @@ public class AspectoLegal {
 
 	public void setId_aspecto_legal(long id_aspecto_legal) {
 		this.id_aspecto_legal = id_aspecto_legal;
+	}
+
+	public long getId_servicio_informacion() {
+		return id_servicio_informacion;
+	}
+
+	public void setId_servicio_informacion(long id_servicio_informacion) {
+		this.id_servicio_informacion = id_servicio_informacion;
+	}
+
+	public int getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(int tipo) {
+		this.tipo = tipo;
 	}
 
 	public String getNombre() {
@@ -90,8 +109,10 @@ public class AspectoLegal {
 	@Override
 	public String toString() {
 		return "AspectoLegal [id=" + id + ", id_aspecto_legal="
-				+ id_aspecto_legal + ", nombre=" + nombre + ", url=" + url
-				+ ", status=" + status + ", fecha_creado=" + fecha_creado
-				+ ", fecha_modificado=" + fecha_modificado + "]";
+				+ id_aspecto_legal + ", id_servicio_informacion="
+				+ id_servicio_informacion + ", tipo=" + tipo + ", nombre="
+				+ nombre + ", url=" + url + ", status=" + status
+				+ ", fecha_creado=" + fecha_creado + ", fecha_modificado="
+				+ fecha_modificado + "]";
 	}
 }
