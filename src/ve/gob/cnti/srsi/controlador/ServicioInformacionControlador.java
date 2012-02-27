@@ -23,10 +23,7 @@ import ve.gob.cnti.srsi.modelo.UnionArquitecturaServicioInformacion;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.validator.annotations.EmailValidator;
 import com.opensymphony.xwork2.validator.annotations.FieldExpressionValidator;
-import com.opensymphony.xwork2.validator.annotations.IntRangeFieldValidator;
-import com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator;
 import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
-import com.opensymphony.xwork2.validator.annotations.ValidatorType;
 
 @SuppressWarnings("serial")
 public class ServicioInformacionControlador extends ActionSupport {
@@ -391,9 +388,6 @@ public class ServicioInformacionControlador extends ActionSupport {
 
 	public void setDocumentoFileName(String documentoFileName) {
 		this.documentoFileName = documentoFileName;
-	}
-
-	
-	
+	}	
 
 }
