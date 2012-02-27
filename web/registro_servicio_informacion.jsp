@@ -295,13 +295,13 @@
 							
 							<h6 class="formulario">Código de Área:</h6>
 							<s:fielderror>
-								<s:param>codigoArea</s:param>
+								<s:param>codArea</s:param>
 							</s:fielderror>							
-							<s:textfield name="codigoArea" labelposition="top"
-								size="4" maxlength="3"
+							<s:textfield name="codArea" labelposition="top"
+								size="4" maxlength="3" cssClass="codTel"
 								onkeyup="var no_digito = /\D/g; this.value = this.value.replace(no_digito , '');" />
 							
-							<h6 class="formulario">Número de Teléfono:</h6>
+							<h6 class="codTel">Número de Teléfono:</h6>
 							<s:fielderror>
 								<s:param>telefonoContacto</s:param>
 							</s:fielderror>						

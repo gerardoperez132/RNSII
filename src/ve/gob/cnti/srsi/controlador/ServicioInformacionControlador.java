@@ -23,6 +23,7 @@ import ve.gob.cnti.srsi.modelo.UnionArquitecturaServicioInformacion;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.validator.annotations.EmailValidator;
 import com.opensymphony.xwork2.validator.annotations.FieldExpressionValidator;
+import com.opensymphony.xwork2.validator.annotations.IntRangeFieldValidator;
 import com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator;
 import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
 import com.opensymphony.xwork2.validator.annotations.ValidatorType;
@@ -49,6 +50,7 @@ public class ServicioInformacionControlador extends ActionSupport {
 	private List<String> arquitectura;
 	private String intercambio;
 	private String responsable;
+	private String codArea;
 	private String telefonoContacto;
 	private String correoContacto;
 	private File documento;
@@ -165,7 +167,7 @@ public class ServicioInformacionControlador extends ActionSupport {
 		//Seteando el TELEFONO DE CONTACTO (FALTA VALIDAR)
 		Telefono telf = new Telefono();
 		telf.setId_telefono(dao.getNextId(telf));
-		telf.setTelefono(telefonoContacto);
+		telf.setTelefono(codArea+"-"+telefonoContacto);
 		telf.setId_servicio_informacion(id_si);
 		telf.setStatus(0);
 		telf.setFecha_creado(fecha);
@@ -339,7 +341,16 @@ public class ServicioInformacionControlador extends ActionSupport {
 		this.responsable = responsable;
 	}
 	
-	@RequiredStringValidator(message="Proporcione un número telefónico para el soporte técnico ")
+	@FieldExpressionValidator(expression = "!(codArea.length() < 3)", message = "Proporcione un código de área teléfonico Válido")		
+	public String getCodArea() {
+		return codArea;
+	}
+
+	public void setCodArea(String codArea) {
+		this.codArea = codArea;
+	}
+	
+	@FieldExpressionValidator(expression = "!(telefonoContacto.length() < 7)", message = "Proporcione un número telefónico Válido")	
 	public String getTelefonoContacto() {
 		return telefonoContacto;
 	}
@@ -381,5 +392,8 @@ public class ServicioInformacionControlador extends ActionSupport {
 	public void setDocumentoFileName(String documentoFileName) {
 		this.documentoFileName = documentoFileName;
 	}
+
+	
+	
 
 }
