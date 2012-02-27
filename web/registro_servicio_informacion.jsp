@@ -10,6 +10,33 @@
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
 <script type="text/javascript" src="res/js/jquery-1.7.1.js"></script>
 <script type="text/javascript" src="res/js/tabs.js"></script>
+<SCRIPT type="text/javascript"> 
+function validateNUM(e,field)
+{
+    var key = getKeyEvent(e);
+    //if (specialKey(key)) return true;
+    if ((key >= 48 && key <= 57) || (key == 46)){ 
+        if (key != 46)
+            return true;
+        else{  
+            if (field.value.search(/\./) == -1 && field.value.length > 0) 
+                return true;
+            else 
+                return false;
+        }       
+    }
+
+function getKeyEvent(e){
+    var keynum;
+    var keychar;
+    var numcheck;
+    if(window.event) // IE
+        keynum = e.keyCode;
+    else if(e.which) // Netscape/Firefox/Opera
+        keynum = e.which;
+    return keynum;
+}
+</script>
 
 <title>SRSI - Inicio</title>
 <!-- Donde dice inicio debería ir una var que identifique el lugar -->
@@ -63,7 +90,7 @@
 				<div class="tab_container">
 					<div id="tab1" class="tab_content">
 						
-						<p>Descripción General del Servicio</p>
+						<p>Descripción General del Servicio</p><hr>ersión:
 
 						<h5 class="formulario">Sector:</h5>
 						<s:fielderror> <s:param>sector</s:param> </s:fielderror>
@@ -95,6 +122,7 @@
 					   <p class="formulario">Aspectos legales que rigen al servicio</p>
 						<small>Incluir documento de acuerdo de nivel de
 							servicio(SLA) por el qué se regirá este Servicio de Información.</small>
+						<hr>
 		
 						<h5 class="formulario">Nombre del Documento:</h5>
 						<s:fielderror> <s:param>aspectoLegal</s:param> </s:fielderror>
@@ -111,6 +139,7 @@
 
 					   <p class="formulario">Descripción técnica del servicio</p>
 						<small>Especificaciones del intercambio de Información</small>
+						<hr>
 		
 						<h5 class="formulario">Orientado a:</h5>
 						<s:fielderror> <s:param>area</s:param> </s:fielderror>							
@@ -132,14 +161,16 @@
 						<s:fielderror> <s:param>version</s:param> </s:fielderror>
 						<s:textfield name="version"/>
 						
-		
+						<input type="text" onkeyup="return NumCheck(event, this)"/>
+						
 						<br>
 						 
 						<h5 class="formulario">Tipo de Intercambio:</h5>
 						<s:fielderror> <s:param>intercambio</s:param> </s:fielderror>
 						<select name="intercambio">						
-						<optgroup></optgroup> 
-						<option value="-1">Seleccione</option>
+						<optgroup label="">
+							<option value="-1">Seleccione</option>
+						</optgroup> 
 						<s:iterator value="intercambiosPadres">
 							
 							<s:set name="padre" value="id_intercambio"></s:set>
@@ -149,7 +180,8 @@
 							<s:iterator value="intercambiosHijos">						
 								<s:if test="%{#padre == id_padre}">	
 									
-									<option value="<s:property value="id_intercambio"/>">
+									<option value="<s:property value="id_intercambio"/>" 
+									<s:if test="intercambio == id_intercambio"> selected="selected"</s:if>>
 										<s:property value="nombre"/>
 									</option>		
 									
@@ -157,27 +189,32 @@
 							</s:iterator>
 							</optgroup>
 						</s:iterator>						
-						</select>
+						</select>						
 						
 						
 					</div>
 					
 					<div id="tab4" class="tab_content">
 					   
-					   	<h5 class="formulario">Responsable del Servicio: <s:label name="responsable" /></h5>
+					   	<h5 class="formulario">Responsable del Servicio: <s:property value="responsable" /></h5>
 					   	<s:hidden name="responsable"></s:hidden>					   									
 						<hr>
 						
 						<h4>Soporte Técnico</h4>		
 						<h5 class="formulario">Teléfono de Contacto:</h5>
 						<s:fielderror> <s:param>telefonoContacto</s:param> </s:fielderror>
-						<s:textfield name="telefonoContacto" labelposition="top"/>
+						<s:textfield name="telefonoContacto" labelposition="top" maxlength="7" 
+                           onkeyup="var no_digito = /\D/g; this.value = this.value.replace(no_digito , '');"/>
 		
 						<h5 class="formulario">Correo de Contacto:</h5>
 						<s:fielderror> <s:param>correoContacto</s:param> </s:fielderror>						
 						<s:textfield name="correoContacto"></s:textfield>
 						
-						<s:submit value="Registrar"/>
+						<input type="submit" value="Registrar"/>
+						<input  type="text" id="FIELD_ID" name="FIELD_ID" onkeyup="var no_digito = /\d+(/\./\d{1,2})?; this.value = this.value.replace(no_digito , '');"/>
+						
+						
+
 					</div>
 					
 					

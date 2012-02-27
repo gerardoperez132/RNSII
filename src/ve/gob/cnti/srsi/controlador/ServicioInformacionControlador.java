@@ -76,7 +76,7 @@ public class ServicioInformacionControlador extends ActionSupport {
 		intercambiosPadres = (List<Intercambio>) dao.getParents(intercambio);
 		intercambiosHijos = (List<Intercambio>) dao.getChildren(intercambio);
 
-		responsable = "Joaquín";
+		responsable = "Usuario";
 
 		return SUCCESS;
 	}
@@ -99,7 +99,7 @@ public class ServicioInformacionControlador extends ActionSupport {
 		intercambiosPadres = (List<Intercambio>) dao.getParents(intercambio);
 		intercambiosHijos = (List<Intercambio>) dao.getChildren(intercambio);
 
-		responsable = "Joaquín";
+		responsable = "Usuario";
 	}
 
 	public String registrarServicioInformacion() {
@@ -139,8 +139,7 @@ public class ServicioInformacionControlador extends ActionSupport {
 		
 		dao.create(si);
 		
-		//Seteando el AREA (FALTA VALIDAR)
-			
+		//Seteando el AREA (FALTA VALIDAR)			
 		UnionAreaServicioInformacion unionarea = new UnionAreaServicioInformacion();
 		for(int i = 0; i<area.size();i++){
 			unionarea.setId_area(Long.parseLong(String.valueOf(area.get(i))));
@@ -151,11 +150,10 @@ public class ServicioInformacionControlador extends ActionSupport {
 			dao.create(unionarea);
 		}
 		
-		//Seteando el ARQUITECTURA (FALTA VALIDAR)
-		arquitectura = arquitectura.replace(", ", "");
+		//Seteando el ARQUITECTURA (FALTA VALIDAR)		
 		UnionArquitecturaServicioInformacion unionarquitectura = new UnionArquitecturaServicioInformacion();
-		for(int i = 0; i<arquitectura.length();i++){
-			unionarquitectura.setId_servicio_informacion(Long.parseLong(String.valueOf(arquitectura.charAt(i))));
+		for(int i = 0; i<arquitectura.size();i++){
+			unionarquitectura.setId_servicio_informacion(Long.parseLong(String.valueOf(arquitectura.get(i))));
 			unionarquitectura.setId_servicio_informacion(id_si);
 			unionarquitectura.setStatus(0);
 			unionarquitectura.setFecha_creado(fecha);
@@ -182,25 +180,6 @@ public class ServicioInformacionControlador extends ActionSupport {
 		correo.setFecha_creado(fecha);
 		correo.setFecha_modificado(fecha);
 		dao.create(correo);
-		
-		
-
-		System.out.println("******************************************************************");
-		System.out.println(sector);
-		System.out.println(nombre);
-		System.out.println(descripcion);
-		System.out.println(estado);
-		System.out.println(aspectoLegal);
-		System.out.println(area);
-		System.out.println(seguridad);
-		System.out.println(arquitectura);
-		System.out.println(intercambio);
-		System.out.println(responsable);
-		System.out.println(telefonoContacto);		
-		System.out.println(correoContacto);
-		System.out.println(documentoContentType);
-		System.out.println(documentoFileName);
-		System.out.println("******************************************************************");
 
 		return SUCCESS;
 	}
@@ -333,7 +312,7 @@ public class ServicioInformacionControlador extends ActionSupport {
 		this.seguridad = seguridad;
 	}
 	
-	@FieldExpressionValidator(expression = "!area.isEmpty()", message = "Seleccione un valor. ")
+	@FieldExpressionValidator(expression = "!arquitectura.isEmpty()", message = "Seleccione un valor. ")
 	public List<String> getArquitectura() {
 		return arquitectura;
 	}
