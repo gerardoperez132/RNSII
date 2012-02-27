@@ -88,7 +88,6 @@
 		if (objeto.value.length - posicion < decimal) {
 
 			objeto.value = objeto.value.substr(0, objeto.value.length - 1);
-			
 
 		} else {
 
@@ -155,7 +154,7 @@
 
 							<p>Descripción General del Servicio</p>
 							<hr>
-							
+
 							<h5 class="formulario">Sector:</h5>
 							<s:fielderror>
 								<s:param>sector</s:param>
@@ -208,7 +207,7 @@
 							<s:fielderror>
 								<s:param>documento</s:param>
 							</s:fielderror>
-							<s:file name="documento"></s:file>
+							<s:file name="archivo"></s:file>
 
 						</div>
 
@@ -245,7 +244,8 @@
 							<s:fielderror>
 								<s:param>version</s:param>
 							</s:fielderror>
-							<s:textfield name="version" onkeydown="return soloDinero(this, event);" />			
+							<s:textfield name="version"
+								onkeydown="return soloDinero(this, event);" />
 
 
 							<br>
@@ -292,19 +292,19 @@
 
 							<h4>Soporte Técnico</h4>
 							<h5 class="formulario">Teléfono de Contacto:</h5>
-							
-							<h6 class="formulario">Código de Área:</h6>
+
+							<h6 class="codArea">Código de Área:</h6>
 							<s:fielderror>
 								<s:param>codArea</s:param>
-							</s:fielderror>							
-							<s:textfield name="codArea" labelposition="top"
-								size="4" maxlength="3" cssClass="codTel"
+							</s:fielderror>
+							<s:textfield name="codArea" labelposition="top" size="4"
+								maxlength="3" cssClass="codTel"
 								onkeyup="var no_digito = /\D/g; this.value = this.value.replace(no_digito , '');" />
-							
+
 							<h6 class="codTel">Número de Teléfono:</h6>
 							<s:fielderror>
 								<s:param>telefonoContacto</s:param>
-							</s:fielderror>						
+							</s:fielderror>
 							<s:textfield name="telefonoContacto" labelposition="top"
 								maxlength="7"
 								onkeyup="var no_digito = /\D/g; this.value = this.value.replace(no_digito , '');" />
