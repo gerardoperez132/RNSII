@@ -9,6 +9,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
 import ve.gob.cnti.srsi.dao.DAO;
@@ -30,7 +31,8 @@ import com.opensymphony.xwork2.validator.annotations.FieldExpressionValidator;
 import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
 
 @SuppressWarnings("serial")
-public class ServicioInformacionControlador extends ActionSupport {
+public class ServicioInformacionControlador extends ActionSupport implements
+		ServletRequestAware {
 
 	private List<Area> areas = new ArrayList<Area>();
 	private List<Estado> estados = new ArrayList<Estado>();
@@ -189,8 +191,9 @@ public class ServicioInformacionControlador extends ActionSupport {
 
 		try {
 			saveFile();
-		} catch (Exception e) {
-			System.out.println("Error guardando el archivo.");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 		return SUCCESS;
@@ -202,7 +205,7 @@ public class ServicioInformacionControlador extends ActionSupport {
 		String filePath = servletRequest.getSession().getServletContext()
 				.getRealPath("/archivos/" + INSTITUCION.toString());
 
-		// System.out.println("Server path:" + filePath);
+		System.out.println("Server path: " + filePath);
 		File fileToCreate = new File(filePath, this.archivoFileName);
 
 		FileUtils.copyFile(this.archivo, fileToCreate);
@@ -405,11 +408,9 @@ public class ServicioInformacionControlador extends ActionSupport {
 		this.archivoFileName = archivoFileName;
 	}
 
-	public HttpServletRequest getServletRequest() {
-		return servletRequest;
-	}
-
+	@Override
 	public void setServletRequest(HttpServletRequest servletRequest) {
 		this.servletRequest = servletRequest;
 	}
+
 }
