@@ -338,7 +338,7 @@ public class ServicioInformacionControlador extends ActionSupport {
 	public void setResponsable(String responsable) {
 		this.responsable = responsable;
 	}
-
+	
 	@RequiredStringValidator(message="Proporcione un número telefónico para el soporte técnico ")
 	public String getTelefonoContacto() {
 		return telefonoContacto;

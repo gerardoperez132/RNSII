@@ -155,8 +155,7 @@
 
 							<p>Descripción General del Servicio</p>
 							<hr>
-							ersión:
-
+							
 							<h5 class="formulario">Sector:</h5>
 							<s:fielderror>
 								<s:param>sector</s:param>
@@ -293,9 +292,19 @@
 
 							<h4>Soporte Técnico</h4>
 							<h5 class="formulario">Teléfono de Contacto:</h5>
+							
+							<h6 class="formulario">Código de Área:</h6>
+							<s:fielderror>
+								<s:param>codigoArea</s:param>
+							</s:fielderror>							
+							<s:textfield name="codigoArea" labelposition="top"
+								size="4" maxlength="3"
+								onkeyup="var no_digito = /\D/g; this.value = this.value.replace(no_digito , '');" />
+							
+							<h6 class="formulario">Número de Teléfono:</h6>
 							<s:fielderror>
 								<s:param>telefonoContacto</s:param>
-							</s:fielderror>
+							</s:fielderror>						
 							<s:textfield name="telefonoContacto" labelposition="top"
 								maxlength="7"
 								onkeyup="var no_digito = /\D/g; this.value = this.value.replace(no_digito , '');" />
