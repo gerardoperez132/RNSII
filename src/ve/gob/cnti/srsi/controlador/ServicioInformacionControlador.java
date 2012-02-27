@@ -21,6 +21,7 @@ import ve.gob.cnti.srsi.modelo.UnionAreaServicioInformacion;
 import ve.gob.cnti.srsi.modelo.UnionArquitecturaServicioInformacion;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.validator.annotations.EmailValidator;
 import com.opensymphony.xwork2.validator.annotations.FieldExpressionValidator;
 import com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator;
 import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
@@ -348,6 +349,7 @@ public class ServicioInformacionControlador extends ActionSupport {
 	}
 
 	@RequiredStringValidator(message="Proporcione una dirección de correo para el soporte técnico ")
+	@EmailValidator(message="Proporcione una dirección valida de correo para el soporte técnico")
 	public String getCorreoContacto() {
 		return correoContacto;
 	}
