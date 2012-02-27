@@ -1,10 +1,14 @@
 package ve.gob.cnti.srsi.controlador;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.io.FileUtils;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
 import ve.gob.cnti.srsi.dao.DAO;
@@ -23,9 +27,7 @@ import ve.gob.cnti.srsi.modelo.UnionArquitecturaServicioInformacion;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.validator.annotations.EmailValidator;
 import com.opensymphony.xwork2.validator.annotations.FieldExpressionValidator;
-import com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator;
 import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
-import com.opensymphony.xwork2.validator.annotations.ValidatorType;
 
 @SuppressWarnings("serial")
 public class ServicioInformacionControlador extends ActionSupport {
@@ -51,14 +53,16 @@ public class ServicioInformacionControlador extends ActionSupport {
 	private String responsable;
 	private String telefonoContacto;
 	private String correoContacto;
-	private File documento;
-	private String documentoContentType;
-	private String documentoFileName;
+
+	private File archivo;
+	private String archivoContentType;
+	private String archivoFileName;
+	private HttpServletRequest servletRequest;
 
 	private DAO dao = new DAO();
 
 	@SuppressWarnings("unchecked")
-	@SkipValidation	
+	@SkipValidation
 	public String prepararRegistroServicioInformacion() {
 
 		Area area = new Area();
@@ -81,9 +85,9 @@ public class ServicioInformacionControlador extends ActionSupport {
 
 		return SUCCESS;
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public void validate(){
+	public void validate() {
 		Area area = new Area();
 		Estado est = new Estado();
 		Seguridad seg = new Seguridad();
@@ -104,45 +108,45 @@ public class ServicioInformacionControlador extends ActionSupport {
 	}
 
 	public String registrarServicioInformacion() {
-				
+
 		Date fecha = new Date();
-		ServicioInformacion si = new ServicioInformacion();		
-		long id_si = dao.getNextId(si); 
-		
+		ServicioInformacion si = new ServicioInformacion();
+		long id_si = dao.getNextId(si);
+
 		si.setId_ente(1);
 		si.setId_servicio_informacion(id_si);
 		si.setId_usuario(1);
-		
-		//Seteando el SECTOR (FALTA VALIDAR)
-		si.setId_sector(Long.parseLong(sector));		
 
-		//Seteando el NOMBRE (FALTA VALIDAR)	
+		// Seteando el SECTOR (FALTA VALIDAR)
+		si.setId_sector(Long.parseLong(sector));
+
+		// Seteando el NOMBRE (FALTA VALIDAR)
 		si.setNombre(nombre);
-		
-		//Seteando el DESCRIPCION (FALTA VALIDAR)
+
+		// Seteando el DESCRIPCION (FALTA VALIDAR)
 		si.setDescripcion(descripcion);
 
-		//Seteando el ESTADO (FALTA VALIDAR)
+		// Seteando el ESTADO (FALTA VALIDAR)
 		si.setId_estado(Long.parseLong(estado));
-					
-		//Seteando el SEGURIDAD (FALTA VALIDAR)
+
+		// Seteando el SEGURIDAD (FALTA VALIDAR)
 		si.setId_seguridad(Long.parseLong(seguridad));
-				
-		//Seteando el VERSION (FALTA VALIDAR)
+
+		// Seteando el VERSION (FALTA VALIDAR)
 		si.setVersion(version);
-		
-		//Seteando el TIPO DE INTERCAMBIO (FALTA VALIDAR)
+
+		// Seteando el TIPO DE INTERCAMBIO (FALTA VALIDAR)
 		si.setId_tipo_intercambio(Long.parseLong(intercambio));
-		
+
 		si.setStatus(0);
 		si.setFecha_creado(fecha);
 		si.setFecha_modificado(fecha);
-		
+
 		dao.create(si);
-		
-		//Seteando el AREA (FALTA VALIDAR)			
+
+		// Seteando el AREA (FALTA VALIDAR)
 		UnionAreaServicioInformacion unionarea = new UnionAreaServicioInformacion();
-		for(int i = 0; i<area.size();i++){
+		for (int i = 0; i < area.size(); i++) {
 			unionarea.setId_area(Long.parseLong(String.valueOf(area.get(i))));
 			unionarea.setId_servicio_informacion(id_si);
 			unionarea.setStatus(0);
@@ -150,19 +154,20 @@ public class ServicioInformacionControlador extends ActionSupport {
 			unionarea.setFecha_modificado(fecha);
 			dao.create(unionarea);
 		}
-		
-		//Seteando el ARQUITECTURA (FALTA VALIDAR)		
+
+		// Seteando el ARQUITECTURA (FALTA VALIDAR)
 		UnionArquitecturaServicioInformacion unionarquitectura = new UnionArquitecturaServicioInformacion();
-		for(int i = 0; i<arquitectura.size();i++){
-			unionarquitectura.setId_servicio_informacion(Long.parseLong(String.valueOf(arquitectura.get(i))));
+		for (int i = 0; i < arquitectura.size(); i++) {
+			unionarquitectura.setId_servicio_informacion(Long.parseLong(String
+					.valueOf(arquitectura.get(i))));
 			unionarquitectura.setId_servicio_informacion(id_si);
 			unionarquitectura.setStatus(0);
 			unionarquitectura.setFecha_creado(fecha);
 			unionarquitectura.setFecha_modificado(fecha);
 			dao.create(unionarquitectura);
 		}
-		
-		//Seteando el TELEFONO DE CONTACTO (FALTA VALIDAR)
+
+		// Seteando el TELEFONO DE CONTACTO (FALTA VALIDAR)
 		Telefono telf = new Telefono();
 		telf.setId_telefono(dao.getNextId(telf));
 		telf.setTelefono(telefonoContacto);
@@ -171,8 +176,8 @@ public class ServicioInformacionControlador extends ActionSupport {
 		telf.setFecha_creado(fecha);
 		telf.setFecha_modificado(fecha);
 		dao.create(telf);
-		
-		//Seteando el CORREO DE CONTACTO (FALTA VALIDAR)
+
+		// Seteando el CORREO DE CONTACTO (FALTA VALIDAR)
 		Correo correo = new Correo();
 		correo.setId_correo(dao.getNextId(correo));
 		correo.setCorreo(correoContacto);
@@ -182,7 +187,25 @@ public class ServicioInformacionControlador extends ActionSupport {
 		correo.setFecha_modificado(fecha);
 		dao.create(correo);
 
+		try {
+			saveFile();
+		} catch (Exception e) {
+			System.out.println("Error guardando el archivo.");
+		}
+
 		return SUCCESS;
+	}
+
+	private void saveFile() throws IOException {
+		String INSTITUCION = "cnti"; // Obtener desde la base de datos.
+
+		String filePath = servletRequest.getSession().getServletContext()
+				.getRealPath("/archivos/" + INSTITUCION.toString());
+
+		// System.out.println("Server path:" + filePath);
+		File fileToCreate = new File(filePath, this.archivoFileName);
+
+		FileUtils.copyFile(this.archivo, fileToCreate);
 	}
 
 	public List<Estado> getEstados() {
@@ -241,7 +264,7 @@ public class ServicioInformacionControlador extends ActionSupport {
 		this.l_seguridad = l_seguridad;
 	}
 
-	@RequiredStringValidator(message="Introduzca la versión del Servicio de Información")
+	@RequiredStringValidator(message = "Introduzca la versión del Servicio de Información")
 	public String getVersion() {
 		return version;
 	}
@@ -259,7 +282,7 @@ public class ServicioInformacionControlador extends ActionSupport {
 		this.sector = sector;
 	}
 
-	@RequiredStringValidator(message="Introduzca El nombre")
+	@RequiredStringValidator(message = "Introduzca El nombre")
 	public String getNombre() {
 		return nombre;
 	}
@@ -267,8 +290,8 @@ public class ServicioInformacionControlador extends ActionSupport {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
-	@RequiredStringValidator(message="Proporcione una descripción ")
+
+	@RequiredStringValidator(message = "Proporcione una descripción ")
 	public String getDescripcion() {
 		return descripcion;
 	}
@@ -286,7 +309,7 @@ public class ServicioInformacionControlador extends ActionSupport {
 		this.estado = estado;
 	}
 
-	@RequiredStringValidator(message="Proporcione el nombre del documento legal")
+	@RequiredStringValidator(message = "Proporcione el nombre del documento legal")
 	public String getAspectoLegal() {
 		return aspectoLegal;
 	}
@@ -294,7 +317,7 @@ public class ServicioInformacionControlador extends ActionSupport {
 	public void setAspectoLegal(String aspectoLegal) {
 		this.aspectoLegal = aspectoLegal;
 	}
-	
+
 	@FieldExpressionValidator(expression = "!area.isEmpty()", message = "Seleccione un valor. ")
 	public List<String> getArea() {
 		return area;
@@ -303,8 +326,8 @@ public class ServicioInformacionControlador extends ActionSupport {
 	public void setArea(List<String> area) {
 		this.area = area;
 	}
-	
-	@FieldExpressionValidator(expression = "!seguridad.equals(\"-1\")", message = "Seleccione un valor. ")	
+
+	@FieldExpressionValidator(expression = "!seguridad.equals(\"-1\")", message = "Seleccione un valor. ")
 	public String getSeguridad() {
 		return seguridad;
 	}
@@ -312,7 +335,7 @@ public class ServicioInformacionControlador extends ActionSupport {
 	public void setSeguridad(String seguridad) {
 		this.seguridad = seguridad;
 	}
-	
+
 	@FieldExpressionValidator(expression = "!arquitectura.isEmpty()", message = "Seleccione un valor. ")
 	public List<String> getArquitectura() {
 		return arquitectura;
@@ -330,7 +353,7 @@ public class ServicioInformacionControlador extends ActionSupport {
 	public void setIntercambio(String intercambio) {
 		this.intercambio = intercambio;
 	}
-	
+
 	public String getResponsable() {
 		return responsable;
 	}
@@ -339,7 +362,7 @@ public class ServicioInformacionControlador extends ActionSupport {
 		this.responsable = responsable;
 	}
 
-	@RequiredStringValidator(message="Proporcione un número telefónico para el soporte técnico ")
+	@RequiredStringValidator(message = "Proporcione un número telefónico para el soporte técnico ")
 	public String getTelefonoContacto() {
 		return telefonoContacto;
 	}
@@ -348,8 +371,8 @@ public class ServicioInformacionControlador extends ActionSupport {
 		this.telefonoContacto = telefonoContacto;
 	}
 
-	@RequiredStringValidator(message="Proporcione una dirección de correo para el soporte técnico ")
-	@EmailValidator(message="Proporcione una dirección valida de correo para el soporte técnico")
+	@RequiredStringValidator(message = "Proporcione una dirección de correo para el soporte técnico ")
+	@EmailValidator(message = "Proporcione una dirección valida de correo para el soporte técnico")
 	public String getCorreoContacto() {
 		return correoContacto;
 	}
@@ -358,28 +381,35 @@ public class ServicioInformacionControlador extends ActionSupport {
 		this.correoContacto = correoContacto;
 	}
 
-	public File getDocumento() {
-		return documento;
+	public File getArchivo() {
+		return archivo;
 	}
 
-	public void setDocumento(File documento) {
-		this.documento = documento;
-	}
-	
-	public String getDocumentoContentType() {
-		return documentoContentType;
+	public void setArchivo(File archivo) {
+		this.archivo = archivo;
 	}
 
-	public void setDocumentoContentType(String documentoContentType) {
-		this.documentoContentType = documentoContentType;
+	public String getArchivoContentType() {
+		return archivoContentType;
 	}
 
-	public String getDocumentoFileName() {
-		return documentoFileName;
+	public void setArchivoContentType(String archivoContentType) {
+		this.archivoContentType = archivoContentType;
 	}
 
-	public void setDocumentoFileName(String documentoFileName) {
-		this.documentoFileName = documentoFileName;
+	public String getArchivoFileName() {
+		return archivoFileName;
 	}
 
+	public void setArchivoFileName(String archivoFileName) {
+		this.archivoFileName = archivoFileName;
+	}
+
+	public HttpServletRequest getServletRequest() {
+		return servletRequest;
+	}
+
+	public void setServletRequest(HttpServletRequest servletRequest) {
+		this.servletRequest = servletRequest;
+	}
 }
