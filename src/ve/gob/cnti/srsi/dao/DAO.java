@@ -10,7 +10,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 /**
- * Clase DAO de la cual heredan los métodos todos los demás controladores.
+ * Clase DAO de la cual se pueden usar los métodos por parte de todos los demás
+ * controladores.
  * 
  * @author Joaquín Pereira
  * @author Richard Ricciardelli
@@ -127,9 +128,38 @@ public class DAO implements CRUD {
 
 	@Override
 	public void create(Object model) {
+		Date date = new Date();
+		long id = getNextId(model);
 		try {
 			startConnection();
 			session.save(model);
+			session.createQuery(
+					"UPDATE " + model.getClass().getSimpleName() + " SET "
+							+ getField(model) + " = " + id
+							+ ", fecha_creado = '" + date
+							+ "', fecha_modificado = '" + date + "', status = "
+							+ Status.ACTIVO + " WHERE " + getField(model)
+							+ " = 0").executeUpdate();
+			transaction.commit();
+		} catch (HibernateException he) {
+			handleException(he);
+		} finally {
+			closeConnection();
+		}
+	}
+
+	@Override
+	public void createUnion(Object model) {
+		Date date = new Date();
+		try {
+			startConnection();
+			session.save(model);
+			session.createQuery(
+					"UPDATE " + model.getClass().getSimpleName() + " SET "
+							+ " fecha_creado = '" + date
+							+ "', fecha_modificado = '" + date + "', status = "
+							+ Status.ACTIVO + " WHERE " + getField(model)
+							+ " = 0").executeUpdate();
 			transaction.commit();
 		} catch (HibernateException he) {
 			handleException(he);
@@ -199,9 +229,10 @@ public class DAO implements CRUD {
 			startConnection();
 			session.createQuery(
 					"UPDATE " + model.getClass().getSimpleName()
-							+ " SET status = 2, fecha_modificado = '"
-							+ new Date() + "' WHERE status = 0 AND " + getField(model) + " = "
-							+ id).executeUpdate();
+							+ " SET status = " + Status.ELIMINADO
+							+ ", fecha_modificado = '" + new Date()
+							+ "' WHERE status = " + Status.ACTIVO + " AND "
+							+ getField(model) + " = " + id).executeUpdate();
 			transaction.commit();
 		} catch (HibernateException he) {
 			handleException(he);

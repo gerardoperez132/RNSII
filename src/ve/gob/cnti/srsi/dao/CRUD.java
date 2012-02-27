@@ -21,6 +21,15 @@ public interface CRUD {
 	public void create(Object model);
 
 	/**
+	 * Permite guardar un registro de una tabla unión M:M en la base de datos.
+	 * 
+	 * @param model
+	 *            Es la clase, modelo o tabla en el cual se realizará el
+	 *            registro.
+	 */
+	public void createUnion(Object model);
+
+	/**
 	 * Permite obtener el registro activo especificado por id del modelo dado.
 	 * 
 	 * @param model
@@ -87,8 +96,8 @@ public interface CRUD {
 	public String getField(Object model);
 
 	/**
-	 * Permite obtener el sufijo para ser agregado al campo que será utilizado para
-	 * la consulta del id de cada modelo.
+	 * Permite obtener el sufijo para ser agregado al campo que será utilizado
+	 * para la consulta del id de cada modelo.
 	 * 
 	 * @param model
 	 *            Es la clase, modelo o tabla en la cual se realizará la

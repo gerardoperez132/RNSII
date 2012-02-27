@@ -3,7 +3,6 @@ package ve.gob.cnti.srsi.controlador;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -113,12 +112,13 @@ public class ServicioInformacionControlador extends ActionSupport implements
 
 	public String registrarServicioInformacion() {
 
-		Date fecha = new Date();
 		ServicioInformacion si = new ServicioInformacion();
+
 		long id_si = dao.getNextId(si);
 
+		//consultar ente
 		si.setId_ente(1);
-		si.setId_servicio_informacion(id_si);
+		//consultar usuario 
 		si.setId_usuario(1);
 
 		// Seteando el SECTOR (FALTA VALIDAR)
@@ -141,22 +141,15 @@ public class ServicioInformacionControlador extends ActionSupport implements
 
 		// Seteando el TIPO DE INTERCAMBIO (FALTA VALIDAR)
 		si.setId_tipo_intercambio(Long.parseLong(intercambio));
-
-		si.setStatus(0);
-		si.setFecha_creado(fecha);
-		si.setFecha_modificado(fecha);
-
+		
 		dao.create(si);
 
 		// Seteando el AREA (FALTA VALIDAR)
 		UnionAreaServicioInformacion unionarea = new UnionAreaServicioInformacion();
 		for (int i = 0; i < area.size(); i++) {
 			unionarea.setId_area(Long.parseLong(String.valueOf(area.get(i))));
-			unionarea.setId_servicio_informacion(id_si);
-			unionarea.setStatus(0);
-			unionarea.setFecha_creado(fecha);
-			unionarea.setFecha_modificado(fecha);
-			dao.create(unionarea);
+			unionarea.setId_servicio_informacion(id_si);			
+			dao.createUnion(unionarea);
 		}
 
 		// Seteando el ARQUITECTURA (FALTA VALIDAR)
@@ -164,26 +157,18 @@ public class ServicioInformacionControlador extends ActionSupport implements
 		for (int i = 0; i < arquitectura.size(); i++) {
 			unionarquitectura.setId_servicio_informacion(Long.parseLong(String
 					.valueOf(arquitectura.get(i))));
-			unionarquitectura.setId_servicio_informacion(id_si);
-			unionarquitectura.setStatus(0);
-			unionarquitectura.setFecha_creado(fecha);
-			unionarquitectura.setFecha_modificado(fecha);
-			dao.create(unionarquitectura);
+			unionarquitectura.setId_servicio_informacion(id_si);			
+			dao.createUnion(unionarquitectura);
 		}
 
 		// Seteando el TELEFONO DE CONTACTO (FALTA VALIDAR)
-		Telefono telf = new Telefono();
-		telf.setId_telefono(dao.getNextId(telf));
+		Telefono telf = new Telefono();		
 		telf.setTelefono(codArea+"-"+telefonoContacto);
-		telf.setId_servicio_informacion(id_si);
-		telf.setStatus(0);
-		telf.setFecha_creado(fecha);
-		telf.setFecha_modificado(fecha);
+		telf.setId_servicio_informacion(id_si);		
 		dao.create(telf);
 
 		// Seteando el CORREO DE CONTACTO (FALTA VALIDAR)
-		Correo correo = new Correo();
-		correo.setId_correo(dao.getNextId(correo));
+		Correo correo = new Correo();		
 		correo.setCorreo(correoContacto);
 		correo.setId_servicio_informacion(id_si);		
 		dao.create(correo);

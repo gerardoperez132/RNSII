@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * URL.
+ * Clase modelo con los atributos de la tabla URL.
  * 
  * @author Joaquín Pereira
  * 
