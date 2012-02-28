@@ -98,6 +98,25 @@ public class ServicioInformacionControlador extends ActionSupport implements
 		Sector sector = new Sector();
 		Intercambio intercambio = new Intercambio();
 
+		/*
+		 * Para Validar la que la cadena sea decimal y con el rango (0,999.999)
+		 * No encontre una anotación en struts validation que lo hiciera
+		 */
+		float ver;
+		try {
+			ver = Float.parseFloat(version);
+			if (ver < 0.0 || ver > 999.999) {
+				addFieldError(
+						"version",
+						getText("Su número de versión se sale del rango, el formato es XXX.XXX"));
+				System.out.println("Entro a el error de rango");
+			}
+		} catch (NumberFormatException ex) {
+			addFieldError(
+					"version",
+					getText("La versión solo debe tener números en un formato XXX.XXX"));
+		}
+
 		areas = (List<Area>) dao.read(area);
 		estados = (List<Estado>) dao.read(est);
 		l_seguridad = (List<Seguridad>) dao.read(seg);
