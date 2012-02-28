@@ -42,6 +42,7 @@ public class ServicioInformacionControlador extends ActionSupport implements
 	private List<Intercambio> intercambiosPadres = new ArrayList<Intercambio>();
 	private List<Intercambio> intercambiosHijos = new ArrayList<Intercambio>();
 
+	private long idServicioInformacion;
 	private String sector;
 	private String nombre;
 	private String descripcion;
@@ -122,11 +123,8 @@ public class ServicioInformacionControlador extends ActionSupport implements
 					getText("La versión solo debe tener números en un formato XXX.XXX"));
 		}
 
-		if (archivoFileName != null && aspectoLegal.isEmpty() == true) {// valida
-																		// que
-																		// ambos
-																		// campos
-																		// existan
+		// valida que ambos campos existan
+		if (archivoFileName != null && aspectoLegal.isEmpty() == true) {
 			addFieldError(
 					"aspectoLegal",
 					getText("Si va a subir un documento debe proporcionar el nombre con que se va a guardar"));
@@ -134,21 +132,15 @@ public class ServicioInformacionControlador extends ActionSupport implements
 					"archivo",
 					getText("Si va a subir un documento debe proporcionar el archivo a guardar"));
 		}
-		if (archivoFileName == null && aspectoLegal.isEmpty() == false) {// valida
-																			// que
-																			// ambos
-																			// campos
-																			// existan
+		// valida que ambos campos existan
+		if (archivoFileName == null && aspectoLegal.isEmpty() == false) {
 			addFieldError(
 					"archivo",
 					getText("Si va a subir un documento debe proporcionar el archivo a guardar"));
 		}
 
-		if (slaArchivoFileName != null && slaNombre.isEmpty() == true) {// valida
-																		// que
-																		// ambos
-																		// campos
-																		// existan
+		// valida que ambos campos existan
+		if (slaArchivoFileName != null && slaNombre.isEmpty() == true) {
 			addFieldError(
 					"slaNombre",
 					getText("Si va a subir un documento debe proporcionar el nombre con que se va a guardar"));
@@ -156,11 +148,8 @@ public class ServicioInformacionControlador extends ActionSupport implements
 					"slaArchivo",
 					getText("Si va a subir un documento debe proporcionar el archivo a guardar"));
 		}
-		if (slaArchivoFileName == null && slaNombre.isEmpty() == false) {// valida
-																			// que
-																			// ambos
-																			// campos
-																			// existan
+		// valida que ambos campos existan
+		if (slaArchivoFileName == null && slaNombre.isEmpty() == false) {
 			addFieldError(
 					"slaArchivo",
 					getText("Si va a subir un documento debe proporcionar el archivo a guardar"));
@@ -540,6 +529,14 @@ public class ServicioInformacionControlador extends ActionSupport implements
 
 	public void setSlaNombre(String slaNombre) {
 		this.slaNombre = slaNombre;
+	}
+
+	public long getIdServicioInformacion() {
+		return idServicioInformacion;
+	}
+
+	public void setIdServicioInformacion(long idServicioInformacion) {
+		this.idServicioInformacion = idServicioInformacion;
 	}
 
 	@Override
