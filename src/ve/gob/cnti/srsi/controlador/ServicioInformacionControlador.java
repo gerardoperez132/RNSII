@@ -57,13 +57,13 @@ public class ServicioInformacionControlador extends ActionSupport implements
 	private String codArea;
 	private String telefonoContacto;
 	private String correoContacto;
-	
+
 	private File archivo;
 	private String archivoContentType;
 	private String archivoFileName;
-	
+
 	private File slaArchivo;
-	private String slaArchivoFileName;	
+	private String slaArchivoFileName;
 
 	private HttpServletRequest servletRequest;
 
@@ -93,7 +93,7 @@ public class ServicioInformacionControlador extends ActionSupport implements
 
 		return SUCCESS;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void validate() {
 		Area area = new Area();
@@ -102,38 +102,68 @@ public class ServicioInformacionControlador extends ActionSupport implements
 		Arquitectura arq = new Arquitectura();
 		Sector sector = new Sector();
 		Intercambio intercambio = new Intercambio();
-		
+
 		/*
 		 * Para Validar la que la cadena sea decimal y con el rango (0,999.999)
 		 * No encontre una anotación en struts validation que lo hiciera
 		 */
 		float ver;
-		try{
-		    ver = Float.parseFloat(version);
-		    if (ver < 0.0 || ver > 999.999) {
-				addFieldError("version", getText("Su número de versión se sale del rango, el formato es XXX.XXX"));
-				System.out.println("Entro a el error de rango");			
+		try {
+			ver = Float.parseFloat(version);
+			if (ver < 0.0 || ver > 999.999) {
+				addFieldError(
+						"version",
+						getText("Su número de versión se sale del rango, el formato es XXX.XXX"));
+				System.out.println("Entro a el error de rango");
 			}
+		} catch (NumberFormatException ex) {
+			addFieldError(
+					"version",
+					getText("La versión solo debe tener números en un formato XXX.XXX"));
 		}
-		catch(NumberFormatException ex){
-			addFieldError("version", getText("La versión solo debe tener números en un formato XXX.XXX"));
-		}	
-		
-		
-		if(archivoFileName != null && aspectoLegal.isEmpty() == true){//valida que ambos campos existan
-			addFieldError("aspectoLegal", getText("Si va a subir un documento debe proporcionar el nombre con que se va a guardar"));
-			addFieldError("archivo", getText("Si va a subir un documento debe proporcionar el archivo a guardar"));			
-		}		
-		if(archivoFileName == null && aspectoLegal.isEmpty() == false){//valida que ambos campos existan
-			addFieldError("archivo", getText("Si va a subir un documento debe proporcionar el archivo a guardar"));
+
+		if (archivoFileName != null && aspectoLegal.isEmpty() == true) {// valida
+																		// que
+																		// ambos
+																		// campos
+																		// existan
+			addFieldError(
+					"aspectoLegal",
+					getText("Si va a subir un documento debe proporcionar el nombre con que se va a guardar"));
+			addFieldError(
+					"archivo",
+					getText("Si va a subir un documento debe proporcionar el archivo a guardar"));
 		}
-		
-		if(slaArchivoFileName != null && slaNombre.isEmpty() == true){//valida que ambos campos existan
-			addFieldError("slaNombre", getText("Si va a subir un documento debe proporcionar el nombre con que se va a guardar"));
-			addFieldError("slaArchivo", getText("Si va a subir un documento debe proporcionar el archivo a guardar"));			
-		}		
-		if(slaArchivoFileName == null && slaNombre.isEmpty() == false){//valida que ambos campos existan
-			addFieldError("slaArchivo", getText("Si va a subir un documento debe proporcionar el archivo a guardar"));
+		if (archivoFileName == null && aspectoLegal.isEmpty() == false) {// valida
+																			// que
+																			// ambos
+																			// campos
+																			// existan
+			addFieldError(
+					"archivo",
+					getText("Si va a subir un documento debe proporcionar el archivo a guardar"));
+		}
+
+		if (slaArchivoFileName != null && slaNombre.isEmpty() == true) {// valida
+																		// que
+																		// ambos
+																		// campos
+																		// existan
+			addFieldError(
+					"slaNombre",
+					getText("Si va a subir un documento debe proporcionar el nombre con que se va a guardar"));
+			addFieldError(
+					"slaArchivo",
+					getText("Si va a subir un documento debe proporcionar el archivo a guardar"));
+		}
+		if (slaArchivoFileName == null && slaNombre.isEmpty() == false) {// valida
+																			// que
+																			// ambos
+																			// campos
+																			// existan
+			addFieldError(
+					"slaArchivo",
+					getText("Si va a subir un documento debe proporcionar el archivo a guardar"));
 		}
 
 		areas = (List<Area>) dao.read(area);
@@ -146,7 +176,7 @@ public class ServicioInformacionControlador extends ActionSupport implements
 		intercambiosHijos = (List<Intercambio>) dao.getChildren(intercambio);
 
 		responsable = "Usuario";
-		
+
 	}
 
 	public String registrarServicioInformacion() {
@@ -160,30 +190,30 @@ public class ServicioInformacionControlador extends ActionSupport implements
 		// consultar usuario
 		si.setId_usuario(1);
 
-		// Seteando el SECTOR 
+		// Seteando el SECTOR
 		si.setId_sector(Long.parseLong(sector));
 
-		// Seteando el NOMBRE 
+		// Seteando el NOMBRE
 		si.setNombre(nombre);
 
-		// Seteando el DESCRIPCION 
+		// Seteando el DESCRIPCION
 		si.setDescripcion(descripcion);
 
-		// Seteando el ESTADO 
+		// Seteando el ESTADO
 		si.setId_estado(Long.parseLong(estado));
 
-		// Seteando el SEGURIDAD 
+		// Seteando el SEGURIDAD
 		si.setId_seguridad(Long.parseLong(seguridad));
 
-		// Seteando el VERSION 		
+		// Seteando el VERSION
 		si.setVersion(version);
 
-		// Seteando el TIPO DE INTERCAMBIO 
+		// Seteando el TIPO DE INTERCAMBIO
 		si.setId_tipo_intercambio(Long.parseLong(intercambio));
 
 		dao.create(si);
 
-		// Seteando el AREA 
+		// Seteando el AREA
 		UnionAreaServicioInformacion unionarea = new UnionAreaServicioInformacion();
 		for (int i = 0; i < area.size(); i++) {
 			unionarea.setId_area(Long.parseLong(String.valueOf(area.get(i))));
@@ -191,7 +221,7 @@ public class ServicioInformacionControlador extends ActionSupport implements
 			dao.create(unionarea, id_si);
 		}
 
-		// Seteando el ARQUITECTURA 
+		// Seteando el ARQUITECTURA
 		UnionArquitecturaServicioInformacion unionarquitectura = new UnionArquitecturaServicioInformacion();
 		for (int i = 0; i < arquitectura.size(); i++) {
 			unionarquitectura.setId_arquitectura(Long.parseLong(String
@@ -200,20 +230,21 @@ public class ServicioInformacionControlador extends ActionSupport implements
 			dao.create(unionarquitectura, id_si);
 		}
 
-		// Seteando el TELEFONO DE CONTACTO 
+		// Seteando el TELEFONO DE CONTACTO
 		Telefono telf = new Telefono();
 		telf.setTelefono(codArea + "-" + telefonoContacto);
 		telf.setId_servicio_informacion(id_si);
 		dao.create(telf);
 
-		// Seteando el CORREO DE CONTACTO 
+		// Seteando el CORREO DE CONTACTO
 		Correo correo = new Correo();
 		correo.setCorreo(correoContacto);
 		correo.setId_servicio_informacion(id_si);
 		dao.create(correo);
 
-		// Seteando el documento legal (FALTA VALIDAR)
-		if(archivoFileName != null && aspectoLegal.isEmpty() == false){//valida que ambos campos existan
+		// Seteando el documento legal
+		// valida que ambos campos existan
+		if (archivoFileName != null && aspectoLegal.isEmpty() == false) {
 			AspectoLegal al = new AspectoLegal();
 			try {
 				al.setUrl(saveFile());
@@ -226,22 +257,23 @@ public class ServicioInformacionControlador extends ActionSupport implements
 			al.setId_servicio_informacion(id_si);
 			dao.create(al);
 		}
-		
-		// Seteando el documento legal (FALTA VALIDAR)
-				if(slaArchivo != null && slaNombre.isEmpty() == false){//valida que ambos campos existan
-					AspectoLegal al = new AspectoLegal();
-					try {
-						al.setUrl(saveFile2());
-					} catch (IOException e) {
-						// levantar action error
-						e.printStackTrace();
-					}
-					al.setNombre(aspectoLegal);
-					al.setTipo(1);
-					al.setId_servicio_informacion(id_si);
-					dao.create(al);
-				}
-		
+
+		// Seteando el documento legal
+		// valida que ambos campos existan
+		if (slaArchivo != null && slaNombre.isEmpty() == false) {
+			AspectoLegal al = new AspectoLegal();
+			try {
+				al.setUrl(saveFile2());
+			} catch (IOException e) {
+				// levantar action error
+				e.printStackTrace();
+			}
+			al.setNombre(aspectoLegal);
+			al.setTipo(1);
+			al.setId_servicio_informacion(id_si);
+			dao.create(al);
+		}
+
 		return SUCCESS;
 	}
 
@@ -259,7 +291,7 @@ public class ServicioInformacionControlador extends ActionSupport implements
 
 		return "/archivos/" + INSTITUCION.toString() + "/" + archivoFileName;
 	}
-	
+
 	private String saveFile2() throws IOException {
 		String INSTITUCION = "cnti"; // Obtener desde la base de datos.
 
@@ -375,7 +407,7 @@ public class ServicioInformacionControlador extends ActionSupport implements
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	
+
 	public String getAspectoLegal() {
 		return aspectoLegal;
 	}
@@ -454,8 +486,8 @@ public class ServicioInformacionControlador extends ActionSupport implements
 
 	public void setCorreoContacto(String correoContacto) {
 		this.correoContacto = correoContacto;
-	}	
-	
+	}
+
 	public File getArchivo() {
 		return archivo;
 	}
@@ -479,7 +511,7 @@ public class ServicioInformacionControlador extends ActionSupport implements
 	public void setArchivoFileName(String archivoFileName) {
 		this.archivoFileName = archivoFileName;
 	}
-	
+
 	public File getSlaArchivo() {
 		return slaArchivo;
 	}

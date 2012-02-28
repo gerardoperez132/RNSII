@@ -53,10 +53,14 @@
 				<hr>
 
 				<ul class="tabs">
-					<li><a href="#tab1">Descripción General</a></li>
-					<li><a href="#tab2">Aspectos legales</a></li>
-					<li><a href="#tab3">Descripción técnica</a></li>
-					<li><a href="#tab4">Descripción de Soporte</a></li>
+					<li><a href="#tab1">Descripción General</a>
+					</li>
+					<li><a href="#tab2">Aspectos legales</a>
+					</li>
+					<li><a href="#tab3">Descripción técnica</a>
+					</li>
+					<li><a href="#tab4">Descripción de Soporte</a>
+					</li>
 				</ul>
 
 				<form action="registrarServicioInformacion" method="post"
@@ -172,8 +176,9 @@
 							<s:fielderror>
 								<s:param>version</s:param>
 							</s:fielderror>
-							<s:textfield name="version" onkeyup="var pattern = /[^0-9\.]/g;
-								this.value = this.value.replace(pattern, '');" 
+							<s:textfield name="version"
+								onkeyup="var pattern = /[^0-9\.]/g;
+								this.value = this.value.replace(pattern, '');"
 								maxlength="7" />
 							<br>
 
