@@ -9,6 +9,8 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import ve.gob.cnti.srsi.dao.Constants.Status;
+
 /**
  * Clase DAO de la cual se pueden usar los métodos por parte de todos los demás
  * controladores.
@@ -18,7 +20,7 @@ import org.hibernate.Transaction;
  * @see CRUD
  * 
  */
-public class DAO implements CRUD {
+public class DAO implements CRUD, Status {
 
 	private Session session;
 	private Transaction transaction;
@@ -211,9 +213,10 @@ public class DAO implements CRUD {
 			startConnection();
 			session.createQuery(
 					"UPDATE " + model.getClass().getSimpleName()
-							+ " SET status = 1, fecha_modificado = '"
-							+ new Date() + "' WHERE " + getField(model) + " = "
-							+ id).executeUpdate();
+							+ " SET status = " + Status.MODIFICADO
+							+ ", fecha_modificado = '" + new Date()
+							+ "' WHERE " + getField(model) + " = " + id)
+					.executeUpdate();
 			session.save(model);
 			transaction.commit();
 		} catch (HibernateException he) {
