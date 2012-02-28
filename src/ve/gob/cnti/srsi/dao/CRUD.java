@@ -27,7 +27,7 @@ public interface CRUD {
 	 *            Es la clase, modelo o tabla en el cual se realizará el
 	 *            registro.
 	 */
-	public void createUnion(Object model);
+	public void create(Object model, long id);
 
 	/**
 	 * Permite obtener el registro activo especificado por id del modelo dado.

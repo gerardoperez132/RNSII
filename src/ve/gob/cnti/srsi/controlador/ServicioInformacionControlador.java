@@ -108,6 +108,7 @@ public class ServicioInformacionControlador extends ActionSupport implements
 		intercambiosHijos = (List<Intercambio>) dao.getChildren(intercambio);
 
 		responsable = "Usuario";
+
 	}
 
 	public String registrarServicioInformacion() {
@@ -116,9 +117,9 @@ public class ServicioInformacionControlador extends ActionSupport implements
 
 		long id_si = dao.getNextId(si);
 
-		//consultar ente
+		// consultar ente
 		si.setId_ente(1);
-		//consultar usuario 
+		// consultar usuario
 		si.setId_usuario(1);
 
 		// Seteando el SECTOR (FALTA VALIDAR)
@@ -137,44 +138,51 @@ public class ServicioInformacionControlador extends ActionSupport implements
 		si.setId_seguridad(Long.parseLong(seguridad));
 
 		// Seteando el VERSION (FALTA VALIDAR)
+		if (Float.parseFloat(version) < 0.0
+				|| Float.parseFloat(version) > 999.999) {
+			addFieldError("version",
+					getText("su numero se sale del rango(0,999.999)"));
+			System.out.println("Entro a el error de rango");
+			return "input";
+		}
 		si.setVersion(version);
 
 		// Seteando el TIPO DE INTERCAMBIO (FALTA VALIDAR)
 		si.setId_tipo_intercambio(Long.parseLong(intercambio));
-		
+
 		dao.create(si);
 
 		// Seteando el AREA (FALTA VALIDAR)
 		UnionAreaServicioInformacion unionarea = new UnionAreaServicioInformacion();
 		for (int i = 0; i < area.size(); i++) {
 			unionarea.setId_area(Long.parseLong(String.valueOf(area.get(i))));
-			unionarea.setId_servicio_informacion(id_si);			
-			dao.createUnion(unionarea);
+			unionarea.setId_servicio_informacion(id_si);
+			dao.create(unionarea, id_si);
 		}
 
 		// Seteando el ARQUITECTURA (FALTA VALIDAR)
 		UnionArquitecturaServicioInformacion unionarquitectura = new UnionArquitecturaServicioInformacion();
 		for (int i = 0; i < arquitectura.size(); i++) {
-			unionarquitectura.setId_servicio_informacion(Long.parseLong(String
+			unionarquitectura.setId_arquitectura(Long.parseLong(String
 					.valueOf(arquitectura.get(i))));
-			unionarquitectura.setId_servicio_informacion(id_si);			
-			dao.createUnion(unionarquitectura);
+			unionarquitectura.setId_servicio_informacion(id_si);
+			dao.create(unionarquitectura, id_si);
 		}
 
 		// Seteando el TELEFONO DE CONTACTO (FALTA VALIDAR)
-		Telefono telf = new Telefono();		
-		telf.setTelefono(codArea+"-"+telefonoContacto);
-		telf.setId_servicio_informacion(id_si);		
+		Telefono telf = new Telefono();
+		telf.setTelefono(codArea + "-" + telefonoContacto);
+		telf.setId_servicio_informacion(id_si);
 		dao.create(telf);
 
 		// Seteando el CORREO DE CONTACTO (FALTA VALIDAR)
-		Correo correo = new Correo();		
+		Correo correo = new Correo();
 		correo.setCorreo(correoContacto);
-		correo.setId_servicio_informacion(id_si);		
+		correo.setId_servicio_informacion(id_si);
 		dao.create(correo);
 
-		//Seteando el documento legal
-		AspectoLegal al = new AspectoLegal();		
+		// Seteando el documento legal
+		AspectoLegal al = new AspectoLegal();
 		try {
 			al.setUrl(saveFile());
 		} catch (IOException e) {
@@ -184,7 +192,6 @@ public class ServicioInformacionControlador extends ActionSupport implements
 		al.setNombre(aspectoLegal);
 		al.setTipo(0);
 		al.setId_servicio_informacion(id_si);
-		
 
 		return SUCCESS;
 	}
@@ -200,8 +207,8 @@ public class ServicioInformacionControlador extends ActionSupport implements
 		File fileToCreate = new File(filePath, this.archivoFileName);
 
 		FileUtils.copyFile(this.archivo, fileToCreate);
-		
-		return "/archivos/" + INSTITUCION.toString()+ "/" + archivoFileName;
+
+		return "/archivos/" + INSTITUCION.toString() + "/" + archivoFileName;
 	}
 
 	public List<Estado> getEstados() {
@@ -358,8 +365,7 @@ public class ServicioInformacionControlador extends ActionSupport implements
 		this.responsable = responsable;
 	}
 
-	
-	@FieldExpressionValidator(expression = "!(codArea.length() < 3)", message = "Proporcione un código de área teléfonico Válido")		
+	@FieldExpressionValidator(expression = "!(codArea.length() < 3)", message = "Proporcione un código de área teléfonico Válido")
 	public String getCodArea() {
 		return codArea;
 	}
@@ -367,7 +373,7 @@ public class ServicioInformacionControlador extends ActionSupport implements
 	public void setCodArea(String codArea) {
 		this.codArea = codArea;
 	}
-	
+
 	@FieldExpressionValidator(expression = "!(telefonoContacto.length() < 7)", message = "Proporcione un número telefónico Válido")
 	public String getTelefonoContacto() {
 		return telefonoContacto;
@@ -415,6 +421,5 @@ public class ServicioInformacionControlador extends ActionSupport implements
 	public void setServletRequest(HttpServletRequest servletRequest) {
 		this.servletRequest = servletRequest;
 	}
-
 
 }
