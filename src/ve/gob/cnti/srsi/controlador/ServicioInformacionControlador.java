@@ -131,9 +131,6 @@ public class ServicioInformacionControlador extends ActionSupport implements
 		// Seteando el DESCRIPCION (FALTA VALIDAR)
 		si.setDescripcion(descripcion);
 
-		// Seteando el ASPECTO LEGAL (FALTA VALIDAR)
-		si.setId_aspectos_legales(Long.parseLong(aspectoLegal));
-
 		// Seteando el ESTADO (FALTA VALIDAR)
 		si.setId_estado(Long.parseLong(estado));
 
