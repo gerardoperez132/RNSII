@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * Clase modelo con los atributos de los servicios de información del estado
+ * Clase modelo con los atributos de los servicios de información del Estado
  * Venezolano.
  * 
  * @author Joaquín Pereira
@@ -35,7 +35,6 @@ public class ServicioInformacion {
 	private boolean publicado;
 	private long id_sector;
 	private long id_estado;
-	private long id_aspectos_legales;
 	private long id_seguridad;
 	private long id_tipo_intercambio;
 	private int status;
@@ -109,14 +108,6 @@ public class ServicioInformacion {
 		this.id_estado = id_estado;
 	}
 
-	public long getId_aspectos_legales() {
-		return id_aspectos_legales;
-	}
-
-	public void setId_aspectos_legales(long id_aspectos_legales) {
-		this.id_aspectos_legales = id_aspectos_legales;
-	}
-
 	public long getId_seguridad() {
 		return id_seguridad;
 	}
@@ -180,11 +171,9 @@ public class ServicioInformacion {
 				+ ", id_usuario=" + id_usuario + ", nombre=" + nombre
 				+ ", descripcion=" + descripcion + ", version=" + version
 				+ ", publicado=" + publicado + ", id_sector=" + id_sector
-				+ ", id_estado=" + id_estado + ", id_aspectos_legales="
-				+ id_aspectos_legales + ", id_seguridad=" + id_seguridad
+				+ ", id_estado=" + id_estado + ", id_seguridad=" + id_seguridad
 				+ ", id_tipo_intercambio=" + id_tipo_intercambio + ", status="
 				+ status + ", fecha_creado=" + fecha_creado
 				+ ", fecha_modificado=" + fecha_modificado + "]";
 	}
-
 }
