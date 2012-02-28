@@ -173,7 +173,6 @@ public class ServicioInformacionControlador extends ActionSupport implements
 		ServicioInformacion si = new ServicioInformacion();
 
 		long id_si = dao.getNextId(si);
-
 		// consultar ente
 		si.setId_ente(1);
 		// consultar usuario
