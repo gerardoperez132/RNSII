@@ -137,14 +137,7 @@ public class ServicioInformacionControlador extends ActionSupport implements
 		// Seteando el SEGURIDAD (FALTA VALIDAR)
 		si.setId_seguridad(Long.parseLong(seguridad));
 
-		// Seteando el VERSION (FALTA VALIDAR)
-		if (Float.parseFloat(version) < 0.0
-				|| Float.parseFloat(version) > 999.999) {
-			addFieldError("version",
-					getText("su numero se sale del rango(0,999.999)"));
-			System.out.println("Entro a el error de rango");
-			return "input";
-		}
+		// Seteando el VERSION (FALTA VALIDAR)		
 		si.setVersion(version);
 
 		// Seteando el TIPO DE INTERCAMBIO (FALTA VALIDAR)
