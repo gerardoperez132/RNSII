@@ -162,7 +162,13 @@ public class ServicioInformacionControlador extends ActionSupport implements
 		// Seteando el TIPO DE INTERCAMBIO (FALTA VALIDAR)
 		si.setId_tipo_intercambio(Long.parseLong(intercambio));
 
-		dao.create(si);
+		try {
+			dao.create(si);
+		} catch (Exception e) {
+			addFieldError("nombre",
+					getText("Este nombre ya existe. Proporcione otro."));
+			return INPUT;
+		}
 
 		// Seteando el AREA (FALTA VALIDAR)
 		UnionAreaServicioInformacion unionarea = new UnionAreaServicioInformacion();
