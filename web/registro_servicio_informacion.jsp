@@ -95,7 +95,12 @@
 							</s:fielderror>
 							<s:textarea name="descripcion" cols="40" rows="10" />
 
-
+							<h5 class="formulario">Orientado a:</h5>
+							<s:fielderror>
+								<s:param>area</s:param>
+							</s:fielderror>
+							<s:checkboxlist list="areas" listKey="id_area" listValue="nombre"
+								name="area" value="area" />
 
 							<h5 class="formulario">Estado del Servicio:</h5>
 							<s:fielderror>
@@ -109,22 +114,39 @@
 
 						<div id="tab2" class="tab_content">
 							<p class="formulario">Aspectos legales que rigen al servicio</p>
-							<small>Incluir documento de acuerdo de nivel de
+							<small>Incluir documento legal y documento de acuerdo de nivel de
 								servicio(SLA) por el qué se regirá este Servicio de Información.</small>
 							<hr>
 
-							<h5 class="formulario">Nombre del Documento:</h5>
+							<h5 class="formulario">Nombre del Documento Legal:</h5>
 							<s:fielderror>
 								<s:param>aspectoLegal</s:param>
 							</s:fielderror>
 							<s:textfield name="aspectoLegal" labelposition="top" />
 
 
+							<h5 class="formulario">Adjuntar Documento Legal:</h5>
+							<s:fielderror>
+								<s:param>archivo</s:param>
+							</s:fielderror>
+							<s:file name="archivo" value="archivoFileName"></s:file>
+							
+							<br><br><br><br>
+							
+							<h5 class="formulario">Nombre del Documento SLA:</h5>
+							<s:fielderror>
+								<s:param>slaNombre</s:param>
+							</s:fielderror>
+							<s:textfield name="slaNombre" labelposition="top" />
+
+
 							<h5 class="formulario">Adjuntar SLA:</h5>
 							<s:fielderror>
-								<s:param>documento</s:param>
+								<s:param>slaArchivo</s:param>
 							</s:fielderror>
-							<s:file name="archivo"></s:file>
+							<s:file name="slaArchivo"></s:file>
+							
+							
 
 						</div>
 
@@ -133,14 +155,7 @@
 							<p class="formulario">Descripción técnica del servicio</p>
 							<small>Especificaciones del intercambio de Información</small>
 							<hr>
-
-							<h5 class="formulario">Orientado a:</h5>
-							<s:fielderror>
-								<s:param>area</s:param>
-							</s:fielderror>
-							<s:checkboxlist list="areas" listKey="id_area" listValue="nombre"
-								name="area" value="area" />
-
+							
 							<h5 class="formulario">Seguridad:</h5>
 							<s:fielderror>
 								<s:param>seguridad</s:param>
@@ -165,7 +180,6 @@
 								onkeyup="var pattern = /[^0-9\.]/g;
 								this.value = this.value.replace(pattern, '');"
 								maxlength="7" />
-
 							<br>
 
 							<h5 class="formulario">Tipo de Intercambio:</h5>
@@ -211,7 +225,7 @@
 							<h4>Soporte Técnico</h4>
 							<h5 class="formulario">Teléfono de Contacto:</h5>
 
-							<h6 class="codArea">Código de Área:</h6>
+							<h6 class="codTel">Código de Área:</h6>
 							<s:fielderror>
 								<s:param>codArea</s:param>
 							</s:fielderror>
