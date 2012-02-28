@@ -42,6 +42,7 @@ public class ServicioInformacionControlador extends ActionSupport implements
 	private List<Intercambio> intercambiosPadres = new ArrayList<Intercambio>();
 	private List<Intercambio> intercambiosHijos = new ArrayList<Intercambio>();
 
+	private long idServicioInformacion;
 	private String sector;
 	private String nombre;
 	private String descripcion;
@@ -534,6 +535,14 @@ public class ServicioInformacionControlador extends ActionSupport implements
 
 	public void setSlaNombre(String slaNombre) {
 		this.slaNombre = slaNombre;
+	}
+
+	public long getIdServicioInformacion() {
+		return idServicioInformacion;
+	}
+
+	public void setIdServicioInformacion(long idServicioInformacion) {
+		this.idServicioInformacion = idServicioInformacion;
 	}
 
 	@Override
