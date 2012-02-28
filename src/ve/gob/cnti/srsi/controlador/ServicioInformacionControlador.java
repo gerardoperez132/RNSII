@@ -131,13 +131,16 @@ public class ServicioInformacionControlador extends ActionSupport implements
 		// Seteando el DESCRIPCION (FALTA VALIDAR)
 		si.setDescripcion(descripcion);
 
+		// Seteando el ASPECTO LEGAL (FALTA VALIDAR)
+		si.setId_aspectos_legales(Long.parseLong(aspectoLegal));
+
 		// Seteando el ESTADO (FALTA VALIDAR)
 		si.setId_estado(Long.parseLong(estado));
 
 		// Seteando el SEGURIDAD (FALTA VALIDAR)
 		si.setId_seguridad(Long.parseLong(seguridad));
 
-		// Seteando el VERSION (FALTA VALIDAR)		
+		// Seteando el VERSION (FALTA VALIDAR)
 		si.setVersion(version);
 
 		// Seteando el TIPO DE INTERCAMBIO (FALTA VALIDAR)
@@ -185,6 +188,7 @@ public class ServicioInformacionControlador extends ActionSupport implements
 		al.setNombre(aspectoLegal);
 		al.setTipo(0);
 		al.setId_servicio_informacion(id_si);
+		dao.create(al);
 
 		return SUCCESS;
 	}
