@@ -2,6 +2,7 @@ package ve.gob.cnti.srsi.modelo;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,6 +23,8 @@ public class Usuario {
 	private long id;
 	private long id_usuario;
 	private long id_ente;
+	@Column(unique = true)
+	private long id_correo;
 	private String nombre;
 	private String apellido;
 	private String cedula;
@@ -55,6 +58,14 @@ public class Usuario {
 
 	public void setId_ente(long id_ente) {
 		this.id_ente = id_ente;
+	}
+
+	public long getId_correo() {
+		return id_correo;
+	}
+
+	public void setId_correo(long id_correo) {
+		this.id_correo = id_correo;
 	}
 
 	public String getNombre() {
@@ -116,9 +127,10 @@ public class Usuario {
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", id_usuario=" + id_usuario
-				+ ", id_ente=" + id_ente + ", nombre=" + nombre + ", apellido="
-				+ apellido + ", cedula=" + cedula + ", clave=" + clave
-				+ ", status=" + status + ", fecha_creado=" + fecha_creado
-				+ ", fecha_modificado=" + fecha_modificado + "]";
+				+ ", id_ente=" + id_ente + ", id_correo=" + id_correo
+				+ ", nombre=" + nombre + ", apellido=" + apellido + ", cedula="
+				+ cedula + ", clave=" + clave + ", status=" + status
+				+ ", fecha_creado=" + fecha_creado + ", fecha_modificado="
+				+ fecha_modificado + "]";
 	}
 }
