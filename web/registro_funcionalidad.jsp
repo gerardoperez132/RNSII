@@ -70,6 +70,9 @@
 						<s:textarea name="descripcion" cols="40" rows="10" />
 						<!-- Descripción de la funcionalidad u operación del servicio. -->
 						<br>
+						<s:fielderror>
+							<s:param>funcionalidades</s:param>
+						</s:fielderror>
 						<s:if test="funcionalidades.size() > 0">
 							<div>
 								<p>Funcionalidades cargadas</p>
