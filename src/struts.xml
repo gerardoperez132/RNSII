@@ -18,7 +18,7 @@
 		<action name="registrarServicioInformacion" method="registrarServicioInformacion"
 			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">			
 			<result name="input">registro_servicio_informacion.jsp</result>
-			<result name="success">registro_servicio_informacion.jsp</result>
+			<result name="success">registro_funcionalidad.jsp</result>
 		</action>	
 		
 	</package>
