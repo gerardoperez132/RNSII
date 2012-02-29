@@ -11,6 +11,8 @@ import org.hibernate.Transaction;
 
 import ve.gob.cnti.srsi.dao.Constants.Status;
 
+import com.opensymphony.xwork2.ActionSupport;
+
 /**
  * Clase DAO de la cual se pueden usar los métodos por parte de todos los demás
  * controladores.
@@ -21,10 +23,10 @@ import ve.gob.cnti.srsi.dao.Constants.Status;
  * 
  */
 @SuppressWarnings("serial")
-public class DAO implements CRUD, Status {
+public class DAO extends ActionSupport implements CRUD, Status {
 
-	private Session session;
-	private Transaction transaction;
+	private static Session session;
+	private static Transaction transaction;
 
 	public void startConnection() {
 		session = HibernateUtils.getSessionFactory().openSession();
