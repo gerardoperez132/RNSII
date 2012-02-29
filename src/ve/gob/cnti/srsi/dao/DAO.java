@@ -11,8 +11,6 @@ import org.hibernate.Transaction;
 
 import ve.gob.cnti.srsi.dao.Constants.Status;
 
-import com.opensymphony.xwork2.ActionSupport;
-
 /**
  * Clase DAO de la cual se pueden usar los métodos por parte de todos los demás
  * controladores.
@@ -23,7 +21,7 @@ import com.opensymphony.xwork2.ActionSupport;
  * 
  */
 @SuppressWarnings("serial")
-public class DAO extends ActionSupport implements CRUD, Status {
+public class DAO implements CRUD, Status {
 
 	private Session session;
 	private Transaction transaction;
