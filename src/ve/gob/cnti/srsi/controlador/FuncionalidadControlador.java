@@ -10,12 +10,26 @@ public class FuncionalidadControlador extends FuncionalidadFormulario {
 	private EntradaSalida salida;
 
 	public String registrarFuncionalidad() {
-		funcionalidad.setId(100);
-		System.out.println(funcionalidad.getId());
 		System.out.println(funcionalidad.getNombre());
 		System.out.println(funcionalidad.getDescripcion());
 		return SUCCESS;
 
+	}
+
+	public EntradaSalida getEntrada() {
+		return entrada;
+	}
+
+	public void setEntrada(EntradaSalida entrada) {
+		this.entrada = entrada;
+	}
+
+	public EntradaSalida getSalida() {
+		return salida;
+	}
+
+	public void setSalida(EntradaSalida salida) {
+		this.salida = salida;
 	}
 
 	public Funcionalidad getFuncionalidad() {
