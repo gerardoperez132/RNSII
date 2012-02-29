@@ -13,6 +13,7 @@
 		<action name="registroFuncionalidad" method="prepararFormulario"
 			class="ve.gob.cnti.srsi.controlador.FuncionalidadFormulario">
 			<result name="success">registro_funcionalidad.jsp</result>
+			<result name="input">registro_funcionalidad.jsp</result>
 		</action>
 
 		<action name="registrarServicioInformacion" method="registrarServicioInformacion"
