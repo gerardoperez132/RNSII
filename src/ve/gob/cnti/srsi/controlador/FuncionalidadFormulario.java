@@ -20,7 +20,7 @@ public class FuncionalidadFormulario extends DAO implements Formulario {
 		funcionalidades = (List<Funcionalidad>) read(funcionalidad);
 		if (funcionalidades.isEmpty())
 			addFieldError("funcionalidades",
-					"No hay funcionalidades asociadas.");
+					"No hay funcionalidades asociadas a este servicio de información.");
 		return SUCCESS;
 	}
 
