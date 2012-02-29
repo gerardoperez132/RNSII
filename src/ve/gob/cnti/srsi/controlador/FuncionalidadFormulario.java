@@ -24,6 +24,12 @@ public class FuncionalidadFormulario extends DAO implements Formulario {
 		return SUCCESS;
 	}
 
+	@Override
+	public void validate() {
+		super.validate();
+		prepararFormulario();
+	}
+
 	public List<Funcionalidad> getFuncionalidades() {
 		return funcionalidades;
 	}
