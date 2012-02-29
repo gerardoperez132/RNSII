@@ -3,24 +3,24 @@
 "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
-	<package name="fileUploadPackage" extends="struts-default">		
-	
+	<package name="fileUploadPackage" extends="struts-default">
+
 		<action name="prepararRegistroServicioInformacion" method="prepararRegistroServicioInformacion"
 			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
 			<result name="success">registro_servicio_informacion.jsp</result>
 		</action>
 
-		<action name="prepararRegistroFuncionalidad" method="prepararRegistroFuncionalidad"
-			class="ve.gob.cnti.srsi.controlador.FuncionalidadControlador">
+		<action name="registroFuncionalidad" method="prepararFormulario"
+			class="ve.gob.cnti.srsi.controlador.FuncionalidadFormulario">
 			<result name="success">registro_funcionalidad.jsp</result>
 		</action>
-		
+
 		<action name="registrarServicioInformacion" method="registrarServicioInformacion"
-			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">			
+			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
 			<result name="input">registro_servicio_informacion.jsp</result>
 			<result name="success">registro_funcionalidad.jsp</result>
-		</action>	
-		
+		</action>
+
 	</package>
 	<constant name="struts.devMode" value="true" />
 	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
