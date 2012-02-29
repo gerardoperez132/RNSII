@@ -10,15 +10,19 @@
 			<result name="success">registro_servicio_informacion.jsp</result>
 		</action>
 
-		<action name="prepararFuncionalidad" method="prepararFormulario"
-			class="ve.gob.cnti.srsi.controlador.FuncionalidadFormulario">
-			<result name="success">registro_funcionalidad.jsp</result>
-			<result name="input">registro_funcionalidad.jsp</result>
-		</action>
-
 		<action name="registrarServicioInformacion" method="registrarServicioInformacion"
 			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
 			<result name="input">registro_servicio_informacion.jsp</result>
+			<result name="success">registro_funcionalidad.jsp</result>
+		</action>
+
+		<action name="prepararFuncionalidad" method="prepararFormulario"
+			class="ve.gob.cnti.srsi.controlador.FuncionalidadFormulario">
+			<result name="success">registro_funcionalidad.jsp</result>
+		</action>
+
+		<action name="registrarFuncionalidad" method="registrarFuncionalidad"
+			class="ve.gob.cnti.srsi.controlador.FuncionalidadControlador">
 			<result name="success">registro_funcionalidad.jsp</result>
 		</action>
 
