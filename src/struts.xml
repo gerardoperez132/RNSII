@@ -10,7 +10,7 @@
 			<result name="success">registro_servicio_informacion.jsp</result>
 		</action>
 
-		<action name="registroFuncionalidad" method="prepararFormulario"
+		<action name="prepararFuncionalidad" method="prepararFormulario"
 			class="ve.gob.cnti.srsi.controlador.FuncionalidadFormulario">
 			<result name="success">registro_funcionalidad.jsp</result>
 			<result name="input">registro_funcionalidad.jsp</result>
