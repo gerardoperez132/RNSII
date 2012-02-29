@@ -5,9 +5,6 @@ import java.util.List;
 import ve.gob.cnti.srsi.dao.DAO;
 import ve.gob.cnti.srsi.modelo.Funcionalidad;
 
-import com.opensymphony.xwork2.validator.annotations.Validations;
-
-@Validations
 @SuppressWarnings("serial")
 public class FuncionalidadFormulario extends DAO implements Formulario {
 
@@ -18,17 +15,17 @@ public class FuncionalidadFormulario extends DAO implements Formulario {
 	public String prepararFormulario() {
 		Funcionalidad funcionalidad = new Funcionalidad();
 		funcionalidades = (List<Funcionalidad>) read(funcionalidad);
-		if (funcionalidades.isEmpty())
-			addFieldError("funcionalidades",
-					"No hay funcionalidades asociadas a este servicio de información.");
 		return SUCCESS;
 	}
 
-	@Override
-	public void validate() {
-		super.validate();
-		prepararFormulario();
-	}
+	// @Override
+	// public void validate() {
+	// super.validate();
+	// prepararFormulario();
+	// if (funcionalidades.isEmpty())
+	// addFieldError("funcionalidades",
+	// "No hay funcionalidades asociadas a este servicio de información.");
+	// }
 
 	public List<Funcionalidad> getFuncionalidades() {
 		return funcionalidades;
