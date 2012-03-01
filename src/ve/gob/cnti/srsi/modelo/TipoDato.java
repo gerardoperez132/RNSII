@@ -23,7 +23,7 @@ public class TipoDato {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private long id_tipo_dato;
-	/** Simple (0) o compuesto (1). */
+	/** Simple (1) o compuesto (0). */
 	private int clase_dato;
 	private String nombre;
 	private String descripcion;
