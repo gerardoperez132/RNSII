@@ -102,10 +102,12 @@ public class DAO extends ActionSupport implements CRUD, Status {
 	public ArrayList<?> getParents(Object model) {
 		try {
 			startConnection();
-			return (ArrayList<Object>) session.createQuery(
-					"FROM " + model.getClass().getSimpleName().toString()
-							+ " WHERE status = " + Status.ACTIVO
-							+ " AND id_padre = 0").list();
+			return (ArrayList<Object>) session
+					.createQuery(
+							"FROM "
+									+ model.getClass().getSimpleName()
+											.toString() + " WHERE status = "
+									+ ACTIVO + " AND id_padre = 0").list();
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;
@@ -121,7 +123,7 @@ public class DAO extends ActionSupport implements CRUD, Status {
 			startConnection();
 			return (ArrayList<Object>) session.createQuery(
 					"FROM " + model.getClass().getSimpleName().toString()
-							+ " WHERE status = " + Status.ACTIVO
+							+ " WHERE status = " + ACTIVO
 							+ " AND id_padre != 0").list();
 		} catch (HibernateException he) {
 			handleException(he);
@@ -143,8 +145,8 @@ public class DAO extends ActionSupport implements CRUD, Status {
 							+ getField(model) + " = " + id
 							+ ", fecha_creado = '" + date
 							+ "', fecha_modificado = '" + date + "', status = "
-							+ Status.ACTIVO + " WHERE " + getField(model)
-							+ " = 0").executeUpdate();
+							+ ACTIVO + " WHERE " + getField(model) + " = 0")
+					.executeUpdate();
 			transaction.commit();
 		} catch (HibernateException he) {
 			handleException(he);
@@ -163,8 +165,7 @@ public class DAO extends ActionSupport implements CRUD, Status {
 					"UPDATE " + model.getClass().getSimpleName()
 							+ " SET fecha_creado = '" + date
 							+ "', fecha_modificado = '" + date + "', status = "
-							+ Status.ACTIVO
-							+ " WHERE id_servicio_informacion = " + id)
+							+ ACTIVO + " WHERE id_servicio_informacion = " + id)
 					.executeUpdate();
 			transaction.commit();
 		} catch (HibernateException he) {
@@ -184,7 +185,7 @@ public class DAO extends ActionSupport implements CRUD, Status {
 							+ " WHERE "
 							+ getField(model).toString().replace("get", "")
 									.toLowerCase() + " = " + id
-							+ " AND status = " + Status.ACTIVO).uniqueResult();
+							+ " AND status = " + ACTIVO).uniqueResult();
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;
@@ -200,7 +201,7 @@ public class DAO extends ActionSupport implements CRUD, Status {
 			startConnection();
 			return (ArrayList<Object>) session.createQuery(
 					"FROM " + model.getClass().getSimpleName().toString()
-							+ " WHERE status = " + Status.ACTIVO).list();
+							+ " WHERE status = " + ACTIVO).list();
 
 		} catch (HibernateException he) {
 			handleException(he);
@@ -216,7 +217,7 @@ public class DAO extends ActionSupport implements CRUD, Status {
 			startConnection();
 			session.createQuery(
 					"UPDATE " + model.getClass().getSimpleName()
-							+ " SET status = " + Status.MODIFICADO
+							+ " SET status = " + MODIFICADO
 							+ ", fecha_modificado = '" + new Date()
 							+ "' WHERE " + getField(model) + " = " + id)
 					.executeUpdate();
@@ -236,9 +237,9 @@ public class DAO extends ActionSupport implements CRUD, Status {
 			startConnection();
 			session.createQuery(
 					"UPDATE " + model.getClass().getSimpleName()
-							+ " SET status = " + Status.ELIMINADO
+							+ " SET status = " + ELIMINADO
 							+ ", fecha_modificado = '" + new Date()
-							+ "' WHERE status = " + Status.ACTIVO + " AND "
+							+ "' WHERE status = " + ACTIVO + " AND "
 							+ getField(model) + " = " + id).executeUpdate();
 			transaction.commit();
 		} catch (HibernateException he) {
