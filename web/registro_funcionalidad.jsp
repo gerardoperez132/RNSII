@@ -50,25 +50,29 @@
 				<hr>
 
 				<ul class="tabs">
-					<li><a href="#tab1">Descripción General</a></li>
-					<li><a href="#tab2">Entradas</a></li>
-					<li><a href="#tab3">Salidas</a></li>
-					<li><a href="#tab4">Guardar</a></li>
+					<li><a href="#tab1">Descripción General</a>
+					</li>
+					<li><a href="#tab2">Entradas</a>
+					</li>
+					<li><a href="#tab3">Salidas</a>
+					</li>
+					<li><a href="#tab4">Resumen Funcionalidad</a>
+					</li>
 				</ul>
-				<form action="registrarFuncionalidad" method="POST">
-					<div class="tab_container">
-						<div id="tab1" class="tab_content">
-
+				<div class="tab_container">
+					<div id="tab1" class="tab_content">
+						<form action="registrarFuncionalidad" method="POST">
 							<p>Descripción General de la Funcionalidad</p>
 
+							<!-- Nombre de la funcionalidad u operación del servicio. -->
 							<h5 id="formulario">Nombre:</h5>
 							<s:textfield labelposition="top" name="funcionalidad.nombre" />
-							<!-- Nombre de la funcionalidad u operación del servicio. -->
 
 							<br>
-							<h5 id="formulario">Descripción (Pre-Condiciones):</h5>
-							<s:textarea name="funcionalidad.descripcion" cols="40" rows="10" />
 							<!-- Descripción de la funcionalidad u operación del servicio. -->
+							<h5 id="formulario">Descripción (Pre-Condiciones):</h5>
+							<s:textarea name="funcionalidad.descripcion" cols="30" rows="5" />
+
 							<br>
 							<s:fielderror>
 								<s:param>funcionalidades</s:param>
@@ -85,86 +89,76 @@
 										</tr>
 										<s:iterator value="funcionalidades">
 											<tr>
-												<td><s:property value="id_funcionalidad" /></td>
-												<td><s:property value="nombre" /></td>
-												<td><s:property value="fecha_creado" /></td>
-												<td><a href="#">Editar</a> <a href="#">Eliminar</a></td>
+												<td><s:property value="id_funcionalidad" />
+												</td>
+												<td><s:property value="nombre" />
+												</td>
+												<td><s:property value="fecha_creado" />
+												</td>
+												<td><a href="#">Editar</a> <a href="#">Eliminar</a>
+												</td>
 											</tr>
 										</s:iterator>
 									</table>
 								</div>
 							</s:if>
 							<input type="submit" value="Registrar" />
-						</div>
-				</form>
+						</form>
+					</div>
 
-				<div id="tab2" class="tab_content">
-					<h5 id="formulario">Formato:</h5>
-					<s:textfield labelposition="top" name="formato_entrada" />
 
-					<h5 id="formulario">Tipo de dato asociado:</h5>
-					<select>
-						<optgroup></optgroup>
-						<option value="-1">Ninguno</option>
-						<s:iterator value="datosPadres">
+					<div id="tab2" class="tab_content">
 
-							<s:set name="padre" value="id_dato"></s:set>
-							<s:set name="nombrePadre" value="nombre"></s:set>
-							<optgroup label="<s:property value="nombre"/>">
+						<!-- Nombre de la entrada. -->
+						<h5 id="formulario">Nombre:</h5>
+						<s:textfield labelposition="top" name="funcionalidad.nombre" />
 
-								<s:iterator value="datosHijos">
-									<s:if test="%{#padre == id_padre}">
+						<br>
+						<!-- Descripción de la entrada. -->
+						<h5 id="formulario">Descripción:</h5>
+						<s:textarea name="funcionalidad.descripcion" cols="30" rows="5" />
 
-										<option value="<s:property value="id_dato"/>">
-											<s:property value="nombre" />
-										</option>
+						<br>
 
-									</s:if>
-								</s:iterator>
-							</optgroup>
-						</s:iterator>
-					</select>
+						<h5 id="formulario">Formato:</h5>
+						<s:textfield labelposition="top" name="formato_entrada" />
 
+						<h5 id="formulario">Tipo de dato asociado:</h5>
+						<s:select list="tipoDatos" listKey="id_tipo_dato"
+							listValue="nombre" headerKey="-1" headerValue="Ninguno"></s:select>
+
+
+					</div>
+
+					<div id="tab3" class="tab_content">
+
+						<!-- Nombre de la salida. -->
+						<h5 id="formulario">Nombre:</h5>
+						<s:textfield labelposition="top" name="funcionalidad.nombre" />
+
+						<br>
+						<!-- Descripción de la salida. -->
+						<h5 id="formulario">Descripción:</h5>
+						<s:textarea name="funcionalidad.descripcion" cols="30" rows="5" />
+
+						<br>
+						<h5 id="formulario">Formato:</h5>
+						<s:textfield labelposition="top" name="formato_salida" />
+
+						<h5 id="formulario">Tipo de dato asociado:</h5>
+						<s:select list="tipoDatos" listKey="id_tipo_dato"
+							listValue="nombre" headerKey="-1" headerValue="Seleccione"></s:select>
+
+					</div>
+
+					<div id="tab4" class="tab_content"></div>
 				</div>
-
-				<div id="tab3" class="tab_content">
-					<h5 id="formulario">Formato:</h5>
-					<s:textfield labelposition="top" name="formato_salida" />
-
-					<h5 id="formulario">Tipo de dato asociado:</h5>
-					<select>
-						<optgroup></optgroup>
-						<option value="-1">Seleccione</option>
-						<s:iterator value="datosPadres">
-
-							<s:set name="padre" value="id_dato"></s:set>
-							<s:set name="nombrePadre" value="nombre"></s:set>
-							<optgroup label="<s:property value="nombre"/>">
-
-								<s:iterator value="datosHijos">
-									<s:if test="%{#padre == id_padre}">
-
-										<option value="<s:property value="id_dato"/>">
-											<s:property value="nombre" />
-										</option>
-
-									</s:if>
-								</s:iterator>
-							</optgroup>
-						</s:iterator>
-					</select>
-				</div>
-
-				<div id="tab4" class="tab_content"></div>
 
 			</div>
 
-
+			<!-- Este es el pie de página -->
+			<div id="footer"></div>
 		</div>
-
-		<!-- Este es el pie de página -->
-		<div id="footer"></div>
-	</div>
 	</div>
 </body>
 </html>

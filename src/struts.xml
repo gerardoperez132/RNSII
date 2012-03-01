@@ -17,13 +17,14 @@
 		</action>
 
 		<action name="prepararFuncionalidad" method="prepararFormulario"
-			class="ve.gob.cnti.srsi.controlador.FuncionalidadFormulario">
+			class="ve.gob.cnti.srsi.controlador.FuncionalidadControlador">
 			<result name="success">registro_funcionalidad.jsp</result>
 		</action>
 
 		<action name="registrarFuncionalidad" method="registrarFuncionalidad"
 			class="ve.gob.cnti.srsi.controlador.FuncionalidadControlador">
 			<result name="success">registro_funcionalidad.jsp</result>
+			<result name="input">registro_funcionalidad.jsp</result>
 		</action>
 
 	</package>
