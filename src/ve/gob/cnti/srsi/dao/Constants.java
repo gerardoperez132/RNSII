@@ -35,10 +35,29 @@ public interface Constants {
 		public static final int SLA = 1;
 	}
 
+	/**
+	 * Interfaz con los tipos de entrada en la tabla de entradas y salidas.
+	 * 
+	 * @author Richard Ricciardelli
+	 * 
+	 */
 	public interface TipoEntradaSalida {
 		/** Entrada de una funcionalidad. */
 		public static final int ENTRADA = 0;
 		/** Salida de una funcionalidad. */
 		public static final int SALIDA = 1;
+	}
+
+	/**
+	 * Interfaz con los tipos de datos en la tabla de tipo de datos.
+	 * 
+	 * @author Richard Ricciardelli
+	 * 
+	 */
+	public interface ClaseDato {
+		/** Tipo de dato compuesto. */
+		public static final int COMPUESTO = 0;
+		/** Tipo de dato simple. */
+		public static final int SIMPLE = 1;
 	}
 }
