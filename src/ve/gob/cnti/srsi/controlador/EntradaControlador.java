@@ -24,17 +24,13 @@ public class EntradaControlador extends DAO implements Formulario {
 	@Override
 	@SkipValidation
 	public String prepararFormulario() {
-		tipoDatos = (List<TipoDato>) read(new TipoDato());
+		tipoDatos = (List<TipoDato>) getSimple();
 
 		return SUCCESS;
 	}
-	
-	public String registrarEntradaSimple(){
-		
-			
-		
-		
-		
+
+	public String registrarEntradaSimple() {
+
 		return SUCCESS;
 	}
 
