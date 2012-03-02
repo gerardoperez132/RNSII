@@ -212,7 +212,7 @@ public class ServicioInformacionControlador extends ActionSupport implements
 		for (int i = 0; i < area.size(); i++) {
 			unionarea.setId_area(Long.parseLong(String.valueOf(area.get(i))));
 			unionarea.setId_servicio_informacion(id_si);
-			dao.create(unionarea, id_si);
+			// dao.create(unionarea, id_si);
 		}
 
 		// Seteando el ARQUITECTURA
@@ -221,7 +221,7 @@ public class ServicioInformacionControlador extends ActionSupport implements
 			unionarquitectura.setId_arquitectura(Long.parseLong(String
 					.valueOf(arquitectura.get(i))));
 			unionarquitectura.setId_servicio_informacion(id_si);
-			dao.create(unionarquitectura, id_si);
+			// dao.create(unionarquitectura, id_si);
 		}
 
 		// Seteando el TELEFONO DE CONTACTO
