@@ -30,6 +30,9 @@ public class FuncionalidadControlador extends DAO implements Formulario {
 		funcionalidades = (List<Funcionalidad>) read(funcionalidad);
 		tipoDatos = (List<TipoDato>) read(tipoDato);
 
+		String nombre_dato = read(1);
+		System.out.println("El dato de la entrada 1 es => " + nombre_dato);
+
 		if (funcionalidades.isEmpty())
 			addFieldError("funcionalidades",
 					"No hay funcionalidades asociadas a este servicio de información.");
