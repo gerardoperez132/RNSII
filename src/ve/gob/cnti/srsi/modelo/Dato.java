@@ -34,6 +34,7 @@ public class Dato {
 	private String nombre;
 	private String descripcion;
 	private String longitud; // ¿Qué se guarda aquí? Definir.
+	private String formato; // ¿Qué demonios es el formato? Definir.
 	private int status;
 	private Date fecha_creado;
 	private Date fecha_modificado;
@@ -118,13 +119,21 @@ public class Dato {
 		this.fecha_modificado = fecha_modificado;
 	}
 
+	public String getFormato() {
+		return formato;
+	}
+
+	public void setFormato(String formato) {
+		this.formato = formato;
+	}
+
 	@Override
 	public String toString() {
 		return "Dato [id=" + id + ", id_dato=" + id_dato
 				+ ", id_entrada_salida=" + id_entrada_salida + ", id_padre="
 				+ id_padre + ", nombre=" + nombre + ", descripcion="
-				+ descripcion + ", longitud=" + longitud + ", status=" + status
-				+ ", fecha_creado=" + fecha_creado + ", fecha_modificado="
-				+ fecha_modificado + "]";
+				+ descripcion + ", longitud=" + longitud + ", formato="
+				+ formato + ", status=" + status + ", fecha_creado="
+				+ fecha_creado + ", fecha_modificado=" + fecha_modificado + "]";
 	}
 }
