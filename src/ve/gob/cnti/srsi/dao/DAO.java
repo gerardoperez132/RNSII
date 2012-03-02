@@ -142,9 +142,9 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato {
 			startConnection();
 			return (ArrayList<Object>) session.createQuery(
 					"FROM "
-							+ TipoDato.class.getClass().getSimpleName()
+							+ new TipoDato().getClass().getSimpleName()
 									.toString() + " WHERE status = " + ACTIVO
-							+ " AND clase = " + SIMPLE).list();
+							+ " AND clase_dato = " + SIMPLE).list();
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;
@@ -160,9 +160,9 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato {
 			startConnection();
 			return (ArrayList<Object>) session.createQuery(
 					"FROM "
-							+ TipoDato.class.getClass().getSimpleName()
+							+ new TipoDato().getClass().getSimpleName()
 									.toString() + " WHERE status = " + ACTIVO
-							+ " AND clase = " + COMPUESTO).list();
+							+ " AND clase_dato = " + COMPUESTO).list();
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;
