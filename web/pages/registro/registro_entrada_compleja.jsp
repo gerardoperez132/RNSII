@@ -59,6 +59,10 @@
 
 					<form action="" method="post">
 					<div id="tab2" class="tab_content">
+					
+						<h5 class="formulario">Registro de Entrada Compleja</h5>
+						<h6>Perteneciente a la funcionalidad:  "<s:property value="funcionalidad.nombre"/>"</h6>
+						<hr>
 
 						<!-- Nombre de la entrada. -->
 						<h5 class="formulario">Nombre:</h5>
@@ -81,9 +85,7 @@
 						<s:fielderror>
 								<s:param>entrada.formato</s:param>
 						</s:fielderror>
-						<s:textfield name="entrada.formato" />						
-						
-						
+						<s:textfield name="entrada.formato" />								
 						
 
 						<br><br>

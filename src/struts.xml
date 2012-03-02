@@ -39,7 +39,7 @@
 		
 		<action name="prepararEntradaComplejo" method="prepararFormulario"
 			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
-			<result name="success">registro/registro_entrada.jsp</result>
+			<result name="success">registro/registro_entrada_compleja.jsp</result>
 		</action>
 		
 		<action name="registrarEntradaSimple" method="registrarEntradaSimple"
