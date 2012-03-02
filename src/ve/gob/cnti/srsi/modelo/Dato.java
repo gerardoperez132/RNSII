@@ -29,11 +29,13 @@ public class Dato {
 	private long id;
 	private long id_dato;
 	private long id_entrada_salida;
+	private long id_tipo_dato;
 	/** Tendrá padre solamente si éste es de tipo compuesto */
 	private long id_padre;
 	private String nombre;
 	private String descripcion;
 	private String longitud; // ¿Qué se guarda aquí? Definir.
+	private String formato; // ¿Qué demonios es el formato? Definir.
 	private int status;
 	private Date fecha_creado;
 	private Date fecha_modificado;
@@ -118,13 +120,30 @@ public class Dato {
 		this.fecha_modificado = fecha_modificado;
 	}
 
+	public String getFormato() {
+		return formato;
+	}
+
+	public void setFormato(String formato) {
+		this.formato = formato;
+	}
+
+	public long getId_tipo_dato() {
+		return id_tipo_dato;
+	}
+
+	public void setId_tipo_dato(long id_tipo_dato) {
+		this.id_tipo_dato = id_tipo_dato;
+	}
+
 	@Override
 	public String toString() {
 		return "Dato [id=" + id + ", id_dato=" + id_dato
-				+ ", id_entrada_salida=" + id_entrada_salida + ", id_padre="
-				+ id_padre + ", nombre=" + nombre + ", descripcion="
-				+ descripcion + ", longitud=" + longitud + ", status=" + status
-				+ ", fecha_creado=" + fecha_creado + ", fecha_modificado="
-				+ fecha_modificado + "]";
+				+ ", id_entrada_salida=" + id_entrada_salida
+				+ ", id_tipo_dato=" + id_tipo_dato + ", id_padre=" + id_padre
+				+ ", nombre=" + nombre + ", descripcion=" + descripcion
+				+ ", longitud=" + longitud + ", formato=" + formato
+				+ ", status=" + status + ", fecha_creado=" + fecha_creado
+				+ ", fecha_modificado=" + fecha_modificado + "]";
 	}
 }

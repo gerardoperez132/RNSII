@@ -13,6 +13,7 @@ import javax.persistence.Table;
  * Funcionalidad.
  * 
  * @see Funcionalidad
+ * @see Dato
  * @author Richard Ricciardelli
  * 
  */
@@ -25,8 +26,8 @@ public class EntradaSalida {
 	private long id;
 	private long id_entrada_salida;
 	private long id_funcionalidad; // FK
+	private long id_dato;
 	private int tipo; // Tipo Entrada o Salida (0 ó 1)
-	private String formato; // ¿Codificación?
 	private int status;
 	private Date fecha_creado;
 	private Date fecha_modificado;
@@ -66,14 +67,6 @@ public class EntradaSalida {
 		this.tipo = tipo;
 	}
 
-	public String getFormato() {
-		return formato;
-	}
-
-	public void setFormato(String formato) {
-		this.formato = formato;
-	}
-
 	public int getStatus() {
 		return status;
 	}
@@ -98,11 +91,19 @@ public class EntradaSalida {
 		this.fecha_modificado = fecha_modificado;
 	}
 
+	public long getId_dato() {
+		return id_dato;
+	}
+
+	public void setId_dato(long id_dato) {
+		this.id_dato = id_dato;
+	}
+
 	@Override
 	public String toString() {
 		return "EntradaSalida [id=" + id + ", id_entrada_salida="
 				+ id_entrada_salida + ", id_funcionalidad=" + id_funcionalidad
-				+ ", tipo=" + tipo + ", formato=" + formato + ", status="
+				+ ", id_dato=" + id_dato + ", tipo=" + tipo + ", status="
 				+ status + ", fecha_creado=" + fecha_creado
 				+ ", fecha_modificado=" + fecha_modificado + "]";
 	}

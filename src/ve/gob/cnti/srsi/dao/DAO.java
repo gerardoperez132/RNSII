@@ -156,20 +156,37 @@ public class DAO extends ActionSupport implements CRUD, Status {
 	}
 
 	@Override
-	public void create(Object model, long id) {
+	public void create(Object modelOne, Object modelTwo, long id) {
 		Date date = new Date();
 		try {
 			startConnection();
-			session.save(model);
+			session.save(modelOne);
 			session.createQuery(
-					"UPDATE " + model.getClass().getSimpleName()
+					"UPDATE " + modelOne.getClass().getSimpleName()
 							+ " SET fecha_creado = '" + date
 							+ "', fecha_modificado = '" + date + "', status = "
-							+ ACTIVO + " WHERE id_servicio_informacion = " + id)
-					.executeUpdate();
+							+ ACTIVO + " WHERE " + getField(modelTwo) + " = "
+							+ id).executeUpdate();
 			transaction.commit();
 		} catch (HibernateException he) {
 			handleException(he);
+		} finally {
+			closeConnection();
+		}
+	}
+
+	@Override
+	public String read(long id) {
+		try {
+			startConnection();
+			return (String) session
+					.createSQLQuery(
+							"SELECT td.nombre FROM tipos_datos AS td INNER JOIN datos AS d ON d.id_tipo_dato = td.id_tipo_dato INNER JOIN entradas_salidas AS es ON es.id_dato = d.id_dato WHERE es.id_entrada_salida = "
+									+ id + " AND td.status = " + ACTIVO)
+					.uniqueResult();
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
 		} finally {
 			closeConnection();
 		}

@@ -23,11 +23,16 @@ public interface CRUD {
 	/**
 	 * Permite guardar un registro de una tabla unión M:M en la base de datos.
 	 * 
-	 * @param model
-	 *            Es la clase, modelo o tabla en el cual se realizará el
-	 *            registro.
+	 * @param modelOne
+	 *            Primer modelo escrito en la tabla unión de izquierda a
+	 *            derecha.
+	 * @param modelTwo
+	 *            Segundo modelo escrito en la tabla unión de izquierda a
+	 *            derecha.
+	 * @param id
+	 *            Id del segundo modelo a insertar
 	 */
-	public void create(Object model, long id);
+	public void create(Object modelOne, Object modelTwo, long id);
 
 	/**
 	 * Permite obtener el registro activo especificado por id del modelo dado.
@@ -50,6 +55,16 @@ public interface CRUD {
 	 * @return Una lista de objetos del modelo dado con sus atributos.
 	 */
 	public ArrayList<?> read(Object model);
+
+	/**
+	 * Permite obtener el nombre del tipo de dato asociado a una entrada o
+	 * salida
+	 * 
+	 * @param id
+	 *            El id de la entrada o salida.
+	 * @return El nombre del dato asociado.
+	 */
+	public String read(long id);
 
 	/**
 	 * Permite modificar el registro especificado por id del modelo dado.

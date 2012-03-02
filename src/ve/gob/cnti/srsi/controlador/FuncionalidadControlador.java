@@ -34,6 +34,10 @@ public class FuncionalidadControlador extends DAO implements Formulario {
 	@Override
 	@SkipValidation
 	public String prepararFormulario() {
+		
+		String nombre_dato = read(1);
+		System.out.println("El dato de la entrada 1 es => " + nombre_dato);
+
 		return SUCCESS;
 	}
 
