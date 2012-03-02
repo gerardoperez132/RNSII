@@ -140,4 +140,19 @@ public interface CRUD {
 	 * @return Lista de hijos activos en esa tabla.
 	 */
 	public ArrayList<?> getChildren(Object model);
+
+	/**
+	 * Permite obtener la lista de los datos simples cargados en base de datos.
+	 * 
+	 * @return Lista de datos simples.
+	 */
+	public ArrayList<?> getSimple();
+
+	/**
+	 * Permite obtener la lista de los datos compuestos cargados en base de
+	 * datos.
+	 * 
+	 * @return Lista de datos compuestos.
+	 */
+	public ArrayList<?> getComplex();
 }
