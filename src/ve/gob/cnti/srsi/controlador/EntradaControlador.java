@@ -28,6 +28,7 @@ public class EntradaControlador extends DAO implements Formulario {
 
 		return SUCCESS;
 	}
+
 	
 	public String registrarEntradaSimple(){
 				
