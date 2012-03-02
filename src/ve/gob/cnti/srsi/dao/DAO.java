@@ -102,9 +102,10 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato {
 	@Override
 	@SuppressWarnings("unchecked")
 	public ArrayList<?> getParents(Object model) {
+		ArrayList<?> parents;
 		try {
 			startConnection();
-			return (ArrayList<Object>) session
+			parents = (ArrayList<Object>) session
 					.createQuery(
 							"FROM "
 									+ model.getClass().getSimpleName()
@@ -116,14 +117,16 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato {
 		} finally {
 			closeConnection();
 		}
+		return parents;
 	}
 
 	@Override
 	@SuppressWarnings("unchecked")
 	public ArrayList<?> getChildren(Object model) {
+		ArrayList<?> children;
 		try {
 			startConnection();
-			return (ArrayList<Object>) session.createQuery(
+			children = (ArrayList<Object>) session.createQuery(
 					"FROM " + model.getClass().getSimpleName().toString()
 							+ " WHERE status = " + ACTIVO
 							+ " AND id_padre != 0").list();
@@ -133,14 +136,16 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato {
 		} finally {
 			closeConnection();
 		}
+		return children;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public ArrayList<?> getSimple() {
+		ArrayList<?> simple;
 		try {
 			startConnection();
-			return (ArrayList<Object>) session.createQuery(
+			simple = (ArrayList<Object>) session.createQuery(
 					"FROM "
 							+ new TipoDato().getClass().getSimpleName()
 									.toString() + " WHERE status = " + ACTIVO
@@ -151,14 +156,16 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato {
 		} finally {
 			closeConnection();
 		}
+		return simple;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public ArrayList<?> getComplex() {
+		ArrayList<?> complex;
 		try {
 			startConnection();
-			return (ArrayList<Object>) session.createQuery(
+			complex = (ArrayList<Object>) session.createQuery(
 					"FROM "
 							+ new TipoDato().getClass().getSimpleName()
 									.toString() + " WHERE status = " + ACTIVO
@@ -169,6 +176,7 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato {
 		} finally {
 			closeConnection();
 		}
+		return complex;
 	}
 
 	@Override
@@ -215,9 +223,10 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato {
 
 	@Override
 	public String read(long id) {
+		String name;
 		try {
 			startConnection();
-			return (String) session
+			name = (String) session
 					.createSQLQuery(
 							"SELECT td.nombre FROM tipos_datos AS td INNER JOIN datos AS d ON d.id_tipo_dato = td.id_tipo_dato INNER JOIN entradas_salidas AS es ON es.id_dato = d.id_dato WHERE es.id_entrada_salida = "
 									+ id + " AND td.status = " + ACTIVO)
@@ -228,13 +237,15 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato {
 		} finally {
 			closeConnection();
 		}
+		return name;
 	}
 
 	@Override
 	public Object read(Object model, long id) {
+		Object result;
 		try {
 			startConnection();
-			return session.createQuery(
+			result = session.createQuery(
 					"FROM "
 							+ model.getClass().getName().toString()
 							+ " WHERE "
@@ -247,14 +258,16 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato {
 		} finally {
 			closeConnection();
 		}
+		return result;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public ArrayList<?> read(Object model) {
+		ArrayList<?> result;
 		try {
 			startConnection();
-			return (ArrayList<Object>) session.createQuery(
+			result = (ArrayList<Object>) session.createQuery(
 					"FROM " + model.getClass().getSimpleName().toString()
 							+ " WHERE status = " + ACTIVO).list();
 
@@ -264,6 +277,7 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato {
 		} finally {
 			closeConnection();
 		}
+		return result;
 	}
 
 	@Override
@@ -304,5 +318,4 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato {
 			closeConnection();
 		}
 	}
-
 }
