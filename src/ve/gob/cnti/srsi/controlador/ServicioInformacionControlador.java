@@ -41,6 +41,8 @@ public class ServicioInformacionControlador extends ActionSupport implements
 	private List<Sector> sectores = new ArrayList<Sector>();
 	private List<Intercambio> intercambiosPadres = new ArrayList<Intercambio>();
 	private List<Intercambio> intercambiosHijos = new ArrayList<Intercambio>();
+	
+	private ServicioInformacion servicio = new ServicioInformacion();
 
 	private long idServicioInformacion;
 	private String sector;
@@ -170,37 +172,35 @@ public class ServicioInformacionControlador extends ActionSupport implements
 
 	public String registrarServicioInformacion() {
 
-		ServicioInformacion si = new ServicioInformacion();
-
-		long id_si = dao.getNextId(si);
+		long id_si = dao.getNextId(servicio);
 		// consultar ente
-		si.setId_ente(1);
+		servicio.setId_ente(1);
 		// consultar usuario
-		si.setId_usuario(1);
+		servicio.setId_usuario(1);
 
 		// Seteando el SECTOR
-		si.setId_sector(Long.parseLong(sector));
+		servicio.setId_sector(Long.parseLong(sector));
 
 		// Seteando el NOMBRE
-		si.setNombre(nombre);
+		servicio.setNombre(nombre);
 
 		// Seteando el DESCRIPCION
-		si.setDescripcion(descripcion);
+		servicio.setDescripcion(descripcion);
 
 		// Seteando el ESTADO
-		si.setId_estado(Long.parseLong(estado));
+		servicio.setId_estado(Long.parseLong(estado));
 
 		// Seteando el SEGURIDAD
-		si.setId_seguridad(Long.parseLong(seguridad));
+		servicio.setId_seguridad(Long.parseLong(seguridad));
 
 		// Seteando el VERSION
-		si.setVersion(version);
+		servicio.setVersion(version);
 
 		// Seteando el TIPO DE INTERCAMBIO
-		si.setId_tipo_intercambio(Long.parseLong(intercambio));
+		servicio.setId_tipo_intercambio(Long.parseLong(intercambio));
 
 		try {
-			dao.create(si);
+			dao.create(servicio);
 		} catch (Exception e) {
 			addFieldError("nombre",
 					getText("Este nombre ya existe. Proporcione otro."));
@@ -266,7 +266,7 @@ public class ServicioInformacionControlador extends ActionSupport implements
 			al.setTipo(1);
 			al.setId_servicio_informacion(id_si);
 			dao.create(al);
-		}
+		}	
 
 		return SUCCESS;
 	}
@@ -541,6 +541,14 @@ public class ServicioInformacionControlador extends ActionSupport implements
 	@Override
 	public void setServletRequest(HttpServletRequest servletRequest) {
 		this.servletRequest = servletRequest;
+	}
+
+	public ServicioInformacion getServicio() {
+		return servicio;
+	}
+
+	public void setServicio(ServicioInformacion servicio) {
+		this.servicio = servicio;
 	}
 
 }

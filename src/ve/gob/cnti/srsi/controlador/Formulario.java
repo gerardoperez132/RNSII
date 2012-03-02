@@ -1,7 +1,5 @@
 package ve.gob.cnti.srsi.controlador;
 
-import org.apache.struts2.interceptor.validation.SkipValidation;
-
 /**
  * Interfaz con métodos para implementar en cada formulario.
  * 
@@ -14,6 +12,5 @@ public interface Formulario {
 	 * 
 	 * @return "success"
 	 */
-	@SkipValidation
 	public String prepararFormulario();
 }
