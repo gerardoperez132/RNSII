@@ -9,7 +9,9 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import ve.gob.cnti.srsi.dao.Constants.ClaseDato;
 import ve.gob.cnti.srsi.dao.Constants.Status;
+import ve.gob.cnti.srsi.modelo.TipoDato;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -23,7 +25,7 @@ import com.opensymphony.xwork2.ActionSupport;
  * 
  */
 @SuppressWarnings("serial")
-public class DAO extends ActionSupport implements CRUD, Status {
+public class DAO extends ActionSupport implements CRUD, Status, ClaseDato {
 
 	private static Session session;
 	private static Transaction transaction;
@@ -125,6 +127,42 @@ public class DAO extends ActionSupport implements CRUD, Status {
 					"FROM " + model.getClass().getSimpleName().toString()
 							+ " WHERE status = " + ACTIVO
 							+ " AND id_padre != 0").list();
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public ArrayList<?> getSimple() {
+		try {
+			startConnection();
+			return (ArrayList<Object>) session.createQuery(
+					"FROM "
+							+ TipoDato.class.getClass().getSimpleName()
+									.toString() + " WHERE status = " + ACTIVO
+							+ " AND clase = " + SIMPLE).list();
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public ArrayList<?> getComplex() {
+		try {
+			startConnection();
+			return (ArrayList<Object>) session.createQuery(
+					"FROM "
+							+ TipoDato.class.getClass().getSimpleName()
+									.toString() + " WHERE status = " + ACTIVO
+							+ " AND clase = " + COMPUESTO).list();
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;
@@ -266,4 +304,5 @@ public class DAO extends ActionSupport implements CRUD, Status {
 			closeConnection();
 		}
 	}
+
 }
