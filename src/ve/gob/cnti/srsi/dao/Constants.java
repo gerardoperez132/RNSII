@@ -34,4 +34,11 @@ public interface Constants {
 		/** Tipo de documento SLA. */
 		public static final int SLA = 1;
 	}
+
+	public interface TipoEntradaSalida {
+		/** Entrada de una funcionalidad. */
+		public static final int ENTRADA = 0;
+		/** Salida de una funcionalidad. */
+		public static final int SALIDA = 1;
+	}
 }
