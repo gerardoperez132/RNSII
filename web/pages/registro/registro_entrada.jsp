@@ -48,7 +48,7 @@
 				<h3>Registro de Funcionalidades</h3>
 
 				<hr>
-				
+
 				<ul class="tabs">
 					<li><a href="#tab1">Descripción General</a></li>
 					<li class="active"><a>Entradas</a></li>
@@ -58,47 +58,51 @@
 				<div class="tab_container">
 
 					<form action="" method="post">
-					<div id="tab2" class="tab_content">
-						
-						<h5 class="formulario">Registro de Entrada Simple</h5>
-						<h6>Perteneciente a la funcionalidad:  "<s:property value="funcionalidad.nombre"/>"</h6>
-						<hr>
-						
-						<!-- Nombre de la entrada. -->
-						<h5 class="formulario">Nombre:</h5>
-						<s:fielderror>
+						<div id="tab2" class="tab_content">
+
+							<h5 class="formulario">Registro de Entrada Simple</h5>
+							<h6>
+								Perteneciente a la funcionalidad: "
+								<s:property value="funcionalidad.nombre" />
+								"
+							</h6>
+							<hr>
+
+							<!-- Nombre de la entrada. -->
+							<h5 class="formulario">Nombre:</h5>
+							<s:fielderror>
 								<s:param>entrada.nombre</s:param>
-						</s:fielderror>
-						<s:textfield name="entrada.nombre" />
+							</s:fielderror>
+							<s:textfield name="entrada.nombre" />
 
-						<br>
-						<!-- Descripción de la entrada. -->
-						<h5 class="formulario">Descripción:</h5>
-						<s:fielderror>
+							<br>
+							<!-- Descripción de la entrada. -->
+							<h5 class="formulario">Descripción:</h5>
+							<s:fielderror>
 								<s:param>entrada.descripcion</s:param>
-						</s:fielderror>
-						<s:textarea name="entrada.descripcion" cols="30" rows="5" />
+							</s:fielderror>
+							<s:textarea name="entrada.descripcion" cols="30" rows="5" />
 
-						<br>
+							<br>
 
-						<h5 class="formulario">Formato:</h5>
-						<s:fielderror>
+							<h5 class="formulario">Formato:</h5>
+							<s:fielderror>
 								<s:param>entrada.formato</s:param>
-						</s:fielderror>
-						<s:textfield name="entrada.formato" />						
-						
-						
-						<h5 class="formulario">Tipo de dato asociado:</h5>
-						<s:fielderror>
-								<s:param>tipodato</s:param>
-						</s:fielderror>
-						<s:select name="tipodato" list="tipoDatos" listKey="id_tipo_dato"
-							listValue="nombre" headerKey="-1" headerValue="Ninguno"></s:select>
+							</s:fielderror>
+							<s:textfield name="entrada.formato" />
 
-						<br><br>
-						<input type="submit" value="Registrar Entrada" />
-						
-					</div>
+
+							<h5 class="formulario">Tipo de dato asociado:</h5>
+							<s:fielderror>
+								<s:param>tipodato</s:param>
+							</s:fielderror>
+							<s:select name="tipodato" list="tipoDatos" listKey="id_tipo_dato"
+								listValue="nombre" headerKey="-1" headerValue="Ninguno"></s:select>
+
+							<br> <br> <input type="submit"
+								value="Registrar Entrada" />
+
+						</div>
 					</form>
 
 				</div>
