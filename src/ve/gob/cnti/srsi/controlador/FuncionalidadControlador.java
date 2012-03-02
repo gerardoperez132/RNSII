@@ -18,8 +18,13 @@ public class FuncionalidadControlador extends DAO implements Formulario {
 	private Funcionalidad funcionalidad = new Funcionalidad();
 	private EntradaSalida entrada = new EntradaSalida();
 	private EntradaSalida salida = new EntradaSalida();
+	
+	private long idServicioInformacion;
+	
+	private long idsi;
 
 	public String registrarFuncionalidad() {
+		
 		return SUCCESS;
 	}
 
@@ -37,7 +42,8 @@ public class FuncionalidadControlador extends DAO implements Formulario {
 		
 		String nombre_dato = read(1);
 		System.out.println("El dato de la entrada 1 es => " + nombre_dato);
-
+		System.out.println("id "+idServicioInformacion);
+		System.out.println("idsi "+idsi);
 		return SUCCESS;
 	}
 
@@ -79,6 +85,22 @@ public class FuncionalidadControlador extends DAO implements Formulario {
 
 	public void setSalidas(List<EntradaSalida> salidas) {
 		this.salidas = salidas;
+	}
+
+	public long getIdServicioInformacion() {
+		return idServicioInformacion;
+	}
+
+	public void setIdServicioInformacion(long idServicioInformacion) {
+		this.idServicioInformacion = idServicioInformacion;
+	}
+
+	public long getIdsi() {
+		return idsi;
+	}
+
+	public void setIdsi(long idsi) {
+		this.idsi = idsi;
 	}
 
 }

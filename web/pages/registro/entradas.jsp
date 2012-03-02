@@ -39,7 +39,9 @@
 				<small>Paso 3 Registro de Entradas/Salidas</small><br> <br>
 				<small>Paso 4 Verificar y guardar</small>
 
-
+			
+			
+			
 			</div>
 
 			<!-- Este es el div de contenidos -->

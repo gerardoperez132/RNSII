@@ -16,7 +16,7 @@ public class EntradaControlador extends DAO implements Formulario {
 	private List<EntradaSalida> salidas = new ArrayList<EntradaSalida>();
 	private List<TipoDato> tipoDatos = new ArrayList<TipoDato>();
 
-	private Funcionalidad funcionalidad = new Funcionalidad();
+	private Funcionalidad funcionalidad;
 	private EntradaSalida entrada = new EntradaSalida();
 	private EntradaSalida salida = new EntradaSalida();
 

@@ -41,7 +41,7 @@ public class ServicioInformacionControlador extends ActionSupport implements
 	private List<Sector> sectores = new ArrayList<Sector>();
 	private List<Intercambio> intercambiosPadres = new ArrayList<Intercambio>();
 	private List<Intercambio> intercambiosHijos = new ArrayList<Intercambio>();
-	
+
 	private ServicioInformacion servicio = new ServicioInformacion();
 
 	private long idServicioInformacion;
@@ -172,7 +172,7 @@ public class ServicioInformacionControlador extends ActionSupport implements
 
 	public String registrarServicioInformacion() {
 
-		long id_si = dao.getNextId(servicio);
+		idServicioInformacion = dao.getNextId(servicio);
 		// consultar ente
 		servicio.setId_ente(1);
 		// consultar usuario
@@ -211,7 +211,7 @@ public class ServicioInformacionControlador extends ActionSupport implements
 		UnionAreaServicioInformacion unionarea = new UnionAreaServicioInformacion();
 		for (int i = 0; i < area.size(); i++) {
 			unionarea.setId_area(Long.parseLong(String.valueOf(area.get(i))));
-			unionarea.setId_servicio_informacion(id_si);
+			unionarea.setId_servicio_informacion(idServicioInformacion);
 			// dao.create(unionarea, id_si);
 		}
 
@@ -220,20 +220,20 @@ public class ServicioInformacionControlador extends ActionSupport implements
 		for (int i = 0; i < arquitectura.size(); i++) {
 			unionarquitectura.setId_arquitectura(Long.parseLong(String
 					.valueOf(arquitectura.get(i))));
-			unionarquitectura.setId_servicio_informacion(id_si);
+			unionarquitectura.setId_servicio_informacion(idServicioInformacion);
 			// dao.create(unionarquitectura, id_si);
 		}
 
 		// Seteando el TELEFONO DE CONTACTO
 		Telefono telf = new Telefono();
 		telf.setTelefono(codArea + "-" + telefonoContacto);
-		telf.setId_servicio_informacion(id_si);
+		telf.setId_servicio_informacion(idServicioInformacion);
 		dao.create(telf);
 
 		// Seteando el CORREO DE CONTACTO
 		Correo correo = new Correo();
 		correo.setCorreo(correoContacto);
-		correo.setId_servicio_informacion(id_si);
+		correo.setId_servicio_informacion(idServicioInformacion);
 		dao.create(correo);
 
 		// Seteando el documento legal
@@ -248,7 +248,7 @@ public class ServicioInformacionControlador extends ActionSupport implements
 			}
 			al.setNombre(aspectoLegal);
 			al.setTipo(0);
-			al.setId_servicio_informacion(id_si);
+			al.setId_servicio_informacion(idServicioInformacion);
 			dao.create(al);
 		}
 
@@ -264,9 +264,9 @@ public class ServicioInformacionControlador extends ActionSupport implements
 			}
 			al.setNombre(aspectoLegal);
 			al.setTipo(1);
-			al.setId_servicio_informacion(id_si);
+			al.setId_servicio_informacion(idServicioInformacion);
 			dao.create(al);
-		}	
+		}
 
 		return SUCCESS;
 	}

@@ -62,7 +62,7 @@
 					<div id="tab1" class="tab_content">
 						<form action="registrarFuncionalidad" method="POST">
 							<p>Descripción General de la Funcionalidad</p>
-
+							
 							<!-- Nombre de la funcionalidad u operación del servicio. -->
 							<h5 id="formulario">Nombre:</h5>
 							<s:fielderror>

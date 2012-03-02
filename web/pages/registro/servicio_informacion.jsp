@@ -44,11 +44,10 @@
 			<!-- Este es el div de contenidos -->
 			<div id="content">
 
-				<h5>nombre:</h5>
-				<s:property value="servicio.nombre" />
-				<h5>descripcion:</h5>
-				<s:property value="servicio.descripcion" />
-
+				<h5 class="formulario">Servicio de Información: "<s:property value="servicio.nombre" />"</h5>				
+				<h5 class="formulario">Descripcion: "<s:property value="servicio.descripcion" />"</h5>
+				<h5 class="formulario">id: "<s:property value="idServicioInformacion" />"</h5>
+				 
 				<hr>
 				<s:fielderror>
 					<s:param>funcionalidades</s:param>
@@ -82,6 +81,11 @@
 				<s:a href="%{registrarFuncionalidad}" cssClass="enlace">
 					<input type="button" value="Registrar Funcionalidad">
 				</s:a>
+				
+				<form action="prepararFuncionalidad" method="POST">
+					<s:hidden name="idServicioInformacion" ></s:hidden>
+					<input type="submit" value="Registrar" />
+				</form>
 
 			</div>
 

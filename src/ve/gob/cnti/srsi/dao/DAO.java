@@ -215,9 +215,10 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato {
 
 	@Override
 	public String read(long id) {
+		String result;
 		try {
 			startConnection();
-			return (String) session
+			result = (String) session
 					.createSQLQuery(
 							"SELECT td.nombre FROM tipos_datos AS td INNER JOIN datos AS d ON d.id_tipo_dato = td.id_tipo_dato INNER JOIN entradas_salidas AS es ON es.id_dato = d.id_dato WHERE es.id_entrada_salida = "
 									+ id + " AND td.status = " + ACTIVO)
@@ -228,6 +229,7 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato {
 		} finally {
 			closeConnection();
 		}
+		return result;
 	}
 
 	@Override
