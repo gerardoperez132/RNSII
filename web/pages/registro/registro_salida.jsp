@@ -8,8 +8,7 @@
 <!-- CSS (required) -->
 <link rel="stylesheet" type="text/css" href="res/css/styles.css">
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
-<script type="text/javascript" src="res/js/jquery-1.7.1.js"></script>
-<script type="text/javascript" src="res/js/tabs.js"></script>
+
 
 <title>SRSI - Inicio</title>
 <!-- Donde dice inicio debería ir una var que identifique el lugar -->
@@ -48,63 +47,19 @@
 				<h3>Registro de Funcionalidades</h3>
 
 				<hr>
+				<s:url id="funcionalidad"
+					action="prepararRegistroServicioInformacion"></s:url>
+				<s:a href="%{registrarServicioInformacion}">Registrar Servicio de Información</s:a>
+
 
 				<ul class="tabs">
-					<li><a href="#tab1">Descripción General</a>
-					</li>
-					<li><a href="#tab2">Entradas</a>
-					</li>
-					<li><a href="#tab3">Salidas</a>
-					</li>
-					<li><a href="#tab4">Resumen Funcionalidad</a>
-					</li>
+					<li><a href="#tab1">Descripción General</a></li>
+					<li>Entradas</li>
+					<li class="active">Salidas</li>
+					<li><a href="#tab4">Resumen Funcionalidad</a></li>
 				</ul>
 				<div class="tab_container">
-					<div id="tab1" class="tab_content">
-						<form action="registrarFuncionalidad" method="POST">
-							<p>Descripción General de la Funcionalidad</p>
-
-							<!-- Nombre de la funcionalidad u operación del servicio. -->
-							<h5 id="formulario">Nombre:</h5>
-							<s:textfield labelposition="top" name="funcionalidad.nombre" />
-
-							<br>
-							<!-- Descripción de la funcionalidad u operación del servicio. -->
-							<h5 id="formulario">Descripción (Pre-Condiciones):</h5>
-							<s:textarea name="funcionalidad.descripcion" cols="30" rows="5" />
-
-							<br>
-							<s:fielderror>
-								<s:param>funcionalidades</s:param>
-							</s:fielderror>
-							<s:if test="funcionalidades.size() > 0">
-								<div>
-									<p>Funcionalidades cargadas</p>
-									<table border="1">
-										<tr>
-											<th>Número</th>
-											<th>Nombre</th>
-											<th>Fecha</th>
-											<th>Acciones</th>
-										</tr>
-										<s:iterator value="funcionalidades">
-											<tr>
-												<td><s:property value="id_funcionalidad" />
-												</td>
-												<td><s:property value="nombre" />
-												</td>
-												<td><s:property value="fecha_creado" />
-												</td>
-												<td><a href="#">Editar</a> <a href="#">Eliminar</a>
-												</td>
-											</tr>
-										</s:iterator>
-									</table>
-								</div>
-							</s:if>
-							<input type="submit" value="Registrar" />
-						</form>
-					</div>
+					<div id="tab1" class="tab_content"></div>
 
 
 					<div id="tab2" class="tab_content">

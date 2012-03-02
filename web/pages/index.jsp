@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <!-- CSS (required) -->
-<link rel="stylesheet" type="text/css" href="res/css/styles.css">
+<link rel="stylesheet" type="text/css" href="pages/res/css/styles.css">
 <title>SRSI - Inicio</title>
 <!-- Donde dice inicio debería ir una var que identifique el lugar -->
 </head>
@@ -19,8 +19,8 @@
 
 			<!-- Este es el div de la cabecera -->
 			<div id="header">
-				<img src="res/img/header.png" width="880" height="70"
-					alt="Cintillo Gobierno Bolivariano" /> <img src="res/img/mio.png"
+				<img src="pages/res/img/header.png" width="880" height="70"
+					alt="Cintillo Gobierno Bolivariano" /> <img src="pages/res/img/mio.png"
 					width="874" height="116" alt="Marco de Interoperabilidad"
 					style="border: 3px solid #57cedc;" />
 			</div>
