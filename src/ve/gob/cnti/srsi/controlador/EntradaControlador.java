@@ -8,6 +8,7 @@ import org.apache.struts2.interceptor.validation.SkipValidation;
 import ve.gob.cnti.srsi.dao.DAO;
 import ve.gob.cnti.srsi.modelo.EntradaSalida;
 import ve.gob.cnti.srsi.modelo.Funcionalidad;
+import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.TipoDato;
 
 @SuppressWarnings("serial")
@@ -16,14 +17,21 @@ public class EntradaControlador extends DAO implements Formulario {
 	private List<EntradaSalida> salidas = new ArrayList<EntradaSalida>();
 	private List<TipoDato> tipoDatos = new ArrayList<TipoDato>();
 
-	private Funcionalidad funcionalidad;
+	private ServicioInformacion servicio = new ServicioInformacion();
+	private Funcionalidad funcionalidad = new Funcionalidad();
 	private EntradaSalida entrada = new EntradaSalida();
 	private EntradaSalida salida = new EntradaSalida();
+
+	private long idServicioInformacion;
+	private long idFuncionalidad;
 
 	@SuppressWarnings("unchecked")
 	@Override
 	@SkipValidation
 	public String prepararFormulario() {
+		
+		funcionalidad = (Funcionalidad) read(funcionalidad, idFuncionalidad);
+		servicio = (ServicioInformacion) read(servicio, idServicioInformacion);		
 		tipoDatos = (List<TipoDato>) getSimple();
 
 		return SUCCESS;
@@ -80,6 +88,30 @@ public class EntradaControlador extends DAO implements Formulario {
 
 	public void setTipoDatos(List<TipoDato> tipoDatos) {
 		this.tipoDatos = tipoDatos;
+	}
+
+	public long getIdServicioInformacion() {
+		return idServicioInformacion;
+	}
+
+	public void setIdServicioInformacion(long idServicioInformacion) {
+		this.idServicioInformacion = idServicioInformacion;
+	}
+
+	public long getIdFuncionalidad() {
+		return idFuncionalidad;
+	}
+
+	public void setIdFuncionalidad(long idFuncionalidad) {
+		this.idFuncionalidad = idFuncionalidad;
+	}
+
+	public ServicioInformacion getServicio() {
+		return servicio;
+	}
+
+	public void setServicio(ServicioInformacion servicio) {
+		this.servicio = servicio;
 	}
 
 }
