@@ -39,15 +39,19 @@
 				<small>Paso 3 Registro de Entradas/Salidas</small><br> <br>
 				<small>Paso 4 Verificar y guardar</small>
 
-			
-			
-			
+
+
+
 			</div>
 
 			<!-- Este es el div de contenidos -->
 			<div id="content">
 
-				<h3>Registro de Funcionalidades del servicio: "<s:property value="servicio.nombre"/>"</h3>
+				<h3>
+					Registro de Funcionalidades del servicio: "
+					<s:property value="servicio.nombre" />
+					"
+				</h3>
 
 				<hr>
 				<ul class="tabs">
@@ -61,36 +65,49 @@
 
 					<div id="tab2" class="tab_content">
 
-						<h4>Registro de Entradas de la Funcionalidad: <s:property value="funcionalidad.nombre"/> </h4>
+						<h4>
+							Registro de Entradas de la Funcionalidad:
+							<s:property value="funcionalidad.nombre" />
+						</h4>
 						<hr>
-						
-						<s:if test="entradas.size > 0">
-						
-						<p>Entradas cargadas</p>
-						<table border="1">
-							<tr>								
-								<th>Nombre</th>
-								<th>tipo</th>								
-							</tr>
-							
-						<s:iterator value="entradas">
-							<tr><s:property value="nombre" /></tr>
-							<tr><s:property value="id_dato" /></tr>
-						</s:iterator>
-						</table>
-						
+
+						<s:if test="datos.size > 0">
+
+							<p>Entradas cargadas</p>
+							<table border="1">
+								<tr>
+									<th>Nombre</th>
+									<th>Descripción</th>
+									<th>tipo</th>
+								</tr>
+
+								<s:iterator value="datos">
+									<tr>
+										<s:property value="nombre" />
+									</tr>
+									<tr>
+										<s:property value="descripcion" />
+									</tr>
+									<tr>
+										<s:property value="id_dato" />
+									</tr>
+								</s:iterator>
+							</table>
+
 						</s:if>
 						<s:else>
-							<p class="errorMessage">Aún no hay Entradas cargadas para está funcionalidad</p>
+							<p class="errorMessage">Aún no hay Entradas cargadas para
+								está funcionalidad</p>
 						</s:else>
-						
+
 						<form action="prepararEntradaSimple" method="POST">
-							<s:hidden name="idServicioInformacion" ></s:hidden>	
-							<s:hidden name="idFuncionalidad"></s:hidden>			
+							<s:hidden name="idServicioInformacion"></s:hidden>
+							<s:hidden name="idFuncionalidad"></s:hidden>
 							<input type="submit" value="Agregar Dato Simple" />
 						</form>
-												
-						<s:url id="registrarEntradaComplejo" action="prepararEntradaComplejo"></s:url>
+
+						<s:url id="registrarEntradaComplejo"
+							action="prepararEntradaComplejo"></s:url>
 						<s:a href="%{registrarEntradaComplejo}" cssClass="enlace">
 							<input type="button" value="Agregar Dato Complejo">
 						</s:a>

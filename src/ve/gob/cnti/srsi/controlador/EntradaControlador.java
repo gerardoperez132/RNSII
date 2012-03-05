@@ -1,6 +1,7 @@
 package ve.gob.cnti.srsi.controlador;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.struts2.interceptor.validation.SkipValidation;
@@ -19,6 +20,7 @@ public class EntradaControlador extends DAO implements Formulario,
 	private List<EntradaSalida> entradas = new ArrayList<EntradaSalida>();
 	private List<EntradaSalida> salidas = new ArrayList<EntradaSalida>();
 	private List<TipoDato> tipoDatos = new ArrayList<TipoDato>();
+	private List<Dato> datos = new ArrayList<Dato>();
 
 	private ServicioInformacion servicio = new ServicioInformacion();
 	private Funcionalidad funcionalidad = new Funcionalidad();
@@ -36,8 +38,12 @@ public class EntradaControlador extends DAO implements Formulario,
 
 		funcionalidad = (Funcionalidad) read(funcionalidad, idFuncionalidad);
 		servicio = (ServicioInformacion) read(servicio, idServicioInformacion);
-		entradas = (List<EntradaSalida>) read(entrada, funcionalidad,
-				idFuncionalidad);
+		datos = (ArrayList<Dato>) readEntrada(idFuncionalidad);
+		Iterator<Dato> iterator = datos.iterator();
+		while (iterator.hasNext()) {
+
+			System.out.println(" DATO => " + iterator.next().getNombre());
+		}
 		tipoDatos = (List<TipoDato>) getSimple();
 
 		return SUCCESS;
@@ -143,6 +149,14 @@ public class EntradaControlador extends DAO implements Formulario,
 
 	public void setDato(Dato dato) {
 		this.dato = dato;
+	}
+
+	public List<Dato> getDatos() {
+		return datos;
+	}
+
+	public void setDatos(List<Dato> datos) {
+		this.datos = datos;
 	}
 
 }

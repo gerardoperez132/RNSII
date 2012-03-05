@@ -83,20 +83,21 @@
 							</s:fielderror>
 							<s:textarea name="dato.descripcion" cols="30" rows="5" />
 
-							<br>				
+							<br>
 
 
 							<h5 class="formulario">Tipo de dato asociado:</h5>
 							<s:fielderror>
 								<s:param>tipodato</s:param>
 							</s:fielderror>
-							<s:select name="dato.id_tipo_dato" list="tipoDatos" listKey="id_tipo_dato"
-								listValue="nombre" headerKey="-1" headerValue="Seleccione"></s:select>
+							<s:select name="dato.id_tipo_dato" list="tipoDatos"
+								listKey="id_tipo_dato" listValue="nombre" headerKey="-1"
+								headerValue="Seleccione"></s:select>
 
-							<br> <br> 
-							<s:hidden name="idServicioInformacion" ></s:hidden>	
-							<s:hidden name="idFuncionalidad" ></s:hidden>	
-							<input type="submit"value="Registrar Entrada" />
+							<br> <br>
+							<s:hidden name="idServicioInformacion"></s:hidden>
+							<s:hidden name="idFuncionalidad"></s:hidden>
+							<input type="submit" value="Registrar Entrada" />
 
 						</div>
 					</form>

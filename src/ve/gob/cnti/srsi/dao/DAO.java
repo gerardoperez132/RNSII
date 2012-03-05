@@ -3,6 +3,7 @@ package ve.gob.cnti.srsi.dao;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -11,6 +12,8 @@ import org.hibernate.Transaction;
 
 import ve.gob.cnti.srsi.dao.Constants.ClaseDato;
 import ve.gob.cnti.srsi.dao.Constants.Status;
+import ve.gob.cnti.srsi.dao.Constants.TipoEntradaSalida;
+import ve.gob.cnti.srsi.modelo.Dato;
 import ve.gob.cnti.srsi.modelo.TipoDato;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -25,7 +28,8 @@ import com.opensymphony.xwork2.ActionSupport;
  * 
  */
 @SuppressWarnings("serial")
-public class DAO extends ActionSupport implements CRUD, Status, ClaseDato {
+public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
+		TipoEntradaSalida {
 
 	private static Session session;
 	private static Transaction transaction;
@@ -219,6 +223,34 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato {
 		} finally {
 			closeConnection();
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public ArrayList<?> readEntrada(long id) {
+		ArrayList<?> result;
+		try {
+			startConnection();
+			result = (ArrayList<Object>) session
+					.createSQLQuery(
+							"SELECT d.* FROM datos AS d INNER JOIN entradas_salidas AS es ON d.id_entrada_salida = es.id_entrada_salida INNER JOIN funcionalidades AS f ON f.id_funcionalidad = es.id_funcionalidad WHERE f.id_funcionalidad = "
+									+ id
+									+ " AND d.status = "
+									+ ACTIVO
+									+ " AND es.tipo = " + ENTRADA).list();
+			Iterator<Dato> iterator = (Iterator<Dato>) result.iterator();
+			while (iterator.hasNext()) {
+				System.out.println(" DATO => " + iterator.next().toString());
+			}
+
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+		return result;
+
 	}
 
 	@Override

@@ -78,6 +78,8 @@ public interface CRUD {
 	 * @return El nombre del dato asociado.
 	 */
 	public String read(long id);
+	
+	public ArrayList<?> readEntrada(long id);
 
 	/**
 	 * Permite modificar el registro especificado por id del modelo dado.
