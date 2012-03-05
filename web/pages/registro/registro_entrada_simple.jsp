@@ -99,8 +99,10 @@
 							<s:select name="tipodato" list="tipoDatos" listKey="id_tipo_dato"
 								listValue="nombre" headerKey="-1" headerValue="Ninguno"></s:select>
 
-							<br> <br> <input type="submit"
-								value="Registrar Entrada" />
+							<br> <br> 
+							<s:hidden name="idServicioInformacion" ></s:hidden>	
+							<s:hidden name="idFuncionalidad" ></s:hidden>	
+							<input type="submit"value="Registrar Entrada" />
 
 						</div>
 					</form>
