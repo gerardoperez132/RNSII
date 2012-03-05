@@ -47,13 +47,9 @@
 			<!-- Este es el div de contenidos -->
 			<div id="content">
 
-				<h3>Registro de Funcionalidades</h3>
+				<h3>Registro de Funcionalidades del servicio: "<s:property value="servicio.nombre"/>"</h3>
 
 				<hr>
-				<s:url id="funcionalidad" action="prepararFuncionalidad"></s:url>
-				<s:a href="%{registrarServicioInformacion}">Registrar Servicio de Información</s:a>
-
-
 				<ul class="tabs">
 					<li><a href="#tab1">Descripción General</a></li>
 					<li class="active"><a>Entradas</a></li>
@@ -88,11 +84,12 @@
 							<p class="errorMessage">Aún no hay Entradas cargadas para está funcionalidad</p>
 						</s:else>
 						
-						<s:url id="registrarEntradaSimple" action="prepararEntradaSimple"></s:url>
-						<s:a href="%{registrarEntradaSimple}" cssClass="enlace">
-							<input type="button" value="Agregar Dato Simple">
-						</s:a>
-						
+						<form action="prepararEntradaSimple" method="POST">
+							<s:hidden name="idServicioInformacion" ></s:hidden>	
+							<s:hidden name="idFuncionalidad"></s:hidden>			
+							<input type="submit" value="Agregar Dato Simple" />
+						</form>
+												
 						<s:url id="registrarEntradaComplejo" action="prepararEntradaComplejo"></s:url>
 						<s:a href="%{registrarEntradaComplejo}" cssClass="enlace">
 							<input type="button" value="Agregar Dato Complejo">
