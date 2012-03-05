@@ -251,7 +251,7 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato {
 			startConnection();
 			result = session.createQuery(
 					"FROM "
-							+ model.getClass().getName().toString()
+							+ model.getClass().getSimpleName().toString()
 							+ " WHERE "
 							+ getField(model).toString().replace("get", "")
 									.toLowerCase() + " = " + id
