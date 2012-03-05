@@ -44,7 +44,7 @@
 			<!-- Este es el div de contenidos -->
 			<div id="content">
 
-				<h3>Registro de Funcionalidades</h3>
+				<h3>Registro de Funcionalidades del servicio: "<s:property value="servicio.nombre"/>"</h3>
 
 				<hr>
 
@@ -64,7 +64,7 @@
 							<p>Descripción General de la Funcionalidad</p>
 							
 							<!-- Nombre de la funcionalidad u operación del servicio. -->
-							<h5 id="formulario">Nombre:</h5>
+							<h5 class="formulario">Nombre:</h5>
 							<s:fielderror>
 								<s:param>funcionalidad.nombre</s:param>
 							</s:fielderror>
@@ -72,7 +72,7 @@
 
 							<br>
 							<!-- Descripción de la funcionalidad u operación del servicio. -->
-							<h5 id="formulario">Descripción (Pre-Condiciones):</h5>
+							<h5 class="formulario">Descripción (Pre-Condiciones):</h5>
 							<s:fielderror>
 								<s:param>funcionalidad.descripcion</s:param>
 							</s:fielderror>
@@ -80,6 +80,7 @@
 
 							<br>
 							
+							<s:hidden name="idServicioInformacion" ></s:hidden>	
 							<input type="submit" value="Registrar" />
 						</form>
 					</div>
