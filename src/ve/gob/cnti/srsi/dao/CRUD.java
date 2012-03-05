@@ -47,6 +47,19 @@ public interface CRUD {
 	public Object read(Object model, long id);
 
 	/**
+	 * Permite obtener una lista de todos los registros de una relación de 1:N
+	 * 
+	 * @param model
+	 *            Un modelo que está relacionado de 1:N
+	 * @param hasMany
+	 *            Un modelo que pertenece a una relación 1:N
+	 * @param id
+	 *            El id a identificar en la relación
+	 * @return Una lista de objetos del modelo.
+	 */
+	public ArrayList<?> read(Object model, Object belongsTo, long id);
+
+	/**
 	 * Permite obtener todos los registros activos del modelo dado.
 	 * 
 	 * @param model

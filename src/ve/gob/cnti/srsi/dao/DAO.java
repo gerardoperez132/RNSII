@@ -267,6 +267,25 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato {
 
 	@SuppressWarnings("unchecked")
 	@Override
+	public ArrayList<?> read(Object model, Object belongsTo, long id) {
+		ArrayList<?> result;
+		try {
+			startConnection();
+			result = (ArrayList<Object>) session.createQuery(
+					"FROM " + model.getClass().getSimpleName().toString()
+							+ " WHERE " + getField(belongsTo) + " = " + id
+							+ " AND status = " + ACTIVO).list();
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+		return result;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
 	public ArrayList<?> read(Object model) {
 		ArrayList<?> result;
 		try {
