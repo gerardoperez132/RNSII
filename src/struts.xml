@@ -27,20 +27,23 @@
 
 		<action name="registrarFuncionalidad" method="registrarFuncionalidad"
 			class="ve.gob.cnti.srsi.controlador.FuncionalidadControlador">
-			<result name="success">
-				registro/entradas.jsp
-				<param name="idServicioInformacion">${idServicioInformacion}</param>
-			</result>
+			
+			<result name="success" type="chain">
+               <param name="actionName">prepararEntradas</param>                         
+            </result>
+			
 			<result name="input">registro/registro_funcionalidad.jsp</result>
 		</action>
 
 		<!--Actions para Entradas -->
+		<action name="prepararEntradas" method="prepararFormulario"
+			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
+			<result name="success">registro/entradas.jsp</result>
+		</action>
+		
 		<action name="prepararEntradaSimple" method="prepararFormulario"
 			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
-			<result name="success">
-				registro/registro_entrada.jsp
-
-			</result>
+			<result name="success">registro/registro_entrada_simple.jsp</result>
 		</action>
 
 		<action name="prepararEntradaComplejo" method="prepararFormulario"

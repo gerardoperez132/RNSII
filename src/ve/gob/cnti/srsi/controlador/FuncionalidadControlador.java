@@ -8,6 +8,7 @@ import org.apache.struts2.interceptor.validation.SkipValidation;
 import ve.gob.cnti.srsi.dao.DAO;
 import ve.gob.cnti.srsi.modelo.EntradaSalida;
 import ve.gob.cnti.srsi.modelo.Funcionalidad;
+import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 
 @SuppressWarnings("serial")
 public class FuncionalidadControlador extends DAO implements Formulario {
@@ -15,16 +16,22 @@ public class FuncionalidadControlador extends DAO implements Formulario {
 	private List<EntradaSalida> entradas = new ArrayList<EntradaSalida>();
 	private List<EntradaSalida> salidas = new ArrayList<EntradaSalida>();
 
+	private ServicioInformacion servicio = new ServicioInformacion();
 	private Funcionalidad funcionalidad = new Funcionalidad();
 	private EntradaSalida entrada = new EntradaSalida();
 	private EntradaSalida salida = new EntradaSalida();
 	
 	private long idServicioInformacion;
+	private long idFuncionalidad;
 	
-	private long idsi;
 
 	public String registrarFuncionalidad() {
-		
+		/*idFuncionalidad
+		 *Variable necesaria para persistir la E/S de la funcionalidad en los otros controladores 
+		 */
+		idFuncionalidad = getNextId(funcionalidad);
+		funcionalidad.setId_servicio_informacion(idServicioInformacion);
+		create(funcionalidad);
 		return SUCCESS;
 	}
 
@@ -38,12 +45,8 @@ public class FuncionalidadControlador extends DAO implements Formulario {
 
 	@Override
 	@SkipValidation
-	public String prepararFormulario() {
-		
-		String nombre_dato = read(1);
-		System.out.println("El dato de la entrada 1 es => " + nombre_dato);
-		System.out.println("id "+idServicioInformacion);
-		System.out.println("idsi "+idsi);
+	public String prepararFormulario() {		
+		servicio = (ServicioInformacion) read(servicio, idServicioInformacion);
 		return SUCCESS;
 	}
 
@@ -87,6 +90,14 @@ public class FuncionalidadControlador extends DAO implements Formulario {
 		this.salidas = salidas;
 	}
 
+	public ServicioInformacion getServicio() {
+		return servicio;
+	}
+
+	public void setServicio(ServicioInformacion servicio) {
+		this.servicio = servicio;
+	}
+
 	public long getIdServicioInformacion() {
 		return idServicioInformacion;
 	}
@@ -95,12 +106,12 @@ public class FuncionalidadControlador extends DAO implements Formulario {
 		this.idServicioInformacion = idServicioInformacion;
 	}
 
-	public long getIdsi() {
-		return idsi;
+	public long getIdFuncionalidad() {
+		return idFuncionalidad;
 	}
 
-	public void setIdsi(long idsi) {
-		this.idsi = idsi;
+	public void setIdFuncionalidad(long idFuncionalidad) {
+		this.idFuncionalidad = idFuncionalidad;
 	}
 
 }
