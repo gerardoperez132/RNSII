@@ -47,6 +47,7 @@
 				<h5 class="formulario">Servicio de Información: "<s:property value="servicio.nombre" />"</h5>				
 				<h5 class="formulario">Descripcion: "<s:property value="servicio.descripcion" />"</h5>
 				<h5 class="formulario">id: "<s:property value="idServicioInformacion" />"</h5>
+				
 				 
 				<hr>
 				<s:fielderror>
@@ -75,15 +76,10 @@
 				</s:if>
 				<s:else>
 					<p>No hay funcionalidades cargadas</p>
-				</s:else>
-				
-				<s:url id="registrarFuncionalidad" action="prepararFuncionalidad"></s:url>
-				<s:a href="%{registrarFuncionalidad}" cssClass="enlace">
-					<input type="button" value="Registrar Funcionalidad">
-				</s:a>
+				</s:else>				
 				
 				<form action="prepararFuncionalidad" method="POST">
-					<s:hidden name="idServicioInformacion" ></s:hidden>
+					<s:hidden name="idServicioInformacion" ></s:hidden>				
 					<input type="submit" value="Registrar" />
 				</form>
 
