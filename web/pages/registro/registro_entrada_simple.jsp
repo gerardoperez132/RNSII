@@ -57,7 +57,7 @@
 				</ul>
 				<div class="tab_container">
 
-					<form action="" method="post">
+					<form action="registrarEntradaSimple" method="post">
 						<div id="tab2" class="tab_content">
 
 							<h5 class="formulario">Registro de Entrada Simple</h5>
@@ -71,33 +71,27 @@
 							<!-- Nombre de la entrada. -->
 							<h5 class="formulario">Nombre:</h5>
 							<s:fielderror>
-								<s:param>entrada.nombre</s:param>
+								<s:param>dato.nombre</s:param>
 							</s:fielderror>
-							<s:textfield name="entrada.nombre" />
+							<s:textfield name="dato.nombre" />
 
 							<br>
 							<!-- Descripción de la entrada. -->
 							<h5 class="formulario">Descripción:</h5>
 							<s:fielderror>
-								<s:param>entrada.descripcion</s:param>
+								<s:param>dato.descripcion</s:param>
 							</s:fielderror>
-							<s:textarea name="entrada.descripcion" cols="30" rows="5" />
+							<s:textarea name="dato.descripcion" cols="30" rows="5" />
 
-							<br>
-
-							<h5 class="formulario">Formato:</h5>
-							<s:fielderror>
-								<s:param>entrada.formato</s:param>
-							</s:fielderror>
-							<s:textfield name="entrada.formato" />
+							<br>				
 
 
 							<h5 class="formulario">Tipo de dato asociado:</h5>
 							<s:fielderror>
 								<s:param>tipodato</s:param>
 							</s:fielderror>
-							<s:select name="tipodato" list="tipoDatos" listKey="id_tipo_dato"
-								listValue="nombre" headerKey="-1" headerValue="Ninguno"></s:select>
+							<s:select name="dato.id_tipo_dato" list="tipoDatos" listKey="id_tipo_dato"
+								listValue="nombre" headerKey="-1" headerValue="Seleccione"></s:select>
 
 							<br> <br> 
 							<s:hidden name="idServicioInformacion" ></s:hidden>	

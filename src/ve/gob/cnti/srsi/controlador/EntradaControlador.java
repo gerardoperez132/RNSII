@@ -5,14 +5,17 @@ import java.util.List;
 
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
+import ve.gob.cnti.srsi.dao.Constants.TipoEntradaSalida;
 import ve.gob.cnti.srsi.dao.DAO;
+import ve.gob.cnti.srsi.modelo.Dato;
 import ve.gob.cnti.srsi.modelo.EntradaSalida;
 import ve.gob.cnti.srsi.modelo.Funcionalidad;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.TipoDato;
 
 @SuppressWarnings("serial")
-public class EntradaControlador extends DAO implements Formulario {
+public class EntradaControlador extends DAO implements Formulario,
+		TipoEntradaSalida {
 	private List<EntradaSalida> entradas = new ArrayList<EntradaSalida>();
 	private List<EntradaSalida> salidas = new ArrayList<EntradaSalida>();
 	private List<TipoDato> tipoDatos = new ArrayList<TipoDato>();
@@ -21,6 +24,7 @@ public class EntradaControlador extends DAO implements Formulario {
 	private Funcionalidad funcionalidad = new Funcionalidad();
 	private EntradaSalida entrada = new EntradaSalida();
 	private EntradaSalida salida = new EntradaSalida();
+	private Dato dato = new Dato();
 
 	private long idServicioInformacion;
 	private long idFuncionalidad;
@@ -29,17 +33,36 @@ public class EntradaControlador extends DAO implements Formulario {
 	@Override
 	@SkipValidation
 	public String prepararFormulario() {
-		
+
 		funcionalidad = (Funcionalidad) read(funcionalidad, idFuncionalidad);
-		servicio = (ServicioInformacion) read(servicio, idServicioInformacion);		
+		servicio = (ServicioInformacion) read(servicio, idServicioInformacion);
+		entradas = (List<EntradaSalida>) read(entrada, funcionalidad,
+				idFuncionalidad);
 		tipoDatos = (List<TipoDato>) getSimple();
 
 		return SUCCESS;
 	}
 
 	public String registrarEntradaSimple() {
+		entrada.setId_funcionalidad(idFuncionalidad);
+		entrada.setTipo(ENTRADA);
+		dato.setId_entrada_salida(getNextId(entrada));
+		create(entrada);
+		create(dato);
 
 		return SUCCESS;
+	}
+
+	public void validate() {
+		if (dato.getNombre().isEmpty())
+			addFieldError("dato.nombre",
+					"Debe introducir un nombre que identifique el dato");
+		if (dato.getDescripcion().isEmpty())
+			addFieldError("dato.descripcion",
+					"Debe introducir una descripción.");
+		if (dato.getId_tipo_dato() == -1)
+			addFieldError("tipodato", "Debe seleccionar un tipo de dato");
+		prepararFormulario();
 	}
 
 	public List<EntradaSalida> getEntradas() {
@@ -112,6 +135,14 @@ public class EntradaControlador extends DAO implements Formulario {
 
 	public void setServicio(ServicioInformacion servicio) {
 		this.servicio = servicio;
+	}
+
+	public Dato getDato() {
+		return dato;
+	}
+
+	public void setDato(Dato dato) {
+		this.dato = dato;
 	}
 
 }
