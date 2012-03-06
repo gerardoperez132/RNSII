@@ -86,15 +86,22 @@
 										<td>
 										<s:property value="nombre" />
 										</td>
-									</tr>
-									<tr>
+									
 										<td>
 										<s:property value="descripcion" />
 										</td>
-									</tr>
-									<tr>
+									
+									
 										<td>
-										<s:property value="id_dato" />
+										<s:set name="id_d" value="id_tipo_dato" ></s:set> 
+										
+										<s:iterator value="tipoDatos"> 
+											<s:if test="%{id_tipo_dato == #id_d}">
+												<s:property value="nombre" />
+											</s:if>
+											
+										</s:iterator> 
+										
 										</td>
 									</tr>
 								</s:iterator>

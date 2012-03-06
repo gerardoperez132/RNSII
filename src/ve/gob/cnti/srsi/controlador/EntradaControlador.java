@@ -59,7 +59,7 @@ public class EntradaControlador extends DAO implements Formulario,
 		return SUCCESS;
 	}
 
-	public void validate() {
+	public void validate() {		
 		if (dato.getNombre().isEmpty())
 			addFieldError("dato.nombre",
 					"Debe introducir un nombre que identifique el dato");

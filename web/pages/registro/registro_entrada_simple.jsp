@@ -97,6 +97,8 @@
 							<br> <br>
 							<s:hidden name="idServicioInformacion"></s:hidden>
 							<s:hidden name="idFuncionalidad"></s:hidden>
+							
+							<s:token name="token"></s:token>
 							<input type="submit" value="Registrar Entrada" />
 
 						</div>
