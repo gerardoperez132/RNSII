@@ -25,14 +25,13 @@ import ve.gob.cnti.srsi.modelo.Telefono;
 import ve.gob.cnti.srsi.modelo.UnionAreaServicioInformacion;
 import ve.gob.cnti.srsi.modelo.UnionArquitecturaServicioInformacion;
 
-import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.validator.annotations.EmailValidator;
 import com.opensymphony.xwork2.validator.annotations.FieldExpressionValidator;
 import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
 
 @SuppressWarnings("serial")
-public class ServicioInformacionControlador extends ActionSupport implements
-		ServletRequestAware {
+public class ServicioInformacionControlador extends DAO implements
+		ServletRequestAware, Formulario {
 
 	private List<Area> areas = new ArrayList<Area>();
 	private List<Estado> estados = new ArrayList<Estado>();
@@ -70,11 +69,10 @@ public class ServicioInformacionControlador extends ActionSupport implements
 
 	private HttpServletRequest servletRequest;
 
-	private DAO dao = new DAO();
-
 	@SuppressWarnings("unchecked")
+	@Override
 	@SkipValidation
-	public String prepararRegistroServicioInformacion() {
+	public String prepararFormulario() {
 
 		Area area = new Area();
 		Estado est = new Estado();
@@ -83,15 +81,16 @@ public class ServicioInformacionControlador extends ActionSupport implements
 		Sector sector = new Sector();
 		Intercambio intercambio = new Intercambio();
 
-		areas = (List<Area>) dao.read(area);
-		estados = (List<Estado>) dao.read(est);
-		l_seguridad = (List<Seguridad>) dao.read(seg);
-		arquitecturas = (List<Arquitectura>) dao.read(arq);
-		sectores = (List<Sector>) dao.read(sector);
+		areas = (List<Area>) read(area);
+		estados = (List<Estado>) read(est);
+		l_seguridad = (List<Seguridad>) read(seg);
+		arquitecturas = (List<Arquitectura>) read(arq);
+		sectores = (List<Sector>) read(sector);
 
-		intercambiosPadres = (List<Intercambio>) dao.getParents(intercambio);
-		intercambiosHijos = (List<Intercambio>) dao.getChildren(intercambio);
+		intercambiosPadres = (List<Intercambio>) getParents(intercambio);
+		intercambiosHijos = (List<Intercambio>) getChildren(intercambio);
 
+		// Debe venir de la sesión de usuario.
 		responsable = "Usuario";
 
 		return SUCCESS;
@@ -99,16 +98,10 @@ public class ServicioInformacionControlador extends ActionSupport implements
 
 	@SuppressWarnings("unchecked")
 	public void validate() {
-		Area area = new Area();
-		Estado est = new Estado();
-		Seguridad seg = new Seguridad();
-		Arquitectura arq = new Arquitectura();
-		Sector sector = new Sector();
-		Intercambio intercambio = new Intercambio();
-
 		/*
 		 * Para Validar la que la cadena sea decimal y con el rango (0,999.999)
-		 * No encontre una anotación en struts validation que lo hiciera
+		 * No encontre una anotación en struts validation que lo hiciera (ESO ES
+		 * UN BONO MENOS)
 		 */
 		float ver;
 		try {
@@ -156,23 +149,12 @@ public class ServicioInformacionControlador extends ActionSupport implements
 					"slaArchivo",
 					getText("Si va a subir un documento debe proporcionar el archivo a guardar"));
 		}
-
-		areas = (List<Area>) dao.read(area);
-		estados = (List<Estado>) dao.read(est);
-		l_seguridad = (List<Seguridad>) dao.read(seg);
-		arquitecturas = (List<Arquitectura>) dao.read(arq);
-		sectores = (List<Sector>) dao.read(sector);
-
-		intercambiosPadres = (List<Intercambio>) dao.getParents(intercambio);
-		intercambiosHijos = (List<Intercambio>) dao.getChildren(intercambio);
-
-		responsable = "Usuario";
-
+		prepararFormulario();
 	}
 
 	public String registrarServicioInformacion() {
 
-		idServicioInformacion = dao.getNextId(servicio);
+		idServicioInformacion = getNextId(servicio);
 		// consultar ente
 		servicio.setId_ente(1);
 		// consultar usuario
@@ -200,7 +182,7 @@ public class ServicioInformacionControlador extends ActionSupport implements
 		servicio.setId_tipo_intercambio(Long.parseLong(intercambio));
 
 		try {
-			dao.create(servicio);
+			create(servicio);
 		} catch (Exception e) {
 			addFieldError("nombre",
 					getText("Este nombre ya existe. Proporcione otro."));
@@ -212,7 +194,7 @@ public class ServicioInformacionControlador extends ActionSupport implements
 		for (int i = 0; i < area.size(); i++) {
 			unionarea.setId_area(Long.parseLong(String.valueOf(area.get(i))));
 			unionarea.setId_servicio_informacion(idServicioInformacion);
-			// dao.create(unionarea, id_si);
+			// create(unionarea, id_si);
 		}
 
 		// Seteando el ARQUITECTURA
@@ -221,27 +203,27 @@ public class ServicioInformacionControlador extends ActionSupport implements
 			unionarquitectura.setId_arquitectura(Long.parseLong(String
 					.valueOf(arquitectura.get(i))));
 			unionarquitectura.setId_servicio_informacion(idServicioInformacion);
-			// dao.create(unionarquitectura, id_si);
+			// create(unionarquitectura, id_si);
 		}
 
 		// Seteando el TELEFONO DE CONTACTO
 		Telefono telf = new Telefono();
 		telf.setTelefono(codArea + "-" + telefonoContacto);
 		telf.setId_servicio_informacion(idServicioInformacion);
-		dao.create(telf);
+		create(telf);
 
 		// Seteando el CORREO DE CONTACTO
 		Correo correo = new Correo();
 		correo.setCorreo(correoContacto);
 		correo.setId_servicio_informacion(idServicioInformacion);
-		dao.create(correo);
+		create(correo);
 
 		// Seteando el documento legal
 		// valida que ambos campos existan
 		if (archivoFileName != null && aspectoLegal.isEmpty() == false) {
 			AspectoLegal al = new AspectoLegal();
 			try {
-				al.setUrl(saveFile());
+				al.setUrl(saveFile(archivo, archivoFileName));
 			} catch (IOException e) {
 				// levantar action error
 				e.printStackTrace();
@@ -249,7 +231,7 @@ public class ServicioInformacionControlador extends ActionSupport implements
 			al.setNombre(aspectoLegal);
 			al.setTipo(0);
 			al.setId_servicio_informacion(idServicioInformacion);
-			dao.create(al);
+			create(al);
 		}
 
 		// Seteando el documento legal
@@ -257,7 +239,7 @@ public class ServicioInformacionControlador extends ActionSupport implements
 		if (slaArchivo != null && slaNombre.isEmpty() == false) {
 			AspectoLegal al = new AspectoLegal();
 			try {
-				al.setUrl(saveFile2());
+				al.setUrl(saveFile(slaArchivo, slaArchivoFileName));
 			} catch (IOException e) {
 				// levantar action error
 				e.printStackTrace();
@@ -265,40 +247,22 @@ public class ServicioInformacionControlador extends ActionSupport implements
 			al.setNombre(aspectoLegal);
 			al.setTipo(1);
 			al.setId_servicio_informacion(idServicioInformacion);
-			dao.create(al);
+			create(al);
 		}
-
 		return SUCCESS;
 	}
 
-	private String saveFile() throws IOException {
+	private String saveFile(File file, String fileName) throws IOException {
 		String INSTITUCION = "cnti"; // Obtener desde la base de datos.
 
 		String filePath = servletRequest.getSession().getServletContext()
 				.getRealPath("/archivos/" + INSTITUCION.toString());
 
-		System.out.println("Server path: " + filePath);
-		System.out.println(archivoFileName);
-		File fileToCreate = new File(filePath, this.archivoFileName);
+		File fileToCreate = new File(filePath, fileName);
 
-		FileUtils.copyFile(this.archivo, fileToCreate);
+		FileUtils.copyFile(file, fileToCreate);
 
-		return "/archivos/" + INSTITUCION.toString() + "/" + archivoFileName;
-	}
-
-	private String saveFile2() throws IOException {
-		String INSTITUCION = "cnti"; // Obtener desde la base de datos.
-
-		String filePath = servletRequest.getSession().getServletContext()
-				.getRealPath("/archivos/" + INSTITUCION.toString());
-
-		System.out.println("Server path: " + filePath);
-		System.out.println(slaArchivoFileName);
-		File fileToCreate = new File(filePath, this.slaArchivoFileName);
-
-		FileUtils.copyFile(this.slaArchivo, fileToCreate);
-
-		return "/archivos/" + INSTITUCION.toString() + "/" + slaArchivoFileName;
+		return "/archivos/" + INSTITUCION.toString() + "/" + fileName;
 	}
 
 	public List<Estado> getEstados() {
