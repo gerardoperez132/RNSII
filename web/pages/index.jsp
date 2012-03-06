@@ -20,9 +20,9 @@
 			<!-- Este es el div de la cabecera -->
 			<div id="header">
 				<img src="pages/res/img/header.png" width="880" height="70"
-					alt="Cintillo Gobierno Bolivariano" /> <img src="pages/res/img/mio.png"
-					width="874" height="116" alt="Marco de Interoperabilidad"
-					style="border: 3px solid #57cedc;" />
+					alt="Cintillo Gobierno Bolivariano" /> <img
+					src="pages/res/img/mio.png" width="874" height="116"
+					alt="Marco de Interoperabilidad" style="border: 3px solid #57cedc;" />
 			</div>
 
 			<!-- Este es el div de los menúes -->
@@ -35,7 +35,7 @@
 			<div id="content">
 				<br>
 				<s:url id="registrarServicioInformacion"
-					action="prepararRegistroServicioInformacion"></s:url>
+					action="prepararServicioInformacion"></s:url>
 				<s:a href="%{registrarServicioInformacion}">Registrar Servicio de Información</s:a>
 				<br>
 				<s:url id="prepararFuncionalidad" action="prepararFuncionalidad"></s:url>

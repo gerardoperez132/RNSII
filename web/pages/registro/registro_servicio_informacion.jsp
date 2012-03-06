@@ -34,17 +34,17 @@
 
 			<!-- Esta es la barra lateral -->
 			<div id="sidebar">
-			
-			<div class="main_cont">
-				<div class="menu_top_bg">Navegacion</div>
-				<div class="sub_menu">
-					<ul>
-						<li><a class="selected">Paso 1</a></li>						
-						<li><a href="#">Paso 2</a></li>
-						<li><a href="#">Paso 3 </a></li>						
-					</ul>
+
+				<div class="main_cont">
+					<div class="menu_top_bg">Navegacion</div>
+					<div class="sub_menu">
+						<ul>
+							<li><a class="selected">Paso 1</a></li>
+							<li><a href="#">Paso 2</a></li>
+							<li><a href="#">Paso 3 </a></li>
+						</ul>
+					</div>
 				</div>
-			</div>
 
 				<small>Paso 1 Registro de Servicio de Información</small><br> <br>
 				<small>Paso 2 Registro de Funcionalidad(es)</small> <br> <br>
@@ -83,12 +83,10 @@
 							<p>Descripción General del Servicio</p>
 							<hr>
 
-							<a class="tooltip" >			 
-							Sector:
-							<span class="custom help"><img src="res/img/Info.png" alt="Help" height="48" width="48" />
-								 <em>ayuda</em>This is just an example of what you can do using a CSS tooltip, feel free to get creative and produce your own!
-								 </span>
-							 </a><br>
+							<a class="tooltip"> Sector: <span class="custom help"><img
+									src="res/img/Info.png" alt="Help" height="48" width="48" /> <em>ayuda</em>This
+									is just an example of what you can do using a CSS tooltip, feel
+									free to get creative and produce your own! </span> </a><br>
 							<s:fielderror>
 								<s:param>sector</s:param>
 							</s:fielderror>
@@ -130,25 +128,26 @@
 
 						<div id="tab2" class="tab_content">
 							<p class="formulario">Aspectos legales que rigen al servicio</p>
-							<small>Incluir documento legal y documento de acuerdo de nivel de
-								servicio(SLA) por el qué se regirá este Servicio de Información.</small>
+							<small>Incluir documento legal y documento de acuerdo de
+								nivel de servicio(SLA) por el qué se regirá este Servicio de
+								Información.</small>
 							<hr>
 
 							<h5 class="formulario">Nombre del Documento Legal:</h5>
 							<s:fielderror>
-								<s:param>aspectoLegal</s:param>
+								<s:param>documentoLegalNombre</s:param>
 							</s:fielderror>
-							<s:textfield name="aspectoLegal" labelposition="top" />
+							<s:textfield name="documentoLegalNombre" labelposition="top" />
 
 
 							<h5 class="formulario">Adjuntar Documento Legal:</h5>
 							<s:fielderror>
-								<s:param>archivo</s:param>
+								<s:param>documentoLegal</s:param>
 							</s:fielderror>
-							<s:file name="archivo" value="archivoFileName"></s:file>
-							
-							<br><br><br><br>
-							
+							<s:file name="documentoLegal" value="documentoLegalFileName"></s:file>
+
+							<br> <br> <br> <br>
+
 							<h5 class="formulario">Nombre del Documento SLA:</h5>
 							<s:fielderror>
 								<s:param>slaNombre</s:param>
@@ -158,11 +157,11 @@
 
 							<h5 class="formulario">Adjuntar SLA:</h5>
 							<s:fielderror>
-								<s:param>slaArchivo</s:param>
+								<s:param>sla</s:param>
 							</s:fielderror>
-							<s:file name="slaArchivo"></s:file>
-							
-							
+							<s:file name="sla" value="slaFileName"></s:file>
+
+
 
 						</div>
 
@@ -171,7 +170,7 @@
 							<p class="formulario">Descripción técnica del servicio</p>
 							<small>Especificaciones del intercambio de Información</small>
 							<hr>
-							
+
 							<h5 class="formulario">Seguridad:</h5>
 							<s:fielderror>
 								<s:param>seguridad</s:param>

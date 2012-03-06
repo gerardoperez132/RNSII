@@ -2,11 +2,12 @@
 <!DOCTYPE struts PUBLIC
 "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
 "http://struts.apache.org/dtds/struts-2.0.dtd">
-<struts>	
-	<package name="default" extends="struts-default">	
-		
-		<!--Actions para registros -->
-		<action name="prepararRegistroServicioInformacion" method="prepararRegistroServicioInformacion"
+
+<struts>
+	<package name="default" extends="struts-default">
+
+		<!--Actions para registros de servicios de información -->
+		<action name="prepararServicioInformacion" method="prepararFormulario"
 			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
 			<result name="success">registro/registro_servicio_informacion.jsp
 			</result>
@@ -27,11 +28,11 @@
 
 		<action name="registrarFuncionalidad" method="registrarFuncionalidad"
 			class="ve.gob.cnti.srsi.controlador.FuncionalidadControlador">
-			
+
 			<result name="success" type="chain">
-               <param name="actionName">prepararEntradas</param>                         
-            </result>
-			
+				<param name="actionName">prepararEntradas</param>
+			</result>
+
 			<result name="input">registro/registro_funcionalidad.jsp</result>
 		</action>
 
@@ -40,7 +41,7 @@
 			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
 			<result name="success">registro/entradas.jsp</result>
 		</action>
-		
+
 		<action name="prepararEntradaSimple" method="prepararFormulario"
 			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
 			<result name="success">registro/registro_entrada_simple.jsp</result>
@@ -55,10 +56,11 @@
 			class="ve.gob.cnti.srsi.controlador.EntradaControlador">			
 			<interceptor-ref name="token"/>
             <interceptor-ref name="basicStack"/>			
-			<result name="invalid.token" type="chain">err/err_entradas.jsp</result>			
+			<result name="invalid.token">err/err_entradas.jsp</result>			
 			<result name="success" type="chain">
                <param name="actionName">prepararEntradas</param>                         
             </result>            
+
 			<result name="input">registro/registro_entrada_simple.jsp</result>
 		</action>
 

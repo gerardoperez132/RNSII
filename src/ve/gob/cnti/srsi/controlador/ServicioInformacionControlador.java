@@ -11,6 +11,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
+import ve.gob.cnti.srsi.dao.Constants.TipoDocumento;
 import ve.gob.cnti.srsi.dao.DAO;
 import ve.gob.cnti.srsi.modelo.Area;
 import ve.gob.cnti.srsi.modelo.Arquitectura;
@@ -25,14 +26,13 @@ import ve.gob.cnti.srsi.modelo.Telefono;
 import ve.gob.cnti.srsi.modelo.UnionAreaServicioInformacion;
 import ve.gob.cnti.srsi.modelo.UnionArquitecturaServicioInformacion;
 
-import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.validator.annotations.EmailValidator;
 import com.opensymphony.xwork2.validator.annotations.FieldExpressionValidator;
 import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
 
 @SuppressWarnings("serial")
-public class ServicioInformacionControlador extends ActionSupport implements
-		ServletRequestAware {
+public class ServicioInformacionControlador extends DAO implements
+		ServletRequestAware, Formulario, TipoDocumento {
 
 	private List<Area> areas = new ArrayList<Area>();
 	private List<Estado> estados = new ArrayList<Estado>();
@@ -49,8 +49,6 @@ public class ServicioInformacionControlador extends ActionSupport implements
 	private String nombre;
 	private String descripcion;
 	private String estado;
-	private String aspectoLegal;
-	private String slaNombre;
 	private List<String> area;
 	private String seguridad;
 	private String version;
@@ -61,20 +59,20 @@ public class ServicioInformacionControlador extends ActionSupport implements
 	private String telefonoContacto;
 	private String correoContacto;
 
-	private File archivo;
-	private String archivoContentType;
-	private String archivoFileName;
+	private File documentoLegal;
+	private String documentoLegalNombre;
+	private String documentoLegalFileName;
 
-	private File slaArchivo;
-	private String slaArchivoFileName;
+	private File sla;
+	private String slaNombre;
+	private String slaFileName;
 
 	private HttpServletRequest servletRequest;
 
-	private DAO dao = new DAO();
-
 	@SuppressWarnings("unchecked")
+	@Override
 	@SkipValidation
-	public String prepararRegistroServicioInformacion() {
+	public String prepararFormulario() {
 
 		Area area = new Area();
 		Estado est = new Estado();
@@ -83,15 +81,16 @@ public class ServicioInformacionControlador extends ActionSupport implements
 		Sector sector = new Sector();
 		Intercambio intercambio = new Intercambio();
 
-		areas = (List<Area>) dao.read(area);
-		estados = (List<Estado>) dao.read(est);
-		l_seguridad = (List<Seguridad>) dao.read(seg);
-		arquitecturas = (List<Arquitectura>) dao.read(arq);
-		sectores = (List<Sector>) dao.read(sector);
+		areas = (List<Area>) read(area);
+		estados = (List<Estado>) read(est);
+		l_seguridad = (List<Seguridad>) read(seg);
+		arquitecturas = (List<Arquitectura>) read(arq);
+		sectores = (List<Sector>) read(sector);
 
-		intercambiosPadres = (List<Intercambio>) dao.getParents(intercambio);
-		intercambiosHijos = (List<Intercambio>) dao.getChildren(intercambio);
+		intercambiosPadres = (List<Intercambio>) getParents(intercambio);
+		intercambiosHijos = (List<Intercambio>) getChildren(intercambio);
 
+		// Debe venir de la sesión de usuario.
 		responsable = "Usuario";
 
 		return SUCCESS;
@@ -99,16 +98,10 @@ public class ServicioInformacionControlador extends ActionSupport implements
 
 	@SuppressWarnings("unchecked")
 	public void validate() {
-		Area area = new Area();
-		Estado est = new Estado();
-		Seguridad seg = new Seguridad();
-		Arquitectura arq = new Arquitectura();
-		Sector sector = new Sector();
-		Intercambio intercambio = new Intercambio();
-
 		/*
 		 * Para Validar la que la cadena sea decimal y con el rango (0,999.999)
-		 * No encontre una anotación en struts validation que lo hiciera
+		 * No encontre una anotación en struts validation que lo hiciera (ESO ES
+		 * UN BONO MENOS)
 		 */
 		float ver;
 		try {
@@ -126,53 +119,44 @@ public class ServicioInformacionControlador extends ActionSupport implements
 		}
 
 		// valida que ambos campos existan
-		if (archivoFileName != null && aspectoLegal.isEmpty() == true) {
+		if (documentoLegalFileName != null
+				&& documentoLegalNombre.isEmpty() == true) {
 			addFieldError(
-					"aspectoLegal",
+					"documentoLegalNombre",
 					getText("Si va a subir un documento debe proporcionar el nombre con que se va a guardar"));
 			addFieldError(
-					"archivo",
+					"documentoLegal",
 					getText("Si va a subir un documento debe proporcionar el archivo a guardar"));
 		}
 		// valida que ambos campos existan
-		if (archivoFileName == null && aspectoLegal.isEmpty() == false) {
+		if (documentoLegalFileName == null
+				&& documentoLegalNombre.isEmpty() == false) {
 			addFieldError(
-					"archivo",
+					"documentoLegal",
 					getText("Si va a subir un documento debe proporcionar el archivo a guardar"));
 		}
 
 		// valida que ambos campos existan
-		if (slaArchivoFileName != null && slaNombre.isEmpty() == true) {
+		if (slaFileName != null && slaNombre.isEmpty() == true) {
 			addFieldError(
 					"slaNombre",
 					getText("Si va a subir un documento debe proporcionar el nombre con que se va a guardar"));
 			addFieldError(
-					"slaArchivo",
+					"sla",
 					getText("Si va a subir un documento debe proporcionar el archivo a guardar"));
 		}
 		// valida que ambos campos existan
-		if (slaArchivoFileName == null && slaNombre.isEmpty() == false) {
+		if (sla == null && slaNombre.isEmpty() == false) {
 			addFieldError(
-					"slaArchivo",
+					"sla",
 					getText("Si va a subir un documento debe proporcionar el archivo a guardar"));
 		}
-
-		areas = (List<Area>) dao.read(area);
-		estados = (List<Estado>) dao.read(est);
-		l_seguridad = (List<Seguridad>) dao.read(seg);
-		arquitecturas = (List<Arquitectura>) dao.read(arq);
-		sectores = (List<Sector>) dao.read(sector);
-
-		intercambiosPadres = (List<Intercambio>) dao.getParents(intercambio);
-		intercambiosHijos = (List<Intercambio>) dao.getChildren(intercambio);
-
-		responsable = "Usuario";
-
+		prepararFormulario();
 	}
 
 	public String registrarServicioInformacion() {
 
-		idServicioInformacion = dao.getNextId(servicio);
+		idServicioInformacion = getNextId(servicio);
 		// consultar ente
 		servicio.setId_ente(1);
 		// consultar usuario
@@ -200,7 +184,7 @@ public class ServicioInformacionControlador extends ActionSupport implements
 		servicio.setId_tipo_intercambio(Long.parseLong(intercambio));
 
 		try {
-			dao.create(servicio);
+			create(servicio);
 		} catch (Exception e) {
 			addFieldError("nombre",
 					getText("Este nombre ya existe. Proporcione otro."));
@@ -212,7 +196,7 @@ public class ServicioInformacionControlador extends ActionSupport implements
 		for (int i = 0; i < area.size(); i++) {
 			unionarea.setId_area(Long.parseLong(String.valueOf(area.get(i))));
 			unionarea.setId_servicio_informacion(idServicioInformacion);
-			// dao.create(unionarea, id_si);
+			// create(unionarea, id_si);
 		}
 
 		// Seteando el ARQUITECTURA
@@ -221,84 +205,64 @@ public class ServicioInformacionControlador extends ActionSupport implements
 			unionarquitectura.setId_arquitectura(Long.parseLong(String
 					.valueOf(arquitectura.get(i))));
 			unionarquitectura.setId_servicio_informacion(idServicioInformacion);
-			// dao.create(unionarquitectura, id_si);
+			// create(unionarquitectura, id_si);
 		}
 
 		// Seteando el TELEFONO DE CONTACTO
 		Telefono telf = new Telefono();
 		telf.setTelefono(codArea + "-" + telefonoContacto);
 		telf.setId_servicio_informacion(idServicioInformacion);
-		dao.create(telf);
+		create(telf);
 
 		// Seteando el CORREO DE CONTACTO
 		Correo correo = new Correo();
 		correo.setCorreo(correoContacto);
 		correo.setId_servicio_informacion(idServicioInformacion);
-		dao.create(correo);
+		create(correo);
 
 		// Seteando el documento legal
 		// valida que ambos campos existan
-		if (archivoFileName != null && aspectoLegal.isEmpty() == false) {
+		if (documentoLegalFileName != null
+				&& documentoLegalNombre.isEmpty() == false) {
 			AspectoLegal al = new AspectoLegal();
 			try {
-				al.setUrl(saveFile());
+				al.setUrl(saveFile(documentoLegal, documentoLegalFileName));
 			} catch (IOException e) {
 				// levantar action error
 				e.printStackTrace();
 			}
-			al.setNombre(aspectoLegal);
-			al.setTipo(0);
+			al.setNombre(documentoLegalNombre);
+			al.setTipo(LEGAL);
 			al.setId_servicio_informacion(idServicioInformacion);
-			dao.create(al);
+			create(al);
 		}
 
 		// Seteando el documento legal
 		// valida que ambos campos existan
-		if (slaArchivo != null && slaNombre.isEmpty() == false) {
+		if (sla != null && slaNombre.isEmpty() == false) {
 			AspectoLegal al = new AspectoLegal();
 			try {
-				al.setUrl(saveFile2());
+				al.setUrl(saveFile(sla, slaFileName));
 			} catch (IOException e) {
 				// levantar action error
 				e.printStackTrace();
 			}
-			al.setNombre(aspectoLegal);
-			al.setTipo(1);
+			al.setNombre(slaNombre);
+			al.setTipo(SLA);
 			al.setId_servicio_informacion(idServicioInformacion);
-			dao.create(al);
+			create(al);
 		}
-
 		return SUCCESS;
 	}
 
-	private String saveFile() throws IOException {
+	private String saveFile(File file, String fileName) throws IOException {
 		String INSTITUCION = "cnti"; // Obtener desde la base de datos.
-
 		String filePath = servletRequest.getSession().getServletContext()
 				.getRealPath("/archivos/" + INSTITUCION.toString());
+		File fileToCreate = new File(filePath, fileName);
+		FileUtils.copyFile(file, fileToCreate);
 
-		System.out.println("Server path: " + filePath);
-		System.out.println(archivoFileName);
-		File fileToCreate = new File(filePath, this.archivoFileName);
-
-		FileUtils.copyFile(this.archivo, fileToCreate);
-
-		return "/archivos/" + INSTITUCION.toString() + "/" + archivoFileName;
-	}
-
-	private String saveFile2() throws IOException {
-		String INSTITUCION = "cnti"; // Obtener desde la base de datos.
-
-		String filePath = servletRequest.getSession().getServletContext()
-				.getRealPath("/archivos/" + INSTITUCION.toString());
-
-		System.out.println("Server path: " + filePath);
-		System.out.println(slaArchivoFileName);
-		File fileToCreate = new File(filePath, this.slaArchivoFileName);
-
-		FileUtils.copyFile(this.slaArchivo, fileToCreate);
-
-		return "/archivos/" + INSTITUCION.toString() + "/" + slaArchivoFileName;
+		return "/archivos/" + INSTITUCION.toString() + "/" + fileName;
 	}
 
 	public List<Estado> getEstados() {
@@ -402,14 +366,6 @@ public class ServicioInformacionControlador extends ActionSupport implements
 		this.estado = estado;
 	}
 
-	public String getAspectoLegal() {
-		return aspectoLegal;
-	}
-
-	public void setAspectoLegal(String aspectoLegal) {
-		this.aspectoLegal = aspectoLegal;
-	}
-
 	@FieldExpressionValidator(expression = "!area.isEmpty()", message = "Seleccione un valor. ")
 	public List<String> getArea() {
 		return area;
@@ -482,54 +438,6 @@ public class ServicioInformacionControlador extends ActionSupport implements
 		this.correoContacto = correoContacto;
 	}
 
-	public File getArchivo() {
-		return archivo;
-	}
-
-	public void setArchivo(File archivo) {
-		this.archivo = archivo;
-	}
-
-	public String getArchivoContentType() {
-		return archivoContentType;
-	}
-
-	public void setArchivoContentType(String archivoContentType) {
-		this.archivoContentType = archivoContentType;
-	}
-
-	public String getArchivoFileName() {
-		return archivoFileName;
-	}
-
-	public void setArchivoFileName(String archivoFileName) {
-		this.archivoFileName = archivoFileName;
-	}
-
-	public File getSlaArchivo() {
-		return slaArchivo;
-	}
-
-	public void setSlaArchivo(File slaArchivo) {
-		this.slaArchivo = slaArchivo;
-	}
-
-	public String getSlaArchivoFileName() {
-		return slaArchivoFileName;
-	}
-
-	public void setSlaArchivoFileName(String slaArchivoFileName) {
-		this.slaArchivoFileName = slaArchivoFileName;
-	}
-
-	public String getSlaNombre() {
-		return slaNombre;
-	}
-
-	public void setSlaNombre(String slaNombre) {
-		this.slaNombre = slaNombre;
-	}
-
 	public long getIdServicioInformacion() {
 		return idServicioInformacion;
 	}
@@ -551,4 +459,51 @@ public class ServicioInformacionControlador extends ActionSupport implements
 		this.servicio = servicio;
 	}
 
+	public File getDocumentoLegal() {
+		return documentoLegal;
+	}
+
+	public void setDocumentoLegal(File documentoLegal) {
+		this.documentoLegal = documentoLegal;
+	}
+
+	public String getDocumentoLegalNombre() {
+		return documentoLegalNombre;
+	}
+
+	public void setDocumentoLegalNombre(String documentoLegalNombre) {
+		this.documentoLegalNombre = documentoLegalNombre;
+	}
+
+	public String getDocumentoLegalFileName() {
+		return documentoLegalFileName;
+	}
+
+	public void setDocumentoLegalFileName(String documentoLegalFileName) {
+		this.documentoLegalFileName = documentoLegalFileName;
+	}
+
+	public File getSla() {
+		return sla;
+	}
+
+	public void setSla(File sla) {
+		this.sla = sla;
+	}
+
+	public String getSlaNombre() {
+		return slaNombre;
+	}
+
+	public void setSlaNombre(String slaNombre) {
+		this.slaNombre = slaNombre;
+	}
+
+	public String getSlaFileName() {
+		return slaFileName;
+	}
+
+	public void setSlaFileName(String slaFileName) {
+		this.slaFileName = slaFileName;
+	}
 }
