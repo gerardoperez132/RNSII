@@ -170,4 +170,6 @@ public interface CRUD {
 	 * @return Lista de datos compuestos.
 	 */
 	public ArrayList<?> getComplex();
+
+	public ArrayList<?> readEntrada2(long id);
 }

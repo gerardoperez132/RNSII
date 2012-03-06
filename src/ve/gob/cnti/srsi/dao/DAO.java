@@ -4,6 +4,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -228,15 +229,48 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 	@SuppressWarnings("unchecked")
 	@Override
 	public ArrayList<?> readEntrada(long id) {
+		List<Dato> result = new ArrayList<Dato>();
+
+		try {
+			startConnection();
+			result = session
+					.createSQLQuery("SELECT d.* FROM datos AS d INNER JOIN " +
+							"entradas_salidas AS es ON d.id_entrada_salida = es.id_entrada_salida " +
+							"INNER JOIN funcionalidades AS f ON f.id_funcionalidad = es.id_funcionalidad " +
+							"WHERE f.id_funcionalidad = " + id
+							+ " AND d.status = "
+							+ ACTIVO
+							+ " AND es.tipo = " + ENTRADA).addEntity(Dato.class).list();		
+			Iterator<Dato> iterator = (Iterator<Dato>) result.iterator();
+			Dato da = new Dato();
+			while (iterator.hasNext()) {
+				da = (Dato) iterator.next();
+				System.out.println(" DATO => " + da.toString());
+			}
+
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+		return (ArrayList<?>)result;
+
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public ArrayList<?> readEntrada2(long id) {
 		ArrayList<?> result;
 		try {
 			startConnection();
 			result = (ArrayList<Object>) session
-					.createSQLQuery(
-							"SELECT d.* FROM datos AS d INNER JOIN entradas_salidas AS es ON d.id_entrada_salida = es.id_entrada_salida INNER JOIN funcionalidades AS f ON f.id_funcionalidad = es.id_funcionalidad WHERE f.id_funcionalidad = "
-									+ id
-									+ " AND d.status = "
-									+ ACTIVO
+					.createQuery(
+							"SELECT d FROM Dato as d inner join "
+									+ "EntradaSalida as es with es.id_entrada_salida = d.id_entrada_salida inner join "
+									+ "Funcionalidad as f with f.id_funcionalidad = es.id_funcionalidad "
+									+ "WHERE f.id_funcionalidad = " + id
+									+ " AND d.status = " + ACTIVO
 									+ " AND es.tipo = " + ENTRADA).list();
 			Iterator<Dato> iterator = (Iterator<Dato>) result.iterator();
 			while (iterator.hasNext()) {

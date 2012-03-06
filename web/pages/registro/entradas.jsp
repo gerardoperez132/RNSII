@@ -83,13 +83,19 @@
 
 								<s:iterator value="datos">
 									<tr>
+										<td>
 										<s:property value="nombre" />
+										</td>
 									</tr>
 									<tr>
+										<td>
 										<s:property value="descripcion" />
+										</td>
 									</tr>
 									<tr>
+										<td>
 										<s:property value="id_dato" />
+										</td>
 									</tr>
 								</s:iterator>
 							</table>
