@@ -135,16 +135,16 @@
 
 							<h5 class="formulario">Nombre del Documento Legal:</h5>
 							<s:fielderror>
-								<s:param>aspectoLegal</s:param>
+								<s:param>documentoLegalNombre</s:param>
 							</s:fielderror>
-							<s:textfield name="aspectoLegal" labelposition="top" />
+							<s:textfield name="documentoLegalNombre" labelposition="top" />
 
 
 							<h5 class="formulario">Adjuntar Documento Legal:</h5>
 							<s:fielderror>
-								<s:param>archivo</s:param>
+								<s:param>documentoLegal</s:param>
 							</s:fielderror>
-							<s:file name="archivo" value="archivoFileName"></s:file>
+							<s:file name="documentoLegal" value="documentoLegalFileName"></s:file>
 
 							<br> <br> <br> <br>
 
@@ -157,9 +157,9 @@
 
 							<h5 class="formulario">Adjuntar SLA:</h5>
 							<s:fielderror>
-								<s:param>slaArchivo</s:param>
+								<s:param>sla</s:param>
 							</s:fielderror>
-							<s:file name="slaArchivo"></s:file>
+							<s:file name="sla" value="slaFileName"></s:file>
 
 
 
