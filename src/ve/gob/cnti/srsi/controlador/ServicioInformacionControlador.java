@@ -11,18 +11,21 @@ import org.apache.commons.io.FileUtils;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
+import ve.gob.cnti.srsi.dao.Constants.ArregloModelos;
 import ve.gob.cnti.srsi.dao.Constants.TipoDocumento;
 import ve.gob.cnti.srsi.dao.DAO;
 import ve.gob.cnti.srsi.modelo.Area;
 import ve.gob.cnti.srsi.modelo.Arquitectura;
 import ve.gob.cnti.srsi.modelo.AspectoLegal;
 import ve.gob.cnti.srsi.modelo.Correo;
+import ve.gob.cnti.srsi.modelo.Dato;
 import ve.gob.cnti.srsi.modelo.Estado;
 import ve.gob.cnti.srsi.modelo.Intercambio;
 import ve.gob.cnti.srsi.modelo.Sector;
 import ve.gob.cnti.srsi.modelo.Seguridad;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.Telefono;
+import ve.gob.cnti.srsi.modelo.TipoDato;
 import ve.gob.cnti.srsi.modelo.UnionAreaServicioInformacion;
 import ve.gob.cnti.srsi.modelo.UnionArquitecturaServicioInformacion;
 
@@ -32,7 +35,7 @@ import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
 
 @SuppressWarnings("serial")
 public class ServicioInformacionControlador extends DAO implements
-		ServletRequestAware, Formulario, TipoDocumento {
+		ServletRequestAware, Formulario, TipoDocumento, ArregloModelos {
 
 	private List<Area> areas = new ArrayList<Area>();
 	private List<Estado> estados = new ArrayList<Estado>();
@@ -92,6 +95,15 @@ public class ServicioInformacionControlador extends DAO implements
 
 		// Debe venir de la sesión de usuario.
 		responsable = "Usuario";
+
+		System.out.println("NOMBRE DEL DATO => "
+				+ ((Dato) read(NOMBRE_DATO, ENTRADA, 3)).getNombre());
+
+		System.out.println("NOMBRE TIPO DATO => "
+				+ ((TipoDato) read(NOMBRE_TIPO_DATO, 1)).getNombre());
+
+		System.out.println("DATO DUPLICADO => "
+				+ read(NOMBRE_DATO_NO_DUPLICADO, "Dato Simple 1", 3));
 
 		return SUCCESS;
 	}
