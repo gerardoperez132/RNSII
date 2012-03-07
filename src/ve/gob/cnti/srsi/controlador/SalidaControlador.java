@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
 import ve.gob.cnti.srsi.dao.DAO;
+import ve.gob.cnti.srsi.dao.Constants.ArregloModelos;
 import ve.gob.cnti.srsi.dao.Constants.TipoEntradaSalida;
 import ve.gob.cnti.srsi.modelo.Dato;
 import ve.gob.cnti.srsi.modelo.EntradaSalida;
@@ -16,7 +17,7 @@ import ve.gob.cnti.srsi.modelo.TipoDato;
 
 @SuppressWarnings("serial")
 public class SalidaControlador extends DAO implements Formulario,
-		TipoEntradaSalida {
+		TipoEntradaSalida, ArregloModelos {
 	private List<EntradaSalida> entradas = new ArrayList<EntradaSalida>();
 	private List<EntradaSalida> salidas = new ArrayList<EntradaSalida>();
 	private List<TipoDato> tipoDatos = new ArrayList<TipoDato>();
@@ -38,7 +39,8 @@ public class SalidaControlador extends DAO implements Formulario,
 
 		funcionalidad = (Funcionalidad) read(funcionalidad, idFuncionalidad);
 		servicio = (ServicioInformacion) read(servicio, idServicioInformacion);
-		datos = (ArrayList<Dato>) readEntrada(idFuncionalidad);
+		// datos = (ArrayList<Dato>) readEntrada(idFuncionalidad);
+		datos = (ArrayList<Dato>) read(NOMBRE_DATO, SALIDA, idFuncionalidad);
 		Iterator<Dato> iterator = datos.iterator();
 		while (iterator.hasNext()) {
 
@@ -68,6 +70,9 @@ public class SalidaControlador extends DAO implements Formulario,
 					"Debe introducir una descripción.");
 		if (dato.getId_tipo_dato() == -1)
 			addFieldError("tipodato", "Debe seleccionar un tipo de dato");
+		if (read(NOMBRE_DATO_NO_DUPLICADO, dato.getNombre(), idFuncionalidad)){
+			addFieldError("dato.nombre", "Nombre de Salida Duplicado, cambie el nombre por favor");
+		}
 
 		prepararFormulario();
 	}
