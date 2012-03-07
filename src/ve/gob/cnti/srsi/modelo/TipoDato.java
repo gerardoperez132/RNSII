@@ -24,7 +24,7 @@ public class TipoDato {
 	private long id;
 	private long id_tipo_dato;
 	/** Simple (1) o compuesto (0). */
-	private int clase_dato;
+	private int tipo;
 	private String nombre;
 	private String descripcion;
 	private int status;
@@ -47,12 +47,12 @@ public class TipoDato {
 		this.id_tipo_dato = id_tipo_dato;
 	}
 
-	public int getClase_dato() {
-		return clase_dato;
+	public int getTipo() {
+		return tipo;
 	}
 
-	public void setClase_dato(int clase_dato) {
-		this.clase_dato = clase_dato;
+	public void setTipo(int tipo) {
+		this.tipo = tipo;
 	}
 
 	public String getNombre() {
@@ -98,9 +98,8 @@ public class TipoDato {
 	@Override
 	public String toString() {
 		return "TipoDato [id=" + id + ", id_tipo_dato=" + id_tipo_dato
-				+ ", clase_dato=" + clase_dato + ", nombre=" + nombre
-				+ ", descripcion=" + descripcion + ", status=" + status
-				+ ", fecha_creado=" + fecha_creado + ", fecha_modificado="
-				+ fecha_modificado + "]";
+				+ ", tipo=" + tipo + ", nombre=" + nombre + ", descripcion="
+				+ descripcion + ", status=" + status + ", fecha_creado="
+				+ fecha_creado + ", fecha_modificado=" + fecha_modificado + "]";
 	}
 }
