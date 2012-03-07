@@ -68,7 +68,9 @@ public class EntradaControlador extends DAO implements Formulario,
 					"Debe introducir una descripción.");
 		if (dato.getId_tipo_dato() == -1)
 			addFieldError("tipodato", "Debe seleccionar un tipo de dato");
-		prepararFormulario();
+		
+		
+		prepararFormulario();		
 	}
 
 	public List<EntradaSalida> getEntradas() {

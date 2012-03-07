@@ -54,9 +54,7 @@
 
 		<action name="registrarEntradaSimple" method="registrarEntradaSimple"
 			class="ve.gob.cnti.srsi.controlador.EntradaControlador">			
-			<interceptor-ref name="token"/>
-            <interceptor-ref name="basicStack"/>			
-			<result name="invalid.token">err/err_entradas.jsp</result>			
+						
 			<result name="success" type="chain">
                <param name="actionName">prepararEntradas</param>                         
             </result>            
