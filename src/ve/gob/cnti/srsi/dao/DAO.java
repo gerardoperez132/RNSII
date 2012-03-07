@@ -3,8 +3,8 @@ package ve.gob.cnti.srsi.dao;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+
+import javax.persistence.Table;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -14,7 +14,6 @@ import org.hibernate.Transaction;
 import ve.gob.cnti.srsi.dao.Constants.ClaseDato;
 import ve.gob.cnti.srsi.dao.Constants.Status;
 import ve.gob.cnti.srsi.dao.Constants.TipoEntradaSalida;
-import ve.gob.cnti.srsi.modelo.Dato;
 import ve.gob.cnti.srsi.modelo.TipoDato;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -154,7 +153,7 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 					"FROM "
 							+ new TipoDato().getClass().getSimpleName()
 									.toString() + " WHERE status = " + ACTIVO
-							+ " AND clase_dato = " + SIMPLE).list();
+							+ " AND tipo = " + SIMPLE).list();
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;
@@ -174,7 +173,7 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 					"FROM "
 							+ new TipoDato().getClass().getSimpleName()
 									.toString() + " WHERE status = " + ACTIVO
-							+ " AND clase_dato = " + COMPUESTO).list();
+							+ " AND tipo = " + COMPUESTO).list();
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;
@@ -228,55 +227,145 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public ArrayList<?> readEntrada(long id) {
-		List<Dato> result = new ArrayList<Dato>();
-
+	public ArrayList<?> read(Object[] models, int type, long id) {
+		ArrayList<?> result;
+		String query = "SELECT "
+				+ models[0].getClass().getSimpleName().toLowerCase()
+				+ ".* FROM ";
 		try {
 			startConnection();
-			result = session
-					.createSQLQuery("SELECT d.* FROM datos AS d INNER JOIN " +
-							"entradas_salidas AS es ON d.id_entrada_salida = es.id_entrada_salida " +
-							"INNER JOIN funcionalidades AS f ON f.id_funcionalidad = es.id_funcionalidad " +
-							"WHERE f.id_funcionalidad = " + id
-							+ " AND d.status = "
+			for (short i = 0; i < models.length; i++) {
+				if (i < 1)
+					query += models[i].getClass().getAnnotation(Table.class)
+							.name().toString()
+							+ " AS "
+							+ models[i].getClass().getSimpleName()
+									.toLowerCase() + " INNER JOIN ";
+				else if (i > 0 && i < (models.length - 1))
+					query += models[i].getClass().getAnnotation(Table.class)
+							.name().toString()
+							+ " AS "
+							+ models[i].getClass().getSimpleName()
+									.toLowerCase()
+							+ " ON "
+							+ models[i - 1].getClass().getSimpleName()
+									.toLowerCase()
+							+ "."
+							+ getField(models[i])
+							+ " = "
+							+ models[i].getClass().getSimpleName()
+									.toLowerCase()
+							+ "."
+							+ getField(models[i])
+							+ " INNER JOIN ";
+				else
+					query += models[i].getClass().getAnnotation(Table.class)
+							.name().toString()
+							+ " AS "
+							+ models[i].getClass().getSimpleName()
+									.toLowerCase()
+							+ " ON "
+							+ models[i].getClass().getSimpleName()
+									.toLowerCase()
+							+ "."
+							+ getField(models[i])
+							+ " = "
+							+ models[i - 1].getClass().getSimpleName()
+									.toLowerCase()
+							+ "."
+							+ getField(models[i])
+							+ " WHERE "
+							+ models[i].getClass().getSimpleName()
+									.toLowerCase()
+							+ "."
+							+ getField(models[i])
+							+ " = "
+							+ id
+							+ " AND "
+							+ models[0].getClass().getSimpleName()
+									.toLowerCase()
+							+ ".status = "
 							+ ACTIVO
-							+ " AND es.tipo = " + ENTRADA).addEntity(Dato.class).list();		
-			Iterator<Dato> iterator = (Iterator<Dato>) result.iterator();
-			Dato da = new Dato();
-			while (iterator.hasNext()) {
-				da = (Dato) iterator.next();
-				System.out.println(" DATO => " + da.toString());
-			}
+							+ " AND "
+							+ models[1].getClass().getSimpleName()
+									.toLowerCase() + ".tipo = " + type;
 
+			}
+			System.out.println("QUERY => " + query);
+			result = (ArrayList<?>) session.createSQLQuery(query)
+					.addEntity(models[0].getClass()).list();
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;
 		} finally {
 			closeConnection();
 		}
-		return (ArrayList<?>)result;
-
+		return result;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public ArrayList<?> readEntrada2(long id) {
-		ArrayList<?> result;
+	public Object read(Object[] models, long id) {
+		Object result;
+		String query = "SELECT "
+				+ models[0].getClass().getSimpleName().toLowerCase()
+				+ ".* FROM ";
 		try {
 			startConnection();
-			result = (ArrayList<Object>) session
-					.createQuery(
-							"SELECT d FROM Dato as d inner join "
-									+ "EntradaSalida as es with es.id_entrada_salida = d.id_entrada_salida inner join "
-									+ "Funcionalidad as f with f.id_funcionalidad = es.id_funcionalidad "
-									+ "WHERE f.id_funcionalidad = " + id
-									+ " AND d.status = " + ACTIVO
-									+ " AND es.tipo = " + ENTRADA).list();
-			Iterator<Dato> iterator = (Iterator<Dato>) result.iterator();
-			while (iterator.hasNext()) {
-				System.out.println(" DATO => " + iterator.next().toString());
-			}
+			for (short i = 0; i < models.length; i++) {
+				if (i < 1)
+					query += models[i].getClass().getAnnotation(Table.class)
+							.name().toString()
+							+ " AS "
+							+ models[i].getClass().getSimpleName()
+									.toLowerCase() + " INNER JOIN ";
+				else if (i > 0 && i < (models.length - 1))
+					query += models[i].getClass().getAnnotation(Table.class)
+							.name().toString()
+							+ " AS "
+							+ models[i].getClass().getSimpleName()
+									.toLowerCase()
+							+ " ON "
+							+ models[i - 1].getClass().getSimpleName()
+									.toLowerCase()
+							+ "."
+							+ getField(models[i - 1])
+							+ " = "
+							+ models[i].getClass().getSimpleName()
+									.toLowerCase()
+							+ "."
+							+ getField(models[i - 1]) + " INNER JOIN ";
+				else
+					query += models[i].getClass().getAnnotation(Table.class)
+							.name().toString()
+							+ " AS "
+							+ models[i].getClass().getSimpleName()
+									.toLowerCase()
+							+ " ON "
+							+ models[i].getClass().getSimpleName()
+									.toLowerCase()
+							+ "."
+							+ getField(models[i])
+							+ " = "
+							+ models[i - 1].getClass().getSimpleName()
+									.toLowerCase()
+							+ "."
+							+ getField(models[i])
+							+ " WHERE "
+							+ models[i].getClass().getSimpleName()
+									.toLowerCase()
+							+ "."
+							+ getField(models[i])
+							+ " = "
+							+ id
+							+ " AND "
+							+ models[0].getClass().getSimpleName()
+									.toLowerCase() + ".status = " + ACTIVO;
 
+			}
+			System.out.println("QUERY => " + query);
+			result = session.createSQLQuery(query)
+					.addEntity(models[0].getClass()).uniqueResult();
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;
@@ -284,30 +373,83 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 			closeConnection();
 		}
 		return result;
-
 	}
 
 	@Override
-	public String read(long id) {
-
-		String result;
+	public boolean read(Object[] models, String name, long id) {
+		boolean result = false;
+		String query = "SELECT "
+				+ models[0].getClass().getSimpleName().toLowerCase()
+				+ ".* FROM ";
 		try {
 			startConnection();
-			result = (String) session
-
-					.createSQLQuery(
-							"SELECT td.nombre FROM tipos_datos AS td INNER JOIN datos AS d ON d.id_tipo_dato = td.id_tipo_dato INNER JOIN entradas_salidas AS es ON es.id_dato = d.id_dato WHERE es.id_entrada_salida = "
-									+ id + " AND td.status = " + ACTIVO)
-					.uniqueResult();
+			for (short i = 0; i < models.length; i++) {
+				if (i < 1)
+					query += models[i].getClass().getAnnotation(Table.class)
+							.name().toString()
+							+ " AS "
+							+ models[i].getClass().getSimpleName()
+									.toLowerCase() + " INNER JOIN ";
+				else if (i > 0 && i < (models.length - 1))
+					query += models[i].getClass().getAnnotation(Table.class)
+							.name().toString()
+							+ " AS "
+							+ models[i].getClass().getSimpleName()
+									.toLowerCase()
+							+ " ON "
+							+ models[i - 1].getClass().getSimpleName()
+									.toLowerCase()
+							+ "."
+							+ getField(models[i])
+							+ " = "
+							+ models[i].getClass().getSimpleName()
+									.toLowerCase()
+							+ "."
+							+ getField(models[i])
+							+ " INNER JOIN ";
+				else
+					query += models[i].getClass().getAnnotation(Table.class)
+							.name().toString()
+							+ " AS "
+							+ models[i].getClass().getSimpleName()
+									.toLowerCase()
+							+ " ON "
+							+ models[i].getClass().getSimpleName()
+									.toLowerCase()
+							+ "."
+							+ getField(models[i])
+							+ " = "
+							+ models[i - 1].getClass().getSimpleName()
+									.toLowerCase()
+							+ "."
+							+ getField(models[i])
+							+ " WHERE "
+							+ models[i].getClass().getSimpleName()
+									.toLowerCase()
+							+ "."
+							+ getField(models[i])
+							+ " = "
+							+ id
+							+ " AND "
+							+ models[0].getClass().getSimpleName()
+									.toLowerCase()
+							+ ".status = "
+							+ ACTIVO
+							+ " AND "
+							+ models[0].getClass().getSimpleName()
+									.toLowerCase() + ".nombre = '" + name + "'";
+			}
+			System.out.println("QUERY => " + query);
+			if (session.createSQLQuery(query).addEntity(models[0].getClass())
+					.uniqueResult() != null)
+				result = true;
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;
 		} finally {
 			closeConnection();
 		}
-
 		return result;
-
 	}
 
 	@Override
@@ -322,6 +464,7 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 							+ getField(model).toString().replace("get", "")
 									.toLowerCase() + " = " + id
 							+ " AND status = " + ACTIVO).uniqueResult();
+
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;

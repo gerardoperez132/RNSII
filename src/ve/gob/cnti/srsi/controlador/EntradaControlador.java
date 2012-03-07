@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
+import ve.gob.cnti.srsi.dao.Constants.ArregloModelos;
 import ve.gob.cnti.srsi.dao.Constants.TipoEntradaSalida;
 import ve.gob.cnti.srsi.dao.DAO;
 import ve.gob.cnti.srsi.modelo.Dato;
@@ -16,7 +17,7 @@ import ve.gob.cnti.srsi.modelo.TipoDato;
 
 @SuppressWarnings("serial")
 public class EntradaControlador extends DAO implements Formulario,
-		TipoEntradaSalida {
+		TipoEntradaSalida, ArregloModelos {
 	private List<EntradaSalida> entradas = new ArrayList<EntradaSalida>();
 	private List<EntradaSalida> salidas = new ArrayList<EntradaSalida>();
 	private List<TipoDato> tipoDatos = new ArrayList<TipoDato>();
@@ -38,7 +39,8 @@ public class EntradaControlador extends DAO implements Formulario,
 
 		funcionalidad = (Funcionalidad) read(funcionalidad, idFuncionalidad);
 		servicio = (ServicioInformacion) read(servicio, idServicioInformacion);
-		datos = (ArrayList<Dato>) readEntrada(idFuncionalidad);
+		// datos = (ArrayList<Dato>) readEntrada(idFuncionalidad);
+		datos = (ArrayList<Dato>) read(NOMBRE_DATO, ENTRADA, idFuncionalidad);
 		Iterator<Dato> iterator = datos.iterator();
 		while (iterator.hasNext()) {
 
@@ -59,7 +61,7 @@ public class EntradaControlador extends DAO implements Formulario,
 		return SUCCESS;
 	}
 
-	public void validate() {		
+	public void validate() {
 		if (dato.getNombre().isEmpty())
 			addFieldError("dato.nombre",
 					"Debe introducir un nombre que identifique el dato");
