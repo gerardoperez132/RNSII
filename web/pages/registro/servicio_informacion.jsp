@@ -8,6 +8,7 @@
 <!-- CSS (required) -->
 <link rel="stylesheet" type="text/css" href="res/css/styles.css">
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
+<link rel="stylesheet" type="text/css" href="res/css/table.css">
 
 
 <title>SRSI - Inicio</title>
@@ -43,45 +44,69 @@
 
 			<!-- Este es el div de contenidos -->
 			<div id="content">
+			
+				<h4>Registro de Funcionalidades</h4>
+				<hr>
 
 				<h5 class="formulario">Servicio de Información: "<s:property value="servicio.nombre" />"</h5>				
 				<h5 class="formulario">Descripcion: "<s:property value="servicio.descripcion" />"</h5>
-				<h5 class="formulario">id: "<s:property value="idServicioInformacion" />"</h5>
-				
+				<h5 class="formulario">Id: "<s:property value="idServicioInformacion" />"</h5>
 				 
 				<hr>
 				<s:fielderror>
 					<s:param>funcionalidades</s:param>
 				</s:fielderror>
-				<s:if test="funcionalidades.size() > 0">
-					<div>
-						<p>Funcionalidades cargadas</p>
-						<table border="1">
-							<tr>
-								<th>Número</th>
-								<th>Nombre</th>
-								<th>Fecha</th>
-								<th>Acciones</th>
-							</tr>
-							<s:iterator value="funcionalidades">
-								<tr>
-									<td><s:property value="id_funcionalidad" /></td>
-									<td><s:property value="nombre" /></td>
-									<td><s:property value="fecha_creado" /></td>
-									<td><a href="#">Editar</a> <a href="#">Eliminar</a></td>
-								</tr>
-							</s:iterator>
-						</table>
-					</div>
-				</s:if>
-				<s:else>
-					<p>No hay funcionalidades cargadas</p>
-				</s:else>				
 				
 				<form action="prepararFuncionalidad" method="POST">
 					<s:hidden name="idServicioInformacion" ></s:hidden>				
 					<input type="submit" value="Registrar" />
 				</form>
+				
+				<table class="result">						
+							
+				<thead>
+					<tr>
+						<th scope="col">ID</th>
+						<th scope="col">Nombre</th>
+						<th scope="col">Fecha</th>									
+						<th scope="col">Acciones</th>
+					</tr>
+				</thead>	
+				
+				
+				<tfoot>
+					<tr class="hv">
+						<th scope="row">Total</th>
+						<td colspan="3"><s:property value="datos.size"/> funcionalidades cargadas</td>
+					</tr>
+				</tfoot>
+				
+				<tbody>
+				<s:if test="funcionalidades.size() > 0">
+				
+				<s:iterator value="funcionalidades" status="result_Status">
+					<tr class="<s:if test="#result_Status.odd == true ">odd</s:if><s:else>hv</s:else>">
+						<th><s:property value="id_funcionalidad" /></th>
+						<td><s:property value="nombre" /></td>
+						<td><s:property value="fecha_creado" /></td>
+						<td>Editar,Eliminar</td>														
+					</tr>	
+				</s:iterator>		
+							
+					
+				</s:if>
+				<s:else>
+					<tr class="hv">
+						<th class="row" colspan="4">Aún no hay Funcionalidades cargadas para
+				este Servicio
+						</th>																			
+					</tr>	
+				</s:else>	
+				
+				</tbody>	
+				
+				</table>	
+				
 
 			</div>
 
