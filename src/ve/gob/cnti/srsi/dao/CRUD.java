@@ -32,7 +32,55 @@ public interface CRUD {
 	 * @param id
 	 *            Id del segundo modelo a insertar
 	 */
+	// NO ESTÁ LISTO
 	public void create(Object modelOne, Object modelTwo, long id);
+
+	/**
+	 * Permite obtener el objeto resultante de la consulta anidada del número de
+	 * modelos dado.
+	 * 
+	 * @param models
+	 *            Arreglo de modelos donde el primero es el objeto resultante y
+	 *            el orden es importante.
+	 * @param type
+	 *            Tipo de objeto en una tabla recursiva.
+	 * @param id
+	 *            Identificador del último modelo en el arreglo para realizar la
+	 *            consulta en base a éste.
+	 * @return El objeto resultante.
+	 */
+	public Object read(Object[] models, int type, long id);
+
+	/**
+	 * Permite obtener el objeto resultante de la consulta anidada del número de
+	 * modelos dado.
+	 * 
+	 * @param models
+	 *            Arreglo de modelos donde el primero es el objeto resultante y
+	 *            el orden es importante.
+	 * @param id
+	 *            Identificador del último modelo en el arreglo para realizar la
+	 *            consulta en base a éste.
+	 * @return El objeto resultante.
+	 */
+	public Object read(Object[] models, long id);
+
+	/**
+	 * Permite obtener un valor de verdad sobre la consulta en un arreglo de
+	 * modelos anidados y los valores repetidos del nombre en cadena de texto
+	 * basado en el id suministrado.
+	 * 
+	 * @param models
+	 *            Arreglo de modelos donde el primero es el objeto resultante y
+	 *            el orden es importante.
+	 * @param name
+	 *            El nombre del campo a verificar si está repetido o no.
+	 * @param id
+	 *            Identificador del último modelo en el arreglo para realizar la
+	 *            consulta en base a éste.
+	 * @return {@code true} si está repetido, {@code false} si no lo está.
+	 */
+	public boolean read(Object[] models, String name, long id);
 
 	/**
 	 * Permite obtener el registro activo especificado por id del modelo dado.
@@ -57,7 +105,7 @@ public interface CRUD {
 	 *            El id a identificar en la relación
 	 * @return Una lista de objetos del modelo.
 	 */
-	public ArrayList<?> read(Object model, Object belongsTo, long id);
+	public ArrayList<?> read(Object model, Object belongsTo, long id); // PROBAR
 
 	/**
 	 * Permite obtener todos los registros activos del modelo dado.
@@ -68,18 +116,6 @@ public interface CRUD {
 	 * @return Una lista de objetos del modelo dado con sus atributos.
 	 */
 	public ArrayList<?> read(Object model);
-
-	/**
-	 * Permite obtener el nombre del tipo de dato asociado a una entrada o
-	 * salida
-	 * 
-	 * @param id
-	 *            El id de la entrada o salida.
-	 * @return El nombre del dato asociado.
-	 */
-	public String read(long id);
-	
-	public ArrayList<?> readEntrada(long id);
 
 	/**
 	 * Permite modificar el registro especificado por id del modelo dado.
@@ -170,6 +206,4 @@ public interface CRUD {
 	 * @return Lista de datos compuestos.
 	 */
 	public ArrayList<?> getComplex();
-
-	public ArrayList<?> readEntrada2(long id);
 }
