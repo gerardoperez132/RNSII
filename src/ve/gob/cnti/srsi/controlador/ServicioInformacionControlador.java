@@ -97,7 +97,8 @@ public class ServicioInformacionControlador extends DAO implements
 		responsable = "Usuario";
 
 		System.out.println("NOMBRE DEL DATO => "
-				+ ((Dato) read(NOMBRE_DATO, ENTRADA, 3)).getNombre());
+				+ ((ArrayList<Dato>) read(NOMBRE_DATO, ENTRADA, 3)).get(0)
+						.getNombre());
 
 		System.out.println("NOMBRE TIPO DATO => "
 				+ ((TipoDato) read(NOMBRE_TIPO_DATO, 1)).getNombre());
