@@ -8,6 +8,7 @@
 <!-- CSS (required) -->
 <link rel="stylesheet" type="text/css" href="res/css/styles.css">
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
+<link rel="stylesheet" type="text/css" href="res/css/table.css">
 
 
 
@@ -70,60 +71,77 @@
 							<s:property value="funcionalidad.nombre" />
 						</h4>
 						<hr>
-
-						<s:if test="datos.size > 0">
-
-							<p>Entradas cargadas</p>
-							<table border="1">
+						
+						<table>
+							<tr class="nohover">
+								<td>
+									<form action="prepararEntradaSimple" method="POST">
+										<s:hidden name="idServicioInformacion"></s:hidden>
+										<s:hidden name="idFuncionalidad"></s:hidden>
+										<input type="submit" value="Agregar Dato Simple" />
+									</form>
+								</td>
+								<td>
+									<s:url id="registrarEntradaComplejo"
+										action="prepararEntradaComplejo"></s:url>
+									<s:a href="%{registrarEntradaComplejo}" cssClass="enlace">
+										<input type="button" value="Agregar Dato Complejo">
+									</s:a>
+								</td>
+							</tr>
+						</table>
+						
+						<table class="result">						
+							
+							<thead>
 								<tr>
-									<th>Nombre</th>
-									<th>Descripción</th>
-									<th>tipo</th>
+									<th scope="col">Nombre</th>
+									<th scope="col">Descripción</th>
+									<th scope="col">Tipo</th>									
 								</tr>
-
-								<s:iterator value="datos">
-									<tr>
+							</thead>	
+							
+							
+							<tfoot>
+								<tr class="hv">
+									<th scope="row">Total</th>
+									<td colspan="2"><s:property value="datos.size"/> entradas cargadas</td>
+								</tr>
+							</tfoot>
+							
+							<s:if test="datos.size > 0">
+							<tbody>
+							<s:iterator value="datos" status="result_Status">							
+								
+									<tr class="<s:if test="#result_Status.odd == true ">odd</s:if><s:else>hv</s:else>">
+										<th ><s:property value="nombre" /></th>
+										<td><s:property value="descripcion" /></td>
 										<td>
-										<s:property value="nombre" />
-										</td>
-									
-										<td>
-										<s:property value="descripcion" />
-										</td>
-									
-									
-										<td>
-										<s:set name="id_d" value="id_tipo_dato" ></s:set> 
-										
-										<s:iterator value="tipoDatos"> 
-											<s:if test="%{id_tipo_dato == #id_d}">
-												<s:property value="nombre" />
-											</s:if>
-											
-										</s:iterator> 
-										
-										</td>
-									</tr>
+											<s:set name="id_d" value="id_tipo_dato" ></s:set>										
+											<s:iterator value="tipoDatos"> 
+												<s:if test="%{id_tipo_dato == #id_d}">
+													<s:property value="nombre" />
+												</s:if>											
+											</s:iterator> 									
+										</td>									
+									</tr>												
+																
 								</s:iterator>
-							</table>
+							</tbody>
+							</s:if>
+							<s:else>
+								<tbody>
+									<tr class="hv">
+										<th class="row" colspan="3">Aún no hay Entradas cargadas para
+								está funcionalidad
+										</th>																			
+									</tr>												
+								</tbody>
+							</s:else>	
+						</table>
+						
 
-						</s:if>
-						<s:else>
-							<p class="errorMessage">Aún no hay Entradas cargadas para
-								está funcionalidad</p>
-						</s:else>
-
-						<form action="prepararEntradaSimple" method="POST">
-							<s:hidden name="idServicioInformacion"></s:hidden>
-							<s:hidden name="idFuncionalidad"></s:hidden>
-							<input type="submit" value="Agregar Dato Simple" />
-						</form>
-
-						<s:url id="registrarEntradaComplejo"
-							action="prepararEntradaComplejo"></s:url>
-						<s:a href="%{registrarEntradaComplejo}" cssClass="enlace">
-							<input type="button" value="Agregar Dato Complejo">
-						</s:a>
+						
 
 					</div>
 
