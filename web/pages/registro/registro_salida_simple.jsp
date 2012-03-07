@@ -10,7 +10,7 @@
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
 
 
-<title>SRSI - Inicio</title>
+<title>SRSI - Registro Salidas Simples</title>
 <!-- Donde dice inicio debería ir una var que identifique el lugar -->
 </head>
 <body>
@@ -54,59 +54,59 @@
 
 				<ul class="tabs">
 					<li><a href="#tab1">Descripción General</a></li>
-					<li>Entradas</li>
+					<li><a href="#tab2">Entradas</a></li>
 					<li class="active">Salidas</li>
 					<li><a href="#tab4">Resumen Funcionalidad</a></li>
 				</ul>
-				<div class="tab_container">
-					<div id="tab1" class="tab_content"></div>
+				<div class="tab_container">		
+				
+					<form action="registrarSalidaSimple" method="post">
+						<div id="tab2" class="tab_content">
+
+							<h5 class="formulario">Registro de Salida Simple</h5>
+							<h6>
+								Perteneciente a la funcionalidad: "
+								<s:property value="funcionalidad.nombre" />
+								"
+							</h6>
+							<hr>
+
+							<!-- Nombre de la entrada. -->
+							<h5 class="formulario">Nombre:</h5>
+							<s:fielderror>
+								<s:param>dato.nombre</s:param>
+							</s:fielderror>
+							<s:textfield name="dato.nombre" />
+
+							<br>
+							<!-- Descripción de la entrada. -->
+							<h5 class="formulario">Descripción:</h5>
+							<s:fielderror>
+								<s:param>dato.descripcion</s:param>
+							</s:fielderror>
+							<s:textarea name="dato.descripcion" cols="30" rows="5" />
+
+							<br>
 
 
-					<div id="tab2" class="tab_content">
+							<h5 class="formulario">Tipo de dato asociado:</h5>
+							<s:fielderror>
+								<s:param>tipodato</s:param>
+							</s:fielderror>
+							<s:select name="dato.id_tipo_dato" list="tipoDatos"
+								listKey="id_tipo_dato" listValue="nombre" headerKey="-1"
+								headerValue="Seleccione"></s:select>
 
-						<!-- Nombre de la entrada. -->
-						<h5 id="formulario">Nombre:</h5>
-						<s:textfield labelposition="top" name="funcionalidad.nombre" />
+							<br> <br>
+							<s:hidden name="idServicioInformacion"></s:hidden>
+							<s:hidden name="idFuncionalidad"></s:hidden>
+														
+							<input type="submit" value="Registrar Entrada" />
 
-						<br>
-						<!-- Descripción de la entrada. -->
-						<h5 id="formulario">Descripción:</h5>
-						<s:textarea name="funcionalidad.descripcion" cols="30" rows="5" />
+						</div>
+					</form>
 
-						<br>
-
-						<h5 id="formulario">Formato:</h5>
-						<s:textfield labelposition="top" name="formato_entrada" />
-
-						<h5 id="formulario">Tipo de dato asociado:</h5>
-						<s:select list="tipoDatos" listKey="id_tipo_dato"
-							listValue="nombre" headerKey="-1" headerValue="Ninguno"></s:select>
-
-
-					</div>
-
-					<div id="tab3" class="tab_content">
-
-						<!-- Nombre de la salida. -->
-						<h5 id="formulario">Nombre:</h5>
-						<s:textfield labelposition="top" name="funcionalidad.nombre" />
-
-						<br>
-						<!-- Descripción de la salida. -->
-						<h5 id="formulario">Descripción:</h5>
-						<s:textarea name="funcionalidad.descripcion" cols="30" rows="5" />
-
-						<br>
-						<h5 id="formulario">Formato:</h5>
-						<s:textfield labelposition="top" name="formato_salida" />
-
-						<h5 id="formulario">Tipo de dato asociado:</h5>
-						<s:select list="tipoDatos" listKey="id_tipo_dato"
-							listValue="nombre" headerKey="-1" headerValue="Seleccione"></s:select>
-
-					</div>
-
-					<div id="tab4" class="tab_content"></div>
+					
 				</div>
 
 			</div>

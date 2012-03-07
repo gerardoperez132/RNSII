@@ -12,7 +12,7 @@
 
 
 
-<title>SRSI - Inicio</title>
+<title>SRSI - Salidas</title>
 <!-- Donde dice inicio debería ir una var que identifique el lugar -->
 </head>
 <body>
@@ -57,8 +57,8 @@
 				<hr>
 				<ul class="tabs">
 					<li><a href="#tab1">Descripción General</a></li>
-					<li class="active"><a>Entradas</a></li>
-					<li><a href="#tab3">Salidas</a></li>
+					<li><a href="#tab3">Entradas</a></li>
+					<li class="active"><a>Salidas</a></li>
 					<li><a href="#tab4">Resumen Funcionalidad</a></li>
 				</ul>
 				<div class="tab_container">
@@ -67,7 +67,7 @@
 					<div id="tab2" class="tab_content">
 
 						<h4>
-							Registro de Entradas de la Funcionalidad:
+							Registro de Salidas de la Funcionalidad:
 							<s:property value="funcionalidad.nombre" />
 						</h4>
 						<hr>
@@ -75,16 +75,16 @@
 						<table>
 							<tr class="nohover">
 								<td>
-									<form action="prepararEntradaSimple" method="POST">
+									<form action="prepararSalidaSimple" method="POST">
 										<s:hidden name="idServicioInformacion"></s:hidden>
 										<s:hidden name="idFuncionalidad"></s:hidden>
 										<input type="submit" value="Agregar Dato Simple" />
 									</form>
 								</td>
 								<td>
-									<s:url id="registrarEntradaComplejo"
-										action="prepararEntradaComplejo"></s:url>
-									<s:a href="%{registrarEntradaComplejo}" cssClass="enlace">
+									<s:url id="registrarSalidaComplejo"
+										action="prepararSalidaComplejo"></s:url>
+									<s:a href="%{registrarSalidaComplejo}" cssClass="enlace">
 										<input type="button" value="Agregar Dato Complejo">
 									</s:a>
 								</td>
@@ -105,7 +105,7 @@
 							<tfoot>
 								<tr class="hv">
 									<th scope="row">Total</th>
-									<td colspan="2"><s:property value="datos.size"/> entradas cargadas</td>
+									<td colspan="2"><s:property value="datos.size"/> salidas cargadas</td>
 								</tr>
 							</tfoot>
 							
@@ -132,7 +132,7 @@
 							<s:else>
 								<tbody>
 									<tr class="hv">
-										<th class="row" colspan="3">Aún no hay Entradas cargadas para
+										<th class="row" colspan="3">Aún no hay Salidas cargadas para
 								está funcionalidad
 										</th>																			
 									</tr>												
