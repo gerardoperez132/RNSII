@@ -109,7 +109,6 @@ public class ServicioInformacionControlador extends DAO implements
 		return SUCCESS;
 	}
 
-	@SuppressWarnings("unchecked")
 	public void validate() {
 		/*
 		 * Para Validar la que la cadena sea decimal y con el rango (0,999.999)
