@@ -60,7 +60,7 @@
 					<form action="registrarEntradaSimple" method="post">
 						<div id="tab2" class="tab_content">
 
-							<h5 class="formulario">Registro de Entrada Simple</h5>
+							<h5 class="formulario">Registro de Entrada</h5>
 							<h6>
 								Perteneciente a la funcionalidad: "
 								<s:property value="funcionalidad.nombre" />
@@ -86,7 +86,7 @@
 							<br>
 
 
-							<h5 class="formulario">Tipo de dato asociado:</h5>
+							<h5 class="formulario">Tipo de dato:</h5>
 							<s:fielderror>
 								<s:param>tipodato</s:param>
 							</s:fielderror>
@@ -97,8 +97,9 @@
 							<br> <br>
 							<s:hidden name="idServicioInformacion"></s:hidden>
 							<s:hidden name="idFuncionalidad"></s:hidden>
-														
+							<s:hidden name="id_dato"></s:hidden>							
 							<input type="submit" value="Registrar Entrada" />
+
 						</div>
 					</form>
 

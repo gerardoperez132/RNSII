@@ -41,21 +41,32 @@
 			<result name="input">registro/registro_funcionalidad.jsp</result>
 		</action>
 
-		<!--Actions para Entradas -->
+		<!--*****************************************************************
+						Actions para Entradas 
+		********************************************************************-->
 		<action name="prepararEntradas" method="prepararFormulario"
 			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
 			<result name="success">registro/entradas.jsp</result>
 		</action>
 
-		<action name="prepararEntradaSimple" method="prepararFormulario"
+		<action name="prepararEntradaSimple" method="prepararFormularioSimple"
 			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
 			<result name="success">registro/registro_entrada_simple.jsp</result>
 		</action>
+		
+		<action name="registrarEntradaSimple" method="registrarEntradaSimple"
+			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
+			<result name="success" type="chain">
+               <param name="actionName">prepararEntradas</param>                         
+            </result>            
+			<result name="input">registro/registro_entrada_simple.jsp</result>
+		</action>
 
-		<action name="prepararEntradaComplejo" method="prepararFormulario"
+		<action name="prepararEntradaCompleja" method="prepararFormularioComplejo"
 			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
 			<result name="success">registro/registro_entrada_compleja.jsp</result>
 		</action>
+
 
 		<action name="registrarEntradaSimple" method="registrarEntradaSimple"
 			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
@@ -66,6 +77,15 @@
 
 			<result name="input">registro/registro_entrada_simple.jsp</result>
 		</action>
+
+		<action name="registrarEntradaCompleja" method="registrarEntradaCompleja"
+			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
+			<result name="success" type="chain">
+               <param name="actionName">prepararEntradas</param>                         
+            </result>            
+			<result name="input">registro/registro_entrada_compleja.jsp</result>
+		</action>		
+
 
 
 
