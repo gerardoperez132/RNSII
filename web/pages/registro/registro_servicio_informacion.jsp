@@ -39,9 +39,12 @@
 					<div class="menu_top_bg">Navegacion</div>
 					<div class="sub_menu">
 						<ul>
-							<li><a class="selected">Paso 1</a></li>
-							<li><a href="#">Paso 2</a></li>
-							<li><a href="#">Paso 3 </a></li>
+							<li><a class="selected">Paso 1</a>
+							</li>
+							<li><a href="#">Paso 2</a>
+							</li>
+							<li><a href="#">Paso 3 </a>
+							</li>
 						</ul>
 					</div>
 				</div>
@@ -64,14 +67,10 @@
 				<hr>
 
 				<ul class="tabs">
-					<li><a href="#tab1">Descripción General</a>
-					</li>
-					<li><a href="#tab2">Aspectos legales</a>
-					</li>
-					<li><a href="#tab3">Descripción técnica</a>
-					</li>
-					<li><a href="#tab4">Descripción de Soporte</a>
-					</li>
+					<li><a href="#tab1">Descripción General</a></li>
+					<li><a href="#tab2">Aspectos legales</a></li>
+					<li><a href="#tab3">Descripción técnica</a></li>
+					<li><a href="#tab4">Descripción de Soporte</a></li>
 				</ul>
 
 				<form action="registrarServicioInformacion" method="post"
@@ -79,6 +78,8 @@
 
 					<div class="tab_container">
 						<div id="tab1" class="tab_content">
+
+
 
 							<p>Descripción General del Servicio</p>
 							<hr>
