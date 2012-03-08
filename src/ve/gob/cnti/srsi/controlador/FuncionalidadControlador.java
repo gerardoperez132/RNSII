@@ -15,19 +15,20 @@ public class FuncionalidadControlador extends DAO implements Formulario {
 
 	private List<EntradaSalida> entradas = new ArrayList<EntradaSalida>();
 	private List<EntradaSalida> salidas = new ArrayList<EntradaSalida>();
+	private List<Funcionalidad> funcionalidades = new ArrayList<Funcionalidad>();
 
 	private ServicioInformacion servicio = new ServicioInformacion();
 	private Funcionalidad funcionalidad = new Funcionalidad();
 	private EntradaSalida entrada = new EntradaSalida();
 	private EntradaSalida salida = new EntradaSalida();
-	
+
 	private long idServicioInformacion;
 	private long idFuncionalidad;
-	
 
 	public String registrarFuncionalidad() {
-		/*idFuncionalidad
-		 *Variable necesaria para persistir la E/S de la funcionalidad en los otros controladores 
+		/*
+		 * idFuncionalidadVariable necesaria para persistir la E/S de la
+		 * funcionalidad en los otros controladores
 		 */
 		idFuncionalidad = getNextId(funcionalidad);
 		funcionalidad.setId_servicio_informacion(idServicioInformacion);
@@ -45,8 +46,10 @@ public class FuncionalidadControlador extends DAO implements Formulario {
 
 	@Override
 	@SkipValidation
-	public String prepararFormulario() {		
+	public String prepararFormulario() {
 		servicio = (ServicioInformacion) read(servicio, idServicioInformacion);
+		funcionalidades = ((List<Funcionalidad>) read(funcionalidad,
+				new ServicioInformacion(), idFuncionalidad));
 		return SUCCESS;
 	}
 
@@ -112,6 +115,14 @@ public class FuncionalidadControlador extends DAO implements Formulario {
 
 	public void setIdFuncionalidad(long idFuncionalidad) {
 		this.idFuncionalidad = idFuncionalidad;
+	}
+
+	public List<Funcionalidad> getFuncionalidades() {
+		return funcionalidades;
+	}
+
+	public void setFuncionalidades(List<Funcionalidad> funcionalidades) {
+		this.funcionalidades = funcionalidades;
 	}
 
 }
