@@ -70,6 +70,25 @@
 							Registro de Entradas de la Funcionalidad:
 							<s:property value="funcionalidad.nombre" />
 						</h4>
+						
+						
+						<s:append var="datos2">  
+						    <s:param value="%{datos}" />						      
+						</s:append>
+						
+						Usuarios:  
+						<ul>  
+					    <s:iterator value="datos2">  
+					        <li><s:property value="nombre" /><s:property value="descripcion" /></li>  
+					     </s:iterator>  
+					    </ul>
+						
+						
+						<s:if test="datos2.size > 0">ejjejejejejej funciona</s:if>
+						<s:else>:-( no funciona</s:else>
+						
+						
+						
 						<hr>
 						
 						<table>
@@ -78,15 +97,15 @@
 									<form action="prepararEntradaSimple" method="POST">
 										<s:hidden name="idServicioInformacion"></s:hidden>
 										<s:hidden name="idFuncionalidad"></s:hidden>
-										<input type="submit" value="Agregar Dato Simple" />
+										<input type="submit" value="Registrar Dato Simple" />
 									</form>
 								</td>
 								<td>
-									<s:url id="registrarEntradaComplejo"
-										action="prepararEntradaComplejo"></s:url>
-									<s:a href="%{registrarEntradaComplejo}" cssClass="enlace">
-										<input type="button" value="Agregar Dato Complejo">
-									</s:a>
+									<form action="prepararEntradaCompleja" method="POST">
+										<s:hidden name="idServicioInformacion"></s:hidden>
+										<s:hidden name="idFuncionalidad"></s:hidden>
+										<input type="submit" value="Registrar Dato Complejo">
+									</form>
 								</td>
 							</tr>
 						</table>
@@ -97,7 +116,8 @@
 								<tr>
 									<th scope="col">Nombre</th>
 									<th scope="col">Descripción</th>
-									<th scope="col">Tipo</th>									
+									<th scope="col">Tipo</th>	
+									<th scope="col"></th>								
 								</tr>
 							</thead>	
 							
@@ -105,7 +125,7 @@
 							<tfoot>
 								<tr class="hv">
 									<th scope="row">Total</th>
-									<td colspan="2"><s:property value="datos.size"/> entradas cargadas</td>
+									<td colspan="3"><s:property value="datos.size"/> entradas cargadas</td>
 								</tr>
 							</tfoot>
 							
@@ -123,16 +143,29 @@
 													<s:property value="nombre" />
 												</s:if>											
 											</s:iterator> 									
+										</td>
+										<td>
+											<s:iterator value="tipoDatos">
+												<s:if test="%{id_tipo_dato == #id_d}">
+													<s:if test="%{tipo == 0}">
+														<form action="prepararEntradaSimple" method="POST">
+															<s:hidden name="idServicioInformacion"></s:hidden>
+															<s:hidden name="idFuncionalidad"></s:hidden>
+															<s:hidden name="id_dato"></s:hidden>
+															<input type="submit" value="Registrar Dato Simple" /><s:property value="id_dato"/>
+														</form>
+													</s:if>			
+												</s:if>												
+											</s:iterator>								
 										</td>									
-									</tr>												
-																
-								</s:iterator>
+									</tr>													
+							</s:iterator>
 							</tbody>
 							</s:if>
 							<s:else>
 								<tbody>
 									<tr class="hv">
-										<th class="row" colspan="3">Aún no hay Entradas cargadas para
+										<th class="row" colspan="4">Aún no hay Entradas cargadas para
 								está funcionalidad
 										</th>																			
 									</tr>												
