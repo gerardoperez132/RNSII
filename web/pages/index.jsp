@@ -38,8 +38,9 @@
 					action="prepararServicioInformacion"></s:url>
 				<s:a href="%{registrarServicioInformacion}">Registrar Servicio de Información</s:a>
 				<br>
-				<s:url id="prepararFuncionalidad" action="prepararFuncionalidad"></s:url>
-				<s:a href="%{prepararFuncionalidad}">Registrar Funcionalidades del Servicio</s:a>
+
+				<s:url id="registrarPrueba" action="registrarPrueba"></s:url>
+				<s:a href="%{registrarPrueba}">Registrar Servicio de Información de Prueba</s:a>
 
 			</div>
 
