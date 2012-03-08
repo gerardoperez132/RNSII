@@ -175,3 +175,15 @@ Date date = new Date();
 		sector.setId_sector(dao.getNextId(sector));
 		sector.setNombre("Comunicación e Información");
 		dao.create(sector);
+		
+		##################### PARA PROBAR QUE FUNCIONAN LOS MÉTODOS ############
+
+		System.out.println("NOMBRE DEL DATO => "
+				+ ((ArrayList<Dato>) read(NOMBRE_DATO, ENTRADA, 3)).get(0)
+						.getNombre());
+
+		System.out.println("NOMBRE TIPO DATO => "
+				+ ((TipoDato) read(NOMBRE_TIPO_DATO, 1)).getNombre());
+
+		System.out.println("DATO DUPLICADO => "
+				+ read(NOMBRE_DATO_NO_DUPLICADO, "Dato Simple 1", 3));
