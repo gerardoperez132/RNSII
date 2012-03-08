@@ -92,6 +92,8 @@
 						</tr>
 					</tfoot>
 
+					<s:url id="modificarFuncionalidad" action="modificarFuncionalidad"></s:url>
+
 					<tbody>
 						<s:if test="funcionalidades.size() > 0">
 
@@ -101,7 +103,11 @@
 									<th><s:property value="id_funcionalidad" /></th>
 									<td><s:property value="nombre" /></td>
 									<td><s:property value="fecha_creado" /></td>
-									<td>Editar,Eliminar</td>
+									<td><form action="modificarFuncionalidad" method="POST">
+											<s:hidden name="idFuncionalidad" value="%{id_funcionalidad}"></s:hidden>
+											<input type="submit" value="Editar"
+												style="background: none; border: 0;" /> Eliminar
+										</form></td>
 								</tr>
 							</s:iterator>
 
