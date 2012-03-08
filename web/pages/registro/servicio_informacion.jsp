@@ -44,70 +44,76 @@
 
 			<!-- Este es el div de contenidos -->
 			<div id="content">
-			
+
 				<h4>Registro de Funcionalidades</h4>
 				<hr>
 
-				<h5 class="formulario">Servicio de Información: "<s:property value="servicio.nombre" />"</h5>				
-				<h5 class="formulario">Descripcion: "<s:property value="servicio.descripcion" />"</h5>
-				<h5 class="formulario">Id: "<s:property value="idServicioInformacion" />"</h5>
-				 
+				<h5 class="formulario">
+					Servicio de Información: "
+					<s:property value="servicio.nombre" />
+					"
+				</h5>
+				<h5 class="formulario">
+					Descripcion: "
+					<s:property value="servicio.descripcion" />
+					"
+				</h5>
+				<h5 class="formulario">
+					Id: "
+					<s:property value="idServicioInformacion" />
+					"
+				</h5>
+
 				<hr>
 				<s:fielderror>
 					<s:param>funcionalidades</s:param>
 				</s:fielderror>
-				
+
 				<form action="prepararFuncionalidad" method="POST">
-					<s:hidden name="idServicioInformacion" ></s:hidden>				
+					<s:hidden name="idServicioInformacion"></s:hidden>
 					<input type="submit" value="Registrar" />
 				</form>
-				
-				<table class="result">						
-							
-				<thead>
-					<tr>
-						<th scope="col">ID</th>
-						<th scope="col">Nombre</th>
-						<th scope="col">Fecha</th>									
-						<th scope="col">Acciones</th>
-					</tr>
-				</thead>	
-				
-				
-				<tfoot>
-					<tr class="hv">
-						<th scope="row">Total</th>
-						<td colspan="3"><s:property value="datos.size"/> funcionalidades cargadas</td>
-					</tr>
-				</tfoot>
-				
-				<tbody>
-				<s:if test="funcionalidades.size() > 0">
-				
-				<s:iterator value="funcionalidades" status="result_Status">
-					<tr class="<s:if test="#result_Status.odd == true ">odd</s:if><s:else>hv</s:else>">
-						<th><s:property value="id_funcionalidad" /></th>
-						<td><s:property value="nombre" /></td>
-						<td><s:property value="fecha_creado" /></td>
-						<td>Editar,Eliminar</td>														
-					</tr>	
-				</s:iterator>		
-							
-					
-				</s:if>
-				<s:else>
-					<tr class="hv">
-						<th class="row" colspan="4">Aún no hay Funcionalidades cargadas para
-				este Servicio
-						</th>																			
-					</tr>	
-				</s:else>	
-				
-				</tbody>	
-				
-				</table>	
-				
 
+				<table class="result">
+					<thead>
+						<tr>
+							<th scope="col">ID</th>
+							<th scope="col">Nombre</th>
+							<th scope="col">Fecha</th>
+							<th scope="col">Acciones</th>
+						</tr>
+					</thead>
+
+					<tfoot>
+						<tr class="hv">
+							<th scope="row">Total</th>
+							<td colspan="3"><s:property value="datos.size" />
+								funcionalidades cargadas</td>
+						</tr>
+					</tfoot>
+
+					<tbody>
+						<s:if test="funcionalidades.size() > 0">
+
+							<s:iterator value="funcionalidades" status="result_Status">
+								<tr
+									class="<s:if test="#result_Status.odd == true ">odd</s:if><s:else>hv</s:else>">
+									<th><s:property value="id_funcionalidad" /></th>
+									<td><s:property value="nombre" /></td>
+									<td><s:property value="fecha_creado" /></td>
+									<td>Editar,Eliminar</td>
+								</tr>
+							</s:iterator>
+
+						</s:if>
+						<s:else>
+							<tr class="hv">
+								<th class="row" colspan="4">Aún no hay Funcionalidades
+									cargadas para este Servicio</th>
+							</tr>
+						</s:else>
+					</tbody>
+				</table>
 			</div>
 
 			<!-- Este es el pie de página -->
