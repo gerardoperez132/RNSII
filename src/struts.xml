@@ -84,11 +84,8 @@
                <param name="actionName">prepararEntradas</param>                         
             </result>            
 			<result name="input">registro/registro_entrada_compleja.jsp</result>
-		</action>		
-
-
-
-
+		</action>	
+		
 	</package>
 	<constant name="struts.devMode" value="true" />
 	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
