@@ -3,6 +3,7 @@ package ve.gob.cnti.srsi.controlador;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +20,7 @@ import ve.gob.cnti.srsi.modelo.Arquitectura;
 import ve.gob.cnti.srsi.modelo.AspectoLegal;
 import ve.gob.cnti.srsi.modelo.Correo;
 import ve.gob.cnti.srsi.modelo.Estado;
+import ve.gob.cnti.srsi.modelo.Funcionalidad;
 import ve.gob.cnti.srsi.modelo.Intercambio;
 import ve.gob.cnti.srsi.modelo.Sector;
 import ve.gob.cnti.srsi.modelo.Seguridad;
@@ -70,6 +72,10 @@ public class ServicioInformacionControlador extends DAO implements
 
 	private HttpServletRequest servletRequest;
 
+	private Funcionalidad funcionalidad = new Funcionalidad();
+
+	private List<Funcionalidad> funcionalidades;
+
 	@SuppressWarnings("unchecked")
 	@Override
 	@SkipValidation
@@ -93,6 +99,60 @@ public class ServicioInformacionControlador extends DAO implements
 
 		// Debe venir de la sesión de usuario.
 		responsable = "Usuario";
+		return SUCCESS;
+	}
+
+	@SkipValidation
+	public String registrarPrueba() {
+		idServicioInformacion = getNextId(servicio);
+		servicio.setId_ente(1);
+		servicio.setId_usuario(1);
+		servicio.setId_sector(1);
+		servicio.setNombre("Nombre" + new Date());
+		servicio.setDescripcion("Descripción");
+		servicio.setId_estado(1);
+		servicio.setId_seguridad(1);
+		servicio.setVersion("1.0");
+		servicio.setId_tipo_intercambio(1);
+		create(servicio);
+
+		funcionalidad.setId_servicio_informacion(idServicioInformacion);
+		funcionalidad.setNombre("Funcionalidad" + new Date());
+		funcionalidad.setDescripcion("Descripción");
+		create(funcionalidad);
+
+		funcionalidades = ((List<Funcionalidad>) read(funcionalidad,
+				new ServicioInformacion(), getNextId(servicio) - 1));
+
+		// UnionAreaServicioInformacion unionarea = new
+		// UnionAreaServicioInformacion();
+		// for (int i = 0; i < area.size(); i++) {
+		// unionarea.setId_area(Long.parseLong(String.valueOf(area.get(i))));
+		// unionarea.setId_servicio_informacion(idServicioInformacion);
+		// // create(unionarea, id_si);
+		// }
+		//
+		// // Seteando el ARQUITECTURA
+		// UnionArquitecturaServicioInformacion unionarquitectura = new
+		// UnionArquitecturaServicioInformacion();
+		// for (int i = 0; i < arquitectura.size(); i++) {
+		// unionarquitectura.setId_arquitectura(Long.parseLong(String
+		// .valueOf(arquitectura.get(i))));
+		// unionarquitectura.setId_servicio_informacion(idServicioInformacion);
+		// // create(unionarquitectura, id_si);
+		// }
+		//
+		// // Seteando el TELEFONO DE CONTACTO
+		// Telefono telf = new Telefono();
+		// telf.setTelefono(codArea + "-" + telefonoContacto);
+		// telf.setId_servicio_informacion(idServicioInformacion);
+		// create(telf);
+		//
+		// // Seteando el CORREO DE CONTACTO
+		// Correo correo = new Correo();
+		// correo.setCorreo(correoContacto);
+		// correo.setId_servicio_informacion(idServicioInformacion);
+		// create(correo);
 		return SUCCESS;
 	}
 
@@ -504,5 +564,21 @@ public class ServicioInformacionControlador extends DAO implements
 
 	public void setSlaFileName(String slaFileName) {
 		this.slaFileName = slaFileName;
+	}
+
+	public List<Funcionalidad> getFuncionalidades() {
+		return funcionalidades;
+	}
+
+	public void setFuncionalidades(List<Funcionalidad> funcionalidades) {
+		this.funcionalidades = funcionalidades;
+	}
+
+	public Funcionalidad getFuncionalidad() {
+		return funcionalidad;
+	}
+
+	public void setFuncionalidad(Funcionalidad funcionalidad) {
+		this.funcionalidad = funcionalidad;
 	}
 }
