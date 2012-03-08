@@ -153,7 +153,7 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 					"FROM "
 							+ new TipoDato().getClass().getSimpleName()
 									.toString() + " WHERE status = " + ACTIVO
-							+ " AND tipo = " + SIMPLE).list();
+									+ " AND tipo = " + SIMPLE).list();
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;
@@ -174,6 +174,25 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 							+ new TipoDato().getClass().getSimpleName()
 									.toString() + " WHERE status = " + ACTIVO
 							+ " AND tipo = " + COMPUESTO).list();
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+		return complex;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public ArrayList<?> getALL() {
+		ArrayList<?> complex;
+		try {
+			startConnection();
+			complex = (ArrayList<Object>) session.createQuery(
+					"FROM "
+							+ new TipoDato().getClass().getSimpleName()
+									.toString() + " WHERE status = " + ACTIVO).list();
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;
@@ -224,8 +243,7 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 			closeConnection();
 		}
 	}
-
-	@SuppressWarnings("unchecked")
+	
 	@Override
 	public ArrayList<?> read(Object[] models, int type, long id) {
 		ArrayList<?> result;
@@ -302,8 +320,7 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 		}
 		return result;
 	}
-
-	@SuppressWarnings("unchecked")
+	
 	@Override
 	public Object read(Object[] models, long id) {
 		Object result;

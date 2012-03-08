@@ -206,4 +206,12 @@ public interface CRUD {
 	 * @return Lista de datos compuestos.
 	 */
 	public ArrayList<?> getComplex();
+	
+	/**
+	 * Permite obtener la lista de los datos cargados en base de
+	 * datos.
+	 * 
+	 * @return Lista de datos.
+	 */
+	public ArrayList<?> getALL();
 }
