@@ -72,20 +72,7 @@
 						</h4>
 						
 						
-						<s:append var="datos2">  
-						    <s:param value="%{datos}" />						      
-						</s:append>
 						
-						Usuarios:  
-						<ul>  
-					    <s:iterator value="datos2">  
-					        <li><s:property value="nombre" /><s:property value="descripcion" /></li>  
-					     </s:iterator>  
-					    </ul>
-						
-						
-						<s:if test="datos2.size > 0">ejjejejejejej funciona</s:if>
-						<s:else>:-( no funciona</s:else>
 						
 						
 						
@@ -132,15 +119,16 @@
 							<s:if test="datos.size > 0">
 							<tbody>
 							<s:iterator value="datos" status="result_Status">							
-								
+									<s:if test="id_padre == 0">
 									<tr class="<s:if test="#result_Status.odd == true ">odd</s:if><s:else>hv</s:else>">
-										<th ><s:property value="nombre" /></th>
+										<th><s:property value="nombre" /></th>
 										<td><s:property value="descripcion" /></td>
 										<td>
 											<s:set name="id_d" value="id_tipo_dato" ></s:set>										
+											<s:set name="id" value="id_dato" ></s:set>
 											<s:iterator value="tipoDatos"> 
 												<s:if test="%{id_tipo_dato == #id_d}">
-													<s:property value="nombre" />
+													<s:property value="nombre" /><s:property value="#id"/>
 												</s:if>											
 											</s:iterator> 									
 										</td>
@@ -148,17 +136,54 @@
 											<s:iterator value="tipoDatos">
 												<s:if test="%{id_tipo_dato == #id_d}">
 													<s:if test="%{tipo == 0}">
+													<s:set name="padre" value="#id" ></s:set>
+													<s:append var="datos2">  
+													    <s:param value="%{datos}" />						      
+													</s:append>
 														<form action="prepararEntradaSimple" method="POST">
 															<s:hidden name="idServicioInformacion"></s:hidden>
 															<s:hidden name="idFuncionalidad"></s:hidden>
 															<s:hidden name="id_dato"></s:hidden>
 															<input type="submit" value="Registrar Dato Simple" /><s:property value="id_dato"/>
 														</form>
+														<s:property value="#padre"/>
 													</s:if>			
 												</s:if>												
 											</s:iterator>								
-										</td>									
-									</tr>													
+										</td>
+															
+									</tr>
+									
+									<s:if test="%{#padre > 0}">
+									entro
+									<tr>
+									<td colspan="4">
+									<table class="result">
+									<s:iterator value="datos2">
+										
+										<s:if test="%{id_padre == #padre}">	
+													<tr>
+														<th><s:property value="nombre" /></th>
+														<td><s:property value="descripcion" /></td>
+														<td>
+															<s:set name="id_d2" value="id_tipo_dato" ></s:set>										
+															<s:iterator value="tipoDatos"> 
+																<s:if test="%{id_tipo_dato == #id_d2}">
+																	<s:property value="nombre" />
+																</s:if>											
+															</s:iterator> 									
+														</td>
+													</tr>		
+										</s:if>																
+									</s:iterator>
+									</table>
+									</td>												
+									</tr>	
+									</s:if>
+									
+									</s:if>
+									
+																						
 							</s:iterator>
 							</tbody>
 							</s:if>
@@ -173,7 +198,7 @@
 							</s:else>	
 						</table>
 						
-
+<s:property value="#padre"/>
 						
 
 					</div>
