@@ -18,14 +18,12 @@ import ve.gob.cnti.srsi.modelo.Area;
 import ve.gob.cnti.srsi.modelo.Arquitectura;
 import ve.gob.cnti.srsi.modelo.AspectoLegal;
 import ve.gob.cnti.srsi.modelo.Correo;
-import ve.gob.cnti.srsi.modelo.Dato;
 import ve.gob.cnti.srsi.modelo.Estado;
 import ve.gob.cnti.srsi.modelo.Intercambio;
 import ve.gob.cnti.srsi.modelo.Sector;
 import ve.gob.cnti.srsi.modelo.Seguridad;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.Telefono;
-import ve.gob.cnti.srsi.modelo.TipoDato;
 import ve.gob.cnti.srsi.modelo.UnionAreaServicioInformacion;
 import ve.gob.cnti.srsi.modelo.UnionArquitecturaServicioInformacion;
 
@@ -95,21 +93,9 @@ public class ServicioInformacionControlador extends DAO implements
 
 		// Debe venir de la sesión de usuario.
 		responsable = "Usuario";
-
-		System.out.println("NOMBRE DEL DATO => "
-				+ ((ArrayList<Dato>) read(NOMBRE_DATO, ENTRADA, 3)).get(0)
-						.getNombre());
-
-		System.out.println("NOMBRE TIPO DATO => "
-				+ ((TipoDato) read(NOMBRE_TIPO_DATO, 1)).getNombre());
-
-		System.out.println("DATO DUPLICADO => "
-				+ read(NOMBRE_DATO_NO_DUPLICADO, "Dato Simple 1", 3));
-
 		return SUCCESS;
 	}
 
-	@SuppressWarnings("unchecked")
 	public void validate() {
 		/*
 		 * Para Validar la que la cadena sea decimal y con el rango (0,999.999)
