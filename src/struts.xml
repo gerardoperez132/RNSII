@@ -37,6 +37,11 @@
 			<result name="success">registro/registro_funcionalidad.jsp</result>
 		</action>
 
+		<action name="prepararModificacionesFuncionalidad" method="prepararModificaciones"
+			class="ve.gob.cnti.srsi.controlador.FuncionalidadControlador">
+			<result name="success">modificar/modificar_funcionalidad.jsp</result>
+		</action>
+
 		<action name="registrarFuncionalidad" method="registrarFuncionalidad"
 			class="ve.gob.cnti.srsi.controlador.FuncionalidadControlador">
 			<result name="success" type="chain">
@@ -45,9 +50,12 @@
 			<result name="input">registro/registro_funcionalidad.jsp</result>
 		</action>
 
-		<action name="prepararModificacionesFuncionalidad" method="prepararModificaciones"
+		<action name="modificarFuncionalidad" method="modificarFuncionalidad"
 			class="ve.gob.cnti.srsi.controlador.FuncionalidadControlador">
-			<result name="success">modificar/modificar_funcionalidad.jsp</result>
+			<result name="success" type="chain">
+				<param name="actionName">prepararEntradas</param>
+			</result>
+			<result name="input">modificar/modificar_funcionalidad.jsp</result>
 		</action>
 
 		<!--Actions para Entradas -->
