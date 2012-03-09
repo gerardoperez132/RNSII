@@ -43,6 +43,15 @@ public class FuncionalidadControlador extends DAO implements Formulario {
 		return SUCCESS;
 	}
 
+	public String modificarFuncionalidad() {
+		funcionalidad.setId_servicio_informacion(idServicioInformacion);
+		System.out.println("ENTRÓ Y CON ESTOS DATOS => "
+				+ funcionalidad.toString());
+		update(funcionalidad, funcionalidad.getId_funcionalidad());
+		create(funcionalidad);
+		return SUCCESS;
+	}
+
 	public void validate() {
 		if (funcionalidad.getNombre().isEmpty())
 			addFieldError("funcionalidad.nombre", "Debe introducir un nombre.");
