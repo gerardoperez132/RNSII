@@ -86,6 +86,51 @@
 			<result name="input">registro/registro_entrada_compleja.jsp</result>
 		</action>	
 		
+		<!--*****************************************************************
+						Actions para Salidas
+		********************************************************************-->
+		<action name="prepararSalidas" method="prepararFormulario"
+			class="ve.gob.cnti.srsi.controlador.SalidaControlador">
+			<result name="success">registro/salidas.jsp</result>
+		</action>
+		
+		<action name="prepararSalidaSimple" method="prepararFormularioSimple"
+			class="ve.gob.cnti.srsi.controlador.SalidaControlador">
+			<result name="success">registro/registro_salida_simple.jsp</result>
+		</action>
+		
+		<action name="registrarSalidaSimple" method="registrarSalidaSimple"
+			class="ve.gob.cnti.srsi.controlador.SalidaControlador">
+			<result name="success" type="chain">
+               <param name="actionName">prepararSalidas</param>                         
+            </result>            
+			<result name="input">registro/registro_salida_simple.jsp</result>
+		</action>
+
+		<action name="prepararSalidaCompleja" method="prepararFormularioComplejo"
+			class="ve.gob.cnti.srsi.controlador.SalidaControlador">
+			<result name="success">registro/registro_salida_compleja.jsp</result>
+		</action>
+
+
+		<action name="registrarSalidaSimple" method="registrarSalidaSimple"
+			class="ve.gob.cnti.srsi.controlador.SalidaControlador">
+
+			<result name="success" type="chain">
+				<param name="actionName">prepararSalidas</param>
+			</result>
+
+			<result name="input">registro/registro_salida_simple.jsp</result>
+		</action>
+
+		<action name="registrarSalidaCompleja" method="registrarSalidaCompleja"
+			class="ve.gob.cnti.srsi.controlador.SalidaControlador">
+			<result name="success" type="chain">
+               <param name="actionName">prepararSalidas</param>                         
+            </result>            
+			<result name="input">registro/registro_salida_compleja.jsp</result>
+		</action>	
+		
 	</package>
 	<constant name="struts.devMode" value="true" />
 	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
