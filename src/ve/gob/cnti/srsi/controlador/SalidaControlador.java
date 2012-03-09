@@ -1,7 +1,6 @@
 package ve.gob.cnti.srsi.controlador;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.struts2.interceptor.validation.SkipValidation;
@@ -29,35 +28,76 @@ public class SalidaControlador extends DAO implements Formulario,
 	private EntradaSalida salida = new EntradaSalida();
 	private Dato dato = new Dato();
 
+	private long id_dato;
 	private long idServicioInformacion;
 	private long idFuncionalidad;
+	private boolean complejo;
 
 	@SuppressWarnings("unchecked")
 	@Override
 	@SkipValidation
 	public String prepararFormulario() {
+		tipoDatos = null;
+		System.out.println("id f" + idFuncionalidad);
+		funcionalidad = (Funcionalidad) read(funcionalidad, idFuncionalidad);
+		servicio = (ServicioInformacion) read(servicio, idServicioInformacion);
+		datos = (ArrayList<Dato>) read(NOMBRE_DATO, SALIDA, idFuncionalidad);
+		tipoDatos = (List<TipoDato>) getALL();
+		complejo = false;
+		return SUCCESS;
+	}
+
+	@SuppressWarnings("unchecked")
+	@SkipValidation
+	public String prepararFormularioSimple() {
 
 		funcionalidad = (Funcionalidad) read(funcionalidad, idFuncionalidad);
 		servicio = (ServicioInformacion) read(servicio, idServicioInformacion);
-		// datos = (ArrayList<Dato>) readEntrada(idFuncionalidad);
 		datos = (ArrayList<Dato>) read(NOMBRE_DATO, SALIDA, idFuncionalidad);
-		Iterator<Dato> iterator = datos.iterator();
-		while (iterator.hasNext()) {
-
-			System.out.println(" DATO => " + iterator.next().getNombre());
-		}
+		tipoDatos = null;
 		tipoDatos = (List<TipoDato>) getSimple();
+		complejo = false;
+
+		return SUCCESS;
+	}
+
+	@SuppressWarnings("unchecked")
+	@SkipValidation
+	public String prepararFormularioComplejo() {
+
+		funcionalidad = (Funcionalidad) read(funcionalidad, idFuncionalidad);
+		servicio = (ServicioInformacion) read(servicio, idServicioInformacion);
+		datos = (ArrayList<Dato>) read(NOMBRE_DATO, SALIDA, idFuncionalidad);
+		tipoDatos = null;
+		tipoDatos = (List<TipoDato>) getComplex();
+		complejo = true;
 
 		return SUCCESS;
 	}
 
 	public String registrarSalidaSimple() {
-		entrada.setId_funcionalidad(idFuncionalidad);
-		entrada.setTipo(ENTRADA);
-		dato.setId_entrada_salida(getNextId(entrada));
-		create(entrada);
+
+		salida.setId_funcionalidad(idFuncionalidad);
+		salida.setTipo(SALIDA);
+		dato.setId_entrada_salida(getNextId(salida));
+		System.out.println("id_dato: " + id_dato);
+		if (id_dato > 0) {
+			dato.setId_padre(id_dato);
+		}
+		create(salida);
 		create(dato);
 
+		return SUCCESS;
+	}
+
+	public String registrarSalidaCompleja() {
+		System.out.println("id f compl" + idFuncionalidad);
+		salida.setId_funcionalidad(idFuncionalidad);
+		salida.setTipo(SALIDA);
+		dato.setId_entrada_salida(getNextId(salida));
+		create(salida);
+		create(dato);
+		complejo = false;
 		return SUCCESS;
 	}
 
@@ -70,11 +110,15 @@ public class SalidaControlador extends DAO implements Formulario,
 					"Debe introducir una descripción.");
 		if (dato.getId_tipo_dato() == -1)
 			addFieldError("tipodato", "Debe seleccionar un tipo de dato");
-		if (read(NOMBRE_DATO_NO_DUPLICADO, dato.getNombre(), idFuncionalidad)){
-			addFieldError("dato.nombre", "Nombre de Salida Duplicado, cambie el nombre por favor");
+		if (read(NOMBRE_DATO_NO_DUPLICADO, dato.getNombre(), idFuncionalidad)) {
+			addFieldError("dato.nombre",
+					"Nombre de Entrada Duplicado, cambie el nombre por favor");
 		}
-
-		prepararFormulario();
+		if (complejo == true) {
+			prepararFormularioComplejo();
+		} else {
+			prepararFormularioSimple();
+		}
 	}
 
 	public List<EntradaSalida> getEntradas() {
@@ -164,4 +208,21 @@ public class SalidaControlador extends DAO implements Formulario,
 	public void setDatos(List<Dato> datos) {
 		this.datos = datos;
 	}
+
+	public boolean isComplejo() {
+		return complejo;
+	}
+
+	public void setComplejo(boolean complejo) {
+		this.complejo = complejo;
+	}
+
+	public long getId_dato() {
+		return id_dato;
+	}
+
+	public void setId_dato(long id_dato) {
+		this.id_dato = id_dato;
+	}
+
 }
