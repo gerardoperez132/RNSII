@@ -8,7 +8,18 @@
 <!-- CSS (required) -->
 <link rel="stylesheet" type="text/css" href="res/css/styles.css">
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
-<link rel="stylesheet" type="text/css" href="res/css/table.css">
+
+<link rel="stylesheet" type="text/css" href="res/css/jquery.treeTable.css">
+<script type="text/javascript" src="res/js/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="res/js/jquery.treeTable.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(
+		function() {
+			$("#tree").treeTable();
+		}
+	);
+</script>
 
 
 
@@ -34,15 +45,10 @@
 
 			<!-- Esta es la barra lateral -->
 			<div id="sidebar">
-
 				<small>Paso 1 Registro de Servicio de Información</small><br> <br>
 				<big>Paso 2 Registro de Funcionalidad(es)</big> <br> <br>
 				<small>Paso 3 Registro de Entradas/Salidas</small><br> <br>
 				<small>Paso 4 Verificar y guardar</small>
-
-
-
-
 			</div>
 
 			<!-- Este es el div de contenidos -->
@@ -58,7 +64,14 @@
 				<ul class="tabs">
 					<li><a href="#tab1">Descripción General</a></li>
 					<li class="active"><a>Entradas</a></li>
-					<li><a href="#tab3">Salidas</a></li>
+					<li>
+						<form action="prepararSalidas" method="POST">
+							<s:hidden name="idServicioInformacion"></s:hidden>
+							<s:hidden name="idFuncionalidad"></s:hidden>
+							<input type="submit" value="Salidas" style="background: none;
+							border: none;font-size: 0.8em;padding: 0 20px; margin-top: 7px;">
+						</form>
+					</li>
 					<li><a href="#tab4">Resumen Funcionalidad</a></li>
 				</ul>
 				<div class="tab_container">
@@ -70,11 +83,6 @@
 							Registro de Entradas de la Funcionalidad:
 							<s:property value="funcionalidad.nombre" />
 						</h4>
-						
-						
-						
-						
-						
 						
 						<hr>
 						
@@ -120,7 +128,7 @@
 							<tbody>
 							<s:iterator value="datos" status="result_Status">							
 									<s:if test="id_padre == 0">
-									<tr class="<s:if test="#result_Status.odd == true ">odd</s:if><s:else>hv</s:else>">
+									<tr style="border:1px solid #dadada;">
 										<th><s:property value="nombre" /></th>
 										<td><s:property value="descripcion" /></td>
 										<td>
@@ -128,7 +136,7 @@
 											<s:set name="id" value="id_dato" ></s:set>
 											<s:iterator value="tipoDatos"> 
 												<s:if test="%{id_tipo_dato == #id_d}">
-													<s:property value="nombre" /><s:property value="#id"/>
+													<s:property value="nombre" />
 												</s:if>											
 											</s:iterator> 									
 										</td>
@@ -144,36 +152,45 @@
 															<s:hidden name="idServicioInformacion"></s:hidden>
 															<s:hidden name="idFuncionalidad"></s:hidden>
 															<s:hidden name="id_dato"></s:hidden>
-															<input type="submit" value="Registrar Dato Simple" /><s:property value="id_dato"/>
-														</form>
-														<s:property value="#padre"/>
+															<input type="submit" value="Agregar Dato Simple" />
+														</form>														
 													</s:if>			
 												</s:if>												
 											</s:iterator>								
 										</td>
 															
 									</tr>
+									</s:if>
+									<s:else><s:set name="padre">0</s:set></s:else>
 									
-									<s:if test="%{#padre > 0}">
-									entro
+									<s:if test="%{#padre > 0}">																	
 									<tr>
 									<td colspan="4">
-									<table class="result">
+									
+									<table style="border: 2px solid #616161;width: 580px;">
+									<CAPTION style="width: 580px;">Lista de datos simples</CAPTION>
+									<thead>
+										<tr>
+											<th scope="col">Nombre</th>
+											<th scope="col">Descripción</th>
+											<th scope="col">Tipo</th>																		
+										</tr>
+									</thead>									
 									<s:iterator value="datos2">
 										
 										<s:if test="%{id_padre == #padre}">	
-													<tr>
-														<th><s:property value="nombre" /></th>
-														<td><s:property value="descripcion" /></td>
-														<td>
-															<s:set name="id_d2" value="id_tipo_dato" ></s:set>										
-															<s:iterator value="tipoDatos"> 
-																<s:if test="%{id_tipo_dato == #id_d2}">
-																	<s:property value="nombre" />
-																</s:if>											
-															</s:iterator> 									
-														</td>
-													</tr>		
+											<tr style="border:1px solid #dadada;">
+												<th><s:property value="nombre" /></th>
+												<td><s:property value="descripcion" /></td>
+												<td>
+													<s:set name="id_d2" value="id_tipo_dato" ></s:set>										
+													<s:iterator value="tipoDatos"> 
+														<s:if test="%{id_tipo_dato == #id_d2}">
+															<s:property value="nombre" />
+														</s:if>											
+													</s:iterator> 									
+												</td>
+											</tr>		
 										</s:if>																
 									</s:iterator>
 									</table>
@@ -181,7 +198,7 @@
 									</tr>	
 									</s:if>
 									
-									</s:if>
+									
 									
 																						
 							</s:iterator>
@@ -198,9 +215,109 @@
 							</s:else>	
 						</table>
 						
-<s:property value="#padre"/>
 						
-
+						
+						
+						<table id="tree" class="treeTable">
+							<thead>
+								<tr>
+									<th>Nombre</th>
+									<th>Descripción</th>
+									<th>Tipo</th>	
+									<th></th>
+								</tr>
+							</thead>
+							
+							<s:if test="datos.size > 0">
+							
+							<tbody>
+							<s:iterator value="datos" status="result_datos">
+							
+								<s:if test="id_padre == 0">
+								
+								<tr id="node-<s:property value="#result_datos"/>">
+									
+										<th><s:property value="nombre" /></th>
+										<td><s:property value="descripcion" /></td>
+										<td>
+											<s:set name="id_d" value="id_tipo_dato" ></s:set>										
+											<s:set name="id" value="id_dato" ></s:set>
+											<s:iterator value="tipoDatos"> 
+												<s:if test="%{id_tipo_dato == #id_d}">
+													<s:property value="nombre" />
+												</s:if>											
+											</s:iterator> 									
+										</td>
+										<td>
+											<s:iterator value="tipoDatos">
+												<s:if test="%{id_tipo_dato == #id_d}">
+													<s:if test="%{tipo == 0}">
+													<s:set name="padre" value="#id" ></s:set>
+													<s:append var="datos2">  
+													    <s:param value="%{datos}" />						      
+													</s:append>
+														<form action="prepararEntradaSimple" method="POST">
+															<s:hidden name="idServicioInformacion"></s:hidden>
+															<s:hidden name="idFuncionalidad"></s:hidden>
+															<s:hidden name="id_dato"></s:hidden>
+															<input type="submit" value="Agregar Dato Simple" />
+														</form>														
+													</s:if>			
+												</s:if>												
+											</s:iterator>								
+										</td>							
+								
+								</tr>
+								</s:if>
+								<s:else><s:set name="padre">0</s:set></s:else>
+								
+								<s:if test="%{#padre > 0}">		
+								
+									<tr id="node-100" class="child-of-node-1">
+										<td>
+											<span class="rar">Version 1</span>
+										</td>
+										<td>&nbsp;</td>
+										<td>&nbsp;</td>
+									</tr>
+									
+									
+								<tr id="node-2">
+									<td>
+										<span class="folder">PseudoToPython</span>
+									</td>
+									<td>Ninfas</td>
+									<td>En desarrollo</td>
+								</tr>
+									<tr id="node-200" class="child-of-node-2">
+										<td>
+											<span class="rar">Version 1</span>
+										</td>
+										<td>&nbsp;</td>
+										<td>&nbsp;</td>
+									<tr>
+									<tr id="node-201" class="child-of-node-2">
+										<td>
+											<span class="rar">Version 2</span>
+										</td>
+										<td>&nbsp;</td>
+										<td>&nbsp;</td>
+									</tr>
+							</s:iterator>
+							</tbody>
+							
+							</s:if>
+							<s:else>
+							
+							</s:else>
+							
+						</table>
+						
+						
+						
+						
+						
+						
 					</div>
 
 				</div>
