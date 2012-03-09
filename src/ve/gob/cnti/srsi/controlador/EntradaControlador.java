@@ -165,4 +165,10 @@ public class EntradaControlador extends DAO implements Formulario,
 		this.datos = datos;
 	}
 
+	@Override
+	public String prepararModificaciones() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

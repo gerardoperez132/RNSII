@@ -581,4 +581,10 @@ public class ServicioInformacionControlador extends DAO implements
 	public void setFuncionalidad(Funcionalidad funcionalidad) {
 		this.funcionalidad = funcionalidad;
 	}
+
+	@Override
+	public String prepararModificaciones() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -164,4 +164,10 @@ public class SalidaControlador extends DAO implements Formulario,
 	public void setDatos(List<Dato> datos) {
 		this.datos = datos;
 	}
+
+	@Override
+	public String prepararModificaciones() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
