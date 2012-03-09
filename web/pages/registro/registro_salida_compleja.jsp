@@ -10,7 +10,8 @@
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
 
 
-<title>SRSI - Registro Salidas Simples</title>
+
+<title>SRSI - Inicio</title>
 <!-- Donde dice inicio debería ir una var que identifique el lugar -->
 </head>
 <body>
@@ -47,59 +48,55 @@
 				<h3>Registro de Funcionalidades</h3>
 
 				<hr>
-
+				
 				<ul class="tabs">
 					<li><a href="#tab1">Descripción General</a></li>
-					<li><a href="#tab2">Entradas</a></li>
-					<li class="active">Salidas</li>
+					<li class="active"><a>Entradas</a></li>
+					<li><a href="#tab3">Salidas</a></li>
 					<li><a href="#tab4">Resumen Funcionalidad</a></li>
 				</ul>
-				<div class="tab_container">		
-				
-					<form action="registrarSalidaSimple" method="post">
-						<div id="tab2" class="tab_content">
+				<div class="tab_container">
 
-							<h5 class="formulario">Registro de Salida Simple</h5>
-							<h6>
-								Perteneciente a la funcionalidad: "
-								<s:property value="funcionalidad.nombre" />
-								"
-							</h6>
-							<hr>
-
-							<!-- Nombre de la entrada. -->
-							<h5 class="formulario">Nombre:</h5>
-							<s:fielderror>
+					<form action="registrarSalidaCompleja" method="post">
+					<div id="tab2" class="tab_content">
+					
+						<h5 class="formulario">Registro de Salida Compleja</h5>
+						<h6>Perteneciente a la funcionalidad:  "<s:property value="funcionalidad.nombre"/>"</h6>
+						<hr>
+						id:<s:property value="idFuncionalidad"/>
+						<!-- Nombre de la entrada. -->
+						<h5 class="formulario">Nombre:</h5>
+						<s:fielderror>
 								<s:param>dato.nombre</s:param>
-							</s:fielderror>
-							<s:textfield name="dato.nombre" />
+						</s:fielderror>
+						<s:textfield name="dato.nombre" />
 
-							<br>
-							<!-- Descripción de la entrada. -->
-							<h5 class="formulario">Descripción:</h5>
-							<s:fielderror>
+						<br>
+						<!-- Descripción de la entrada. -->
+						<h5 class="formulario">Descripción:</h5>
+						<s:fielderror>
 								<s:param>dato.descripcion</s:param>
-							</s:fielderror>
-							<s:textarea name="dato.descripcion" cols="30" rows="5" />
+						</s:fielderror>
+						<s:textarea name="dato.descripcion" cols="30" rows="5" />
 
-							<br>
+						<br>
+						
+						<h5 class="formulario">Tipo de dato:</h5>
+						<s:fielderror>
+							<s:param>tipodato</s:param>
+						</s:fielderror>
+						<s:select name="dato.id_tipo_dato" list="tipoDatos"
+							listKey="id_tipo_dato" listValue="nombre" headerKey="-1"
+							headerValue="Seleccione"></s:select>
 
-
-							<h5 class="formulario">Tipo de dato asociado:</h5>
-							<s:fielderror>
-								<s:param>tipodato</s:param>
-							</s:fielderror>
-							<s:select name="dato.id_tipo_dato" list="tipoDatos"
-								listKey="id_tipo_dato" listValue="nombre" headerKey="-1"
-								headerValue="Seleccione"></s:select>
-
-							<br> <br>
-							<s:hidden name="idServicioInformacion"></s:hidden>
-							<s:hidden name="idFuncionalidad"></s:hidden>
-														
-							<input type="submit" value="Registrar Salida" />
-
-						</div>
+						<br><br>
+						
+						<s:hidden name="idServicioInformacion"></s:hidden>
+						<s:hidden name="idFuncionalidad"></s:hidden>
+						<s:hidden name="complejo"></s:hidden>
+						<input type="submit" value="Registrar Salida Compleja" />
+						
+					</div>
 					</form>
 
 				</div>

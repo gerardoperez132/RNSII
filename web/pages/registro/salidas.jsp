@@ -34,15 +34,10 @@
 
 			<!-- Esta es la barra lateral -->
 			<div id="sidebar">
-
 				<small>Paso 1 Registro de Servicio de Información</small><br> <br>
 				<big>Paso 2 Registro de Funcionalidad(es)</big> <br> <br>
 				<small>Paso 3 Registro de Entradas/Salidas</small><br> <br>
 				<small>Paso 4 Verificar y guardar</small>
-
-
-
-
 			</div>
 
 			<!-- Este es el div de contenidos -->
@@ -57,9 +52,16 @@
 				<hr>
 				<ul class="tabs">
 					<li><a href="#tab1">Descripción General</a></li>
-					<li><a href="#tab3">Entradas</a></li>
-					<li class="active"><a>Salidas</a></li>
-					<li><a href="#tab4">Resumen Funcionalidad</a></li>
+					<li>
+						<form action="prepararEntradas" method="POST">
+							<s:hidden name="idServicioInformacion"></s:hidden>
+							<s:hidden name="idFuncionalidad"></s:hidden>
+							<input type="submit" value="Entradas" style="background: none;
+							border: none;font-size: 0.8em;padding: 0 20px; margin-top: 7px;">
+						</form>
+					</li>
+					<li class="active"><a>Salidas</a></li>					
+					<li><a>Resumen Funcionalidad</a></li>
 				</ul>
 				<div class="tab_container">
 
@@ -70,6 +72,7 @@
 							Registro de Salidas de la Funcionalidad:
 							<s:property value="funcionalidad.nombre" />
 						</h4>
+						
 						<hr>
 						
 						<table>
@@ -78,15 +81,15 @@
 									<form action="prepararSalidaSimple" method="POST">
 										<s:hidden name="idServicioInformacion"></s:hidden>
 										<s:hidden name="idFuncionalidad"></s:hidden>
-										<input type="submit" value="Agregar Dato Simple" />
+										<input type="submit" value="Registrar Dato Simple" />
 									</form>
 								</td>
 								<td>
-									<s:url id="registrarSalidaComplejo"
-										action="prepararSalidaComplejo"></s:url>
-									<s:a href="%{registrarSalidaComplejo}" cssClass="enlace">
-										<input type="button" value="Agregar Dato Complejo">
-									</s:a>
+									<form action="prepararSalidaCompleja" method="POST">
+										<s:hidden name="idServicioInformacion"></s:hidden>
+										<s:hidden name="idFuncionalidad"></s:hidden>
+										<input type="submit" value="Registrar Dato Complejo">
+									</form>
 								</td>
 							</tr>
 						</table>
@@ -97,7 +100,8 @@
 								<tr>
 									<th scope="col">Nombre</th>
 									<th scope="col">Descripción</th>
-									<th scope="col">Tipo</th>									
+									<th scope="col">Tipo</th>	
+									<th scope="col"></th>								
 								</tr>
 							</thead>	
 							
@@ -105,46 +109,97 @@
 							<tfoot>
 								<tr class="hv">
 									<th scope="row">Total</th>
-									<td colspan="2"><s:property value="datos.size"/> salidas cargadas</td>
+									<td colspan="3"><s:property value="datos.size"/> Salidas cargadas</td>
 								</tr>
 							</tfoot>
 							
 							<s:if test="datos.size > 0">
 							<tbody>
 							<s:iterator value="datos" status="result_Status">							
-								
-									<tr class="<s:if test="#result_Status.odd == true ">odd</s:if><s:else>hv</s:else>">
-										<th ><s:property value="nombre" /></th>
+									<s:if test="id_padre == 0">
+									<tr style="border:1px solid #dadada;">
+										<th><s:property value="nombre" /></th>
 										<td><s:property value="descripcion" /></td>
 										<td>
 											<s:set name="id_d" value="id_tipo_dato" ></s:set>										
+											<s:set name="id" value="id_dato" ></s:set>
 											<s:iterator value="tipoDatos"> 
 												<s:if test="%{id_tipo_dato == #id_d}">
 													<s:property value="nombre" />
 												</s:if>											
 											</s:iterator> 									
-										</td>									
-									</tr>												
-																
-								</s:iterator>
+										</td>
+										<td>
+											<s:iterator value="tipoDatos">
+												<s:if test="%{id_tipo_dato == #id_d}">
+													<s:if test="%{tipo == 0}">
+													<s:set name="padre" value="#id" ></s:set>
+													<s:append var="datos2">  
+													    <s:param value="%{datos}" />						      
+													</s:append>
+														<form action="prepararSalidaSimple" method="POST">
+															<s:hidden name="idServicioInformacion"></s:hidden>
+															<s:hidden name="idFuncionalidad"></s:hidden>
+															<s:hidden name="id_dato"></s:hidden>
+															<input type="submit" value="Agregar Dato Simple" />
+														</form>														
+													</s:if>			
+												</s:if>												
+											</s:iterator>								
+										</td>
+															
+									</tr>
+									</s:if>
+									<s:else><s:set name="padre">0</s:set></s:else>
+									
+									<s:if test="%{#padre > 0}">																	
+									<tr>
+									<td colspan="4">
+									
+									<table style="border: 2px solid #616161;width: 580px;">
+									<CAPTION style="width: 580px;">Lista de datos simples</CAPTION>
+									<thead>
+										<tr>
+											<th scope="col">Nombre</th>
+											<th scope="col">Descripción</th>
+											<th scope="col">Tipo</th>																		
+										</tr>
+									</thead>									
+									<s:iterator value="datos2">
+										
+										<s:if test="%{id_padre == #padre}">	
+											<tr style="border:1px solid #dadada;">
+												<th><s:property value="nombre" /></th>
+												<td><s:property value="descripcion" /></td>
+												<td>
+													<s:set name="id_d2" value="id_tipo_dato" ></s:set>										
+													<s:iterator value="tipoDatos"> 
+														<s:if test="%{id_tipo_dato == #id_d2}">
+															<s:property value="nombre" />
+														</s:if>											
+													</s:iterator> 									
+												</td>
+											</tr>		
+										</s:if>																
+									</s:iterator>
+									</table>
+									</td>												
+									</tr>	
+									</s:if>													
+							</s:iterator>
 							</tbody>
 							</s:if>
 							<s:else>
 								<tbody>
 									<tr class="hv">
-										<th class="row" colspan="3">Aún no hay Salidas cargadas para
+										<th class="row" colspan="4">Aún no hay salidas cargadas para
 								está funcionalidad
 										</th>																			
 									</tr>												
 								</tbody>
 							</s:else>	
 						</table>
-						
-
-						
-
 					</div>
-
 				</div>
 
 			</div>
