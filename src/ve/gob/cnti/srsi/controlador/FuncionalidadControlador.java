@@ -36,9 +36,9 @@ public class FuncionalidadControlador extends DAO implements Formulario {
 		return SUCCESS;
 	}
 
+	@Override
 	@SkipValidation
-	public String modificarFuncionalidad() {
-		System.out.println("idFuncionalidad recibido => " + idFuncionalidad);
+	public String prepararModificaciones() {
 		funcionalidad = (Funcionalidad) read(funcionalidad, idFuncionalidad);
 		return SUCCESS;
 	}
