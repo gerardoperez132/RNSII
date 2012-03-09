@@ -204,3 +204,10 @@ Efecto tooltip
 	font-style: normal;
 }
 
+.botonsubmit{
+	background: none;
+	border: none;
+	font-size: 0.8em;
+}
+	
+
