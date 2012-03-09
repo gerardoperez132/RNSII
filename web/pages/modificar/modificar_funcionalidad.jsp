@@ -60,7 +60,7 @@
 				</ul>
 				<div class="tab_container">
 					<div id="tab1" class="tab_content">
-						<form action="registrarFuncionalidad" method="POST">
+						<form action="modificarFuncionalidad" method="POST">
 							<p>Descripción General de la Funcionalidad</p>
 
 							<!-- Nombre de la funcionalidad u operación del servicio. -->
@@ -81,6 +81,7 @@
 							<br>
 
 							<s:hidden name="idServicioInformacion"></s:hidden>
+							<s:hidden name="funcionalidad.id_funcionalidad"></s:hidden>
 							<input type="submit" value="Modificar" />
 						</form>
 					</div>
