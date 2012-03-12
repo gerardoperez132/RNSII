@@ -24,6 +24,8 @@ public class FuncionalidadControlador extends DAO implements Formulario {
 
 	private long idServicioInformacion;
 	private long idFuncionalidad;
+	
+	private boolean modificar;
 
 	public String registrarFuncionalidad() {
 		/*
@@ -44,14 +46,33 @@ public class FuncionalidadControlador extends DAO implements Formulario {
 					"Debe introducir una descripción.");
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	@SkipValidation
 	public String prepararFormulario() {
+		
+		System.out.println("idf: "+ idFuncionalidad);
+		System.out.println("id s: "+ idServicioInformacion);
+		
 		servicio = (ServicioInformacion) read(servicio, idServicioInformacion);
-		funcionalidades = ((List<Funcionalidad>) read(funcionalidad,
-				new ServicioInformacion(), idFuncionalidad));
+		if(idFuncionalidad>0){
+			funcionalidad = (Funcionalidad) read(funcionalidad, idFuncionalidad);
+			funcionalidades = null;
+			funcionalidades = ((List<Funcionalidad>) read(funcionalidad,
+					new ServicioInformacion(), idFuncionalidad));
+		}		
 		return SUCCESS;
 	}
+	
+	public String modificarFuncionalidad() {
+		
+		System.out.println("idf: "+ idFuncionalidad);
+		System.out.println("id s: "+ idServicioInformacion);
+		update(funcionalidad, idFuncionalidad);
+				
+		return SUCCESS;
+	}
+		
 
 	public EntradaSalida getEntrada() {
 		return entrada;
@@ -123,6 +144,14 @@ public class FuncionalidadControlador extends DAO implements Formulario {
 
 	public void setFuncionalidades(List<Funcionalidad> funcionalidades) {
 		this.funcionalidades = funcionalidades;
+	}
+
+	public boolean isModificar() {
+		return modificar;
+	}
+
+	public void setModificar(boolean modificar) {
+		this.modificar = modificar;
 	}
 
 }
