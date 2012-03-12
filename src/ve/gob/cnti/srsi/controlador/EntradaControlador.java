@@ -224,5 +224,12 @@ public class EntradaControlador extends DAO implements Formulario,
 	public void setId_dato(long id_dato) {
 		this.id_dato = id_dato;
 	}
+	
+	@Override
+	public String prepararModificaciones() {
+		// TODO Auto-generated method stub
+		return null;
+
+	}
 
 }

@@ -13,6 +13,17 @@ import ve.gob.cnti.srsi.modelo.TipoDato;
  */
 public interface Constants {
 	/**
+	 * Códigos de área de un número telefónico en Venezuela.
+	 */
+	public static final String[] COD = { "212", "412", "414", "424", "416",
+			"426", "234", "235", "237", "238", "239", "241", "242", "243",
+			"244", "245", "246", "247", "248", "249", "251", "252", "253",
+			"254", "255", "256", "257", "258", "261", "262", "263", "264",
+			"266", "267", "268", "269", "271", "272", "273", "274", "275",
+			"276", "277", "278", "281", "282", "283", "285", "286", "287",
+			"288", "291", "292", "293", "294", "295" };
+
+	/**
 	 * Interfaz con los estados de un sistema de información.
 	 * 
 	 * @author Richard Ricciardelli

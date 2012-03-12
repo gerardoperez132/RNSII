@@ -12,6 +12,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
+import ve.gob.cnti.srsi.dao.Constants;
 import ve.gob.cnti.srsi.dao.Constants.ArregloModelos;
 import ve.gob.cnti.srsi.dao.Constants.TipoDocumento;
 import ve.gob.cnti.srsi.dao.DAO;
@@ -34,7 +35,7 @@ import com.opensymphony.xwork2.validator.annotations.FieldExpressionValidator;
 import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
 
 @SuppressWarnings("serial")
-public class ServicioInformacionControlador extends DAO implements
+public class ServicioInformacionControlador extends DAO implements Constants,
 		ServletRequestAware, Formulario, TipoDocumento, ArregloModelos {
 
 	private List<Area> areas = new ArrayList<Area>();
@@ -58,17 +59,14 @@ public class ServicioInformacionControlador extends DAO implements
 	private List<String> arquitectura;
 	private String intercambio;
 	private String responsable;
-	private String codArea;
-	private String telefonoContacto;
-	private String correoContacto;
+	private String[] codigos;
+	private String codigo;
+	private String telefono;
+	private String correo;
 
-	private File documentoLegal;
-	private String documentoLegalNombre;
-	private String documentoLegalFileName;
-
-	private File sla;
-	private String slaNombre;
-	private String slaFileName;
+	private File documento;
+	private String documentoNombre;
+	private String documentoFileName;
 
 	private HttpServletRequest servletRequest;
 
@@ -96,9 +94,14 @@ public class ServicioInformacionControlador extends DAO implements
 
 		intercambiosPadres = (List<Intercambio>) getParents(intercambio);
 		intercambiosHijos = (List<Intercambio>) getChildren(intercambio);
+		
+		setCodigos(COD);
+		
+		
 
-		// Debe venir de la sesión de usuario.
-		responsable = "Usuario";
+		// Por defecto consultará la base de datos.
+		responsable = "Usuario usuario";
+
 		return SUCCESS;
 	}
 
@@ -178,36 +181,18 @@ public class ServicioInformacionControlador extends DAO implements
 		}
 
 		// valida que ambos campos existan
-		if (documentoLegalFileName != null
-				&& documentoLegalNombre.isEmpty() == true) {
+		if (documentoFileName != null && documentoNombre.isEmpty() == true) {
 			addFieldError(
-					"documentoLegalNombre",
+					"documentoNombre",
 					getText("Si va a subir un documento debe proporcionar el nombre con que se va a guardar"));
 			addFieldError(
-					"documentoLegal",
+					"documento",
 					getText("Si va a subir un documento debe proporcionar el archivo a guardar"));
 		}
 		// valida que ambos campos existan
-		if (documentoLegalFileName == null
-				&& documentoLegalNombre.isEmpty() == false) {
+		if (documentoFileName == null && documentoNombre.isEmpty() == false) {
 			addFieldError(
-					"documentoLegal",
-					getText("Si va a subir un documento debe proporcionar el archivo a guardar"));
-		}
-
-		// valida que ambos campos existan
-		if (slaFileName != null && slaNombre.isEmpty() == true) {
-			addFieldError(
-					"slaNombre",
-					getText("Si va a subir un documento debe proporcionar el nombre con que se va a guardar"));
-			addFieldError(
-					"sla",
-					getText("Si va a subir un documento debe proporcionar el archivo a guardar"));
-		}
-		// valida que ambos campos existan
-		if (sla == null && slaNombre.isEmpty() == false) {
-			addFieldError(
-					"sla",
+					"documento",
 					getText("Si va a subir un documento debe proporcionar el archivo a guardar"));
 		}
 		prepararFormulario();
@@ -269,45 +254,28 @@ public class ServicioInformacionControlador extends DAO implements
 
 		// Seteando el TELEFONO DE CONTACTO
 		Telefono telf = new Telefono();
-		telf.setTelefono(codArea + "-" + telefonoContacto);
+		telf.setTelefono(codigo + "-" + telefono);
 		telf.setId_servicio_informacion(idServicioInformacion);
 		create(telf);
 
 		// Seteando el CORREO DE CONTACTO
-		Correo correo = new Correo();
-		correo.setCorreo(correoContacto);
-		correo.setId_servicio_informacion(idServicioInformacion);
-		create(correo);
+		Correo email = new Correo();
+		email.setCorreo(correo);
+		email.setId_servicio_informacion(idServicioInformacion);
+		create(email);
 
 		// Seteando el documento legal
 		// valida que ambos campos existan
-		if (documentoLegalFileName != null
-				&& documentoLegalNombre.isEmpty() == false) {
+		if (documentoFileName != null && documentoNombre.isEmpty() == false) {
 			AspectoLegal al = new AspectoLegal();
 			try {
-				al.setUrl(saveFile(documentoLegal, documentoLegalFileName));
+				al.setUrl(saveFile(documento, documentoFileName));
 			} catch (IOException e) {
 				// levantar action error
 				e.printStackTrace();
 			}
-			al.setNombre(documentoLegalNombre);
+			al.setNombre(documentoNombre);
 			al.setTipo(LEGAL);
-			al.setId_servicio_informacion(idServicioInformacion);
-			create(al);
-		}
-
-		// Seteando el documento legal
-		// valida que ambos campos existan
-		if (sla != null && slaNombre.isEmpty() == false) {
-			AspectoLegal al = new AspectoLegal();
-			try {
-				al.setUrl(saveFile(sla, slaFileName));
-			} catch (IOException e) {
-				// levantar action error
-				e.printStackTrace();
-			}
-			al.setNombre(slaNombre);
-			al.setTipo(SLA);
 			al.setId_servicio_informacion(idServicioInformacion);
 			create(al);
 		}
@@ -452,7 +420,7 @@ public class ServicioInformacionControlador extends DAO implements
 		this.arquitectura = arquitectura;
 	}
 
-	@FieldExpressionValidator(expression = "!intercambio.equals(\"-1\")", message = "Seleccione un valor. ")
+	@FieldExpressionValidator(expression = "!intercambio.equals(\"-1\")", message = "Seleccione un valor.")
 	public String getIntercambio() {
 		return intercambio;
 	}
@@ -461,40 +429,32 @@ public class ServicioInformacionControlador extends DAO implements
 		this.intercambio = intercambio;
 	}
 
-	public String getResponsable() {
-		return responsable;
+	@FieldExpressionValidator(expression = "!(codigo.length() < 3)", message = "Proporcione un código de área teléfonico válido")
+	public String getCodigo() {
+		return codigo;
 	}
 
-	public void setResponsable(String responsable) {
-		this.responsable = responsable;
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 
-	@FieldExpressionValidator(expression = "!(codArea.length() < 3)", message = "Proporcione un código de área teléfonico Válido")
-	public String getCodArea() {
-		return codArea;
+	@FieldExpressionValidator(expression = "!(telefono.length() < 7)", message = "Proporcione un número telefónico válido")
+	public String getTelefono() {
+		return telefono;
 	}
 
-	public void setCodArea(String codArea) {
-		this.codArea = codArea;
-	}
-
-	@FieldExpressionValidator(expression = "!(telefonoContacto.length() < 7)", message = "Proporcione un número telefónico Válido")
-	public String getTelefonoContacto() {
-		return telefonoContacto;
-	}
-
-	public void setTelefonoContacto(String telefonoContacto) {
-		this.telefonoContacto = telefonoContacto;
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
 	}
 
 	@RequiredStringValidator(message = "Proporcione una dirección de correo para el soporte técnico ")
-	@EmailValidator(message = "Proporcione una dirección valida de correo para el soporte técnico")
-	public String getCorreoContacto() {
-		return correoContacto;
+	@EmailValidator(message = "Proporcione una dirección válida de correo para el soporte técnico")
+	public String getCorreo() {
+		return correo;
 	}
 
-	public void setCorreoContacto(String correoContacto) {
-		this.correoContacto = correoContacto;
+	public void setCorreo(String correo) {
+		this.correo = correo;
 	}
 
 	public long getIdServicioInformacion() {
@@ -518,54 +478,6 @@ public class ServicioInformacionControlador extends DAO implements
 		this.servicio = servicio;
 	}
 
-	public File getDocumentoLegal() {
-		return documentoLegal;
-	}
-
-	public void setDocumentoLegal(File documentoLegal) {
-		this.documentoLegal = documentoLegal;
-	}
-
-	public String getDocumentoLegalNombre() {
-		return documentoLegalNombre;
-	}
-
-	public void setDocumentoLegalNombre(String documentoLegalNombre) {
-		this.documentoLegalNombre = documentoLegalNombre;
-	}
-
-	public String getDocumentoLegalFileName() {
-		return documentoLegalFileName;
-	}
-
-	public void setDocumentoLegalFileName(String documentoLegalFileName) {
-		this.documentoLegalFileName = documentoLegalFileName;
-	}
-
-	public File getSla() {
-		return sla;
-	}
-
-	public void setSla(File sla) {
-		this.sla = sla;
-	}
-
-	public String getSlaNombre() {
-		return slaNombre;
-	}
-
-	public void setSlaNombre(String slaNombre) {
-		this.slaNombre = slaNombre;
-	}
-
-	public String getSlaFileName() {
-		return slaFileName;
-	}
-
-	public void setSlaFileName(String slaFileName) {
-		this.slaFileName = slaFileName;
-	}
-
 	public List<Funcionalidad> getFuncionalidades() {
 		return funcionalidades;
 	}
@@ -580,5 +492,51 @@ public class ServicioInformacionControlador extends DAO implements
 
 	public void setFuncionalidad(Funcionalidad funcionalidad) {
 		this.funcionalidad = funcionalidad;
+	}
+
+	public File getDocumento() {
+		return documento;
+	}
+
+	public void setDocumento(File documento) {
+		this.documento = documento;
+	}
+
+	public String getDocumentoNombre() {
+		return documentoNombre;
+	}
+
+	public void setDocumentoNombre(String documentoNombre) {
+		this.documentoNombre = documentoNombre;
+	}
+
+	public String getDocumentoFileName() {
+		return documentoFileName;
+	}
+
+	public void setDocumentoFileName(String documentoFileName) {
+		this.documentoFileName = documentoFileName;
+	}
+
+	public String getResponsable() {
+		return responsable;
+	}
+
+	public void setResponsable(String responsable) {
+		this.responsable = responsable;
+	}
+
+	public String[] getCodigos() {
+		return codigos;
+	}
+
+	public void setCodigos(String[] codigos) {
+		this.codigos = codigos;
+	}
+
+	@Override
+	public String prepararModificaciones() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

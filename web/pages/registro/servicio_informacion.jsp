@@ -98,10 +98,20 @@
 							<s:iterator value="funcionalidades" status="result_Status">
 								<tr
 									class="<s:if test="#result_Status.odd == true ">odd</s:if><s:else>hv</s:else>">
-									<th><s:property value="id_funcionalidad" /></th>
-									<td><s:property value="nombre" /></td>
-									<td><s:property value="fecha_creado" /></td>
-									<td>Editar,Eliminar</td>
+									<th><s:property value="id_funcionalidad" />
+									</th>
+									<td><s:property value="nombre" />
+									</td>
+									<td><s:property value="fecha_creado" />
+									</td>
+									<td><form action="prepararModificacionesFuncionalidad"
+											method="POST">
+											<s:hidden name="idFuncionalidad" value="%{id_funcionalidad}"></s:hidden>
+											<s:hidden name="idServicioInformacion"></s:hidden>
+											<input type="submit" value="Editar"
+												style="background: none; border: 0;" /> Eliminar
+										</form>
+									</td>
 								</tr>
 							</s:iterator>
 

@@ -38,6 +38,22 @@ public class FuncionalidadControlador extends DAO implements Formulario {
 		return SUCCESS;
 	}
 
+	@Override
+	@SkipValidation
+	public String prepararModificaciones() {
+		funcionalidad = (Funcionalidad) read(funcionalidad, idFuncionalidad);
+		return SUCCESS;
+	}
+
+	public String modificarFuncionalidad() {
+		funcionalidad.setId_servicio_informacion(idServicioInformacion);
+		System.out.println("ENTRÓ Y CON ESTOS DATOS => "
+				+ funcionalidad.toString());
+		update(funcionalidad, idFuncionalidad);
+		create(funcionalidad);
+		return SUCCESS;
+	}
+
 	public void validate() {
 		if (funcionalidad.getNombre().isEmpty())
 			addFieldError("funcionalidad.nombre", "Debe introducir un nombre.");
@@ -63,17 +79,7 @@ public class FuncionalidadControlador extends DAO implements Formulario {
 		}		
 		return SUCCESS;
 	}
-	
-	public String modificarFuncionalidad() {
 		
-		System.out.println("idf: "+ idFuncionalidad);
-		System.out.println("id s: "+ idServicioInformacion);
-		update(funcionalidad, idFuncionalidad);
-				
-		return SUCCESS;
-	}
-		
-
 	public EntradaSalida getEntrada() {
 		return entrada;
 	}
