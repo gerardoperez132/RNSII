@@ -32,6 +32,9 @@ public interface CRUD {
 	 * @param id
 	 *            Id del segundo modelo a insertar
 	 */
+	
+	public void create(Object model, long id);
+	
 	// NO ESTÁ LISTO
 	public void create(Object modelOne, Object modelTwo, long id);
 
