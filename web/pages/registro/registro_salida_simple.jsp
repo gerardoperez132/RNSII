@@ -96,6 +96,7 @@
 							<br> <br>
 							<s:hidden name="idServicioInformacion"></s:hidden>
 							<s:hidden name="idFuncionalidad"></s:hidden>
+							<s:hidden name="id_dato"></s:hidden>
 														
 							<input type="submit" value="Registrar Salida" />
 
