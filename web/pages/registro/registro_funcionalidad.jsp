@@ -47,19 +47,111 @@
 				<h3>Registro de Funcionalidades del servicio: "<s:property value="servicio.nombre"/>"</h3>
 
 				<hr>
-
+				
+				<s:if test="idFuncionalidad>0 && modificar!=true">
+				
 				<ul class="tabs">
-					<li class="active"><a href="#tab1">Descripción General</a>
+					<li class="active"><a>Descripción General</a>
 					</li>
-					<li><a href="#tab2">Entradas</a>
+					<li>
+						<form action="prepararEntradas" method="POST">
+							<s:hidden name="idServicioInformacion"></s:hidden>
+							<s:hidden name="idFuncionalidad"></s:hidden>
+							<input type="submit" value="Entradas" style="background: none;
+							border: none;font-size: 0.8em;padding: 0 20px; margin-top: 7px;">
+						</form>
 					</li>
-					<li><a href="#tab3">Salidas</a>
+					<li>
+						<form action="prepararSalidas" method="POST">
+							<s:hidden name="idServicioInformacion"></s:hidden>
+							<s:hidden name="idFuncionalidad"></s:hidden>
+							<input type="submit" value="Salidas" style="background: none;
+							border: none;font-size: 0.8em;padding: 0 20px; margin-top: 7px;">
+						</form>
 					</li>
-					<li><a href="#tab4">Resumen Funcionalidad</a>
+					<li><a>Resumen Funcionalidad</a>
+					</li>
+				</ul>
+				
+				<div class="tab_container">
+					<div id="tab1" class="tab_content">
+					<table>
+					<tr>
+						<td>
+						<h5>Nombre:</h5> 
+						</td>
+						<td><s:property value="funcionalidad.nombre"/></td>
+					</tr>
+					<tr>
+						<td>
+						<h5>Descripción:</h5>
+						</td>
+						<td> <s:property value="funcionalidad.descripcion"/></td>
+					</tr>
+					</table>
+					
+					<form action="prepararFuncionalidad" method="POST">
+						<s:hidden name="idServicioInformacion"></s:hidden>
+						<s:hidden name="idFuncionalidad"></s:hidden>
+						<s:hidden name= "modificar" value="%{true}"></s:hidden>
+						<input type="submit" value="Modificar Funcionalidad">
+					</form>
+					
+					
+					</div>
+				</div>
+				
+				
+				</s:if>				
+				
+				<s:else>
+				<ul class="tabs">
+					<li class="active"><a>Descripción General</a>
+					</li>
+					<li><a>Entradas</a>
+					</li>
+					<li><a>Salidas</a>
+					</li>
+					<li><a>Resumen Funcionalidad</a>
 					</li>
 				</ul>
 				<div class="tab_container">
 					<div id="tab1" class="tab_content">
+					
+						<s:if test="modificar == true">
+						
+						<form action="modificarFuncionalidad" method="POST">
+							<p>Descripción General de la Funcionalidad</p>
+							<hr>
+							
+							<!-- Nombre de la funcionalidad u operación del servicio. -->
+							<h5 class="formulario">Nombre:</h5>
+							<s:fielderror>
+								<s:param>funcionalidad.nombre</s:param>
+							</s:fielderror>
+							<s:textfield name="funcionalidad.nombre" />
+
+							<br>
+							<!-- Descripción de la funcionalidad u operación del servicio. -->
+							<h5 class="formulario">Descripción (Pre-Condiciones):</h5>
+							<s:fielderror>
+								<s:param>funcionalidad.descripcion</s:param>
+							</s:fielderror>
+							<s:textarea name="funcionalidad.descripcion" cols="30" rows="5" />
+
+							<br>
+							
+							<s:hidden name="idServicioInformacion" ></s:hidden>	
+							<s:hidden name="idFuncionalidad"></s:hidden>
+							<s:hidden name= "modificar" value="%{false}"></s:hidden>
+							<input type="submit" value="Modificar Funcionalidad" />
+						</form>
+						
+												
+						</s:if>
+						
+						<s:else>
+					
 						<form action="registrarFuncionalidad" method="POST">
 							<p>Descripción General de la Funcionalidad</p>
 							
@@ -83,9 +175,14 @@
 							<s:hidden name="idServicioInformacion" ></s:hidden>	
 							<input type="submit" value="Registrar" />
 						</form>
+						
+						</s:else>
+						
 					</div>
 					
 				</div>
+				
+				</s:else>
 
 			</div>
 
