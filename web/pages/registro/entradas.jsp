@@ -8,8 +8,9 @@
 <!-- CSS (required) -->
 <link rel="stylesheet" type="text/css" href="res/css/styles.css">
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
-
 <link rel="stylesheet" type="text/css" href="res/css/jquery.treeTable.css">
+<link rel="stylesheet" type="text/css" href="res/css/table_tree.css">
+
 <script type="text/javascript" src="res/js/jquery-1.7.1.js"></script>
 <script type="text/javascript" src="res/js/jquery.treeTable.js"></script>
 
@@ -105,119 +106,7 @@
 							</tr>
 						</table>
 						
-						<table class="result">						
-							
-							<thead>
-								<tr>
-									<th scope="col">Nombre</th>
-									<th scope="col">Descripción</th>
-									<th scope="col">Tipo</th>	
-									<th scope="col"></th>								
-								</tr>
-							</thead>	
-							
-							
-							<tfoot>
-								<tr class="hv">
-									<th scope="row">Total</th>
-									<td colspan="3"><s:property value="datos.size"/> entradas cargadas</td>
-								</tr>
-							</tfoot>
-							
-							<s:if test="datos.size > 0">
-							<tbody>
-							<s:iterator value="datos" status="result_Status">							
-									<s:if test="id_padre == 0">
-									<tr style="border:1px solid #dadada;">
-										<th><s:property value="nombre" /></th>
-										<td><s:property value="descripcion" /></td>
-										<td>
-											<s:set name="id_d" value="id_tipo_dato" ></s:set>										
-											<s:set name="id" value="id_dato" ></s:set>
-											<s:iterator value="tipoDatos"> 
-												<s:if test="%{id_tipo_dato == #id_d}">
-													<s:property value="nombre" />
-												</s:if>											
-											</s:iterator> 									
-										</td>
-										<td>
-											<s:iterator value="tipoDatos">
-												<s:if test="%{id_tipo_dato == #id_d}">
-													<s:if test="%{tipo == 0}">
-													<s:set name="padre" value="#id" ></s:set>
-													<s:append var="datos2">  
-													    <s:param value="%{datos}" />						      
-													</s:append>
-														<form action="prepararEntradaSimple" method="POST">
-															<s:hidden name="idServicioInformacion"></s:hidden>
-															<s:hidden name="idFuncionalidad"></s:hidden>
-															<s:hidden name="id_dato"></s:hidden>
-															<input type="submit" value="Agregar Dato Simple" />
-														</form>														
-													</s:if>			
-												</s:if>												
-											</s:iterator>								
-										</td>
-															
-									</tr>
-									</s:if>
-									<s:else><s:set name="padre">0</s:set></s:else>
-									
-									<s:if test="%{#padre > 0}">																	
-									<tr>
-									<td colspan="4">
-									
-									<table style="border: 2px solid #616161;width: 580px;">
-									<CAPTION style="width: 580px;">Lista de datos simples</CAPTION>
-									<thead>
-										<tr>
-											<th scope="col">Nombre</th>
-											<th scope="col">Descripción</th>
-											<th scope="col">Tipo</th>																		
-										</tr>
-									</thead>									
-									<s:iterator value="datos2">
-										
-										<s:if test="%{id_padre == #padre}">	
-											<tr style="border:1px solid #dadada;">
-												<th><s:property value="nombre" /></th>
-												<td><s:property value="descripcion" /></td>
-												<td>
-													<s:set name="id_d2" value="id_tipo_dato" ></s:set>										
-													<s:iterator value="tipoDatos"> 
-														<s:if test="%{id_tipo_dato == #id_d2}">
-															<s:property value="nombre" />
-														</s:if>											
-													</s:iterator> 									
-												</td>
-											</tr>		
-										</s:if>																
-									</s:iterator>
-									</table>
-									</td>												
-									</tr>	
-									</s:if>
-									
-									
-									
-																						
-							</s:iterator>
-							</tbody>
-							</s:if>
-							<s:else>
-								<tbody>
-									<tr class="hv">
-										<th class="row" colspan="4">Aún no hay Entradas cargadas para
-								está funcionalidad
-										</th>																			
-									</tr>												
-								</tbody>
-							</s:else>	
-						</table>
-						
-						
-						
-						
+						<!-- Tabla en arborl -->
 						<table id="tree" class="treeTable">
 							<thead>
 								<tr>
@@ -228,27 +117,36 @@
 								</tr>
 							</thead>
 							
+							<!-- Validación de lista vacia -->
 							<s:if test="datos.size > 0">
 							
 							<tbody>
+							<!-- iterador con todas las entradas cargadas -->
 							<s:iterator value="datos" status="result_datos">
 							
+								<!-- Condicción que asegura que solo se impriman datos sin padres -->
 								<s:if test="id_padre == 0">
 								
-								<tr id="node-<s:property value="#result_datos"/>">
+								<!-- Creación de fila con su nodo sacado del index del iterador -->
+								<tr id="node-<s:property value="#result_datos.index"/>">
 									
-										<th><s:property value="nombre" /></th>
+										<td><s:property value="nombre" /></td>
 										<td><s:property value="descripcion" /></td>
+										<!-- impresión del tipo dato -->
 										<td>
-											<s:set name="id_d" value="id_tipo_dato" ></s:set>										
+											<!-- creación de una variable con el id_dato para identicar a los datos complejos -->										
 											<s:set name="id" value="id_dato" ></s:set>
-											<s:iterator value="tipoDatos"> 
+											<!-- creación de una variable con el id_tipo_de_dato -->
+											<s:set name="id_d" value="id_tipo_dato" ></s:set>
+											<s:iterator value="tipoDatos">
+												<!--impresión del tipo de dato de acuerdo a su id --> 
 												<s:if test="%{id_tipo_dato == #id_d}">
 													<s:property value="nombre" />
 												</s:if>											
 											</s:iterator> 									
 										</td>
 										<td>
+											<!-- Bloque que muestra un boton si el dato es una lista-->
 											<s:iterator value="tipoDatos">
 												<s:if test="%{id_tipo_dato == #id_d}">
 													<s:if test="%{tipo == 0}">
@@ -269,45 +167,46 @@
 								
 								</tr>
 								</s:if>
-								<s:else><s:set name="padre">0</s:set></s:else>
+								<s:else>
+									<s:set name="padre">0</s:set>
+								</s:else>
+								<!-- impresion de datos hijos-->
+								<s:if test="%{#padre > 0}">	
+									<s:iterator value="datos2" status="status_datos2">
+										
+										<s:if test="%{id_padre == #padre}">		
+											<tr id="node-<s:property value="%{( (100) * (#result_datos.index) )+ #status_datos2.index}" />" 
+										class="child-of-node-<s:property value="#result_datos.index" />" >
+												
+												<td><s:property value="nombre" /></td>
+												<td><s:property value="descripcion" /></td>
+												<td>
+													<s:set name="id_d2" value="id_tipo_dato" ></s:set>										
+													<s:iterator value="tipoDatos"> 
+														<s:if test="%{id_tipo_dato == #id_d2}">
+															<s:property value="nombre" />
+														</s:if>											
+													</s:iterator> 									
+												</td>
+											</tr>		
+										</s:if>																
+									</s:iterator>
 								
-								<s:if test="%{#padre > 0}">		
+								</s:if>	
+									
 								
-									<tr id="node-100" class="child-of-node-1">
-										<td>
-											<span class="rar">Version 1</span>
-										</td>
-										<td>&nbsp;</td>
-										<td>&nbsp;</td>
-									</tr>
-									
-									
-								<tr id="node-2">
-									<td>
-										<span class="folder">PseudoToPython</span>
-									</td>
-									<td>Ninfas</td>
-									<td>En desarrollo</td>
-								</tr>
-									<tr id="node-200" class="child-of-node-2">
-										<td>
-											<span class="rar">Version 1</span>
-										</td>
-										<td>&nbsp;</td>
-										<td>&nbsp;</td>
-									<tr>
-									<tr id="node-201" class="child-of-node-2">
-										<td>
-											<span class="rar">Version 2</span>
-										</td>
-										<td>&nbsp;</td>
-										<td>&nbsp;</td>
-									</tr>
 							</s:iterator>
 							</tbody>
 							
 							</s:if>
 							<s:else>
+							
+								<tbody>
+									<tr>
+										<th colspan="4">Aún no hay Entradas cargadas para está funcionalidad
+										</th>																			
+									</tr>												
+								</tbody>
 							
 							</s:else>
 							

@@ -8,7 +8,19 @@
 <!-- CSS (required) -->
 <link rel="stylesheet" type="text/css" href="res/css/styles.css">
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
-<link rel="stylesheet" type="text/css" href="res/css/table.css">
+<link rel="stylesheet" type="text/css" href="res/css/jquery.treeTable.css">
+<link rel="stylesheet" type="text/css" href="res/css/table_tree.css">
+
+<script type="text/javascript" src="res/js/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="res/js/jquery.treeTable.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(
+		function() {
+			$("#tree").treeTable();
+		}
+	);
+</script>
 
 
 
@@ -94,35 +106,37 @@
 							</tr>
 						</table>
 						
-						<table class="result">						
-							
+						<table id="tree" class="treeTable">
 							<thead>
 								<tr>
-									<th scope="col">Nombre</th>
-									<th scope="col">Descripción</th>
-									<th scope="col">Tipo</th>	
-									<th scope="col"></th>								
+									<th>Nombre</th>
+									<th>Descripción</th>
+									<th>Tipo</th>	
+									<th></th>
 								</tr>
-							</thead>	
+							</thead>
 							
-							
-							<tfoot>
-								<tr class="hv">
-									<th scope="row">Total</th>
-									<td colspan="3"><s:property value="datos.size"/> Salidas cargadas</td>
-								</tr>
-							</tfoot>
-							
+							<!-- Validación de lista vacia -->
 							<s:if test="datos.size > 0">
+							
 							<tbody>
-							<s:iterator value="datos" status="result_Status">							
-									<s:if test="id_padre == 0">
-									<tr style="border:1px solid #dadada;">
-										<th><s:property value="nombre" /></th>
+							<!-- iterador con todas las entradas cargadas -->
+							<s:iterator value="datos" status="result_datos">
+							
+								<!-- Condicción que asegura que solo se impriman datos sin padres -->
+								<s:if test="id_padre == 0">
+								
+								<!-- Creación de fila con su nodo sacado del index del iterador -->
+								<tr id="node-<s:property value="#result_datos.index"/>">
+									
+										<td><s:property value="nombre" /></td>
 										<td><s:property value="descripcion" /></td>
+										<!-- impresión del tipo dato -->
 										<td>
+											<!-- creación de una variable con el id_tipo_de_dato -->
 											<s:set name="id_d" value="id_tipo_dato" ></s:set>										
 											<s:set name="id" value="id_dato" ></s:set>
+											<!-- creación de una variable con el id_tipo_de_dato -->
 											<s:iterator value="tipoDatos"> 
 												<s:if test="%{id_tipo_dato == #id_d}">
 													<s:property value="nombre" />
@@ -146,30 +160,22 @@
 													</s:if>			
 												</s:if>												
 											</s:iterator>								
-										</td>
-															
-									</tr>
-									</s:if>
-									<s:else><s:set name="padre">0</s:set></s:else>
-									
-									<s:if test="%{#padre > 0}">																	
-									<tr>
-									<td colspan="4">
-									
-									<table style="border: 2px solid #616161;width: 580px;">
-									<CAPTION style="width: 580px;">Lista de datos simples</CAPTION>
-									<thead>
-										<tr>
-											<th scope="col">Nombre</th>
-											<th scope="col">Descripción</th>
-											<th scope="col">Tipo</th>																		
-										</tr>
-									</thead>									
-									<s:iterator value="datos2">
+										</td>							
+								
+								</tr>
+								</s:if>
+								<s:else>
+									<s:set name="padre">0</s:set>
+								</s:else>
+								
+								<s:if test="%{#padre > 0}">	
+									<s:iterator value="datos2" status="status_datos2">
 										
-										<s:if test="%{id_padre == #padre}">	
-											<tr style="border:1px solid #dadada;">
-												<th><s:property value="nombre" /></th>
+										<s:if test="%{id_padre == #padre}">		
+											<tr id="node-<s:property value="%{( (100) * (#result_datos.index) )+ #status_datos2.index}" />" 
+										class="child-of-node-<s:property value="#result_datos.index" />" >
+												
+												<td><s:property value="nombre" /></td>
 												<td><s:property value="descripcion" /></td>
 												<td>
 													<s:set name="id_d2" value="id_tipo_dato" ></s:set>										
@@ -182,12 +188,13 @@
 											</tr>		
 										</s:if>																
 									</s:iterator>
-									</table>
-									</td>												
-									</tr>	
-									</s:if>													
+								
+								</s:if>	
+									
+								
 							</s:iterator>
 							</tbody>
+							
 							</s:if>
 							<s:else>
 								<tbody>
