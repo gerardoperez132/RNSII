@@ -36,9 +36,12 @@
 						<div class="menu_top_bg">Navegacion</div>
 						<div class="sub_menu">
 							<ul>
-								<li><a class="selected">Paso 1</a></li>
-								<li><a href="#">Paso 2</a></li>
-								<li><a href="#">Paso 3 </a></li>
+								<li><a class="selected">Paso 1</a>
+								</li>
+								<li><a href="#">Paso 2</a>
+								</li>
+								<li><a href="#">Paso 3 </a>
+								</li>
 							</ul>
 						</div>
 					</div>
@@ -81,7 +84,7 @@
 								</s:fielderror>
 								<s:select name="sector" list="sectores" listKey="id_sector"
 									listValue="nombre" headerKey="-1"
-									headerValue="<s:text name="sector.title"></s:text>"></s:select>
+									headerValue="%{getText('sector.select')}"></s:select>
 								<h5 class="formulario">
 									<s:text name="nombre.title"></s:text>
 								</h5>
@@ -114,66 +117,51 @@
 									listValue="nombre" headerKey="-1" headerValue="Seleccione"></s:select>
 							</div>
 							<div id="tab2" class="tab_content">
-								<p class="formulario">
-									<s:text name="documento.title"></s:text>
-								</p>
-								<small><s:text name="documento.descripcion"></s:text> </small>
+								<p class="formulario">Aspectos Legales (¿Hará falta esto?)</p>
+								<small><s:text name="tab2.description"></s:text> </small>
 								<hr>
-								<h5 class="formulario">Nombre del Documento Legal:</h5>
+								<h5 class="formulario">
+									<s:text name="documento.name"></s:text>
+								</h5>
 								<s:fielderror>
-									<s:param>documentoLegalNombre</s:param>
+									<s:param>documentoNombre</s:param>
 								</s:fielderror>
-								<s:textfield name="documentoLegalNombre" labelposition="top" />
-
-
-								<h5 class="formulario">Adjuntar Documento Legal:</h5>
+								<s:textfield name="documentoNombre" labelposition="top" />
+								<h5 class="formulario">
+									<s:text name="documento.file"></s:text>
+								</h5>
 								<s:fielderror>
-									<s:param>documentoLegal</s:param>
+									<s:param>documento</s:param>
 								</s:fielderror>
-								<s:file name="documentoLegal" value="documentoLegalFileName"></s:file>
-
+								<s:file name="documento" value="documentoFileName"></s:file>
 								<br> <br> <br> <br>
-
-								<h5 class="formulario">Nombre del Documento SLA:</h5>
-								<s:fielderror>
-									<s:param>slaNombre</s:param>
-								</s:fielderror>
-								<s:textfield name="slaNombre" labelposition="top" />
-
-
-								<h5 class="formulario">Adjuntar SLA:</h5>
-								<s:fielderror>
-									<s:param>sla</s:param>
-								</s:fielderror>
-								<s:file name="sla" value="slaFileName"></s:file>
-
-
-
 							</div>
-
 							<div id="tab3" class="tab_content">
-
-								<p class="formulario">Descripción técnica del servicio</p>
-								<small>Especificaciones del intercambio de Información</small>
+								<p class="formulario">Descripción técnica del servicio ¿Hará
+									falta esto?</p>
+								<small><s:text name="tab3.description"></s:text> </small>
 								<hr>
-
-								<h5 class="formulario">gagw</h5>
+								<h5 class="formulario">
+									<s:text name="seguridad.title"></s:text>
+								</h5>
 								<s:fielderror>
 									<s:param>seguridad</s:param>
 								</s:fielderror>
 								<s:select list="l_seguridad" listKey="id_seguridad"
-									listValue="nombre" headerKey="-1" headerValue="Seleccione"
-									name="seguridad"></s:select>
-
-								<h5 class="formulario">Arquitectura:</h5>
+									listValue="nombre" headerKey="-1"
+									headerValue="%{getText('seguridad.select')}" name="seguridad"></s:select>
+								<h5 class="formulario">
+									<s:text name="arquitectura.title"></s:text>
+								</h5>
 								<s:fielderror>
 									<s:param>arquitectura</s:param>
 								</s:fielderror>
 								<s:checkboxlist list="arquitecturas" listKey="id_arquitectura"
 									listValue="nombre" name="arquitectura" />
-
 								<br>
-								<h5 class="formulario">Versión:</h5>
+								<h5 class="formulario">
+									<s:text name="version.title"></s:text>
+								</h5>
 								<s:fielderror>
 									<s:param>version</s:param>
 								</s:fielderror>
@@ -182,85 +170,69 @@
 								this.value = this.value.replace(pattern, '');"
 									maxlength="7" />
 								<br>
-
-								<h5 class="formulario">Tipo de Intercambio:</h5>
+								<h5 class="formulario">
+									<s:text name="intercambio.title"></s:text>
+								</h5>
 								<s:fielderror>
 									<s:param>intercambio</s:param>
 								</s:fielderror>
 								<select name="intercambio">
 									<optgroup label="">
-										<option value="-1">Seleccione</option>
+										<option value="-1">
+											<s:text name="intercambio.select"></s:text>
+										</option>
 									</optgroup>
 									<s:iterator value="intercambiosPadres">
-
 										<s:set name="padre" value="id_intercambio"></s:set>
 										<s:set name="nombrePadre" value="nombre"></s:set>
 										<optgroup label="<s:property value="nombre"/>">
-
 											<s:iterator value="intercambiosHijos">
 												<s:if test="%{#padre == id_padre}">
-
 													<option value="<s:property value="id_intercambio"/>"
 														<s:if test="intercambio == id_intercambio"> selected="selected"</s:if>>
 														<s:property value="nombre" />
 													</option>
-
 												</s:if>
 											</s:iterator>
 										</optgroup>
 									</s:iterator>
 								</select>
-
-
 							</div>
-
 							<div id="tab4" class="tab_content">
-
-								<h5 class="formulario">
-									Responsable del Servicio:
-									<s:property value="responsable" />
-								</h5>
-								<s:hidden name="responsable"></s:hidden>
+								<p class="formulario">Soporte Técnico (¿Hará falta esto?)</p>
+								<small><s:text name="tab4.description"></s:text> </small>
 								<hr>
-
-								<h4>Soporte Técnico</h4>
-								<h5 class="formulario">Teléfono de Contacto:</h5>
-
+								<h5 class="formulario">
+									<s:text name="responsable.title"></s:text>
+								</h5>
+								<s:textfield name="responsable" labelposition="top"
+									value="%{responsable}" />
+								<h5 class="formulario">
+									<s:text name="telefono.title"></s:text>
+								</h5>
 								<h6 class="codTel">Código de Área:</h6>
 								<s:fielderror>
-									<s:param>codArea</s:param>
+									<s:param>codigo</s:param>
 								</s:fielderror>
-								<s:textfield name="codArea" labelposition="top" size="4"
-									maxlength="3" cssClass="codTel"
-									onkeyup="var no_digito = /\D/g; this.value = this.value.replace(no_digito , '');" />
-
+								<s:select name="codigo" list="codigos" />
 								<h6 class="codTel">Número de Teléfono:</h6>
 								<s:fielderror>
-									<s:param>telefonoContacto</s:param>
+									<s:param>telefono</s:param>
 								</s:fielderror>
-								<s:textfield name="telefonoContacto" labelposition="top"
-									maxlength="7"
+								<s:textfield name="telefono" labelposition="top" maxlength="7"
 									onkeyup="var no_digito = /\D/g; this.value = this.value.replace(no_digito , '');" />
-
-								<h5 class="formulario">Correo de Contacto:</h5>
+								<h5 class="formulario">
+									<s:text name="correo.title"></s:text>
+								</h5>
 								<s:fielderror>
-									<s:param>correoContacto</s:param>
+									<s:param>correo</s:param>
 								</s:fielderror>
-								<s:textfield name="correoContacto"></s:textfield>
-								<input type="submit" value="Registrar" />
-
+								<s:textfield name="correo"></s:textfield>
+								<input type="submit" value='<s:text name="registrar"></s:text>' />
 							</div>
-
-
-
-
 						</div>
-
 					</form>
-
-
 				</div>
-
 				<!-- Este es el pie de página -->
 				<div id="footer"></div>
 			</div>
