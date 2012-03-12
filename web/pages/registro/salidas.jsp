@@ -63,7 +63,14 @@
 
 				<hr>
 				<ul class="tabs">
-					<li><a href="#tab1">Descripción General</a></li>
+					<li>
+						<form action="prepararFuncionalidad" method="POST">
+							<s:hidden name="idServicioInformacion"></s:hidden>
+							<s:hidden name="idFuncionalidad"></s:hidden>
+							<input type="submit" value="Descripcion General" style="background: none;
+							border: none;font-size: 0.8em;padding: 0 20px; margin-top: 7px;">
+						</form>
+					</li>
 					<li>
 						<form action="prepararEntradas" method="POST">
 							<s:hidden name="idServicioInformacion"></s:hidden>
