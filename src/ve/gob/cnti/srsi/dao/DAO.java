@@ -153,7 +153,7 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 					"FROM "
 							+ new TipoDato().getClass().getSimpleName()
 									.toString() + " WHERE status = " + ACTIVO
-									+ " AND tipo = " + SIMPLE).list();
+							+ " AND tipo = " + SIMPLE).list();
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;
@@ -182,7 +182,7 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 		}
 		return complex;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public ArrayList<?> getALL() {
@@ -192,7 +192,8 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 			complex = (ArrayList<Object>) session.createQuery(
 					"FROM "
 							+ new TipoDato().getClass().getSimpleName()
-									.toString() + " WHERE status = " + ACTIVO).list();
+									.toString() + " WHERE status = " + ACTIVO)
+					.list();
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;
@@ -264,7 +265,7 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 			closeConnection();
 		}
 	}
-	
+
 	@Override
 	public ArrayList<?> read(Object[] models, int type, long id) {
 		ArrayList<?> result;
@@ -341,7 +342,7 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 		}
 		return result;
 	}
-	
+
 	@Override
 	public Object read(Object[] models, long id) {
 		Object result;
@@ -552,6 +553,7 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 
 	@Override
 	public void update(Object model, long id) {
+
 		try {
 			startConnection();
 			session.createQuery(
@@ -567,6 +569,7 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 		} finally {
 			closeConnection();
 		}
+		
 	}
 
 	@Override
