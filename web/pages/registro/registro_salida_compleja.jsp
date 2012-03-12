@@ -63,7 +63,7 @@
 						<h5 class="formulario">Registro de Salida Compleja</h5>
 						<h6>Perteneciente a la funcionalidad:  "<s:property value="funcionalidad.nombre"/>"</h6>
 						<hr>
-						id:<s:property value="idFuncionalidad"/>
+						
 						<!-- Nombre de la entrada. -->
 						<h5 class="formulario">Nombre:</h5>
 						<s:fielderror>
