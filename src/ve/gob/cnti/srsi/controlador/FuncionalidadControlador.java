@@ -50,7 +50,6 @@ public class FuncionalidadControlador extends DAO implements Formulario {
 		System.out.println("ENTRÓ Y CON ESTOS DATOS => "
 				+ funcionalidad.toString());
 		update(funcionalidad, idFuncionalidad);
-		create(funcionalidad);
 		return SUCCESS;
 	}
 
