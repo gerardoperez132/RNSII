@@ -1,0 +1,41 @@
+#tree {
+	margin: 20px;
+	width: 90%;
+	overflow: auto;
+	border: 1px solid #888;
+	border-collapse: collapse;
+}
+
+#tree thead {
+	background: url("images/bg-table-thead.png") repeat-x scroll left top
+		#AAAAAA
+}
+
+#tree thead th {
+	font: 75% sans-serif;
+	padding-left: 1em;
+	text-align: left;
+}
+
+#tree tbody td {
+	font: 75% sans-serif;
+	padding-left: 1.3em;
+}
+
+#tree span {
+	background-position: left center;
+	background-repeat: no-repeat;
+	padding: 0.2em 0 0.2em 1.5em;
+}
+
+#tree span.folder {
+	background-image: url("images/folder.png");
+}
+
+#tree span.file {
+	background-image: url("images/page_white_text.png");
+}
+
+#tree span.rar {
+	background-image: url("images/rar.png");
+}
