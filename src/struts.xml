@@ -25,7 +25,9 @@
 			<result name="success">registro/servicio_informacion.jsp</result>
 		</action>
 
-		<!--Actions para Funcionalidades -->
+		<!--*****************************************************************
+						Actions para Funcionalidades 
+		********************************************************************-->
 		<action name="prepararFuncionalidad" method="prepararFormulario"
 			class="ve.gob.cnti.srsi.controlador.FuncionalidadControlador">
 			<result name="success">registro/registro_funcionalidad.jsp</result>
@@ -38,6 +40,15 @@
 				<param name="actionName">prepararEntradas</param>
 			</result>
 
+			<result name="input">registro/registro_funcionalidad.jsp</result>
+		</action>
+		
+		<action name="modificarFuncionalidad" method="modificarFuncionalidad"
+			class="ve.gob.cnti.srsi.controlador.FuncionalidadControlador">
+			<result name="success" type="chain">
+				<param name="actionName">prepararFuncionalidad</param>
+			</result>
+			
 			<result name="input">registro/registro_funcionalidad.jsp</result>
 		</action>
 
