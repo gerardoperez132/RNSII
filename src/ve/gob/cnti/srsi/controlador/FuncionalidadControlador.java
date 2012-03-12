@@ -46,10 +46,11 @@ public class FuncionalidadControlador extends DAO implements Formulario {
 	}
 
 	public String modificarFuncionalidad() {
-				
+
 		funcionalidad.setId_servicio_informacion(idServicioInformacion);		
 		update(funcionalidad, idFuncionalidad);	
 		
+
 		return SUCCESS;
 	}
 
@@ -65,10 +66,7 @@ public class FuncionalidadControlador extends DAO implements Formulario {
 	@Override
 	@SkipValidation
 	public String prepararFormulario() {
-		
-		System.out.println("idf: "+ idFuncionalidad);
-		System.out.println("id s: "+ idServicioInformacion);
-		
+	
 		servicio = (ServicioInformacion) read(servicio, idServicioInformacion);
 		if(idFuncionalidad>0){
 			funcionalidad = (Funcionalidad) read(funcionalidad, idFuncionalidad);
