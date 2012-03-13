@@ -155,7 +155,7 @@
 										<br>
 										<s:hidden name="idServicioInformacion"></s:hidden>
 										<input type="submit"
-											value='<s:text name="registrar"></s:text>' />
+											value='<s:text name="guardar"></s:text>' />
 									</form>
 								</s:else>
 							</div>

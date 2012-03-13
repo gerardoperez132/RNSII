@@ -218,7 +218,7 @@
 									<s:param>correo</s:param>
 								</s:fielderror>
 								<s:textfield name="correo"></s:textfield>
-								<input type="submit" value='<s:text name="registrar"></s:text>' />
+								<input type="submit" value='<s:text name="guardar"></s:text>' />
 							</div>
 						</div>
 					</form>
