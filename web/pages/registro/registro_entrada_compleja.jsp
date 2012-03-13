@@ -45,7 +45,7 @@
 						<form action="registrarEntradaCompleja" method="post">
 							<div id="tab2" class="tab_content">
 								<h5 class="formulario">
-									<s:text name="registro.title"></s:text>
+									<s:text name="registro.complejo"></s:text>
 								</h5>
 								<h6>
 									<s:text name="funcionalidad.title">
