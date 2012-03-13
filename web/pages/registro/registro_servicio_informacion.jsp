@@ -1,23 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <%@taglib uri="/struts-tags" prefix="s"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <s:i18n name="ve/gob/cnti/srsi/i18n/registro_servicio_informacion">
 	<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <!-- CSS (required) -->
 <link rel="stylesheet" type="text/css" href="res/css/styles.css">
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
 <script type="text/javascript" src="res/js/jquery-1.7.1.js"></script>
 <script type="text/javascript" src="res/js/tabs.js"></script>
-<title><s:text name="registro.title"></s:text>
-</title>
+<title><s:text name="registro.title"></s:text></title>
 	</head>
 	<body>
-		<!-- Este es el div de la sombra del contenedor del maquetado de la p√°gina -->
+		<!-- Este es el div de la sombra del contenedor del maquetado de la p·gina -->
 		<div id="sombra">
-			<!-- Este es el div contenedor del maquetado de la p√°gina -->
+			<!-- Este es el div contenedor del maquetado de la p·gina -->
 			<div id="container">
 				<%@include file="../layout/header.jsp"%>
 				<!-- Esta es la barra lateral -->
@@ -26,13 +25,16 @@
 						<div class="menu_top_bg">Navegacion</div>
 						<div class="sub_menu">
 							<ul>
-								<li><a class="selected">Paso 1</a></li>
-								<li><a href="#">Paso 2</a></li>
-								<li><a href="#">Paso 3 </a></li>
+								<li><a class="selected">Paso 1</a>
+								</li>
+								<li><a href="#">Paso 2</a>
+								</li>
+								<li><a href="#">Paso 3 </a>
+								</li>
 							</ul>
 						</div>
 					</div>
-					<small>Paso 1 Registro de Servicio de Informaci√≥n</small><br>
+					<small>Paso 1 Registro de Servicio de InformaciÛn</small><br>
 					<br> <small>Paso 2 Registro de Funcionalidad(es)</small> <br>
 					<br> <small>Paso 3 Registro de Entradas/Salidas</small><br>
 					<br> <small>Paso 4 Verificar y guardar</small>
@@ -57,12 +59,10 @@
 						enctype="multipart/form-data">
 						<div class="tab_container">
 							<div id="tab1" class="tab_content">
-								<p>Descripci√≥n General del Servicio ¬øHace falta esto?</p>
+								<p class="formulario">DescripciÛn General del Servicio øHace
+									falta esto?</p>
+								<small><s:text name="tab1.description"></s:text> </small>
 								<hr>
-								<!-- <a class="tooltip"> Sector: <span class="custom help"><img
-										src="res/img/Info.png" alt="Help" height="48" width="48" /> <em>ayuda</em>This
-										is just an example of what you can do using a CSS tooltip,
-										feel free to get creative and produce your own! </span> </a><br>-->
 								<h5 class="formulario">
 									<s:text name="sector.title"></s:text>
 								</h5>
@@ -104,7 +104,7 @@
 									listValue="nombre" headerKey="-1" headerValue="Seleccione"></s:select>
 							</div>
 							<div id="tab2" class="tab_content">
-								<p class="formulario">Aspectos Legales (¬øHar√° falta esto?)</p>
+								<p class="formulario">Aspectos Legales (øHar· falta esto?)</p>
 								<small><s:text name="tab2.description"></s:text> </small>
 								<hr>
 								<h5 class="formulario">
@@ -124,7 +124,7 @@
 								<br> <br> <br> <br>
 							</div>
 							<div id="tab3" class="tab_content">
-								<p class="formulario">Descripci√≥n t√©cnica del servicio ¬øHar√°
+								<p class="formulario">DescripciÛn tÈcnica del servicio øHar·
 									falta esto?</p>
 								<small><s:text name="tab3.description"></s:text> </small>
 								<hr>
@@ -186,27 +186,31 @@
 								</select>
 							</div>
 							<div id="tab4" class="tab_content">
-								<p class="formulario">Soporte T√©cnico (¬øHar√° falta esto?)</p>
+								<p class="formulario">Soporte TÈcnico (øHar· falta esto?)</p>
 								<small><s:text name="tab4.description"></s:text> </small>
 								<hr>
 								<h5 class="formulario">
 									<s:text name="responsable.title"></s:text>
 								</h5>
+								<s:fielderror>
+									<s:param>responsable</s:param>
+								</s:fielderror>
 								<s:textfield name="responsable" labelposition="top" />
 								<h5 class="formulario">
 									<s:text name="telefono.title"></s:text>
 								</h5>
-								<h6 class="codTel">C√≥digo de √Årea:</h6>
-								<s:fielderror>
-									<s:param>codigo</s:param>
-								</s:fielderror>
-								<s:select name="codigo" list="codigos" />
-								<h6 class="codTel">N√∫mero de Tel√©fono:</h6>
 								<s:fielderror>
 									<s:param>telefono</s:param>
 								</s:fielderror>
-								<s:textfield name="telefono" labelposition="top" maxlength="7"
-									onkeyup="var no_digito = /\D/g; this.value = this.value.replace(no_digito , '');" />
+								<table>
+									<tr>
+										<td><s:select name="codigo" list="codigos" /></td>
+										<td><s:textfield name="telefono" labelposition="top"
+												maxlength="7"
+												onkeyup="var no_digito = /\D/g; this.value = this.value.replace(no_digito , '');" />
+										</td>
+									</tr>
+								</table>
 								<h5 class="formulario">
 									<s:text name="correo.title"></s:text>
 								</h5>
