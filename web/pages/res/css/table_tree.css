@@ -1,6 +1,5 @@
-#tree {
-	margin: 20px;
-	width: 90%;
+#tree {	
+	width: 670px;
 	overflow: auto;
 	border: 1px solid #888;
 	border-collapse: collapse;

@@ -158,14 +158,57 @@
 													<s:append var="datos2">  
 													    <s:param value="%{datos}" />						      
 													</s:append>
+														<table style="margin: 0;padding: 0;"><tr style="margin: 0;padding: 0;">
+														<td style="margin: 0;padding: 0;">
 														<form action="prepararEntradaSimple" method="POST">
 															<s:hidden name="idServicioInformacion"></s:hidden>
 															<s:hidden name="idFuncionalidad"></s:hidden>
 															<s:hidden name="id_dato"></s:hidden>
 															<input type="submit" value="Agregar dato Simple" style="font-size: 0.7em;" />
-														</form>														
-													</s:if>			
-												</s:if>												
+														</form>
+														</td>
+														<td style="margin: 0;padding: 0;">
+														<form action="prepararModificarEntradaCompleja" method="POST">
+															<s:hidden name="idServicioInformacion"></s:hidden>
+															<s:hidden name="idFuncionalidad"></s:hidden>
+															<s:hidden name="id_dato" value="%{#id}"></s:hidden>
+															<s:hidden name= "modificar" value="%{true}"></s:hidden>
+															<input type="submit" value="Modificar" style="font-size: 0.7em;" />
+														</form>
+														</td>
+														<td style="margin: 0;padding: 0;">
+														<form action="eliminarEntradaCompleja" method="POST">
+															<s:hidden name="idServicioInformacion"></s:hidden>
+															<s:hidden name="idFuncionalidad"></s:hidden>
+															<s:hidden name="id_dato" value="%{#id}"></s:hidden>
+															<s:hidden name= "modificar" value="%{true}"></s:hidden>
+															<input type="submit" value="Eliminar" style="font-size: 0.7em;" />
+														</form>
+														</table>
+																												
+													</s:if>
+													<s:else>
+													<table style="margin: 0;padding: 0;"><tr style="margin: 0;padding: 0;">
+													<td style="margin: 0;padding: 0;">
+													<form action="prepararModificarEntradaSimple" method="POST">
+														<s:hidden name="idServicioInformacion"></s:hidden>
+														<s:hidden name="idFuncionalidad"></s:hidden>
+														<s:hidden name="id_dato"></s:hidden>
+														<s:hidden name= "modificar" value="%{true}"></s:hidden>
+														<input type="submit" value="Modificar" style="font-size: 0.7em;" />
+													</form>
+													</td>
+													<td style="margin: 0;padding: 0;">
+													<form action="eliminarEntradaSimple" method="POST">
+														<s:hidden name="idServicioInformacion"></s:hidden>
+														<s:hidden name="idFuncionalidad"></s:hidden>
+														<s:hidden name="id_dato"></s:hidden>														
+														<input type="submit" value="Eliminar" style="font-size: 0.7em;" />
+													</form>
+													</td>
+													</tr></table>
+													</s:else>			
+												</s:if>																				
 											</s:iterator>								
 										</td>							
 								
@@ -192,6 +235,28 @@
 														</s:if>											
 													</s:iterator> 									
 												</td>
+												<td>
+												<table style="margin: 0;padding: 0;"><tr style="margin: 0;padding: 0;">
+													<td style="margin: 0;padding: 0;">
+													<form action="prepararModificarEntradaSimple" method="POST">
+														<s:hidden name="idServicioInformacion"></s:hidden>
+														<s:hidden name="idFuncionalidad"></s:hidden>
+														<s:hidden name="id_dato"></s:hidden>
+														<s:hidden name= "modificar" value="%{true}"></s:hidden>
+														<input type="submit" value="Modificar" style="font-size: 0.7em;" />
+													</form>
+													</td>
+													<td style="margin: 0;padding: 0;">
+													<form action="eliminarEntradaSimple" method="POST">
+														<s:hidden name="idServicioInformacion"></s:hidden>
+														<s:hidden name="idFuncionalidad"></s:hidden>
+														<s:hidden name="id_dato"></s:hidden>														
+														<input type="submit" value="Eliminar" style="font-size: 0.7em;" />
+													</form>
+													</td>
+													</tr></table>
+												</td>
+												
 											</tr>		
 										</s:if>																
 									</s:iterator>

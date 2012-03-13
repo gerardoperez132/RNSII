@@ -56,8 +56,11 @@
 					<li><a href="#tab4">Resumen Funcionalidad</a></li>
 				</ul>
 				<div class="tab_container">
-
+				
+					<s:if test="modificar!=true">
+					<!-- Formulario para registrar entrada -->
 					<form action="registrarEntradaSimple" method="post">
+					
 						<div id="tab2" class="tab_content">
 
 							<h5 class="formulario">Registro de Entrada</h5>
@@ -102,6 +105,57 @@
 
 						</div>
 					</form>
+					</s:if>
+					<s:else>
+					<!-- Formulario para modificar entrada -->
+					<form action="modificarEntrada" method="post">
+					
+						<div id="tab2" class="tab_content">
+
+							<h5 class="formulario">Modificar Entrada</h5>
+							<h6>
+								Perteneciente a la funcionalidad: "
+								<s:property value="funcionalidad.nombre" />
+								"
+							</h6>
+							<hr>
+
+							<!-- Nombre de la entrada. -->
+							<h5 class="formulario">Nombre:</h5>
+							<s:fielderror>
+								<s:param>dato.nombre</s:param>
+							</s:fielderror>
+							<s:textfield name="dato.nombre" />
+
+							<br>
+							<!-- Descripción de la entrada. -->
+							<h5 class="formulario">Descripción:</h5>
+							<s:fielderror>
+								<s:param>dato.descripcion</s:param>
+							</s:fielderror>
+							<s:textarea name="dato.descripcion" cols="30" rows="5" />
+
+							<br>
+
+
+							<h5 class="formulario">Tipo de dato:</h5>
+							<s:fielderror>
+								<s:param>tipodato</s:param>
+							</s:fielderror>
+							<s:select name="dato.id_tipo_dato" list="tipoDatos"
+								listKey="id_tipo_dato" listValue="nombre" headerKey="-1"
+								headerValue="Seleccione"></s:select>
+
+							<br> <br>
+							<s:hidden name="idServicioInformacion"></s:hidden>
+							<s:hidden name="idFuncionalidad"></s:hidden>
+							<s:hidden name="id_dato"></s:hidden>		
+							<s:hidden name= "modificar" value="%{true}"></s:hidden>					
+							<input type="submit" value="Modificar Entrada" />
+
+						</div>
+					</form>					
+					</s:else>
 
 				</div>
 

@@ -76,7 +76,7 @@
 
 		<action name="prepararEntradaSimple" method="prepararFormularioSimple"
 			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
-			<result name="success">registro/registro_entrada_simple.jsp</result>
+			<result name="success">registro/formulario_entrada.jsp</result>
 		</action>
 		
 		<action name="registrarEntradaSimple" method="registrarEntradaSimple"
@@ -84,31 +84,47 @@
 			<result name="success" type="chain">
                <param name="actionName">prepararEntradas</param>                         
             </result>            
-			<result name="input">registro/registro_entrada_simple.jsp</result>
+			<result name="input">registro/formulario_entrada.jsp</result>
 		</action>
 
 		<action name="prepararEntradaCompleja" method="prepararFormularioComplejo"
 			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
-			<result name="success">registro/registro_entrada_compleja.jsp</result>
+			<result name="success">registro/formulario_entrada.jsp</result>
 		</action>
-
-
-		<action name="registrarEntradaSimple" method="registrarEntradaSimple"
-			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
-			<result name="success" type="chain">
-				<param name="actionName">prepararEntradas</param>
-			</result>
-			<result name="input">registro/registro_entrada_simple.jsp</result>
-		</action>
-
-
+		
 		<action name="registrarEntradaCompleja" method="registrarEntradaCompleja"
 			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
 			<result name="success" type="chain">
                <param name="actionName">prepararEntradas</param>                         
             </result>            
-			<result name="input">registro/registro_entrada_compleja.jsp</result>
+			<result name="input">registro/formulario_entrada.jsp</result>
+		</action>
+		
+		<action name="prepararModificarEntradaSimple" method="prepararModificarEntradaSimple"
+			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
+			<result name="success">registro/formulario_entrada.jsp</result>
+		</action>
+		
+		<action name="prepararModificarEntradaCompleja" method="prepararModificarEntradaCompleja"
+			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
+			<result name="success">registro/formulario_entrada.jsp</result>
+		</action>
+		
+		<action name="modificarEntrada" method="modificarEntrada"
+			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
+			<result name="success">registro/entradas.jsp</result>
+			<result name="input">registro/formulario_entrada.jsp</result>
 		</action>	
+		
+		<action name="eliminarEntradaSimple" method="eliminarEntradaSimple"
+			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
+			<result name="success">registro/entradas.jsp</result>			
+		</action>
+		
+		<action name="eliminarEntradaCompleja" method="eliminarEntradaCompleja"
+			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
+			<result name="success">registro/entradas.jsp</result>			
+		</action>
 		
 		<!--*****************************************************************
 						Actions para Salidas

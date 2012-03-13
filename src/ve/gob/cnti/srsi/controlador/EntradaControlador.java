@@ -1,6 +1,7 @@
 package ve.gob.cnti.srsi.controlador;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.struts2.interceptor.validation.SkipValidation;
@@ -32,6 +33,7 @@ public class EntradaControlador extends DAO implements Formulario,
 	private long idServicioInformacion;
 	private long idFuncionalidad;
 	private boolean complejo;
+	private boolean modificar;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -53,8 +55,7 @@ public class EntradaControlador extends DAO implements Formulario,
 		
 		funcionalidad = (Funcionalidad) read(funcionalidad, idFuncionalidad);
 		servicio = (ServicioInformacion) read(servicio, idServicioInformacion);		
-		datos = (ArrayList<Dato>) read(NOMBRE_DATO, ENTRADA, idFuncionalidad);
-		tipoDatos=null;
+		datos = (ArrayList<Dato>) read(NOMBRE_DATO, ENTRADA, idFuncionalidad);		
 		tipoDatos = (List<TipoDato>) getSimple();
 		complejo=false;
 
@@ -67,10 +68,33 @@ public class EntradaControlador extends DAO implements Formulario,
 		
 		funcionalidad = (Funcionalidad) read(funcionalidad, idFuncionalidad);
 		servicio = (ServicioInformacion) read(servicio, idServicioInformacion);		
-		datos = (ArrayList<Dato>) read(NOMBRE_DATO, ENTRADA, idFuncionalidad);
-		tipoDatos=null;
+		datos = (ArrayList<Dato>) read(NOMBRE_DATO, ENTRADA, idFuncionalidad);		
 		tipoDatos = (List<TipoDato>) getComplex();
 		complejo=true;
+
+		return SUCCESS;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@SkipValidation
+	public String prepararModificarEntradaSimple() {		
+						
+		dato = (Dato) read(dato,id_dato);		
+		funcionalidad = (Funcionalidad) read(funcionalidad, idFuncionalidad);
+		servicio = (ServicioInformacion) read(servicio, idServicioInformacion);	
+		tipoDatos = (List<TipoDato>) getSimple();		
+
+		return SUCCESS;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@SkipValidation
+	public String prepararModificarEntradaCompleja() {		
+						
+		dato = (Dato) read(dato,id_dato);		
+		funcionalidad = (Funcionalidad) read(funcionalidad, idFuncionalidad);
+		servicio = (ServicioInformacion) read(servicio, idServicioInformacion);	
+		tipoDatos = (List<TipoDato>) getComplex();		
 
 		return SUCCESS;
 	}
@@ -99,6 +123,65 @@ public class EntradaControlador extends DAO implements Formulario,
 		complejo=false;
 		return SUCCESS;
 	}
+	
+	@SuppressWarnings("unchecked")	
+	public String modificarEntrada() {
+		//Creación de este objeto para copair los datos activos del dato
+		//seteos de los datos a modificar
+		//persistencia de esa modificación
+		Dato dato2 = new Dato();
+		dato2 = (Dato)read(dato, id_dato);
+		dato2.setNombre(dato.getNombre());
+		dato2.setDescripcion(dato.getDescripcion());
+		dato2.setId_tipo_dato(dato.getId_tipo_dato());		
+		update(dato2,id_dato);
+		funcionalidad = (Funcionalidad) read(funcionalidad, idFuncionalidad);
+		servicio = (ServicioInformacion) read(servicio, idServicioInformacion);		
+		datos = (ArrayList<Dato>) read(NOMBRE_DATO, ENTRADA, idFuncionalidad);		
+		tipoDatos = (List<TipoDato>) getALL();
+		
+		return SUCCESS;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@SkipValidation
+	public String eliminarEntradaSimple() {
+				
+		dato.setId_entrada_salida(id_dato);
+		delete(dato,id_dato);
+		funcionalidad = (Funcionalidad) read(funcionalidad, idFuncionalidad);
+		servicio = (ServicioInformacion) read(servicio, idServicioInformacion);		
+		datos = (ArrayList<Dato>) read(NOMBRE_DATO, ENTRADA, idFuncionalidad);		
+		tipoDatos = (List<TipoDato>) getALL();
+		
+		return SUCCESS;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@SkipValidation
+	public String eliminarEntradaCompleja() {
+		
+		Dato dato2 = new Dato();
+		datos = (ArrayList<Dato>) read(NOMBRE_DATO, ENTRADA, idFuncionalidad);	
+		Iterator<Dato> iterador = datos.iterator();
+		while(iterador.hasNext()){
+			dato2 = iterador.next();			
+			if(dato2.getId_padre()==id_dato){
+				delete(dato,dato2.getId_dato());
+			}
+		}		
+		
+		System.out.println("\ndato p: " +dato.toString() );	
+		System.out.println("\nid dato p: " +id_dato );	
+		delete(dato,id_dato);
+		
+		funcionalidad = (Funcionalidad) read(funcionalidad, idFuncionalidad);
+		servicio = (ServicioInformacion) read(servicio, idServicioInformacion);		
+		datos = (ArrayList<Dato>) read(NOMBRE_DATO, ENTRADA, idFuncionalidad);		
+		tipoDatos = (List<TipoDato>) getALL();
+		
+		return SUCCESS;
+	}
 
 	public void validate() {
 		if (dato.getNombre().isEmpty())
@@ -109,7 +192,7 @@ public class EntradaControlador extends DAO implements Formulario,
 					"Debe introducir una descripción.");
 		if (dato.getId_tipo_dato() == -1)
 			addFieldError("tipodato", "Debe seleccionar un tipo de dato");
-		if (read(NOMBRE_DATO_NO_DUPLICADO, dato.getNombre(), idFuncionalidad)){
+		if (read(NOMBRE_DATO_NO_DUPLICADO, dato.getNombre(), idFuncionalidad) && modificar != true){
 			addFieldError("dato.nombre", "Nombre de Entrada Duplicado, cambie el nombre por favor");
 		}
 		if(complejo==true){
@@ -229,6 +312,14 @@ public class EntradaControlador extends DAO implements Formulario,
 		// TODO Auto-generated method stub
 		return null;
 
+	}
+
+	public boolean isModificar() {
+		return modificar;
+	}
+
+	public void setModificar(boolean modificar) {
+		this.modificar = modificar;
 	}
 
 }
