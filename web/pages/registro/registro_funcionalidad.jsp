@@ -44,8 +44,8 @@
 			<!-- Este es el div de contenidos -->
 			<div id="content">
 
-				<h3>Registro de Funcionalidades del servicio: "<s:property value="servicio.nombre"/>"</h3>
-
+				<h3>Registro de Funcionalidad</h3>
+				<h4>Servicio: "<s:property value="servicio.nombre"/>"</h4>	
 				<hr>
 				
 				<s:if test="idFuncionalidad>0 && modificar!=true">
