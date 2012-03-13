@@ -78,30 +78,22 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	@Override
 	@SkipValidation
 	public String prepararFormulario() {
-
 		Area area = new Area();
 		Estado est = new Estado();
 		Seguridad seg = new Seguridad();
 		Arquitectura arq = new Arquitectura();
 		Sector sector = new Sector();
 		Intercambio intercambio = new Intercambio();
-
 		areas = (List<Area>) read(area);
 		estados = (List<Estado>) read(est);
 		l_seguridad = (List<Seguridad>) read(seg);
 		arquitecturas = (List<Arquitectura>) read(arq);
 		sectores = (List<Sector>) read(sector);
-
 		intercambiosPadres = (List<Intercambio>) getParents(intercambio);
 		intercambiosHijos = (List<Intercambio>) getChildren(intercambio);
-		
 		setCodigos(COD);
-		
-		
-
 		// Por defecto consultará la base de datos.
-		responsable = "Usuario usuario";
-
+		// responsable = "Usuario usuario";
 		return SUCCESS;
 	}
 
@@ -221,7 +213,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 
 		// Seteando el SEGURIDAD
 		servicio.setId_seguridad(Long.parseLong(seguridad));
-		
+
 		servicio.setResponsable(responsable);
 
 		// Seteando el VERSION
@@ -521,6 +513,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		this.documentoFileName = documentoFileName;
 	}
 
+	@RequiredStringValidator(message = "Proporcione el nombre del responsable del Servicio de Información")
 	public String getResponsable() {
 		return responsable;
 	}
