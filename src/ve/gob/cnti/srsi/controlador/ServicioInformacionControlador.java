@@ -105,6 +105,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		return SUCCESS;
 	}
 
+	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String registrarPrueba() {
 		idServicioInformacion = getNextId(servicio);
