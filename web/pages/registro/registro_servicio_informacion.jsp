@@ -3,45 +3,32 @@
 <%@taglib uri="/struts-tags" prefix="s"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
+<s:i18n name="ve/gob/cnti/srsi/i18n/registro_servicio_informacion">
+	<head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- CSS (required) -->
 <link rel="stylesheet" type="text/css" href="res/css/styles.css">
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
 <script type="text/javascript" src="res/js/jquery-1.7.1.js"></script>
 <script type="text/javascript" src="res/js/tabs.js"></script>
-
-
-<title>SRSI - Inicio</title>
-<!-- Donde dice inicio debería ir una var que identifique el lugar -->
-</head>
-<body>
-	<s:i18n name="ve/gob/cnti/srsi/i18n/registro_servicio_informacion">
+<title><s:text name="registro.title"></s:text>
+</title>
+	</head>
+	<body>
 		<!-- Este es el div de la sombra del contenedor del maquetado de la página -->
 		<div id="sombra">
 			<!-- Este es el div contenedor del maquetado de la página -->
 			<div id="container">
-				<!-- Este es el div de la cabecera -->
-				<div id="header">
-					<img src="res/img/header.png" width="880" height="70"
-						alt="Cintillo Gobierno Bolivariano" /> <img src="res/img/mio.png"
-						width="874" height="116" alt="Marco de Interoperabilidad"
-						style="border: 3px solid #57cedc;" />
-				</div>
-				<!-- Este es el div de los menus -->
-				<div id="menu"></div>
+				<%@include file="../layout/header.jsp"%>
 				<!-- Esta es la barra lateral -->
 				<div id="sidebar">
 					<div class="main_cont">
 						<div class="menu_top_bg">Navegacion</div>
 						<div class="sub_menu">
 							<ul>
-								<li><a class="selected">Paso 1</a>
-								</li>
-								<li><a href="#">Paso 2</a>
-								</li>
-								<li><a href="#">Paso 3 </a>
-								</li>
+								<li><a class="selected">Paso 1</a></li>
+								<li><a href="#">Paso 2</a></li>
+								<li><a href="#">Paso 3 </a></li>
 							</ul>
 						</div>
 					</div>
@@ -205,8 +192,7 @@
 								<h5 class="formulario">
 									<s:text name="responsable.title"></s:text>
 								</h5>
-								<s:textfield name="responsable" labelposition="top"
-									value="%{responsable}" />
+								<s:textfield name="responsable" labelposition="top" />
 								<h5 class="formulario">
 									<s:text name="telefono.title"></s:text>
 								</h5>
@@ -233,10 +219,9 @@
 						</div>
 					</form>
 				</div>
-				<!-- Este es el pie de página -->
-				<div id="footer"></div>
+				<%@include file="../layout/footer.jsp"%>
 			</div>
 		</div>
-	</s:i18n>
-</body>
+	</body>
+</s:i18n>
 </html>
