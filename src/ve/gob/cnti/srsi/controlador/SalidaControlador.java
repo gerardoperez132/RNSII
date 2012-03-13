@@ -37,7 +37,7 @@ public class SalidaControlador extends DAO implements Formulario,
 	@Override
 	@SkipValidation
 	public String prepararFormulario() {
-		tipoDatos = null;
+		
 		funcionalidad = (Funcionalidad) read(funcionalidad, idFuncionalidad);
 		servicio = (ServicioInformacion) read(servicio, idServicioInformacion);
 		datos = (ArrayList<Dato>) read(NOMBRE_DATO, SALIDA, idFuncionalidad);
@@ -78,11 +78,7 @@ public class SalidaControlador extends DAO implements Formulario,
 
 		salida.setId_funcionalidad(idFuncionalidad);
 		salida.setTipo(SALIDA);
-		dato.setId_entrada_salida(getNextId(salida));
-		System.out.println("id_dato: " + id_dato);
-		if (id_dato > 0) {
-			dato.setId_padre(id_dato);
-		}
+		dato.setId_entrada_salida(getNextId(salida));		
 		create(salida);
 		create(dato);
 

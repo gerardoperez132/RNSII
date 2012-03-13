@@ -37,13 +37,13 @@ public class EntradaControlador extends DAO implements Formulario,
 	@Override
 	@SkipValidation
 	public String prepararFormulario() {
-		tipoDatos=null;
-		System.out.println("id f" +idFuncionalidad);
+				
 		funcionalidad = (Funcionalidad) read(funcionalidad, idFuncionalidad);
 		servicio = (ServicioInformacion) read(servicio, idServicioInformacion);		
 		datos = (ArrayList<Dato>) read(NOMBRE_DATO, ENTRADA, idFuncionalidad);		
 		tipoDatos = (List<TipoDato>) getALL();
 		complejo=false;
+				
 		return SUCCESS;
 	}
 	
@@ -79,11 +79,7 @@ public class EntradaControlador extends DAO implements Formulario,
 		
 		entrada.setId_funcionalidad(idFuncionalidad);
 		entrada.setTipo(ENTRADA);
-		dato.setId_entrada_salida(getNextId(entrada));
-		System.out.println("id_dato: "+id_dato);
-		if( id_dato >0 ){
-			dato.setId_padre(id_dato);
-		}
+		dato.setId_entrada_salida(getNextId(entrada));		
 		create(entrada);
 		create(dato);
 		
