@@ -79,7 +79,10 @@ public class EntradaControlador extends DAO implements Formulario,
 		
 		entrada.setId_funcionalidad(idFuncionalidad);
 		entrada.setTipo(ENTRADA);
-		dato.setId_entrada_salida(getNextId(entrada));		
+		dato.setId_entrada_salida(getNextId(entrada));	
+		if( id_dato >0 ){
+			dato.setId_padre(id_dato);
+		}
 		create(entrada);
 		create(dato);
 		

@@ -78,7 +78,10 @@ public class SalidaControlador extends DAO implements Formulario,
 
 		salida.setId_funcionalidad(idFuncionalidad);
 		salida.setTipo(SALIDA);
-		dato.setId_entrada_salida(getNextId(salida));		
+		dato.setId_entrada_salida(getNextId(salida));
+		if( id_dato >0 ){
+			dato.setId_padre(id_dato);
+		}
 		create(salida);
 		create(dato);
 
