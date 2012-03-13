@@ -3,7 +3,7 @@
 <%@taglib uri="/struts-tags" prefix="s"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<s:i18n name="ve/gob/cnti/srsi/i18n/registro_entrada_simple">
+<s:i18n name="ve/gob/cnti/srsi/i18n/formulario_entrada">
 	<head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <!-- CSS (required) -->
@@ -42,104 +42,67 @@
 					</ul>
 					<div class="tab_container">
 						<s:if test="modificar!=true">
-							<!-- Formulario para registrar entrada -->
-							<form action="registrarEntradaSimple" method="post">
-
-								<div id="tab2" class="tab_content">
-
-									<h5 class="formulario">Registro de Entrada</h5>
-									<h6>
-										Perteneciente a la funcionalidad: "
-										<s:property value="funcionalidad.nombre" />
-										"
-									</h6>
-									<hr>
-
-									<!-- Nombre de la entrada. -->
-									<h5 class="formulario">Nombre:</h5>
-									<s:fielderror>
-										<s:param>dato.nombre</s:param>
-									</s:fielderror>
-									<s:textfield name="dato.nombre" />
-
-									<br>
-									<!-- Descripción de la entrada. -->
-									<h5 class="formulario">Descripción:</h5>
-									<s:fielderror>
-										<s:param>dato.descripcion</s:param>
-									</s:fielderror>
-									<s:textarea name="dato.descripcion" cols="30" rows="5" />
-
-									<br>
-
-
-									<h5 class="formulario">Tipo de dato:</h5>
-									<s:fielderror>
-										<s:param>tipodato</s:param>
-									</s:fielderror>
-									<s:select name="dato.id_tipo_dato" list="tipoDatos"
-										listKey="id_tipo_dato" listValue="nombre" headerKey="-1"
-										headerValue="Seleccione"></s:select>
-
-									<br> <br>
-									<s:hidden name="idServicioInformacion"></s:hidden>
-									<s:hidden name="idFuncionalidad"></s:hidden>
-									<s:hidden name="id_dato"></s:hidden>
-									<input type="submit" value="Registrar Entrada" />
-
-								</div>
-							</form>
+							<s:set name="action" var="action">registrarEntrada</s:set>
+							<s:set name="submit" var="submit">
+								<s:text name="guardar"></s:text>
+							</s:set>
 						</s:if>
 						<s:else>
-							<!-- Formulario para modificar entrada -->
-							<form action="modificarEntrada" method="post">
-
-								<div id="tab2" class="tab_content">
-
-									<h5 class="formulario">Modificar Entrada</h5>
-									<h6>
-										Perteneciente a la funcionalidad: "
-										<s:property value="funcionalidad.nombre" />
-										"
-									</h6>
-									<hr>
-
-									<!-- Nombre de la entrada. -->
-									<h5 class="formulario">Nombre:</h5>
-									<s:fielderror>
-										<s:param>dato.nombre</s:param>
-									</s:fielderror>
-									<s:textfield name="dato.nombre" />
-
-									<br>
-									<!-- Descripción de la entrada. -->
-									<h5 class="formulario">Descripción:</h5>
-									<s:fielderror>
-										<s:param>dato.descripcion</s:param>
-									</s:fielderror>
-									<s:textarea name="dato.descripcion" cols="30" rows="5" />
-
-									<br>
-
-
-									<h5 class="formulario">Tipo de dato:</h5>
-									<s:fielderror>
-										<s:param>tipodato</s:param>
-									</s:fielderror>
-									<s:select name="dato.id_tipo_dato" list="tipoDatos"
-										listKey="id_tipo_dato" listValue="nombre" headerKey="-1"
-										headerValue="Seleccione"></s:select>
-
-									<br> <br>
-									<s:hidden name="idServicioInformacion"></s:hidden>
-									<s:hidden name="idFuncionalidad"></s:hidden>
-									<s:hidden name="id_dato"></s:hidden>
-									<s:hidden name="modificar" value="%{true}"></s:hidden>
-									<input type="submit" value="Modificar Entrada" />
-
-								</div>
-							</form>
+							<s:set name="action" var="action">modificarEntrada</s:set>
+							<s:set name="submit" var="submit">
+								<s:text name="modificar"></s:text>
+							</s:set>
 						</s:else>
+						<!-- Formulario para registrar o modificar entrada -->
+						<form action="<s:property value="#action"></s:property>"
+							method="post">
+							<div id="tab2" class="tab_content">
+								<h5 class="formulario">
+									<s:text name="registro.title"></s:text>
+								</h5>
+								<h6>
+									<s:text name="funcionalidad.title">
+										<s:param>
+											<s:property value="funcionalidad.nombre" />
+										</s:param>
+									</s:text>
+								</h6>
+								<hr>
+								<!-- Nombre de la entrada. -->
+								<h5 class="formulario">
+									<s:text name="nombre.title"></s:text>
+								</h5>
+								<s:fielderror>
+									<s:param>dato.nombre</s:param>
+								</s:fielderror>
+								<s:textfield name="dato.nombre" />
+								<br>
+								<!-- Descripción de la entrada. -->
+								<h5 class="formulario">
+									<s:text name="descripcion.title"></s:text>
+								</h5>
+								<s:fielderror>
+									<s:param>dato.descripcion</s:param>
+								</s:fielderror>
+								<s:textarea name="dato.descripcion" cols="30" rows="5" />
+								<br>
+								<h5 class="formulario">
+									<s:text name="dato.title"></s:text>
+								</h5>
+								<s:fielderror>
+									<s:param>tipodato</s:param>
+								</s:fielderror>
+								<s:select name="dato.id_tipo_dato" list="tipoDatos"
+									listKey="id_tipo_dato" listValue="nombre" headerKey="-1"
+									headerValue="%{getText('dato.select')}"></s:select>
+								<br> <br>
+								<s:hidden name="idServicioInformacion"></s:hidden>
+								<s:hidden name="idFuncionalidad"></s:hidden>
+								<s:hidden name="id_dato"></s:hidden>
+								<input type="submit"
+									value="<s:property value="#submit"></s:property>" />
+							</div>
+						</form>
 					</div>
 				</div>
 				<%@include file="../layout/footer.jsp"%>

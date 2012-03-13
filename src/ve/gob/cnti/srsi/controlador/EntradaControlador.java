@@ -99,7 +99,7 @@ public class EntradaControlador extends DAO implements Formulario,
 		return SUCCESS;
 	}
 
-	public String registrarEntradaSimple() {
+	public String registrarEntrada() {
 		
 		entrada.setId_funcionalidad(idFuncionalidad);
 		entrada.setTipo(ENTRADA);
@@ -110,17 +110,6 @@ public class EntradaControlador extends DAO implements Formulario,
 		create(entrada);
 		create(dato);
 		
-		return SUCCESS;
-	}
-	
-	public String registrarEntradaCompleja() {
-		System.out.println("id f compl" +idFuncionalidad);
-		entrada.setId_funcionalidad(idFuncionalidad);
-		entrada.setTipo(ENTRADA);		
-		dato.setId_entrada_salida(getNextId(entrada));		
-		create(entrada);
-		create(dato);
-		complejo=false;
 		return SUCCESS;
 	}
 	

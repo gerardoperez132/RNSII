@@ -79,7 +79,7 @@
 			<result name="success">registro/formulario_entrada.jsp</result>
 		</action>
 		
-		<action name="registrarEntradaSimple" method="registrarEntradaSimple"
+		<action name="registrarEntrada" method="registrarEntrada"
 			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
 			<result name="success" type="chain">
                <param name="actionName">prepararEntradas</param>                         
@@ -90,14 +90,6 @@
 		<action name="prepararEntradaCompleja" method="prepararFormularioComplejo"
 			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
 			<result name="success">registro/formulario_entrada.jsp</result>
-		</action>
-		
-		<action name="registrarEntradaCompleja" method="registrarEntradaCompleja"
-			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
-			<result name="success" type="chain">
-               <param name="actionName">prepararEntradas</param>                         
-            </result>            
-			<result name="input">registro/formulario_entrada.jsp</result>
 		</action>
 		
 		<action name="prepararModificarEntradaSimple" method="prepararModificarEntradaSimple"
