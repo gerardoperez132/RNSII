@@ -327,6 +327,11 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 							+ ".status = "
 							+ ACTIVO
 							+ " AND "
+							+ models[i].getClass().getSimpleName()
+									.toLowerCase()
+							+ ".status = "
+							+ ACTIVO
+							+ " AND "
 							+ models[1].getClass().getSimpleName()
 									.toLowerCase() + ".tipo = " + type;
 
@@ -589,7 +594,7 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 		} finally {
 			closeConnection();
 		}
-		
+
 	}
 
 	@Override
