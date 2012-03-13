@@ -55,13 +55,10 @@
 			<!-- Este es el div de contenidos -->
 			<div id="content">
 
-				<h3>
-					Registro de Funcionalidades del servicio: "
-					<s:property value="servicio.nombre" />
-					"
-				</h3>
-
+				<h3>Registro de Funcionalidad</h3>
+				<h4>Servicio: "<s:property value="servicio.nombre"/>"</h4>	
 				<hr>
+
 				<ul class="tabs">
 					<li>
 						<form action="prepararFuncionalidad" method="POST">
@@ -119,7 +116,7 @@
 									<th>Nombre</th>
 									<th>Descripción</th>
 									<th>Tipo</th>	
-									<th></th>
+									<th>Acciones</th>
 								</tr>
 							</thead>
 							
@@ -162,7 +159,7 @@
 															<s:hidden name="idServicioInformacion"></s:hidden>
 															<s:hidden name="idFuncionalidad"></s:hidden>
 															<s:hidden name="id_dato"></s:hidden>
-															<input type="submit" value="Agregar Dato Simple" />
+															<input type="submit" value="Agregar dato Simple" style="font-size: 0.7em;" />
 														</form>														
 													</s:if>			
 												</s:if>												
