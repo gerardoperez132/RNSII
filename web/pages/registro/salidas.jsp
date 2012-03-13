@@ -68,7 +68,7 @@
 							<s:hidden name="idServicioInformacion"></s:hidden>
 							<s:hidden name="idFuncionalidad"></s:hidden>
 							<input type="submit" value="Descripcion General" style="background: none;
-							border: none;font-size: 0.8em;padding: 0 20px; margin-top: 7px;">
+							border: none;font-size: 0.8em;padding: 0 20px; height: 31px;">
 						</form>
 					</li>
 					<li>
@@ -76,7 +76,7 @@
 							<s:hidden name="idServicioInformacion"></s:hidden>
 							<s:hidden name="idFuncionalidad"></s:hidden>
 							<input type="submit" value="Entradas" style="background: none;
-							border: none;font-size: 0.8em;padding: 0 20px; margin-top: 7px;">
+							border: none;font-size: 0.8em;padding: 0 20px; height: 31px;">
 						</form>
 					</li>
 					<li class="active"><a>Salidas</a></li>					
