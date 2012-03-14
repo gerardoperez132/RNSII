@@ -125,43 +125,50 @@
 			class="ve.gob.cnti.srsi.controlador.SalidaControlador">
 			<result name="success">registro/salidas.jsp</result>
 		</action>
-		
+
 		<action name="prepararSalidaSimple" method="prepararFormularioSimple"
 			class="ve.gob.cnti.srsi.controlador.SalidaControlador">
-			<result name="success">registro/registro_salida_simple.jsp</result>
+			<result name="success">registro/formulario_salida.jsp</result>
 		</action>
 		
-		<action name="registrarSalidaSimple" method="registrarSalidaSimple"
+		<action name="registrarSalida" method="registrarSalida"
 			class="ve.gob.cnti.srsi.controlador.SalidaControlador">
 			<result name="success" type="chain">
                <param name="actionName">prepararSalidas</param>                         
             </result>            
-			<result name="input">registro/registro_salida_simple.jsp</result>
+			<result name="input">registro/formulario_salida.jsp</result>
 		</action>
 
 		<action name="prepararSalidaCompleja" method="prepararFormularioComplejo"
 			class="ve.gob.cnti.srsi.controlador.SalidaControlador">
-			<result name="success">registro/registro_salida_compleja.jsp</result>
+			<result name="success">registro/formulario_salida.jsp</result>
 		</action>
-
-
-		<action name="registrarSalidaSimple" method="registrarSalidaSimple"
+		
+		<action name="prepararModificarSalidaSimple" method="prepararModificarSalidaSimple"
 			class="ve.gob.cnti.srsi.controlador.SalidaControlador">
-
-			<result name="success" type="chain">
-				<param name="actionName">prepararSalidas</param>
-			</result>
-
-			<result name="input">registro/registro_salida_simple.jsp</result>
+			<result name="success">registro/formulario_salida.jsp</result>
 		</action>
-
-		<action name="registrarSalidaCompleja" method="registrarSalidaCompleja"
+		
+		<action name="prepararModificarSalidaCompleja" method="prepararModificarSalidaCompleja"
 			class="ve.gob.cnti.srsi.controlador.SalidaControlador">
-			<result name="success" type="chain">
-               <param name="actionName">prepararSalidas</param>                         
-            </result>            
-			<result name="input">registro/registro_salida_compleja.jsp</result>
+			<result name="success">registro/formulario_salida.jsp</result>
+		</action>
+		
+		<action name="modificarSalida" method="modificarSalida"
+			class="ve.gob.cnti.srsi.controlador.SalidaControlador">
+			<result name="success">registro/salidas.jsp</result>
+			<result name="input">registro/formulario_salida.jsp</result>
 		</action>	
+		
+		<action name="eliminarSalidaSimple" method="eliminarSalidaSimple"
+			class="ve.gob.cnti.srsi.controlador.SalidaControlador">
+			<result name="success">registro/salidas.jsp</result>			
+		</action>
+		
+		<action name="eliminarSalidaCompleja" method="eliminarSalidaCompleja"
+			class="ve.gob.cnti.srsi.controlador.SalidaControlador">
+			<result name="success">registro/salidas.jsp</result>			
+		</action>
 	
 
 	</package>

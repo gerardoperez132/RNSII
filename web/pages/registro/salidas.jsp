@@ -48,7 +48,7 @@
 			<div id="sidebar">
 				<small>Paso 1 Registro de Servicio de Información</small><br> <br>
 				<big>Paso 2 Registro de Funcionalidad(es)</big> <br> <br>
-				<small>Paso 3 Registro de Entradas/Salidas</small><br> <br>
+				<small>Paso 3 Registro de Salidas/Salidas</small><br> <br>
 				<small>Paso 4 Verificar y guardar</small>
 			</div>
 
@@ -110,6 +110,7 @@
 							</tr>
 						</table>
 						
+						<!-- Tabla en arborl -->
 						<table id="tree" class="treeTable">
 							<thead>
 								<tr>
@@ -124,7 +125,7 @@
 							<s:if test="datos.size > 0">
 							
 							<tbody>
-							<!-- iterador con todas las entradas cargadas -->
+							<!-- iterador con todas las Salidas cargadas -->
 							<s:iterator value="datos" status="result_datos">
 							
 								<!-- Condicción que asegura que solo se impriman datos sin padres -->
@@ -137,17 +138,19 @@
 										<td><s:property value="descripcion" /></td>
 										<!-- impresión del tipo dato -->
 										<td>
-											<!-- creación de una variable con el id_tipo_de_dato -->
-											<s:set name="id_d" value="id_tipo_dato" ></s:set>										
+											<!-- creación de una variable con el id_dato para identicar a los datos complejos -->										
 											<s:set name="id" value="id_dato" ></s:set>
 											<!-- creación de una variable con el id_tipo_de_dato -->
-											<s:iterator value="tipoDatos"> 
+											<s:set name="id_d" value="id_tipo_dato" ></s:set>
+											<s:iterator value="tipoDatos">
+												<!--impresión del tipo de dato de acuerdo a su id --> 
 												<s:if test="%{id_tipo_dato == #id_d}">
 													<s:property value="nombre" />
 												</s:if>											
 											</s:iterator> 									
 										</td>
 										<td>
+											<!-- Bloque que muestra un boton si el dato es una lista-->
 											<s:iterator value="tipoDatos">
 												<s:if test="%{id_tipo_dato == #id_d}">
 													<s:if test="%{tipo == 0}">
@@ -155,14 +158,57 @@
 													<s:append var="datos2">  
 													    <s:param value="%{datos}" />						      
 													</s:append>
+														<table style="margin: 0;padding: 0;"><tr style="margin: 0;padding: 0;">
+														<td style="margin: 0;padding: 0;">
 														<form action="prepararSalidaSimple" method="POST">
 															<s:hidden name="idServicioInformacion"></s:hidden>
 															<s:hidden name="idFuncionalidad"></s:hidden>
 															<s:hidden name="id_dato"></s:hidden>
 															<input type="submit" value="Agregar dato Simple" style="font-size: 0.7em;" />
-														</form>														
-													</s:if>			
-												</s:if>												
+														</form>
+														</td>
+														<td style="margin: 0;padding: 0;">
+														<form action="prepararModificarSalidaCompleja" method="POST">
+															<s:hidden name="idServicioInformacion"></s:hidden>
+															<s:hidden name="idFuncionalidad"></s:hidden>
+															<s:hidden name="id_dato" value="%{#id}"></s:hidden>
+															<s:hidden name= "modificar" value="%{true}"></s:hidden>
+															<input type="submit" value="Modificar" style="font-size: 0.7em;" />
+														</form>
+														</td>
+														<td style="margin: 0;padding: 0;">
+														<form action="eliminarSalidaCompleja" method="POST">
+															<s:hidden name="idServicioInformacion"></s:hidden>
+															<s:hidden name="idFuncionalidad"></s:hidden>
+															<s:hidden name="id_dato" value="%{#id}"></s:hidden>
+															<s:hidden name= "modificar" value="%{true}"></s:hidden>
+															<input type="submit" value="Eliminar" style="font-size: 0.7em;" />
+														</form>
+														</table>
+																												
+													</s:if>
+													<s:else>
+													<table style="margin: 0;padding: 0;"><tr style="margin: 0;padding: 0;">
+													<td style="margin: 0;padding: 0;">
+													<form action="prepararModificarSalidaSimple" method="POST">
+														<s:hidden name="idServicioInformacion"></s:hidden>
+														<s:hidden name="idFuncionalidad"></s:hidden>
+														<s:hidden name="id_dato"></s:hidden>
+														<s:hidden name= "modificar" value="%{true}"></s:hidden>
+														<input type="submit" value="Modificar" style="font-size: 0.7em;" />
+													</form>
+													</td>
+													<td style="margin: 0;padding: 0;">
+													<form action="eliminarSalidaSimple" method="POST">
+														<s:hidden name="idServicioInformacion"></s:hidden>
+														<s:hidden name="idFuncionalidad"></s:hidden>
+														<s:hidden name="id_dato"></s:hidden>														
+														<input type="submit" value="Eliminar" style="font-size: 0.7em;" />
+													</form>
+													</td>
+													</tr></table>
+													</s:else>			
+												</s:if>																				
 											</s:iterator>								
 										</td>							
 								
@@ -171,7 +217,7 @@
 								<s:else>
 									<s:set name="padre">0</s:set>
 								</s:else>
-								
+								<!-- impresion de datos hijos-->
 								<s:if test="%{#padre > 0}">	
 									<s:iterator value="datos2" status="status_datos2">
 										
@@ -189,6 +235,28 @@
 														</s:if>											
 													</s:iterator> 									
 												</td>
+												<td>
+												<table style="margin: 0;padding: 0;"><tr style="margin: 0;padding: 0;">
+													<td style="margin: 0;padding: 0;">
+													<form action="prepararModificarSalidaSimple" method="POST">
+														<s:hidden name="idServicioInformacion"></s:hidden>
+														<s:hidden name="idFuncionalidad"></s:hidden>
+														<s:hidden name="id_dato"></s:hidden>
+														<s:hidden name= "modificar" value="%{true}"></s:hidden>
+														<input type="submit" value="Modificar" style="font-size: 0.7em;" />
+													</form>
+													</td>
+													<td style="margin: 0;padding: 0;">
+													<form action="eliminarSalidaSimple" method="POST">
+														<s:hidden name="idServicioInformacion"></s:hidden>
+														<s:hidden name="idFuncionalidad"></s:hidden>
+														<s:hidden name="id_dato"></s:hidden>														
+														<input type="submit" value="Eliminar" style="font-size: 0.7em;" />
+													</form>
+													</td>
+													</tr></table>
+												</td>
+												
 											</tr>		
 										</s:if>																
 									</s:iterator>
@@ -201,14 +269,16 @@
 							
 							</s:if>
 							<s:else>
+							
 								<tbody>
-									<tr class="hv">
-										<th class="row" colspan="4">Aún no hay salidas cargadas para
-								está funcionalidad
+									<tr>
+										<th colspan="4">Aún no hay Salidas cargadas para está funcionalidad
 										</th>																			
 									</tr>												
 								</tbody>
-							</s:else>	
+							
+							</s:else>
+							
 						</table>
 					</div>
 				</div>

@@ -3,7 +3,7 @@
 <%@taglib uri="/struts-tags" prefix="s"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<s:i18n name="ve/gob/cnti/srsi/i18n/registro_salida_compleja">
+<s:i18n name="ve/gob/cnti/srsi/i18n/formulario_salida">
 	<head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <!-- CSS (required) -->
@@ -16,6 +16,7 @@
 		<div id="sombra">
 			<!-- Este es el div contenedor del maquetado de la página -->
 			<div id="container">
+				<%@include file="../layout/header.jsp"%>
 				<!-- Esta es la barra lateral -->
 				<div id="sidebar">
 					<small>Paso 1 Registro de Servicio de Información</small><br>
@@ -32,18 +33,37 @@
 					<ul class="tabs">
 						<li><a href="#tab1"><s:text name="tab1.title"></s:text> </a>
 						</li>
-						<li class="active"><a><s:text name="tab2.title"></s:text>
+						<li><a><s:text name="tab2.title"></s:text>
 						</a></li>
-						<li><a href="#tab3"><s:text name="tab3.title"></s:text> </a>
+						<li class="active"><a href="#tab3"><s:text name="tab3.title"></s:text> </a>
 						</li>
 						<li><a href="#tab4"><s:text name="tab4.title"></s:text> </a>
 						</li>
 					</ul>
 					<div class="tab_container">
-						<form action="registrarSalidaCompleja" method="post">
+						<s:if test="modificar!=true">
+							<s:set name="action" var="action">registrarSalida</s:set>
+							<s:set name="submit" var="submit">
+								<s:text name="guardar"></s:text>
+							</s:set>
+						</s:if>
+						<s:else>
+							<s:set name="action" var="action">modificarSalida</s:set>
+							<s:set name="submit" var="submit">
+								<s:text name="modificar"></s:text>
+							</s:set>
+						</s:else>
+						<!-- Formulario para registrar o modificar entrada -->
+						<form action="<s:property value="#action"></s:property>"
+							method="post">
 							<div id="tab2" class="tab_content">
 								<h5 class="formulario">
-									<s:text name="registro.complejo"></s:text>
+									<s:if test="modificar!=true">
+									<s:text name="registro.title"></s:text>
+									</s:if>
+									<s:else>
+									<s:text name="modificar.title"></s:text>
+									</s:else>
 								</h5>
 								<h6>
 									<s:text name="funcionalidad.title">
@@ -83,8 +103,11 @@
 								<br> <br>
 								<s:hidden name="idServicioInformacion"></s:hidden>
 								<s:hidden name="idFuncionalidad"></s:hidden>
-								<s:hidden name="complejo"></s:hidden>
-								<input type="submit" value="<s:text name="guardar"></s:text>" />
+								<s:hidden name="id_dato"></s:hidden>
+								<s:hidden name= "modificar" value="%{true}"></s:hidden>
+								<s:hidden name= "complejo"></s:hidden>
+								<input type="submit"
+									value="<s:property value="#submit"></s:property>" />
 							</div>
 						</form>
 					</div>
