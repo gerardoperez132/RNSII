@@ -77,7 +77,14 @@
 						</form>
 					</li>
 					<li class="active"><a>Salidas</a></li>					
-					<li><a>Resumen Funcionalidad</a></li>
+					<li>
+						<form action="prepararResumen" method="POST">
+							<s:hidden name="idServicioInformacion"></s:hidden>
+							<s:hidden name="idFuncionalidad"></s:hidden>
+							<input type="submit" value="Resumen de Funcionalidad" style="background: none;
+							border: none;font-size: 0.8em;padding: 0 20px; height: 31px;">
+						</form>
+					</li>
 				</ul>
 				<div class="tab_container">
 

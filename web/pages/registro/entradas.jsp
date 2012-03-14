@@ -65,7 +65,14 @@
 								<input type="submit" value="<s:text name="tab3.title"></s:text>"
 									style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
 							</form></li>
-						<li><a href="#tab4"><s:text name="tab4.title"></s:text> </a>
+						<li>
+							<form action="prepararResumen" method="POST">
+							<s:hidden name="idServicioInformacion"></s:hidden>
+							<s:hidden name="idFuncionalidad"></s:hidden>
+							<input type="submit" value="<s:text name="tab4.title" />" style="background: none;
+							border: none;font-size: 0.8em;padding: 0 20px; height: 31px;">
+						</form>
+						 
 						</li>
 					</ul>
 					<div class="tab_container">

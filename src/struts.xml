@@ -63,6 +63,11 @@
 			
 			<result name="input">registro/registro_funcionalidad.jsp</result>
 		</action>
+		
+		<action name="prepararResumen" method="prepararResumen"
+			class="ve.gob.cnti.srsi.controlador.FuncionalidadControlador">
+			<result name="success">registro/registro_funcionalidad.jsp</result>
+		</action>
 
 
 		<!--*****************************************************************
