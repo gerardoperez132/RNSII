@@ -9,6 +9,8 @@ Debe decidirse si la relación de Dato y TipoDato será 1:1 o 1:N
 Debe decir de qué se trata el campo origen en la tabla telefonos.
 Debe decir de qué se trata el campo origen en la tabla correos.
 
+Tratar de reutilizar los códigos del formulario de entradas y salidas.
+
 Replicar para cuando se necesite crear la información más estática de la base de datos:
 
 Date date = new Date();
