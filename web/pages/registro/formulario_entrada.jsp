@@ -43,12 +43,14 @@
 					<div class="tab_container">
 						<s:if test="modificar!=true">
 							<s:set name="action" var="action">registrarEntrada</s:set>
+							<s:set name="modificar" value="%{false}" />
 							<s:set name="submit" var="submit">
 								<s:text name="guardar"></s:text>
 							</s:set>
 						</s:if>
 						<s:else>
 							<s:set name="action" var="action">modificarEntrada</s:set>
+							<s:set name="modificar" value="%{true}" />
 							<s:set name="submit" var="submit">
 								<s:text name="modificar"></s:text>
 							</s:set>
@@ -104,7 +106,7 @@
 								<s:hidden name="idServicioInformacion"></s:hidden>
 								<s:hidden name="idFuncionalidad"></s:hidden>
 								<s:hidden name="id_dato"></s:hidden>
-								<s:hidden name= "modificar" value="%{true}"></s:hidden>
+								<s:hidden name= "modificar"></s:hidden>
 								<s:hidden name= "complejo"></s:hidden>
 								<input type="submit"
 									value="<s:property value="#submit"></s:property>" />
