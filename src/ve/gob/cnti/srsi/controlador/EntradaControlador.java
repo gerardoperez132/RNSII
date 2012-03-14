@@ -160,8 +160,6 @@ public class EntradaControlador extends DAO implements Formulario,
 			}
 		}		
 		
-		System.out.println("\ndato p: " +dato.toString() );	
-		System.out.println("\nid dato p: " +id_dato );	
 		delete(dato,id_dato);
 		
 		funcionalidad = (Funcionalidad) read(funcionalidad, idFuncionalidad);
