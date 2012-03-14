@@ -88,6 +88,16 @@ TipoEntradaSalida, ArregloModelos {
 
 		return SUCCESS;
 	}
+	
+	
+	@SkipValidation
+	public String eliminarFuncionalidad() {
+				
+		delete(funcionalidad, idFuncionalidad);			
+		prepararFuncionalidades();
+		
+		return SUCCESS;
+	}
 
 	public void validate() {
 		if (funcionalidad.getNombre().isEmpty())

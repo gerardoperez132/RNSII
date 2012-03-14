@@ -74,6 +74,11 @@
 			class="ve.gob.cnti.srsi.controlador.FuncionalidadControlador">
 			<result name="success">registro/funcionalidades.jsp</result>
 		</action>
+		
+		<action name="eliminarFuncionalidad" method="eliminarFuncionalidad"
+			class="ve.gob.cnti.srsi.controlador.FuncionalidadControlador">
+			<result name="success">registro/funcionalidades.jsp</result>			
+		</action>
 
 		<!--*****************************************************************
 						Actions para Entradas 

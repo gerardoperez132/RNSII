@@ -89,14 +89,31 @@
 										<th><s:property value="id_funcionalidad" /></th>
 										<td><s:property value="nombre" /></td>
 										<td><s:property value="fecha_creado" /></td>
-										<td><form action="prepararModificacionesFuncionalidad"
-												method="POST">
-												<s:hidden name="idFuncionalidad" value="%{id_funcionalidad}"></s:hidden>
-												<s:hidden name="idServicioInformacion"></s:hidden>
-												<input type="submit" value="<s:text name="modificar"/>"
-													style="background: none; border: 0;" />
-												<s:text name="eliminar" />
-											</form></td>
+										<td>
+											<table style="margin: 0; padding: 0;">
+											<tr style="margin: 0; padding: 0;">
+											<td style="margin: 0; padding: 0;">
+												<form action="prepararFuncionalidad"
+													method="POST">
+													<s:hidden name="idFuncionalidad" value="%{id_funcionalidad}"></s:hidden>
+													<s:hidden name="idServicioInformacion"></s:hidden>
+													<s:hidden name="modificar" value="%{true}"></s:hidden>
+													<input type="submit" value="<s:text name="modificar"/>"
+														style="font-size: 0.7em;" />													
+												</form>												
+											</td>
+											<td style="margin: 0; padding: 0;">
+												<form action="eliminarFuncionalidad"
+													method="POST">
+													<s:hidden name="idFuncionalidad" value="%{id_funcionalidad}"></s:hidden>
+													<s:hidden name="idServicioInformacion"></s:hidden>
+													<input type="submit" value="<s:text name="eliminar" />"
+														style="font-size: 0.7em;" />													
+												</form>
+											</td>
+											</tr>
+											</table>
+										</td>
 									</tr>
 								</s:iterator>
 							</s:if>
