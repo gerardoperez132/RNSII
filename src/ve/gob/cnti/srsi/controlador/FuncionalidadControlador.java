@@ -6,16 +6,22 @@ import java.util.List;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
 import ve.gob.cnti.srsi.dao.DAO;
+import ve.gob.cnti.srsi.dao.Constants.ArregloModelos;
+import ve.gob.cnti.srsi.dao.Constants.TipoEntradaSalida;
+import ve.gob.cnti.srsi.modelo.Dato;
 import ve.gob.cnti.srsi.modelo.EntradaSalida;
 import ve.gob.cnti.srsi.modelo.Funcionalidad;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 
 @SuppressWarnings("serial")
-public class FuncionalidadControlador extends DAO implements Formulario {
-
+public class FuncionalidadControlador extends DAO implements Formulario ,
+TipoEntradaSalida, ArregloModelos {
+	
 	private List<EntradaSalida> entradas = new ArrayList<EntradaSalida>();
 	private List<EntradaSalida> salidas = new ArrayList<EntradaSalida>();
 	private List<Funcionalidad> funcionalidades = new ArrayList<Funcionalidad>();
+	private List<Dato> datosEntradas = new ArrayList<Dato>();
+	private List<Dato> datosSalidas = new ArrayList<Dato>();
 
 	private ServicioInformacion servicio = new ServicioInformacion();
 	private Funcionalidad funcionalidad = new Funcionalidad();
@@ -44,6 +50,22 @@ public class FuncionalidadControlador extends DAO implements Formulario {
 		funcionalidad = (Funcionalidad) read(funcionalidad, idFuncionalidad);
 		return SUCCESS;
 	}
+		
+	@SuppressWarnings("unchecked")
+	@SkipValidation
+	public String prepararResumen() {
+		
+		servicio = (ServicioInformacion) read(servicio, idServicioInformacion);
+		funcionalidad = (Funcionalidad) read(funcionalidad, idFuncionalidad);
+		datosEntradas = (ArrayList<Dato>) read(NOMBRE_DATO, ENTRADA, idFuncionalidad);
+		datosSalidas = (ArrayList<Dato>) read(NOMBRE_DATO, SALIDA, idFuncionalidad);
+		if (datosSalidas.size()<1){
+			addFieldError("Salidas",
+					"Aún no ha cargado datos de salidas");
+		}
+		
+		return SUCCESS;
+	}
 
 	public String modificarFuncionalidad() {
 
@@ -68,8 +90,7 @@ public class FuncionalidadControlador extends DAO implements Formulario {
 	
 		servicio = (ServicioInformacion) read(servicio, idServicioInformacion);
 		if(idFuncionalidad>0){
-			funcionalidad = (Funcionalidad) read(funcionalidad, idFuncionalidad);
-			funcionalidades = null;
+			funcionalidad = (Funcionalidad) read(funcionalidad, idFuncionalidad);			
 			funcionalidades = ((List<Funcionalidad>) read(funcionalidad,
 					new ServicioInformacion(), idFuncionalidad));
 		}		
@@ -154,6 +175,22 @@ public class FuncionalidadControlador extends DAO implements Formulario {
 
 	public void setModificar(boolean modificar) {
 		this.modificar = modificar;
+	}
+
+	public List<Dato> getDatosEntradas() {
+		return datosEntradas;
+	}
+
+	public void setDatosEntradas(List<Dato> datosEntradas) {
+		this.datosEntradas = datosEntradas;
+	}
+
+	public List<Dato> getDatosSalidas() {
+		return datosSalidas;
+	}
+
+	public void setDatosSalidas(List<Dato> datosSalidas) {
+		this.datosSalidas = datosSalidas;
 	}
 
 }
