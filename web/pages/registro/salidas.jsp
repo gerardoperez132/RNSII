@@ -19,7 +19,6 @@
 		$("#tree").treeTable();
 	});
 </script>
-
 <title><s:text name="salidas"></s:text></title>
 	</head>
 	<body>
@@ -43,7 +42,8 @@
 					<h4>
 						<s:text name="servicio.title">
 							<s:param>
-								<s:property value="servicio.nombre" /></s:param>
+								<s:property value="servicio.nombre" />
+							</s:param>
 						</s:text>
 					</h4>
 					<hr>
@@ -64,14 +64,15 @@
 									style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
 							</form>
 						</li>
-						<li class="active"><a><s:text name="tab3.title"></s:text></a>
+						<li class="active"><a><s:text name="tab3.title"></s:text>
+						</a>
 						</li>
 						<li>
 							<form action="prepararResumen" method="POST">
 								<s:hidden name="idServicioInformacion"></s:hidden>
 								<s:hidden name="idFuncionalidad"></s:hidden>
-								<input type="submit" value="<s:text name="tab4.title"/>" style="background: none;
-								border: none;font-size: 0.8em;padding: 0 20px; height: 31px;">
+								<input type="submit" value="<s:text name="tab4.title"/>"
+									style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
 							</form>
 						</li>
 					</ul>
@@ -91,14 +92,16 @@
 										<form action="prepararSalidaSimple" method="POST">
 											<s:hidden name="idServicioInformacion"></s:hidden>
 											<s:hidden name="idFuncionalidad"></s:hidden>
-											<input type="submit" value="<s:text name="simple.title"></s:text>" />
+											<input type="submit"
+												value="<s:text name="simple.title"></s:text>" />
 										</form>
 									</td>
 									<td>
 										<form action="prepararSalidaCompleja" method="POST">
 											<s:hidden name="idServicioInformacion"></s:hidden>
 											<s:hidden name="idFuncionalidad"></s:hidden>
-											<input type="submit" value="<s:text name="complejo.title"></s:text>">
+											<input type="submit"
+												value="<s:text name="complejo.title"></s:text>">
 										</form>
 									</td>
 								</tr>
@@ -243,7 +246,8 @@
 																				<s:hidden name="idFuncionalidad"></s:hidden>
 																				<s:hidden name="id_dato"></s:hidden>
 																				<s:hidden name="modificar" value="%{true}"></s:hidden>
-																				<input type="submit" value="<s:text name="modificar"></s:text>"
+																				<input type="submit"
+																					value="<s:text name="modificar"></s:text>"
 																					style="font-size: 0.7em;" />
 																			</form>
 																		</td>
@@ -252,7 +256,8 @@
 																				<s:hidden name="idServicioInformacion"></s:hidden>
 																				<s:hidden name="idFuncionalidad"></s:hidden>
 																				<s:hidden name="id_dato"></s:hidden>
-																				<input type="submit" value="<s:text name="eliminar"></s:text>"
+																				<input type="submit"
+																					value="<s:text name="eliminar"></s:text>"
 																					style="font-size: 0.7em;" />
 																			</form>
 																		</td>
