@@ -17,12 +17,12 @@
 			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
 			<result name="input">registro/registro_servicio_informacion.jsp
 			</result>
-			<result name="success">registro/servicio_informacion.jsp</result>
+			<result name="success">registro/funcionalidades.jsp</result>
 		</action>
 
 		<action name="registrarPrueba" method="registrarPrueba"
 			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
-			<result name="success">registro/servicio_informacion.jsp</result>
+			<result name="success">registro/funcionalidades.jsp</result>
 		</action>
 
 
