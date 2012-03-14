@@ -58,7 +58,12 @@
 							method="post">
 							<div id="tab2" class="tab_content">
 								<h5 class="formulario">
+									<s:if test="modificar!=true">
 									<s:text name="registro.title"></s:text>
+									</s:if>
+									<s:else>
+									<s:text name="modificar.title"></s:text>
+									</s:else>
 								</h5>
 								<h6>
 									<s:text name="funcionalidad.title">
@@ -99,6 +104,8 @@
 								<s:hidden name="idServicioInformacion"></s:hidden>
 								<s:hidden name="idFuncionalidad"></s:hidden>
 								<s:hidden name="id_dato"></s:hidden>
+								<s:hidden name= "modificar" value="%{true}"></s:hidden>
+								<s:hidden name= "complejo"></s:hidden>
 								<input type="submit"
 									value="<s:property value="#submit"></s:property>" />
 							</div>
