@@ -32,6 +32,7 @@ TipoEntradaSalida, ArregloModelos {
 	private long idFuncionalidad;
 	
 	private boolean modificar;
+	private boolean resumen;
 
 	public String registrarFuncionalidad() {
 		/*
@@ -54,7 +55,8 @@ TipoEntradaSalida, ArregloModelos {
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararResumen() {
-		
+		System.out.println("mod: "+modificar);
+		resumen = true;
 		servicio = (ServicioInformacion) read(servicio, idServicioInformacion);
 		funcionalidad = (Funcionalidad) read(funcionalidad, idFuncionalidad);
 		datosEntradas = (ArrayList<Dato>) read(NOMBRE_DATO, ENTRADA, idFuncionalidad);
@@ -62,8 +64,20 @@ TipoEntradaSalida, ArregloModelos {
 		if (datosSalidas.size()<1){
 			addFieldError("Salidas",
 					"Aún no ha cargado datos de salidas");
+			return INPUT;
 		}
 		
+		return SUCCESS;
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	@SkipValidation
+	public String prepararFuncionalidades() {
+	
+		servicio = (ServicioInformacion) read(servicio, idServicioInformacion);			
+		funcionalidades = ((List<Funcionalidad>) read(funcionalidad,
+				new ServicioInformacion(), idServicioInformacion));				
 		return SUCCESS;
 	}
 
@@ -191,6 +205,14 @@ TipoEntradaSalida, ArregloModelos {
 
 	public void setDatosSalidas(List<Dato> datosSalidas) {
 		this.datosSalidas = datosSalidas;
+	}
+
+	public boolean isResumen() {
+		return resumen;
+	}
+
+	public void setResumen(boolean resumen) {
+		this.resumen = resumen;
 	}
 
 }

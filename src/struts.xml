@@ -39,12 +39,12 @@
 
 		<action name="prepararFuncionalidad" method="prepararFormulario"
 			class="ve.gob.cnti.srsi.controlador.FuncionalidadControlador">
-			<result name="success">registro/registro_funcionalidad.jsp</result>
+			<result name="success">registro/formulario_funcionalidad.jsp</result>
 		</action>
 
 		<action name="prepararModificacionesFuncionalidad" method="prepararModificaciones"
 			class="ve.gob.cnti.srsi.controlador.FuncionalidadControlador">
-			<result name="success">modificar/modificar_funcionalidad.jsp</result>
+			<result name="success">registro/formulario_funcionalidad.jsp</result>
 		</action>
 
 		<action name="registrarFuncionalidad" method="registrarFuncionalidad"
@@ -52,7 +52,7 @@
 			<result name="success" type="chain">
 				<param name="actionName">prepararEntradas</param>
 			</result>
-			<result name="input">registro/registro_funcionalidad.jsp</result>
+			<result name="input">registro/formulario_funcionalidad.jsp</result>
 		</action>
 		
 		<action name="modificarFuncionalidad" method="modificarFuncionalidad"
@@ -61,14 +61,19 @@
 				<param name="actionName">prepararFuncionalidad</param>
 			</result>
 			
-			<result name="input">registro/registro_funcionalidad.jsp</result>
+			<result name="input">registro/formulario_funcionalidad.jsp</result>
 		</action>
 		
 		<action name="prepararResumen" method="prepararResumen"
 			class="ve.gob.cnti.srsi.controlador.FuncionalidadControlador">
-			<result name="success">registro/registro_funcionalidad.jsp</result>
+			<result name="success">registro/formulario_funcionalidad.jsp</result>
+			<result name="input">registro/formulario_funcionalidad.jsp</result>
 		</action>
 
+		<action name="prepararFuncionalidades" method="prepararFuncionalidades"
+			class="ve.gob.cnti.srsi.controlador.FuncionalidadControlador">
+			<result name="success">registro/funcionalidades.jsp</result>
+		</action>
 
 		<!--*****************************************************************
 						Actions para Entradas 
