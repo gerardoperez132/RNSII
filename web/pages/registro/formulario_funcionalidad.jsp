@@ -22,7 +22,7 @@
 					<small>Paso 1 Registro de Servicio de Información</small><br>
 					<br> <big>Paso 2 Registro de Funcionalidad(es)</big> <br>
 					<br> <small>Paso 3 Registro de Entradas/Salidas</small><br>
-					<br> <small>Paso 4 Verificar y guardar</small>					
+					<br> <small>Paso 4 Verificar y guardar</small>
 				</div>
 				<!-- Este es el div de contenidos -->
 				<div id="content">
@@ -37,22 +37,23 @@
 						</s:text>
 					</h4>
 					<hr>
-					<s:if test="idFuncionalidad > 0 && modificar != true && resumen != true">
+					<s:if
+						test="id_funcionalidad > 0 && modificar != true && resumen != true">
 						<ul class="tabs">
 							<li class="active"><a><s:text name="tab1.title"></s:text>
 							</a></li>
 							<li>
 								<form action="prepararEntradas" method="POST">
-									<s:hidden name="idServicioInformacion"></s:hidden>
-									<s:hidden name="idFuncionalidad"></s:hidden>
+									<s:hidden name="id_servicio_informacion"></s:hidden>
+									<s:hidden name="id_funcionalidad"></s:hidden>
 									<input type="submit"
 										value='<s:text name="tab2.title"></s:text>'
 										style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
 								</form></li>
 							<li>
 								<form action="prepararSalidas" method="POST">
-									<s:hidden name="idServicioInformacion"></s:hidden>
-									<s:hidden name="idFuncionalidad"></s:hidden>
+									<s:hidden name="id_servicio_informacion"></s:hidden>
+									<s:hidden name="id_funcionalidad"></s:hidden>
 									<input type="submit"
 										value='<s:text name="tab3.title"></s:text>'
 										style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
@@ -80,8 +81,8 @@
 									</tr>
 								</table>
 								<form action="prepararFuncionalidad" method="POST">
-									<s:hidden name="idServicioInformacion"></s:hidden>
-									<s:hidden name="idFuncionalidad"></s:hidden>
+									<s:hidden name="id_servicio_informacion"></s:hidden>
+									<s:hidden name="id_funcionalidad"></s:hidden>
 									<s:hidden name="modificar" value="%{true}"></s:hidden>
 									<input type="submit" value='<s:text name="modificar"></s:text>'>
 								</form>
@@ -92,29 +93,31 @@
 						<ul class="tabs">
 							<li>
 								<form action="prepararFuncionalidad" method="POST">
-									<s:hidden name="idServicioInformacion"></s:hidden>
-									<s:hidden name="idFuncionalidad"></s:hidden>
-									<input type="submit" value="<s:text name="tab1.title"></s:text>"
-									style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
+									<s:hidden name="id_servicio_informacion"></s:hidden>
+									<s:hidden name="id_funcionalidad"></s:hidden>
+									<input type="submit"
+										value="<s:text name="tab1.title"></s:text>"
+										style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
 								</form>
 							</li>
 							<li>
 								<form action="prepararEntradas" method="POST">
-									<s:hidden name="idServicioInformacion"></s:hidden>
-									<s:hidden name="idFuncionalidad"></s:hidden>
+									<s:hidden name="id_servicio_informacion"></s:hidden>
+									<s:hidden name="id_funcionalidad"></s:hidden>
 									<input type="submit"
 										value='<s:text name="tab2.title"></s:text>'
 										style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
 								</form></li>
 							<li>
 								<form action="prepararSalidas" method="POST">
-									<s:hidden name="idServicioInformacion"></s:hidden>
-									<s:hidden name="idFuncionalidad"></s:hidden>
+									<s:hidden name="id_servicio_informacion"></s:hidden>
+									<s:hidden name="id_funcionalidad"></s:hidden>
 									<input type="submit"
 										value='<s:text name="tab3.title"></s:text>'
 										style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
 								</form></li>
-							<li class="active"><a><s:text name="tab4.title"></s:text> </a></li>
+							<li class="active"><a><s:text name="tab4.title"></s:text>
+							</a></li>
 						</ul>
 						<div class="tab_container">
 							<div id="tab1" class="tab_content">
@@ -137,39 +140,36 @@
 										</td>
 									</tr>
 									<tr>
-									<td>
-										<s:fielderror>
-											<s:param>Salidas</s:param>											
-										</s:fielderror>
-										<h5>
-											<s:text name="salidas.title"></s:text>
-										</h5>
-									</td>
-									<td>
-										<s:property value="datosSalidas.size"/>
-									</td>
+										<td><s:fielderror>
+												<s:param>Salidas</s:param>
+											</s:fielderror>
+											<h5>
+												<s:text name="salidas.title"></s:text>
+											</h5>
+										</td>
+										<td><s:property value="datosSalidas.size" />
+										</td>
 									</tr>
 									<tr>
-									<td>										
-										<h5>
-											<s:text name="entradas.title"></s:text>
-										</h5>
-									</td>
-									<td>
-										<s:property value="datosEntradas.size"/>
-									</td>
+										<td>
+											<h5>
+												<s:text name="entradas.title"></s:text>
+											</h5>
+										</td>
+										<td><s:property value="datosEntradas.size" />
+										</td>
 									</tr>
 								</table>
 								<s:if test="datosSalidas.size>0">
-								<form action="prepararFuncionalidades" method="POST">
-									<s:hidden name="idServicioInformacion"></s:hidden>
-									<s:hidden name="idFuncionalidad"></s:hidden>									
-									<input type="submit" value='<s:text name="guardar"></s:text>'>
-								</form>
+									<form action="prepararFuncionalidades" method="POST">
+										<s:hidden name="id_servicio_informacion"></s:hidden>
+										<s:hidden name="id_funcionalidad"></s:hidden>
+										<input type="submit" value='<s:text name="guardar"></s:text>'>
+									</form>
 								</s:if>
 							</div>
 						</div>
-					</s:elseif>					
+					</s:elseif>
 					<s:else>
 						<ul class="tabs">
 							<li class="active"><a><s:text name="tab1.title"></s:text>
@@ -205,8 +205,8 @@
 										<s:textarea name="funcionalidad.descripcion" cols="30"
 											rows="5" />
 										<br>
-										<s:hidden name="idServicioInformacion"></s:hidden>
-										<s:hidden name="idFuncionalidad"></s:hidden>
+										<s:hidden name="id_servicio_informacion"></s:hidden>
+										<s:hidden name="id_funcionalidad"></s:hidden>
 										<s:hidden name="modificar" value="%{false}"></s:hidden>
 										<input type="submit" value=<s:text name="guardar"></s:text> />
 									</form>
@@ -235,9 +235,8 @@
 										<s:textarea name="funcionalidad.descripcion" cols="30"
 											rows="5" />
 										<br>
-										<s:hidden name="idServicioInformacion"></s:hidden>
-										<input type="submit"
-											value='<s:text name="guardar"></s:text>' />
+										<s:hidden name="id_servicio_informacion"></s:hidden>
+										<input type="submit" value='<s:text name="guardar"></s:text>' />
 									</form>
 								</s:else>
 							</div>

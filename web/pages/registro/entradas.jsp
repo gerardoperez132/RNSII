@@ -50,8 +50,8 @@
 					<ul class="tabs">
 						<li>
 							<form action="prepararFuncionalidad" method="POST">
-								<s:hidden name="idServicioInformacion"></s:hidden>
-								<s:hidden name="idFuncionalidad"></s:hidden>
+								<s:hidden name="id_servicio_informacion"></s:hidden>
+								<s:hidden name="id_funcionalidad"></s:hidden>
 								<input type="submit" value="<s:text name="tab1.title"></s:text>"
 									style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
 							</form></li>
@@ -60,19 +60,18 @@
 						</li>
 						<li>
 							<form action="prepararSalidas" method="POST">
-								<s:hidden name="idServicioInformacion"></s:hidden>
-								<s:hidden name="idFuncionalidad"></s:hidden>
+								<s:hidden name="id_servicio_informacion"></s:hidden>
+								<s:hidden name="id_funcionalidad"></s:hidden>
 								<input type="submit" value="<s:text name="tab3.title"></s:text>"
 									style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
 							</form></li>
 						<li>
 							<form action="prepararResumen" method="POST">
-							<s:hidden name="idServicioInformacion"></s:hidden>
-							<s:hidden name="idFuncionalidad"></s:hidden>
-							<input type="submit" value="<s:text name="tab4.title" />" style="background: none;
-							border: none;font-size: 0.8em;padding: 0 20px; height: 31px;">
-						</form>
-						 
+								<s:hidden name="id_servicio_informacion"></s:hidden>
+								<s:hidden name="id_funcionalidad"></s:hidden>
+								<input type="submit" value="<s:text name="tab4.title" />"
+									style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
+							</form>
 						</li>
 					</ul>
 					<div class="tab_container">
@@ -89,15 +88,15 @@
 								<tr class="nohover">
 									<td>
 										<form action="prepararEntradaSimple" method="POST">
-											<s:hidden name="idServicioInformacion"></s:hidden>
-											<s:hidden name="idFuncionalidad"></s:hidden>
+											<s:hidden name="id_servicio_informacion"></s:hidden>
+											<s:hidden name="id_funcionalidad"></s:hidden>
 											<input type="submit"
 												value="<s:text name="simple.title"></s:text>" />
 										</form></td>
 									<td>
 										<form action="prepararEntradaCompleja" method="POST">
-											<s:hidden name="idServicioInformacion"></s:hidden>
-											<s:hidden name="idFuncionalidad"></s:hidden>
+											<s:hidden name="id_servicio_informacion"></s:hidden>
+											<s:hidden name="id_funcionalidad"></s:hidden>
 											<input type="submit"
 												value="<s:text name="complejo.title"></s:text>">
 										</form></td>
@@ -118,22 +117,22 @@
 									</tr>
 								</thead>
 								<!-- Validación de lista vacía. -->
-								<s:if test="datos.size > 0">
+								<s:if test="entradas.size > 0">
 									<tbody>
 										<!-- Iterador con todas las entradas cargadas. -->
-										<s:iterator value="datos" status="result_datos">
+										<s:iterator value="entradas" status="result_entradas">
 											<!-- Condición que asegura que sólo se impriman datos sin padres. -->
 											<s:if test="id_padre == 0">
 												<!-- Creación de fila con su nodo sacado del index del iterador. -->
-												<tr id="node-<s:property value="#result_datos.index"/>">
+												<tr id="node-<s:property value="#result_entradas.index"/>">
 													<td><s:property value="nombre" />
 													</td>
 													<td><s:property value="descripcion" />
 													</td>
 													<!-- Impresión del tipo dato. -->
 													<td>
-														<!-- Creación de una variable con el id_dato para identificar a los datos complejos. -->
-														<s:set name="id" value="id_dato" /> <!-- Creación de una variable con el id_tipo_de_dato. -->
+														<!-- Creación de una variable con el id_entrada_salida para identificar a los datos complejos. -->
+														<s:set name="id" value="id_entrada_salida" /> <!-- Creación de una variable con el id_tipo_de_dato. -->
 														<s:set name="id_d" value="id_tipo_dato" /> <s:iterator
 															value="tipoDatos">
 															<!-- Impresión del tipo de dato de acuerdo a su id. -->
@@ -147,16 +146,16 @@
 															<s:if test="%{id_tipo_dato == #id_d}">
 																<s:if test="%{tipo == 0}">
 																	<s:set name="padre" value="#id"></s:set>
-																	<s:append var="datos2">
-																		<s:param value="%{datos}" />
+																	<s:append var="hijos">
+																		<s:param value="%{entradas}" />
 																	</s:append>
 																	<table style="margin: 0; padding: 0;">
 																		<tr style="margin: 0; padding: 0;">
 																			<td style="margin: 0; padding: 0;">
 																				<form action="prepararEntradaSimple" method="POST">
-																					<s:hidden name="idServicioInformacion"></s:hidden>
-																					<s:hidden name="idFuncionalidad"></s:hidden>
-																					<s:hidden name="id_dato"></s:hidden>
+																					<s:hidden name="id_servicio_informacion"></s:hidden>
+																					<s:hidden name="id_funcionalidad"></s:hidden>
+																					<s:hidden name="id_entrada_salida"></s:hidden>
 																					<input type="submit"
 																						value="<s:text name="simple.add"></s:text>"
 																						style="font-size: 0.7em;" />
@@ -164,9 +163,9 @@
 																			<td style="margin: 0; padding: 0;">
 																				<form action="prepararModificarEntradaCompleja"
 																					method="POST">
-																					<s:hidden name="idServicioInformacion"></s:hidden>
-																					<s:hidden name="idFuncionalidad"></s:hidden>
-																					<s:hidden name="id_dato" value="%{#id}"></s:hidden>
+																					<s:hidden name="id_servicio_informacion"></s:hidden>
+																					<s:hidden name="id_funcionalidad"></s:hidden>
+																					<s:hidden name="id_entrada_salida" value="%{#id}"></s:hidden>
 																					<s:hidden name="modificar" value="%{true}"></s:hidden>
 																					<input type="submit"
 																						value="<s:text name="modificar"></s:text>"
@@ -174,9 +173,9 @@
 																				</form></td>
 																			<td style="margin: 0; padding: 0;">
 																				<form action="eliminarEntradaCompleja" method="POST">
-																					<s:hidden name="idServicioInformacion"></s:hidden>
-																					<s:hidden name="idFuncionalidad"></s:hidden>
-																					<s:hidden name="id_dato" value="%{#id}"></s:hidden>
+																					<s:hidden name="id_servicio_informacion"></s:hidden>
+																					<s:hidden name="id_funcionalidad"></s:hidden>
+																					<s:hidden name="id_entrada_salida" value="%{#id}"></s:hidden>
 																					<s:hidden name="modificar" value="%{true}"></s:hidden>
 																					<input type="submit"
 																						value="<s:text name="eliminar"></s:text>"
@@ -190,9 +189,9 @@
 																			<td style="margin: 0; padding: 0;">
 																				<form action="prepararModificarEntradaSimple"
 																					method="POST">
-																					<s:hidden name="idServicioInformacion"></s:hidden>
-																					<s:hidden name="idFuncionalidad"></s:hidden>
-																					<s:hidden name="id_dato"></s:hidden>
+																					<s:hidden name="id_servicio_informacion"></s:hidden>
+																					<s:hidden name="id_funcionalidad"></s:hidden>
+																					<s:hidden name="id_entrada_salida"></s:hidden>
 																					<s:hidden name="modificar" value="%{true}"></s:hidden>
 																					<input type="submit"
 																						value="<s:text name="modificar"></s:text>"
@@ -200,9 +199,9 @@
 																				</form></td>
 																			<td style="margin: 0; padding: 0;">
 																				<form action="eliminarEntradaSimple" method="POST">
-																					<s:hidden name="idServicioInformacion"></s:hidden>
-																					<s:hidden name="idFuncionalidad"></s:hidden>
-																					<s:hidden name="id_dato"></s:hidden>
+																					<s:hidden name="id_servicio_informacion"></s:hidden>
+																					<s:hidden name="id_funcionalidad"></s:hidden>
+																					<s:hidden name="id_entrada_salida"></s:hidden>
 																					<input type="submit"
 																						value="<s:text name="eliminar"></s:text>"
 																						style="font-size: 0.7em;" />
@@ -219,11 +218,11 @@
 											</s:else>
 											<!-- Impresión de datos hijos. -->
 											<s:if test="%{#padre > 0}">
-												<s:iterator value="datos2" status="status_datos2">
+												<s:iterator value="hijos" status="status_hijos">
 													<s:if test="%{id_padre == #padre}">
 														<tr
-															id="node-<s:property value="%{( (100) * (#result_datos.index) )+ #status_datos2.index}" />"
-															class="child-of-node-<s:property value="#result_datos.index" />">
+															id="node-<s:property value="%{( (100) * (#result_entradas.index) )+ #status_hijos.index}" />"
+															class="child-of-node-<s:property value="#result_entradas.index" />">
 															<td><s:property value="nombre" />
 															</td>
 															<td><s:property value="descripcion" />
@@ -240,9 +239,9 @@
 																		<td style="margin: 0; padding: 0;">
 																			<form action="prepararModificarEntradaSimple"
 																				method="POST">
-																				<s:hidden name="idServicioInformacion"></s:hidden>
-																				<s:hidden name="idFuncionalidad"></s:hidden>
-																				<s:hidden name="id_dato"></s:hidden>
+																				<s:hidden name="id_servicio_informacion"></s:hidden>
+																				<s:hidden name="id_funcionalidad"></s:hidden>
+																				<s:hidden name="id_entrada_salida"></s:hidden>
 																				<s:hidden name="modificar" value="%{true}"></s:hidden>
 																				<input type="submit"
 																					value="<s:text name="modificar"></s:text>"
@@ -250,9 +249,9 @@
 																			</form></td>
 																		<td style="margin: 0; padding: 0;">
 																			<form action="eliminarEntradaSimple" method="POST">
-																				<s:hidden name="idServicioInformacion"></s:hidden>
-																				<s:hidden name="idFuncionalidad"></s:hidden>
-																				<s:hidden name="id_dato"></s:hidden>
+																				<s:hidden name="id_servicio_informacion"></s:hidden>
+																				<s:hidden name="id_funcionalidad"></s:hidden>
+																				<s:hidden name="id_entrada_salida"></s:hidden>
 																				<input type="submit"
 																					value="<s:text name="eliminar"></s:text>"
 																					style="font-size: 0.7em;" />

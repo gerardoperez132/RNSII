@@ -5,42 +5,136 @@ import java.util.List;
 
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
-import ve.gob.cnti.srsi.dao.DAO;
-import ve.gob.cnti.srsi.dao.Constants.ArregloModelos;
+import ve.gob.cnti.srsi.dao.Constants.Modelos;
 import ve.gob.cnti.srsi.dao.Constants.TipoEntradaSalida;
-import ve.gob.cnti.srsi.modelo.Dato;
+import ve.gob.cnti.srsi.dao.DAO;
 import ve.gob.cnti.srsi.modelo.EntradaSalida;
 import ve.gob.cnti.srsi.modelo.Funcionalidad;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 
 @SuppressWarnings("serial")
-public class FuncionalidadControlador extends DAO implements Formulario ,
-TipoEntradaSalida, ArregloModelos {
-	
-	private List<EntradaSalida> entradas = new ArrayList<EntradaSalida>();
-	private List<EntradaSalida> salidas = new ArrayList<EntradaSalida>();
-	private List<Funcionalidad> funcionalidades = new ArrayList<Funcionalidad>();
-	private List<Dato> datosEntradas = new ArrayList<Dato>();
-	private List<Dato> datosSalidas = new ArrayList<Dato>();
+public class FuncionalidadControlador extends DAO implements Formulario,
+		TipoEntradaSalida, Modelos {
+
+	private List<EntradaSalida> entradas;
+	private List<EntradaSalida> salidas;
+	private List<Funcionalidad> funcionalidades;
 
 	private ServicioInformacion servicio = new ServicioInformacion();
 	private Funcionalidad funcionalidad = new Funcionalidad();
 	private EntradaSalida entrada = new EntradaSalida();
 	private EntradaSalida salida = new EntradaSalida();
 
-	private long idServicioInformacion;
-	private long idFuncionalidad;
-	
+	private long id_servicio_informacion;
+	private long id_funcionalidad;
+
 	private boolean modificar;
 	private boolean resumen;
 
+	public List<EntradaSalida> getEntradas() {
+		return entradas;
+	}
+
+	public List<EntradaSalida> getSalidas() {
+		return salidas;
+	}
+
+	public List<Funcionalidad> getFuncionalidades() {
+		return funcionalidades;
+	}
+
+	public ServicioInformacion getServicio() {
+		return servicio;
+	}
+
+	public Funcionalidad getFuncionalidad() {
+		return funcionalidad;
+	}
+
+	public EntradaSalida getEntrada() {
+		return entrada;
+	}
+
+	public EntradaSalida getSalida() {
+		return salida;
+	}
+
+	public long getId_servicio_informacion() {
+		return id_servicio_informacion;
+	}
+
+	public long getId_funcionalidad() {
+		return id_funcionalidad;
+	}
+
+	public boolean isModificar() {
+		return modificar;
+	}
+
+	public boolean isResumen() {
+		return resumen;
+	}
+
+	public void setEntradas(List<EntradaSalida> entradas) {
+		this.entradas = entradas;
+	}
+
+	public void setSalidas(List<EntradaSalida> salidas) {
+		this.salidas = salidas;
+	}
+
+	public void setFuncionalidades(List<Funcionalidad> funcionalidades) {
+		this.funcionalidades = funcionalidades;
+	}
+
+	public void setServicio(ServicioInformacion servicio) {
+		this.servicio = servicio;
+	}
+
+	public void setFuncionalidad(Funcionalidad funcionalidad) {
+		this.funcionalidad = funcionalidad;
+	}
+
+	public void setEntrada(EntradaSalida entrada) {
+		this.entrada = entrada;
+	}
+
+	public void setSalida(EntradaSalida salida) {
+		this.salida = salida;
+	}
+
+	public void setId_servicio_informacion(long id_servicio_informacion) {
+		this.id_servicio_informacion = id_servicio_informacion;
+	}
+
+	public void setId_funcionalidad(long id_funcionalidad) {
+		this.id_funcionalidad = id_funcionalidad;
+	}
+
+	public void setModificar(boolean modificar) {
+		this.modificar = modificar;
+	}
+
+	public void setResumen(boolean resumen) {
+		this.resumen = resumen;
+	}
+
+	@Override
+	@SkipValidation
+	public String prepararFormulario() {
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		if (id_funcionalidad > 0) {
+			funcionalidad = (Funcionalidad) read(funcionalidad,
+					id_funcionalidad);
+			funcionalidades = (List<Funcionalidad>) read(FSI, id_funcionalidad,
+					-1);
+		}
+		return SUCCESS;
+	}
+
 	public String registrarFuncionalidad() {
-		/*
-		 * idFuncionalidadVariable necesaria para persistir la E/S de la
-		 * funcionalidad en los otros controladores
-		 */
-		idFuncionalidad = getNextId(funcionalidad);
-		funcionalidad.setId_servicio_informacion(idServicioInformacion);
+		id_funcionalidad = getNextId(funcionalidad);
+		funcionalidad.setId_servicio_informacion(id_servicio_informacion);
 		create(funcionalidad);
 		return SUCCESS;
 	}
@@ -48,44 +142,38 @@ TipoEntradaSalida, ArregloModelos {
 	@Override
 	@SkipValidation
 	public String prepararModificaciones() {
-		funcionalidad = (Funcionalidad) read(funcionalidad, idFuncionalidad);
+		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		return SUCCESS;
 	}
-		
+
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararResumen() {
-		System.out.println("mod: "+modificar);
 		resumen = true;
-		servicio = (ServicioInformacion) read(servicio, idServicioInformacion);
-		funcionalidad = (Funcionalidad) read(funcionalidad, idFuncionalidad);
-		datosEntradas = (ArrayList<Dato>) read(NOMBRE_DATO, ENTRADA, idFuncionalidad);
-		datosSalidas = (ArrayList<Dato>) read(NOMBRE_DATO, SALIDA, idFuncionalidad);
-		if (datosSalidas.size()<1){
-			addFieldError("Salidas",
-					"Aún no ha cargado datos de salidas");
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
+		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,
+				ENTRADA);
+		salidas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad, SALIDA);
+		if (salidas.size() < 1) {
+			addFieldError("Salidas", "Aún no ha cargado datos de salidas");
 			return INPUT;
 		}
-		
+
 		return SUCCESS;
 	}
-	
-	
+
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararFuncionalidades() {
-	
-		servicio = (ServicioInformacion) read(servicio, idServicioInformacion);			
-		funcionalidades = ((List<Funcionalidad>) read(funcionalidad,
-				new ServicioInformacion(), idServicioInformacion));				
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		funcionalidades = (List<Funcionalidad>) read(FSI, id_funcionalidad, -1);
 		return SUCCESS;
 	}
 
 	public String modificarFuncionalidad() {
-
-		funcionalidad.setId_servicio_informacion(idServicioInformacion);		
-		update(funcionalidad, idFuncionalidad);			
-
+		funcionalidad.setId_servicio_informacion(id_servicio_informacion);
+		update(funcionalidad, id_funcionalidad);
 		return SUCCESS;
 	}
 
@@ -96,123 +184,4 @@ TipoEntradaSalida, ArregloModelos {
 			addFieldError("funcionalidad.descripcion",
 					"Debe introducir una descripción.");
 	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	@SkipValidation
-	public String prepararFormulario() {
-	
-		servicio = (ServicioInformacion) read(servicio, idServicioInformacion);
-		if(idFuncionalidad>0){
-			funcionalidad = (Funcionalidad) read(funcionalidad, idFuncionalidad);			
-			funcionalidades = ((List<Funcionalidad>) read(funcionalidad,
-					new ServicioInformacion(), idFuncionalidad));
-		}		
-		return SUCCESS;
-	}
-		
-	public EntradaSalida getEntrada() {
-		return entrada;
-	}
-
-	public void setEntrada(EntradaSalida entrada) {
-		this.entrada = entrada;
-	}
-
-	public EntradaSalida getSalida() {
-		return salida;
-	}
-
-	public void setSalida(EntradaSalida salida) {
-		this.salida = salida;
-	}
-
-	public Funcionalidad getFuncionalidad() {
-		return funcionalidad;
-	}
-
-	public void setFuncionalidad(Funcionalidad funcionalidad) {
-		this.funcionalidad = funcionalidad;
-	}
-
-	public List<EntradaSalida> getEntradas() {
-		return entradas;
-	}
-
-	public void setEntradas(List<EntradaSalida> entradas) {
-		this.entradas = entradas;
-	}
-
-	public List<EntradaSalida> getSalidas() {
-		return salidas;
-	}
-
-	public void setSalidas(List<EntradaSalida> salidas) {
-		this.salidas = salidas;
-	}
-
-	public ServicioInformacion getServicio() {
-		return servicio;
-	}
-
-	public void setServicio(ServicioInformacion servicio) {
-		this.servicio = servicio;
-	}
-
-	public long getIdServicioInformacion() {
-		return idServicioInformacion;
-	}
-
-	public void setIdServicioInformacion(long idServicioInformacion) {
-		this.idServicioInformacion = idServicioInformacion;
-	}
-
-	public long getIdFuncionalidad() {
-		return idFuncionalidad;
-	}
-
-	public void setIdFuncionalidad(long idFuncionalidad) {
-		this.idFuncionalidad = idFuncionalidad;
-	}
-
-	public List<Funcionalidad> getFuncionalidades() {
-		return funcionalidades;
-	}
-
-	public void setFuncionalidades(List<Funcionalidad> funcionalidades) {
-		this.funcionalidades = funcionalidades;
-	}
-
-	public boolean isModificar() {
-		return modificar;
-	}
-
-	public void setModificar(boolean modificar) {
-		this.modificar = modificar;
-	}
-
-	public List<Dato> getDatosEntradas() {
-		return datosEntradas;
-	}
-
-	public void setDatosEntradas(List<Dato> datosEntradas) {
-		this.datosEntradas = datosEntradas;
-	}
-
-	public List<Dato> getDatosSalidas() {
-		return datosSalidas;
-	}
-
-	public void setDatosSalidas(List<Dato> datosSalidas) {
-		this.datosSalidas = datosSalidas;
-	}
-
-	public boolean isResumen() {
-		return resumen;
-	}
-
-	public void setResumen(boolean resumen) {
-		this.resumen = resumen;
-	}
-
 }

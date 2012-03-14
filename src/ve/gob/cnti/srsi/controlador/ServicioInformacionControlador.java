@@ -13,7 +13,7 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
 import ve.gob.cnti.srsi.dao.Constants;
-import ve.gob.cnti.srsi.dao.Constants.ArregloModelos;
+import ve.gob.cnti.srsi.dao.Constants.Modelos;
 import ve.gob.cnti.srsi.dao.Constants.TipoDocumento;
 import ve.gob.cnti.srsi.dao.DAO;
 import ve.gob.cnti.srsi.modelo.Area;
@@ -36,7 +36,7 @@ import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
 
 @SuppressWarnings("serial")
 public class ServicioInformacionControlador extends DAO implements Constants,
-		ServletRequestAware, Formulario, TipoDocumento, ArregloModelos {
+		ServletRequestAware, Formulario, TipoDocumento, Modelos {
 
 	private List<Area> areas = new ArrayList<Area>();
 	private List<Estado> estados = new ArrayList<Estado>();
@@ -47,8 +47,11 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	private List<Intercambio> intercambiosHijos = new ArrayList<Intercambio>();
 
 	private ServicioInformacion servicio = new ServicioInformacion();
+	private Funcionalidad funcionalidad = new Funcionalidad();
+	
+	private List<Funcionalidad> funcionalidades = new ArrayList<Funcionalidad>();
 
-	private long idServicioInformacion;
+	private long id_servicio_informacion;
 	private String sector;
 	private String nombre;
 	private String descripcion;
@@ -69,10 +72,6 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	private String documentoFileName;
 
 	private HttpServletRequest servletRequest;
-
-	private Funcionalidad funcionalidad = new Funcionalidad();
-
-	private List<Funcionalidad> funcionalidades;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -100,7 +99,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String registrarPrueba() {
-		idServicioInformacion = getNextId(servicio);
+		id_servicio_informacion = getNextId(servicio);
 		servicio.setId_ente(1);
 		servicio.setId_usuario(1);
 		servicio.setId_sector(1);
@@ -113,19 +112,19 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		servicio.setResponsable(responsable);
 		create(servicio);
 
-		funcionalidad.setId_servicio_informacion(idServicioInformacion);
+		funcionalidad.setId_servicio_informacion(id_servicio_informacion);
 		funcionalidad.setNombre("Funcionalidad" + new Date());
 		funcionalidad.setDescripcion("Descripción");
 		create(funcionalidad);
 
-		funcionalidades = ((List<Funcionalidad>) read(funcionalidad,
-				new ServicioInformacion(), getNextId(servicio) - 1));
+		// funcionalidades = ((List<Funcionalidad>) read(funcionalidad,
+		// new ServicioInformacion(), getNextId(servicio) - 1));
 
 		// UnionAreaServicioInformacion unionarea = new
 		// UnionAreaServicioInformacion();
 		// for (int i = 0; i < area.size(); i++) {
 		// unionarea.setId_area(Long.parseLong(String.valueOf(area.get(i))));
-		// unionarea.setId_servicio_informacion(idServicioInformacion);
+		// unionarea.setId_servicio_informacion(id_servicio_informacion);
 		// // create(unionarea, id_si);
 		// }
 		//
@@ -135,20 +134,20 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		// for (int i = 0; i < arquitectura.size(); i++) {
 		// unionarquitectura.setId_arquitectura(Long.parseLong(String
 		// .valueOf(arquitectura.get(i))));
-		// unionarquitectura.setId_servicio_informacion(idServicioInformacion);
+		// unionarquitectura.setId_servicio_informacion(id_servicio_informacion);
 		// // create(unionarquitectura, id_si);
 		// }
 		//
 		// // Seteando el TELEFONO DE CONTACTO
 		// Telefono telf = new Telefono();
 		// telf.setTelefono(codArea + "-" + telefonoContacto);
-		// telf.setId_servicio_informacion(idServicioInformacion);
+		// telf.setId_servicio_informacion(id_servicio_informacion);
 		// create(telf);
 		//
 		// // Seteando el CORREO DE CONTACTO
 		// Correo correo = new Correo();
 		// correo.setCorreo(correoContacto);
-		// correo.setId_servicio_informacion(idServicioInformacion);
+		// correo.setId_servicio_informacion(id_servicio_informacion);
 		// create(correo);
 		return SUCCESS;
 	}
@@ -194,7 +193,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 
 	public String registrarServicioInformacion() {
 
-		idServicioInformacion = getNextId(servicio);
+		id_servicio_informacion = getNextId(servicio);
 		// consultar ente
 		servicio.setId_ente(1);
 		// consultar usuario
@@ -235,7 +234,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		UnionAreaServicioInformacion unionarea = new UnionAreaServicioInformacion();
 		for (int i = 0; i < area.size(); i++) {
 			unionarea.setId_area(Long.parseLong(String.valueOf(area.get(i))));
-			unionarea.setId_servicio_informacion(idServicioInformacion);
+			unionarea.setId_servicio_informacion(id_servicio_informacion);
 			// create(unionarea, id_si);
 		}
 
@@ -244,20 +243,21 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		for (int i = 0; i < arquitectura.size(); i++) {
 			unionarquitectura.setId_arquitectura(Long.parseLong(String
 					.valueOf(arquitectura.get(i))));
-			unionarquitectura.setId_servicio_informacion(idServicioInformacion);
+			unionarquitectura
+					.setId_servicio_informacion(id_servicio_informacion);
 			// create(unionarquitectura, id_si);
 		}
 
 		// Seteando el TELEFONO DE CONTACTO
 		Telefono telf = new Telefono();
 		telf.setTelefono(codigo + "-" + telefono);
-		telf.setId_servicio_informacion(idServicioInformacion);
+		telf.setId_servicio_informacion(id_servicio_informacion);
 		create(telf);
 
 		// Seteando el CORREO DE CONTACTO
 		Correo email = new Correo();
 		email.setCorreo(correo);
-		email.setId_servicio_informacion(idServicioInformacion);
+		email.setId_servicio_informacion(id_servicio_informacion);
 		create(email);
 
 		// Seteando el documento legal
@@ -272,7 +272,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			}
 			al.setNombre(documentoNombre);
 			al.setTipo(LEGAL);
-			al.setId_servicio_informacion(idServicioInformacion);
+			al.setId_servicio_informacion(id_servicio_informacion);
 			create(al);
 		}
 		return SUCCESS;
@@ -453,12 +453,12 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		this.correo = correo;
 	}
 
-	public long getIdServicioInformacion() {
-		return idServicioInformacion;
+	public long getid_servicio_informacion() {
+		return id_servicio_informacion;
 	}
 
-	public void setIdServicioInformacion(long idServicioInformacion) {
-		this.idServicioInformacion = idServicioInformacion;
+	public void setid_servicio_informacion(long id_servicio_informacion) {
+		this.id_servicio_informacion = id_servicio_informacion;
 	}
 
 	@Override

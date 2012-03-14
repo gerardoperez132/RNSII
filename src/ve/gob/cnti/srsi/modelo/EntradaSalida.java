@@ -28,7 +28,7 @@ import javax.persistence.Table;
  * Funcionalidad.
  * 
  * @see Funcionalidad
- * @see Dato
+ * @see TipoDato
  * @author Richard Ricciardelli
  * 
  */
@@ -40,8 +40,15 @@ public class EntradaSalida {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private long id_entrada_salida;
-	private long id_funcionalidad; // FK
-	private int tipo; // Tipo Entrada o Salida (0 ó 1)
+	private long id_funcionalidad;
+	private long id_tipo_dato;
+	private long id_padre;
+	private String nombre;
+	private String descripcion;
+	private String formato;
+	private String longitud;
+	/** Entrada o Salida. */
+	private int tipo;
 	private int status;
 	private Date fecha_creado;
 	private Date fecha_modificado;
@@ -53,52 +60,100 @@ public class EntradaSalida {
 		return id;
 	}
 
-	public void setId(long id) {
-		this.id = id;
-	}
-
 	public long getId_entrada_salida() {
 		return id_entrada_salida;
-	}
-
-	public void setId_entrada_salida(long id_entrada_salida) {
-		this.id_entrada_salida = id_entrada_salida;
 	}
 
 	public long getId_funcionalidad() {
 		return id_funcionalidad;
 	}
 
-	public void setId_funcionalidad(long id_funcionalidad) {
-		this.id_funcionalidad = id_funcionalidad;
+	public long getId_tipo_dato() {
+		return id_tipo_dato;
+	}
+
+	public long getId_padre() {
+		return id_padre;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public String getFormato() {
+		return formato;
+	}
+
+	public String getLongitud() {
+		return longitud;
 	}
 
 	public int getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(int tipo) {
-		this.tipo = tipo;
-	}
-
 	public int getStatus() {
 		return status;
-	}
-
-	public void setStatus(int status) {
-		this.status = status;
 	}
 
 	public Date getFecha_creado() {
 		return fecha_creado;
 	}
 
-	public void setFecha_creado(Date fecha_creado) {
-		this.fecha_creado = fecha_creado;
-	}
-
 	public Date getFecha_modificado() {
 		return fecha_modificado;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public void setId_entrada_salida(long id_entrada_salida) {
+		this.id_entrada_salida = id_entrada_salida;
+	}
+
+	public void setId_funcionalidad(long id_funcionalidad) {
+		this.id_funcionalidad = id_funcionalidad;
+	}
+
+	public void setId_tipo_dato(long id_tipo_dato) {
+		this.id_tipo_dato = id_tipo_dato;
+	}
+
+	public void setId_padre(long id_padre) {
+		this.id_padre = id_padre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public void setFormato(String formato) {
+		this.formato = formato;
+	}
+
+	public void setLongitud(String longitud) {
+		this.longitud = longitud;
+	}
+
+	public void setTipo(int tipo) {
+		this.tipo = tipo;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public void setFecha_creado(Date fecha_creado) {
+		this.fecha_creado = fecha_creado;
 	}
 
 	public void setFecha_modificado(Date fecha_modificado) {
@@ -109,7 +164,10 @@ public class EntradaSalida {
 	public String toString() {
 		return "EntradaSalida [id=" + id + ", id_entrada_salida="
 				+ id_entrada_salida + ", id_funcionalidad=" + id_funcionalidad
-				+ ", tipo=" + tipo + ", status=" + status + ", fecha_creado="
+				+ ", id_tipo_dato=" + id_tipo_dato + ", id_padre=" + id_padre
+				+ ", nombre=" + nombre + ", descripcion=" + descripcion
+				+ ", formato=" + formato + ", longitud=" + longitud + ", tipo="
+				+ tipo + ", status=" + status + ", fecha_creado="
 				+ fecha_creado + ", fecha_modificado=" + fecha_modificado + "]";
 	}
 }

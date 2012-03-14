@@ -12,101 +12,13 @@ import java.util.ArrayList;
 public interface CRUD {
 
 	/**
-	 * Permite guardar un registro en la base de datos.
+	 * Permite guardar un registro en la base de datos de cualquier modelo.
 	 * 
 	 * @param model
 	 *            Es la clase, modelo o tabla en el cual se realizará el
 	 *            registro.
 	 */
 	public void create(Object model);
-
-	/**
-	 * Permite guardar un registro de una tabla unión M:M en la base de datos.
-	 * 
-	 * @param modelOne
-	 *            Primer modelo escrito en la tabla unión de izquierda a
-	 *            derecha.
-	 * @param modelTwo
-	 *            Segundo modelo escrito en la tabla unión de izquierda a
-	 *            derecha.
-	 * @param id
-	 *            Id del segundo modelo a insertar
-	 */
-
-	// NO ESTÁ LISTO
-	public void create(Object modelOne, Object modelTwo, long id);
-
-	/**
-	 * Permite obtener el objeto resultante de la consulta anidada del número de
-	 * modelos dado.
-	 * 
-	 * @param models
-	 *            Arreglo de modelos donde el primero es el objeto resultante y
-	 *            el orden es importante.
-	 * @param type
-	 *            Tipo de objeto en una tabla recursiva.
-	 * @param id
-	 *            Identificador del último modelo en el arreglo para realizar la
-	 *            consulta en base a éste.
-	 * @return El objeto resultante.
-	 */
-	public Object read(Object[] models, int type, long id);
-
-	/**
-	 * Permite obtener el objeto resultante de la consulta anidada del número de
-	 * modelos dado.
-	 * 
-	 * @param models
-	 *            Arreglo de modelos donde el primero es el objeto resultante y
-	 *            el orden es importante.
-	 * @param id
-	 *            Identificador del último modelo en el arreglo para realizar la
-	 *            consulta en base a éste.
-	 * @return El objeto resultante.
-	 */
-	public Object read(Object[] models, long id);
-
-	/**
-	 * Permite obtener un valor de verdad sobre la consulta en un arreglo de
-	 * modelos anidados y los valores repetidos del nombre en cadena de texto
-	 * basado en el id suministrado.
-	 * 
-	 * @param models
-	 *            Arreglo de modelos donde el primero es el objeto resultante y
-	 *            el orden es importante.
-	 * @param name
-	 *            El nombre del campo a verificar si está repetido o no.
-	 * @param id
-	 *            Identificador del último modelo en el arreglo para realizar la
-	 *            consulta en base a éste.
-	 * @return {@code true} si está repetido, {@code false} si no lo está.
-	 */
-	public boolean read(Object[] models, String name, long id);
-
-	/**
-	 * Permite obtener el registro activo especificado por id del modelo dado.
-	 * 
-	 * @param model
-	 *            Es la clase, modelo o tabla en la cual se realizará la
-	 *            consulta.
-	 * @param id
-	 *            Es el id del registro a consultar.
-	 * @return El objeto modelo con sus atributos.
-	 */
-	public Object read(Object model, long id);
-
-	/**
-	 * Permite obtener una lista de todos los registros de una relación de 1:N
-	 * 
-	 * @param model
-	 *            Un modelo que está relacionado de 1:N
-	 * @param hasMany
-	 *            Un modelo que pertenece a una relación 1:N
-	 * @param id
-	 *            El id a identificar en la relación
-	 * @return Una lista de objetos del modelo.
-	 */
-	public ArrayList<?> read(Object model, Object belongsTo, long id); // PROBAR
 
 	/**
 	 * Permite obtener todos los registros activos del modelo dado.
@@ -117,6 +29,56 @@ public interface CRUD {
 	 * @return Una lista de objetos del modelo dado con sus atributos.
 	 */
 	public ArrayList<?> read(Object model);
+
+	/**
+	 * Permite obtener el registro activo especificado por el identificador del
+	 * modelo dado.
+	 * 
+	 * @param model
+	 *            Es la clase, modelo o tabla en la cual se realizará la
+	 *            consulta.
+	 * @param id
+	 *            Es el identificador único del registro a consultar.
+	 * @return El objeto modelo con sus atributos.
+	 */
+	public Object read(Object model, long id);
+
+	/**
+	 * Permite obtener una lista de registros del primer modelo dado dentro del
+	 * arreglo. Funciona para relaciones 1:M donde el segundo modelo sirve de
+	 * llave foránea dentro de la primer tabla.
+	 * 
+	 * @param models
+	 *            Son las clases, modelos o tablas en las cuales se realizará la
+	 *            consulta. Siendo la primera de éstas el tipo de objeto
+	 *            resultante.
+	 * @param id
+	 *            Identificador de llave foránea dentro del primer modelo del
+	 *            arreglo.
+	 * @param type
+	 *            Tipo de objeto que no será tomado en cuenta si tiene un valor
+	 *            negativo.
+	 * @return El listado de objetos resultantes.
+	 */
+	public ArrayList<?> read(Object models[], long id, int type);
+
+	/**
+	 * Permite obtener un valor de verdad sobre el nombre repetido en la base de
+	 * datos de acuerdo a un criterio de relación 1:N donde el segundo modelo
+	 * sirve de llave foránea.
+	 * 
+	 * @param models
+	 *            Son las clases, modelos o tablas en las cuales se realizará la
+	 *            consulta. Siendo la primera de éstas el tipo de objeto
+	 *            resultante.
+	 * @param id
+	 *            Identificador de llave foránea dentro del primer modelo del
+	 *            arreglo.
+	 * @param name
+	 *            Nombre del objeto.
+	 * @return {@code true} si se encuentran coincidencias.
+	 */
+	public boolean read(Object[] models, long id, String name);
 
 	/**
 	 * Permite modificar el registro especificado por id del modelo dado.
@@ -207,11 +169,4 @@ public interface CRUD {
 	 * @return Lista de datos compuestos.
 	 */
 	public ArrayList<?> getComplex();
-
-	/**
-	 * Permite obtener la lista de los datos cargados en base de datos.
-	 * 
-	 * @return Lista de datos.
-	 */
-	public ArrayList<?> getALL();
 }

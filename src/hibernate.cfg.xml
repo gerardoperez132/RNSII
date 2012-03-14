@@ -18,7 +18,6 @@
 		<mapping class="ve.gob.cnti.srsi.modelo.Arquitectura" />
 		<mapping class="ve.gob.cnti.srsi.modelo.AspectoLegal" />
 		<mapping class="ve.gob.cnti.srsi.modelo.Correo" />
-		<mapping class="ve.gob.cnti.srsi.modelo.Dato" />
 		<mapping class="ve.gob.cnti.srsi.modelo.Ente" />
 		<mapping class="ve.gob.cnti.srsi.modelo.EntradaSalida" />
 		<mapping class="ve.gob.cnti.srsi.modelo.Estado" />

@@ -15,7 +15,7 @@ public interface Formulario {
 	public String prepararFormulario();
 
 	/**
-	 * Prepara el formulario con la data del modelo dado para su modificación.
+	 * Prepara el formulario del modelo dado para su modificación.
 	 * 
 	 * @return "success"
 	 */

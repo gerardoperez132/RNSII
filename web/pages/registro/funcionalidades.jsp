@@ -48,7 +48,7 @@
 					<h5 class="formulario">
 						<s:text name="id.title">
 							<s:param>
-								<s:property value="idServicioInformacion" />
+								<s:property value="id_servicio_informacion" />
 							</s:param>
 						</s:text>
 					</h5>
@@ -57,7 +57,7 @@
 						<s:param>funcionalidades</s:param>
 					</s:fielderror>
 					<form action="prepararFuncionalidad" method="POST">
-						<s:hidden name="idServicioInformacion"></s:hidden>
+						<s:hidden name="id_servicio_informacion"></s:hidden>
 						<input type="submit" value="<s:text name="funcionalidad.add"/>" />
 					</form>
 					<table class="result">
@@ -91,8 +91,9 @@
 										<td><s:property value="fecha_creado" /></td>
 										<td><form action="prepararModificacionesFuncionalidad"
 												method="POST">
-												<s:hidden name="idFuncionalidad" value="%{id_funcionalidad}"></s:hidden>
-												<s:hidden name="idServicioInformacion"></s:hidden>
+												<s:hidden name="id_funcionalidad"
+													value="%{id_funcionalidad}"></s:hidden>
+												<s:hidden name="id_servicio_informacion"></s:hidden>
 												<input type="submit" value="<s:text name="modificar"/>"
 													style="background: none; border: 0;" />
 												<s:text name="eliminar" />

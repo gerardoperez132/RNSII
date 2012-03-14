@@ -1,9 +1,8 @@
 package ve.gob.cnti.srsi.dao;
 
-import ve.gob.cnti.srsi.modelo.Dato;
 import ve.gob.cnti.srsi.modelo.EntradaSalida;
 import ve.gob.cnti.srsi.modelo.Funcionalidad;
-import ve.gob.cnti.srsi.modelo.TipoDato;
+import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 
 /**
  * Interfaz de constantes del Sistema de Registro de Servicio de Información.
@@ -78,25 +77,17 @@ public interface Constants {
 	}
 
 	/**
-	 * Interfaz con los arreglos de modelos preestablecidos para la consultas
-	 * anidadas utilizando el método de lectura.
+	 * Interfaz con los arreglos de objetos para consultas tipo 1:N.
 	 * 
 	 * @author Richard Ricciardelli
 	 * 
 	 */
-	public interface ArregloModelos {
-		/** Cuando se requiere conocer el nombre del dato. */
-		public static final Object[] NOMBRE_DATO = { new Dato(),
-				new EntradaSalida(), new Funcionalidad() };
-		/** Cuando se requiere conocer el nombre del tipo de dato. */
-		public static final Object[] NOMBRE_TIPO_DATO = { new TipoDato(),
-				new Dato(), new EntradaSalida() };
-		/**
-		 * Cuando se requiere conocer si el nommbre del dato no está duplicado
-		 * en la base de datos.
-		 */
-		public static final Object[] NOMBRE_DATO_NO_DUPLICADO = { new Dato(),
-				new EntradaSalida(), new Funcionalidad() };
-
+	public interface Modelos {
+		/** Relación 1 Funcionalidad tiene N Entradas / Salidas. */
+		public static final Object[] ESF = { new EntradaSalida(),
+				new Funcionalidad() };
+		/** Relación 1 Servicio de Información tiene N Funcionalidades. */
+		public static final Object[] FSI = { new Funcionalidad(),
+				new ServicioInformacion() };
 	}
 }
