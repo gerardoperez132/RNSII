@@ -39,8 +39,9 @@
 				<s:a href="%{registrarServicioInformacion}">Registrar Servicio de Información</s:a>
 				<br>
 
-				<s:url id="registrarPrueba" action="registrarPrueba"></s:url>
-				<s:a href="%{registrarPrueba}">Registrar Servicio de Información de Prueba</s:a>
+				<s:url id="registrarPrueba" action="registrarPrueba"><s:param name="refresh" value="%{false}"></s:param></s:url>				
+				<s:a href="%{registrarPrueba}">Registrar Servicio de Información de Prueba</s:a>			
+				
 
 			</div>
 

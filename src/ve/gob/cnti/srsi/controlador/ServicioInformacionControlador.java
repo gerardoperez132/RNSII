@@ -72,7 +72,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 
 	private Funcionalidad funcionalidad = new Funcionalidad();
 
-	private List<Funcionalidad> funcionalidades;
+	private List<Funcionalidad> funcionalidades;	
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -99,7 +99,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 
 	@SuppressWarnings("unchecked")
 	@SkipValidation
-	public String registrarPrueba() {
+	public String registrarPrueba() {		
 		idServicioInformacion = getNextId(servicio);
 		servicio.setId_ente(1);
 		servicio.setId_usuario(1);
@@ -119,37 +119,8 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		create(funcionalidad);
 
 		funcionalidades = ((List<Funcionalidad>) read(funcionalidad,
-				new ServicioInformacion(), getNextId(servicio) - 1));
-
-		// UnionAreaServicioInformacion unionarea = new
-		// UnionAreaServicioInformacion();
-		// for (int i = 0; i < area.size(); i++) {
-		// unionarea.setId_area(Long.parseLong(String.valueOf(area.get(i))));
-		// unionarea.setId_servicio_informacion(idServicioInformacion);
-		// // create(unionarea, id_si);
-		// }
-		//
-		// // Seteando el ARQUITECTURA
-		// UnionArquitecturaServicioInformacion unionarquitectura = new
-		// UnionArquitecturaServicioInformacion();
-		// for (int i = 0; i < arquitectura.size(); i++) {
-		// unionarquitectura.setId_arquitectura(Long.parseLong(String
-		// .valueOf(arquitectura.get(i))));
-		// unionarquitectura.setId_servicio_informacion(idServicioInformacion);
-		// // create(unionarquitectura, id_si);
-		// }
-		//
-		// // Seteando el TELEFONO DE CONTACTO
-		// Telefono telf = new Telefono();
-		// telf.setTelefono(codArea + "-" + telefonoContacto);
-		// telf.setId_servicio_informacion(idServicioInformacion);
-		// create(telf);
-		//
-		// // Seteando el CORREO DE CONTACTO
-		// Correo correo = new Correo();
-		// correo.setCorreo(correoContacto);
-		// correo.setId_servicio_informacion(idServicioInformacion);
-		// create(correo);
+				new ServicioInformacion(), getNextId(servicio) - 1));	
+				
 		return SUCCESS;
 	}
 
@@ -192,7 +163,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		prepararFormulario();
 	}
 
-	public String registrarServicioInformacion() {
+	public String registrarServicioInformacion() {		
 
 		idServicioInformacion = getNextId(servicio);
 		// consultar ente
@@ -275,6 +246,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			al.setId_servicio_informacion(idServicioInformacion);
 			create(al);
 		}
+				
 		return SUCCESS;
 	}
 
@@ -530,7 +502,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	public void setCodigos(String[] codigos) {
 		this.codigos = codigos;
 	}
-
+	
 	@Override
 	public String prepararModificaciones() {
 		// TODO Auto-generated method stub

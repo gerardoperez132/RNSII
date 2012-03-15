@@ -15,9 +15,14 @@
 
 		<action name="registrarServicioInformacion" method="registrarServicioInformacion"
 			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
-			<result name="input">registro/registro_servicio_informacion.jsp
-			</result>
-			<result name="success">registro/funcionalidades.jsp</result>
+			<interceptor-ref name="token" />
+	        <interceptor-ref name="basicStack"/>
+	        <result name="success">registro/funcionalidades.jsp</result>
+			<result name="input">registro/registro_servicio_informacion.jsp			
+			</result>			
+			<result name="invalid.token" type="chain">				
+					<param name="actionName">prepararFuncionalidades</param>				
+			</result>  
 		</action>
 
 		<action name="registrarPrueba" method="registrarPrueba"
