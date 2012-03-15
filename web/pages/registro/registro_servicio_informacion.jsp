@@ -67,42 +67,45 @@
 									<s:text name="sector.title"></s:text>
 								</h5>
 								<s:fielderror>
-									<s:param>sector</s:param>
+									<s:param>servicio.sector</s:param>
 								</s:fielderror>
-								<s:select name="sector" list="sectores" listKey="id_sector"
-									listValue="nombre" headerKey="-1"
+								<s:select name="servicio.sector" list="sectores"
+									listKey="id_sector" listValue="nombre" headerKey="-1"
 									headerValue="%{getText('sector.select')}"></s:select>
 								<h5 class="formulario">
 									<s:text name="nombre.title"></s:text>
 								</h5>
 								<s:fielderror>
-									<s:param>nombre</s:param>
+									<s:param>servicio.nombre</s:param>
 								</s:fielderror>
-								<s:textfield name="nombre" />
+								<s:textfield name="servicio.nombre" />
 								<h5 class="formulario">
 									<s:text name="descripcion.title"></s:text>
 								</h5>
 								<s:fielderror>
-									<s:param>descripcion</s:param>
+									<s:param>servicio.descripcion</s:param>
 								</s:fielderror>
-								<s:textarea name="descripcion" cols="40" rows="10" />
+								<s:textarea name="servicio.descripcion" cols="40" rows="10" />
 								<h5 class="formulario">
 									<s:text name="area.title"></s:text>
 								</h5>
 								<s:fielderror>
-									<s:param>area</s:param>
+									<s:param>servicio.area</s:param>
 								</s:fielderror>
 								<s:checkboxlist list="areas" listKey="id_area"
-									listValue="nombre" name="area" value="area" />
+									listValue="nombre" name="servicio.area" value="servicio.area" />
 								<h5 class="formulario">
 									<s:text name="estado.title"></s:text>
 								</h5>
 								<s:fielderror>
-									<s:param>estado</s:param>
+									<s:param>servicio.estado</s:param>
 								</s:fielderror>
-								<s:select name="estado" list="estados" listKey="id_estado"
-									listValue="nombre" headerKey="-1" headerValue="Seleccione"></s:select>
+								<s:select name="servicio.estado" list="estados"
+									listKey="id_estado" listValue="nombre" headerKey="-1"
+									headerValue="Seleccione"></s:select>
 							</div>
+							<!-- PROBAR A PARTIR DE AQUÍ... -->
+
 							<div id="tab2" class="tab_content">
 								<p class="formulario">Aspectos Legales (¿Hará falta esto?)</p>
 								<small><s:text name="tab2.description"></s:text> </small>
