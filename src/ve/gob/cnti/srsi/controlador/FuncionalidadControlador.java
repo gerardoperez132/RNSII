@@ -43,13 +43,6 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 		return funcionalidades;
 	}
 
-	@SkipValidation
-	public String eliminarFuncionalidad() {
-		delete(funcionalidad, id_funcionalidad);
-		prepararFuncionalidades();
-		return SUCCESS;
-	}
-
 	public ServicioInformacion getServicio() {
 		return servicio;
 	}
@@ -135,8 +128,6 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 					id_funcionalidad);
 			funcionalidades = (List<Funcionalidad>) read(FSI, id_funcionalidad,
 					-1);
-			System.out
-					.println("FUN LEN => " + funcionalidades.toArray().length);
 		}
 		return SUCCESS;
 	}
@@ -168,7 +159,6 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 			addFieldError("Salidas", "Aún no ha cargado datos de salidas");
 			return INPUT;
 		}
-
 		return SUCCESS;
 	}
 
@@ -183,6 +173,13 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 	public String modificarFuncionalidad() {
 		funcionalidad.setId_servicio_informacion(id_servicio_informacion);
 		update(funcionalidad, id_funcionalidad);
+		return SUCCESS;
+	}
+
+	@SkipValidation
+	public String eliminarFuncionalidad() {
+		delete(funcionalidad, id_funcionalidad);
+		prepararFuncionalidades();
 		return SUCCESS;
 	}
 
