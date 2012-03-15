@@ -48,7 +48,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 
 	private ServicioInformacion servicio = new ServicioInformacion();
 	private Funcionalidad funcionalidad = new Funcionalidad();
-	
+
 	private List<Funcionalidad> funcionalidades = new ArrayList<Funcionalidad>();
 
 	private long id_servicio_informacion;
@@ -117,6 +117,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		funcionalidad.setDescripcion("Descripción");
 		create(funcionalidad);
 
+		funcionalidades = (List<Funcionalidad>) read(FSI, id_servicio_informacion, -1);
 		// funcionalidades = ((List<Funcionalidad>) read(funcionalidad,
 		// new ServicioInformacion(), getNextId(servicio) - 1));
 

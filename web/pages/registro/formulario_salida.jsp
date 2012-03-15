@@ -33,9 +33,9 @@
 					<ul class="tabs">
 						<li><a href="#tab1"><s:text name="tab1.title"></s:text> </a>
 						</li>
-						<li><a><s:text name="tab2.title"></s:text>
-						</a></li>
-						<li class="active"><a href="#tab3"><s:text name="tab3.title"></s:text> </a>
+						<li><a><s:text name="tab2.title"></s:text> </a></li>
+						<li class="active"><a href="#tab3"><s:text
+									name="tab3.title"></s:text> </a>
 						</li>
 						<li><a href="#tab4"><s:text name="tab4.title"></s:text> </a>
 						</li>
@@ -61,10 +61,10 @@
 							<div id="tab2" class="tab_content">
 								<h5 class="formulario">
 									<s:if test="modificar!=true">
-									<s:text name="registro.title"></s:text>
+										<s:text name="registro.title"></s:text>
 									</s:if>
 									<s:else>
-									<s:text name="modificar.title"></s:text>
+										<s:text name="modificar.title"></s:text>
 									</s:else>
 								</h5>
 								<h6>
@@ -80,18 +80,18 @@
 									<s:text name="nombre.title"></s:text>
 								</h5>
 								<s:fielderror>
-									<s:param>dato.nombre</s:param>
+									<s:param>salida.nombre</s:param>
 								</s:fielderror>
-								<s:textfield name="dato.nombre" />
+								<s:textfield name="salida.nombre" />
 								<br>
 								<!-- Descripción de la entrada. -->
 								<h5 class="formulario">
 									<s:text name="descripcion.title"></s:text>
 								</h5>
 								<s:fielderror>
-									<s:param>dato.descripcion</s:param>
+									<s:param>salida.descripcion</s:param>
 								</s:fielderror>
-								<s:textarea name="dato.descripcion" cols="30" rows="5" />
+								<s:textarea name="salida.descripcion" cols="30" rows="5" />
 								<br>
 								<h5 class="formulario">
 									<s:text name="dato.title"></s:text>
@@ -99,15 +99,15 @@
 								<s:fielderror>
 									<s:param>tipodato</s:param>
 								</s:fielderror>
-								<s:select name="dato.id_tipo_dato" list="tipoDatos"
+								<s:select name="salida.id_tipo_dato" list="tipoDatos"
 									listKey="id_tipo_dato" listValue="nombre" headerKey="-1"
 									headerValue="%{getText('dato.select')}"></s:select>
 								<br> <br>
-								<s:hidden name="idServicioInformacion"></s:hidden>
-								<s:hidden name="idFuncionalidad"></s:hidden>
-								<s:hidden name="id_dato"></s:hidden>
-								<s:hidden name= "modificar"></s:hidden>
-								<s:hidden name= "complejo"></s:hidden>
+								<s:hidden name="id_servicio_informacion"></s:hidden>
+								<s:hidden name="id_funcionalidad"></s:hidden>
+								<s:hidden name="id_entrada_salida"></s:hidden>
+								<s:hidden name="modificar"></s:hidden>
+								<s:hidden name="complejo"></s:hidden>
 								<input type="submit"
 									value="<s:property value="#submit"></s:property>" />
 							</div>

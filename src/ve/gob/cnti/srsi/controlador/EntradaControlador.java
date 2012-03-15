@@ -19,13 +19,11 @@ public class EntradaControlador extends DAO implements Formulario,
 		TipoEntradaSalida, Modelos {
 
 	private List<EntradaSalida> entradas;
-	private List<EntradaSalida> salidas;
 	private List<TipoDato> tipoDatos;
 
 	private ServicioInformacion servicio = new ServicioInformacion();
 	private Funcionalidad funcionalidad = new Funcionalidad();
 	private EntradaSalida entrada = new EntradaSalida();
-	private EntradaSalida salida = new EntradaSalida();
 
 	private long id_entrada_salida;
 	private long id_servicio_informacion;
@@ -35,10 +33,6 @@ public class EntradaControlador extends DAO implements Formulario,
 
 	public List<EntradaSalida> getEntradas() {
 		return entradas;
-	}
-
-	public List<EntradaSalida> getSalidas() {
-		return salidas;
 	}
 
 	public List<TipoDato> getTipoDatos() {
@@ -55,10 +49,6 @@ public class EntradaControlador extends DAO implements Formulario,
 
 	public EntradaSalida getEntrada() {
 		return entrada;
-	}
-
-	public EntradaSalida getSalida() {
-		return salida;
 	}
 
 	public long getId_entrada_salida() {
@@ -85,10 +75,6 @@ public class EntradaControlador extends DAO implements Formulario,
 		this.entradas = entradas;
 	}
 
-	public void setSalidas(List<EntradaSalida> salidas) {
-		this.salidas = salidas;
-	}
-
 	public void setTipoDatos(List<TipoDato> tipoDatos) {
 		this.tipoDatos = tipoDatos;
 	}
@@ -103,10 +89,6 @@ public class EntradaControlador extends DAO implements Formulario,
 
 	public void setEntrada(EntradaSalida entrada) {
 		this.entrada = entrada;
-	}
-
-	public void setSalida(EntradaSalida salida) {
-		this.salida = salida;
 	}
 
 	public void setId_entrada_salida(long id_entrada_salida) {
