@@ -117,7 +117,8 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		funcionalidad.setDescripcion("Descripción");
 		create(funcionalidad);
 
-		funcionalidades = (List<Funcionalidad>) read(FSI, id_servicio_informacion, -1);
+		funcionalidades = (List<Funcionalidad>) read(FSI,
+				id_servicio_informacion, -1);
 		// funcionalidades = ((List<Funcionalidad>) read(funcionalidad,
 		// new ServicioInformacion(), getNextId(servicio) - 1));
 

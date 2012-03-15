@@ -9,7 +9,9 @@
 <!-- CSS (required) -->
 <link rel="stylesheet" type="text/css" href="res/css/styles.css">
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
-<link rel="stylesheet" type="text/css" href="res/css/table.css">
+<link rel="stylesheet" type="text/css"
+	href="res/css/jquery.treeTable.css">
+<link rel="stylesheet" type="text/css" href="res/css/table_tree.css">
 <title><s:text name="funcionalidades" /></title>
 	</head>
 	<body>
@@ -23,7 +25,9 @@
 					<small>Paso 1 Registro de Servicio de Información</small><br>
 					<br> <big>Paso 2 Registro de Funcionalidad(es)</big> <br>
 					<br> <small>Paso 3 Registro de Entradas/Salidas</small><br>
-					<br> <small>Paso 4 Verificar y guardar</small>
+					<br> <small>Paso 4 Verificar y guardar</small> <br> <small>refresh:
+						<s:property value="refresh" />
+					</small>
 				</div>
 				<!-- Este es el div de contenidos -->
 				<div id="content">
@@ -60,52 +64,54 @@
 						<s:hidden name="id_servicio_informacion"></s:hidden>
 						<input type="submit" value="<s:text name="funcionalidad.add"/>" />
 					</form>
-					<table class="result">
+					<!-- Tabla en árbol. -->
+					<table id="tree" class="treeTable">
 						<thead>
 							<tr>
-								<th scope="col"><s:text name="id" />
-								</th>
-								<th scope="col"><s:text name="nombre" />
-								</th>
-								<th scope="col"><s:text name="fecha" />
-								</th>
-								<th scope="col"><s:text name="acciones" />
-								</th>
+								<th><s:text name="id"></s:text></th>
+								<th><s:text name="nombre"></s:text></th>
+								<th><s:text name="fecha"></s:text></th>
+								<th><s:text name="acciones"></s:text></th>
 							</tr>
 						</thead>
-						<tfoot>
-							<tr class="hv">
-								<th scope="row">Total</th>
-								<td colspan="3"><s:property value="datos.size" /> <s:text
-										name="funcionalidades.title" />
-								</td>
-							</tr>
-						</tfoot>
 						<tbody>
 							<s:if test="funcionalidades.size() > 0">
 								<s:iterator value="funcionalidades" status="result_Status">
-									<tr
-										class="<s:if test="#result_Status.odd == true ">odd</s:if><s:else>hv</s:else>">
+									<tr id="node-<s:property value="#result_datos.index"/>">
 										<th><s:property value="id_funcionalidad" /></th>
 										<td><s:property value="nombre" /></td>
 										<td><s:property value="fecha_creado" /></td>
-										<td><form action="prepararModificacionesFuncionalidad"
-												method="POST">
-												<s:hidden name="id_funcionalidad"
-													value="%{id_funcionalidad}"></s:hidden>
-												<s:hidden name="id_servicio_informacion"></s:hidden>
-												<input type="submit" value="<s:text name="modificar"/>"
-													style="background: none; border: 0;" />
-												<s:text name="eliminar" />
-											</form></td>
+										<td>
+											<table style="margin: 0; padding: 0;">
+												<tr style="margin: 0; padding: 0;">
+													<td style="margin: 0; padding: 0;">
+														<form action="prepararFuncionalidad" method="POST">
+															<s:hidden name="id_funcionalidad"
+																value="%{id_funcionalidad}"></s:hidden>
+															<s:hidden name="idServicioInformacion"></s:hidden>
+															<s:hidden name="modificar" value="%{true}"></s:hidden>
+															<input type="submit" value="<s:text name="modificar"/>"
+																style="font-size: 0.9em;" />
+														</form>
+													</td>
+													<td style="margin: 0; padding: 0;">
+														<form action="eliminarFuncionalidad" method="POST">
+															<s:hidden name="id_funcionalidad"
+																value="%{id_funcionalidad}"></s:hidden>
+															<s:hidden name="idServicioInformacion"></s:hidden>
+															<input type="submit" value="<s:text name="eliminar" />"
+																style="font-size: 0.9em;" />
+														</form>
+													</td>
+												</tr>
+											</table>
+										</td>
 									</tr>
 								</s:iterator>
 							</s:if>
 							<s:else>
-								<tr class="hv">
-									<th class="row" colspan="4"><s:text
-											name="funcionalidades.error" />
-									</th>
+								<tr>
+									<th colspan="4"><s:text name="funcionalidades.error" /></th>
 								</tr>
 							</s:else>
 						</tbody>
