@@ -26,8 +26,7 @@
 					<br> <big>Paso 2 Registro de Funcionalidad(es)</big> <br>
 					<br> <small>Paso 3 Registro de Entradas/Salidas</small><br>
 					<br> <small>Paso 4 Verificar y guardar</small> <br> <small>refresh:
-						<s:property value="refresh" />
-					</small>
+						<s:property value="refresh" /> </small>
 				</div>
 				<!-- Este es el div de contenidos -->
 				<div id="content">
@@ -88,7 +87,7 @@
 														<form action="prepararFuncionalidad" method="POST">
 															<s:hidden name="id_funcionalidad"
 																value="%{id_funcionalidad}"></s:hidden>
-															<s:hidden name="idServicioInformacion"></s:hidden>
+															<s:hidden name="id_servicio_informacion"></s:hidden>
 															<s:hidden name="modificar" value="%{true}"></s:hidden>
 															<input type="submit" value="<s:text name="modificar"/>"
 																style="font-size: 0.9em;" />
@@ -98,7 +97,7 @@
 														<form action="eliminarFuncionalidad" method="POST">
 															<s:hidden name="id_funcionalidad"
 																value="%{id_funcionalidad}"></s:hidden>
-															<s:hidden name="idServicioInformacion"></s:hidden>
+															<s:hidden name="id_servicio_informacion"></s:hidden>
 															<input type="submit" value="<s:text name="eliminar" />"
 																style="font-size: 0.9em;" />
 														</form>
