@@ -4,12 +4,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <s:if test="%{#session.logueado != true}">
- 	<META HTTP-EQUIV="Refresh" CONTENT="0;URL=../index.action">
+ 	<META HTTP-EQUIV="Refresh" CONTENT="0;URL=../index.jsp">
 </s:if>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <!-- CSS (required) -->
-<link rel="stylesheet" type="text/css" href="res/css/styles.css">
+<link rel="stylesheet" type="text/css" href="pages/res/css/styles.css">
 <title>SRSI - Inicio</title>
 <!-- Donde dice inicio debería ir una var que identifique el lugar -->
 </head>
@@ -19,15 +19,16 @@
 	<div id="sombra">
 		<!-- Este es el div contenedor del maquetado de la página -->
 		<div id="container">
+
 			<!-- Este es el div de la cabecera -->
 			<div id="header">
-				<img src="res/img/header.png" width="880" height="70"
-					alt="Cintillo Gobierno Bolivariano" /> <img src="res/img/mio.png"
-					width="874" height="116" alt="Marco de Interoperabilidad"
-					style="border: 3px solid #57cedc;" />
+				<img src="pages/res/img/header.png" width="880" height="70"
+					alt="Cintillo Gobierno Bolivariano" /> <img
+					src="pages/res/img/mio.png" width="874" height="116"
+					alt="Marco de Interoperabilidad" style="border: 3px solid #57cedc;" />
 			</div>
 
-			<!-- Este es el div de los menus -->
+			<!-- Este es el div de los menúes -->
 			<div id="menu"></div>
 
 			<!-- Esta es la barra lateral -->
@@ -35,11 +36,9 @@
 
 			<!-- Este es el div de contenidos -->
 			<div id="content">
-			
-			llegó: <s:property value="%{#session.usuario.nombre}"/>
-			
-			<a href="<s:url action="salir"/>" >Salir</a>			
-			
+				<br>
+				
+				
 			</div>
 
 			<!-- Este es el pie de página -->

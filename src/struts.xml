@@ -188,16 +188,27 @@
 		***********************************************************
 		 -->
 		 
-		 <action name="mostrarLogin" method="mostrarLogin"
+		 <action name="autenticarUsuario" method="mostrarLogin"
 			class="ve.gob.cnti.srsi.controlador.LoginControlador">
 			<result name="success">user/login.jsp</result>
 		 </action>
 		 
-		 <action name="autenticarUsuario" method="autenticarUsuario"
+		 <action name="index" method="autenticarUsuario"
 			class="ve.gob.cnti.srsi.controlador.LoginControlador">
             <result name="input">user/login.jsp</result>
-            <result name="success">user/main.jsp</result>            
+            <result name="success">user/main.jsp</result>   
+            <result name="accesoInvalido" type="redirectAction">index</result>         
         </action>
+        
+        <action name="salir" method="desloguearUsuario"
+			class="ve.gob.cnti.srsi.controlador.LoginControlador">				
+            <result name="success" type="redirectAction">inicio</result>            
+        </action>
+        
+        <action name="inicio" method="inicio"
+			class="ve.gob.cnti.srsi.controlador.LoginControlador">
+			<result name="success">index.jsp</result>
+		 </action>
 
 
 	</package>

@@ -34,20 +34,46 @@
 			<!-- Este es el div de contenidos -->
 			<div id="content">
 				<br>
-				<div Style="margin-left: 35%; margin-top: 5%; margin-bottom:15%; border : 3px solid blue; width: 285px;">				
-            	<s:form action="autenticarUsuario" cssStyle="padding-left:5px;">
+				<div Style="margin-left: 10%; margin-top: 5%; margin-bottom:15%; width: 400px;">				
+            	<form action="index" method="post">
+            		<table>
             		<tr>
-            			<td>
+            			<td colspan="3">
             			<h5>Control de acceso</h5>
             			</td>	
             		</tr>
-            		<s:fielderror>
-						<s:param>userName</s:param>
-					</s:fielderror>
-					<s:textfield name="userName" label="Usuario"/>
-					<s:password name="password" label="Clave" />						
-					<s:submit value="Entrar"/>	
-				</s:form>
+            		<tr>
+            			<td colspan="3">
+            			<s:fielderror>
+            			<s:param>error</s:param>
+            			</s:fielderror>
+            			</td>            				
+            		</tr>						
+					<tr>
+						<td>Correo:</td>
+            			<td><input type="text" name="correo"/></td>
+            			<td>
+	            			<s:fielderror>
+	            				<s:param>correo</s:param>
+	            			</s:fielderror>
+            			</td>
+					</tr>            		
+            		<tr>
+						<td>Clave:</td>
+            			<td><input type="password" name="password"/></td>
+            			<td>
+	            			<s:fielderror>
+	            				<s:param>password</s:param>
+	            			</s:fielderror>
+            			</td>	
+					</tr>	
+					<tr>
+            			<td colspan="2">
+            			<input type="submit" value="Entrar"/>
+            			</td>	
+            		</tr>					
+					</table>	
+				</form>
 				</div>
 						
 				
