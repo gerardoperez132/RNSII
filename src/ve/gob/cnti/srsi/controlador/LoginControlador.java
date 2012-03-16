@@ -4,55 +4,36 @@ import ve.gob.cnti.srsi.dao.DAO;
 import ve.gob.cnti.srsi.modelo.Correo;
 import ve.gob.cnti.srsi.modelo.Usuario;
 
-import com.opensymphony.xwork2.ActionSupport;
-
 @SuppressWarnings("serial")
 public class LoginControlador extends DAO {
-	
-	private String userName;
+		
 	private String correo;
     private String password;
     private Usuario usuario = new Usuario();
     private Correo user_correo = new Correo();
-	
-	
+		
 	public String autenticarUsuario(){
 		
-		if(userName.contains("admin") && password.contains("admin")){
-			System.out.println("valido");
-		return SUCCESS;
-		}else{
-			System.out.println("invalido");
-			addFieldError("userName",
-					"Usuario o clave de acceso erroneos");
+		user_correo = (Correo) read(correo, correo); 
+		if(user_correo == null || user_correo.getId_usuario()==0){
+			addFieldError("correo","Correo no existe");
 			return INPUT;
+		}else{
+			usuario = (Usuario) read(usuario, user_correo.getId_usuario());
+			if(usuario==null){
+				addFieldError("correo","Ha ocurrido un problema recuperando sus datos!!!");
+				return INPUT;
+			}else if(!usuario.getClave().contains(password)){
+				addFieldError("password","La clave no coincide con el correo");
+				return INPUT;
+			}else{
+				return SUCCESS;
+			}
 		}		
-		
 	}
 	
-	public String autenticarUsuario(){
-		
-		//user_correo = 
-		usuario = (Usuario) read(usuario, user_correo.getId_usuario());
-		
-		if(correo.contains("admin") && password.contains("admin")){
-			System.out.println("valido");
+	public String mostrarLogin(){
 		return SUCCESS;
-		}else{
-			System.out.println("invalido");
-			addFieldError("userName",
-					"Usuario o clave de acceso erroneos");
-			return INPUT;
-		}		
-		
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
 	}
 
 	public String getPassword() {
@@ -63,18 +44,6 @@ public class LoginControlador extends DAO {
 		this.password = password;
 	}
 	
-	public Usuario getUsuario() {
-		return usuario;
-	}
-	
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
-	public String mostrarLogin(){
-		return SUCCESS;
-	}
-
 	public String getCorreo() {
 		return correo;
 	}

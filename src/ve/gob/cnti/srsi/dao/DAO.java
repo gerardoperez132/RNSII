@@ -162,7 +162,7 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 					"FROM " + model.getClass().getSimpleName() + " WHERE "
 							+ getField(model).replace("id_", "") + " = '"
 							+ field + "' AND status = " + ACTIVO)
-					.uniqueResult();
+					.uniqueResult();			
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;

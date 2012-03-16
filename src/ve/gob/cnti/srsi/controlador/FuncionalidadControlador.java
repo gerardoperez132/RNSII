@@ -120,16 +120,10 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 		this.resumen = resumen;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	@SkipValidation
-	public String prepararFormulario() {
-		Correo correo = new Correo();
-		correo = (Correo) read(correo, "rrr@go.col.ve");
-		if (correo == null)
-			System.out.println("OBJETO NULO");
-		else
-			System.out.println("Correo => " + correo.toString());
-
+	public String prepararFormulario() {		
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		if (id_funcionalidad > 0) {
 			funcionalidad = (Funcionalidad) read(funcionalidad,
