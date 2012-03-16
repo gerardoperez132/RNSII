@@ -159,7 +159,7 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 		try {
 			startConnection();
 			result = (Correo) session.createQuery(
-					"FROM " + Correo.class.getClass().getSimpleName()
+					"FROM " + new Correo().getClass().getSimpleName()
 							+ " WHERE correo = '" + email + "' AND status = "
 							+ ACTIVO + " AND id_usuario != 0").uniqueResult();
 		} catch (HibernateException he) {
