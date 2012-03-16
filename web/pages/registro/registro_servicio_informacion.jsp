@@ -67,10 +67,10 @@
 									<s:text name="sector.title"></s:text>
 								</h5>
 								<s:fielderror>
-									<s:param>servicio.sector</s:param>
+									<s:param>servicio.id_sector</s:param>
 								</s:fielderror>
-								<s:select name="servicio.sector" list="sectores"
-									listKey="id_sector" listValue="nombre" headerKey="-1"
+								<s:select name="sectores" list="sectores" listKey="id_sector"
+									listValue="nombre" headerKey="-1" value="id_sector"
 									headerValue="%{getText('sector.select')}"></s:select>
 								<h5 class="formulario">
 									<s:text name="nombre.title"></s:text>
@@ -90,22 +90,24 @@
 									<s:text name="area.title"></s:text>
 								</h5>
 								<s:fielderror>
-									<s:param>servicio.area</s:param>
+									<s:param>areas</s:param>
 								</s:fielderror>
-								<s:checkboxlist list="areas" listKey="id_area"
-									listValue="nombre" name="servicio.area" value="servicio.area" />
+								<s:checkboxlist list="areas" listValue="nombre" name="areas"
+									listKey="id_area" />
 								<h5 class="formulario">
 									<s:text name="estado.title"></s:text>
 								</h5>
 								<s:fielderror>
-									<s:param>servicio.estado</s:param>
+									<s:param>servicio.id_estado</s:param>
 								</s:fielderror>
-								<s:select name="servicio.estado" list="estados"
-									listKey="id_estado" listValue="nombre" headerKey="-1"
-									headerValue="Seleccione"></s:select>
+								<s:select name="estados" list="estados" listKey="id_estado"
+									listValue="nombre" headerKey="-1"
+									headerValue="%{getText('estado.select')}"></s:select>
 							</div>
 							<!-- PROBAR A PARTIR DE AQUÍ... -->
 
+
+							<!-- *************************** ARREGLAR ARCHIVOS. ******************** -->
 							<div id="tab2" class="tab_content">
 								<p class="formulario">Aspectos Legales (¿Hará falta esto?)</p>
 								<small><s:text name="tab2.description"></s:text> </small>
@@ -126,6 +128,8 @@
 								<s:file name="documento" value="documentoFileName"></s:file>
 								<br> <br> <br> <br>
 							</div>
+							<!-- *************************** ARREGLAR ARCHIVOS. ******************** -->
+
 							<div id="tab3" class="tab_content">
 								<p class="formulario">Descripción técnica del servicio ¿Hará
 									falta esto?</p>
@@ -135,27 +139,27 @@
 									<s:text name="seguridad.title"></s:text>
 								</h5>
 								<s:fielderror>
-									<s:param>seguridad</s:param>
+									<s:param>servicio.id_seguridad</s:param>
 								</s:fielderror>
-								<s:select list="l_seguridad" listKey="id_seguridad"
+								<s:select list="niveles" listKey="id_seguridad"
 									listValue="nombre" headerKey="-1"
-									headerValue="%{getText('seguridad.select')}" name="seguridad"></s:select>
+									headerValue="%{getText('seguridad.select')}" name="niveles"></s:select>
 								<h5 class="formulario">
 									<s:text name="arquitectura.title"></s:text>
 								</h5>
 								<s:fielderror>
-									<s:param>arquitectura</s:param>
+									<s:param>arquitecturas</s:param>
 								</s:fielderror>
-								<s:checkboxlist list="arquitecturas" listKey="id_arquitectura"
-									listValue="nombre" name="arquitectura" />
+								<s:checkboxlist list="arquitecturas" listValue="nombre"
+									name="arquitecturas" value="id_arquitectura" />
 								<br>
 								<h5 class="formulario">
 									<s:text name="version.title"></s:text>
 								</h5>
 								<s:fielderror>
-									<s:param>version</s:param>
+									<s:param>servicio.version</s:param>
 								</s:fielderror>
-								<s:textfield name="version"
+								<s:textfield name="servicio.version"
 									onkeyup="var pattern = /[^0-9\.]/g;
 								this.value = this.value.replace(pattern, '');"
 									maxlength="7" />
@@ -164,19 +168,19 @@
 									<s:text name="intercambio.title"></s:text>
 								</h5>
 								<s:fielderror>
-									<s:param>intercambio</s:param>
+									<s:param>servicio.id_intercambio</s:param>
 								</s:fielderror>
-								<select name="intercambio">
+								<select name="servicio.id_intercambio">
 									<optgroup label="">
 										<option value="-1">
 											<s:text name="intercambio.select"></s:text>
 										</option>
 									</optgroup>
-									<s:iterator value="intercambiosPadres">
+									<s:iterator value="parents">
 										<s:set name="padre" value="id_intercambio"></s:set>
 										<s:set name="nombrePadre" value="nombre"></s:set>
 										<optgroup label="<s:property value="nombre"/>">
-											<s:iterator value="intercambiosHijos">
+											<s:iterator value="children">
 												<s:if test="%{#padre == id_padre}">
 													<option value="<s:property value="id_intercambio"/>"
 														<s:if test="intercambio == id_intercambio"> selected="selected"</s:if>>
@@ -196,31 +200,12 @@
 									<s:text name="responsable.title"></s:text>
 								</h5>
 								<s:fielderror>
-									<s:param>responsable</s:param>
+									<s:param>servicio.responsable</s:param>
 								</s:fielderror>
-								<s:textfield name="responsable" labelposition="top" />
+								<s:textfield name="servicio.responsable" labelposition="top" />
 								<h5 class="formulario">
 									<s:text name="telefono.title"></s:text>
 								</h5>
-								<s:fielderror>
-									<s:param>telefono</s:param>
-								</s:fielderror>
-								<table>
-									<tr>
-										<td><s:select name="codigo" list="codigos" /></td>
-										<td><s:textfield name="telefono" labelposition="top"
-												maxlength="7"
-												onkeyup="var no_digito = /\D/g; this.value = this.value.replace(no_digito , '');" />
-										</td>
-									</tr>
-								</table>
-								<h5 class="formulario">
-									<s:text name="correo.title"></s:text>
-								</h5>
-								<s:fielderror>
-									<s:param>correo</s:param>
-								</s:fielderror>
-								<s:textfield name="correo"></s:textfield>
 								<input type="submit" value='<s:text name="guardar"></s:text>' />
 							</div>
 						</div>

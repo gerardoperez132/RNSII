@@ -12,8 +12,10 @@ import ve.gob.cnti.srsi.modelo.EntradaSalida;
 import ve.gob.cnti.srsi.modelo.Funcionalidad;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 
+import com.opensymphony.xwork2.Preparable;
+
 @SuppressWarnings("serial")
-public class FuncionalidadControlador extends DAO implements Formulario,
+public class FuncionalidadControlador extends DAO implements Preparable,
 		TipoEntradaSalida, Modelos {
 
 	private List<EntradaSalida> entradas;
@@ -119,19 +121,6 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 		this.resumen = resumen;
 	}
 
-	@Override
-	@SkipValidation
-	public String prepararFormulario() {
-		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
-		if (id_funcionalidad > 0) {
-			funcionalidad = (Funcionalidad) read(funcionalidad,
-					id_funcionalidad);
-			funcionalidades = (List<Funcionalidad>) read(FSI, id_funcionalidad,
-					-1);
-		}
-		return SUCCESS;
-	}
-
 	public String registrarFuncionalidad() {
 		id_funcionalidad = getNextId(funcionalidad);
 		funcionalidad.setId_servicio_informacion(id_servicio_informacion);
@@ -139,7 +128,6 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 		return SUCCESS;
 	}
 
-	@Override
 	@SkipValidation
 	public String prepararModificaciones() {
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
@@ -189,5 +177,16 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 		if (funcionalidad.getDescripcion().isEmpty())
 			addFieldError("funcionalidad.descripcion",
 					"Debe introducir una descripción.");
+	}
+
+	@Override
+	public void prepare() throws Exception {
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		if (id_funcionalidad > 0) {
+			funcionalidad = (Funcionalidad) read(funcionalidad,
+					id_funcionalidad);
+			funcionalidades = (List<Funcionalidad>) read(FSI, id_funcionalidad,
+					-1);
+		}
 	}
 }

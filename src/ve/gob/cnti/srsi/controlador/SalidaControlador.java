@@ -14,8 +14,10 @@ import ve.gob.cnti.srsi.modelo.Funcionalidad;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.TipoDato;
 
+import com.opensymphony.xwork2.Preparable;
+
 @SuppressWarnings("serial")
-public class SalidaControlador extends DAO implements Formulario,
+public class SalidaControlador extends DAO implements Preparable,
 		TipoEntradaSalida, Modelos {
 
 	private List<EntradaSalida> salidas;
@@ -109,18 +111,6 @@ public class SalidaControlador extends DAO implements Formulario,
 
 	public void setModificar(boolean modificar) {
 		this.modificar = modificar;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	@SkipValidation
-	public String prepararFormulario() {
-		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
-		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
-		salidas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad, SALIDA);
-		tipoDatos = (List<TipoDato>) read(new TipoDato());
-		complejo = false;
-		return SUCCESS;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -241,8 +231,11 @@ public class SalidaControlador extends DAO implements Formulario,
 	}
 
 	@Override
-	public String prepararModificaciones() {
-		// TODO Auto-generated method stub
-		return null;
+	public void prepare() throws Exception {
+		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		salidas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad, SALIDA);
+		tipoDatos = (List<TipoDato>) read(new TipoDato());
+		complejo = false;
 	}
 }
