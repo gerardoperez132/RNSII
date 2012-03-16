@@ -168,7 +168,7 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 	@SkipValidation
 	public String prepararFuncionalidades() {
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
-		funcionalidades = (List<Funcionalidad>) read(FSI, id_funcionalidad, -1);
+		funcionalidades = (List<Funcionalidad>) read(FSI, id_servicio_informacion, -1);
 		return SUCCESS;
 	}
 
