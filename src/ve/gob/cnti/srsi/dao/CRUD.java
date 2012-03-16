@@ -80,6 +80,8 @@ public interface CRUD {
 	 */
 	public boolean read(Object[] models, long id, String name);
 
+	public Object read(Object model, String field);
+
 	/**
 	 * Permite modificar el registro especificado por id del modelo dado.
 	 * 

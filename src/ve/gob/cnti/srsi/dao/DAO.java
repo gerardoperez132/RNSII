@@ -14,6 +14,7 @@ import org.hibernate.Transaction;
 import ve.gob.cnti.srsi.dao.Constants.ClaseDato;
 import ve.gob.cnti.srsi.dao.Constants.Status;
 import ve.gob.cnti.srsi.dao.Constants.TipoEntradaSalida;
+import ve.gob.cnti.srsi.modelo.Correo;
 import ve.gob.cnti.srsi.modelo.TipoDato;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -143,6 +144,25 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 							+ " AND nombre = '" + name + "' AND status = "
 							+ ACTIVO).uniqueResult() != null)
 				result = true;
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+		return result;
+	}
+
+	@Override
+	public Object read(Object model, String field) {
+		Object result;
+		try {
+			startConnection();
+			result = session.createQuery(
+					"FROM " + model.getClass().getSimpleName() + " WHERE "
+							+ getField(model).replace("id_", "") + " = '"
+							+ field + "' AND status = " + ACTIVO)
+					.uniqueResult();
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;

@@ -8,6 +8,7 @@ import org.apache.struts2.interceptor.validation.SkipValidation;
 import ve.gob.cnti.srsi.dao.Constants.Modelos;
 import ve.gob.cnti.srsi.dao.Constants.TipoEntradaSalida;
 import ve.gob.cnti.srsi.dao.DAO;
+import ve.gob.cnti.srsi.modelo.Correo;
 import ve.gob.cnti.srsi.modelo.EntradaSalida;
 import ve.gob.cnti.srsi.modelo.Funcionalidad;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
@@ -122,6 +123,13 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 	@Override
 	@SkipValidation
 	public String prepararFormulario() {
+		Correo correo = new Correo();
+		correo = (Correo) read(correo, "rrr@go.col.ve");
+		if (correo == null)
+			System.out.println("OBJETO NULO");
+		else
+			System.out.println("Correo => " + correo.toString());
+
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		if (id_funcionalidad > 0) {
 			funcionalidad = (Funcionalidad) read(funcionalidad,
