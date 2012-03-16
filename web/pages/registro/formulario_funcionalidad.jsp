@@ -60,11 +60,11 @@
 								</form></li>
 							<li>
 								<form action="prepararResumen" method="POST">
-									<s:hidden name="idServicioInformacion"></s:hidden>
-									<s:hidden name="idFuncionalidad"></s:hidden>
-									<input type="submit" value="<s:text name="tab4.title" />" style="background: none;
-									border: none;font-size: 0.8em;padding: 0 20px; height: 31px;">
-								</form>							
+									<s:hidden name="id_servicio_informacion"></s:hidden>
+									<s:hidden name="id_funcionalidad"></s:hidden>
+									<input type="submit" value="<s:text name="tab4.title" />"
+										style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
+								</form>
 							</li>
 						</ul>
 						<div class="tab_container">
@@ -154,7 +154,7 @@
 												<s:text name="salidas.title"></s:text>
 											</h5>
 										</td>
-										<td><s:property value="datosSalidas.size" />
+										<td><s:property value="salidas.size" />
 										</td>
 									</tr>
 									<tr>
@@ -163,11 +163,11 @@
 												<s:text name="entradas.title"></s:text>
 											</h5>
 										</td>
-										<td><s:property value="datosEntradas.size" />
+										<td><s:property value="entradas.size" />
 										</td>
 									</tr>
 								</table>
-								<s:if test="datosSalidas.size>0">
+								<s:if test="salidas.size>0">
 									<form action="prepararFuncionalidades" method="POST">
 										<s:hidden name="id_servicio_informacion"></s:hidden>
 										<s:hidden name="id_funcionalidad"></s:hidden>

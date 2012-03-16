@@ -8,6 +8,7 @@ import org.apache.struts2.interceptor.validation.SkipValidation;
 import ve.gob.cnti.srsi.dao.Constants.Modelos;
 import ve.gob.cnti.srsi.dao.Constants.TipoEntradaSalida;
 import ve.gob.cnti.srsi.dao.DAO;
+import ve.gob.cnti.srsi.modelo.Correo;
 import ve.gob.cnti.srsi.modelo.EntradaSalida;
 import ve.gob.cnti.srsi.modelo.Funcionalidad;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
@@ -41,13 +42,6 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 
 	public List<Funcionalidad> getFuncionalidades() {
 		return funcionalidades;
-	}
-
-	@SkipValidation
-	public String eliminarFuncionalidad() {
-		delete(funcionalidad, id_funcionalidad);
-		prepararFuncionalidades();
-		return SUCCESS;
 	}
 
 	public ServicioInformacion getServicio() {
@@ -129,14 +123,19 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 	@Override
 	@SkipValidation
 	public String prepararFormulario() {
+		Correo correo = new Correo();
+		correo = (Correo) read(correo, "rrr@go.col.ve");
+		if (correo == null)
+			System.out.println("OBJETO NULO");
+		else
+			System.out.println("Correo => " + correo.toString());
+
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		if (id_funcionalidad > 0) {
 			funcionalidad = (Funcionalidad) read(funcionalidad,
 					id_funcionalidad);
 			funcionalidades = (List<Funcionalidad>) read(FSI, id_funcionalidad,
 					-1);
-			System.out
-					.println("FUN LEN => " + funcionalidades.toArray().length);
 		}
 		return SUCCESS;
 	}
@@ -168,7 +167,6 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 			addFieldError("Salidas", "Aún no ha cargado datos de salidas");
 			return INPUT;
 		}
-
 		return SUCCESS;
 	}
 
@@ -183,6 +181,13 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 	public String modificarFuncionalidad() {
 		funcionalidad.setId_servicio_informacion(id_servicio_informacion);
 		update(funcionalidad, id_funcionalidad);
+		return SUCCESS;
+	}
+
+	@SkipValidation
+	public String eliminarFuncionalidad() {
+		delete(funcionalidad, id_funcionalidad);
+		prepararFuncionalidades();
 		return SUCCESS;
 	}
 
