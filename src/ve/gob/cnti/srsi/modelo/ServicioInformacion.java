@@ -55,7 +55,7 @@ public class ServicioInformacion {
 	private long id_sector;
 	private long id_estado;
 	private long id_seguridad;
-	private long id_tipo_intercambio;
+	private long id_intercambio;
 	private int status;
 	private Date fecha_creado;
 	private Date fecha_modificado;
@@ -109,11 +109,7 @@ public class ServicioInformacion {
 
 	public long getId_seguridad() {
 		return id_seguridad;
-	}
-
-	public long getId_tipo_intercambio() {
-		return id_tipo_intercambio;
-	}
+	}	
 
 	public int getStatus() {
 		return status;
@@ -173,11 +169,7 @@ public class ServicioInformacion {
 
 	public void setId_seguridad(long id_seguridad) {
 		this.id_seguridad = id_seguridad;
-	}
-
-	public void setId_tipo_intercambio(long id_tipo_intercambio) {
-		this.id_tipo_intercambio = id_tipo_intercambio;
-	}
+	}	
 
 	public void setStatus(int status) {
 		this.status = status;
@@ -191,6 +183,14 @@ public class ServicioInformacion {
 		this.fecha_modificado = fecha_modificado;
 	}
 
+	public long getId_intercambio() {
+		return id_intercambio;
+	}
+
+	public void setId_intercambio(long id_intercambio) {
+		this.id_intercambio = id_intercambio;
+	}
+	
 	@Override
 	public String toString() {
 		return "ServicioInformacion [id=" + id + ", id_servicio_informacion="
@@ -199,9 +199,9 @@ public class ServicioInformacion {
 				+ ", descripcion=" + descripcion + ", version=" + version
 				+ ", responsable=" + responsable + ", publicado=" + publicado
 				+ ", id_sector=" + id_sector + ", id_estado=" + id_estado
-				+ ", id_seguridad=" + id_seguridad + ", id_tipo_intercambio="
-				+ id_tipo_intercambio + ", status=" + status
-				+ ", fecha_creado=" + fecha_creado + ", fecha_modificado="
-				+ fecha_modificado + "]";
+				+ ", id_seguridad=" + id_seguridad + ", id_intercambio="
+				+ id_intercambio + ", status=" + status + ", fecha_creado="
+				+ fecha_creado + ", fecha_modificado=" + fecha_modificado + "]";
 	}
+
 }

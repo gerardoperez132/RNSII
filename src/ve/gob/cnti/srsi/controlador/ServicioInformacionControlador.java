@@ -108,7 +108,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		servicio.setId_estado(1);
 		servicio.setId_seguridad(1);
 		servicio.setVersion("1.0");
-		servicio.setId_tipo_intercambio(1);
+		servicio.setId_intercambio(1);
 		servicio.setResponsable(responsable);
 		create(servicio);
 
@@ -222,7 +222,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		servicio.setVersion(version);
 
 		// Seteando el TIPO DE INTERCAMBIO
-		servicio.setId_tipo_intercambio(Long.parseLong(intercambio));
+		servicio.setId_intercambio(Long.parseLong(intercambio));
 
 		try {
 			create(servicio);

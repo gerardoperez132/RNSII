@@ -131,8 +131,8 @@
 			<result name="success">registro/entradas.jsp</result>
 		</action>
 
-		<!--***************************************************************** Actions 
-			para Salidas ******************************************************************** -->
+		<!--***************** Actions	para Salidas *********************
+		*********************************************** -->
 		<action name="prepararSalidas" method="prepararFormulario"
 			class="ve.gob.cnti.srsi.controlador.SalidaControlador">
 			<result name="success">registro/salidas.jsp</result>

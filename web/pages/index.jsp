@@ -35,13 +35,7 @@
 			<div id="content">
 				<br>
 				
-				
-				
-				<s:url id="entrar"
-					action="autenticarUsuario"></s:url>
-				<s:a href="%{entrar}">Entrar</s:a>
-				<br>
-				
+								
 				<s:url id="registrarServicioInformacion"
 					action="prepararServicioInformacion"></s:url>
 				<s:a href="%{registrarServicioInformacion}">Registrar Servicio de Información</s:a>

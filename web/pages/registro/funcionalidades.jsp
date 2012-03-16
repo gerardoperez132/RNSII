@@ -25,8 +25,7 @@
 					<small>Paso 1 Registro de Servicio de Información</small><br>
 					<br> <big>Paso 2 Registro de Funcionalidad(es)</big> <br>
 					<br> <small>Paso 3 Registro de Entradas/Salidas</small><br>
-					<br> <small>Paso 4 Verificar y guardar</small> <br> <small>refresh:
-						<s:property value="refresh" /> </small>
+					<br> <small>Paso 4 Verificar y guardar</small> <br> 
 				</div>
 				<!-- Este es el div de contenidos -->
 				<div id="content">
