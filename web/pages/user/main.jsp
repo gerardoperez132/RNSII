@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <!-- CSS (required) -->
-<link rel="stylesheet" type="text/css" href="pages/res/css/styles.css">
+<link rel="stylesheet" type="text/css" href="res/css/styles.css">
 <title>SRSI - Inicio</title>
 <!-- Donde dice inicio debería ir una var que identifique el lugar -->
 </head>
@@ -16,16 +16,15 @@
 	<div id="sombra">
 		<!-- Este es el div contenedor del maquetado de la página -->
 		<div id="container">
-
 			<!-- Este es el div de la cabecera -->
 			<div id="header">
-				<img src="pages/res/img/header.png" width="880" height="70"
-					alt="Cintillo Gobierno Bolivariano" /> <img
-					src="pages/res/img/mio.png" width="874" height="116"
-					alt="Marco de Interoperabilidad" style="border: 3px solid #57cedc;" />
+				<img src="res/img/header.png" width="880" height="70"
+					alt="Cintillo Gobierno Bolivariano" /> <img src="res/img/mio.png"
+					width="874" height="116" alt="Marco de Interoperabilidad"
+					style="border: 3px solid #57cedc;" />
 			</div>
 
-			<!-- Este es el div de los menúes -->
+			<!-- Este es el div de los menus -->
 			<div id="menu"></div>
 
 			<!-- Esta es la barra lateral -->
@@ -33,24 +32,7 @@
 
 			<!-- Este es el div de contenidos -->
 			<div id="content">
-				<br>
-				
-				
-				
-				<s:url id="entrar"
-					action="mostrarLogin"></s:url>
-				<s:a href="%{entrar}">Entrar</s:a>
-				<br>
-				
-				<s:url id="registrarServicioInformacion"
-					action="prepararServicioInformacion"></s:url>
-				<s:a href="%{registrarServicioInformacion}">Registrar Servicio de Información</s:a>
-				<br>
-
-				<s:url id="registrarPrueba" action="registrarPrueba"><s:param name="refresh" value="%{false}"></s:param></s:url>				
-				<s:a href="%{registrarPrueba}">Registrar Servicio de Información de Prueba</s:a>			
-				
-
+			llegue
 			</div>
 
 			<!-- Este es el pie de página -->
