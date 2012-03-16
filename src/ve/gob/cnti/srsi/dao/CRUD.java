@@ -2,6 +2,8 @@ package ve.gob.cnti.srsi.dao;
 
 import java.util.ArrayList;
 
+import ve.gob.cnti.srsi.modelo.Correo;
+
 /**
  * Definición de métodos para las operaciones en la base de datos.
  * 
@@ -80,7 +82,14 @@ public interface CRUD {
 	 */
 	public boolean read(Object[] models, long id, String name);
 
-	public Object read(Object model, String field);
+	/**
+	 * Permite obtener el objeto correo de un usuario con el string dado.
+	 * 
+	 * @param email
+	 *            El string del correo que se quiere buscar.
+	 * @return {@code correo} asociado a un usuario.
+	 */
+	public Correo getUserEmail(String email);
 
 	/**
 	 * Permite modificar el registro especificado por id del modelo dado.
