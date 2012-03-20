@@ -34,6 +34,8 @@
 			<!-- Este es el div de los menus -->
 			<div id="menu"></div>
 
+
+
 			<!-- Esta es la barra lateral -->
 			<div id="sidebar">
 				<div id="menuv">
@@ -49,8 +51,10 @@
 					  	</a>					
 						<ul class="nivel2">
 							<li>
-								<a href=""><s:text name="registro" /></a>								
-							</li>							
+								<a href="<s:url action="prepararServicioInformacion"/>">
+									<s:text name="registro" />
+								</a>								
+							</li>														
 						</ul>					
 					</li>
 					<li class="nivel1">

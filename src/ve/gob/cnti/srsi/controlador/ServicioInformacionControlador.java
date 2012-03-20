@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -29,7 +30,9 @@ import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.Telefono;
 import ve.gob.cnti.srsi.modelo.UnionAreaServicioInformacion;
 import ve.gob.cnti.srsi.modelo.UnionArquitecturaServicioInformacion;
+import ve.gob.cnti.srsi.modelo.Usuario;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.validator.annotations.EmailValidator;
 import com.opensymphony.xwork2.validator.annotations.FieldExpressionValidator;
 import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
@@ -72,6 +75,9 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	private String documentoFileName;
 
 	private HttpServletRequest servletRequest;
+	
+	@SuppressWarnings("rawtypes")
+	private Map session;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -91,6 +97,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		intercambiosPadres = (List<Intercambio>) getParents(intercambio);
 		intercambiosHijos = (List<Intercambio>) getChildren(intercambio);
 		setCodigos(COD);
+		session = ActionContext.getContext().getSession(); 
 		// Por defecto consultará la base de datos.
 		// responsable = "Usuario usuario";
 		return SUCCESS;
@@ -195,11 +202,15 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 
 	public String registrarServicioInformacion() {
 
+		session = ActionContext.getContext().getSession();
+		Usuario usuario = new Usuario();
+		usuario = (Usuario)session.get("usuario");
+		
 		id_servicio_informacion = getNextId(servicio);
 		// consultar ente
-		servicio.setId_ente(1);
+		servicio.setId_ente(usuario.getId_ente());
 		// consultar usuario
-		servicio.setId_usuario(1);
+		servicio.setId_usuario(usuario.getId_usuario());
 
 		// Seteando el SECTOR
 		servicio.setId_sector(Long.parseLong(sector));
