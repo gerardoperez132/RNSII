@@ -3,6 +3,8 @@ package ve.gob.cnti.srsi.controlador;
 
 import com.opensymphony.xwork2.ActionContext;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.validation.SkipValidation;
@@ -12,6 +14,7 @@ import org.apache.struts2.interceptor.validation.SkipValidation;
 import ve.gob.cnti.srsi.dao.DAO;
 import ve.gob.cnti.srsi.modelo.Correo;
 import ve.gob.cnti.srsi.modelo.Ente;
+import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.Usuario;
 
 @SuppressWarnings("serial")
@@ -22,6 +25,7 @@ public class LoginControlador extends DAO {
     private Usuario usuario = new Usuario();
     private Correo user_correo = new Correo();
     private Ente ente = new Ente(); 
+    private List<ServicioInformacion> servicios =new ArrayList<ServicioInformacion>(); 
 	@SuppressWarnings("rawtypes")
 	private Map session;
 		
@@ -57,14 +61,20 @@ public class LoginControlador extends DAO {
 		return SUCCESS;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String home(){
 		session = ActionContext.getContext().getSession();  
 		if(session.isEmpty()){
 			return INPUT;
-		}else{
-			usuario = (Usuario) session.get("usuario");			
+		}else{		
+			System.out.println("user: "+ usuario.toString());
+			usuario = (Usuario) session.get("usuario");
+			System.out.println("user: "+ usuario.toString());
+			System.out.println("ente: "+ ente.toString());
 			ente = (Ente) read(ente, usuario.getId());			
+			Object[] objetos = {new ServicioInformacion(),new Ente()};
+			servicios =  (ArrayList<ServicioInformacion>) read(objetos, ente.getId_ente(), -1);			
 		}
 		return SUCCESS;
 	}	
@@ -108,4 +118,14 @@ public class LoginControlador extends DAO {
 	public void setEnte(Ente ente) {
 		this.ente = ente;
 	}
+
+	public List<ServicioInformacion> getServicios() {
+		return servicios;
+	}
+
+	public void setServicios(List<ServicioInformacion> servicios) {
+		this.servicios = servicios;
+	}
+
+
 }

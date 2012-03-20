@@ -1,0 +1,23 @@
+#menuv {  font-size: 0.7em; margin-left: -40px;}
+#menuv ul { list-style-type: none;}
+#menuv ul li.nivel1 { width: 150px;}
+#menuv ul li { text-align: center;}
+#menuv ul li.primera { border-top: solid 1px #FFF;}
+
+#menuv ul li a {display: block;text-decoration: none;color: #777;display: block;background: url(../img/menu8.png);
+				border: solid 1px #fff;border-top: none;padding: 8px 8px 9px;position: relative;}
+#menuv ul li:hover {position: relative;color: #000;}
+#menuv ul li a:active {color: #fff;background: url(../img/menu8.png) 0 -64px;position: relative;}
+#menuv ul li a:hover, #menuv ul li:hover a.nivel1 {color: #000;position: relative; background: url(../img/menu8.png) 0 -32px;}
+#menuv ul li a.nivel1 {display: block!important;display: none;position: relative;}
+
+#menuv ul li ul {display: none;}
+#menuv ul li:hover > ul {display: block;position: absolute;left: 110px;top:-1px;}
+#menuv ul li ul li a {width: 134px;color: #777;position: relative;}
+#menuv ul li ul li a:hover {position: relative;color: #000; background: url(../img/menu8.png) 0 -32px;}
+#menuv ul li ul li a:active {width: 134px;color: #fff;background: url(../img/menu8.png) 0 -64px;position: relative;}/**/
+#menuv ul li a.nivel1ie {width: 134px;padding: 8px;}
+#menuv ul li a.subnivel {padding-bottom: 8px;}
+#menuv ul li a:hover ul.nivel2, #menuv ul.nivel2 li a:hover ul.nivel3, 
+#menuv ul.nivel3 li a:hover ul.nivel4 {display: block;position: absolute;left: 110px;top:-1px;background: url(../img/menu8.png) 0 -32px;}
+table.falsa {border-collapse:collapse;border:0px;float: left;}
