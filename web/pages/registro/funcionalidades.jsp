@@ -58,10 +58,18 @@
 					<s:fielderror>
 						<s:param>funcionalidades</s:param>
 					</s:fielderror>
+					<table>
+					<tr><td>
 					<form action="prepararFuncionalidad" method="POST">
 						<s:hidden name="id_servicio_informacion"></s:hidden>
 						<input type="submit" value="<s:text name="funcionalidad.add"/>" />
 					</form>
+					</td><td>
+					<form action="home" method="POST">						
+						<input type="submit" value="<s:text name="terminar"/>" />
+					</form>
+					</td></tr>
+					</table>
 					<!-- Tabla en árbol. -->
 					<table id="tree" class="treeTable">
 						<thead>
