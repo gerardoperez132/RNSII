@@ -17,7 +17,6 @@ package ve.gob.cnti.srsi.modelo;
 
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -37,8 +36,7 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private long id_usuario;
-	private long id_ente;
-	@Column(unique = true)
+	private long id_ente;	
 	private long id_correo;
 	private String nombre;
 	private String apellido;
