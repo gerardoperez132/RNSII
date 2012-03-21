@@ -65,9 +65,11 @@
 						<input type="submit" value="<s:text name="funcionalidad.add"/>" />
 					</form>
 					</td><td>
-					<form action="home" method="POST">						
-						<input type="submit" value="<s:text name="terminar"/>" />
-					</form>
+						<s:if test="funcionalidades.size() > 0">
+						<form action="home" method="POST">						
+							<input type="submit" value="<s:text name="terminar"/>" />
+						</form>
+						</s:if>
 					</td></tr>
 					</table>
 					<!-- Tabla en árbol. -->
