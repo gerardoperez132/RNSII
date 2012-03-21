@@ -111,7 +111,7 @@
 							<tr id="node-<s:property value="#result_datos.index"/>">
 								<th><s:property value="id_servicio_informacion" /></th>
 								<td><s:property value="nombre" /></td>
-								<td><s:property value="fecha_creado" /></td>
+								<td><s:date name="fecha_creado" format="d'/'MM'/'yyyy" /></td>
 								<td>
 									<table style="margin: 0; padding: 0;">
 										<tr style="margin: 0; padding: 0;">
@@ -128,6 +128,22 @@
 													<input type="submit" value="<s:text name="eliminar" />"
 														style="font-size: 0.9em;" />
 												</form>
+											</td>
+											<td style="margin: 0; padding: 0;">
+												<s:if test="publicado==false">
+													<form action="publicarServicioInformacion" method="POST">
+														<s:hidden name="id_servicio_informacion"></s:hidden>													
+														<input type="submit" value="<s:text name="publicar" />"
+															style="font-size: 0.9em;" />
+													</form>
+												</s:if>
+												<s:else>
+													<form action="despublicarServicioInformacion" method="POST">
+														<s:hidden name="id_servicio_informacion"></s:hidden>													
+														<input type="submit" value="<s:text name="despublicar" />"
+															style="font-size: 0.9em;" />
+													</form>
+												</s:else>
 											</td>
 										</tr>
 									</table>

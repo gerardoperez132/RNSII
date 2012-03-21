@@ -28,18 +28,16 @@
 			<!-- Este es el div de los menúes -->
 			<div id="menu"></div>
 
-			<!-- Esta es la barra lateral -->
-			<div id="sidebar"></div>
-
 			<!-- Este es el div de contenidos -->
-			<div id="content">
+			<div id="content2">
 				<br>
-				<div Style="margin-left: 10%; margin-top: 5%; margin-bottom:15%; width: 400px;">				
+				<div Style="margin-left: 35%; margin-top: 5%; margin-bottom:15%; 
+							width: 265px; padding: 15px;  border : 3px solid blue;">				
             	<form action="index" method="post">
             		<table>
             		<tr>
             			<td colspan="3">
-            			<h5>Control de acceso</h5>
+            			<h5 style="margin: 0;">Control de acceso</h5>
             			</td>	
             		</tr>
             		<tr>
@@ -47,25 +45,21 @@
             			<s:fielderror>
             			<s:param>error</s:param>
             			</s:fielderror>
+            			<s:fielderror>
+            				<s:param>correo</s:param>
+            			</s:fielderror>
+            			<s:fielderror>
+            				<s:param>password</s:param>
+            			</s:fielderror>
             			</td>            				
             		</tr>						
 					<tr>
 						<td>Correo:</td>
-            			<td><input type="text" name="correo"/></td>
-            			<td>
-	            			<s:fielderror>
-	            				<s:param>correo</s:param>
-	            			</s:fielderror>
-            			</td>
+            			<td><input type="text" name="correo"/></td>            			
 					</tr>            		
             		<tr>
 						<td>Clave:</td>
-            			<td><input type="password" name="password"/></td>
-            			<td>
-	            			<s:fielderror>
-	            				<s:param>password</s:param>
-	            			</s:fielderror>
-            			</td>	
+            			<td><input type="password" name="password"/></td>            				
 					</tr>	
 					<tr>
             			<td colspan="2">
