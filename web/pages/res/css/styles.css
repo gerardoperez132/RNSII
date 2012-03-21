@@ -37,6 +37,15 @@
 	padding-left: 5px;
 }
 
+#content2 {
+	background: #f5f5ee;
+	float: left;
+	width: 870px;
+	height: 450px;
+	overflow: auto;
+	padding-left: 5px;
+}
+
 #footer {
 	background: #3b3939 url("../img/footer.png") repeat-x;
 	width: 100%;
