@@ -90,4 +90,19 @@ public interface Constants {
 		public static final Object[] FSI = { new Funcionalidad(),
 				new ServicioInformacion() };
 	}
+
+	/**
+	 * Interfaz con métodos para implementar en cada formulario.
+	 * 
+	 * @author Richard Ricciardelli
+	 * 
+	 */
+	public interface Formulario {
+		/**
+		 * Prepara el formulario del modelo dado para su registro.
+		 * 
+		 * @return "success"
+		 */
+		public String prepararFormulario();
+	}
 }
