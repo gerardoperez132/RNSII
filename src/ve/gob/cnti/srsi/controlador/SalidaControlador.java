@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
+import ve.gob.cnti.srsi.dao.Constants.Formulario;
 import ve.gob.cnti.srsi.dao.Constants.Modelos;
 import ve.gob.cnti.srsi.dao.Constants.TipoEntradaSalida;
 import ve.gob.cnti.srsi.dao.DAO;
@@ -14,10 +15,8 @@ import ve.gob.cnti.srsi.modelo.Funcionalidad;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.TipoDato;
 
-import com.opensymphony.xwork2.Preparable;
-
 @SuppressWarnings("serial")
-public class SalidaControlador extends DAO implements Preparable,
+public class SalidaControlador extends DAO implements Formulario,
 		TipoEntradaSalida, Modelos {
 
 	private List<EntradaSalida> salidas;
@@ -114,6 +113,18 @@ public class SalidaControlador extends DAO implements Preparable,
 	}
 
 	@SuppressWarnings("unchecked")
+	@Override
+	@SkipValidation
+	public String prepararFormulario() {
+		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		salidas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad, SALIDA);
+		tipoDatos = (List<TipoDato>) read(new TipoDato());
+		complejo = false;
+		return SUCCESS;
+	}
+
+	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararFormularioSimple() {
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
@@ -182,7 +193,7 @@ public class SalidaControlador extends DAO implements Preparable,
 
 	@SuppressWarnings("unchecked")
 	@SkipValidation
-	public String eliminarSalidaSimple() {
+	public String eliminarEntradaSimple() {
 		delete(salida, id_entrada_salida);
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
@@ -193,7 +204,7 @@ public class SalidaControlador extends DAO implements Preparable,
 
 	@SuppressWarnings("unchecked")
 	@SkipValidation
-	public String eliminarSalidaCompleja() {
+	public String eliminarEntradaCompleja() {
 		salidas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad, SALIDA);
 		Iterator<EntradaSalida> iterator = salidas.iterator();
 		while (iterator.hasNext()) {
@@ -228,14 +239,5 @@ public class SalidaControlador extends DAO implements Preparable,
 		} else {
 			prepararFormularioSimple();
 		}
-	}
-
-	@Override
-	public void prepare() throws Exception {
-		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
-		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
-		salidas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad, SALIDA);
-		tipoDatos = (List<TipoDato>) read(new TipoDato());
-		complejo = false;
 	}
 }

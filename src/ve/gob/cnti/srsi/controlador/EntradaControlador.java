@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
+import ve.gob.cnti.srsi.dao.Constants.Formulario;
 import ve.gob.cnti.srsi.dao.Constants.Modelos;
 import ve.gob.cnti.srsi.dao.Constants.TipoEntradaSalida;
 import ve.gob.cnti.srsi.dao.DAO;
@@ -14,11 +15,9 @@ import ve.gob.cnti.srsi.modelo.Funcionalidad;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.TipoDato;
 
-import com.opensymphony.xwork2.Preparable;
-
 @SuppressWarnings("serial")
-public class EntradaControlador extends DAO implements Preparable,
-		TipoEntradaSalida, Modelos {
+public class EntradaControlador extends DAO implements TipoEntradaSalida,
+		Modelos, Formulario {
 
 	private List<EntradaSalida> entradas;
 	private List<TipoDato> tipoDatos;
@@ -111,6 +110,19 @@ public class EntradaControlador extends DAO implements Preparable,
 
 	public void setModificar(boolean modificar) {
 		this.modificar = modificar;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	@SkipValidation
+	public String prepararFormulario() {
+		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,
+				ENTRADA);
+		tipoDatos = (List<TipoDato>) read(new TipoDato());
+		complejo = false;
+		return SUCCESS;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -234,15 +246,5 @@ public class EntradaControlador extends DAO implements Preparable,
 		} else {
 			prepararFormularioSimple();
 		}
-	}
-
-	@Override
-	public void prepare() throws Exception {
-		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
-		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
-		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,
-				ENTRADA);
-		tipoDatos = (List<TipoDato>) read(new TipoDato());
-		complejo = false;
 	}
 }
