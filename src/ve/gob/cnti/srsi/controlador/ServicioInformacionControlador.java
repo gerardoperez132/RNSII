@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +22,7 @@ import ve.gob.cnti.srsi.modelo.Area;
 import ve.gob.cnti.srsi.modelo.Arquitectura;
 import ve.gob.cnti.srsi.modelo.AspectoLegal;
 import ve.gob.cnti.srsi.modelo.Correo;
+import ve.gob.cnti.srsi.modelo.EntradaSalida;
 import ve.gob.cnti.srsi.modelo.Estado;
 import ve.gob.cnti.srsi.modelo.Funcionalidad;
 import ve.gob.cnti.srsi.modelo.Intercambio;
@@ -203,8 +205,11 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	public String registrarServicioInformacion() {
 
 		session = ActionContext.getContext().getSession();
-		Usuario usuario = new Usuario();
+		Usuario usuario = new Usuario();		
 		usuario = (Usuario)session.get("usuario");
+		if(usuario == null){
+			return "errorSession";
+		}
 		
 		id_servicio_informacion = getNextId(servicio);
 		// consultar ente
@@ -242,7 +247,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 					getText("Este nombre ya existe. Proporcione otro."));
 			return INPUT;
 		}
-
+		
 		// Seteando el AREA
 		UnionAreaServicioInformacion unionarea = new UnionAreaServicioInformacion();
 		for (int i = 0; i < area.size(); i++) {
@@ -290,7 +295,54 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		}
 		return SUCCESS;
 	}
-
+	
+	@SuppressWarnings({ "unchecked" })
+	@SkipValidation
+	public String eliminarServicioInformacion(){		
+		Funcionalidad funcion_del = new Funcionalidad();
+		EntradaSalida io_del = new EntradaSalida();
+		List<EntradaSalida> ios_del = new ArrayList<EntradaSalida>();
+		
+		Object[] models = {new Funcionalidad(),new ServicioInformacion()};
+		funcionalidades = (List<Funcionalidad>)read(models, id_servicio_informacion, -1);
+		Iterator<Funcionalidad> iterador = funcionalidades.iterator(); 
+		
+		while(iterador.hasNext()){
+			funcion_del = iterador.next();
+						
+			Object[] models2 = {new EntradaSalida(),new Funcionalidad()};
+			ios_del = (List<EntradaSalida>)read(models2, funcion_del.getId_funcionalidad(), -1);
+			Iterator<EntradaSalida> iterador2 = ios_del.iterator();
+			
+			while(iterador2.hasNext()){
+				io_del = iterador2.next();
+				delete(io_del, io_del.getId_entrada_salida());
+			}
+			delete(funcion_del, funcion_del.getId_funcionalidad());
+		}
+		delete(new ServicioInformacion(), id_servicio_informacion);
+		
+		return SUCCESS;
+	}	
+		
+	@SkipValidation
+	public String publicarServicioInformacion(){		
+		ServicioInformacion servicio = new ServicioInformacion();
+		servicio = (ServicioInformacion)read(servicio, id_servicio_informacion);
+		servicio.setPublicado(true);
+		update(servicio, id_servicio_informacion);		
+		return SUCCESS;
+	}
+	
+	@SkipValidation
+	public String despublicarServicioInformacion(){		
+		ServicioInformacion servicio = new ServicioInformacion();
+		servicio = (ServicioInformacion)read(servicio, id_servicio_informacion);
+		servicio.setPublicado(false);
+		update(servicio, id_servicio_informacion);		
+		return SUCCESS;
+	}
+	
 	private String saveFile(File file, String fileName) throws IOException {
 		String INSTITUCION = "cnti"; // Obtener desde la base de datos.
 		String filePath = servletRequest.getSession().getServletContext()

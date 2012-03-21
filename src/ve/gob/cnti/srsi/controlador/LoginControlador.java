@@ -67,11 +67,11 @@ public class LoginControlador extends DAO {
 		session = ActionContext.getContext().getSession();  
 		if(session.isEmpty()){
 			return INPUT;
-		}else{		
-			System.out.println("user: "+ usuario.toString());
+		}else{
 			usuario = (Usuario) session.get("usuario");
-			System.out.println("user: "+ usuario.toString());
-			System.out.println("ente: "+ ente.toString());
+			if(usuario == null){
+				return INPUT;
+			}
 			ente = (Ente) read(ente, usuario.getId());			
 			Object[] objetos = {new ServicioInformacion(),new Ente()};
 			servicios =  (ArrayList<ServicioInformacion>) read(objetos, ente.getId_ente(), -1);			
@@ -82,7 +82,7 @@ public class LoginControlador extends DAO {
 	@SkipValidation
 	public String desloguearUsuario(){	 
 		session = ActionContext.getContext().getSession();
-	    session.clear();
+		session.clear();
 		return SUCCESS;
 	}
 	
