@@ -14,12 +14,16 @@ import ve.gob.cnti.srsi.dao.Constants.Formulario;
 import ve.gob.cnti.srsi.dao.DAO;
 import ve.gob.cnti.srsi.modelo.Area;
 import ve.gob.cnti.srsi.modelo.Arquitectura;
+import ve.gob.cnti.srsi.modelo.AspectoLegal;
+import ve.gob.cnti.srsi.modelo.Correo;
 import ve.gob.cnti.srsi.modelo.Estado;
 import ve.gob.cnti.srsi.modelo.Intercambio;
 import ve.gob.cnti.srsi.modelo.Sector;
 import ve.gob.cnti.srsi.modelo.Seguridad;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
+import ve.gob.cnti.srsi.modelo.Telefono;
 import ve.gob.cnti.srsi.modelo.UnionAreaServicioInformacion;
+import ve.gob.cnti.srsi.modelo.UnionArquitecturaServicioInformacion;
 
 import com.opensymphony.xwork2.validator.annotations.EmailValidator;
 import com.opensymphony.xwork2.validator.annotations.FieldExpressionValidator;
@@ -43,7 +47,7 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 	private String filename;
 
 	private String[] codigos = COD;
-	private int codigo;
+	private String codigo;
 
 	private long sector;
 	private long estado;
@@ -242,11 +246,11 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 		this.codigos = codigos;
 	}
 
-	public int getCodigo() {
+	public String getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(int codigo) {
+	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
 
@@ -320,52 +324,45 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 
 		UnionAreaServicioInformacion unionAreaServicioInformacion = new UnionAreaServicioInformacion();
 		for (int i = 0; i < area.size(); i++) {
-			unionAreaServicioInformacion.setId_area(Long.parseLong(String
-					.valueOf(area.get(i))));
+			unionAreaServicioInformacion.setId_area(area.get(i));
 			unionAreaServicioInformacion
 					.setId_servicio_informacion(id_servicio_informacion);
 			createUnion(unionAreaServicioInformacion);
 		}
-		//
-		// // Seteando el ARQUITECTURA
-		// UnionArquitecturaServicioInformacion unionarquitectura = new
-		// UnionArquitecturaServicioInformacion();
-		// for (int i = 0; i < arquitectura.size(); i++) {
-		// unionarquitectura.setId_arquitectura(Long.parseLong(String
-		// .valueOf(arquitectura.get(i))));
-		// unionarquitectura
-		// .setId_servicio_informacion(id_servicio_informacion);
-		// // create(unionarquitectura, id_si);
-		// }
-		//
-		// // Seteando el TELEFONO DE CONTACTO
-		// Telefono telf = new Telefono();
-		// telf.setTelefono(codigo + "-" + telefono);
-		// telf.setId_servicio_informacion(id_servicio_informacion);
-		// create(telf);
-		//
-		// // Seteando el CORREO DE CONTACTO
-		// Correo email = new Correo();
-		// email.setCorreo(correo);
-		// email.setId_servicio_informacion(id_servicio_informacion);
-		// create(email);
-		//
-		// // Seteando el documento legal
-		// // valida que ambos campos existan
-		// if (documentoFileName != null && documentoNombre.isEmpty() == false)
-		// {
-		// AspectoLegal al = new AspectoLegal();
-		// try {
-		// al.setUrl(saveFile(documento, documentoFileName));
-		// } catch (IOException e) {
-		// // levantar action error
-		// e.printStackTrace();
-		// }
-		// al.setNombre(documentoNombre);
-		// al.setTipo(LEGAL);
-		// al.setId_servicio_informacion(id_servicio_informacion);
-		// create(al);
-		// }
+
+		UnionArquitecturaServicioInformacion unionArquitecturaServicioInformacion = new UnionArquitecturaServicioInformacion();
+		for (int i = 0; i < arquitectura.size(); i++) {
+			unionArquitecturaServicioInformacion
+					.setId_arquitectura(arquitectura.get(i));
+			unionArquitecturaServicioInformacion
+					.setId_servicio_informacion(id_servicio_informacion);
+			createUnion(unionArquitecturaServicioInformacion);
+		}
+
+		Telefono phone = new Telefono();
+		phone.setTelefono(codigo + telefono);
+		phone.setId_servicio_informacion(id_servicio_informacion);
+		create(phone);
+
+		Correo email = new Correo();
+		email.setCorreo(correo);
+		email.setId_servicio_informacion(id_servicio_informacion);
+		create(email);
+
+		if (filename != null && !name.isEmpty()) {
+			AspectoLegal documento = new AspectoLegal();
+			documento.setId_servicio_informacion(id_servicio_informacion);
+			documento.setNombre(name);
+			// TODO Colocar el tipo de documento, ¿cuáles son? =/
+			// documento.setTipo(0);
+			try {
+				documento.setUrl(saveFile(file, filename));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			create(documento);
+		}
 		return SUCCESS;
 	}
 
