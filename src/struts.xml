@@ -6,7 +6,9 @@
 <struts>
 	<package name="default" extends="struts-default">
 
-		<!--Actions para registros de servicios de información -->
+		<!--*******************************************************
+				Actions para registros de servicios de información
+	        *************************************************** -->
 		<action name="prepararServicioInformacion" method="prepararFormulario"
 			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
 			<result name="success">registro/registro_servicio_informacion.jsp
@@ -17,17 +19,34 @@
 			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
 			<result name="success">registro/funcionalidades.jsp</result>
 			<result name="input">registro/registro_servicio_informacion.jsp
-			</result>
+			</result>			
+			<result name="errorSession" type="redirectAction">home</result>
 		</action>
 
 		<action name="registrarPrueba" method="registrarPrueba"
 			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
 			<result name="success">registro/funcionalidades.jsp</result>
 		</action>
+		
+		<action name="eliminarServicioInformacion" method="eliminarServicioInformacion"
+			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
+			<result name="success" type="redirectAction">home</result>
+		</action>
+		
+		<action name="publicarServicioInformacion" method="publicarServicioInformacion"
+			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
+			<result name="success" type="redirectAction">home</result>
+		</action>
+		
+		<action name="despublicarServicioInformacion" method="despublicarServicioInformacion"
+			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
+			<result name="success" type="redirectAction">home</result>
+		</action>
 
 
-		<!--***************************************************************** Actions 
-			para Funcionalidades ******************************************************************** -->
+		<!--********************************************
+				 Actions para Funcionalidades 
+	         *************************************** -->
 
 		<action name="prepararModificacionesServicioInformacion"
 			method="prepararModificaciones" class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
@@ -79,8 +98,9 @@
 			<result name="success">registro/funcionalidades.jsp</result>
 		</action>
 
-		<!--***************************************************************** Actions 
-			para Entradas ******************************************************************** -->
+		<!--*********************************************
+		 			Actions para Entradas
+		    ********************************************* -->
 
 		<action name="prepararEntradas" method="prepararFormulario"
 			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
@@ -131,7 +151,8 @@
 			<result name="success">registro/entradas.jsp</result>
 		</action>
 
-		<!--***************** Actions	para Salidas *********************
+		<!--***********************************************
+		                Actions para Salidas 
 		*********************************************** -->
 		<action name="prepararSalidas" method="prepararFormulario"
 			class="ve.gob.cnti.srsi.controlador.SalidaControlador">
