@@ -311,20 +311,20 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 		servicio.setId_ente(1);
 		// TODO Este identificador debe venir de la base de datos.
 		servicio.setId_usuario(1);
-		servicio.setId_sector(sectores.get(0).getId());
-		// servicio.setId_estado(estado);
-		// servicio.setId_seguridad(seguridad);
-		// servicio.setId_intercambio(intercambio);
+		servicio.setId_sector(sector);
+		servicio.setId_estado(estado);
+		servicio.setId_seguridad(seguridad);
+		servicio.setId_intercambio(intercambio);
+		// TODO Verificar que el nombre no esté repetido.
 		create(servicio);
 
-		UnionAreaServicioInformacion areaServicioInformacion = new UnionAreaServicioInformacion();
-		for (int i = 0; i < areas.size(); i++) {
-			areaServicioInformacion.setId_area(Long.parseLong(String
-					.valueOf(areas.get(i))));
-			areaServicioInformacion
+		UnionAreaServicioInformacion unionAreaServicioInformacion = new UnionAreaServicioInformacion();
+		for (int i = 0; i < area.size(); i++) {
+			unionAreaServicioInformacion.setId_area(Long.parseLong(String
+					.valueOf(area.get(i))));
+			unionAreaServicioInformacion
 					.setId_servicio_informacion(id_servicio_informacion);
-			System.out.println("AREAS => " + areas.get(i));
-			// create(unionarea, id_si);
+			createUnion(unionAreaServicioInformacion);
 		}
 		//
 		// // Seteando el ARQUITECTURA
@@ -369,6 +369,7 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 		return SUCCESS;
 	}
 
+	@SuppressWarnings("unchecked")
 	@SkipValidation
 	@Override
 	public String prepararFormulario() {
