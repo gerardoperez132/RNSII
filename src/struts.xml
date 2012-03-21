@@ -7,7 +7,7 @@
 	<package name="default" extends="struts-default">
 
 		<!--Actions para registros de servicios de información -->
-		<action name="prepararServicioInformacion"
+		<action name="prepararServicioInformacion" method="prepararFormulario"
 			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
 			<result name="success">registro/registro_servicio_informacion.jsp
 			</result>
@@ -36,7 +36,7 @@
 		</action>
 
 
-		<action name="prepararFuncionalidad"
+		<action name="prepararFuncionalidad" method="prepararFormulario"
 			class="ve.gob.cnti.srsi.controlador.FuncionalidadControlador">
 			<result name="success">registro/formulario_funcionalidad.jsp</result>
 		</action>
@@ -82,7 +82,8 @@
 		<!--***************************************************************** Actions 
 			para Entradas ******************************************************************** -->
 
-		<action name="prepararEntradas" class="ve.gob.cnti.srsi.controlador.EntradaControlador">
+		<action name="prepararEntradas" method="prepararFormulario"
+			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
 			<result name="success">registro/entradas.jsp</result>
 		</action>
 
@@ -132,7 +133,8 @@
 
 		<!--***************************************************************** Actions 
 			para Salidas ******************************************************************** -->
-		<action name="prepararSalidas" class="ve.gob.cnti.srsi.controlador.SalidaControlador">
+		<action name="prepararSalidas" method="prepararFormulario"
+			class="ve.gob.cnti.srsi.controlador.SalidaControlador">
 			<result name="success">registro/salidas.jsp</result>
 		</action>
 
