@@ -23,7 +23,7 @@ public interface Constants {
 			"288", "291", "292", "293", "294", "295" };
 
 	/**
-	 * Interfaz con los estados de un sistema de información.
+	 * Interfaz con los estados de registro en la base de datos.
 	 * 
 	 * @author Richard Ricciardelli
 	 * 
