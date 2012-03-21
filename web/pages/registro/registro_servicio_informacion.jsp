@@ -11,7 +11,8 @@
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
 <script type="text/javascript" src="res/js/jquery-1.7.1.js"></script>
 <script type="text/javascript" src="res/js/tabs.js"></script>
-<title><s:text name="registro.title"></s:text></title>
+<title><s:text name="registro.title"></s:text>
+</title>
 	</head>
 	<body>
 		<!-- Este es el div de la sombra del contenedor del maquetado de la página -->
@@ -25,12 +26,9 @@
 						<div class="menu_top_bg">Navegacion</div>
 						<div class="sub_menu">
 							<ul>
-								<li><a class="selected">Paso 1</a>
-								</li>
-								<li><a href="#">Paso 2</a>
-								</li>
-								<li><a href="#">Paso 3 </a>
-								</li>
+								<li><a class="selected">Paso 1</a></li>
+								<li><a href="#">Paso 2</a></li>
+								<li><a href="#">Paso 3 </a></li>
 							</ul>
 						</div>
 					</div>
@@ -67,10 +65,10 @@
 									<s:text name="sector.title"></s:text>
 								</h5>
 								<s:fielderror>
-									<s:param>servicio.id_sector</s:param>
+									<s:param>sector</s:param>
 								</s:fielderror>
-								<s:select name="sectores" list="sectores" listKey="id_sector"
-									listValue="nombre" headerKey="-1" value="id_sector"
+								<s:select name="sector" list="sectores" listKey="id_sector"
+									listValue="nombre" headerKey="-1"
 									headerValue="%{getText('sector.select')}"></s:select>
 								<h5 class="formulario">
 									<s:text name="nombre.title"></s:text>
@@ -90,17 +88,17 @@
 									<s:text name="area.title"></s:text>
 								</h5>
 								<s:fielderror>
-									<s:param>areas</s:param>
+									<s:param>area</s:param>
 								</s:fielderror>
-								<s:checkboxlist list="areas" listValue="nombre" name="areas"
+								<s:checkboxlist list="areas" listValue="nombre" name="area"
 									listKey="id_area" />
 								<h5 class="formulario">
 									<s:text name="estado.title"></s:text>
 								</h5>
 								<s:fielderror>
-									<s:param>servicio.id_estado</s:param>
+									<s:param>estado</s:param>
 								</s:fielderror>
-								<s:select name="estados" list="estados" listKey="id_estado"
+								<s:select name="estado" list="estados" listKey="id_estado"
 									listValue="nombre" headerKey="-1"
 									headerValue="%{getText('estado.select')}"></s:select>
 							</div>
@@ -116,16 +114,16 @@
 									<s:text name="documento.name"></s:text>
 								</h5>
 								<s:fielderror>
-									<s:param>documentoNombre</s:param>
+									<s:param>name</s:param>
 								</s:fielderror>
-								<s:textfield name="documentoNombre" labelposition="top" />
+								<s:textfield name="name" labelposition="top" />
 								<h5 class="formulario">
 									<s:text name="documento.file"></s:text>
 								</h5>
 								<s:fielderror>
-									<s:param>documento</s:param>
+									<s:param>file</s:param>
 								</s:fielderror>
-								<s:file name="documento" value="documentoFileName"></s:file>
+								<s:file name="file" value="filename"></s:file>
 								<br> <br> <br> <br>
 							</div>
 							<!-- *************************** ARREGLAR ARCHIVOS. ******************** -->
@@ -139,19 +137,19 @@
 									<s:text name="seguridad.title"></s:text>
 								</h5>
 								<s:fielderror>
-									<s:param>servicio.id_seguridad</s:param>
+									<s:param>seguridad</s:param>
 								</s:fielderror>
 								<s:select list="niveles" listKey="id_seguridad"
 									listValue="nombre" headerKey="-1"
-									headerValue="%{getText('seguridad.select')}" name="niveles"></s:select>
+									headerValue="%{getText('seguridad.select')}" name="seguridad"></s:select>
 								<h5 class="formulario">
 									<s:text name="arquitectura.title"></s:text>
 								</h5>
 								<s:fielderror>
-									<s:param>arquitecturas</s:param>
+									<s:param>arquitectura</s:param>
 								</s:fielderror>
-								<s:checkboxlist list="arquitecturas" listValue="nombre"
-									name="arquitecturas" value="id_arquitectura" />
+								<s:checkboxlist list="arquitecturas" listValue="nombre" name="arquitectura"
+									listKey="id_arquitectura" />
 								<br>
 								<h5 class="formulario">
 									<s:text name="version.title"></s:text>
@@ -168,9 +166,9 @@
 									<s:text name="intercambio.title"></s:text>
 								</h5>
 								<s:fielderror>
-									<s:param>servicio.id_intercambio</s:param>
+									<s:param>intercambio</s:param>
 								</s:fielderror>
-								<select name="servicio.id_intercambio">
+								<select name="intercambio">
 									<optgroup label="">
 										<option value="-1">
 											<s:text name="intercambio.select"></s:text>
@@ -206,6 +204,26 @@
 								<h5 class="formulario">
 									<s:text name="telefono.title"></s:text>
 								</h5>
+								<s:fielderror>
+									<s:param>telefono</s:param>
+								</s:fielderror>
+								<table>
+									<tr>
+										<td><s:select name="codigo" list="codigos" />
+										</td>
+										<td><s:textfield name="telefono" labelposition="top"
+												maxlength="7"
+												onkeyup="var no_digito = /\D/g; this.value = this.value.replace(no_digito , '');" />
+										</td>
+									</tr>
+								</table>
+								<h5 class="formulario">
+									<s:text name="correo.title"></s:text>
+								</h5>
+								<s:fielderror>
+									<s:param>correo</s:param>
+								</s:fielderror>
+								<s:textfield name="correo"></s:textfield>
 								<input type="submit" value='<s:text name="guardar"></s:text>' />
 							</div>
 						</div>
