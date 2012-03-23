@@ -23,6 +23,16 @@ public interface CRUD {
 	public void create(Object model);
 
 	/**
+	 * Permite guardar un registro en la base de datos cuando el modelo es de
+	 * una relación de unión M:N.
+	 * 
+	 * @param model
+	 *            Es la clase, modelo o tabla en el cual se realizará el
+	 *            registro.
+	 */
+	public void createUnion(Object model);
+
+	/**
 	 * Permite obtener todos los registros activos del modelo dado.
 	 * 
 	 * @param model

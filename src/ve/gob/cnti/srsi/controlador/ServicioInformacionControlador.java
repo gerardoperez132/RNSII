@@ -3,7 +3,6 @@ package ve.gob.cnti.srsi.controlador;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -11,12 +10,10 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
 import ve.gob.cnti.srsi.dao.Constants;
-import ve.gob.cnti.srsi.dao.Constants.Modelos;
-import ve.gob.cnti.srsi.dao.Constants.TipoDocumento;
+import ve.gob.cnti.srsi.dao.Constants.Formulario;
 import ve.gob.cnti.srsi.dao.DAO;
 import ve.gob.cnti.srsi.modelo.Area;
 import ve.gob.cnti.srsi.modelo.Arquitectura;
@@ -41,146 +38,148 @@ import com.opensymphony.xwork2.validator.annotations.FieldExpressionValidator;
 import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
 
 @SuppressWarnings("serial")
-public class ServicioInformacionControlador extends DAO implements Constants,
-		ServletRequestAware, Formulario, TipoDocumento, Modelos {
+public class ServicioInformacionControlador extends DAO implements Formulario,
+		Constants {
 
-	private List<Area> areas = new ArrayList<Area>();
-	private List<UnionAreaServicioInformacion> unionareas = new ArrayList<UnionAreaServicioInformacion>();
-	private List<Estado> estados = new ArrayList<Estado>();
-	private List<Seguridad> l_seguridad = new ArrayList<Seguridad>();
-	private List<Arquitectura> arquitecturas = new ArrayList<Arquitectura>();
-	private List<Sector> sectores = new ArrayList<Sector>();
-	private List<Intercambio> intercambiosPadres = new ArrayList<Intercambio>();
-	private List<Intercambio> intercambiosHijos = new ArrayList<Intercambio>();
+	private List<Sector> sectores;
+	private List<Estado> estados;
+	private List<Area> areas;
+	private List<Seguridad> niveles;
+	private List<Arquitectura> arquitecturas;
+	private List<Intercambio> parents;
+	private List<Intercambio> children;
+	private List<Funcionalidad> funcionalidades;
+	private List<EntradaSalida> ios;
+	private List<UnionAreaServicioInformacion> unionareas;
 
-	private Ente ente = new Ente();
+	private HttpServletRequest servletRequest;
+	private Ente ente;
 	private ServicioInformacion servicio = new ServicioInformacion();
 	private Funcionalidad funcionalidad = new Funcionalidad();
 
-	private List<Funcionalidad> funcionalidades = new ArrayList<Funcionalidad>();
-	private List<EntradaSalida> ios = new ArrayList<EntradaSalida>();
+	private File file;
+	private String name;
+	private String filename;
 
-	private long id_servicio_informacion;
-	private String sector;
-	private String nombre;
-	private String descripcion;
-	private String estado;
-	private List<String> area;
-	private String seguridad;
-	private String version;
-	private List<String> arquitectura;
-	private String intercambio;
-	private String responsable;
-	private String[] codigos;
+	private String[] codigos = COD;
 	private String codigo;
+
+	private long sector;
+	private long estado;
+	private List<Long> area;
+	private long seguridad;
+	private List<Long> arquitectura;
+	private long intercambio;
 	private String telefono;
 	private String correo;
 
-	private File documento;
-	private String documentoNombre;
-	private String documentoFileName;
-
-	private HttpServletRequest servletRequest;
-	
 	@SuppressWarnings("rawtypes")
 	private Map session;
 
-	@SuppressWarnings("unchecked")
-	@Override
+	private long id_servicio_informacion;
+
+	@SuppressWarnings({ "unchecked" })
 	@SkipValidation
-	public String prepararFormulario() {
-		Area area = new Area();
-		Estado est = new Estado();
-		Seguridad seg = new Seguridad();
-		Arquitectura arq = new Arquitectura();
-		Sector sector = new Sector();
-		Intercambio intercambio = new Intercambio();
-		areas = (List<Area>) read(area);
-		estados = (List<Estado>) read(est);
-		l_seguridad = (List<Seguridad>) read(seg);
-		arquitecturas = (List<Arquitectura>) read(arq);
-		sectores = (List<Sector>) read(sector);
-		intercambiosPadres = (List<Intercambio>) getParents(intercambio);
-		intercambiosHijos = (List<Intercambio>) getChildren(intercambio);
-		setCodigos(COD);
-		session = ActionContext.getContext().getSession(); 
-		// Por defecto consultará la base de datos.
-		// responsable = "Usuario usuario";
-		return SUCCESS;
-	}
+	public String eliminarServicioInformacion() {
+		Funcionalidad funcion_del = new Funcionalidad();
+		EntradaSalida io_del = new EntradaSalida();
+		List<EntradaSalida> ios_del = new ArrayList<EntradaSalida>();
 
-	@SuppressWarnings("unchecked")
-	@SkipValidation
-	public String registrarPrueba() {
-		id_servicio_informacion = getNextId(servicio);
-		servicio.setId_ente(1);
-		servicio.setId_usuario(1);
-		servicio.setId_sector(1);
-		servicio.setNombre("Nombre" + new Date());
-		servicio.setDescripcion("Descripción");
-		servicio.setId_estado(1);
-		servicio.setId_seguridad(1);
-		servicio.setVersion("1.0");
-		servicio.setId_intercambio(1);
-		servicio.setResponsable(responsable);
-		create(servicio);
-
-		funcionalidad.setId_servicio_informacion(id_servicio_informacion);
-		funcionalidad.setNombre("Funcionalidad" + new Date());
-		funcionalidad.setDescripcion("Descripción");
-		create(funcionalidad);
-
-		funcionalidades = (List<Funcionalidad>) read(FSI,
+		Object[] models = { new Funcionalidad(), new ServicioInformacion() };
+		funcionalidades = (List<Funcionalidad>) read(models,
 				id_servicio_informacion, -1);
-		// funcionalidades = ((List<Funcionalidad>) read(funcionalidad,
-		// new ServicioInformacion(), getNextId(servicio) - 1));
+		Iterator<Funcionalidad> iterador = funcionalidades.iterator();
 
-		// UnionAreaServicioInformacion unionarea = new
-		// UnionAreaServicioInformacion();
-		// for (int i = 0; i < area.size(); i++) {
-		// unionarea.setId_area(Long.parseLong(String.valueOf(area.get(i))));
-		// unionarea.setId_servicio_informacion(id_servicio_informacion);
-		// // create(unionarea, id_si);
-		// }
-		//
-		// // Seteando el ARQUITECTURA
-		// UnionArquitecturaServicioInformacion unionarquitectura = new
-		// UnionArquitecturaServicioInformacion();
-		// for (int i = 0; i < arquitectura.size(); i++) {
-		// unionarquitectura.setId_arquitectura(Long.parseLong(String
-		// .valueOf(arquitectura.get(i))));
-		// unionarquitectura.setId_servicio_informacion(id_servicio_informacion);
-		// // create(unionarquitectura, id_si);
-		// }
-		//
-		// // Seteando el TELEFONO DE CONTACTO
-		// Telefono telf = new Telefono();
-		// telf.setTelefono(codArea + "-" + telefonoContacto);
-		// telf.setId_servicio_informacion(id_servicio_informacion);
-		// create(telf);
-		//
-		// // Seteando el CORREO DE CONTACTO
-		// Correo correo = new Correo();
-		// correo.setCorreo(correoContacto);
-		// correo.setId_servicio_informacion(id_servicio_informacion);
-		// create(correo);
+		while (iterador.hasNext()) {
+			funcion_del = iterador.next();
+
+			Object[] models2 = { new EntradaSalida(), new Funcionalidad() };
+			ios_del = (List<EntradaSalida>) read(models2,
+					funcion_del.getId_funcionalidad(), -1);
+			Iterator<EntradaSalida> iterador2 = ios_del.iterator();
+
+			while (iterador2.hasNext()) {
+				io_del = iterador2.next();
+				delete(io_del, io_del.getId_entrada_salida());
+			}
+			delete(funcion_del, funcion_del.getId_funcionalidad());
+		}
+		delete(new ServicioInformacion(), id_servicio_informacion);
+
 		return SUCCESS;
 	}
 
+	@SkipValidation
+	public String publicarServicioInformacion() {
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		servicio.setPublicado(true);
+		update(servicio, id_servicio_informacion);
+		return SUCCESS;
+	}
+
+	@SkipValidation
+	public String despublicarServicioInformacion() {
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		servicio.setPublicado(false);
+		update(servicio, id_servicio_informacion);
+		return SUCCESS;
+	}
+
+	@SuppressWarnings({ "unchecked" })
+	@SkipValidation
+	public String examinarServicioInformacion() {
+		session = ActionContext.getContext().getSession();
+		Usuario usuario = new Usuario();
+		usuario = (Usuario) session.get("usuario");
+		if (usuario == null) {
+			return "errorSession";
+		}
+		ente = (Ente) read(new Ente(), usuario.getId_ente());
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		Object[] models = { new Funcionalidad(), new ServicioInformacion() };
+		funcionalidades = (List<Funcionalidad>) read(models,
+				id_servicio_informacion, -1);
+		Iterator<Funcionalidad> iterador = funcionalidades.iterator();
+		while (iterador.hasNext()) {
+			funcionalidad = iterador.next();
+			Object[] models2 = { new EntradaSalida(), new Funcionalidad() };
+			ios = (List<EntradaSalida>) read(models2,
+					funcionalidad.getId_funcionalidad(), -1);
+		}
+		sectores = (List<Sector>) read(new Sector());
+		estados = (List<Estado>) read(new Estado());
+		sectores = (List<Sector>) read(new Sector());
+		areas = (List<Area>) read(new Area());
+		// unionareas = (List<UnionAreaServicioInformacion>) read(new
+		// UnionAreaServicioInformacion() );
+		unionareas = (List<UnionAreaServicioInformacion>) readUnion(
+				new UnionAreaServicioInformacion(), servicio,
+				id_servicio_informacion);
+		return SUCCESS;
+	}
+
+	@Override
 	public void validate() {
-		/*
-		 * Para Validar la que la cadena sea decimal y con el rango (0,999.999)
-		 * No encontre una anotación en struts validation que lo hiciera (ESO ES
-		 * UN BONO MENOS)
-		 */
-		float ver;
+		if (servicio.getNombre().isEmpty())
+			addFieldError("servicio.nombre",
+					"Proporcione un nombre para el servicio");
+
+		if (servicio.getDescripcion().isEmpty())
+			addFieldError("servicio.descripcion",
+					"Debe proporcionar una descripción para el servicio de información");
+
+		if (servicio.getResponsable().isEmpty())
+			addFieldError(
+					"servicio.responsable",
+					getText("Debe introducir el nombre del responsable del servicio"));
+
 		try {
-			ver = Float.parseFloat(version);
-			if (ver < 0.0 || ver > 999.999) {
+			float version = Float.parseFloat(servicio.getVersion().toString());
+			if (version < 0.0 || version > 999.999) {
 				addFieldError(
-						"version",
+						"servicio.version",
 						getText("Su número de versión se sale del rango, el formato es XXX.XXX"));
-				System.out.println("Entro a el error de rango");
+				System.out.println("ENTRÓ");
 			}
 		} catch (NumberFormatException ex) {
 			addFieldError(
@@ -188,199 +187,133 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 					getText("La versión solo debe tener números en un formato XXX.XXX"));
 		}
 
-		// valida que ambos campos existan
-		if (documentoFileName != null && documentoNombre.isEmpty() == true) {
+		if (servicio.getVersion().isEmpty())
+			addFieldError("servicio.version",
+					getText("Debe introducir un número de versión"));
+		// TODO ¿Validar que sólo tiene un punto?
+
+		if (filename != null && name.isEmpty()) {
 			addFieldError(
-					"documentoNombre",
+					"name",
 					getText("Si va a subir un documento debe proporcionar el nombre con que se va a guardar"));
 			addFieldError(
-					"documento",
+					"file",
 					getText("Si va a subir un documento debe proporcionar el archivo a guardar"));
 		}
-		// valida que ambos campos existan
-		if (documentoFileName == null && documentoNombre.isEmpty() == false) {
+
+		if (filename == null && !name.isEmpty()) {
 			addFieldError(
-					"documento",
+					"file",
 					getText("Si va a subir un documento debe proporcionar el archivo a guardar"));
 		}
+
+		if (telefono.length() > 0 && telefono.length() < 7)
+			addFieldError("telefono",
+					"Debe introducir un número telefónico válido de 7 dígitos");
 		prepararFormulario();
 	}
 
 	public String registrarServicioInformacion() {
-
 		session = ActionContext.getContext().getSession();
-		Usuario usuario = new Usuario();		
-		usuario = (Usuario)session.get("usuario");
-		if(usuario == null){
+		Usuario usuario = new Usuario();
+		usuario = (Usuario) session.get("usuario");
+		if (usuario == null) {
 			return "errorSession";
 		}
-		
 		id_servicio_informacion = getNextId(servicio);
-		// consultar ente
 		servicio.setId_ente(usuario.getId_ente());
-		// consultar usuario
 		servicio.setId_usuario(usuario.getId_usuario());
+		servicio.setId_sector(sector);
+		servicio.setId_estado(estado);
+		servicio.setId_seguridad(seguridad);
+		servicio.setId_intercambio(intercambio);
+		// TODO Verificar que el nombre no esté repetido.
+		create(servicio);
 
-		// Seteando el SECTOR
-		servicio.setId_sector(Long.parseLong(sector));
-
-		// Seteando el NOMBRE
-		servicio.setNombre(nombre);
-
-		// Seteando el DESCRIPCION
-		servicio.setDescripcion(descripcion);
-
-		// Seteando el ESTADO
-		servicio.setId_estado(Long.parseLong(estado));
-
-		// Seteando el SEGURIDAD
-		servicio.setId_seguridad(Long.parseLong(seguridad));
-
-		servicio.setResponsable(responsable);
-
-		// Seteando el VERSION
-		servicio.setVersion(version);
-
-		// Seteando el TIPO DE INTERCAMBIO
-		servicio.setId_intercambio(Long.parseLong(intercambio));
-
-		try {
-			create(servicio);
-		} catch (Exception e) {
-			addFieldError("nombre",
-					getText("Este nombre ya existe. Proporcione otro."));
-			return INPUT;
-		}
-		
-		// Seteando el AREA
-		UnionAreaServicioInformacion unionarea = new UnionAreaServicioInformacion();
+		UnionAreaServicioInformacion unionAreaServicioInformacion = new UnionAreaServicioInformacion();
 		for (int i = 0; i < area.size(); i++) {
-			unionarea.setId_area(Long.parseLong(String.valueOf(area.get(i))));
-			unionarea.setId_servicio_informacion(id_servicio_informacion);
-			//create(unionarea, id_si);
-		}
-
-		// Seteando el ARQUITECTURA
-		UnionArquitecturaServicioInformacion unionarquitectura = new UnionArquitecturaServicioInformacion();
-		for (int i = 0; i < arquitectura.size(); i++) {
-			unionarquitectura.setId_arquitectura(Long.parseLong(String
-					.valueOf(arquitectura.get(i))));
-			unionarquitectura
+			unionAreaServicioInformacion.setId_area(area.get(i));
+			unionAreaServicioInformacion
 					.setId_servicio_informacion(id_servicio_informacion);
-			// create(unionarquitectura, id_si);
+			createUnion(unionAreaServicioInformacion);
 		}
 
-		// Seteando el TELEFONO DE CONTACTO
-		Telefono telf = new Telefono();
-		telf.setTelefono(codigo + "-" + telefono);
-		telf.setId_servicio_informacion(id_servicio_informacion);
-		create(telf);
+		UnionArquitecturaServicioInformacion unionArquitecturaServicioInformacion = new UnionArquitecturaServicioInformacion();
+		for (int i = 0; i < arquitectura.size(); i++) {
+			unionArquitecturaServicioInformacion
+					.setId_arquitectura(arquitectura.get(i));
+			unionArquitecturaServicioInformacion
+					.setId_servicio_informacion(id_servicio_informacion);
+			createUnion(unionArquitecturaServicioInformacion);
+		}
 
-		// Seteando el CORREO DE CONTACTO
+		Telefono phone = new Telefono();
+		phone.setTelefono(codigo + telefono);
+		phone.setId_servicio_informacion(id_servicio_informacion);
+		create(phone);
+
 		Correo email = new Correo();
 		email.setCorreo(correo);
 		email.setId_servicio_informacion(id_servicio_informacion);
 		create(email);
 
-		// Seteando el documento legal
-		// valida que ambos campos existan
-		if (documentoFileName != null && documentoNombre.isEmpty() == false) {
-			AspectoLegal al = new AspectoLegal();
+		if (filename != null && !name.isEmpty()) {
+			AspectoLegal documento = new AspectoLegal();
+			documento.setId_servicio_informacion(id_servicio_informacion);
+			documento.setNombre(name);
+			// TODO Colocar el tipo de documento, ¿cuáles son? =/
+			// documento.setTipo(0);
 			try {
-				al.setUrl(saveFile(documento, documentoFileName));
+				documento.setUrl(saveFile(file, filename));
 			} catch (IOException e) {
-				// levantar action error
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			al.setNombre(documentoNombre);
-			al.setTipo(LEGAL);
-			al.setId_servicio_informacion(id_servicio_informacion);
-			create(al);
+			create(documento);
 		}
 		return SUCCESS;
 	}
-	
-	@SuppressWarnings({ "unchecked" })
+
+	@SuppressWarnings("unchecked")
 	@SkipValidation
-	public String eliminarServicioInformacion(){		
-		Funcionalidad funcion_del = new Funcionalidad();
-		EntradaSalida io_del = new EntradaSalida();
-		List<EntradaSalida> ios_del = new ArrayList<EntradaSalida>();
-		
-		Object[] models = {new Funcionalidad(),new ServicioInformacion()};
-		funcionalidades = (List<Funcionalidad>)read(models, id_servicio_informacion, -1);
-		Iterator<Funcionalidad> iterador = funcionalidades.iterator(); 
-		
-		while(iterador.hasNext()){
-			funcion_del = iterador.next();
-						
-			Object[] models2 = {new EntradaSalida(),new Funcionalidad()};
-			ios_del = (List<EntradaSalida>)read(models2, funcion_del.getId_funcionalidad(), -1);
-			Iterator<EntradaSalida> iterador2 = ios_del.iterator();
-			
-			while(iterador2.hasNext()){
-				io_del = iterador2.next();
-				delete(io_del, io_del.getId_entrada_salida());
-			}
-			delete(funcion_del, funcion_del.getId_funcionalidad());
-		}
-		delete(new ServicioInformacion(), id_servicio_informacion);
-		
-		return SUCCESS;
-	}	
-		
-	@SkipValidation
-	public String publicarServicioInformacion(){		
-		servicio = (ServicioInformacion)read(servicio, id_servicio_informacion);
-		servicio.setPublicado(true);
-		update(servicio, id_servicio_informacion);		
-		return SUCCESS;
-	}
-	
-	@SkipValidation
-	public String despublicarServicioInformacion(){		
-		servicio = (ServicioInformacion)read(servicio, id_servicio_informacion);
-		servicio.setPublicado(false);
-		update(servicio, id_servicio_informacion);		
-		return SUCCESS;
-	}
-	
-	@SuppressWarnings({ "unchecked" })
-	@SkipValidation
-	public String examinarServicioInformacion(){
-		session = ActionContext.getContext().getSession();
-		Usuario usuario = new Usuario();		
-		usuario = (Usuario)session.get("usuario");
-		if(usuario == null){
-			return "errorSession";
-		}
-		ente = (Ente) read(new Ente(),usuario.getId_ente());
-		servicio = (ServicioInformacion)read(servicio, id_servicio_informacion);
-		Object[] models = {new Funcionalidad(),new ServicioInformacion()};
-		funcionalidades = (List<Funcionalidad>)read(models, id_servicio_informacion, -1);
-		Iterator<Funcionalidad> iterador = funcionalidades.iterator(); 		
-		while(iterador.hasNext()){
-			funcionalidad = iterador.next();						
-			Object[] models2 = {new EntradaSalida(),new Funcionalidad()};
-			ios = (List<EntradaSalida>)read(models2, funcionalidad.getId_funcionalidad(), -1);
-		}	
+	@Override
+	public String prepararFormulario() {
 		sectores = (List<Sector>) read(new Sector());
 		estados = (List<Estado>) read(new Estado());
-		sectores = (List<Sector>) read(new Sector());
 		areas = (List<Area>) read(new Area());
-		//unionareas = (List<UnionAreaServicioInformacion>) read(new UnionAreaServicioInformacion() );
-		unionareas = (List<UnionAreaServicioInformacion>)readUnion(new UnionAreaServicioInformacion(), servicio, id_servicio_informacion);
+		niveles = (List<Seguridad>) read(new Seguridad());
+		arquitecturas = (List<Arquitectura>) read(new Arquitectura());
+		parents = (List<Intercambio>) getParents(new Intercambio());
+		children = (List<Intercambio>) getChildren(new Intercambio());
+		session = ActionContext.getContext().getSession();
 		return SUCCESS;
 	}
-	
-	private String saveFile(File file, String fileName) throws IOException {
-		String INSTITUCION = "cnti"; // Obtener desde la base de datos.
-		String filePath = servletRequest.getSession().getServletContext()
-				.getRealPath("/archivos/" + INSTITUCION.toString());
-		File fileToCreate = new File(filePath, fileName);
-		FileUtils.copyFile(file, fileToCreate);
 
-		return "/archivos/" + INSTITUCION.toString() + "/" + fileName;
+	/**
+	 * Regresa la ruta en la que se guardará el archivo que cargó el usuario.
+	 * 
+	 * @param file
+	 *            Archivo a guardar.
+	 * @param name
+	 *            Nombre del archivo a guardar.
+	 * @return {@code String} Ruta donde se guarda el archivo.
+	 * @throws IOException
+	 */
+	private String saveFile(File file, String name) throws IOException {
+		// TODO Obtener el nombre de la institución desde la base de datos.
+		String ENTE = "CNTI".toLowerCase();
+		String path = servletRequest.getSession().getServletContext()
+				.getRealPath("/archivos/" + ENTE);
+		FileUtils.copyFile(file, new File(path, name));
+		return "/archivos/" + ENTE + "/" + name;
+	}
+
+	public List<Sector> getSectores() {
+		return sectores;
+	}
+
+	public void setSectores(List<Sector> sectores) {
+		this.sectores = sectores;
 	}
 
 	public List<Estado> getEstados() {
@@ -399,6 +332,14 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		this.areas = areas;
 	}
 
+	public List<Seguridad> getNiveles() {
+		return niveles;
+	}
+
+	public void setNiveles(List<Seguridad> niveles) {
+		this.niveles = niveles;
+	}
+
 	public List<Arquitectura> getArquitecturas() {
 		return arquitecturas;
 	}
@@ -407,129 +348,109 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		this.arquitecturas = arquitecturas;
 	}
 
-	public List<Sector> getSectores() {
-		return sectores;
+	public List<Intercambio> getParents() {
+		return parents;
 	}
 
-	public void setSectores(List<Sector> sectores) {
-		this.sectores = sectores;
+	public void setParents(List<Intercambio> parents) {
+		this.parents = parents;
 	}
 
-	public List<Intercambio> getIntercambiosPadres() {
-		return intercambiosPadres;
+	public List<Intercambio> getChildren() {
+		return children;
 	}
 
-	public void setIntercambiosPadres(List<Intercambio> intercambiosPadres) {
-		this.intercambiosPadres = intercambiosPadres;
+	public void setChildren(List<Intercambio> children) {
+		this.children = children;
 	}
 
-	public List<Intercambio> getIntercambiosHijos() {
-		return intercambiosHijos;
+	public HttpServletRequest getServletRequest() {
+		return servletRequest;
 	}
 
-	public void setIntercambiosHijos(List<Intercambio> intercambiosHijos) {
-		this.intercambiosHijos = intercambiosHijos;
+	public void setServletRequest(HttpServletRequest servletRequest) {
+		this.servletRequest = servletRequest;
 	}
 
-	public List<Seguridad> getL_seguridad() {
-		return l_seguridad;
+	public File getFile() {
+		return file;
 	}
 
-	public void setL_seguridad(List<Seguridad> l_seguridad) {
-		this.l_seguridad = l_seguridad;
+	public void setFile(File file) {
+		this.file = file;
 	}
 
-	@RequiredStringValidator(message = "Introduzca la versión del Servicio de Información")
-	public String getVersion() {
-		return version;
+	public String getName() {
+		return name;
 	}
 
-	public void setVersion(String version) {
-		this.version = version;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	@FieldExpressionValidator(expression = "!sector.equals(\"-1\")", message = "Seleccione un valor. ")
-	public String getSector() {
+	public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+
+	@FieldExpressionValidator(expression = "sector > 0", message = "Debe seleccionar un sector")
+	public long getSector() {
 		return sector;
 	}
 
-	public void setSector(String sector) {
+	public void setSector(long sector) {
 		this.sector = sector;
 	}
 
-	@RequiredStringValidator(message = "Introduzca El nombre")
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	@RequiredStringValidator(message = "Proporcione una descripción ")
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
-	@FieldExpressionValidator(expression = "!sector.equals(\"-1\")", message = "Seleccione un valor. ")
-	public String getEstado() {
+	@FieldExpressionValidator(expression = "estado > 0", message = "Debe seleccionar un estado")
+	public long getEstado() {
 		return estado;
 	}
 
-	public void setEstado(String estado) {
+	public void setEstado(long estado) {
 		this.estado = estado;
 	}
 
-	@FieldExpressionValidator(expression = "!area.isEmpty()", message = "Seleccione un valor. ")
-	public List<String> getArea() {
+	@FieldExpressionValidator(expression = "!area.isEmpty()", message = "Debe seleccionar algún area que esté orientado el servicio")
+	public List<Long> getArea() {
 		return area;
 	}
 
-	public void setArea(List<String> area) {
+	public void setArea(List<Long> area) {
 		this.area = area;
 	}
 
-	@FieldExpressionValidator(expression = "!seguridad.equals(\"-1\")", message = "Seleccione un valor. ")
-	public String getSeguridad() {
+	@FieldExpressionValidator(expression = "seguridad > 0", message = "Debe seleccionar un nivel de seguridad")
+	public long getSeguridad() {
 		return seguridad;
 	}
 
-	public void setSeguridad(String seguridad) {
+	public void setSeguridad(long seguridad) {
 		this.seguridad = seguridad;
 	}
 
-	@FieldExpressionValidator(expression = "!arquitectura.isEmpty()", message = "Seleccione un valor. ")
-	public List<String> getArquitectura() {
+	@FieldExpressionValidator(expression = "!arquitectura.isEmpty()", message = "Debe seleccionar algún tipo de arquitectura")
+	public List<Long> getArquitectura() {
 		return arquitectura;
 	}
 
-	public void setArquitectura(List<String> arquitectura) {
+	public void setArquitectura(List<Long> arquitectura) {
 		this.arquitectura = arquitectura;
 	}
 
-	@FieldExpressionValidator(expression = "!intercambio.equals(\"-1\")", message = "Seleccione un valor.")
-	public String getIntercambio() {
+	@FieldExpressionValidator(expression = "intercambio > 0", message = "Debe seleccionar un tipo de intercambio")
+	public long getIntercambio() {
 		return intercambio;
 	}
 
-	public void setIntercambio(String intercambio) {
+	public void setIntercambio(long intercambio) {
 		this.intercambio = intercambio;
 	}
 
-	@FieldExpressionValidator(expression = "!(codigo.length() < 3)", message = "Proporcione un código de área teléfonico válido")
-	public String getCodigo() {
-		return codigo;
-	}
-
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
-	}
-
-	@FieldExpressionValidator(expression = "!(telefono.length() < 7)", message = "Proporcione un número telefónico válido")
+	@RequiredStringValidator(message = "Debe introducir un número de teléfono")
 	public String getTelefono() {
 		return telefono;
 	}
@@ -538,8 +459,8 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		this.telefono = telefono;
 	}
 
-	@RequiredStringValidator(message = "Proporcione una dirección de correo para el soporte técnico ")
-	@EmailValidator(message = "Proporcione una dirección válida de correo para el soporte técnico")
+	@EmailValidator(fieldName = "correo", message = "Debe introducir un correo electrónico válido")
+	@RequiredStringValidator(message = "Debe introducir una dirección de correo electrónico")
 	public String getCorreo() {
 		return correo;
 	}
@@ -548,17 +469,12 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		this.correo = correo;
 	}
 
-	public long getid_servicio_informacion() {
+	public long getId_servicio_informacion() {
 		return id_servicio_informacion;
 	}
 
-	public void setid_servicio_informacion(long id_servicio_informacion) {
+	public void setId_servicio_informacion(long id_servicio_informacion) {
 		this.id_servicio_informacion = id_servicio_informacion;
-	}
-
-	@Override
-	public void setServletRequest(HttpServletRequest servletRequest) {
-		this.servletRequest = servletRequest;
 	}
 
 	public ServicioInformacion getServicio() {
@@ -569,61 +485,28 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		this.servicio = servicio;
 	}
 
-	public List<Funcionalidad> getFuncionalidades() {
-		return funcionalidades;
-	}
-
-	public void setFuncionalidades(List<Funcionalidad> funcionalidades) {
-		this.funcionalidades = funcionalidades;
-	}
-
-	public Funcionalidad getFuncionalidad() {
-		return funcionalidad;
-	}
-
-	public void setFuncionalidad(Funcionalidad funcionalidad) {
-		this.funcionalidad = funcionalidad;
-	}
-
-	public File getDocumento() {
-		return documento;
-	}
-
-	public void setDocumento(File documento) {
-		this.documento = documento;
-	}
-
-	public String getDocumentoNombre() {
-		return documentoNombre;
-	}
-
-	public void setDocumentoNombre(String documentoNombre) {
-		this.documentoNombre = documentoNombre;
-	}
-
-	public String getDocumentoFileName() {
-		return documentoFileName;
-	}
-
-	public void setDocumentoFileName(String documentoFileName) {
-		this.documentoFileName = documentoFileName;
-	}
-
-	@RequiredStringValidator(message = "Proporcione el nombre del responsable del Servicio de Información")
-	public String getResponsable() {
-		return responsable;
-	}
-
-	public void setResponsable(String responsable) {
-		this.responsable = responsable;
-	}
-
 	public String[] getCodigos() {
 		return codigos;
 	}
 
 	public void setCodigos(String[] codigos) {
 		this.codigos = codigos;
+	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+
+	public List<Funcionalidad> getFuncionalidades() {
+		return funcionalidades;
+	}
+
+	public void setFuncionalidades(List<Funcionalidad> funcionalidades) {
+		this.funcionalidades = funcionalidades;
 	}
 
 	public List<EntradaSalida> getIos() {
@@ -634,14 +517,6 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		this.ios = ios;
 	}
 
-	public Ente getEnte() {
-		return ente;
-	}
-
-	public void setEnte(Ente ente) {
-		this.ente = ente;
-	}
-
 	public List<UnionAreaServicioInformacion> getUnionareas() {
 		return unionareas;
 	}
@@ -650,9 +525,77 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		this.unionareas = unionareas;
 	}
 
-	@Override
-	public String prepararModificaciones() {
-		// TODO Auto-generated method stub
-		return null;
+	public Ente getEnte() {
+		return ente;
 	}
+
+	public void setEnte(Ente ente) {
+		this.ente = ente;
+	}
+
+	public Funcionalidad getFuncionalidad() {
+		return funcionalidad;
+	}
+
+	public void setFuncionalidad(Funcionalidad funcionalidad) {
+		this.funcionalidad = funcionalidad;
+	}
+
+	// @SuppressWarnings("unchecked")
+	// @SkipValidation
+	// public String registrarPrueba() {
+	// id_servicio_informacion = getNextId(servicio);
+	// servicio.setId_ente(1);
+	// servicio.setId_usuario(1);
+	// servicio.setId_sector(1);
+	// servicio.setNombre("Nombre" + new Date());
+	// servicio.setDescripcion("Descripción");
+	// servicio.setId_estado(1);
+	// servicio.setId_seguridad(1);
+	// servicio.setVersion("1.0");
+	// servicio.setId_intercambio(1);
+	// servicio.setResponsable(responsable);
+	// create(servicio);
+	//
+	// funcionalidad.setId_servicio_informacion(id_servicio_informacion);
+	// funcionalidad.setNombre("Funcionalidad" + new Date());
+	// funcionalidad.setDescripcion("Descripción");
+	// create(funcionalidad);
+	//
+	// funcionalidades = (List<Funcionalidad>) read(FSI,
+	// id_servicio_informacion, -1);
+	// // funcionalidades = ((List<Funcionalidad>) read(funcionalidad,
+	// // new ServicioInformacion(), getNextId(servicio) - 1));
+	//
+	// // UnionAreaServicioInformacion unionarea = new
+	// // UnionAreaServicioInformacion();
+	// // for (int i = 0; i < area.size(); i++) {
+	// // unionarea.setId_area(Long.parseLong(String.valueOf(area.get(i))));
+	// // unionarea.setId_servicio_informacion(id_servicio_informacion);
+	// // // create(unionarea, id_si);
+	// // }
+	// //
+	// // // Seteando el ARQUITECTURA
+	// // UnionArquitecturaServicioInformacion unionarquitectura = new
+	// // UnionArquitecturaServicioInformacion();
+	// // for (int i = 0; i < arquitectura.size(); i++) {
+	// // unionarquitectura.setId_arquitectura(Long.parseLong(String
+	// // .valueOf(arquitectura.get(i))));
+	// // unionarquitectura.setId_servicio_informacion(id_servicio_informacion);
+	// // // create(unionarquitectura, id_si);
+	// // }
+	// //
+	// // // Seteando el TELEFONO DE CONTACTO
+	// // Telefono telf = new Telefono();
+	// // telf.setTelefono(codArea + "-" + telefonoContacto);
+	// // telf.setId_servicio_informacion(id_servicio_informacion);
+	// // create(telf);
+	// //
+	// // // Seteando el CORREO DE CONTACTO
+	// // Correo correo = new Correo();
+	// // correo.setCorreo(correoContacto);
+	// // correo.setId_servicio_informacion(id_servicio_informacion);
+	// // create(correo);
+	// return SUCCESS;
+	// }
 }

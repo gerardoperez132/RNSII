@@ -23,7 +23,7 @@ public interface Constants {
 			"288", "291", "292", "293", "294", "295" };
 
 	/**
-	 * Interfaz con los estados de un sistema de información.
+	 * Interfaz con los estados de registro en la base de datos.
 	 * 
 	 * @author Richard Ricciardelli
 	 * 
@@ -89,5 +89,20 @@ public interface Constants {
 		/** Relación 1 Servicio de Información tiene N Funcionalidades. */
 		public static final Object[] FSI = { new Funcionalidad(),
 				new ServicioInformacion() };
+	}
+
+	/**
+	 * Interfaz con métodos para implementar en cada formulario.
+	 * 
+	 * @author Richard Ricciardelli
+	 * 
+	 */
+	public interface Formulario {
+		/**
+		 * Prepara el formulario del modelo dado para su registro.
+		 * 
+		 * @return "success"
+		 */
+		public String prepararFormulario();
 	}
 }

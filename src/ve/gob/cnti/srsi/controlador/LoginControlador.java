@@ -50,17 +50,8 @@ public class LoginControlador extends DAO {
 	}
 
 	@SkipValidation
-	public String mostrarLogin() {
-		if (usuario == null) {
-			addFieldError("correo",
-					"Ha ocurrido un problema recuperando sus datos!!!");
-			return INPUT;
-		} else if (!usuario.getClave().contains(password)) {
-			addFieldError("password", "La clave no coincide con el correo");
-			return INPUT;
-		} else {
-			return SUCCESS;
-		}
+	public String mostrarLogin() {		
+			return SUCCESS;		
 	}
 
 	@SkipValidation

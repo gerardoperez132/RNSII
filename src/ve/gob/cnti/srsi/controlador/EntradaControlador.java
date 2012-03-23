@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
+import ve.gob.cnti.srsi.dao.Constants.Formulario;
 import ve.gob.cnti.srsi.dao.Constants.Modelos;
 import ve.gob.cnti.srsi.dao.Constants.TipoEntradaSalida;
 import ve.gob.cnti.srsi.dao.DAO;
@@ -15,8 +16,8 @@ import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.TipoDato;
 
 @SuppressWarnings("serial")
-public class EntradaControlador extends DAO implements Formulario,
-		TipoEntradaSalida, Modelos {
+public class EntradaControlador extends DAO implements TipoEntradaSalida,
+		Modelos, Formulario {
 
 	private List<EntradaSalida> entradas;
 	private List<TipoDato> tipoDatos;
@@ -245,11 +246,5 @@ public class EntradaControlador extends DAO implements Formulario,
 		} else {
 			prepararFormularioSimple();
 		}
-	}
-
-	@Override
-	public String prepararModificaciones() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

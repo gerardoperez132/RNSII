@@ -119,7 +119,6 @@
 						<s:if test="%{id_area == #area}">
 							<s:property value="nombre"/>
 						</s:if>
-						<s:else><s:property value="nombre"/></s:else>
 					</s:iterator>
 					</s:if>					
 				</s:iterator>

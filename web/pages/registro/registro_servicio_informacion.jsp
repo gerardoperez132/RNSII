@@ -11,7 +11,8 @@
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
 <script type="text/javascript" src="res/js/jquery-1.7.1.js"></script>
 <script type="text/javascript" src="res/js/tabs.js"></script>
-<title><s:text name="registro.title"></s:text></title>
+<title><s:text name="registro.title"></s:text>
+</title>
 	</head>
 	<body>
 		<!-- Este es el div de la sombra del contenedor del maquetado de la página -->
@@ -71,24 +72,24 @@
 									<s:text name="nombre.title"></s:text>
 								</h5>
 								<s:fielderror>
-									<s:param>nombre</s:param>
+									<s:param>servicio.nombre</s:param>
 								</s:fielderror>
-								<s:textfield name="nombre" />
+								<s:textfield name="servicio.nombre" />
 								<h5 class="formulario">
 									<s:text name="descripcion.title"></s:text>
 								</h5>
 								<s:fielderror>
-									<s:param>descripcion</s:param>
+									<s:param>servicio.descripcion</s:param>
 								</s:fielderror>
-								<s:textarea name="descripcion" cols="40" rows="10" />
+								<s:textarea name="servicio.descripcion" cols="40" rows="10" />
 								<h5 class="formulario">
 									<s:text name="area.title"></s:text>
 								</h5>
 								<s:fielderror>
 									<s:param>area</s:param>
 								</s:fielderror>
-								<s:checkboxlist list="areas" listKey="id_area"
-									listValue="nombre" name="area" value="area" />
+								<s:checkboxlist list="areas" listValue="nombre" name="area"
+									listKey="id_area" />
 								<h5 class="formulario">
 									<s:text name="estado.title"></s:text>
 								</h5>
@@ -96,8 +97,13 @@
 									<s:param>estado</s:param>
 								</s:fielderror>
 								<s:select name="estado" list="estados" listKey="id_estado"
-									listValue="nombre" headerKey="-1" headerValue="Seleccione"></s:select>
+									listValue="nombre" headerKey="-1"
+									headerValue="%{getText('estado.select')}"></s:select>
 							</div>
+							<!-- PROBAR A PARTIR DE AQUÍ... -->
+
+
+							<!-- *************************** ARREGLAR ARCHIVOS. ******************** -->
 							<div id="tab2" class="tab_content">
 								<p class="formulario">Aspectos Legales (¿Hará falta esto?)</p>
 								<small><s:text name="tab2.description"></s:text> </small>
@@ -106,18 +112,20 @@
 									<s:text name="documento.name"></s:text>
 								</h5>
 								<s:fielderror>
-									<s:param>documentoNombre</s:param>
+									<s:param>name</s:param>
 								</s:fielderror>
-								<s:textfield name="documentoNombre" labelposition="top" />
+								<s:textfield name="name" labelposition="top" />
 								<h5 class="formulario">
 									<s:text name="documento.file"></s:text>
 								</h5>
 								<s:fielderror>
-									<s:param>documento</s:param>
+									<s:param>file</s:param>
 								</s:fielderror>
-								<s:file name="documento" value="documentoFileName"></s:file>
+								<s:file name="file" value="filename"></s:file>
 								<br> <br> <br> <br>
 							</div>
+							<!-- *************************** ARREGLAR ARCHIVOS. ******************** -->
+
 							<div id="tab3" class="tab_content">
 								<p class="formulario">Descripción técnica del servicio ¿Hará
 									falta esto?</p>
@@ -129,7 +137,7 @@
 								<s:fielderror>
 									<s:param>seguridad</s:param>
 								</s:fielderror>
-								<s:select list="l_seguridad" listKey="id_seguridad"
+								<s:select list="niveles" listKey="id_seguridad"
 									listValue="nombre" headerKey="-1"
 									headerValue="%{getText('seguridad.select')}" name="seguridad"></s:select>
 								<h5 class="formulario">
@@ -138,16 +146,16 @@
 								<s:fielderror>
 									<s:param>arquitectura</s:param>
 								</s:fielderror>
-								<s:checkboxlist list="arquitecturas" listKey="id_arquitectura"
-									listValue="nombre" name="arquitectura" />
+								<s:checkboxlist list="arquitecturas" listValue="nombre" name="arquitectura"
+									listKey="id_arquitectura" />
 								<br>
 								<h5 class="formulario">
 									<s:text name="version.title"></s:text>
 								</h5>
 								<s:fielderror>
-									<s:param>version</s:param>
+									<s:param>servicio.version</s:param>
 								</s:fielderror>
-								<s:textfield name="version"
+								<s:textfield name="servicio.version"
 									onkeyup="var pattern = /[^0-9\.]/g;
 								this.value = this.value.replace(pattern, '');"
 									maxlength="7" />
@@ -164,11 +172,11 @@
 											<s:text name="intercambio.select"></s:text>
 										</option>
 									</optgroup>
-									<s:iterator value="intercambiosPadres">
+									<s:iterator value="parents">
 										<s:set name="padre" value="id_intercambio"></s:set>
 										<s:set name="nombrePadre" value="nombre"></s:set>
 										<optgroup label="<s:property value="nombre"/>">
-											<s:iterator value="intercambiosHijos">
+											<s:iterator value="children">
 												<s:if test="%{#padre == id_padre}">
 													<option value="<s:property value="id_intercambio"/>"
 														<s:if test="intercambio == id_intercambio"> selected="selected"</s:if>>
@@ -188,9 +196,9 @@
 									<s:text name="responsable.title"></s:text>
 								</h5>
 								<s:fielderror>
-									<s:param>responsable</s:param>
+									<s:param>servicio.responsable</s:param>
 								</s:fielderror>
-								<s:textfield name="responsable" labelposition="top" />
+								<s:textfield name="servicio.responsable" labelposition="top" />
 								<h5 class="formulario">
 									<s:text name="telefono.title"></s:text>
 								</h5>
@@ -199,7 +207,8 @@
 								</s:fielderror>
 								<table>
 									<tr>
-										<td><s:select name="codigo" list="codigos" /></td>
+										<td><s:select name="codigo" list="codigos" />
+										</td>
 										<td><s:textfield name="telefono" labelposition="top"
 												maxlength="7"
 												onkeyup="var no_digito = /\D/g; this.value = this.value.replace(no_digito , '');" />

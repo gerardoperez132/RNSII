@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
+import ve.gob.cnti.srsi.dao.Constants.Formulario;
 import ve.gob.cnti.srsi.dao.Constants.Modelos;
 import ve.gob.cnti.srsi.dao.Constants.TipoEntradaSalida;
 import ve.gob.cnti.srsi.dao.DAO;
@@ -192,7 +193,7 @@ public class SalidaControlador extends DAO implements Formulario,
 
 	@SuppressWarnings("unchecked")
 	@SkipValidation
-	public String eliminarSalidaSimple() {
+	public String eliminarEntradaSimple() {
 		delete(salida, id_entrada_salida);
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
@@ -203,7 +204,7 @@ public class SalidaControlador extends DAO implements Formulario,
 
 	@SuppressWarnings("unchecked")
 	@SkipValidation
-	public String eliminarSalidaCompleja() {
+	public String eliminarEntradaCompleja() {
 		salidas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad, SALIDA);
 		Iterator<EntradaSalida> iterator = salidas.iterator();
 		while (iterator.hasNext()) {
@@ -238,11 +239,5 @@ public class SalidaControlador extends DAO implements Formulario,
 		} else {
 			prepararFormularioSimple();
 		}
-	}
-
-	@Override
-	public String prepararModificaciones() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

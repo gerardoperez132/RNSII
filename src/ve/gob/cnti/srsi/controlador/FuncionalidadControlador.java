@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
+import ve.gob.cnti.srsi.dao.Constants.Formulario;
 import ve.gob.cnti.srsi.dao.Constants.Modelos;
 import ve.gob.cnti.srsi.dao.Constants.TipoEntradaSalida;
 import ve.gob.cnti.srsi.dao.DAO;
@@ -141,7 +142,6 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 		return SUCCESS;
 	}
 
-	@Override
 	@SkipValidation
 	public String prepararModificaciones() {
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);

@@ -44,7 +44,7 @@ public class ServicioInformacion {
 	private long id;
 	private long id_servicio_informacion;
 	private long id_ente;
-	private long id_usuario;	
+	private long id_usuario;
 	private String nombre;
 	private String descripcion;
 	private String version;
@@ -107,7 +107,11 @@ public class ServicioInformacion {
 
 	public long getId_seguridad() {
 		return id_seguridad;
-	}	
+	}
+
+	public long getId_intercambio() {
+		return id_intercambio;
+	}
 
 	public int getStatus() {
 		return status;
@@ -167,7 +171,11 @@ public class ServicioInformacion {
 
 	public void setId_seguridad(long id_seguridad) {
 		this.id_seguridad = id_seguridad;
-	}	
+	}
+
+	public void setId_intercambio(long id_intercambio) {
+		this.id_intercambio = id_intercambio;
+	}
 
 	public void setStatus(int status) {
 		this.status = status;
@@ -181,14 +189,6 @@ public class ServicioInformacion {
 		this.fecha_modificado = fecha_modificado;
 	}
 
-	public long getId_intercambio() {
-		return id_intercambio;
-	}
-
-	public void setId_intercambio(long id_intercambio) {
-		this.id_intercambio = id_intercambio;
-	}
-	
 	@Override
 	public String toString() {
 		return "ServicioInformacion [id=" + id + ", id_servicio_informacion="
@@ -201,5 +201,4 @@ public class ServicioInformacion {
 				+ id_intercambio + ", status=" + status + ", fecha_creado="
 				+ fecha_creado + ", fecha_modificado=" + fecha_modificado + "]";
 	}
-
 }
