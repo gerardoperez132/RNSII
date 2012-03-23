@@ -22,6 +22,7 @@ import ve.gob.cnti.srsi.modelo.Area;
 import ve.gob.cnti.srsi.modelo.Arquitectura;
 import ve.gob.cnti.srsi.modelo.AspectoLegal;
 import ve.gob.cnti.srsi.modelo.Correo;
+import ve.gob.cnti.srsi.modelo.Ente;
 import ve.gob.cnti.srsi.modelo.EntradaSalida;
 import ve.gob.cnti.srsi.modelo.Estado;
 import ve.gob.cnti.srsi.modelo.Funcionalidad;
@@ -44,6 +45,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		ServletRequestAware, Formulario, TipoDocumento, Modelos {
 
 	private List<Area> areas = new ArrayList<Area>();
+	private List<UnionAreaServicioInformacion> unionareas = new ArrayList<UnionAreaServicioInformacion>();
 	private List<Estado> estados = new ArrayList<Estado>();
 	private List<Seguridad> l_seguridad = new ArrayList<Seguridad>();
 	private List<Arquitectura> arquitecturas = new ArrayList<Arquitectura>();
@@ -51,10 +53,12 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	private List<Intercambio> intercambiosPadres = new ArrayList<Intercambio>();
 	private List<Intercambio> intercambiosHijos = new ArrayList<Intercambio>();
 
+	private Ente ente = new Ente();
 	private ServicioInformacion servicio = new ServicioInformacion();
 	private Funcionalidad funcionalidad = new Funcionalidad();
 
 	private List<Funcionalidad> funcionalidades = new ArrayList<Funcionalidad>();
+	private List<EntradaSalida> ios = new ArrayList<EntradaSalida>();
 
 	private long id_servicio_informacion;
 	private String sector;
@@ -253,7 +257,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		for (int i = 0; i < area.size(); i++) {
 			unionarea.setId_area(Long.parseLong(String.valueOf(area.get(i))));
 			unionarea.setId_servicio_informacion(id_servicio_informacion);
-			// create(unionarea, id_si);
+			//create(unionarea, id_si);
 		}
 
 		// Seteando el ARQUITECTURA
@@ -327,7 +331,6 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		
 	@SkipValidation
 	public String publicarServicioInformacion(){		
-		ServicioInformacion servicio = new ServicioInformacion();
 		servicio = (ServicioInformacion)read(servicio, id_servicio_informacion);
 		servicio.setPublicado(true);
 		update(servicio, id_servicio_informacion);		
@@ -336,10 +339,37 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	
 	@SkipValidation
 	public String despublicarServicioInformacion(){		
-		ServicioInformacion servicio = new ServicioInformacion();
 		servicio = (ServicioInformacion)read(servicio, id_servicio_informacion);
 		servicio.setPublicado(false);
 		update(servicio, id_servicio_informacion);		
+		return SUCCESS;
+	}
+	
+	@SuppressWarnings({ "unchecked" })
+	@SkipValidation
+	public String examinarServicioInformacion(){
+		session = ActionContext.getContext().getSession();
+		Usuario usuario = new Usuario();		
+		usuario = (Usuario)session.get("usuario");
+		if(usuario == null){
+			return "errorSession";
+		}
+		ente = (Ente) read(new Ente(),usuario.getId_ente());
+		servicio = (ServicioInformacion)read(servicio, id_servicio_informacion);
+		Object[] models = {new Funcionalidad(),new ServicioInformacion()};
+		funcionalidades = (List<Funcionalidad>)read(models, id_servicio_informacion, -1);
+		Iterator<Funcionalidad> iterador = funcionalidades.iterator(); 		
+		while(iterador.hasNext()){
+			funcionalidad = iterador.next();						
+			Object[] models2 = {new EntradaSalida(),new Funcionalidad()};
+			ios = (List<EntradaSalida>)read(models2, funcionalidad.getId_funcionalidad(), -1);
+		}	
+		sectores = (List<Sector>) read(new Sector());
+		estados = (List<Estado>) read(new Estado());
+		sectores = (List<Sector>) read(new Sector());
+		areas = (List<Area>) read(new Area());
+		//unionareas = (List<UnionAreaServicioInformacion>) read(new UnionAreaServicioInformacion() );
+		unionareas = (List<UnionAreaServicioInformacion>)readUnion(new UnionAreaServicioInformacion(), servicio, id_servicio_informacion);
 		return SUCCESS;
 	}
 	
@@ -594,6 +624,30 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 
 	public void setCodigos(String[] codigos) {
 		this.codigos = codigos;
+	}
+
+	public List<EntradaSalida> getIos() {
+		return ios;
+	}
+
+	public void setIos(List<EntradaSalida> ios) {
+		this.ios = ios;
+	}
+
+	public Ente getEnte() {
+		return ente;
+	}
+
+	public void setEnte(Ente ente) {
+		this.ente = ente;
+	}
+
+	public List<UnionAreaServicioInformacion> getUnionareas() {
+		return unionareas;
+	}
+
+	public void setUnionareas(List<UnionAreaServicioInformacion> unionareas) {
+		this.unionareas = unionareas;
 	}
 
 	@Override

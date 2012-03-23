@@ -116,6 +116,13 @@
 									<table style="margin: 0; padding: 0;">
 										<tr style="margin: 0; padding: 0;">
 											<td style="margin: 0; padding: 0;">
+												<form action="examinarServicioInformacion" method="POST">													
+													<s:hidden name="id_servicio_informacion"></s:hidden>													
+													<input type="submit" value="<s:text name="detalles"/>"
+														style="font-size: 0.9em;" />
+												</form>
+											</td>
+											<td style="margin: 0; padding: 0;">
 												<form action="" method="POST">													
 													<s:hidden name="id_servicio_informacion"></s:hidden>													
 													<input type="submit" value="<s:text name="modificar"/>"

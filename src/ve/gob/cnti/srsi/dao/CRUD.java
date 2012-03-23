@@ -32,6 +32,8 @@ public interface CRUD {
 	 */
 	public ArrayList<?> read(Object model);
 
+	public ArrayList<?> readUnion(Object unionModel, Object model, long id);
+
 	/**
 	 * Permite obtener el registro activo especificado por el identificador del
 	 * modelo dado.

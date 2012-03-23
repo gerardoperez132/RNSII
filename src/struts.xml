@@ -42,6 +42,11 @@
 			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
 			<result name="success" type="redirectAction">home</result>
 		</action>
+		
+		<action name="examinarServicioInformacion" method="examinarServicioInformacion"
+			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
+			<result name="success">user/examinarServicio.jsp</result>
+		</action>
 
 
 		<!--********************************************
@@ -149,7 +154,7 @@
 		<action name="eliminarEntradaCompleja" method="eliminarEntradaCompleja"
 			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
 			<result name="success">registro/entradas.jsp</result>
-		</action>
+		</action>		
 
 		<!--***********************************************
 		                Actions para Salidas 

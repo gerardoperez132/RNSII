@@ -20,24 +20,19 @@
 			<div id="container">
 				<%@include file="../layout/header.jsp"%>
 				<!-- Esta es la barra lateral -->
-				<div id="sidebar">
-					<div class="main_cont">
-						<div class="menu_top_bg">Navegacion</div>
-						<div class="sub_menu">
-							<ul>
-								<li><a class="selected">Paso 1</a>
-								</li>
-								<li><a href="#">Paso 2</a>
-								</li>
-								<li><a href="#">Paso 3 </a>
-								</li>
-							</ul>
-						</div>
-					</div>
-					<small>Paso 1 Registro de Servicio de Información</small><br>
-					<br> <small>Paso 2 Registro de Funcionalidad(es)</small> <br>
-					<br> <small>Paso 3 Registro de Entradas/Salidas</small><br>
-					<br> <small>Paso 4 Verificar y guardar</small>
+				<div id="sidebar">					
+					<small><strong>Paso 1:</strong></small><br>					
+					<small><strong>Registro de Servicio de Información</strong></small>
+					<hr>					
+					<small>Paso 2:</small><br>
+					<small>Registro de Funcionalidad(es)</small>
+					<hr>					
+					<small>Paso 3:</small><br>
+					<small>Registro de Entradas/Salidas</small>
+					<hr>									
+					<small>Paso 4:</small><br>	
+					<small>Verificar y guardar</small>
+					<hr>
 				</div>
 				<!-- Este es el div de contenidos -->
 				<div id="content">

@@ -91,6 +91,24 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 	}
 
 	@Override
+	public ArrayList<?> readUnion(Object unionModel, Object model, long id) {
+		ArrayList<?> result;
+		try {
+			startConnection();
+			result = (ArrayList<?>) session.createQuery(
+					"FROM " + unionModel.getClass().getSimpleName() + " WHERE "
+							+ getField(model) + " = " + id + " AND status = "
+							+ ACTIVO).list();
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+		return result;
+	}
+
+	@Override
 	public Object read(Object model, long id) {
 		Object result;
 		try {
