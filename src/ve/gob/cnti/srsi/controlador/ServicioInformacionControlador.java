@@ -49,7 +49,7 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 	private List<Intercambio> parents;
 	private List<Intercambio> children;
 	private List<Funcionalidad> funcionalidades;
-	private List<EntradaSalida> ios;
+	private List<List<EntradaSalida>> ios = new ArrayList<List<EntradaSalida>>();
 	private List<UnionAreaServicioInformacion> unionareas;
 
 	private HttpServletRequest servletRequest;
@@ -140,11 +140,15 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 		funcionalidades = (List<Funcionalidad>) read(models,
 				id_servicio_informacion, -1);
 		Iterator<Funcionalidad> iterador = funcionalidades.iterator();
+		int index = 0;
 		while (iterador.hasNext()) {
 			funcionalidad = iterador.next();
 			Object[] models2 = { new EntradaSalida(), new Funcionalidad() };
-			ios = (List<EntradaSalida>) read(models2,
+			List<EntradaSalida> es_tmp = (List<EntradaSalida>) read(models2,
 					funcionalidad.getId_funcionalidad(), -1);
+			ios.add(es_tmp);
+			System.out.println(ios.get(index));
+			index++;
 		}
 		sectores = (List<Sector>) read(new Sector());
 		estados = (List<Estado>) read(new Estado());
@@ -509,14 +513,6 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 		this.funcionalidades = funcionalidades;
 	}
 
-	public List<EntradaSalida> getIos() {
-		return ios;
-	}
-
-	public void setIos(List<EntradaSalida> ios) {
-		this.ios = ios;
-	}
-
 	public List<UnionAreaServicioInformacion> getUnionareas() {
 		return unionareas;
 	}
@@ -539,6 +535,14 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 
 	public void setFuncionalidad(Funcionalidad funcionalidad) {
 		this.funcionalidad = funcionalidad;
+	}
+
+	public List<List<EntradaSalida>> getIos() {
+		return ios;
+	}
+
+	public void setIos(List<List<EntradaSalida>> ios) {
+		this.ios = ios;
 	}
 
 	// @SuppressWarnings("unchecked")
