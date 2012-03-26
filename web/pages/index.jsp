@@ -35,6 +35,10 @@
 			<div id="content">
 				<br>
 				
+				<s:url id="login"
+					action="autenticarUsuario"></s:url>
+				<s:a href="%{login}">Entrar al Sistema</s:a>
+				<br>	
 								
 				<s:url id="registrarServicioInformacion"
 					action="prepararServicioInformacion"></s:url>
