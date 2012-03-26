@@ -188,13 +188,13 @@
 														<td>Dato de entrada</td>
 													</tr>
 												</s:if>
-												<s:elseif test="id_padre > 0 && tipo == 0">
+												<s:elseif test="id_padre > 0 && tipo == 0 && #id_funcion == id_funcionalidad">
 													<s:set var="padre" value="id_padre"></s:set>
 													<s:iterator value="hijos" status="hijos_Status">
 														<s:if test="%{id_padre > 0 && id_padre == #padre && tipo == 0 && #id_funcion == id_funcionalidad}">
 															<s:set name="index_1000" value="%{#index_1000 + 1}" />
 															<tr
-																id="node-<s:property value="%{((100) +  (#index_1000))}" />"
+																id="node-<s:property value="%{((1000) +  (#index_1000))}" />"
 																class="child-of-node-<s:property value="%{(100 + #index_100)}"/>">
 																<td><s:property value="nombre" /></td>
 																<td><s:property value="descripcion" /></td>
@@ -229,14 +229,14 @@
 														<td>Dato de salida</td>
 													</tr>
 												</s:if>
-												<s:elseif test="id_padre > 0 && tipo == 1">
+												<s:elseif test="id_padre > 0 && tipo == 1 && #id_funcion == id_funcionalidad">
 													<s:set var="padre" value="id_padre"></s:set>
 													<s:iterator value="hijos" status="hijos_Status">
 														<s:if test="%{id_padre > 0 && id_padre == #padre && tipo == 1 && #id_funcion == id_funcionalidad}">
 															<s:set name="index_1000" value="%{#index_1000 + 1}" />
 															<tr
-																id="node-<s:property value="%{((100) +  (#index_1000))}" />"
-																class="child-of-node-<s:property value="%{(100 + #index_1000)}"/>">
+																id="node-<s:property value="%{((1000) +  (#index_1000))}" />"
+																class="child-of-node-<s:property value="%{(100 + #index_100)}"/>">
 																<td><s:property value="nombre" /></td>
 																<td><s:property value="descripcion" /></td>
 																<td><s:date name="fecha_creado"
