@@ -73,6 +73,7 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 	private long intercambio;
 	private String telefono;
 	private String correo;
+	private boolean modificar;
 
 	@SuppressWarnings("rawtypes")
 	private Map session;
@@ -240,7 +241,7 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 			createUnion(unionAreaServicioInformacion);
 		}
 
-		UnionArquitecturaServicioInformacion unionArquitecturaServicioInformacion = new UnionArquitecturaServicioInformacion();
+		UnionArquitecturaServicioInformacion unionArquitecturaServicioInformacion = new UnionArquitecturaServicioInformacion();		
 		for (int i = 0; i < arquitectura.size(); i++) {
 			unionArquitecturaServicioInformacion
 					.setId_arquitectura(arquitectura.get(i));
@@ -275,6 +276,45 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 		}
 		return SUCCESS;
 	}
+	
+	
+	public String modificarServicioInformacion() {
+		session = ActionContext.getContext().getSession();
+		Usuario usuario = new Usuario();
+		usuario = (Usuario) session.get("usuario");
+		if (usuario == null) {
+			return "errorSession";
+		}
+		ServicioInformacion servicio2 = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		servicio2 = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		servicio.setFecha_creado(servicio2.getFecha_creado());
+		servicio.setFecha_modificado(servicio2.getFecha_modificado());		
+		servicio.setId_ente(usuario.getId_ente());
+		servicio.setId_usuario(usuario.getId_usuario());
+		servicio.setId_sector(sector);
+		servicio.setId_estado(estado);
+		servicio.setId_seguridad(seguridad);
+		servicio.setId_intercambio(intercambio);
+		// TODO Verificar que el nombre no esté repetido.
+		update(servicio,id_servicio_informacion);
+
+		modificarUnionAreas();		
+		modificarUnionArquitecturas();
+
+		Telefono phone = new Telefono();
+		phone =  (Telefono) read(phone,id_servicio_informacion);
+		phone.setTelefono(codigo + telefono);		
+		update(phone,phone.getId_telefono());
+
+		Correo email = new Correo();
+		email = (Correo) getEmail(servicio, id_servicio_informacion);
+		email.setCorreo(correo);		
+		update(email,email.getId_correo());
+		//TODO actualizar documento
+		
+		modificar = false;
+		return SUCCESS;
+	}
 		
 	@SkipValidation	
 	public String subirArchivo() {	
@@ -303,7 +343,7 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 		intercambio = servicio.getId_intercambio();
 		Telefono phone = new Telefono();
 		phone =  (Telefono) read(phone,id_servicio_informacion);
-		telefono = phone.getTelefono().substring(4, 11);
+		telefono = phone.getTelefono().substring(3, 10);
 		codigo = phone.getTelefono().substring(0, 3);
 		Correo email = new Correo();
 		email = (Correo) getEmail(servicio, id_servicio_informacion);
@@ -315,7 +355,7 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 		arquitecturas = (List<Arquitectura>) read(new Arquitectura());
 		parents = (List<Intercambio>) getParents(new Intercambio());
 		children = (List<Intercambio>) getChildren(new Intercambio());
-		session = ActionContext.getContext().getSession();
+		modificar = true;
 		return SUCCESS;
 	}
 	
@@ -351,6 +391,132 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 				.getRealPath("/archivos/" + ENTE);
 		FileUtils.copyFile(file, new File(path, name));
 		return "/archivos/" + ENTE + "/" + name;
+	}
+	
+	/**
+	 * permite modificar los registros de una unión area 
+	 */
+	@SuppressWarnings({ "unchecked" })
+	private void modificarUnionAreas(){
+		System.out.println("area.size = "+ area.size());
+		unionareas = (List<UnionAreaServicioInformacion>)readUnion(new UnionAreaServicioInformacion(), servicio, id_servicio_informacion);
+		UnionAreaServicioInformacion unionAreaServicioInformacion = new UnionAreaServicioInformacion();
+		Iterator<UnionAreaServicioInformacion> iterador = unionareas.iterator();				
+		if(unionareas.size() > area.size()){
+			while(iterador.hasNext()){
+				unionAreaServicioInformacion = iterador.next();				
+				for(int i = 0;i<=area.size();i++){				
+					if(unionAreaServicioInformacion.getId_area() == area.get(i));{
+						deleteUnion(unionAreaServicioInformacion, servicio, id_servicio_informacion);
+					}
+				}								
+			}
+		}else if(unionareas.size() < area.size()){			
+			for(int i = 0; i < area.size(); i++){
+				while(iterador.hasNext()){
+					unionAreaServicioInformacion = iterador.next();
+					if(unionAreaServicioInformacion.getId_area()== area.get(i));{
+						unionAreaServicioInformacion.setId_area(area.get(i));
+						unionAreaServicioInformacion.setId_servicio_informacion(id_servicio_informacion);
+						createUnion(unionAreaServicioInformacion);
+					}
+				}				
+			}
+		}else{
+			while(iterador.hasNext()){
+				unionAreaServicioInformacion = iterador.next();				
+				for(int i = 0;i<=area.size();i++){				
+					if(unionAreaServicioInformacion.getId_area()== area.get(i));{
+						deleteUnion(unionAreaServicioInformacion, servicio, id_servicio_informacion);
+					}
+				}								
+			}
+			for(int i = 0;i<=area.size();i++){				
+				while(iterador.hasNext()){
+					unionAreaServicioInformacion = iterador.next();
+					if(unionAreaServicioInformacion.getId_area()== area.get(i));{						
+						unionAreaServicioInformacion.setId_area(area.get(i));
+						unionAreaServicioInformacion.setId_servicio_informacion(id_servicio_informacion);
+						createUnion(unionAreaServicioInformacion);
+					}
+				}				
+			}
+		}
+	}
+	
+	/**
+	 * permite modificar los registros de una unión Arquitectura
+	 */
+	@SuppressWarnings({ "unchecked", "unused" })
+	private void modificarUnionArquitecturas(){
+		unionarquitecturas = (List<UnionArquitecturaServicioInformacion>) readUnion(new UnionArquitecturaServicioInformacion(), servicio, id_servicio_informacion);
+		Iterator<UnionArquitecturaServicioInformacion> iterador = unionarquitecturas.iterator();
+		UnionArquitecturaServicioInformacion unionArquitecturaServicioInformacion = new UnionArquitecturaServicioInformacion();				
+		boolean existe;		
+		if(unionarquitecturas.size() >area.size()){
+			while(iterador.hasNext()){
+				unionArquitecturaServicioInformacion = iterador.next();
+				existe = false;
+				for(int i = 0;i<=area.size();i++){				
+					if(unionArquitecturaServicioInformacion.getId_arquitectura()== area.get(i));{
+						existe = true;
+						break;
+					}
+				}
+				if(existe=false){
+					// TODO delete union
+					deleteUnion(unionArquitecturaServicioInformacion, servicio, id_servicio_informacion);
+				}				
+			}
+		}else if(unionarquitecturas.size() < area.size()){			
+			for(int i = 0;i<=area.size();i++){					
+				existe = false;
+				while(iterador.hasNext()){
+					unionArquitecturaServicioInformacion = iterador.next();
+					if(unionArquitecturaServicioInformacion.getId_arquitectura()== area.get(i));{
+						existe = true;
+						break;
+					}
+				}
+				if(existe=false){
+					// TODO create union
+					unionArquitecturaServicioInformacion.setId_arquitectura(area.get(i));
+					unionArquitecturaServicioInformacion.setId_servicio_informacion(id_servicio_informacion);
+					createUnion(unionArquitecturaServicioInformacion);
+				}
+			}
+		}else{
+			while(iterador.hasNext()){
+				unionArquitecturaServicioInformacion = iterador.next();
+				existe = false;
+				for(int i = 0;i<=area.size();i++){				
+					if(unionArquitecturaServicioInformacion.getId_arquitectura()== area.get(i));{
+						existe = true;
+						break;
+					}
+				}
+				if(existe=false){
+					// TODO delete union
+					deleteUnion(unionArquitecturaServicioInformacion, servicio, id_servicio_informacion);
+				}				
+			}
+			for(int i = 0;i<=area.size();i++){					
+				existe = false;
+				while(iterador.hasNext()){
+					unionArquitecturaServicioInformacion = iterador.next();
+					if(unionArquitecturaServicioInformacion.getId_arquitectura()== area.get(i));{
+						existe = true;
+						break;
+					}
+				}
+				if(existe=false){
+					// TODO create union
+					unionArquitecturaServicioInformacion.setId_arquitectura(area.get(i));
+					unionArquitecturaServicioInformacion.setId_servicio_informacion(id_servicio_informacion);
+					createUnion(unionArquitecturaServicioInformacion);
+				}
+			}
+		}
 	}
 
 	public List<Sector> getSectores() {
@@ -584,6 +750,14 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 
 	public void setIos(List<List<EntradaSalida>> ios) {
 		this.ios = ios;
+	}
+
+	public boolean isModificar() {
+		return modificar;
+	}
+
+	public void setModificar(boolean modificar) {
+		this.modificar = modificar;
 	}
 
 	// @SuppressWarnings("unchecked")
