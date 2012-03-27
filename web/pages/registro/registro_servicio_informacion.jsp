@@ -11,7 +11,8 @@
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
 <script type="text/javascript" src="res/js/jquery-1.7.1.js"></script>
 <script type="text/javascript" src="res/js/tabs.js"></script>
-<title><s:text name="registro.title"></s:text></title>
+<title><s:text name="registro.title"></s:text>
+</title>
 	</head>
 	<body>
 		<!-- Este es el div de la sombra del contenedor del maquetado de la página -->
@@ -21,8 +22,8 @@
 				<%@include file="../layout/header.jsp"%>
 				<!-- Esta es la barra lateral -->
 				<div id="sidebar">
-					<small><strong>Paso 1:</strong></small><br> <small><strong>Registro
-							de Servicio de Información</strong></small>
+					<small><strong>Paso 1:</strong> </small><br> <small><strong>Registro
+							de Servicio de Información</strong> </small>
 					<hr>
 					<small>Paso 2:</small><br> <small>Registro de
 						Funcionalidad(es)</small>
@@ -106,22 +107,58 @@
 								<p class="formulario">Aspectos Legales (¿Hará falta esto?)</p>
 								<small><s:text name="tab2.description"></s:text> </small>
 								<hr>
+								<s:if test="files.size > 0 || !name.isEmpty()">
+									<s:iterator value="names">
+										<h5 class="formulario">
+											<s:text name="documento.name" />
+										</h5>
+										<s:fielderror>
+											<s:param>name</s:param>
+										</s:fielderror>
+										<s:set var="name">
+											<s:property />
+										</s:set>
+										<s:textfield name="name" labelposition="top" value="%{#name}" />
 
+										<h5 class="formulario">
+											<s:text name="documento.file" />
+										</h5>
+										<s:fielderror>
+											<s:param>file</s:param>
+										</s:fielderror>
+										<s:file name="file" label="File" size="40"></s:file>
+										<hr>
+									</s:iterator>
+								</s:if>
+								<s:else>
+								HEY!!
 								<h5 class="formulario">
-									<s:text name="documento.name"></s:text>
-								</h5>
-								<s:fielderror>
-									<s:param>name</s:param>
-								</s:fielderror>
-								<s:textfield name="name" value="fsdfsdf" labelposition="top" />
-								<h5 class="formulario">
-									<s:text name="documento.file"></s:text>
-								</h5>
-								<s:fielderror>
-									<s:param>file</s:param>
-								</s:fielderror>
-								<s:file name="file"></s:file>
-								<br> <br> <br> <br>
+										<s:text name="documento.name" />
+									</h5>
+									<s:fielderror>
+										<s:param>name</s:param>
+									</s:fielderror>
+									<s:textfield name="name" labelposition="top" />
+									<h5 class="formulario">
+										<s:text name="documento.file" />
+									</h5>
+									<s:fielderror>
+										<s:param>file</s:param>
+									</s:fielderror>
+									<s:file name="file" label="File" size="40"></s:file>
+									<hr>
+								</s:else>
+								<script src="<s:url value="res/js/rows.js"/>"
+									type="text/javascript"></script>
+								<script type="text/javascript">
+									File.prepare(
+											'<s:text name="documento.name"/>',
+											'<s:text name="documento.file"/>');
+								</script>
+								<div id="addRow"></div>
+								<a href="#" onclick="return File.addRow()">Agregar otro
+									documento</a> <br> <br> <br> <br>
+
 							</div>
 							<!-- *************************** ARREGLAR ARCHIVOS. ******************** -->
 
@@ -206,7 +243,8 @@
 								</s:fielderror>
 								<table>
 									<tr>
-										<td><s:select name="codigo" list="codigos" /></td>
+										<td><s:select name="codigo" list="codigos" />
+										</td>
 										<td><s:textfield name="telefono" labelposition="top"
 												maxlength="7"
 												onkeyup="var no_digito = /\D/g; this.value = this.value.replace(no_digito , '');" />
