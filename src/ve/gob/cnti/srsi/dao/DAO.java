@@ -212,6 +212,24 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 	}
 
 	@Override
+	public Correo getEmail(Object model, long id) {
+		Correo result;
+		try {
+			startConnection();
+			result = (Correo) session.createQuery(
+					"FROM " + new Correo().getClass().getSimpleName()
+							+ " WHERE status = " + ACTIVO + " AND "
+							+ getField(model) + " = " + id).uniqueResult();
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+		return result;
+	}
+
+	@Override
 	public void update(Object model, long id) {
 		try {
 			startConnection();

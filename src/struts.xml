@@ -17,7 +17,7 @@
 
 		<action name="registrarServicioInformacion" method="registrarServicioInformacion"
 			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
-			<result name="success">registro/funcionalidades.jsp</result>
+			<result name="success">registro/funcionalidades.jsp</result>					
 			<result name="input">registro/registro_servicio_informacion.jsp
 			</result>			
 			<result name="errorSession" type="redirectAction">home</result>
@@ -46,6 +46,17 @@
 		<action name="examinarServicioInformacion" method="examinarServicioInformacion"
 			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
 			<result name="success">user/examinarServicio.jsp</result>
+		</action>
+		
+		<action name="prepararModificarServicioInformacion" method="prepararModificarServicioInformacion"
+			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
+			<result name="success">registro/registro_servicio_informacion.jsp</result>
+		</action>
+		
+		<action name="subirArchivo" method="subirArchivo"
+			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
+			<result name="success">registro/registro_servicio_informacion.jsp</result>					
+			<result name="input">registro/registro_servicio_informacion.jsp</result>	
 		</action>
 
 

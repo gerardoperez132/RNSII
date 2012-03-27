@@ -51,6 +51,7 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 	private List<Funcionalidad> funcionalidades;
 	private List<List<EntradaSalida>> ios = new ArrayList<List<EntradaSalida>>();
 	private List<UnionAreaServicioInformacion> unionareas;
+	private List<UnionArquitecturaServicioInformacion> unionarquitecturas;
 
 	private HttpServletRequest servletRequest;
 	private Ente ente;
@@ -58,17 +59,17 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 	private Funcionalidad funcionalidad = new Funcionalidad();
 
 	private File file;
-	private String name;
-	private String filename;
+	private String fileFileName;
+	private String name;	
 
 	private String[] codigos = COD;
 	private String codigo;
 
 	private long sector;
 	private long estado;
-	private List<Long> area;
+	private List<Long> area = new ArrayList<Long>();
 	private long seguridad;
-	private List<Long> arquitectura;
+	private List<Long> arquitectura = new ArrayList<Long>();
 	private long intercambio;
 	private String telefono;
 	private String correo;
@@ -182,8 +183,7 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 			if (version < 0.0 || version > 999.999) {
 				addFieldError(
 						"servicio.version",
-						getText("Su número de versión se sale del rango, el formato es XXX.XXX"));
-				System.out.println("ENTRÓ");
+						getText("Su número de versión se sale del rango, el formato es XXX.XXX"));				
 			}
 		} catch (NumberFormatException ex) {
 			addFieldError(
@@ -196,16 +196,14 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 					getText("Debe introducir un número de versión"));
 		// TODO ¿Validar que sólo tiene un punto?
 
-		if (filename != null && name.isEmpty()) {
+		if (file != null && name.isEmpty()) {			
+			System.out.println("file: "+file.getPath());
 			addFieldError(
 					"name",
-					getText("Si va a subir un documento debe proporcionar el nombre con que se va a guardar"));
-			addFieldError(
-					"file",
-					getText("Si va a subir un documento debe proporcionar el archivo a guardar"));
+					getText("Si va a subir un documento debe proporcionar el nombre con que se va a guardar"));			
 		}
 
-		if (filename == null && !name.isEmpty()) {
+		if (file == null && !name.isEmpty()) {			
 			addFieldError(
 					"file",
 					getText("Si va a subir un documento debe proporcionar el archivo a guardar"));
@@ -261,14 +259,14 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 		email.setId_servicio_informacion(id_servicio_informacion);
 		create(email);
 
-		if (filename != null && !name.isEmpty()) {
+		if (fileFileName != null && !name.isEmpty()) {
 			AspectoLegal documento = new AspectoLegal();
 			documento.setId_servicio_informacion(id_servicio_informacion);
 			documento.setNombre(name);
 			// TODO Colocar el tipo de documento, ¿cuáles son? =/
 			// documento.setTipo(0);
 			try {
-				documento.setUrl(saveFile(file, filename));
+				documento.setUrl(saveFile(file, fileFileName));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -277,7 +275,50 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 		}
 		return SUCCESS;
 	}
+		
+	@SkipValidation	
+	public String subirArchivo() {	
+		System.out.println("file: " + file.getName());
+		System.out.println("name: " + fileFileName);
+		return SUCCESS;
+	}
 
+	@SuppressWarnings("unchecked")
+	@SkipValidation	
+	public String prepararModificarServicioInformacion() {		
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		sector = servicio.getId_sector();
+		unionareas = (List<UnionAreaServicioInformacion>)readUnion(new UnionAreaServicioInformacion(), servicio, id_servicio_informacion);
+		Iterator<UnionAreaServicioInformacion> iterador = unionareas.iterator();
+		while(iterador.hasNext()){
+			area.add(iterador.next().getId_area());
+		}
+		estado = servicio.getId_estado();
+		seguridad = servicio.getId_seguridad();
+		unionarquitecturas = (List<UnionArquitecturaServicioInformacion>) readUnion(new UnionArquitecturaServicioInformacion(), servicio, id_servicio_informacion);
+		Iterator<UnionArquitecturaServicioInformacion> iterador2 = unionarquitecturas.iterator();
+		while(iterador2.hasNext()){
+			arquitectura.add(iterador2.next().getId_arquitectura());
+		}
+		intercambio = servicio.getId_intercambio();
+		Telefono phone = new Telefono();
+		phone =  (Telefono) read(phone,id_servicio_informacion);
+		telefono = phone.getTelefono().substring(4, 11);
+		codigo = phone.getTelefono().substring(0, 3);
+		Correo email = new Correo();
+		email = (Correo) getEmail(servicio, id_servicio_informacion);
+		correo = email.getCorreo();		
+		sectores = (List<Sector>) read(new Sector());
+		estados = (List<Estado>) read(new Estado());
+		areas = (List<Area>) read(new Area());
+		niveles = (List<Seguridad>) read(new Seguridad());
+		arquitecturas = (List<Arquitectura>) read(new Arquitectura());
+		parents = (List<Intercambio>) getParents(new Intercambio());
+		children = (List<Intercambio>) getChildren(new Intercambio());
+		session = ActionContext.getContext().getSession();
+		return SUCCESS;
+	}
+	
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	@Override
@@ -390,14 +431,6 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getFilename() {
-		return filename;
-	}
-
-	public void setFilename(String filename) {
-		this.filename = filename;
 	}
 
 	@FieldExpressionValidator(expression = "sector > 0", message = "Debe seleccionar un sector")
@@ -535,6 +568,14 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 
 	public void setFuncionalidad(Funcionalidad funcionalidad) {
 		this.funcionalidad = funcionalidad;
+	}
+
+	public String getFileFileName() {
+		return fileFileName;
+	}
+
+	public void setFileFileName(String fileFileName) {
+		this.fileFileName = fileFileName;
 	}
 
 	public List<List<EntradaSalida>> getIos() {

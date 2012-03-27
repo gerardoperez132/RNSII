@@ -104,6 +104,18 @@ public interface CRUD {
 	public Correo getUserEmail(String email);
 
 	/**
+	 * Permite obtener el objeto correo de un identificador de modelo dado.
+	 * 
+	 * @param model
+	 *            Es la clase, modelo o tabla en la cual se realizará la
+	 *            consulta.
+	 * @param id
+	 *            Es el id del correo a consultar.
+	 * @return {@code correo} asociado a un modelo.
+	 */
+	public Correo getEmail(Object model, long id);
+
+	/**
 	 * Permite modificar el registro especificado por id del modelo dado.
 	 * 
 	 * @param model

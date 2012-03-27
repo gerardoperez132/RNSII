@@ -123,7 +123,7 @@
 												</form>
 											</td>
 											<td style="margin: 0; padding: 0;">
-												<form action="" method="POST">													
+												<form action="prepararModificarServicioInformacion" method="POST">													
 													<s:hidden name="id_servicio_informacion"></s:hidden>													
 													<input type="submit" value="<s:text name="modificar"/>"
 														style="font-size: 0.9em;" />
