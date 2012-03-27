@@ -92,6 +92,24 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 			closeConnection();
 		}
 	}
+	
+	@Override
+	public void deleteUnion(Object model,Object model2, long id) {		
+		try {
+			startConnection();
+			session.createQuery(
+					"UPDATE " + model.getClass().getSimpleName()
+							+ " SET status = " + ELIMINADO
+							+ ", fecha_modificado = '" + new Date()
+							+ "' WHERE " + getField(model2) + " = " + id
+							+ " AND status = " + ACTIVO).executeUpdate();			
+			transaction.commit();
+		} catch (HibernateException he) {
+			handleException(he);
+		} finally {
+			closeConnection();
+		}
+	}
 
 	@Override
 	public ArrayList<?> read(Object model) {

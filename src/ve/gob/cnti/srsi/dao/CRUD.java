@@ -31,6 +31,24 @@ public interface CRUD {
 	 *            registro.
 	 */
 	public void createUnion(Object model);
+	
+	/**
+	 * Permite eliminar un registro en la base de datos cuando el modelo es de
+	 * una relación de unión M:N.
+	 * 
+	 * @param model
+	 *            Es la clase, modelo o tabla en el cual se realizará la
+	 *            eliminación.
+	 * 
+	 * @param model2        
+	 * 			  Es la clase, modelo o tabla que es padre de la unión
+	 * 			  
+	 * 
+	 *  @param id 
+	 *  		Es el identificador de la la clase, modelo o tabla que 
+	 *  	    es padre de la unión
+	 */
+	public void deleteUnion(Object model,Object model2, long id);
 
 	/**
 	 * Permite obtener todos los registros activos del modelo dado.
