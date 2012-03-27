@@ -3,13 +3,13 @@ package ve.gob.cnti.srsi.controlador;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
 import ve.gob.cnti.srsi.dao.Constants;
@@ -17,7 +17,6 @@ import ve.gob.cnti.srsi.dao.Constants.Formulario;
 import ve.gob.cnti.srsi.dao.DAO;
 import ve.gob.cnti.srsi.modelo.Area;
 import ve.gob.cnti.srsi.modelo.Arquitectura;
-import ve.gob.cnti.srsi.modelo.AspectoLegal;
 import ve.gob.cnti.srsi.modelo.Correo;
 import ve.gob.cnti.srsi.modelo.Ente;
 import ve.gob.cnti.srsi.modelo.EntradaSalida;
@@ -58,9 +57,11 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 	private ServicioInformacion servicio = new ServicioInformacion();
 	private Funcionalidad funcionalidad = new Funcionalidad();
 
-	private File file;
-	private String fileFileName;
-	private String name;	
+	private List<File> files = new ArrayList<File>();
+	private List<String> fileContentTypes = new ArrayList<String>();
+	private List<String> fileFileNames = new ArrayList<String>();
+	private String name;
+	private List<String> names;
 
 	private String[] codigos = COD;
 	private String codigo;
@@ -106,7 +107,6 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 			delete(funcion_del, funcion_del.getId_funcionalidad());
 		}
 		delete(new ServicioInformacion(), id_servicio_informacion);
-
 		return SUCCESS;
 	}
 
@@ -165,6 +165,17 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 
 	@Override
 	public void validate() {
+		System.out.println("NAME=>" + name.toString());
+		String[] splits = name.split(",");
+		names = Arrays.asList(splits);
+		for (String n : names)
+			System.out.println("NAMES => " + n);
+		try {
+			saveFile();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (servicio.getNombre().isEmpty())
 			addFieldError("servicio.nombre",
 					"Proporcione un nombre para el servicio");
@@ -183,7 +194,7 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 			if (version < 0.0 || version > 999.999) {
 				addFieldError(
 						"servicio.version",
-						getText("Su número de versión se sale del rango, el formato es XXX.XXX"));				
+						getText("Su número de versión se sale del rango, el formato es XXX.XXX"));
 			}
 		} catch (NumberFormatException ex) {
 			addFieldError(
@@ -196,18 +207,19 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 					getText("Debe introducir un número de versión"));
 		// TODO ¿Validar que sólo tiene un punto?
 
-		if (file != null && name.isEmpty()) {			
-			System.out.println("file: "+file.getPath());
-			addFieldError(
-					"name",
-					getText("Si va a subir un documento debe proporcionar el nombre con que se va a guardar"));			
-		}
-
-		if (file == null && !name.isEmpty()) {			
-			addFieldError(
-					"file",
-					getText("Si va a subir un documento debe proporcionar el archivo a guardar"));
-		}
+		// TODO Validaciones de archivos
+		// if (file != null && name.isEmpty()) {
+		// System.out.println("file: " + file.getPath());
+		// addFieldError(
+		// "name",
+		// getText("Si va a subir un documento debe proporcionar el nombre con que se va a guardar"));
+		// }
+		//
+		// if (file == null && !name.isEmpty()) {
+		// addFieldError(
+		// "file",
+		// getText("Si va a subir un documento debe proporcionar el archivo a guardar"));
+		// }
 
 		if (telefono.length() > 0 && telefono.length() < 7)
 			addFieldError("telefono",
@@ -259,55 +271,54 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 		email.setId_servicio_informacion(id_servicio_informacion);
 		create(email);
 
-		if (fileFileName != null && !name.isEmpty()) {
-			AspectoLegal documento = new AspectoLegal();
-			documento.setId_servicio_informacion(id_servicio_informacion);
-			documento.setNombre(name);
-			// TODO Colocar el tipo de documento, ¿cuáles son? =/
-			// documento.setTipo(0);
-			try {
-				documento.setUrl(saveFile(file, fileFileName));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			create(documento);
-		}
-		return SUCCESS;
-	}
-		
-	@SkipValidation	
-	public String subirArchivo() {	
-		System.out.println("file: " + file.getName());
-		System.out.println("name: " + fileFileName);
+		// if (fileFileName != null && !name.isEmpty()) {
+		// AspectoLegal documento = new AspectoLegal();
+		// documento.setId_servicio_informacion(id_servicio_informacion);
+		// documento.setNombre(name);
+		// // TODO Colocar el tipo de documento, ¿cuáles son? =/
+		// // documento.setTipo(0);
+		// // try {
+		// // // TODO Colocar la ruta del archivo correspondiente.
+		// // // documento.setUrl(saveFile(file, fileFileName));
+		// // } catch (IOException e) {
+		// // // TODO Auto-generated catch block
+		// // e.printStackTrace();
+		// // }
+		// create(documento);
+		// }
 		return SUCCESS;
 	}
 
 	@SuppressWarnings("unchecked")
-	@SkipValidation	
-	public String prepararModificarServicioInformacion() {		
+	@SkipValidation
+	public String prepararModificarServicioInformacion() {
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		sector = servicio.getId_sector();
-		unionareas = (List<UnionAreaServicioInformacion>)readUnion(new UnionAreaServicioInformacion(), servicio, id_servicio_informacion);
+		unionareas = (List<UnionAreaServicioInformacion>) readUnion(
+				new UnionAreaServicioInformacion(), servicio,
+				id_servicio_informacion);
 		Iterator<UnionAreaServicioInformacion> iterador = unionareas.iterator();
-		while(iterador.hasNext()){
+		while (iterador.hasNext()) {
 			area.add(iterador.next().getId_area());
 		}
 		estado = servicio.getId_estado();
 		seguridad = servicio.getId_seguridad();
-		unionarquitecturas = (List<UnionArquitecturaServicioInformacion>) readUnion(new UnionArquitecturaServicioInformacion(), servicio, id_servicio_informacion);
-		Iterator<UnionArquitecturaServicioInformacion> iterador2 = unionarquitecturas.iterator();
-		while(iterador2.hasNext()){
+		unionarquitecturas = (List<UnionArquitecturaServicioInformacion>) readUnion(
+				new UnionArquitecturaServicioInformacion(), servicio,
+				id_servicio_informacion);
+		Iterator<UnionArquitecturaServicioInformacion> iterador2 = unionarquitecturas
+				.iterator();
+		while (iterador2.hasNext()) {
 			arquitectura.add(iterador2.next().getId_arquitectura());
 		}
 		intercambio = servicio.getId_intercambio();
 		Telefono phone = new Telefono();
-		phone =  (Telefono) read(phone,id_servicio_informacion);
+		phone = (Telefono) read(phone, id_servicio_informacion);
 		telefono = phone.getTelefono().substring(4, 11);
 		codigo = phone.getTelefono().substring(0, 3);
 		Correo email = new Correo();
 		email = (Correo) getEmail(servicio, id_servicio_informacion);
-		correo = email.getCorreo();		
+		correo = email.getCorreo();
 		sectores = (List<Sector>) read(new Sector());
 		estados = (List<Estado>) read(new Estado());
 		areas = (List<Area>) read(new Area());
@@ -318,7 +329,7 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 		session = ActionContext.getContext().getSession();
 		return SUCCESS;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	@Override
@@ -344,13 +355,25 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 	 * @return {@code String} Ruta donde se guarda el archivo.
 	 * @throws IOException
 	 */
-	private String saveFile(File file, String name) throws IOException {
+	private String saveFile() throws IOException {
 		// TODO Obtener el nombre de la institución desde la base de datos.
-		String ENTE = "CNTI".toLowerCase();
-		String path = servletRequest.getSession().getServletContext()
-				.getRealPath("/archivos/" + ENTE);
-		FileUtils.copyFile(file, new File(path, name));
-		return "/archivos/" + ENTE + "/" + name;
+		for (File u : files) {
+			System.out.println("*** " + u + "\t" + u.length());
+		}
+		System.out.println("filenames:");
+		for (String n : fileFileNames) {
+			System.out.println("*** " + n);
+		}
+		System.out.println("content types:");
+		for (String c : fileContentTypes) {
+			System.out.println("*** " + c);
+		}
+		// String ENTE = "CNTI".toLowerCase();
+		// String path = servletRequest.getSession().getServletContext()
+		// .getRealPath("/archivos/" + ENTE);
+		// FileUtils.copyFile(file, new File(path, name));
+		// return "/archivos/" + ENTE + "/" + name;
+		return "";
 	}
 
 	public List<Sector> getSectores() {
@@ -417,20 +440,28 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 		this.servletRequest = servletRequest;
 	}
 
-	public File getFile() {
-		return file;
+	public List<File> getFiles() {
+		return files;
 	}
 
-	public void setFile(File file) {
-		this.file = file;
+	public List<String> getFileContentTypes() {
+		return fileContentTypes;
 	}
 
-	public String getName() {
-		return name;
+	public List<String> getFileFileNames() {
+		return fileFileNames;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFiles(List<File> files) {
+		this.files = files;
+	}
+
+	public void setFileContentTypes(List<String> fileContentTypes) {
+		this.fileContentTypes = fileContentTypes;
+	}
+
+	public void setFileFileNames(List<String> fileFileNames) {
+		this.fileFileNames = fileFileNames;
 	}
 
 	@FieldExpressionValidator(expression = "sector > 0", message = "Debe seleccionar un sector")
@@ -570,20 +601,40 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 		this.funcionalidad = funcionalidad;
 	}
 
-	public String getFileFileName() {
-		return fileFileName;
-	}
-
-	public void setFileFileName(String fileFileName) {
-		this.fileFileName = fileFileName;
-	}
-
 	public List<List<EntradaSalida>> getIos() {
 		return ios;
 	}
 
 	public void setIos(List<List<EntradaSalida>> ios) {
 		this.ios = ios;
+	}
+
+	public void setFile(List<File> files) {
+		this.files = files;
+	}
+
+	public void setFileContentType(List<String> fileContentTypes) {
+		this.fileContentTypes = fileContentTypes;
+	}
+
+	public void setFileFileName(List<String> fileFileNames) {
+		this.fileFileNames = fileFileNames;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public List<String> getNames() {
+		return names;
+	}
+
+	public void setNames(List<String> names) {
+		this.names = names;
 	}
 
 	// @SuppressWarnings("unchecked")
