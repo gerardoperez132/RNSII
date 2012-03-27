@@ -1,28 +1,42 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@taglib uri="/struts-tags" prefix="s"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <s:i18n name="ve/gob/cnti/srsi/i18n/registro_servicio_informacion">
 	<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- CSS (required) -->
 <link rel="stylesheet" type="text/css" href="res/css/styles.css">
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
 <script type="text/javascript" src="res/js/jquery-1.7.1.js"></script>
 <script type="text/javascript" src="res/js/tabs.js"></script>
-<title><s:text name="registro.title"></s:text></title>
+<s:if test="modificar==true">
+	<s:set name="action" value="%{'modificarServicioInformacion'}" />	
+	<s:set name="contenido" value="%{'content2'}" />
+	<s:set name="submit" value="%{getText('actualizar')}" />
+	<s:set name="title" value="%{getText('actualizar.title')}" />	
+</s:if>
+<s:else>
+	<s:set name="action" value="%{'registrarServicioInformacion'}" />
+	<s:set name="contenido" value="%{'content'}" />
+	<s:set name="submit" value="%{getText('guardar')}" />
+	<s:set name="title" value="%{getText('registro.title')}" />
+</s:else>
+<title><s:text name="title"></s:text></title>
 	</head>
 	<body>
-		<!-- Este es el div de la sombra del contenedor del maquetado de la página -->
+		
+		<!-- Este es el div de la sombra del contenedor del maquetado de la pÃ¡gina -->
 		<div id="sombra">
-			<!-- Este es el div contenedor del maquetado de la página -->
+			<!-- Este es el div contenedor del maquetado de la pÃ¡gina -->
 			<div id="container">
 				<%@include file="../layout/header.jsp"%>
+				<s:if test="modificar!=true">
 				<!-- Esta es la barra lateral -->
 				<div id="sidebar">
 					<small><strong>Paso 1:</strong></small><br> <small><strong>Registro
-							de Servicio de Información</strong></small>
+							de Servicio de InformaciÃ³n</strong></small>
 					<hr>
 					<small>Paso 2:</small><br> <small>Registro de
 						Funcionalidad(es)</small>
@@ -33,10 +47,11 @@
 					<small>Paso 4:</small><br> <small>Verificar y guardar</small>
 					<hr>
 				</div>
+				</s:if>
 				<!-- Este es el div de contenidos -->
-				<div id="content">
+				<div id="<s:property value="#contenido"/>">
 					<h3>
-						<s:text name="registro.title"></s:text>
+						<s:text name="title"></s:text>
 					</h3>
 					<hr>
 					<ul class="tabs">
@@ -49,11 +64,11 @@
 						<li><a href="#tab4"><s:text name="tab4.title"></s:text> </a>
 						</li>
 					</ul>
-					<form action="registrarServicioInformacion" method="post"
+					<form action="<s:property value="#action"/>" method="post"
 						enctype="multipart/form-data">
 						<div class="tab_container">
 							<div id="tab1" class="tab_content">
-								<p class="formulario">Descripción General del Servicio ¿Hace
+								<p class="formulario">DescripciÃ³n General del Servicio Â¿Hace
 									falta esto?</p>
 								<small><s:text name="tab1.description"></s:text> </small>
 								<hr>
@@ -98,12 +113,12 @@
 									listValue="nombre" headerKey="-1"
 									headerValue="%{getText('estado.select')}"></s:select>
 							</div>
-							<!-- PROBAR A PARTIR DE AQUÍ... -->
+							<!-- PROBAR A PARTIR DE AQUÃ... -->
 
 
 							<!-- *************************** ARREGLAR ARCHIVOS. ******************** -->
 							<div id="tab2" class="tab_content">
-								<p class="formulario">Aspectos Legales (¿Hará falta esto?)</p>
+								<p class="formulario">Aspectos Legales (Â¿HarÃ¡ falta esto?)</p>
 								<small><s:text name="tab2.description"></s:text> </small>
 								<hr>
 
@@ -113,20 +128,20 @@
 								<s:fielderror>
 									<s:param>name</s:param>
 								</s:fielderror>
-								<s:textfield name="name" value="fsdfsdf" labelposition="top" />
+								<s:textfield name="name" labelposition="top" />
 								<h5 class="formulario">
 									<s:text name="documento.file"></s:text>
 								</h5>
 								<s:fielderror>
 									<s:param>file</s:param>
 								</s:fielderror>
-								<s:file name="file"></s:file>
+								<s:file name="file" />
 								<br> <br> <br> <br>
 							</div>
 							<!-- *************************** ARREGLAR ARCHIVOS. ******************** -->
 
 							<div id="tab3" class="tab_content">
-								<p class="formulario">Descripción técnica del servicio ¿Hará
+								<p class="formulario">DescripciÃ³n tÃ©cnica del servicio Â¿HarÃ¡
 									falta esto?</p>
 								<small><s:text name="tab3.description"></s:text> </small>
 								<hr>
@@ -188,7 +203,7 @@
 								</select>
 							</div>
 							<div id="tab4" class="tab_content">
-								<p class="formulario">Soporte Técnico (¿Hará falta esto?)</p>
+								<p class="formulario">Soporte TÃ©cnico (Â¿HarÃ¡ falta esto?)</p>
 								<small><s:text name="tab4.description"></s:text> </small>
 								<hr>
 								<h5 class="formulario">
@@ -220,7 +235,7 @@
 									<s:param>correo</s:param>
 								</s:fielderror>
 								<s:textfield name="correo"></s:textfield>
-								<input type="submit" value='<s:text name="guardar"></s:text>' />
+								<input type="submit" value='<s:property value="#submit"/>' />
 							</div>
 						</div>
 					</form>
