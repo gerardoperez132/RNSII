@@ -11,8 +11,6 @@
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
 <script type="text/javascript" src="res/js/jquery-1.7.1.js"></script>
 <script type="text/javascript" src="res/js/tabs.js"></script>
-<<<<<<< HEAD
-<title><s:text name="registro.title"></s:text></title> =======
 <s:if test="modificar==true">
 	<s:set name="action" value="%{'modificarServicioInformacion'}" />
 	<s:set name="contenido" value="%{'content2'}" />
@@ -26,7 +24,7 @@
 	<s:set name="title" value="%{getText('registro.title')}" />
 </s:else>
 <title><s:text name="title"></s:text>
-</title> >>>>>>> 9956b5ce62d117e0c5bdec9b0b9478931515612d
+</title>
 	</head>
 	<body>
 
@@ -38,11 +36,8 @@
 				<s:if test="modificar!=true">
 					<!-- Esta es la barra lateral -->
 					<div id="sidebar">
-						<<<<<<< HEAD <small><strong>Paso 1:</strong> </small><br> <small><strong>Registro
-								de Servicio de Informaci�n</strong> </small> ======= <small><strong>Paso
-								1:</strong> </small><br> <small><strong>Registro de
-								Servicio de Información</strong> </small> >>>>>>>
-						9956b5ce62d117e0c5bdec9b0b9478931515612d
+						<small><strong>Paso 1:</strong> </small><br> <small><strong>Registro
+								de Servicio de Información</strong> </small>
 						<hr>
 						<small>Paso 2:</small><br> <small>Registro de
 							Funcionalidad(es)</small>
