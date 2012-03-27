@@ -66,6 +66,7 @@
 					</ul>
 					<form action="<s:property value="#action"/>" method="post"
 						enctype="multipart/form-data">
+						<s:if test="modificado=true"><s:hidden name="id_servicio_informacion"></s:hidden></s:if>
 						<div class="tab_container">
 							<div id="tab1" class="tab_content">
 								<p class="formulario">Descripción General del Servicio ¿Hace
