@@ -165,7 +165,7 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 	}
 
 	@Override
-	public void validate() {
+	public void validate() {		
 		System.out.println("NAME=>" + name.toString());
 		String[] splits = name.split(",");
 		names = Arrays.asList(splits);
@@ -312,8 +312,19 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 		// TODO Verificar que el nombre no esté repetido.
 		update(servicio, id_servicio_informacion);
 
-		modificarUnionAreas();
-		modificarUnionArquitecturas();
+		try {
+			updateUnion(new UnionAreaServicioInformacion(),
+					new ServicioInformacion(), new Area(), id_servicio_informacion, area);
+		} catch (Exception e1) {			
+			e1.printStackTrace();
+		}
+		
+		try {
+			updateUnion(new UnionArquitecturaServicioInformacion(),
+					new ServicioInformacion(), new Arquitectura(), id_servicio_informacion, arquitectura);
+		} catch (Exception e1) {			
+			e1.printStackTrace();
+		}		
 
 		Telefono phone = new Telefono();
 		phone = (Telefono) read(phone, id_servicio_informacion);
@@ -416,172 +427,7 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 		// return "/archivos/" + ENTE + "/" + name;
 		return "";
 	}
-
-	/**
-	 * permite modificar los registros de una unión area
-	 */
-	@SuppressWarnings({ "unchecked" })
-	private void modificarUnionAreas() {
-		System.out.println("area.size = " + area.size());
-		unionareas = (List<UnionAreaServicioInformacion>) readUnion(
-				new UnionAreaServicioInformacion(), servicio,
-				id_servicio_informacion);
-		UnionAreaServicioInformacion unionAreaServicioInformacion = new UnionAreaServicioInformacion();
-		Iterator<UnionAreaServicioInformacion> iterador = unionareas.iterator();
-		if (unionareas.size() > area.size()) {
-			while (iterador.hasNext()) {
-				unionAreaServicioInformacion = iterador.next();
-				for (int i = 0; i <= area.size(); i++) {
-					if (unionAreaServicioInformacion.getId_area() == area
-							.get(i))
-						;
-					{
-						deleteUnion(unionAreaServicioInformacion, servicio,
-								id_servicio_informacion);
-					}
-				}
-			}
-		} else if (unionareas.size() < area.size()) {
-			for (int i = 0; i < area.size(); i++) {
-				while (iterador.hasNext()) {
-					unionAreaServicioInformacion = iterador.next();
-					if (unionAreaServicioInformacion.getId_area() == area
-							.get(i))
-						;
-					{
-						unionAreaServicioInformacion.setId_area(area.get(i));
-						unionAreaServicioInformacion
-								.setId_servicio_informacion(id_servicio_informacion);
-						createUnion(unionAreaServicioInformacion);
-					}
-				}
-			}
-		} else {
-			while (iterador.hasNext()) {
-				unionAreaServicioInformacion = iterador.next();
-				for (int i = 0; i <= area.size(); i++) {
-					if (unionAreaServicioInformacion.getId_area() == area
-							.get(i))
-						;
-					{
-						deleteUnion(unionAreaServicioInformacion, servicio,
-								id_servicio_informacion);
-					}
-				}
-			}
-			for (int i = 0; i <= area.size(); i++) {
-				while (iterador.hasNext()) {
-					unionAreaServicioInformacion = iterador.next();
-					if (unionAreaServicioInformacion.getId_area() == area
-							.get(i))
-						;
-					{
-						unionAreaServicioInformacion.setId_area(area.get(i));
-						unionAreaServicioInformacion
-								.setId_servicio_informacion(id_servicio_informacion);
-						createUnion(unionAreaServicioInformacion);
-					}
-				}
-			}
-		}
-	}
-
-	/**
-	 * permite modificar los registros de una unión Arquitectura
-	 */
-	@SuppressWarnings({ "unchecked", "unused" })
-	private void modificarUnionArquitecturas() {
-		unionarquitecturas = (List<UnionArquitecturaServicioInformacion>) readUnion(
-				new UnionArquitecturaServicioInformacion(), servicio,
-				id_servicio_informacion);
-		Iterator<UnionArquitecturaServicioInformacion> iterador = unionarquitecturas
-				.iterator();
-		UnionArquitecturaServicioInformacion unionArquitecturaServicioInformacion = new UnionArquitecturaServicioInformacion();
-		boolean existe;
-		if (unionarquitecturas.size() > area.size()) {
-			while (iterador.hasNext()) {
-				unionArquitecturaServicioInformacion = iterador.next();
-				existe = false;
-				for (int i = 0; i <= area.size(); i++) {
-					if (unionArquitecturaServicioInformacion
-							.getId_arquitectura() == area.get(i))
-						;
-					{
-						existe = true;
-						break;
-					}
-				}
-				if (existe = false) {
-					// TODO delete union
-					deleteUnion(unionArquitecturaServicioInformacion, servicio,
-							id_servicio_informacion);
-				}
-			}
-		} else if (unionarquitecturas.size() < area.size()) {
-			for (int i = 0; i <= area.size(); i++) {
-				existe = false;
-				while (iterador.hasNext()) {
-					unionArquitecturaServicioInformacion = iterador.next();
-					if (unionArquitecturaServicioInformacion
-							.getId_arquitectura() == area.get(i))
-						;
-					{
-						existe = true;
-						break;
-					}
-				}
-				if (existe = false) {
-					// TODO create union
-					unionArquitecturaServicioInformacion
-							.setId_arquitectura(area.get(i));
-					unionArquitecturaServicioInformacion
-							.setId_servicio_informacion(id_servicio_informacion);
-					createUnion(unionArquitecturaServicioInformacion);
-				}
-			}
-		} else {
-			while (iterador.hasNext()) {
-				unionArquitecturaServicioInformacion = iterador.next();
-				existe = false;
-				for (int i = 0; i <= area.size(); i++) {
-					if (unionArquitecturaServicioInformacion
-							.getId_arquitectura() == area.get(i))
-						;
-					{
-						existe = true;
-						break;
-					}
-				}
-				if (existe = false) {
-					// TODO delete union
-					deleteUnion(unionArquitecturaServicioInformacion, servicio,
-							id_servicio_informacion);
-				}
-			}
-			for (int i = 0; i <= area.size(); i++) {
-				existe = false;
-				while (iterador.hasNext()) {
-					unionArquitecturaServicioInformacion = iterador.next();
-					if (unionArquitecturaServicioInformacion
-							.getId_arquitectura() == area.get(i))
-						;
-					{
-						existe = true;
-						break;
-					}
-				}
-				if (existe = false) {
-					// TODO create union
-					unionArquitecturaServicioInformacion
-							.setId_arquitectura(area.get(i));
-					unionArquitecturaServicioInformacion
-							.setId_servicio_informacion(id_servicio_informacion);
-					createUnion(unionArquitecturaServicioInformacion);
-				}
-			}
-		}
-	}
-
+	
 	public List<Sector> getSectores() {
 		return sectores;
 	}

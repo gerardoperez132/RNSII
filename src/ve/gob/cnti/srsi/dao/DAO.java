@@ -3,6 +3,7 @@ package ve.gob.cnti.srsi.dao;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Table;
 
@@ -92,17 +93,18 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 			closeConnection();
 		}
 	}
-	
+
 	@Override
-	public void deleteUnion(Object model,Object model2, long id) {		
+	public void deleteUnion(Object[] models, long id_u, long id) {
 		try {
 			startConnection();
 			session.createQuery(
-					"UPDATE " + model.getClass().getSimpleName()
+					"UPDATE " + models[0].getClass().getSimpleName()
 							+ " SET status = " + ELIMINADO
 							+ ", fecha_modificado = '" + new Date()
-							+ "' WHERE " + getField(model2) + " = " + id
-							+ " AND status = " + ACTIVO).executeUpdate();			
+							+ "' WHERE " + getField(models[1]) + " = " + id
+							+ " AND " + getField(models[2]) + " = " + id_u
+							+ " AND status = " + ACTIVO).executeUpdate();
 			transaction.commit();
 		} catch (HibernateException he) {
 			handleException(he);
@@ -278,6 +280,57 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 							+ " ORDER BY fecha_modificado LIMIT 1) WHERE "
 							+ getField(model) + " = 0").executeUpdate();
 			transaction.commit();
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+	}
+
+	// TODO Quitar las advertencias
+	@Override
+	public void updateUnion(Object unionModel, Object modelParent,
+			Object modelChild, long idParent, List<?> children)
+			throws Exception {
+		List<?> parents = readUnion(unionModel, modelParent, idParent);
+		try {
+			startConnection();
+			session.createQuery(
+					"UPDATE " + unionModel.getClass().getSimpleName()
+							+ " SET status = " + MODIFICADO
+							+ ", fecha_modificado = '" + new Date()
+							+ "' WHERE " + getField(modelParent) + " = "
+							+ idParent + " AND status = " + ACTIVO)
+					.executeUpdate();
+			transaction.commit();
+			closeConnection();
+			for (Object child : children) {
+				startConnection();
+				Class parameters[] = { long.class };
+				unionModel
+						.getClass()
+						.getMethod(
+								"setId" + getField(modelParent).substring(2),
+								parameters).invoke(unionModel, idParent);
+				unionModel
+						.getClass()
+						.getMethod("setId" + getField(modelChild).substring(2),
+								parameters).invoke(unionModel, child);
+				session.save(unionModel);
+				session.createQuery(
+						"UPDATE "
+								+ unionModel.getClass().getSimpleName()
+								+ " SET fecha_creado = '"
+								+ parents.get(0).getClass()
+										.getMethod("getFecha_creado", null)
+										.invoke(parents.get(0), null)
+								+ "', fecha_modificado = '" + new Date()
+								+ "', status = " + ACTIVO
+								+ " WHERE fecha_creado IS NULL")
+						.executeUpdate();
+				transaction.commit();
+			}
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;

@@ -1,6 +1,7 @@
 package ve.gob.cnti.srsi.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import ve.gob.cnti.srsi.modelo.Correo;
 
@@ -31,7 +32,7 @@ public interface CRUD {
 	 *            registro.
 	 */
 	public void createUnion(Object model);
-	
+
 	/**
 	 * Permite eliminar un registro en la base de datos cuando el modelo es de
 	 * una relación de unión M:N.
@@ -40,15 +41,15 @@ public interface CRUD {
 	 *            Es la clase, modelo o tabla en el cual se realizará la
 	 *            eliminación.
 	 * 
-	 * @param model2        
-	 * 			  Es la clase, modelo o tabla que es padre de la unión
-	 * 			  
+	 * @param model2
+	 *            Es la clase, modelo o tabla que es padre de la unión
 	 * 
-	 *  @param id 
-	 *  		Es el identificador de la la clase, modelo o tabla que 
-	 *  	    es padre de la unión
+	 * 
+	 * @param id
+	 *            Es el identificador de la la clase, modelo o tabla que es
+	 *            padre de la unión
 	 */
-	public void deleteUnion(Object model,Object model2, long id);
+	public void deleteUnion(Object[] models, long id_u, long id);
 
 	/**
 	 * Permite obtener todos los registros activos del modelo dado.
@@ -143,6 +144,10 @@ public interface CRUD {
 	 *            Es el id del registro a modificar.
 	 */
 	public void update(Object model, long id);
+
+	public void updateUnion(Object unionModel, Object modelParent,
+			Object modelChild, long idParent, List<?> children)
+			throws Exception;
 
 	/**
 	 * Permite eliminar el registro especificado por id del modelo dado.
