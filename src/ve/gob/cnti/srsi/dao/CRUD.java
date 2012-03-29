@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ve.gob.cnti.srsi.modelo.Correo;
+import ve.gob.cnti.srsi.modelo.Telefono;
 
 /**
  * Definición de métodos para las operaciones en la base de datos.
@@ -227,4 +228,16 @@ public interface CRUD {
 	 * @return Lista de datos compuestos.
 	 */
 	public ArrayList<?> getComplex();
+
+	/**
+	 * Permite obtener el telefono unsa clase dada
+	 * 
+	 @param model
+	 *            Es la clase, modelo o tabla en la cual se realizará la
+	 *            consulta.
+	 * @param id
+	 *            Es el id del correo a consultar.
+	 * @return {@code telefono} 
+	 */
+	public Telefono getPhone(Object model, long id);
 }

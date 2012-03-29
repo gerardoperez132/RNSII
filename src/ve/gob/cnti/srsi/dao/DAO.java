@@ -16,6 +16,7 @@ import ve.gob.cnti.srsi.dao.Constants.ClaseDato;
 import ve.gob.cnti.srsi.dao.Constants.Status;
 import ve.gob.cnti.srsi.dao.Constants.TipoEntradaSalida;
 import ve.gob.cnti.srsi.modelo.Correo;
+import ve.gob.cnti.srsi.modelo.Telefono;
 import ve.gob.cnti.srsi.modelo.TipoDato;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -238,6 +239,24 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 			startConnection();
 			result = (Correo) session.createQuery(
 					"FROM " + new Correo().getClass().getSimpleName()
+							+ " WHERE status = " + ACTIVO + " AND "
+							+ getField(model) + " = " + id).uniqueResult();
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+		return result;
+	}
+	
+	@Override
+	public Telefono getPhone(Object model, long id) {
+		Telefono result;
+		try {
+			startConnection();
+			result = (Telefono) session.createQuery(
+					"FROM " + new Telefono().getClass().getSimpleName()
 							+ " WHERE status = " + ACTIVO + " AND "
 							+ getField(model) + " = " + id).uniqueResult();
 		} catch (HibernateException he) {
