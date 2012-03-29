@@ -15,7 +15,9 @@
 <link rel="stylesheet" type="text/css"
 	href="res/css/jquery.treeTable.css">
 <link rel="stylesheet" type="text/css" href="res/css/table_tree.css">
+<link rel="stylesheet" type="text/css" href="res/css/tabs.css">
 <script type="text/javascript" src="res/js/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="res/js/tabs.js"></script>
 <script type="text/javascript" src="res/js/jquery.treeTable.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -71,6 +73,7 @@
 
 				<!-- Este es el div de contenidos -->
 				<div id="content">
+					
 					<table class="main">
 						<tr>
 							<td style="width: 350px;">
@@ -91,53 +94,139 @@
 						</tr>
 					</table>
 					<hr>
-					<h3 style="margin: 0;">Descripcion general del Servicio</h3>
-					<br>
-					<h5 style="margin: 0;">
-						ID:
-						<s:property value="servicio.id_servicio_informacion" />
-					</h5>
-					<h5 style="margin: 0;">
-						Servicio: "
-						<s:property value="servicio.nombre" />
-						"
-					</h5>
-					<h5 style="margin: 0;">
-						Sector: "
-						<s:set var="sector" value="servicio.id_sector"></s:set>
-						<s:iterator value="sectores">
-							<s:if test="%{id_sector == #sector}">
-								<s:property value="nombre" />
-							</s:if>
-						</s:iterator>
-						"
-					</h5>
-					<h5 style="margin: 0;">
-						Dirigido a: "
-						<s:set var="id_si" value="servicio.id_servicio_informacion"></s:set>
-						<s:iterator value="unionareas">
-							<s:if test="%{id_servicio_informacion == #id_si}">
-								<s:set var="area" value="id_area"></s:set>
-								<s:iterator value="areas">
-									<s:if test="%{id_area == #area}">
+					
+					<ul class="tabs">
+						<li><a href="#tab1"><s:text name="tab1.title"></s:text> </a>
+						</li>
+						<li><a href="#tab2"><s:text name="tab2.title"></s:text> </a>
+						</li>
+						<li><a href="#tab3"><s:text name="tab3.title"></s:text> </a>
+						</li>
+						<li><a href="#tab4"><s:text name="tab4.title"></s:text> </a>
+						</li>
+					</ul>
+					
+					<div class="tab_container">
+						<!-- Descripción general -->
+						<div id="tab1" class="tab_content">							
+							
+							<h5 style="margin: 0;">
+								ID:
+								<s:property value="servicio.id_servicio_informacion" />
+							</h5>
+							<h5 style="margin: 0;">
+								Servicio: "
+								<s:property value="servicio.nombre" />
+								"
+							</h5>
+							<h5 style="margin: 0;">
+								Sector: "
+								<s:set var="sector" value="servicio.id_sector"></s:set>
+								<s:iterator value="sectores">
+									<s:if test="%{id_sector == #sector}">
 										<s:property value="nombre" />
 									</s:if>
 								</s:iterator>
-							</s:if>
-						</s:iterator>
-						"
-					</h5>
-					<h5 style="margin: 0;">
-						Estado del servicio: "
-						<s:set var="estado" value="servicio.id_estado"></s:set>
-						<s:iterator value="estados">
-							<s:if test="%{id_estado == #estado}">
-								<s:property value="nombre" />
-							</s:if>
-						</s:iterator>
-						"
-					</h5>
-					<hr>
+								"
+							</h5>
+							<h5 style="margin: 0;">
+								Dirigido a:
+								<s:set var="id_si" value="servicio.id_servicio_informacion"></s:set>
+								<s:iterator value="unionareas">
+									<s:if test="%{id_servicio_informacion == #id_si}">
+										<s:set var="area" value="id_area"></s:set>
+										<s:iterator value="areas">
+											<s:if test="%{id_area == #area}">
+												"<s:property value="nombre" />"
+											</s:if>
+										</s:iterator>
+									</s:if>
+								</s:iterator>
+								
+							</h5>
+							<h5 style="margin: 0;">
+								Estado del servicio: "
+								<s:set var="estado" value="servicio.id_estado"></s:set>
+								<s:iterator value="estados">
+									<s:if test="%{id_estado == #estado}">
+										<s:property value="nombre" />
+									</s:if>
+								</s:iterator>
+								"
+							</h5>
+							<hr>
+						
+						</div>
+						<!-- Descripción Legal -->
+						<div id="tab2" class="tab_content">
+							
+						</div>
+						<!-- Descripción Técnica -->
+						<div id="tab3" class="tab_content">
+							<h5 style="margin: 0;">
+								Nivel de Seguridad: "
+								<s:set var="seguridad" value="servicio.id_seguridad"></s:set>
+								<s:iterator value="niveles">
+									<s:if test="%{id_seguridad == #seguridad}">
+										<s:property value="nombre" />
+									</s:if>
+								</s:iterator>
+								"
+							</h5>
+							<h5 style="margin: 0;">
+								Arquitectura: 
+								<s:set var="id_si" value="servicio.id_servicio_informacion"></s:set>														
+								<s:iterator value="unionarquitecturas">									
+									<s:if test="%{id_servicio_informacion == #id_si}">
+										<s:set var="arquitectura" value="id_arquitectura"></s:set>
+										<s:iterator value="arquitecturas">
+											<s:if test="%{id_arquitectura == #arquitectura}">
+												"<s:property value="nombre" />"  
+											</s:if>
+										</s:iterator>
+									</s:if>
+								</s:iterator>
+								
+							</h5>
+							<h5 style="margin: 0;">
+								Servicio: "
+								<s:property value="servicio.version" />
+								"
+							</h5>
+							<h5 style="margin: 0;">
+								Nivel de Seguridad: "
+								<s:set var="intercambio" value="servicio.id_intercambio"></s:set>
+								<s:iterator value="children">
+									<s:if test="%{id_intercambio == #intercambio}">
+										<s:property value="nombre" />
+									</s:if>
+								</s:iterator>
+								"
+							</h5>
+						</div>
+						<div id="tab4" class="tab_content">
+							<h5 style="margin: 0;">
+								Responsable del soporte Técnico: "
+								<s:property value="servicio.responsable" />
+								"
+							</h5>
+							<h5 style="margin: 0;">
+								Teléfono: "
+								<s:property value="telefono" />
+								"
+							</h5>
+							<h5 style="margin: 0;">
+								Correo: "
+								<s:property value="correo" />
+								"
+							</h5>
+						</div>
+					</div>
+					
+					
+					
+					
+					
 
 					<!-- Tabla en árbol. -->
 					<table id="tree" class="treeTable">
