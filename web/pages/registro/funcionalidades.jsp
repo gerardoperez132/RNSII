@@ -9,6 +9,7 @@
 <!-- CSS (required) -->
 <link rel="stylesheet" type="text/css" href="res/css/styles.css">
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
+<link rel="stylesheet" type="text/css" href="res/css/menu_vertical.css">
 <link rel="stylesheet" type="text/css"
 	href="res/css/jquery.treeTable.css">
 <link rel="stylesheet" type="text/css" href="res/css/table_tree.css">
@@ -22,13 +23,32 @@
 				<%@include file="../layout/header.jsp"%>
 				<!-- Esta es la barra lateral -->
 				<div id="sidebar">
-					<small>Paso 1 Registro de Servicio de Información</small><br>
-					<br> <big>Paso 2 Registro de Funcionalidad(es)</big> <br>
-					<br> <small>Paso 3 Registro de Entradas/Salidas</small><br>
-					<br> <small>Paso 4 Verificar y guardar</small> <br> 
+					<div id="menuv">
+						<ul>
+							<li class="nivel1 primera"><a href="<s:url action="home"/>"
+								class="nivel1"> <s:text name="inicio" />
+							</a></li>
+							<li class="nivel1"><a class="nivel1"> <s:text
+										name="servicios" />
+							</a>
+								<ul class="nivel2">
+									<li><a
+										href="<s:url action="prepararServicioInformacion"/>"> <s:text
+												name="registro" />
+									</a></li>
+								</ul></li>
+							<li class="nivel1"><a href="#" class="nivel1"> <s:text
+										name="configuración" />
+							</a></li>
+							<li class="nivel1"><a href="<s:url action="salir"/>"
+								class="nivel1"> <s:text name="salir" />
+							</a></li>
+						</ul>
+					</div>
 				</div>
 				<!-- Este es el div de contenidos -->
 				<div id="content">
+					<small>Registro de Servicio de Información / Paso 1: / <strong>Paso 2</strong> / Paso 3</small>
 					<h4>
 						<s:text name="registro.title" />
 					</h4>
@@ -64,12 +84,10 @@
 						<s:hidden name="id_servicio_informacion"></s:hidden>
 						<input type="submit" value="<s:text name="funcionalidad.add"/>" />
 					</form>
-					</td><td>
-						<s:if test="funcionalidades.size() > 0">
+					</td><td>						
 						<form action="home" method="POST">						
 							<input type="submit" value="<s:text name="terminar"/>" />
-						</form>
-						</s:if>
+						</form>						
 					</td></tr>
 					</table>
 					<!-- Tabla en árbol. -->

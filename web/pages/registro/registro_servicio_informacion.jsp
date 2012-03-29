@@ -9,17 +9,16 @@
 <!-- CSS (required) -->
 <link rel="stylesheet" type="text/css" href="res/css/styles.css">
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
+<link rel="stylesheet" type="text/css" href="res/css/menu_vertical.css">
 <script type="text/javascript" src="res/js/jquery-1.7.1.js"></script>
 <script type="text/javascript" src="res/js/tabs.js"></script>
 <s:if test="modificar==true">
-	<s:set name="action" value="%{'modificarServicioInformacion'}" />
-	<s:set name="contenido" value="%{'content2'}" />
+	<s:set name="action" value="%{'modificarServicioInformacion'}" />	
 	<s:set name="submit" value="%{getText('actualizar')}" />
 	<s:set name="title" value="%{getText('actualizar.title')}" />
 </s:if>
 <s:else>
-	<s:set name="action" value="%{'registrarServicioInformacion'}" />
-	<s:set name="contenido" value="%{'content'}" />
+	<s:set name="action" value="%{'registrarServicioInformacion'}" />	
 	<s:set name="submit" value="%{getText('guardar')}" />
 	<s:set name="title" value="%{getText('registro.title')}" />
 </s:else>
@@ -36,6 +35,28 @@
 				<s:if test="modificar!=true">
 					<!-- Esta es la barra lateral -->
 					<div id="sidebar">
+						<div id="menuv">
+						<ul>
+							<li class="nivel1 primera"><a href="<s:url action="home"/>"
+								class="nivel1"> <s:text name="inicio" />
+							</a></li>
+							<li class="nivel1"><a class="nivel1"> <s:text
+										name="servicios" />
+							</a>
+								<ul class="nivel2">
+									<li><a
+										href="<s:url action="prepararServicioInformacion"/>"> <s:text
+												name="registro" />
+									</a></li>
+								</ul></li>
+							<li class="nivel1"><a href="#" class="nivel1"> <s:text
+										name="configuración" />
+							</a></li>
+							<li class="nivel1"><a href="<s:url action="salir"/>"
+								class="nivel1"> <s:text name="salir" />
+							</a></li>
+						</ul>
+						</div>
 						<small><strong>Paso 1:</strong> </small><br> <small><strong>Registro
 								de Servicio de Información</strong> </small>
 						<hr>
@@ -47,10 +68,37 @@
 						<hr>
 						<small>Paso 4:</small><br> <small>Verificar y guardar</small>
 						<hr>
-					</div>
+					</div>					
 				</s:if>
+				<s:else>
+					<div id="sidebar">
+					<div id="menuv">
+						<ul>
+							<li class="nivel1 primera"><a href="<s:url action="home"/>"
+								class="nivel1"> <s:text name="inicio" />
+							</a></li>
+							<li class="nivel1"><a class="nivel1"> <s:text
+										name="servicios" />
+							</a>
+								<ul class="nivel2">
+									<li><a
+										href="<s:url action="prepararServicioInformacion"/>"> <s:text
+												name="registro" />
+									</a></li>
+								</ul></li>
+							<li class="nivel1"><a href="#" class="nivel1"> <s:text
+										name="configuración" />
+							</a></li>
+							<li class="nivel1"><a href="<s:url action="salir"/>"
+								class="nivel1"> <s:text name="salir" />
+							</a></li>
+						</ul>
+					</div>
+					</div>
+				</s:else>
 				<!-- Este es el div de contenidos -->
-				<div id="<s:property value="#contenido"/>">
+				<div id="content">
+					<small><s:text name="title"/> / <strong>Paso 1:</strong> / Paso 2 / Paso 3</small>
 					<h3>
 						<s:text name="title"></s:text>
 					</h3>
