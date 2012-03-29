@@ -141,26 +141,35 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 		Object[] models = { new Funcionalidad(), new ServicioInformacion() };
 		funcionalidades = (List<Funcionalidad>) read(models,
 				id_servicio_informacion, -1);
-		Iterator<Funcionalidad> iterador = funcionalidades.iterator();
-		int index = 0;
+		Iterator<Funcionalidad> iterador = funcionalidades.iterator();		
 		while (iterador.hasNext()) {
 			funcionalidad = iterador.next();
 			Object[] models2 = { new EntradaSalida(), new Funcionalidad() };
 			List<EntradaSalida> es_tmp = (List<EntradaSalida>) read(models2,
 					funcionalidad.getId_funcionalidad(), -1);
-			ios.add(es_tmp);
-			System.out.println(ios.get(index));
-			index++;
+			ios.add(es_tmp);		
 		}
 		sectores = (List<Sector>) read(new Sector());
 		estados = (List<Estado>) read(new Estado());
 		sectores = (List<Sector>) read(new Sector());
-		areas = (List<Area>) read(new Area());
-		// unionareas = (List<UnionAreaServicioInformacion>) read(new
-		// UnionAreaServicioInformacion() );
+		areas = (List<Area>) read(new Area());		
 		unionareas = (List<UnionAreaServicioInformacion>) readUnion(
 				new UnionAreaServicioInformacion(), servicio,
 				id_servicio_informacion);
+		niveles = (List<Seguridad>) read(new Seguridad());
+		unionarquitecturas = (List<UnionArquitecturaServicioInformacion>) readUnion(
+				new UnionArquitecturaServicioInformacion(), servicio, 
+				id_servicio_informacion);
+		System.out.println(unionarquitecturas.size());
+		arquitecturas = (List<Arquitectura>) read(new Arquitectura());
+		System.out.println(arquitecturas.size());
+		children = (List<Intercambio>) read(new Intercambio()); 
+		Telefono phone = new Telefono();
+		phone = (Telefono) getPhone(servicio, servicio.getId_servicio_informacion());
+		telefono = phone.getTelefono();
+		Correo email = new Correo();
+		email = (Correo) getEmail(servicio, servicio.getId_servicio_informacion());
+		correo = email.getCorreo();
 		return SUCCESS;
 	}
 
@@ -695,6 +704,15 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 
 	public void setModificar(boolean modificar) {
 		this.modificar = modificar;
+	}
+
+	public List<UnionArquitecturaServicioInformacion> getUnionarquitecturas() {
+		return unionarquitecturas;
+	}
+
+	public void setUnionarquitecturas(
+			List<UnionArquitecturaServicioInformacion> unionarquitecturas) {
+		this.unionarquitecturas = unionarquitecturas;
 	}
 
 	// @SuppressWarnings("unchecked")
