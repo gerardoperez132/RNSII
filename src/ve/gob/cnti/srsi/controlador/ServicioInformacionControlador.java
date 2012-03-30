@@ -141,45 +141,56 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 		Object[] models = { new Funcionalidad(), new ServicioInformacion() };
 		funcionalidades = (List<Funcionalidad>) read(models,
 				id_servicio_informacion, -1);
-		Iterator<Funcionalidad> iterador = funcionalidades.iterator();		
+		Iterator<Funcionalidad> iterador = funcionalidades.iterator();
 		while (iterador.hasNext()) {
 			funcionalidad = iterador.next();
 			Object[] models2 = { new EntradaSalida(), new Funcionalidad() };
 			List<EntradaSalida> es_tmp = (List<EntradaSalida>) read(models2,
 					funcionalidad.getId_funcionalidad(), -1);
-			ios.add(es_tmp);		
+			ios.add(es_tmp);
 		}
 		sectores = (List<Sector>) read(new Sector());
 		estados = (List<Estado>) read(new Estado());
 		sectores = (List<Sector>) read(new Sector());
-		areas = (List<Area>) read(new Area());		
+		areas = (List<Area>) read(new Area());
 		unionareas = (List<UnionAreaServicioInformacion>) readUnion(
 				new UnionAreaServicioInformacion(), servicio,
 				id_servicio_informacion);
 		niveles = (List<Seguridad>) read(new Seguridad());
 		unionarquitecturas = (List<UnionArquitecturaServicioInformacion>) readUnion(
-				new UnionArquitecturaServicioInformacion(), servicio, 
+				new UnionArquitecturaServicioInformacion(), servicio,
 				id_servicio_informacion);
 		System.out.println(unionarquitecturas.size());
 		arquitecturas = (List<Arquitectura>) read(new Arquitectura());
 		System.out.println(arquitecturas.size());
-		children = (List<Intercambio>) read(new Intercambio()); 
+		children = (List<Intercambio>) read(new Intercambio());
 		Telefono phone = new Telefono();
-		phone = (Telefono) getPhone(servicio, servicio.getId_servicio_informacion());
+		phone = (Telefono) getPhone(servicio,
+				servicio.getId_servicio_informacion());
 		telefono = phone.getTelefono();
 		Correo email = new Correo();
-		email = (Correo) getEmail(servicio, servicio.getId_servicio_informacion());
+		email = (Correo) getEmail(servicio,
+				servicio.getId_servicio_informacion());
 		correo = email.getCorreo();
 		return SUCCESS;
 	}
 
 	@Override
-	public void validate() {		
+	public void validate() {
 		System.out.println("NAME=>" + name.toString());
 		String[] splits = name.split(",");
 		names = Arrays.asList(splits);
 		for (String n : names)
 			System.out.println("NAMES => " + n);
+
+		int i = 0;
+		for (File f : files) {
+			if (f != null
+					&& names.get(i).toString().trim().equalsIgnoreCase(""))
+				addFieldError("name" + i,
+						"Si va a subir un documento, debe proporcionar un nombre");
+			i++;
+		}
 		try {
 			saveFile();
 		} catch (IOException e) {
@@ -218,14 +229,14 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 		// TODO ¿Validar que sólo tiene un punto?
 
 		// TODO Validaciones de archivos
-		// if (file != null && name.isEmpty()) {
-		// System.out.println("file: " + file.getPath());
+		// if (files != null && name.isEmpty()) {
+		// // System.out.println("file: " + files.getPath());
 		// addFieldError(
 		// "name",
 		// getText("Si va a subir un documento debe proporcionar el nombre con que se va a guardar"));
 		// }
 		//
-		// if (file == null && !name.isEmpty()) {
+		// if (files == null && !name.isEmpty()) {
 		// addFieldError(
 		// "file",
 		// getText("Si va a subir un documento debe proporcionar el archivo a guardar"));
@@ -323,17 +334,19 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 
 		try {
 			updateUnion(new UnionAreaServicioInformacion(),
-					new ServicioInformacion(), new Area(), id_servicio_informacion, area);
-		} catch (Exception e1) {			
+					new ServicioInformacion(), new Area(),
+					id_servicio_informacion, area);
+		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
-		
+
 		try {
 			updateUnion(new UnionArquitecturaServicioInformacion(),
-					new ServicioInformacion(), new Arquitectura(), id_servicio_informacion, arquitectura);
-		} catch (Exception e1) {			
+					new ServicioInformacion(), new Arquitectura(),
+					id_servicio_informacion, arquitectura);
+		} catch (Exception e1) {
 			e1.printStackTrace();
-		}		
+		}
 
 		Telefono phone = new Telefono();
 		phone = (Telefono) read(phone, id_servicio_informacion);
@@ -436,7 +449,7 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 		// return "/archivos/" + ENTE + "/" + name;
 		return "";
 	}
-	
+
 	public List<Sector> getSectores() {
 		return sectores;
 	}
