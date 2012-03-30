@@ -8,7 +8,6 @@ var File = function() {
 		// name="documento.file"></s:text></h5><s:fielderror><s:param>file</s:param></s:fielderror><s:file
 		// name="file" />';
 		// return '<input type="submit" value="Submit">';
-
 		form = '<h5 class="formulario">' + nameLabel + '</h5>'
 				+ '<input type="text" name="name" id="name">'
 				+ '<h5 class="formulario">' + fileLabel
