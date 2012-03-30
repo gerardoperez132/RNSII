@@ -13,12 +13,12 @@
 <script type="text/javascript" src="res/js/jquery-1.7.1.js"></script>
 <script type="text/javascript" src="res/js/tabs.js"></script>
 <s:if test="modificar==true">
-	<s:set name="action" value="%{'modificarServicioInformacion'}" />	
+	<s:set name="action" value="%{'modificarServicioInformacion'}" />
 	<s:set name="submit" value="%{getText('actualizar')}" />
 	<s:set name="title" value="%{getText('actualizar.title')}" />
 </s:if>
 <s:else>
-	<s:set name="action" value="%{'registrarServicioInformacion'}" />	
+	<s:set name="action" value="%{'registrarServicioInformacion'}" />
 	<s:set name="submit" value="%{getText('guardar')}" />
 	<s:set name="title" value="%{getText('registro.title')}" />
 </s:else>
@@ -36,26 +36,21 @@
 					<!-- Esta es la barra lateral -->
 					<div id="sidebar">
 						<div id="menuv">
-						<ul>
-							<li class="nivel1 primera"><a href="<s:url action="home"/>"
-								class="nivel1"> <s:text name="inicio" />
-							</a></li>
-							<li class="nivel1"><a class="nivel1"> <s:text
-										name="servicios" />
-							</a>
-								<ul class="nivel2">
-									<li><a
-										href="<s:url action="prepararServicioInformacion"/>"> <s:text
-												name="registro" />
-									</a></li>
-								</ul></li>
-							<li class="nivel1"><a href="#" class="nivel1"> <s:text
-										name="configuración" />
-							</a></li>
-							<li class="nivel1"><a href="<s:url action="salir"/>"
-								class="nivel1"> <s:text name="salir" />
-							</a></li>
-						</ul>
+							<ul>
+								<li class="nivel1 primera"><a href="<s:url action="home"/>"
+									class="nivel1"> <s:text name="inicio" /> </a></li>
+								<li class="nivel1"><a class="nivel1"> <s:text
+											name="servicios" /> </a>
+									<ul class="nivel2">
+										<li><a
+											href="<s:url action="prepararServicioInformacion"/>"> <s:text
+													name="registro" /> </a></li>
+									</ul></li>
+								<li class="nivel1"><a href="#" class="nivel1"> <s:text
+											name="configuración" /> </a></li>
+								<li class="nivel1"><a href="<s:url action="salir"/>"
+									class="nivel1"> <s:text name="salir" /> </a></li>
+							</ul>
 						</div>
 						<small><strong>Paso 1:</strong> </small><br> <small><strong>Registro
 								de Servicio de Información</strong> </small>
@@ -68,37 +63,33 @@
 						<hr>
 						<small>Paso 4:</small><br> <small>Verificar y guardar</small>
 						<hr>
-					</div>					
+					</div>
 				</s:if>
 				<s:else>
 					<div id="sidebar">
-					<div id="menuv">
-						<ul>
-							<li class="nivel1 primera"><a href="<s:url action="home"/>"
-								class="nivel1"> <s:text name="inicio" />
-							</a></li>
-							<li class="nivel1"><a class="nivel1"> <s:text
-										name="servicios" />
-							</a>
-								<ul class="nivel2">
-									<li><a
-										href="<s:url action="prepararServicioInformacion"/>"> <s:text
-												name="registro" />
-									</a></li>
-								</ul></li>
-							<li class="nivel1"><a href="#" class="nivel1"> <s:text
-										name="configuración" />
-							</a></li>
-							<li class="nivel1"><a href="<s:url action="salir"/>"
-								class="nivel1"> <s:text name="salir" />
-							</a></li>
-						</ul>
-					</div>
+						<div id="menuv">
+							<ul>
+								<li class="nivel1 primera"><a href="<s:url action="home"/>"
+									class="nivel1"> <s:text name="inicio" /> </a></li>
+								<li class="nivel1"><a class="nivel1"> <s:text
+											name="servicios" /> </a>
+									<ul class="nivel2">
+										<li><a
+											href="<s:url action="prepararServicioInformacion"/>"> <s:text
+													name="registro" /> </a></li>
+									</ul></li>
+								<li class="nivel1"><a href="#" class="nivel1"> <s:text
+											name="configuración" /> </a></li>
+								<li class="nivel1"><a href="<s:url action="salir"/>"
+									class="nivel1"> <s:text name="salir" /> </a></li>
+							</ul>
+						</div>
 					</div>
 				</s:else>
 				<!-- Este es el div de contenidos -->
 				<div id="content">
-					<small><s:text name="title"/> / <strong>Paso 1:</strong> / Paso 2 / Paso 3</small>
+					<small><s:text name="title" /> / <strong>Paso 1:</strong>
+						/ Paso 2 / Paso 3</small>
 					<h3>
 						<s:text name="title"></s:text>
 					</h3>
@@ -174,25 +165,24 @@
 								<small><s:text name="tab2.description"></s:text> </small>
 								<hr>
 								<s:if test="files.size > 0 || !name.isEmpty()">
-									<s:iterator value="names">
+									<s:iterator value="names" status="i">
 										<h5 class="formulario">
 											<s:text name="documento.name" />
 										</h5>
 										<s:fielderror>
-											<s:param>name</s:param>
+											<s:param value="%{'name' + #i.index}" />
 										</s:fielderror>
 										<s:set var="name">
 											<s:property />
 										</s:set>
 										<s:textfield name="name" labelposition="top" value="%{#name}" />
-
 										<h5 class="formulario">
 											<s:text name="documento.file" />
 										</h5>
 										<s:fielderror>
 											<s:param>file</s:param>
 										</s:fielderror>
-										<s:file name="file" label="File" size="40"></s:file>
+										<s:file name="file" />
 										<hr>
 									</s:iterator>
 								</s:if>
@@ -211,7 +201,7 @@
 									<s:fielderror>
 										<s:param>file</s:param>
 									</s:fielderror>
-									<s:file name="file" label="File" size="40"></s:file>
+									<s:file name="file" />
 									<hr>
 								</s:else>
 								<script src="<s:url value="res/js/rows.js"/>"
