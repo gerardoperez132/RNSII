@@ -1,4 +1,4 @@
-package ve.gob.cnti.srsi.controlador;
+package ve.gob.cnti.srsi.dao;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
