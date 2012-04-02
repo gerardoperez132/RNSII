@@ -15,6 +15,7 @@
 		       		<param name="excludeParams">dojo/..*,struts.token,struts.token.name</param>
 		       </interceptor-ref>
 		       <interceptor-ref name="validation"></interceptor-ref>
+		       <interceptor-ref name="workflow"/>
 		       <interceptor-ref name="token"></interceptor-ref>       
 		       <interceptor-ref name="basicStack"></interceptor-ref>
 		   	</interceptor-stack>
