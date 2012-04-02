@@ -1,6 +1,7 @@
 package ve.gob.cnti.srsi.controlador;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,8 @@ import org.apache.struts2.interceptor.validation.SkipValidation;
 import ve.gob.cnti.srsi.dao.DAO;
 import ve.gob.cnti.srsi.modelo.Correo;
 import ve.gob.cnti.srsi.modelo.Ente;
+import ve.gob.cnti.srsi.modelo.EntradaSalida;
+import ve.gob.cnti.srsi.modelo.Funcionalidad;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.Usuario;
 
@@ -23,8 +26,10 @@ public class LoginControlador extends DAO {
 	private Correo user_correo = new Correo();
 	private Ente ente = new Ente();
 	private List<ServicioInformacion> servicios = new ArrayList<ServicioInformacion>();
+	private List<ServiciosPublicables> ListaServicios  = new ArrayList<ServiciosPublicables>();
 	@SuppressWarnings("rawtypes")
 	private Map session;
+	
 
 	@SuppressWarnings("unchecked")
 	public String autenticarUsuario() {
@@ -69,11 +74,36 @@ public class LoginControlador extends DAO {
 			usuario = (Usuario) session.get("usuario");
 			if (usuario == null) {
 				return INPUT;
-			}
+			}//TODO				
 			ente = (Ente) read(ente, usuario.getId());
 			Object[] objetos = { new ServicioInformacion(), new Ente() };
 			servicios = (ArrayList<ServicioInformacion>) read(objetos,
 					ente.getId_ente(), -1);
+			Iterator<ServicioInformacion> siIterado = servicios.iterator();
+			ServicioInformacion servicio = new ServicioInformacion();
+			while (siIterado.hasNext()){				
+				servicio = siIterado.next();
+				Object[] models = { new Funcionalidad(), new ServicioInformacion() };
+				List<Funcionalidad> funcionalidades = (List<Funcionalidad>) read(models,
+						servicio.getId_servicio_informacion(), -1);
+				if(funcionalidades.isEmpty()){					
+					ListaServicios.add(new ServiciosPublicables(false, servicio));					
+				}else{
+					Iterator<Funcionalidad> fxIterado = funcionalidades.iterator();
+					Funcionalidad fx = new Funcionalidad();				
+					while(fxIterado.hasNext()){
+						fx = fxIterado.next();
+						Object[] models2 = { new EntradaSalida(), new Funcionalidad() };
+						List<EntradaSalida> salidas_tmp = (List<EntradaSalida>) read(models2,
+								fx.getId_funcionalidad(), SALIDA);
+						if(salidas_tmp.isEmpty()){
+							ListaServicios.add(new ServiciosPublicables(false, servicio));
+						}else{
+							ListaServicios.add(new ServiciosPublicables(true, servicio));
+						}
+					}
+				}
+			}			
 		}
 		return SUCCESS;
 	}
@@ -117,7 +147,7 @@ public class LoginControlador extends DAO {
 	public void setEnte(Ente ente) {
 		this.ente = ente;
 	}
-
+/*TODO borrar
 	public List<ServicioInformacion> getServicios() {
 		return servicios;
 	}
@@ -125,5 +155,44 @@ public class LoginControlador extends DAO {
 	public void setServicios(List<ServicioInformacion> servicios) {
 		this.servicios = servicios;
 	}
+*/
+	public List<ServiciosPublicables> getListaServicios() {
+		return ListaServicios;
+	}
 
+	public void setListaServicios(List<ServiciosPublicables> listaServicios) {
+		ListaServicios = listaServicios;
+	}
+
+
+
+}
+
+class ServiciosPublicables{
+	
+	boolean publicable;
+	ServicioInformacion servicio = new ServicioInformacion();
+	
+	public ServiciosPublicables(boolean publicable, ServicioInformacion servicio) {
+		super();
+		this.publicable = publicable;
+		this.servicio = servicio;
+	}
+
+	public boolean isPublicable() {
+		return publicable;
+	}
+
+	public void setPublicable(boolean publicable) {
+		this.publicable = publicable;
+	}
+
+	public ServicioInformacion getServicio() {
+		return servicio;
+	}
+
+	public void setServicio(ServicioInformacion servicio) {
+		this.servicio = servicio;
+	}
+	
 }
