@@ -342,7 +342,7 @@
 							</s:if>
 							<s:else>
 								<tr>
-									<th colspan="4"><s:text name="servicios.error" /></th>
+									<th colspan="4"><s:text name="funcionalidades.error" /></th>
 								</tr>
 							</s:else>
 						</tbody>
