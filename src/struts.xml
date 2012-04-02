@@ -11,8 +11,8 @@
 	        *************************************************** -->
 		<interceptors>
 	    	<interceptor-stack name="doubleSubmit">
-		   		<interceptor-ref name="params">
-		       	<param name="excludeParams">dojo/..*,struts.token,struts.token.name</param>
+		   	   <interceptor-ref name="params">
+		       		<param name="excludeParams">dojo/..*,struts.token,struts.token.name</param>
 		       </interceptor-ref>
 		       <interceptor-ref name="validation"></interceptor-ref>
 		       <interceptor-ref name="token"></interceptor-ref>       
