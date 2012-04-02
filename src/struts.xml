@@ -5,6 +5,20 @@
 
 <struts>
 	<package name="default" extends="struts-default">
+	
+		<!--*******************************************************
+				interceptores para evitar el doubleSubmit
+	        *************************************************** -->
+		<interceptors>
+	    	<interceptor-stack name="doubleSubmit">
+		   		<interceptor-ref name="params">
+		       	<param name="excludeParams">dojo/..*,struts.token,struts.token.name</param>
+		       </interceptor-ref>
+		       <interceptor-ref name="validation"></interceptor-ref>
+		       <interceptor-ref name="token"></interceptor-ref>       
+		       <interceptor-ref name="basicStack"></interceptor-ref>
+		   	</interceptor-stack>
+	   	</interceptors>
 
 		<!--*******************************************************
 				Actions para registros de servicios de información
@@ -17,7 +31,9 @@
 
 		<action name="registrarServicioInformacion" method="registrarServicioInformacion"
 			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
-			<result name="success">registro/funcionalidades.jsp</result>					
+			<interceptor-ref name="doubleSubmit"/>
+			<result name="success">registro/funcionalidades.jsp</result>
+			<result name="invalid.token">registro/funcionalidades.jsp</result>  					
 			<result name="input">registro/registro_servicio_informacion.jsp
 			</result>			
 			<result name="errorSession" type="redirectAction">home</result>
