@@ -55,7 +55,7 @@
 		
 		<action name="modificarServicioInformacion" method="modificarServicioInformacion"
 			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
-			<result name="success" type="redirectAction">home</result>				
+			<result name="success">registro/funcionalidades.jsp</result>			
 			<result name="input">registro/registro_servicio_informacion.jsp
 			</result>			
 			<result name="errorSession" type="redirectAction">home</result>
