@@ -9,9 +9,8 @@ var File = function() {
 		// name="file" />';
 		// return '<input type="submit" value="Submit">';
 		form = '<h5 class="formulario">' + nameLabel + '</h5>'
-				+ '<input type="text" name="name" id="name">'
-				+ '<h5 class="formulario">' + fileLabel
-				+ '</h5><input type="file" name="file" value="" id="file"><hr>';
+				+ '<input type="text" name="name">' + '<h5 class="formulario">'
+				+ fileLabel + '</h5><input type="file" name="file"><hr>';
 		return form;
 	}
 	return {
