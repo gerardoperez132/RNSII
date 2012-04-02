@@ -38,19 +38,6 @@ public interface Constants {
 	}
 
 	/**
-	 * Interfaz con los tipos de documentos de los aspectos legales.
-	 * 
-	 * @author Richard Ricciardelli
-	 * 
-	 */
-	public interface TipoDocumento {
-		/** Tipo de documento legal. */
-		public static final int LEGAL = 0;
-		/** Tipo de documento SLA. */
-		public static final int SLA = 1;
-	}
-
-	/**
 	 * Interfaz con los tipos de entrada en la tabla de entradas y salidas.
 	 * 
 	 * @author Richard Ricciardelli
