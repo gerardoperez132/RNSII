@@ -131,7 +131,7 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 					id_funcionalidad);
 			funcionalidades = (List<Funcionalidad>) read(FSI, id_funcionalidad,
 					-1);
-		}
+		}		
 		return SUCCESS;
 	}
 
