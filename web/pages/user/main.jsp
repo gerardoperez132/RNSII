@@ -18,7 +18,6 @@
 <title><s:text name="inicio" /></title>
 </head>
 <body>
-
 	<!-- Este es el div de la sombra del contenedor del maquetado de la página -->
 	<div id="sombra">
 		<!-- Este es el div contenedor del maquetado de la página -->
@@ -106,48 +105,57 @@
 					</tr>
 				</thead>
 				<tbody>
-					<s:if test="servicios.size() > 0">
-						<s:iterator value="servicios" status="result_Status">
-							<tr id="node-<s:property value="#result_datos.index"/>">
-								<th><s:property value="id_servicio_informacion" /></th>
-								<td><s:property value="nombre" /></td>
-								<td><s:date name="fecha_creado" format="d'/'MM'/'yyyy" /></td>
+					<s:if test="ListaServicios.size() > 0">
+						<s:iterator value="ListaServicios" status="result_Status">
+							<tr id="node-<s:property value="#result_datos.index"/>">								
+								<th><s:property value="servicio.id_servicio_informacion" /></th>
+								<td><s:property value="servicio.nombre" /></td>
+								<td><s:date name="servicio.fecha_creado" format="d'/'MM'/'yyyy" /></td>
 								<td>
 									<table style="margin: 0; padding: 0;">
 										<tr style="margin: 0; padding: 0;">
 											<td style="margin: 0; padding: 0;">
 												<form action="examinarServicioInformacion" method="POST">													
-													<s:hidden name="id_servicio_informacion"></s:hidden>													
+													<s:hidden name="id_servicio_informacion" value="%{servicio.id_servicio_informacion}"></s:hidden>													
 													<input type="submit" value="<s:text name="detalles"/>"
 														style="font-size: 0.9em;" />
 												</form>
 											</td>
 											<td style="margin: 0; padding: 0;">
 												<form action="prepararModificarServicioInformacion" method="POST">													
-													<s:hidden name="id_servicio_informacion"></s:hidden>													
+													<s:hidden name="id_servicio_informacion" value="%{servicio.id_servicio_informacion}"></s:hidden>													
 													<input type="submit" value="<s:text name="modificar"/>"
 														style="font-size: 0.9em;" />
 												</form>
 											</td>
 											<td style="margin: 0; padding: 0;">
 												<form action="eliminarServicioInformacion" method="POST">
-													<s:hidden name="id_servicio_informacion"></s:hidden>													
+													<s:hidden name="id_servicio_informacion" value="%{servicio.id_servicio_informacion}"></s:hidden>													
 													<input type="submit" value="<s:text name="eliminar" />"
 														style="font-size: 0.9em;" />
 												</form>
 											</td>
 											<td style="margin: 0; padding: 0;">
-												<s:if test="publicado==false">
+												<s:if test="publicable==true">
+												<s:if test="servicio.publicado==false">
 													<form action="publicarServicioInformacion" method="POST">
-														<s:hidden name="id_servicio_informacion"></s:hidden>													
+														<s:hidden name="id_servicio_informacion" value="%{servicio.id_servicio_informacion}"></s:hidden>													
 														<input type="submit" value="<s:text name="publicar" />"
 															style="font-size: 0.9em;" />
 													</form>
 												</s:if>
 												<s:else>
 													<form action="despublicarServicioInformacion" method="POST">
-														<s:hidden name="id_servicio_informacion"></s:hidden>													
+														<s:hidden name="id_servicio_informacion" value="%{servicio.id_servicio_informacion}"></s:hidden>													
 														<input type="submit" value="<s:text name="despublicar" />"
+															style="font-size: 0.9em;" />
+													</form>
+												</s:else>
+												</s:if>
+												<s:else>
+													<form action="prepararModificarServicioInformacion" method="POST">
+														<s:hidden name="id_servicio_informacion" value="%{servicio.id_servicio_informacion}"></s:hidden>													
+														<input type="submit" value="continuar registro"
 															style="font-size: 0.9em;" />
 													</form>
 												</s:else>
@@ -166,7 +174,6 @@
 				</tbody>
 			</table>
 			</div>
-
 			<!-- Este es el pie de página -->
 			<div id="footer"></div>
 		</div>
