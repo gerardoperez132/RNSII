@@ -1,5 +1,6 @@
 package ve.gob.cnti.srsi.controlador;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -32,8 +33,9 @@ public class LoginControlador extends DAO {
 	
 
 	@SuppressWarnings("unchecked")
-	public String autenticarUsuario() {
+	public String autenticarUsuario() throws NoSuchAlgorithmException {
 		user_correo = (Correo) getUserEmail(correo);
+		System.out.println("PASSWORD => " + usuario.getClave());
 		if (user_correo == null) {
 			addFieldError("correo", "Correo no existe");
 			return INPUT;
@@ -43,7 +45,8 @@ public class LoginControlador extends DAO {
 				addFieldError("error",
 						"Ha ocurrido un problema recuperando sus datos!!!");
 				return INPUT;
-			} else if (!usuario.getClave().equals(password)) {
+			} else if (!usuario.getClave().equals(
+					new MD5Hashing(password).getPassword().toString())) {
 				addFieldError("password", "La clave no coincide con el correo");
 				return INPUT;
 			} else {
@@ -55,8 +58,8 @@ public class LoginControlador extends DAO {
 	}
 
 	@SkipValidation
-	public String mostrarLogin() {		
-			return SUCCESS;		
+	public String mostrarLogin() {
+		return SUCCESS;
 	}
 
 	@SkipValidation
