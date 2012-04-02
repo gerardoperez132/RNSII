@@ -75,6 +75,7 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 	private String telefono;
 	private String correo;
 	private boolean modificar;
+	private boolean registrado;
 
 	@SuppressWarnings("rawtypes")
 	private Map session;
@@ -248,7 +249,7 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 		prepararFormulario();
 	}
 
-	public String registrarServicioInformacion() {
+	public String registrarServicioInformacion() {		
 		session = ActionContext.getContext().getSession();
 		Usuario usuario = new Usuario();
 		usuario = (Usuario) session.get("usuario");
@@ -291,7 +292,7 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 		email.setCorreo(correo);
 		email.setId_servicio_informacion(id_servicio_informacion);
 		create(email);
-
+		
 		// if (fileFileName != null && !name.isEmpty()) {
 		// AspectoLegal documento = new AspectoLegal();
 		// documento.setId_servicio_informacion(id_servicio_informacion);
@@ -415,7 +416,7 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 		arquitecturas = (List<Arquitectura>) read(new Arquitectura());
 		parents = (List<Intercambio>) getParents(new Intercambio());
 		children = (List<Intercambio>) getChildren(new Intercambio());
-		session = ActionContext.getContext().getSession();
+		session = ActionContext.getContext().getSession();		
 		return SUCCESS;
 	}
 
@@ -717,6 +718,14 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 
 	public void setModificar(boolean modificar) {
 		this.modificar = modificar;
+	}
+
+	public boolean isRegistrado() {
+		return registrado;
+	}
+
+	public void setRegistrado(boolean registrado) {
+		this.registrado = registrado;
 	}
 
 	public List<UnionArquitecturaServicioInformacion> getUnionarquitecturas() {

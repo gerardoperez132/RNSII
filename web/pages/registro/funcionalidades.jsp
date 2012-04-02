@@ -146,6 +146,7 @@
 				<%@include file="../layout/footer.jsp"%>
 			</div>
 		</div>
+		
 	</body>
 </s:i18n>
 </html>

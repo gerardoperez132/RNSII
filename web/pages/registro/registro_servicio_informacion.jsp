@@ -32,60 +32,33 @@
 			<!-- Este es el div contenedor del maquetado de la página -->
 			<div id="container">
 				<%@include file="../layout/header.jsp"%>
-				<s:if test="modificar!=true">
+				<s:if test="modificar!=true"></s:if>
 					<!-- Esta es la barra lateral -->
-					<div id="sidebar">
-						<div id="menuv">
-							<ul>
-								<li class="nivel1 primera"><a href="<s:url action="home"/>"
-									class="nivel1"> <s:text name="inicio" /> </a></li>
-								<li class="nivel1"><a class="nivel1"> <s:text
-											name="servicios" /> </a>
-									<ul class="nivel2">
-										<li><a
-											href="<s:url action="prepararServicioInformacion"/>"> <s:text
-													name="registro" /> </a></li>
-									</ul></li>
-								<li class="nivel1"><a href="#" class="nivel1"> <s:text
-											name="configuración" /> </a></li>
-								<li class="nivel1"><a href="<s:url action="salir"/>"
-									class="nivel1"> <s:text name="salir" /> </a></li>
-							</ul>
-						</div>
-						<small><strong>Paso 1:</strong> </small><br> <small><strong>Registro
-								de Servicio de Información</strong> </small>
-						<hr>
-						<small>Paso 2:</small><br> <small>Registro de
-							Funcionalidad(es)</small>
-						<hr>
-						<small>Paso 3:</small><br> <small>Registro de
-							Entradas/Salidas</small>
-						<hr>
-						<small>Paso 4:</small><br> <small>Verificar y guardar</small>
-						<hr>
-					</div>
-				</s:if>
-				<s:else>
-					<div id="sidebar">
-						<div id="menuv">
-							<ul>
-								<li class="nivel1 primera"><a href="<s:url action="home"/>"
-									class="nivel1"> <s:text name="inicio" /> </a></li>
-								<li class="nivel1"><a class="nivel1"> <s:text
-											name="servicios" /> </a>
-									<ul class="nivel2">
-										<li><a
-											href="<s:url action="prepararServicioInformacion"/>"> <s:text
-													name="registro" /> </a></li>
-									</ul></li>
-								<li class="nivel1"><a href="#" class="nivel1"> <s:text
-											name="configuración" /> </a></li>
-								<li class="nivel1"><a href="<s:url action="salir"/>"
-									class="nivel1"> <s:text name="salir" /> </a></li>
-							</ul>
-						</div>
-					</div>
-				</s:else>
+				<div id="sidebar">
+					<div id="menuv">
+					<ul>
+						<li class="nivel1 primera"><a href="<s:url action="home"/>"
+							class="nivel1"> <s:text name="inicio" />
+						</a></li>
+						<li class="nivel1"><a class="nivel1"> <s:text
+									name="servicios" />
+						</a>
+							<ul class="nivel2">
+								<li><a
+									href="<s:url action="prepararServicioInformacion"/>"> <s:text
+											name="registro" />
+								</a></li>
+							</ul></li>
+						<li class="nivel1"><a href="#" class="nivel1"> <s:text
+									name="configuración" />
+						</a></li>
+						<li class="nivel1"><a href="<s:url action="salir"/>"
+							class="nivel1"> <s:text name="salir" />
+						</a></li>
+					</ul>
+					</div>	
+				</div>			
+
 				<!-- Este es el div de contenidos -->
 				<div id="content">
 					<small><s:text name="title" /> / <strong>Paso 1:</strong>
@@ -311,7 +284,8 @@
 								<s:fielderror>
 									<s:param>correo</s:param>
 								</s:fielderror>
-								<s:textfield name="correo"></s:textfield>
+								<s:textfield name="correo"></s:textfield>	
+								<s:token name="token"/>							
 								<input type="submit" value='<s:property value="#submit"/>' />
 							</div>
 						</div>
