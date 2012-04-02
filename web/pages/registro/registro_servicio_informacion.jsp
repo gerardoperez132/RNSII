@@ -284,7 +284,8 @@
 								<s:fielderror>
 									<s:param>correo</s:param>
 								</s:fielderror>
-								<s:textfield name="correo"></s:textfield>								
+								<s:textfield name="correo"></s:textfield>	
+								<s:token name="token"/>							
 								<input type="submit" value='<s:property value="#submit"/>' />
 							</div>
 						</div>
