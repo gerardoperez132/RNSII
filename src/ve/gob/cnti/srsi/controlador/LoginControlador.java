@@ -9,6 +9,7 @@ import java.util.Map;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
 import ve.gob.cnti.srsi.dao.DAO;
+import ve.gob.cnti.srsi.dao.MD5Hashing;
 import ve.gob.cnti.srsi.modelo.Correo;
 import ve.gob.cnti.srsi.modelo.Ente;
 import ve.gob.cnti.srsi.modelo.EntradaSalida;
