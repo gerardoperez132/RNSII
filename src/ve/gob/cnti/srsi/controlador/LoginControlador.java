@@ -78,7 +78,7 @@ public class LoginControlador extends DAO {
 			usuario = (Usuario) session.get("usuario");
 			if (usuario == null) {
 				return INPUT;
-			}//TODO				
+			}		
 			ente = (Ente) read(ente, usuario.getId());
 			Object[] objetos = { new ServicioInformacion(), new Ente() };
 			servicios = (ArrayList<ServicioInformacion>) read(objetos,
@@ -151,15 +151,7 @@ public class LoginControlador extends DAO {
 	public void setEnte(Ente ente) {
 		this.ente = ente;
 	}
-/*TODO borrar
-	public List<ServicioInformacion> getServicios() {
-		return servicios;
-	}
-
-	public void setServicios(List<ServicioInformacion> servicios) {
-		this.servicios = servicios;
-	}
-*/
+	
 	public List<ServiciosPublicables> getListaServicios() {
 		return ListaServicios;
 	}

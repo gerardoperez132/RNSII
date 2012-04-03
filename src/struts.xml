@@ -6,10 +6,11 @@
 <struts>
 	<package name="default" extends="struts-default">
 
-		<!--******************************************************* interceptores 
-			para evitar el doubleSubmit *************************************************** -->
+		<!--****************************
+		 interceptores para evitar el doubleSubmit 
+		 ***************************** -->
 		<interceptors>
-			<interceptor-stack name="doubleSubmit">
+	    	<interceptor-stack name="doubleSubmit">
 				<interceptor-ref name="params">
 					<param name="excludeParams">dojo/..*,struts.token,struts.token.name</param>
 				</interceptor-ref>
@@ -20,8 +21,10 @@
 			</interceptor-stack>
 		</interceptors>
 
-		<!--******************************************************* Actions para 
-			registros de servicios de información *************************************************** -->
+		<!--*******************************************************
+				Actions para registros de servicios de información
+	        *************************************************** -->
+
 		<action name="prepararServicioInformacion" method="prepararFormulario"
 			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
 			<result name="success">registro/registro_servicio_informacion.jsp

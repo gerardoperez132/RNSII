@@ -242,6 +242,7 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 		if (telefono.length() > 0 && telefono.length() < 7)
 			addFieldError("telefono",
 					"Debe introducir un número telefónico válido de 7 dígitos");
+		id_servicio_informacion = getNextId(servicio)-1;		
 		prepararFormulario();
 	}
 
@@ -253,6 +254,7 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 			return "errorSession";
 		}
 		id_servicio_informacion = getNextId(servicio);
+		
 		servicio.setId_ente(usuario.getId_ente());
 		servicio.setId_usuario(usuario.getId_usuario());
 		servicio.setId_sector(sector);
@@ -261,7 +263,8 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 		servicio.setId_intercambio(intercambio);
 		// TODO Verificar que el nombre no esté repetido.
 		create(servicio);
-
+		servicio.setId_servicio_informacion(id_servicio_informacion);
+		
 		UnionAreaServicioInformacion unionAreaServicioInformacion = new UnionAreaServicioInformacion();
 		for (int i = 0; i < area.size(); i++) {
 			unionAreaServicioInformacion.setId_area(area.get(i));

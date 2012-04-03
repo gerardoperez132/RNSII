@@ -69,7 +69,7 @@
 					</h5>
 					<h5 class="formulario">
 						<s:text name="id.title">
-							<s:param>
+							<s:param>								
 								<s:property value="id_servicio_informacion" />
 							</s:param>
 						</s:text>
