@@ -2,15 +2,10 @@ var File = function() {
 	var nameLabel;
 	var fileLabel;
 	function createRow() {
-		// return
-		// '<s:fielderror><s:param>name</s:param></s:fielderror><s:textfield
-		// name="name" labelposition="top" /><h5 class="formulario"><s:text
-		// name="documento.file"></s:text></h5><s:fielderror><s:param>file</s:param></s:fielderror><s:file
-		// name="file" />';
-		// return '<input type="submit" value="Submit">';
 		form = '<h5 class="formulario">' + nameLabel + '</h5>'
-				+ '<input type="text" name="name">' + '<h5 class="formulario">'
-				+ fileLabel + '</h5><input type="file" name="file"><hr>';
+				+ '<input type="text" name="name" id="name">'
+				+ '<h5 class="formulario">' + fileLabel
+				+ '</h5><input type="file" name="file" value="" id="file"><hr>';
 		return form;
 	}
 	return {

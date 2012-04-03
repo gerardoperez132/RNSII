@@ -33,7 +33,7 @@
 			<div id="container">
 				<%@include file="../layout/header.jsp"%>
 				<s:if test="modificar!=true"></s:if>
-					<!-- Esta es la barra lateral -->
+				<!-- Esta es la barra lateral -->
 				<div id="sidebar">
 					<%@include file="../layout/sidebar.jsp"%>
 				</div>			
@@ -263,8 +263,8 @@
 								<s:fielderror>
 									<s:param>correo</s:param>
 								</s:fielderror>
-								<s:textfield name="correo"></s:textfield>	
-								<s:token name="token"/>							
+								<s:textfield name="correo"></s:textfield>
+								<s:token name="token" />
 								<input type="submit" value='<s:property value="#submit"/>' />
 							</div>
 						</div>

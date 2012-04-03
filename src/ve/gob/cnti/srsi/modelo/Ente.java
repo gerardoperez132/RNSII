@@ -38,6 +38,7 @@ public class Ente {
 	private long id_ente;
 	private long id_padre;
 	private String nombre;
+	private String siglas;
 	private String rif;
 	private String direccion;
 	private int status;
@@ -77,6 +78,14 @@ public class Ente {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public String getSiglas() {
+		return siglas;
+	}
+
+	public void setSiglas(String siglas) {
+		this.siglas = siglas;
 	}
 
 	public String getRif() {
@@ -122,9 +131,9 @@ public class Ente {
 	@Override
 	public String toString() {
 		return "Ente [id=" + id + ", id_ente=" + id_ente + ", id_padre="
-				+ id_padre + ", nombre=" + nombre + ", rif=" + rif
-				+ ", direccion=" + direccion + ", status=" + status
-				+ ", fecha_creado=" + fecha_creado + ", fecha_modificado="
-				+ fecha_modificado + "]";
+				+ id_padre + ", nombre=" + nombre + ", siglas=" + siglas
+				+ ", rif=" + rif + ", direccion=" + direccion + ", status="
+				+ status + ", fecha_creado=" + fecha_creado
+				+ ", fecha_modificado=" + fecha_modificado + "]";
 	}
 }

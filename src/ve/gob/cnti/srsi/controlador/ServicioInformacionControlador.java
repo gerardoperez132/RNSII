@@ -82,7 +82,7 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 
 	private long id_servicio_informacion;
 
-	@SuppressWarnings({ "unchecked" })
+	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String eliminarServicioInformacion() {
 		Funcionalidad funcion_del = new Funcionalidad();
@@ -128,7 +128,7 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 		return SUCCESS;
 	}
 
-	@SuppressWarnings({ "unchecked" })
+	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String examinarServicioInformacion() {
 		session = ActionContext.getContext().getSession();
@@ -181,13 +181,9 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 		System.out.println("NAME=>" + name.toString());
 		String[] splits = name.split(",");
 		names = Arrays.asList(splits);
-		for (String n : names)
-			System.out.println("NAMES => " + n);
-
 		int i = 0;
-		for (File f : files) {
-			if (f != null
-					&& names.get(i).toString().trim().equalsIgnoreCase(""))
+		for (String n : names) {
+			if (n.trim().equalsIgnoreCase(""))
 				addFieldError("name" + i,
 						"Si va a subir un documento, debe proporcionar un nombre");
 			i++;
@@ -250,7 +246,7 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 		prepararFormulario();
 	}
 
-	public String registrarServicioInformacion() {		
+	public String registrarServicioInformacion() {
 		session = ActionContext.getContext().getSession();
 		Usuario usuario = new Usuario();
 		usuario = (Usuario) session.get("usuario");
@@ -295,7 +291,7 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 		email.setCorreo(correo);
 		email.setId_servicio_informacion(id_servicio_informacion);
 		create(email);
-		
+
 		// if (fileFileName != null && !name.isEmpty()) {
 		// AspectoLegal documento = new AspectoLegal();
 		// documento.setId_servicio_informacion(id_servicio_informacion);
@@ -419,7 +415,7 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 		arquitecturas = (List<Arquitectura>) read(new Arquitectura());
 		parents = (List<Intercambio>) getParents(new Intercambio());
 		children = (List<Intercambio>) getChildren(new Intercambio());
-		session = ActionContext.getContext().getSession();		
+		session = ActionContext.getContext().getSession();
 		return SUCCESS;
 	}
 
@@ -518,30 +514,6 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 		this.servletRequest = servletRequest;
 	}
 
-	public List<File> getFiles() {
-		return files;
-	}
-
-	public List<String> getFileContentTypes() {
-		return fileContentTypes;
-	}
-
-	public List<String> getFileFileNames() {
-		return fileFileNames;
-	}
-
-	public void setFiles(List<File> files) {
-		this.files = files;
-	}
-
-	public void setFileContentTypes(List<String> fileContentTypes) {
-		this.fileContentTypes = fileContentTypes;
-	}
-
-	public void setFileFileNames(List<String> fileFileNames) {
-		this.fileFileNames = fileFileNames;
-	}
-
 	@FieldExpressionValidator(expression = "sector > 0", message = "Debe seleccionar un sector")
 	public long getSector() {
 		return sector;
@@ -631,6 +603,46 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 		this.servicio = servicio;
 	}
 
+	public List<File> getFiles() {
+		return files;
+	}
+
+	public void setFiles(List<File> files) {
+		this.files = files;
+	}
+
+	public List<String> getFileContentTypes() {
+		return fileContentTypes;
+	}
+
+	public void setFileContentTypes(List<String> fileContentTypes) {
+		this.fileContentTypes = fileContentTypes;
+	}
+
+	public List<String> getFileFileNames() {
+		return fileFileNames;
+	}
+
+	public void setFileFileNames(List<String> fileFileNames) {
+		this.fileFileNames = fileFileNames;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public List<String> getNames() {
+		return names;
+	}
+
+	public void setNames(List<String> names) {
+		this.names = names;
+	}
+
 	public String[] getCodigos() {
 		return codigos;
 	}
@@ -685,34 +697,6 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 
 	public void setIos(List<List<EntradaSalida>> ios) {
 		this.ios = ios;
-	}
-
-	public void setFile(List<File> files) {
-		this.files = files;
-	}
-
-	public void setFileContentType(List<String> fileContentTypes) {
-		this.fileContentTypes = fileContentTypes;
-	}
-
-	public void setFileFileName(List<String> fileFileNames) {
-		this.fileFileNames = fileFileNames;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public List<String> getNames() {
-		return names;
-	}
-
-	public void setNames(List<String> names) {
-		this.names = names;
 	}
 
 	public boolean isModificar() {
