@@ -33,31 +33,26 @@
 			<div id="container">
 				<%@include file="../layout/header.jsp"%>
 				<s:if test="modificar!=true"></s:if>
-					<!-- Esta es la barra lateral -->
+				<!-- Esta es la barra lateral -->
 				<div id="sidebar">
 					<div id="menuv">
-					<ul>
-						<li class="nivel1 primera"><a href="<s:url action="home"/>"
-							class="nivel1"> <s:text name="inicio" />
-						</a></li>
-						<li class="nivel1"><a class="nivel1"> <s:text
-									name="servicios" />
-						</a>
-							<ul class="nivel2">
-								<li><a
-									href="<s:url action="prepararServicioInformacion"/>"> <s:text
-											name="registro" />
-								</a></li>
-							</ul></li>
-						<li class="nivel1"><a href="#" class="nivel1"> <s:text
-									name="configuración" />
-						</a></li>
-						<li class="nivel1"><a href="<s:url action="salir"/>"
-							class="nivel1"> <s:text name="salir" />
-						</a></li>
-					</ul>
-					</div>	
-				</div>			
+						<ul>
+							<li class="nivel1 primera"><a href="<s:url action="home"/>"
+								class="nivel1"> <s:text name="inicio" /> </a></li>
+							<li class="nivel1"><a class="nivel1"> <s:text
+										name="servicios" /> </a>
+								<ul class="nivel2">
+									<li><a
+										href="<s:url action="prepararServicioInformacion"/>"> <s:text
+												name="registro" /> </a></li>
+								</ul></li>
+							<li class="nivel1"><a href="#" class="nivel1"> <s:text
+										name="configuración" /> </a></li>
+							<li class="nivel1"><a href="<s:url action="salir"/>"
+								class="nivel1"> <s:text name="salir" /> </a></li>
+						</ul>
+					</div>
+				</div>
 
 				<!-- Este es el div de contenidos -->
 				<div id="content">
@@ -284,8 +279,8 @@
 								<s:fielderror>
 									<s:param>correo</s:param>
 								</s:fielderror>
-								<s:textfield name="correo"></s:textfield>	
-								<s:token name="token"/>							
+								<s:textfield name="correo"></s:textfield>
+								<s:token name="token" />
 								<input type="submit" value='<s:property value="#submit"/>' />
 							</div>
 						</div>
