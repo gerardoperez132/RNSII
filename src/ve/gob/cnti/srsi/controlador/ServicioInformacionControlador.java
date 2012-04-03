@@ -184,9 +184,8 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 			System.out.println("NAMES => " + n);
 
 		int i = 0;
-		for (File f : files) {
-			if (f != null
-					&& names.get(i).toString().trim().equalsIgnoreCase(""))
+		for (String n : names) {
+			if (n.trim().equalsIgnoreCase(""))
 				addFieldError("name" + i,
 						"Si va a subir un documento, debe proporcionar un nombre");
 			i++;
