@@ -28,15 +28,13 @@ public class LoginControlador extends DAO {
 	private Correo user_correo = new Correo();
 	private Ente ente = new Ente();
 	private List<ServicioInformacion> servicios = new ArrayList<ServicioInformacion>();
-	private List<ServiciosPublicables> ListaServicios  = new ArrayList<ServiciosPublicables>();
+	private List<ServiciosPublicables> ListaServicios = new ArrayList<ServiciosPublicables>();
 	@SuppressWarnings("rawtypes")
 	private Map session;
-	
 
 	@SuppressWarnings("unchecked")
 	public String autenticarUsuario() throws NoSuchAlgorithmException {
 		user_correo = (Correo) getUserEmail(correo);
-		System.out.println("PASSWORD => " + usuario.getClave());
 		if (user_correo == null) {
 			addFieldError("correo", "Correo no existe");
 			return INPUT;
@@ -78,36 +76,42 @@ public class LoginControlador extends DAO {
 			usuario = (Usuario) session.get("usuario");
 			if (usuario == null) {
 				return INPUT;
-			}		
+			}
 			ente = (Ente) read(ente, usuario.getId());
 			Object[] objetos = { new ServicioInformacion(), new Ente() };
 			servicios = (ArrayList<ServicioInformacion>) read(objetos,
 					ente.getId_ente(), -1);
 			Iterator<ServicioInformacion> siIterado = servicios.iterator();
 			ServicioInformacion servicio = new ServicioInformacion();
-			while (siIterado.hasNext()){				
+			while (siIterado.hasNext()) {
 				servicio = siIterado.next();
-				Object[] models = { new Funcionalidad(), new ServicioInformacion() };
-				List<Funcionalidad> funcionalidades = (List<Funcionalidad>) read(models,
-						servicio.getId_servicio_informacion(), -1);
-				if(funcionalidades.isEmpty()){					
-					ListaServicios.add(new ServiciosPublicables(false, servicio));					
-				}else{
-					Iterator<Funcionalidad> fxIterado = funcionalidades.iterator();
-					Funcionalidad fx = new Funcionalidad();				
-					while(fxIterado.hasNext()){
+				Object[] models = { new Funcionalidad(),
+						new ServicioInformacion() };
+				List<Funcionalidad> funcionalidades = (List<Funcionalidad>) read(
+						models, servicio.getId_servicio_informacion(), -1);
+				if (funcionalidades.isEmpty()) {
+					ListaServicios
+							.add(new ServiciosPublicables(false, servicio));
+				} else {
+					Iterator<Funcionalidad> fxIterado = funcionalidades
+							.iterator();
+					Funcionalidad fx = new Funcionalidad();
+					while (fxIterado.hasNext()) {
 						fx = fxIterado.next();
-						Object[] models2 = { new EntradaSalida(), new Funcionalidad() };
-						List<EntradaSalida> salidas_tmp = (List<EntradaSalida>) read(models2,
-								fx.getId_funcionalidad(), SALIDA);
-						if(salidas_tmp.isEmpty()){
-							ListaServicios.add(new ServiciosPublicables(false, servicio));
-						}else{
-							ListaServicios.add(new ServiciosPublicables(true, servicio));
+						Object[] models2 = { new EntradaSalida(),
+								new Funcionalidad() };
+						List<EntradaSalida> salidas_tmp = (List<EntradaSalida>) read(
+								models2, fx.getId_funcionalidad(), SALIDA);
+						if (salidas_tmp.isEmpty()) {
+							ListaServicios.add(new ServiciosPublicables(false,
+									servicio));
+						} else {
+							ListaServicios.add(new ServiciosPublicables(true,
+									servicio));
 						}
 					}
 				}
-			}			
+			}
 		}
 		return SUCCESS;
 	}
@@ -151,7 +155,7 @@ public class LoginControlador extends DAO {
 	public void setEnte(Ente ente) {
 		this.ente = ente;
 	}
-	
+
 	public List<ServiciosPublicables> getListaServicios() {
 		return ListaServicios;
 	}
@@ -160,15 +164,13 @@ public class LoginControlador extends DAO {
 		ListaServicios = listaServicios;
 	}
 
-
-
 }
 
-class ServiciosPublicables{
-	
+class ServiciosPublicables {
+
 	boolean publicable;
 	ServicioInformacion servicio = new ServicioInformacion();
-	
+
 	public ServiciosPublicables(boolean publicable, ServicioInformacion servicio) {
 		super();
 		this.publicable = publicable;
@@ -190,5 +192,5 @@ class ServiciosPublicables{
 	public void setServicio(ServicioInformacion servicio) {
 		this.servicio = servicio;
 	}
-	
+
 }
