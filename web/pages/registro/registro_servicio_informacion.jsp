@@ -173,47 +173,24 @@
 								<p class="formulario">Aspectos Legales (¿Hará falta esto?)</p>
 								<small><s:text name="tab2.description"></s:text> </small>
 								<hr>
-								<s:if test="files.size > 0 || !name.isEmpty()">
-									<s:iterator value="names" status="i">
-										<h5 class="formulario">
-											<s:text name="documento.name" />
-										</h5>
-										<s:fielderror>
-											<s:param value="%{'name' + #i.index}" />
-										</s:fielderror>
-										<s:set var="name">
-											<s:property />
-										</s:set>
-										<s:textfield name="name" labelposition="top" value="%{#name}" />
-
-										<h5 class="formulario">
-											<s:text name="documento.file" />
-										</h5>
-										<s:fielderror>
-											<s:param>file</s:param>
-										</s:fielderror>
-										<s:file name="file" label="File" size="40"></s:file>
-										<hr>
-									</s:iterator>
-								</s:if>
-								<s:else>
-								HEY!!
 								<h5 class="formulario">
-										<s:text name="documento.name" />
-									</h5>
-									<s:fielderror>
-										<s:param>name</s:param>
-									</s:fielderror>
-									<s:textfield name="name" labelposition="top" />
-									<h5 class="formulario">
-										<s:text name="documento.file" />
-									</h5>
-									<s:fielderror>
-										<s:param>file</s:param>
-									</s:fielderror>
-									<s:file name="file" label="File" size="40"></s:file>
-									<hr>
-								</s:else>
+									<s:text name="documento.name" />
+								</h5>
+								<s:fielderror>
+									<s:param>name</s:param>
+								</s:fielderror>
+								<s:set var="name">
+									<s:property />
+								</s:set>
+								<s:textfield name="archivos[0].name" labelposition="top" />
+								<h5 class="formulario">
+									<s:text name="documento.file" />
+								</h5>
+								<s:fielderror>
+									<s:param>file</s:param>
+								</s:fielderror>
+								<s:file name="archivos[0].file" />
+								<hr>
 								<script src="<s:url value="res/js/rows.js"/>"
 									type="text/javascript"></script>
 								<script type="text/javascript">

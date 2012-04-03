@@ -3,7 +3,6 @@ package ve.gob.cnti.srsi.controlador;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -75,6 +74,16 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 	private String telefono;
 	private String correo;
 	private boolean modificar;
+
+	private List<Archivos> archivos;
+
+	public List<Archivos> getArchivos() {
+		return archivos;
+	}
+
+	public void setArchivos(List<Archivos> archivos) {
+		this.archivos = archivos;
+	}
 
 	@SuppressWarnings("rawtypes")
 	private Map session;
@@ -177,19 +186,24 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 
 	@Override
 	public void validate() {
-		System.out.println("NAME=>" + name.toString());
-		String[] splits = name.split(",");
-		names = Arrays.asList(splits);
-		for (String n : names)
-			System.out.println("NAMES => " + n);
-
-		int i = 0;
-		for (String n : names) {
-			if (n.trim().equalsIgnoreCase(""))
-				addFieldError("name" + i,
-						"Si va a subir un documento, debe proporcionar un nombre");
-			i++;
+		Iterator<Archivos> iterador = archivos.iterator();
+		while (iterador.hasNext()) {
+			System.out.println("Archivo => " + iterador.next().toString());
 		}
+
+		// System.out.println("NAME=>" + name.toString());
+		// String[] splits = name.split(",");
+		// names = Arrays.asList(splits);
+		// for (String n : names)
+		// System.out.println("NAMES => " + n);
+
+		// int i = 0;
+		// for (String n : names) {
+		// if (n.trim().equalsIgnoreCase(""))
+		// addFieldError("name" + i,
+		// "Si va a subir un documento, debe proporcionar un nombre");
+		// i++;
+		// }
 		try {
 			saveFile();
 		} catch (IOException e) {
