@@ -25,7 +25,9 @@
 <title><s:text name="title"></s:text></title>
 	</head>
 	<body>
-
+		<script>
+			var i = 0
+		</script>
 		<!-- Este es el div de la sombra del contenedor del maquetado de la página -->
 		<div id="sombra">
 			<!-- Este es el div contenedor del maquetado de la página -->
@@ -166,8 +168,6 @@
 									headerValue="%{getText('estado.select')}"></s:select>
 							</div>
 							<!-- PROBAR A PARTIR DE AQUÍ... -->
-
-
 							<!-- *************************** ARREGLAR ARCHIVOS. ******************** -->
 							<div id="tab2" class="tab_content">
 								<p class="formulario">Aspectos Legales (¿Hará falta esto?)</p>
@@ -179,17 +179,14 @@
 								<s:fielderror>
 									<s:param>name</s:param>
 								</s:fielderror>
-								<s:set var="name">
-									<s:property />
-								</s:set>
-								<s:textfield name="archivos[0].name" labelposition="top" />
+								<s:textfield name="archivos.name" labelposition="top" />
 								<h5 class="formulario">
 									<s:text name="documento.file" />
 								</h5>
 								<s:fielderror>
 									<s:param>file</s:param>
 								</s:fielderror>
-								<s:file name="archivos[0].file" />
+								<s:file name="archivos.file" />
 								<hr>
 								<script src="<s:url value="res/js/rows.js"/>"
 									type="text/javascript"></script>
@@ -199,8 +196,12 @@
 											'<s:text name="documento.file"/>');
 								</script>
 								<div id="addRow"></div>
-								<a href="#" onclick="return File.addRow()">Agregar otro
-									documento</a> <br> <br> <br> <br>
+								<a href="#"
+									onclick="javascript:
+									i = i + 1
+									document.value = i 
+									return File.addRow()">Agregar
+									otro documento</a> <br> <br> <br> <br>
 							</div>
 							<!-- *************************** ARREGLAR ARCHIVOS. ******************** -->
 

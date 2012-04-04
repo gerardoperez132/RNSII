@@ -188,8 +188,79 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 	public void validate() {
 		Iterator<Archivos> iterador = archivos.iterator();
 		while (iterador.hasNext()) {
-			System.out.println("Archivo => " + iterador.next().toString());
+			System.out.println(iterador.next().toString());
 		}
+
+		List<Archivos> list = new ArrayList<Archivos>();
+		List<File> files = new ArrayList<File>();
+		List<String> fileContentTypes = new ArrayList<String>();
+		List<String> fileFileNames = new ArrayList<String>();
+		List<String> names = new ArrayList<String>();
+
+		for (Archivos a : archivos)
+			if (a.getFile() != null)
+				files.add(a.getFile());
+
+		for (Archivos a : archivos)
+			if (a.getFileContentType() != null)
+				fileContentTypes.add(a.getFileContentType());
+
+		for (Archivos a : archivos)
+			if (a.getFileFileName() != null)
+				fileFileNames.add(a.getFileFileName());
+
+		for (Archivos a : archivos)
+			if (a.getName() != null)
+				names.add(a.getName());
+
+		for (File f : files)
+			System.out.println("FILES BITCH! " + f.toString());
+
+		for (String contentType : fileContentTypes)
+			System.out.println("ContentType BITCH! " + contentType.toString());
+
+		for (String filename : fileFileNames)
+			System.out.println("Filename BITCH! " + filename.toString());
+
+		for (String name : names)
+			System.out.println("Name BITCH! " + name.toString());
+
+		for (int i = 0; i < files.size(); i++) {
+			Archivos archivo = new Archivos();
+			archivo.setFile(files.get(i));
+			archivo.setFileContentType(fileContentTypes.get(i));
+			archivo.setFileFileName(fileFileNames.get(i));
+			archivo.setName(names.get(i));
+			list.add(archivo);
+		}
+
+		for (Archivos a : list) {
+			System.out.println("RIGHT LIST => " + a.toString());
+		}
+
+		// Archivos archivo = new Archivos();
+		// List<Archivos> listaArchivos = new ArrayList<Archivos>();
+		// int i = 0;
+		// while (iterador.hasNext()) {
+		// Archivos temporal = iterador.next();
+		// if (temporal.getFile() != null && archivo.getFile() == null)
+		// archivo.setFile(temporal.getFile());
+		// if (temporal.getName() != null && archivo.getName() == null)
+		// archivo.setName(temporal.getName());
+		// if (temporal.getFileContentType() != null
+		// && archivo.getFileContentType() == null)
+		// archivo.setFileContentType(temporal.getFileContentType());
+		// if (temporal.getFileFileName() != null
+		// && archivo.getFileFileName() == null)
+		// archivo.setFileFileName(temporal.getFileFileName());
+		// if (i == 4) {
+		// listaArchivos.add(archivo);
+		// i = 0;
+		// }
+		// i++;
+		// }
+		// for (Archivos a : listaArchivos)
+		// System.out.println("Archivo => " + a.toString());
 
 		// System.out.println("NAME=>" + name.toString());
 		// String[] splits = name.split(",");
