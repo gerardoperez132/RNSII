@@ -238,6 +238,10 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 			System.out.println("RIGHT LIST => " + a.toString());
 		}
 
+		for (Archivos a : list)
+			if (a.getName().trim().equalsIgnoreCase("") && a.getFile() != null)
+				addFieldError("name", "ERROR. D:");
+
 		// Archivos archivo = new Archivos();
 		// List<Archivos> listaArchivos = new ArrayList<Archivos>();
 		// int i = 0;
