@@ -6,9 +6,9 @@
 <hibernate-configuration>
 	<session-factory>
 		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-		<property name="hibernate.connection.url">jdbc:postgresql://10.8.6.64:5432/srsi</property>
+		<property name="hibernate.connection.url">jdbc:postgresql://10.16.101.50:5432/srsi</property>
 		<property name="hibernate.connection.username">srsi</property>
-		<property name="hibernate.connection.password">s1r-e3</property>
+		<property name="hibernate.connection.password">srsi</property>
 		<property name="hibernate.connection.pool_size">1</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
 		<property name="hibernate.connection.charSet">UTF-8</property>
@@ -31,7 +31,8 @@
 		<mapping class="ve.gob.cnti.srsi.modelo.Telefono" />
 		<mapping class="ve.gob.cnti.srsi.modelo.TipoDato" />
 		<mapping class="ve.gob.cnti.srsi.modelo.UnionAreaServicioInformacion" />
-		<mapping class="ve.gob.cnti.srsi.modelo.UnionArquitecturaServicioInformacion" />
+		<mapping
+			class="ve.gob.cnti.srsi.modelo.UnionArquitecturaServicioInformacion" />
 		<mapping class="ve.gob.cnti.srsi.modelo.UnionSectorEnte" />
 		<mapping class="ve.gob.cnti.srsi.modelo.UnionUsuarioRol" />
 		<mapping class="ve.gob.cnti.srsi.modelo.Url" />
