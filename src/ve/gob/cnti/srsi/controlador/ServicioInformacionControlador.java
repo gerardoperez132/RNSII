@@ -75,13 +75,13 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 	private String correo;
 	private boolean modificar;
 
-	private List<Archivos> archivos;
+	private List<Archivo> archivos;
 
-	public List<Archivos> getArchivos() {
+	public List<Archivo> getArchivos() {
 		return archivos;
 	}
 
-	public void setArchivos(List<Archivos> archivos) {
+	public void setArchivos(List<Archivo> archivos) {
 		this.archivos = archivos;
 	}
 
@@ -186,30 +186,30 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 
 	@Override
 	public void validate() {
-		Iterator<Archivos> iterador = archivos.iterator();
+		Iterator<Archivo> iterador = archivos.iterator();
 		while (iterador.hasNext()) {
 			System.out.println(iterador.next().toString());
 		}
 
-		List<Archivos> list = new ArrayList<Archivos>();
+		List<Archivo> list = new ArrayList<Archivo>();
 		List<File> files = new ArrayList<File>();
 		List<String> fileContentTypes = new ArrayList<String>();
 		List<String> fileFileNames = new ArrayList<String>();
 		List<String> names = new ArrayList<String>();
 
-		for (Archivos a : archivos)
+		for (Archivo a : archivos)
 			if (a.getFile() != null)
 				files.add(a.getFile());
 
-		for (Archivos a : archivos)
+		for (Archivo a : archivos)
 			if (a.getFileContentType() != null)
 				fileContentTypes.add(a.getFileContentType());
 
-		for (Archivos a : archivos)
+		for (Archivo a : archivos)
 			if (a.getFileFileName() != null)
 				fileFileNames.add(a.getFileFileName());
 
-		for (Archivos a : archivos)
+		for (Archivo a : archivos)
 			if (a.getName() != null)
 				names.add(a.getName());
 
@@ -226,7 +226,7 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 			System.out.println("Name BITCH! " + name.toString());
 
 		for (int i = 0; i < files.size(); i++) {
-			Archivos archivo = new Archivos();
+			Archivo archivo = new Archivo();
 			archivo.setFile(files.get(i));
 			archivo.setFileContentType(fileContentTypes.get(i));
 			archivo.setFileFileName(fileFileNames.get(i));
@@ -234,11 +234,11 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 			list.add(archivo);
 		}
 
-		for (Archivos a : list) {
+		for (Archivo a : list) {
 			System.out.println("RIGHT LIST => " + a.toString());
 		}
 
-		for (Archivos a : list)
+		for (Archivo a : list)
 			if (a.getName().trim().equalsIgnoreCase("") && a.getFile() != null)
 				addFieldError("name", "ERROR. D:");
 
