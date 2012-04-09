@@ -2,7 +2,7 @@ package ve.gob.cnti.srsi.controlador;
 
 import java.io.File;
 
-public class Archivos {
+public class Archivo {
 	private String name;
 	private File file;
 	private String fileFileName;
