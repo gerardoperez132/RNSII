@@ -30,8 +30,12 @@
 					style="border: 3px solid #57cedc;" />
 			</div>
 
-			<!-- Este es el div de los menus -->
-			<div id="menu"></div>
+			<!-- Este es el div de los menúes -->
+			<div id="menu">
+				<h5 align="center" style="color:#f5f5ee;">
+				<s:text name="titulo" />
+				</h5>
+			</div>
 
 
 
@@ -144,8 +148,7 @@
 				</tbody>
 			</table>
 			</div>
-			<!-- Este es el pie de página -->
-			<div id="footer"></div>
+			<%@include file="../layout/footer.jsp"%>
 		</div>
 	</div>
 </body>
