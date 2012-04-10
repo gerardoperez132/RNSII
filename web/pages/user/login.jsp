@@ -24,7 +24,6 @@
 						<s:text name="titulo" />
 					</h5>
 				</div>
-
 				<!-- Este es el div de contenidos -->
 				<div id="content2">
 					<br>

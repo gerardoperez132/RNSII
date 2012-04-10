@@ -36,7 +36,7 @@ public class LoginControlador extends DAO {
 	public String autenticarUsuario() throws NoSuchAlgorithmException {
 		user_correo = (Correo) getUserEmail(correo);
 		if (user_correo == null) {
-			addFieldError("correo", "Correo no existe");
+			addFieldError("correo", "Su usuario o contraseña son inválidos");
 			return INPUT;
 		} else {
 			usuario = (Usuario) read(usuario, user_correo.getId_usuario());
@@ -46,7 +46,7 @@ public class LoginControlador extends DAO {
 				return INPUT;
 			} else if (!usuario.getClave().equals(
 					new MD5Hashing(password).getPassword().toString())) {
-				addFieldError("password", "La clave no coincide con el correo");
+				addFieldError("password", "Su usuario o contraseña son inválidos");
 				return INPUT;
 			} else {
 				session.put("logueado", true);
