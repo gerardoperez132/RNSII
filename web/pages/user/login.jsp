@@ -37,7 +37,7 @@
 			<div id="content2">
 				<br>
 				<div Style="margin-left: 35%; margin-top: 5%; margin-bottom:15%; 
-							width: 285px; padding: 15px;  border : 3px solid blue;">				
+							width: 310px; padding: 15px;  border : 3px solid blue;">				
             	<form action="index" method="post">
             		<table>
             		<tr>
@@ -60,14 +60,19 @@
             		</tr>						
 					<tr>
 						<td><s:text name="user" /></td>
-            			<td><input type="text" name="correo"/></td>            			
+            			<td><input type="text" name="correo"/></td>    
+            			<td><a href="#" class="tooltip"><img src="res/img/ayuda.gif">
+            				<span>"Ingrese un correo valido"</span>
+            				</a>
+            			</td>        			
 					</tr>            		
             		<tr>
 						<td><s:text name="pass" /></td>
             			<td><input type="password" name="password"/></td>            				
+            			<td></td>
 					</tr>	
 					<tr>
-            			<td colspan="2">
+            			<td colspan="3" align="right">
             			<input type="submit" value="Entrar"/>
             			</td>	
             		</tr>					
