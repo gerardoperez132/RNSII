@@ -3,7 +3,6 @@ package ve.gob.cnti.srsi.controlador;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -57,12 +56,6 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 	private ServicioInformacion servicio = new ServicioInformacion();
 	private Funcionalidad funcionalidad = new Funcionalidad();
 
-	private List<File> files = new ArrayList<File>();
-	private List<String> fileContentTypes = new ArrayList<String>();
-	private List<String> fileFileNames = new ArrayList<String>();
-	private String name;
-	private List<String> names;
-
 	private String[] codigos = COD;
 	private String codigo;
 
@@ -76,6 +69,25 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 	private String correo;
 	private boolean modificar;
 	private boolean registrado;
+
+	private List<Archivo> archivos;
+	private List<Archivo> list = new ArrayList<Archivo>();
+
+	public List<Archivo> getList() {
+		return list;
+	}
+
+	public void setList(List<Archivo> list) {
+		this.list = list;
+	}
+
+	public List<Archivo> getArchivos() {
+		return archivos;
+	}
+
+	public void setArchivos(List<Archivo> archivos) {
+		this.archivos = archivos;
+	}
 
 	@SuppressWarnings("rawtypes")
 	private Map session;
@@ -178,16 +190,55 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 
 	@Override
 	public void validate() {
-		System.out.println("NAME=>" + name.toString());
-		String[] splits = name.split(",");
-		names = Arrays.asList(splits);
+
+		Iterator<Archivo> iterador = archivos.iterator();
+		while (iterador.hasNext()) {
+			System.out.println(iterador.next().toString());
+		}
+		List<File> files = new ArrayList<File>();
+		List<String> fileContentTypes = new ArrayList<String>();
+		List<String> fileFileNames = new ArrayList<String>();
+		List<String> names = new ArrayList<String>();
+
+		for (Archivo a : archivos)
+			if (a.getFile() != null)
+				files.add(a.getFile());
+
+		for (Archivo a : archivos)
+			if (a.getFileContentType() != null)
+				fileContentTypes.add(a.getFileContentType());
+
+		for (Archivo a : archivos)
+			if (a.getFileFileName() != null)
+				fileFileNames.add(a.getFileFileName());
+
+		for (Archivo a : archivos)
+			if (a.getName() != null)
+				names.add(a.getName());
+
+		for (int i = 0; i < files.size(); i++) {
+			Archivo archivo = new Archivo();
+			archivo.setFile(files.get(i));
+			archivo.setFileContentType(fileContentTypes.get(i));
+			archivo.setFileFileName(fileFileNames.get(i));
+			archivo.setName(names.get(i));
+			list.add(archivo);
+		}
+
+		for (Archivo a : list) {
+			System.out.println("RIGHT LIST => " + a.toString());
+		}
+
 		int i = 0;
-		for (String n : names) {
-			if (n.trim().equalsIgnoreCase(""))
+		for (Archivo a : list) {
+			if (a.getName().trim().equalsIgnoreCase("") && a.getFile() != null) {
 				addFieldError("name" + i,
-						"Si va a subir un documento, debe proporcionar un nombre");
+						"Si va a subir un archivo debe proporcionar el nombre");
+			}
 			i++;
 		}
+		// list = new ArrayList<Archivo>();
+
 		try {
 			saveFile();
 		} catch (IOException e) {
@@ -242,7 +293,7 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 		if (telefono.length() > 0 && telefono.length() < 7)
 			addFieldError("telefono",
 					"Debe introducir un número telefónico válido de 7 dígitos");
-		id_servicio_informacion = getNextId(servicio)-1;		
+		id_servicio_informacion = getNextId(servicio) - 1;
 		prepararFormulario();
 	}
 
@@ -254,7 +305,7 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 			return "errorSession";
 		}
 		id_servicio_informacion = getNextId(servicio);
-		
+
 		servicio.setId_ente(usuario.getId_ente());
 		servicio.setId_usuario(usuario.getId_usuario());
 		servicio.setId_sector(sector);
@@ -264,7 +315,7 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 		// TODO Verificar que el nombre no esté repetido.
 		create(servicio);
 		servicio.setId_servicio_informacion(id_servicio_informacion);
-		
+
 		UnionAreaServicioInformacion unionAreaServicioInformacion = new UnionAreaServicioInformacion();
 		for (int i = 0; i < area.size(); i++) {
 			unionAreaServicioInformacion.setId_area(area.get(i));
@@ -430,18 +481,6 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 	 * @throws IOException
 	 */
 	private String saveFile() throws IOException {
-		// TODO Obtener el nombre de la institución desde la base de datos.
-		for (File u : files) {
-			System.out.println("*** " + u + "\t" + u.length());
-		}
-		System.out.println("filenames:");
-		for (String n : fileFileNames) {
-			System.out.println("*** " + n);
-		}
-		System.out.println("content types:");
-		for (String c : fileContentTypes) {
-			System.out.println("*** " + c);
-		}
 		// String ENTE = "CNTI".toLowerCase();
 		// String path = servletRequest.getSession().getServletContext()
 		// .getRealPath("/archivos/" + ENTE);
@@ -601,46 +640,6 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 
 	public void setServicio(ServicioInformacion servicio) {
 		this.servicio = servicio;
-	}
-
-	public List<File> getFiles() {
-		return files;
-	}
-
-	public void setFiles(List<File> files) {
-		this.files = files;
-	}
-
-	public List<String> getFileContentTypes() {
-		return fileContentTypes;
-	}
-
-	public void setFileContentTypes(List<String> fileContentTypes) {
-		this.fileContentTypes = fileContentTypes;
-	}
-
-	public List<String> getFileFileNames() {
-		return fileFileNames;
-	}
-
-	public void setFileFileNames(List<String> fileFileNames) {
-		this.fileFileNames = fileFileNames;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public List<String> getNames() {
-		return names;
-	}
-
-	public void setNames(List<String> names) {
-		this.names = names;
 	}
 
 	public String[] getCodigos() {

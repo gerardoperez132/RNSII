@@ -31,7 +31,8 @@
 		<mapping class="ve.gob.cnti.srsi.modelo.Telefono" />
 		<mapping class="ve.gob.cnti.srsi.modelo.TipoDato" />
 		<mapping class="ve.gob.cnti.srsi.modelo.UnionAreaServicioInformacion" />
-		<mapping class="ve.gob.cnti.srsi.modelo.UnionArquitecturaServicioInformacion" />
+		<mapping
+			class="ve.gob.cnti.srsi.modelo.UnionArquitecturaServicioInformacion" />
 		<mapping class="ve.gob.cnti.srsi.modelo.UnionSectorEnte" />
 		<mapping class="ve.gob.cnti.srsi.modelo.UnionUsuarioRol" />
 		<mapping class="ve.gob.cnti.srsi.modelo.Url" />
