@@ -259,7 +259,7 @@
 
 		<action name="inicio" method="inicio"
 			class="ve.gob.cnti.srsi.controlador.LoginControlador">
-			<result name="success">index.jsp</result>
+			<result name="success" type="redirectAction">autenticarUsuario</result>
 		</action>
 
 		<action name="home" method="home"

@@ -31,6 +31,7 @@
 			<!-- Este es el div contenedor del maquetado de la página -->
 			<div id="container">
 				<s:if test="modificar!=true"></s:if>
+				<%@include file="../layout/header.jsp"%>
 				<!-- Esta es la barra lateral -->
 				<div id="sidebar">
 					<%@include file="../layout/sidebar.jsp"%>
