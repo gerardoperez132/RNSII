@@ -83,9 +83,7 @@
 				
 
 			</div>
-
-			<!-- Este es el pie de página -->
-			<div id="footer"></div>
+			<%@include file="../layout/footer.jsp"%>
 		</div>
 	</div>
 </body>
