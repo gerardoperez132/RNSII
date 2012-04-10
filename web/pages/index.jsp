@@ -4,6 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<META HTTP-EQUIV="Refresh" CONTENT="0;URL=autenticarUsuario.action">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <!-- CSS (required) -->
 <link rel="stylesheet" type="text/css" href="/SRSI/pages/res/css/styles.css">
@@ -11,7 +12,7 @@
 <!-- Donde dice inicio debería ir una var que identifique el lugar -->
 </head>
 <body>
-
+	
 	<!-- Este es el div de la sombra del contenedor del maquetado de la página -->
 	<div id="sombra">
 		<!-- Este es el div contenedor del maquetado de la página -->
