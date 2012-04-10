@@ -61,12 +61,13 @@
 						</s:if>
 						<div class="tab_container">
 							<div id="tab1" class="tab_content">
-								<p class="formulario">Descripción General del Servicio ¿Hace
-									falta esto?</p>
+								<p class="formulario">
+									<s:text name="tab1.subtitle" />
+								</p>
 								<small><s:text name="tab1.description"></s:text> </small>
 								<hr>
 								<h5 class="formulario">
-									<s:text name="sector.title"></s:text>
+									<s:text name="sector.title" />
 								</h5>
 								<s:fielderror>
 									<s:param>sector</s:param>
@@ -106,13 +107,12 @@
 									listValue="nombre" headerKey="-1"
 									headerValue="%{getText('estado.select')}"></s:select>
 							</div>
-							<!-- PROBAR A PARTIR DE AQUÍ... -->
-							<!-- *************************** ARREGLAR ARCHIVOS. ******************** -->
 							<div id="tab2" class="tab_content">
-								<p class="formulario">Aspectos Legales (¿Hará falta esto?)</p>
+								<p class="formulario">
+									<s:text name="tab2.subtitle" />
+								</p>
 								<small><s:text name="tab2.description"></s:text> </small>
 								<hr>
-
 								<s:if test="list.size > 0">
 									<s:iterator value="list" status="i">
 										<h5 class="formulario">
@@ -160,10 +160,10 @@
 								<a href="#" onclick="return File.addRow()">Agregar otro
 									documento</a> <br> <br> <br> <br>
 							</div>
-							<!-- *************************** ARREGLAR ARCHIVOS. ******************** -->
 							<div id="tab3" class="tab_content">
-								<p class="formulario">Descripción técnica del servicio ¿Hará
-									falta esto?</p>
+								<p class="formulario">
+									<s:text name="tab3.subtitle" />
+								</p>
 								<small><s:text name="tab3.description"></s:text> </small>
 								<hr>
 								<h5 class="formulario">
@@ -224,7 +224,9 @@
 								</select>
 							</div>
 							<div id="tab4" class="tab_content">
-								<p class="formulario">Soporte Técnico (¿Hará falta esto?)</p>
+								<p class="formulario">
+									<s:text name="tab4.subtitle" />
+								</p>
 								<small><s:text name="tab4.description"></s:text> </small>
 								<hr>
 								<h5 class="formulario">
