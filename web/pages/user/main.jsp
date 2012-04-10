@@ -74,6 +74,7 @@
 					<tr>
 						<th><s:text name="id"></s:text></th>
 						<th><s:text name="nombre"></s:text></th>
+						<th><s:text name="estado"></s:text></th>
 						<th><s:text name="fecha"></s:text></th>
 						<th><s:text name="acciones"></s:text></th>
 					</tr>
@@ -84,6 +85,7 @@
 							<tr id="node-<s:property value="#result_datos.index"/>">								
 								<th><s:property value="servicio.id_servicio_informacion" /></th>
 								<td><s:property value="servicio.nombre" /></td>
+								<td><s:property value="servicio.id_estado" /></td>
 								<td><s:date name="servicio.fecha_creado" format="d'/'MM'/'yyyy" /></td>
 								<td>
 									<table style="margin: 0; padding: 0;">
