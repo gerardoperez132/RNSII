@@ -3,11 +3,12 @@
 <%@taglib uri="/struts-tags" prefix="s"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<s:i18n name="ve/gob/cnti/srsi/i18n/login">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <!-- CSS (required) -->
 <link rel="stylesheet" type="text/css" href="res/css/styles.css">
-<title>SRSI - Inicio</title>
+<title><s:text name="inicio" /></title>
 <!-- Donde dice inicio debería ir una var que identifique el lugar -->
 </head>
 <body>
@@ -26,18 +27,22 @@
 			</div>
 
 			<!-- Este es el div de los menúes -->
-			<div id="menu"></div>
+			<div id="menu">
+				<h5 align="center" style="color:#f5f5ee;">
+				<s:text name="titulo" />
+				</h5>
+			</div>
 
 			<!-- Este es el div de contenidos -->
 			<div id="content2">
 				<br>
 				<div Style="margin-left: 35%; margin-top: 5%; margin-bottom:15%; 
-							width: 265px; padding: 15px;  border : 3px solid blue;">				
+							width: 285px; padding: 15px;  border : 3px solid blue;">				
             	<form action="index" method="post">
             		<table>
             		<tr>
             			<td colspan="3">
-            			<h5 style="margin: 0;">Control de acceso</h5>
+            			<h5 style="margin: 0;"><s:text name="sesion" /></h5>
             			</td>	
             		</tr>
             		<tr>
@@ -54,11 +59,11 @@
             			</td>            				
             		</tr>						
 					<tr>
-						<td>Correo:</td>
+						<td><s:text name="user" /></td>
             			<td><input type="text" name="correo"/></td>            			
 					</tr>            		
             		<tr>
-						<td>Clave:</td>
+						<td><s:text name="pass" /></td>
             			<td><input type="password" name="password"/></td>            				
 					</tr>	
 					<tr>
@@ -79,4 +84,5 @@
 		</div>
 	</div>
 </body>
+</s:i18n>
 </html>
