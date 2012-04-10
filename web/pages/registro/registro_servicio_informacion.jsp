@@ -25,9 +25,6 @@
 <title><s:text name="title"></s:text></title>
 	</head>
 	<body>
-		<script>
-			var i = 0
-		</script>
 		<!-- Este es el div de la sombra del contenedor del maquetado de la página -->
 		<div id="sombra">
 			<!-- Este es el div contenedor del maquetado de la página -->
@@ -173,21 +170,42 @@
 								<p class="formulario">Aspectos Legales (¿Hará falta esto?)</p>
 								<small><s:text name="tab2.description"></s:text> </small>
 								<hr>
-								<h5 class="formulario">
-									<s:text name="documento.name" />
-								</h5>
-								<s:fielderror>
-									<s:param>name</s:param>
-								</s:fielderror>
-								<s:textfield name="archivos.name" labelposition="top" />
-								<h5 class="formulario">
-									<s:text name="documento.file" />
-								</h5>
-								<s:fielderror>
-									<s:param>file</s:param>
-								</s:fielderror>
-								<s:file name="archivos.file" />
-								<hr>
+								<s:if test="list.size > 0">
+									<s:iterator value="list" status="i">
+										<h5 class="formulario">
+											<s:text name="documento.name" />
+										</h5>
+										<s:fielderror>
+											<s:param value="%{'name' + #i.index}" />
+										</s:fielderror>
+										<s:textfield name="archivos.name" labelposition="top" />
+										<h5 class="formulario">
+											<s:text name="documento.file" />
+										</h5>
+										<s:fielderror>
+											<s:param>file</s:param>
+										</s:fielderror>
+										<s:file name="archivos.file" />
+										<hr>
+									</s:iterator>
+								</s:if>
+								<s:else>
+									<h5 class="formulario">
+										<s:text name="documento.name" />
+									</h5>
+									<s:fielderror>
+										<s:param>name0</s:param>
+									</s:fielderror>
+									<s:textfield name="archivos.name" labelposition="top" />
+									<h5 class="formulario">
+										<s:text name="documento.file" />
+									</h5>
+									<s:fielderror>
+										<s:param>file</s:param>
+									</s:fielderror>
+									<s:file name="archivos.file" />
+									<hr>
+								</s:else>
 								<script src="<s:url value="res/js/rows.js"/>"
 									type="text/javascript"></script>
 								<script type="text/javascript">
@@ -196,15 +214,10 @@
 											'<s:text name="documento.file"/>');
 								</script>
 								<div id="addRow"></div>
-								<a href="#"
-									onclick="javascript:
-									i = i + 1
-									document.value = i 
-									return File.addRow()">Agregar
-									otro documento</a> <br> <br> <br> <br>
+								<a href="#" onclick="return File.addRow()">Agregar otro
+									documento</a> <br> <br> <br> <br>
 							</div>
 							<!-- *************************** ARREGLAR ARCHIVOS. ******************** -->
-
 							<div id="tab3" class="tab_content">
 								<p class="formulario">Descripción técnica del servicio ¿Hará
 									falta esto?</p>

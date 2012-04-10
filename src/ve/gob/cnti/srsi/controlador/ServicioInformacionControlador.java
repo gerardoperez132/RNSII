@@ -56,12 +56,6 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 	private ServicioInformacion servicio = new ServicioInformacion();
 	private Funcionalidad funcionalidad = new Funcionalidad();
 
-	private List<File> files = new ArrayList<File>();
-	private List<String> fileContentTypes = new ArrayList<String>();
-	private List<String> fileFileNames = new ArrayList<String>();
-	private String name;
-	private List<String> names;
-
 	private String[] codigos = COD;
 	private String codigo;
 
@@ -76,6 +70,15 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 	private boolean modificar;
 
 	private List<Archivo> archivos;
+	private List<Archivo> list = new ArrayList<Archivo>();
+
+	public List<Archivo> getList() {
+		return list;
+	}
+
+	public void setList(List<Archivo> list) {
+		this.list = list;
+	}
 
 	public List<Archivo> getArchivos() {
 		return archivos;
@@ -190,8 +193,6 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 		while (iterador.hasNext()) {
 			System.out.println(iterador.next().toString());
 		}
-
-		List<Archivo> list = new ArrayList<Archivo>();
 		List<File> files = new ArrayList<File>();
 		List<String> fileContentTypes = new ArrayList<String>();
 		List<String> fileFileNames = new ArrayList<String>();
@@ -213,18 +214,6 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 			if (a.getName() != null)
 				names.add(a.getName());
 
-		for (File f : files)
-			System.out.println("FILES BITCH! " + f.toString());
-
-		for (String contentType : fileContentTypes)
-			System.out.println("ContentType BITCH! " + contentType.toString());
-
-		for (String filename : fileFileNames)
-			System.out.println("Filename BITCH! " + filename.toString());
-
-		for (String name : names)
-			System.out.println("Name BITCH! " + name.toString());
-
 		for (int i = 0; i < files.size(); i++) {
 			Archivo archivo = new Archivo();
 			archivo.setFile(files.get(i));
@@ -238,47 +227,16 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 			System.out.println("RIGHT LIST => " + a.toString());
 		}
 
-		for (Archivo a : list)
-			if (a.getName().trim().equalsIgnoreCase("") && a.getFile() != null)
-				addFieldError("name", "ERROR. D:");
+		int i = 0;
+		for (Archivo a : list) {
+			if (a.getName().trim().equalsIgnoreCase("") && a.getFile() != null) {
+				addFieldError("name" + i,
+						"Si va a subir un archivo debe proporcionar el nombre");
+			}
+			i++;
+		}
+		// list = new ArrayList<Archivo>();
 
-		// Archivos archivo = new Archivos();
-		// List<Archivos> listaArchivos = new ArrayList<Archivos>();
-		// int i = 0;
-		// while (iterador.hasNext()) {
-		// Archivos temporal = iterador.next();
-		// if (temporal.getFile() != null && archivo.getFile() == null)
-		// archivo.setFile(temporal.getFile());
-		// if (temporal.getName() != null && archivo.getName() == null)
-		// archivo.setName(temporal.getName());
-		// if (temporal.getFileContentType() != null
-		// && archivo.getFileContentType() == null)
-		// archivo.setFileContentType(temporal.getFileContentType());
-		// if (temporal.getFileFileName() != null
-		// && archivo.getFileFileName() == null)
-		// archivo.setFileFileName(temporal.getFileFileName());
-		// if (i == 4) {
-		// listaArchivos.add(archivo);
-		// i = 0;
-		// }
-		// i++;
-		// }
-		// for (Archivos a : listaArchivos)
-		// System.out.println("Archivo => " + a.toString());
-
-		// System.out.println("NAME=>" + name.toString());
-		// String[] splits = name.split(",");
-		// names = Arrays.asList(splits);
-		// for (String n : names)
-		// System.out.println("NAMES => " + n);
-
-		// int i = 0;
-		// for (String n : names) {
-		// if (n.trim().equalsIgnoreCase(""))
-		// addFieldError("name" + i,
-		// "Si va a subir un documento, debe proporcionar un nombre");
-		// i++;
-		// }
 		try {
 			saveFile();
 		} catch (IOException e) {
@@ -518,18 +476,6 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 	 * @throws IOException
 	 */
 	private String saveFile() throws IOException {
-		// TODO Obtener el nombre de la institución desde la base de datos.
-		for (File u : files) {
-			System.out.println("*** " + u + "\t" + u.length());
-		}
-		System.out.println("filenames:");
-		for (String n : fileFileNames) {
-			System.out.println("*** " + n);
-		}
-		System.out.println("content types:");
-		for (String c : fileContentTypes) {
-			System.out.println("*** " + c);
-		}
 		// String ENTE = "CNTI".toLowerCase();
 		// String path = servletRequest.getSession().getServletContext()
 		// .getRealPath("/archivos/" + ENTE);
@@ -600,30 +546,6 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 
 	public void setServletRequest(HttpServletRequest servletRequest) {
 		this.servletRequest = servletRequest;
-	}
-
-	public List<File> getFiles() {
-		return files;
-	}
-
-	public List<String> getFileContentTypes() {
-		return fileContentTypes;
-	}
-
-	public List<String> getFileFileNames() {
-		return fileFileNames;
-	}
-
-	public void setFiles(List<File> files) {
-		this.files = files;
-	}
-
-	public void setFileContentTypes(List<String> fileContentTypes) {
-		this.fileContentTypes = fileContentTypes;
-	}
-
-	public void setFileFileNames(List<String> fileFileNames) {
-		this.fileFileNames = fileFileNames;
 	}
 
 	@FieldExpressionValidator(expression = "sector > 0", message = "Debe seleccionar un sector")
@@ -769,34 +691,6 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 
 	public void setIos(List<List<EntradaSalida>> ios) {
 		this.ios = ios;
-	}
-
-	public void setFile(List<File> files) {
-		this.files = files;
-	}
-
-	public void setFileContentType(List<String> fileContentTypes) {
-		this.fileContentTypes = fileContentTypes;
-	}
-
-	public void setFileFileName(List<String> fileFileNames) {
-		this.fileFileNames = fileFileNames;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public List<String> getNames() {
-		return names;
-	}
-
-	public void setNames(List<String> names) {
-		this.names = names;
 	}
 
 	public boolean isModificar() {
