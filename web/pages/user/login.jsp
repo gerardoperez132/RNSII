@@ -17,13 +17,7 @@
 		<div id="sombra">
 			<!-- Este es el div contenedor del maquetado de la página -->
 			<div id="container">
-				<%@include file="../layout/header.jsp"%>
-				<!-- Este es el div de los menúes -->
-				<div id="menu">
-					<h5 align="center" style="color: #f5f5ee;">
-						<s:text name="titulo" />
-					</h5>
-				</div>
+				<%@include file="../layout/header.jsp"%>				
 				<!-- Este es el div de contenidos -->
 				<div id="content2">
 					<br>

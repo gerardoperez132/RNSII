@@ -10,5 +10,9 @@
 			style="border: 3px solid #57cedc;" />
 	</div>
 	<!-- Este es el contenedor de los menúes. -->
-	<div id="menu"></div>
+	<div id="menu">
+		<h5 style="text-align: center;color: white;">
+		<s:text name="titulo" />
+		</h5>
+	</div>
 </s:i18n>
