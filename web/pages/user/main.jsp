@@ -22,23 +22,8 @@
 	<div id="sombra">
 		<!-- Este es el div contenedor del maquetado de la página -->
 		<div id="container">
-			<!-- Este es el div de la cabecera -->
-			<div id="header">
-				<img src="res/img/header.png" width="880" height="70"
-					alt="Cintillo Gobierno Bolivariano" /> <img src="res/img/mio.png"
-					width="874" height="116" alt="Marco de Interoperabilidad"
-					style="border: 3px solid #57cedc;" />
-			</div>
-
-			<!-- Este es el div de los menúes -->
-			<div id="menu">
-				<h5 align="center" style="color:#f5f5ee;">
-				<s:text name="titulo" />
-				</h5>
-			</div>
-
-
-
+			<%@include file="../layout/header.jsp"%>
+			
 			<!-- Esta es la barra lateral -->
 			<div id="sidebar">
 				<%@include file="../layout/sidebar.jsp"%>

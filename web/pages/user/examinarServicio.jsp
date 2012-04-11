@@ -32,44 +32,14 @@
 		<div id="sombra">
 			<!-- Este es el div contenedor del maquetado de la página -->
 			<div id="container">
-				<!-- Este es el div de la cabecera -->
-				<div id="header">
-					<img src="res/img/header.png" width="880" height="70"
-						alt="Cintillo Gobierno Bolivariano" /> <img src="res/img/mio.png"
-						width="874" height="116" alt="Marco de Interoperabilidad"
-						style="border: 3px solid #57cedc;" />
-				</div>
-
-				<!-- Este es el div de los menus -->
-				<div id="menu"></div>
-
-
-
+				
+				<%@include file="../layout/header.jsp"%>
+			
 				<!-- Esta es la barra lateral -->
 				<div id="sidebar">
-					<div id="menuv">
-						<ul>
-							<li class="nivel1 primera"><a href="<s:url action="home"/>"
-								class="nivel1"> <s:text name="inicio" />
-							</a></li>
-							<li class="nivel1"><a class="nivel1"> <s:text
-										name="servicios" />
-							</a>
-								<ul class="nivel2">
-									<li><a
-										href="<s:url action="prepararServicioInformacion"/>"> <s:text
-												name="registro" />
-									</a></li>
-								</ul></li>
-							<li class="nivel1"><a href="#" class="nivel1"> <s:text
-										name="configuración" />
-							</a></li>
-							<li class="nivel1"><a href="<s:url action="salir"/>"
-								class="nivel1"> <s:text name="salir" />
-							</a></li>
-						</ul>
-					</div>
+					<%@include file="../layout/sidebar.jsp"%>
 				</div>
+
 
 				<!-- Este es el div de contenidos -->
 				<div id="content">
