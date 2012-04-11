@@ -123,7 +123,6 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 	@SuppressWarnings("unchecked")
 	@Override
 	@SkipValidation
-
 	public String prepararFormulario() {
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		if (id_funcionalidad > 0) {
