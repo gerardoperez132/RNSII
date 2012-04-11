@@ -7,7 +7,7 @@
 	    </a>
 	  </li>
 	  <li class="nivel1">
-	  	<a class="nivel1">
+	  	<a class="nivel1" style="font-size: 0.9em; padding-top:9px;padding-left: 16px;">
 	  		<s:text name="servicios" />
 	  	</a>					
 		<ul class="nivel2">
