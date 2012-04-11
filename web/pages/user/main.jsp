@@ -65,11 +65,12 @@
 				</td>
 			</tr>						
 			</table>
+			<hr>
 			<!-- Tabla en árbol. -->
 			<table id="tree" class="treeTable">
 				<thead>
 					<tr>
-						<th colspan="4" style="text-align: center;" >Servicios de Información</th>						
+						<th colspan="5" style="text-align: center;" >Servicios de Información</th>						
 					</tr>
 					<tr>
 						<th><s:text name="id"></s:text></th>
@@ -144,7 +145,7 @@
 					</s:if>
 					<s:else>
 						<tr>
-							<th colspan="4"><s:text name="servicios.error" /></th>
+							<th colspan="5"><s:text name="servicios.error" /></th>
 						</tr>
 					</s:else>
 				</tbody>
