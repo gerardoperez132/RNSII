@@ -67,7 +67,7 @@
 		</action>
 
 		<action name="prepararModificarServicioInformacion" method="prepararModificarServicioInformacion"
-			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
+			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">			
 			<result name="success">registro/registro_servicio_informacion.jsp
 			</result>
 		</action>
@@ -125,7 +125,7 @@
 		</action>
 
 		<action name="prepararFuncionalidades" method="prepararFuncionalidades"
-			class="ve.gob.cnti.srsi.controlador.FuncionalidadControlador">
+			class="ve.gob.cnti.srsi.controlador.FuncionalidadControlador">			
 			<result name="success">registro/funcionalidades.jsp</result>
 		</action>
 

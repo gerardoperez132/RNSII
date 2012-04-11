@@ -166,6 +166,7 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararFuncionalidades() {
+		System.out.println("id: "+id_servicio_informacion);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		funcionalidades = (List<Funcionalidad>) read(FSI, id_servicio_informacion, -1);
 		return SUCCESS;

@@ -13,6 +13,7 @@ import org.apache.struts2.interceptor.validation.SkipValidation;
 
 import ve.gob.cnti.srsi.dao.Constants;
 import ve.gob.cnti.srsi.dao.Constants.Formulario;
+import ve.gob.cnti.srsi.dao.Constants.Modelos;
 import ve.gob.cnti.srsi.dao.DAO;
 import ve.gob.cnti.srsi.modelo.Area;
 import ve.gob.cnti.srsi.modelo.Arquitectura;
@@ -37,7 +38,7 @@ import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
 
 @SuppressWarnings("serial")
 public class ServicioInformacionControlador extends DAO implements Formulario,
-		Constants {
+		Constants, Modelos {
 
 	private List<Sector> sectores;
 	private List<Estado> estados;
@@ -409,7 +410,7 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 		email.setCorreo(correo);
 		update(email, email.getId_correo());
 		// TODO actualizar documento
-
+		prepararFuncionalidades();
 		modificar = false;
 		return SUCCESS;
 	}
@@ -487,6 +488,14 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 		// FileUtils.copyFile(file, new File(path, name));
 		// return "/archivos/" + ENTE + "/" + name;
 		return "";
+	}
+	
+	@SuppressWarnings("unchecked")
+	@SkipValidation
+	public void prepararFuncionalidades() {
+		System.out.println("id: "+id_servicio_informacion);
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		funcionalidades = (List<Funcionalidad>) read(FSI, id_servicio_informacion, -1);		
 	}
 
 	public List<Sector> getSectores() {
