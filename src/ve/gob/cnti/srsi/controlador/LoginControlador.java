@@ -70,6 +70,7 @@ public class LoginControlador extends DAO {
 	@SkipValidation
 	public String home() {
 		session = ActionContext.getContext().getSession();
+		boolean publicable = true;
 		if (session.isEmpty()) {
 			return INPUT;
 		} else {
@@ -85,30 +86,33 @@ public class LoginControlador extends DAO {
 			ServicioInformacion servicio = new ServicioInformacion();
 			while (siIterado.hasNext()) {
 				servicio = siIterado.next();
-				Object[] models = { new Funcionalidad(),
-						new ServicioInformacion() };
-				List<Funcionalidad> funcionalidades = (List<Funcionalidad>) read(
-						models, servicio.getId_servicio_informacion(), -1);
-				if (funcionalidades.isEmpty()) {
-					ListaServicios
-							.add(new ServiciosPublicables(false, servicio));
-				} else {
-					Iterator<Funcionalidad> fxIterado = funcionalidades
-							.iterator();
-					Funcionalidad fx = new Funcionalidad();
-					while (fxIterado.hasNext()) {
-						fx = fxIterado.next();
-						Object[] models2 = { new EntradaSalida(),
-								new Funcionalidad() };
-						List<EntradaSalida> salidas_tmp = (List<EntradaSalida>) read(
-								models2, fx.getId_funcionalidad(), SALIDA);
-						if (salidas_tmp.isEmpty()) {
-							ListaServicios.add(new ServiciosPublicables(false,
-									servicio));
-						} else {
-							ListaServicios.add(new ServiciosPublicables(true,
-									servicio));
+				if(servicio.getId_estado()==1){
+					ListaServicios.add(new ServiciosPublicables(false,
+							servicio));
+				}else{
+					Object[] models = { new Funcionalidad(),
+							new ServicioInformacion() };
+					List<Funcionalidad> funcionalidades = (List<Funcionalidad>) read(
+							models, servicio.getId_servicio_informacion(), -1);
+					if (funcionalidades.isEmpty()) {
+						ListaServicios
+								.add(new ServiciosPublicables(false, servicio));
+					} else {
+						Iterator<Funcionalidad> fxIterado = funcionalidades
+								.iterator();
+						Funcionalidad fx = new Funcionalidad();
+						while (fxIterado.hasNext()) {
+							fx = fxIterado.next();
+							Object[] models2 = { new EntradaSalida(),
+									new Funcionalidad() };
+							List<EntradaSalida> salidas_tmp = (List<EntradaSalida>) read(
+									models2, fx.getId_funcionalidad(), SALIDA);
+							if (salidas_tmp.isEmpty()) {
+								publicable = false;
+							}
 						}
+						ListaServicios.add(new ServiciosPublicables(publicable,
+								servicio));
 					}
 				}
 			}
