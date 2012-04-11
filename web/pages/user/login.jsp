@@ -57,8 +57,9 @@
 									<td></td>
 								</tr>
 								<tr>
-									<td colspan="3" align="right"><input type="submit"
-										value="Entrar" /></td>
+									<td colspan="3" align="right" style="padding-right: 28px;">
+										<input type="submit" value="<s:text name="entrar" />" />
+									</td>
 								</tr>
 							</table>
 						</form>
