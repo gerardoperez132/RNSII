@@ -3,7 +3,7 @@
 <%@taglib uri="/struts-tags" prefix="s"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<s:i18n name="ve/gob/cnti/srsi/i18n/entradas">
+<s:i18n name="ve/gob/cnti/srsi/i18n/I18">
 	<head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <!-- CSS (required) -->
@@ -19,7 +19,7 @@
 		$("#tree").treeTable();
 	});
 </script>
-<title><s:text name="entradas"></s:text></title>
+<title><s:text name="entrada.entradas"></s:text></title>
 	</head>
 	<body>
 		<!-- Este es el div de la sombra del contenedor del maquetado de la página -->
@@ -37,10 +37,10 @@
 				<!-- Este es el div de contenidos -->
 				<div id="content">
 					<h3>
-						<s:text name="registro.title"></s:text>
+						<s:text name="entrada.registro.title"></s:text>
 					</h3>
 					<h4>
-						<s:text name="servicio.title">
+						<s:text name="entrada.servicio.title">
 							<s:param>
 								<s:property value="servicio.nombre" />
 							</s:param>
@@ -52,17 +52,17 @@
 							<form action="prepararFuncionalidad" method="POST">
 								<s:hidden name="id_servicio_informacion"></s:hidden>
 								<s:hidden name="id_funcionalidad"></s:hidden>
-								<input type="submit" value="<s:text name="tab1.title"></s:text>"
+								<input type="submit" value="<s:text name="entrada.tab1.title"></s:text>"
 									style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
 							</form>
 						</li>
-						<li class="active"><a><s:text name="tab2.title"></s:text>
+						<li class="active"><a><s:text name="entrada.tab2.title"></s:text>
 						</a></li>
 						<li>
 							<form action="prepararSalidas" method="POST">
 								<s:hidden name="id_servicio_informacion"></s:hidden>
 								<s:hidden name="id_funcionalidad"></s:hidden>
-								<input type="submit" value="<s:text name="tab3.title"></s:text>"
+								<input type="submit" value="<s:text name="entrada.tab3.title"></s:text>"
 									style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
 							</form>
 						</li>
@@ -70,7 +70,7 @@
 							<form action="prepararResumen" method="POST">
 								<s:hidden name="id_servicio_informacion"></s:hidden>
 								<s:hidden name="id_funcionalidad"></s:hidden>
-								<input type="submit" value="<s:text name="tab4.title" />"
+								<input type="submit" value="<s:text name="entrada.tab4.title" />"
 									style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
 							</form>
 						</li>
@@ -78,7 +78,7 @@
 					<div class="tab_container">
 						<div id="tab2" class="tab_content">
 							<h4>
-								<s:text name="entradas.title">
+								<s:text name="entrada.entradas.title">
 									<s:param>
 										<s:property value="funcionalidad.nombre" />
 									</s:param>
@@ -92,7 +92,7 @@
 											<s:hidden name="id_servicio_informacion"></s:hidden>
 											<s:hidden name="id_funcionalidad"></s:hidden>
 											<input type="submit"
-												value="<s:text name="simple.title"></s:text>" />
+												value="<s:text name="entrada.simple.title"></s:text>" />
 										</form>
 									</td>
 									<td>
@@ -100,7 +100,7 @@
 											<s:hidden name="id_servicio_informacion"></s:hidden>
 											<s:hidden name="id_funcionalidad"></s:hidden>
 											<input type="submit"
-												value="<s:text name="complejo.title"></s:text>">
+												value="<s:text name="entrada.complejo.title"></s:text>">
 										</form>
 									</td>
 								</tr>
@@ -109,10 +109,10 @@
 							<table id="tree" class="treeTable">
 								<thead>
 									<tr>
-										<th><s:text name="nombre"></s:text></th>
-										<th><s:text name="descripcion"></s:text></th>
-										<th><s:text name="tipo"></s:text></th>
-										<th><s:text name="acciones"></s:text></th>
+										<th><s:text name="entrada.nombre"></s:text></th>
+										<th><s:text name="entrada.descripcion"></s:text></th>
+										<th><s:text name="entrada.tipo"></s:text></th>
+										<th><s:text name="entrada.acciones"></s:text></th>
 									</tr>
 								</thead>
 								<!-- Validación de lista vacía. -->
@@ -155,7 +155,7 @@
 																					<s:hidden name="id_funcionalidad"></s:hidden>
 																					<s:hidden name="id_entrada_salida"></s:hidden>
 																					<input type="submit"
-																						value="<s:text name="simple.add"></s:text>"
+																						value="<s:text name="entrada.simple.add"></s:text>"
 																						style="font-size: 0.7em;" />
 																				</form>
 																			</td>
@@ -167,7 +167,7 @@
 																					<s:hidden name="id_entrada_salida" value="%{#id}"></s:hidden>
 																					<s:hidden name="modificar" value="%{true}"></s:hidden>
 																					<input type="submit"
-																						value="<s:text name="modificar"></s:text>"
+																						value="<s:text name="entrada.modificar"></s:text>"
 																						style="font-size: 0.7em;" />
 																				</form>
 																			</td>
@@ -178,7 +178,7 @@
 																					<s:hidden name="id_entrada_salida" value="%{#id}"></s:hidden>
 																					<s:hidden name="modificar" value="%{true}"></s:hidden>
 																					<input type="submit"
-																						value="<s:text name="eliminar"></s:text>"
+																						value="<s:text name="entrada.eliminar"></s:text>"
 																						style="font-size: 0.7em;" />
 																				</form>
 																	</table>
@@ -194,7 +194,7 @@
 																					<s:hidden name="id_entrada_salida"></s:hidden>
 																					<s:hidden name="modificar" value="%{true}"></s:hidden>
 																					<input type="submit"
-																						value="<s:text name="modificar"></s:text>"
+																						value="<s:text name="entrada.modificar"></s:text>"
 																						style="font-size: 0.7em;" />
 																				</form>
 																			</td>
@@ -204,7 +204,7 @@
 																					<s:hidden name="id_funcionalidad"></s:hidden>
 																					<s:hidden name="id_entrada_salida"></s:hidden>
 																					<input type="submit"
-																						value="<s:text name="eliminar"></s:text>"
+																						value="<s:text name="entrada.eliminar"></s:text>"
 																						style="font-size: 0.7em;" />
 																				</form>
 																			</td>
@@ -245,7 +245,7 @@
 																				<s:hidden name="id_entrada_salida"></s:hidden>
 																				<s:hidden name="modificar" value="%{true}"></s:hidden>
 																				<input type="submit"
-																					value="<s:text name="modificar"></s:text>"
+																					value="<s:text name="entrada.modificar"></s:text>"
 																					style="font-size: 0.7em;" />
 																			</form>
 																		</td>
@@ -255,7 +255,7 @@
 																				<s:hidden name="id_funcionalidad"></s:hidden>
 																				<s:hidden name="id_entrada_salida"></s:hidden>
 																				<input type="submit"
-																					value="<s:text name="eliminar"></s:text>"
+																					value="<s:text name="entrada.eliminar"></s:text>"
 																					style="font-size: 0.7em;" />
 																			</form>
 																		</td>
@@ -272,7 +272,7 @@
 								<s:else>
 									<tbody>
 										<tr>
-											<th colspan="4"><s:text name="entradas.error"></s:text>
+											<th colspan="4"><s:text name="entrada.entradas.error"></s:text>
 											</th>
 										</tr>
 									</tbody>
