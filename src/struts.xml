@@ -6,11 +6,10 @@
 <struts>
 	<package name="default" extends="struts-default">
 
-		<!--****************************
-		 interceptores para evitar el doubleSubmit 
-		 ***************************** -->
+		<!--**************************** interceptores para evitar el doubleSubmit 
+			***************************** -->
 		<interceptors>
-	    	<interceptor-stack name="doubleSubmit">
+			<interceptor-stack name="doubleSubmit">
 				<interceptor-ref name="params">
 					<param name="excludeParams">dojo/..*,struts.token,struts.token.name</param>
 				</interceptor-ref>
@@ -21,14 +20,23 @@
 			</interceptor-stack>
 		</interceptors>
 
-		<!--*******************************************************
-				Actions para registros de servicios de información
-	        *************************************************** -->
+		<!--******************************************************* Actions para 
+			registros de servicios de información *************************************************** -->
 
-		<action name="prepararServicioInformacion" method="prepararFormulario"
+		<action name="prepararServicioInformacion" method="prepararDescripcionGeneral"
 			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
 			<result name="success">registro/registro_servicio_informacion.jsp
 			</result>
+		</action>
+
+		<action name="registrarDescripcionGeneral" method="registrarDescripcionGeneral"
+			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
+			<interceptor-ref name="doubleSubmit" />
+			<result name="success">registro/registro_servicio_informacion.jsp</result>
+			<result name="invalid.token">registro/registro_servicio_informacion.jsp</result>
+			<result name="input">registro/registro_servicio_informacion.jsp
+			</result>
+			<result name="errorSession" type="redirectAction">home</result>
 		</action>
 
 		<action name="registrarServicioInformacion" method="registrarServicioInformacion"
@@ -263,20 +271,19 @@
 			<result name="input" type="redirectAction">autenticarUsuario</result>
 		</action>
 
-		<!-- ********************************************* 
-		            Actions para Usuarios 
-		 ****************************************************-->
-		 <action name="configuracionUsuario" method="configuracion"
+		<!-- ********************************************* Actions para Usuarios 
+			**************************************************** -->
+		<action name="configuracionUsuario" method="configuracion"
 			class="ve.gob.cnti.srsi.controlador.UsuarioControlador">
-			<result name="success">registro/formulario_usuario.jsp</result>		
-			<result name="errorSession" type="redirectAction">home</result>	
+			<result name="success">registro/formulario_usuario.jsp</result>
+			<result name="errorSession" type="redirectAction">home</result>
 		</action>
-		
+
 		<action name="modificarClave" method="modificarClave"
 			class="ve.gob.cnti.srsi.controlador.UsuarioControlador">
 			<result name="success">registro/formulario_usuario.jsp</result>
-			<result name="input">registro/formulario_usuario.jsp</result>			
-			<result name="errorSession" type="redirectAction">home</result>	
+			<result name="input">registro/formulario_usuario.jsp</result>
+			<result name="errorSession" type="redirectAction">home</result>
 		</action>
 
 	</package>
