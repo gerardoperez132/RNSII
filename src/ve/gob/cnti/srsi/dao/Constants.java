@@ -63,6 +63,13 @@ public interface Constants {
 		public static final int SIMPLE = 1;
 	}
 
+	public interface Tabs {
+		public static final int DESCRIPCION_GENERAL = 1;
+		public static final int ASPECTOS_LEGALES = 2;
+		public static final int DESCRIPCION_TECNICA = 3;
+		public static final int DESCRIPCION_SOPORTE = 4;
+	}
+
 	/**
 	 * Interfaz con los arreglos de objetos para consultas tipo 1:N.
 	 * 
