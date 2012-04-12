@@ -41,11 +41,6 @@
 			<result name="errorSession" type="redirectAction">home</result>
 		</action>
 
-		<action name="registrarPrueba" method="registrarPrueba"
-			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
-			<result name="success">registro/funcionalidades.jsp</result>
-		</action>
-
 		<action name="eliminarServicioInformacion" method="eliminarServicioInformacion"
 			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
 			<result name="success" type="redirectAction">home</result>
