@@ -10,33 +10,20 @@
 <link rel="stylesheet" type="text/css" href="res/css/styles.css">
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
 <link rel="stylesheet" type="text/css" href="res/css/menu_vertical.css">
-<script type="text/javascript" src="res/js/jquery-1.7.1.js"></script>
-<script type="text/javascript" src="res/js/tabs.js"></script>
-<s:if test="modificar==true">
-	<s:set name="action" value="%{'modificarServicioInformacion'}" />
-	<s:set name="submit" value="%{getText('actualizar')}" />
-	<s:set name="title" value="%{getText('actualizar.title')}" />
-</s:if>
-<s:else>
-	<s:set name="action" value="%{'registrarServicioInformacion'}" />
+<s:if test="tab==1">
+	<s:set name="action" value="%{'registrarDescripcionGeneral'}" />
 	<s:set name="submit" value="%{getText('guardar')}" />
 	<s:set name="title" value="%{getText('registro.title')}" />
-</s:else>
+</s:if>
 <title><s:text name="title"></s:text>
 </title>
 	</head>
 	<body>
 		<!-- Este es el div de la sombra del contenedor del maquetado de la página -->
 		<div id="sombra">
-			<!-- Este es el div contenedor del maquetado de la página -->
 			<div id="container">
-				<s:if test="modificar!=true"></s:if>
 				<%@include file="../layout/header.jsp"%>
-				<!-- Esta es la barra lateral -->
-				<div id="sidebar">
-					<%@include file="../layout/sidebar.jsp"%>
-				</div>
-				<!-- Este es el div de contenidos -->
+				<%@include file="../layout/sidebar.jsp"%>
 				<div id="content">
 					<small><s:text name="title" /> / <strong>Paso 1:</strong>
 						/ Paso 2 / Paso 3</small>
@@ -45,22 +32,45 @@
 					</h3>
 					<hr>
 					<ul class="tabs">
-						<li><a href="#tab1"><s:text name="tab1.title"></s:text> </a>
-						</li>
-						<li><a href="#tab2"><s:text name="tab2.title"></s:text> </a>
-						</li>
-						<li><a href="#tab3"><s:text name="tab3.title"></s:text> </a>
-						</li>
-						<li><a href="#tab4"><s:text name="tab4.title"></s:text> </a>
-						</li>
-					</ul>
-					<form action="<s:property value="#action"/>" method="post"
-						enctype="multipart/form-data">
-						<s:if test="modificado=true">
-							<s:hidden name="id_servicio_informacion"></s:hidden>
+						<s:if test="%{tab==1}">
+							<li class="active"><a href="#tab1"><s:text
+										name="tab1.title"></s:text> </a></li>
 						</s:if>
-						<div class="tab_container">
-							<div id="tab1" class="tab_content">
+						<s:else>
+							<li><a href="#tab1"><s:text name="tab1.title"></s:text>
+							</a></li>
+						</s:else>
+						<s:if test="%{tab==2}">
+							<li class="active"><a href="#tab2"><s:text
+										name="tab2.title"></s:text> </a>
+							</li>
+						</s:if>
+						<s:else>
+							<li><a href="#tab2"><s:text name="tab2.title"></s:text>
+							</a>
+							</li>
+						</s:else>
+						<s:if test="%{tab==3}">
+							<li class="active"><a href="#tab3"><s:text
+										name="tab3.title"></s:text> </a></li>
+						</s:if>
+						<s:else>
+							<li><a href="#tab3"><s:text name="tab3.title"></s:text>
+							</a></li>
+						</s:else>
+						<s:if test="%{tab==4}">
+							<li class="active"><a href="#tab4"><s:text
+										name="tab4.title"></s:text> </a></li>
+						</s:if>
+						<s:else>
+							<li><a href="#tab4"><s:text name="tab4.title"></s:text>
+							</a></li>
+						</s:else>
+					</ul>
+					<div class="tab_container">
+						<div id="tab1" class="tab_content">
+							<form action="<s:property value="#action"/>" method="post"
+								enctype="multipart/form-data">
 								<p class="formulario">
 									<s:text name="tab1.subtitle" />
 								</p>
@@ -106,163 +116,11 @@
 								<s:select name="estado" list="estados" listKey="id_estado"
 									listValue="nombre" headerKey="-1"
 									headerValue="%{getText('estado.select')}"></s:select>
-							</div>
-							<div id="tab2" class="tab_content">
-								<p class="formulario">
-									<s:text name="tab2.subtitle" />
-								</p>
-								<small><s:text name="tab2.description"></s:text> </small>
-								<hr>
-								<s:if test="list.size > 0">
-									<s:iterator value="list" status="i">
-										<h5 class="formulario">
-											<s:text name="documento.name" />
-										</h5>
-										<s:fielderror>
-											<s:param value="%{'name' + #i.index}" />
-										</s:fielderror>
-										<s:textfield name="archivos.name" labelposition="top" />
-										<h5 class="formulario">
-											<s:text name="documento.file" />
-										</h5>
-										<s:fielderror>
-											<s:param>file</s:param>
-										</s:fielderror>
-										<s:file name="archivos.file" />
-										<hr>
-									</s:iterator>
-								</s:if>
-								<s:else>
-									<h5 class="formulario">
-										<s:text name="documento.name" />
-									</h5>
-									<s:fielderror>
-										<s:param>name0</s:param>
-									</s:fielderror>
-									<s:textfield name="archivos.name" labelposition="top" />
-									<h5 class="formulario">
-										<s:text name="documento.file" />
-									</h5>
-									<s:fielderror>
-										<s:param>file</s:param>
-									</s:fielderror>
-									<s:file name="archivos.file" />
-									<hr>
-								</s:else>
-								<script src="<s:url value="res/js/rows.js"/>"
-									type="text/javascript"></script>
-								<script type="text/javascript">
-									File.prepare(
-											'<s:text name="documento.name"/>',
-											'<s:text name="documento.file"/>');
-								</script>
-								<div id="addRow"></div>
-								<a href="#" onclick="return File.addRow()">Agregar otro
-									documento</a> <br> <br> <br> <br>
-							</div>
-							<div id="tab3" class="tab_content">
-								<p class="formulario">
-									<s:text name="tab3.subtitle" />
-								</p>
-								<small><s:text name="tab3.description"></s:text> </small>
-								<hr>
-								<h5 class="formulario">
-									<s:text name="seguridad.title"></s:text>
-								</h5>
-								<s:fielderror>
-									<s:param>seguridad</s:param>
-								</s:fielderror>
-								<s:select list="niveles" listKey="id_seguridad"
-									listValue="nombre" headerKey="-1"
-									headerValue="%{getText('seguridad.select')}" name="seguridad"></s:select>
-								<h5 class="formulario">
-									<s:text name="arquitectura.title"></s:text>
-								</h5>
-								<s:fielderror>
-									<s:param>arquitectura</s:param>
-								</s:fielderror>
-								<s:checkboxlist list="arquitecturas" listValue="nombre"
-									name="arquitectura" listKey="id_arquitectura" />
-								<br>
-								<h5 class="formulario">
-									<s:text name="version.title"></s:text>
-								</h5>
-								<s:fielderror>
-									<s:param>servicio.version</s:param>
-								</s:fielderror>
-								<s:textfield name="servicio.version"
-									onkeyup="var pattern = /[^0-9\.]/g;
-								this.value = this.value.replace(pattern, '');"
-									maxlength="7" />
-								<br>
-								<h5 class="formulario">
-									<s:text name="intercambio.title"></s:text>
-								</h5>
-								<s:fielderror>
-									<s:param>intercambio</s:param>
-								</s:fielderror>
-								<select name="intercambio">
-									<optgroup label="">
-										<option value="-1">
-											<s:text name="intercambio.select"></s:text>
-										</option>
-									</optgroup>
-									<s:iterator value="parents">
-										<s:set name="padre" value="id_intercambio"></s:set>
-										<s:set name="nombrePadre" value="nombre"></s:set>
-										<optgroup label="<s:property value="nombre"/>">
-											<s:iterator value="children">
-												<s:if test="%{#padre == id_padre}">
-													<option value="<s:property value="id_intercambio"/>"
-														<s:if test="intercambio == id_intercambio"> selected="selected"</s:if>>
-														<s:property value="nombre" />
-													</option>
-												</s:if>
-											</s:iterator>
-										</optgroup>
-									</s:iterator>
-								</select>
-							</div>
-							<div id="tab4" class="tab_content">
-								<p class="formulario">
-									<s:text name="tab4.subtitle" />
-								</p>
-								<small><s:text name="tab4.description"></s:text> </small>
-								<hr>
-								<h5 class="formulario">
-									<s:text name="responsable.title"></s:text>
-								</h5>
-								<s:fielderror>
-									<s:param>servicio.responsable</s:param>
-								</s:fielderror>
-								<s:textfield name="servicio.responsable" labelposition="top" />
-								<h5 class="formulario">
-									<s:text name="telefono.title"></s:text>
-								</h5>
-								<s:fielderror>
-									<s:param>telefono</s:param>
-								</s:fielderror>
-								<table>
-									<tr>
-										<td><s:select name="codigo" list="codigos" /></td>
-										<td><s:textfield name="telefono" labelposition="top"
-												maxlength="7"
-												onkeyup="var no_digito = /\D/g; this.value = this.value.replace(no_digito , '');" />
-										</td>
-									</tr>
-								</table>
-								<h5 class="formulario">
-									<s:text name="correo.title"></s:text>
-								</h5>
-								<s:fielderror>
-									<s:param>correo</s:param>
-								</s:fielderror>
-								<s:textfield name="correo"></s:textfield>
 								<s:token name="token" />
+								<s:hidden name="tab" value="1"></s:hidden>
 								<input type="submit" value='<s:property value="#submit"/>' />
-							</div>
 						</div>
-					</form>
+					</div>
 				</div>
 				<%@include file="../layout/footer.jsp"%>
 			</div>
