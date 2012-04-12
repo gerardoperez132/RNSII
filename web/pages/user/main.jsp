@@ -1,14 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@taglib uri="/struts-tags" prefix="s"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@include file="../layout/cache.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <s:i18n name="ve/gob/cnti/srsi/i18n/userlogin">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<s:if test="%{#session.logueado != true}">
- 	<META HTTP-EQUIV="Refresh" CONTENT="0;URL=../index.action">
-</s:if>
 <!-- CSS (required) -->
 <link rel="stylesheet" type="text/css" href="res/css/styles.css">
 <link rel="stylesheet" type="text/css" href="res/css/menu_vertical.css">
