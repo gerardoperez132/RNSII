@@ -15,6 +15,7 @@
 <s:set name="title" value="%{getText('registro.title')}" />
 <s:if test="tab==1">
 	<s:set name="action" value="%{'registrarDescripcionGeneral'}" />
+	<s:url id="prepararFormulario" action="prepararDescripcionGeneral"></s:url>
 </s:if>
 <s:if test="tab==2">
 	<s:set name="action" value="%{'registrarAspectosLegales'}" />
@@ -43,12 +44,13 @@
 					<hr>
 					<ul class="tabs">
 						<s:if test="%{tab==1}">
+
 							<li class="active"><a href="#tab1"><s:text
 										name="tab1.title"></s:text> </a></li>
 						</s:if>
 						<s:else>
-							<li><a href="#tab1"><s:text name="tab1.title"></s:text>
-							</a></li>
+							<li><a href="%{prepararFormulario}"><s:text
+										name="tab1.title"></s:text> </a></li>
 						</s:else>
 						<s:if test="%{tab==2}">
 							<li class="active"><a href="#tab2"><s:text
