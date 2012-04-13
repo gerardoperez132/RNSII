@@ -21,7 +21,7 @@
  */
 -->
 <#if (actionMessages?? && actionMessages?size > 0)>
-	<ul<#rt/>
+	<#rt/>
 <#if parameters.cssClass??>
  class="${parameters.cssClass?html}"<#rt/>
 <#else>
@@ -30,9 +30,7 @@
 <#if parameters.cssStyle??>
  style="${parameters.cssStyle?html}"<#rt/>
 </#if>
->
 		<#list actionMessages as message>
-			<li><span>${message!}</span></li>
+			<span>${message!}</span>
 		</#list>
-	</ul>
 </#if>
