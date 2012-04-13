@@ -46,11 +46,48 @@
 			</result>
 		</action>
 
-		<action name="registrarServicioInformacion" method="registrarServicioInformacion"
+		<action name="registrarAspectosLegales" method="registrarAspectosLegales"
+			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
+			<interceptor-ref name="doubleSubmit" />
+			<result name="success" type="redirectAction">prepararDescripcionTecnica
+			</result>
+			<result name="invalid.token">registro/registro_servicio_informacion.jsp
+			</result>
+			<result name="input">registro/registro_servicio_informacion.jsp
+			</result>
+			<result name="errorSession" type="redirectAction">home</result>
+		</action>
+
+		<action name="prepararDescripcionTecnica" method="prepararDescripcionTecnica"
+			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
+			<result name="success">registro/registro_servicio_informacion.jsp
+			</result>
+		</action>
+
+		<action name="registrarDescripcionTecnica" method="registrarDescripcionTecnica"
+			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
+			<interceptor-ref name="doubleSubmit" />
+			<result name="success" type="redirectAction">prepararDescripcionSoporte
+			</result>
+			<result name="invalid.token">registro/registro_servicio_informacion.jsp
+			</result>
+			<result name="input">registro/registro_servicio_informacion.jsp
+			</result>
+			<result name="errorSession" type="redirectAction">home</result>
+		</action>
+
+		<action name="prepararDescripcionSoporte" method="prepararDescripcionSoporte"
+			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
+			<result name="success">registro/registro_servicio_informacion.jsp
+			</result>
+		</action>
+
+		<action name="registrarDescripcionSoporte" method="registrarDescripcionSoporte"
 			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
 			<interceptor-ref name="doubleSubmit" />
 			<result name="success">registro/funcionalidades.jsp</result>
-			<result name="invalid.token">registro/funcionalidades.jsp</result>
+			<result name="invalid.token">registro/registro_servicio_informacion.jsp
+			</result>
 			<result name="input">registro/registro_servicio_informacion.jsp
 			</result>
 			<result name="errorSession" type="redirectAction">home</result>
