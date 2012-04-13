@@ -99,15 +99,23 @@
 				datos
 			</s:elseif>
 			<s:else>	
-				<span class="ok_pass"><s:actionmessage/></span>			
-				<form action="prepararFormulario" method="POST">
-					<s:hidden name="modificarClave" value="%{true}"></s:hidden>				
-					<input type="submit" value="<s:text name="usuario.modificar.clave"></s:text>">
-				</form>
-				<form action="prepararFormulario" method="POST">
-					<s:hidden name="modificarDatos" value="%{true}"></s:hidden>				
-					<input type="submit" value="<s:text name="usuario.modificar.datos"></s:text>">
-				</form>
+				<span class="ok_pass"><s:actionmessage/></span>		
+				<table>
+					<tr>
+						<td>
+							<form action="prepararFormulario" method="POST">
+								<s:hidden name="modificarClave" value="%{true}"></s:hidden>				
+								<input type="submit" value="<s:text name="usuario.modificar.clave"></s:text>">
+							</form>
+						</td>
+						<td>
+							<form action="prepararFormulario" method="POST">
+								<s:hidden name="modificarDatos" value="%{true}"></s:hidden>				
+								<input type="submit" value="<s:text name="usuario.modificar.datos"></s:text>">
+							</form>
+						</td>
+					</tr>
+				</table>
 			</s:else>
 			</div>
 			<%@include file="../layout/footer.jsp"%>
