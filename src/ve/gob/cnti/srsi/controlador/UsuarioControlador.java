@@ -50,10 +50,8 @@ public class UsuarioControlador extends DAO{
 				}else if(clave_nueva.length()<6){
 					addFieldError("password", "La nueva contraseña debe tener al menos 6 caracteres");
 					return INPUT;
-				}else{
-					//TODO GUARDAR PASS
-					MD5Hashing pass = new MD5Hashing(clave_nueva);
-					System.out.println("user ==> "+usuario.toString());
+				}else{					
+					MD5Hashing pass = new MD5Hashing(clave_nueva);					
 					usuario.setClave(pass.getPassword());
 					update(usuario,usuario.getId_usuario());
 					modificarClave = false;
