@@ -42,4 +42,47 @@ $(document).ready(function(){
 		 }  
 		 return true;  
 	});
+	
+	$("#modificar_clave").click(function (e){		  
+		var enoughRegex = new RegExp("(?=.{6,}).*", "g");
+		var error = false;
+		e.preventDefault();
+        if( $("#clave_actual").val() == "" ){
+        	$('#passrequired').html('Debe proporcionar la clave actual'); 
+			$('#passrequired').attr('class', 'error_pass');
+            error = true;
+        }else{
+        	$('#passrequired').html('');
+        } 
+        
+        if ($('#pass').val() == "") {  
+			 $('#passstrength').html('La nueva contraseña debe tener 6 caracteres como mínimo'); 
+			 $('#passstrength').attr('class', 'error_pass');
+			 error = true;			
+       }else if (false == enoughRegex.test($('#pass').val())) {  
+			 $('#passstrength').html('La nueva contraseña debe tener 6 caracteres como mínimo'); 
+			 $('#passstrength').attr('class', 'error_pass');
+			 error = true;			
+        }else{
+        	$('#passstrength').html('');
+        }
+        
+        if ($('#pass2').val() == "") {  
+			 $('#passequal').html('Debe llenar este campo!'); 
+			 $('#passequal').attr('class', 'error_pass');
+			 error = true;
+       }else if ($('#pass').val() != $('#pass2').val()) {  
+			 $('#passequal').html('Las contraseñas no coinciden!'); 
+			 $('#passequal').attr('class', 'error_pass');
+			 error = true;
+        }else{
+        	$('#passequal').html('');
+        }
+        
+        if(error == false){
+        	//$("#modificar_clave").submit(); 
+        	document.modificarClave.submit(); 
+        }
+    });
+	
 });

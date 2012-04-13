@@ -53,7 +53,7 @@
 			<hr>
 			
 			<s:if test="modificarClave == true">				
-				<form action="modificarClave" method="post">
+				<form action="modificarClave" method="post" id="formModificarClave" name="modificarClave">
 				<table style="margin-top: 50px; margin-left: 20px;">
 					<tr>
 						<td colspan="4">							
@@ -69,9 +69,9 @@
 					<tr>
 					<tr>
 						<td><s:text name="usuario.modificar.clave.actual"/></td>
-						<td><input type="password" name="clave_actual"/></td>
+						<td><input type="password" name="clave_actual" id="clave_actual"/></td>
 						<td><h5 class="requerido">*</h5></td>
-						<td></td>
+						<td><span id="passrequired"></span></td>
 					<tr>
 					<tr>
 						<td><s:text name="usuario.modificar.clave.nueva"/></td>
@@ -89,7 +89,7 @@
 						<td colspan="4">
 							<s:token name="token" />
 							<s:hidden name="modificarClave"></s:hidden>							
-							<input type="submit" value="<s:text name="usuario.modificar.clave"></s:text>">
+							<input type="submit" id="modificar_clave" value="<s:text name="usuario.modificar.clave"></s:text>">
 						</td>						
 					<tr>
 				</table>
@@ -99,7 +99,7 @@
 				datos
 			</s:elseif>
 			<s:else>	
-				<s:actionmessage cssClass="ok_pass"/>			
+				<span class="ok_pass"><s:actionmessage/></span>			
 				<form action="prepararFormulario" method="POST">
 					<s:hidden name="modificarClave" value="%{true}"></s:hidden>				
 					<input type="submit" value="<s:text name="usuario.modificar.clave"></s:text>">
