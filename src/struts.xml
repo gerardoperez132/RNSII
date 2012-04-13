@@ -32,11 +32,18 @@
 		<action name="registrarDescripcionGeneral" method="registrarDescripcionGeneral"
 			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
 			<interceptor-ref name="doubleSubmit" />
-			<result name="success">registro/registro_servicio_informacion.jsp</result>
-			<result name="invalid.token">registro/registro_servicio_informacion.jsp</result>
+			<result name="success" type="redirectAction">prepararAspectosLegales</result>
+			<result name="invalid.token">registro/registro_servicio_informacion.jsp
+			</result>
 			<result name="input">registro/registro_servicio_informacion.jsp
 			</result>
 			<result name="errorSession" type="redirectAction">home</result>
+		</action>
+
+		<action name="prepararAspectosLegales" method="prepararAspectosLegales"
+			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
+			<result name="success">registro/registro_servicio_informacion.jsp
+			</result>
 		</action>
 
 		<action name="registrarServicioInformacion" method="registrarServicioInformacion"
