@@ -36,8 +36,8 @@ import com.opensymphony.xwork2.validator.annotations.FieldExpressionValidator;
 import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
 
 @SuppressWarnings("serial")
-public class ServicioInformacionControlador extends DAO implements Formulario,
-		Constants {
+public class ServicioInformacionControladorBackup extends DAO implements
+		Formulario, Constants {
 
 	private List<Sector> sectores;
 	private List<Estado> estados;
