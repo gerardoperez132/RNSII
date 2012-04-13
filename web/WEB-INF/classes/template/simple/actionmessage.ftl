@@ -21,16 +21,7 @@
  */
 -->
 <#if (actionMessages?? && actionMessages?size > 0)>
-	<#rt/>
-<#if parameters.cssClass??>
- class="${parameters.cssClass?html}"<#rt/>
-<#else>
- class="actionMessage"<#rt/>
-</#if>
-<#if parameters.cssStyle??>
- style="${parameters.cssStyle?html}"<#rt/>
-</#if>
-		<#list actionMessages as message>
-			<span>${message!}</span>
-		</#list>
+	<#list actionMessages as message>
+		<span>${message!}</span>
+	</#list>
 </#if>
