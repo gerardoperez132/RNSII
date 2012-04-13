@@ -25,7 +25,6 @@
 
 		<action name="prepararDescripcionGeneral" method="prepararDescripcionGeneral"
 			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
-			<interceptor-ref name="params"/>
 			<result name="success">registro/registro_servicio_informacion.jsp
 			</result>
 		</action>
