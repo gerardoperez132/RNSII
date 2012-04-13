@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
+import ve.gob.cnti.srsi.dao.Constants;
 import ve.gob.cnti.srsi.dao.Constants.Tabs;
 import ve.gob.cnti.srsi.dao.DAO;
 import ve.gob.cnti.srsi.modelo.Area;
@@ -23,7 +24,8 @@ import ve.gob.cnti.srsi.modelo.UnionArquitecturaServicioInformacion;
 
 import com.opensymphony.xwork2.ActionContext;
 
-public class ServicioInformacionControlador extends DAO implements Tabs {
+public class ServicioInformacionControlador extends DAO implements Constants,
+		Tabs {
 	private List<Sector> sectores = new ArrayList<Sector>();
 	private List<Estado> estados = new ArrayList<Estado>();
 	private List<Area> areas = new ArrayList<Area>();
@@ -44,6 +46,8 @@ public class ServicioInformacionControlador extends DAO implements Tabs {
 	private long intercambio;
 	private String telefono;
 	private String correo;
+	private String codigo;
+	private String codigos[] = COD;
 
 	private HttpServletRequest servletRequest;
 	private Ente ente;
@@ -219,6 +223,22 @@ public class ServicioInformacionControlador extends DAO implements Tabs {
 		this.servicio = servicio;
 	}
 
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+
+	public String[] getCodigos() {
+		return codigos;
+	}
+
+	public void setCodigos(String[] codigos) {
+		this.codigos = codigos;
+	}
+
 	@SkipValidation
 	public String prepararDescripcionGeneral() {
 		tab = DESCRIPCION_GENERAL;
@@ -291,17 +311,17 @@ public class ServicioInformacionControlador extends DAO implements Tabs {
 	}
 
 	public String registrarAspectosLegales() {
-		update(servicio, servicio.getId());
+		// update(servicio, servicio.getId());
 		return SUCCESS;
 	}
 
 	public String registrarDescripcionTecnica() {
-		update(servicio, servicio.getId());
+		// update(servicio, servicio.getId());
 		return SUCCESS;
 	}
 
 	public String registrarDescripcionSoporte() {
-		update(servicio, servicio.getId());
+		// update(servicio, servicio.getId());
 		return SUCCESS;
 	}
 }
