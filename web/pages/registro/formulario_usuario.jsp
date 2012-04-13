@@ -75,13 +75,13 @@
 					<tr>
 					<tr>
 						<td><s:text name="usuario.modificar.clave.nueva"/></td>
-						<td><input type="password" name="pass" id="pass" /></td>
+						<td><input type="password" name="clave_nueva" id="pass" /></td>
 						<td><h5 class="requerido">*</h5></td>
 						<td><span id="passstrength"></span></td>
 					<tr>
 					<tr>
 						<td><s:text name="usuario.modificar.clave.confirma"/></td>
-						<td><input type="password" name="pass2" id="pass2" /></td>
+						<td><input type="password" name="clave_nueva_confirme" id="pass2" /></td>
 						<td><h5 class="requerido">*</h5></td>
 						<td><span id="passequal"></span>  <br></td>
 					<tr>					
@@ -98,7 +98,8 @@
 			<s:elseif test="modificarDatos == true">
 				datos
 			</s:elseif>
-			<s:else>				
+			<s:else>	
+				<s:actionmessage cssClass="ok_pass"/>			
 				<form action="prepararFormulario" method="POST">
 					<s:hidden name="modificarClave" value="%{true}"></s:hidden>				
 					<input type="submit" value="<s:text name="usuario.modificar.clave"></s:text>">
