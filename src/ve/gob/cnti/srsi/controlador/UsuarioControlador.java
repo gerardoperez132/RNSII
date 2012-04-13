@@ -2,35 +2,35 @@ package ve.gob.cnti.srsi.controlador;
 
 import java.util.Map;
 
-import com.opensymphony.xwork2.ActionContext;
-
 import ve.gob.cnti.srsi.dao.DAO;
 import ve.gob.cnti.srsi.modelo.Ente;
 import ve.gob.cnti.srsi.modelo.Usuario;
 
+import com.opensymphony.xwork2.ActionContext;
+
 @SuppressWarnings("serial")
-public class UsuarioControlador extends DAO{
-	
+public class UsuarioControlador extends DAO {
+
 	private Usuario usuario = new Usuario();
 	private boolean modificarDatos;
 	private boolean modificarClave;
-	
+
 	@SuppressWarnings("rawtypes")
 	private Map session;
-	private Ente ente;	
-	
-	public String header(){
+	private Ente ente;
+
+	public String header() {
 		session = ActionContext.getContext().getSession();
 		Usuario usuario = new Usuario();
 		usuario = (Usuario) session.get("usuario");
 		if (usuario == null) {
 			return "errorSession";
 		}
-		ente = (Ente) read(new Ente(), usuario.getId_ente());		
+		ente = (Ente) read(new Ente(), usuario.getId_ente());
 		return SUCCESS;
 	}
-	
-	public String configuracion(){
+
+	public String configuracion() {
 		return header();
 	}
 
@@ -50,8 +50,6 @@ public class UsuarioControlador extends DAO{
 		this.modificarDatos = modificarDatos;
 	}
 
-	
-
 	public boolean isModificarClave() {
 		return modificarClave;
 	}
@@ -67,5 +65,4 @@ public class UsuarioControlador extends DAO{
 	public void setEnte(Ente ente) {
 		this.ente = ente;
 	}
-
 }
