@@ -46,7 +46,8 @@ public class LoginControlador extends DAO {
 				return INPUT;
 			} else if (!usuario.getClave().equals(
 					new MD5Hashing(password).getPassword().toString())) {
-				addFieldError("password", "Su usuario o contraseña son inválidos");
+				addFieldError("password",
+						"Su usuario o contraseña son inválidos");
 				return INPUT;
 			} else {
 				session.put("logueado", true);
@@ -77,7 +78,7 @@ public class LoginControlador extends DAO {
 			if (usuario == null) {
 				return INPUT;
 			}
-			ente = (Ente) read(ente, usuario.getId());
+			ente = (Ente) read(ente, usuario.getId_ente());
 			Object[] objetos = { new ServicioInformacion(), new Ente() };
 			servicios = (ArrayList<ServicioInformacion>) read(objetos,
 					ente.getId_ente(), -1);
