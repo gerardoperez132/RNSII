@@ -286,7 +286,7 @@
 		<action name="modificarClave" method="modificarClave"
 			class="ve.gob.cnti.srsi.controlador.UsuarioControlador">	
 			<interceptor-ref name="doubleSubmit" />			
-			<result name="invalid.token">registro/formulario_usuario.jsp</result>		
+			<result name="invalid.token" type="redirectAction">home</result>		
 			<result name="success">registro/formulario_usuario.jsp</result>			
 			<result name="input">registro/formulario_usuario.jsp</result>	
 			<result name="errorSession" type="redirectAction">salir</result>	
