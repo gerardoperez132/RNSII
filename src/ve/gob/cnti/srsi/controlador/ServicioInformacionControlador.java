@@ -52,7 +52,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	private HttpServletRequest servletRequest;
 	private Ente ente;
 	private Map session;
-	private ServicioInformacion servicio = new ServicioInformacion();
+	private static ServicioInformacion servicio = new ServicioInformacion();
 
 	public List<Sector> getSectores() {
 		return sectores;
