@@ -252,24 +252,18 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararDescripcionGeneral() {
-		sessionStack();
+		getSessionStack();
 		tab = DESCRIPCION_GENERAL;
-		System.out.println("Estoy en prepararDescripcionGeneral");
 		sectores = (List<Sector>) read(new Sector());
 		estados = (List<Estado>) read(new Estado());
 		areas = (List<Area>) read(new Area());
-		System.out.println("Servicio en Preparar Descripción General=> "
-				+ servicio.toString());
 		return SUCCESS;
 	}
 
 	@SkipValidation
 	public String prepararAspectosLegales() {
 		// TODO La tablita esa.
-		sessionStack();
-		System.out.println("Estoy en prepararAspectosLegales");
-		System.out.println("Servicio en Preparar Aspectos Legales => "
-				+ servicio.toString());
+		getSessionStack();
 		tab = ASPECTOS_LEGALES;
 		return SUCCESS;
 	}
@@ -277,9 +271,8 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararDescripcionTecnica() {
+		getSessionStack();
 		tab = DESCRIPCION_TECNICA;
-		System.out.println("Servicio en Preparar Descripción Técnica => "
-				+ servicio.toString());
 		niveles = (List<Seguridad>) read(new Seguridad());
 		arquitecturas = (List<Arquitectura>) read(new Arquitectura());
 		parents = (List<Intercambio>) getParents(new Intercambio());
@@ -289,14 +282,13 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 
 	@SkipValidation
 	public String prepararDescripcionSoporte() {
-		// TODO Falta.
+		getSessionStack();
 		tab = DESCRIPCION_SOPORTE;
 		return SUCCESS;
 	}
 
 	public String registrarDescripcionGeneral() {
-		sessionStack();
-		System.out.println("Estoy en registrarDescripcionGeneral");
+		setSessionStack();
 		setModificar(servicio != null);
 		System.out.println("SERVICIO => " + servicio.toString() + "\nMODI => "
 				+ isModificar());
@@ -305,16 +297,19 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	}
 
 	public String registrarAspectosLegales() {
+		setSessionStack();
 		// update(servicio, servicio.getId());
 		return SUCCESS;
 	}
 
 	public String registrarDescripcionTecnica() {
+		setSessionStack();
 		// update(servicio, servicio.getId());
 		return SUCCESS;
 	}
 
 	public String registrarDescripcionSoporte() {
+		setSessionStack();
 		// update(servicio, servicio.getId());
 		return SUCCESS;
 	}
@@ -385,13 +380,34 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	}
 
 	@SuppressWarnings("unchecked")
-	protected void sessionStack() {
+	private void setSessionStack() {
 		session = ActionContext.getContext().getSession();
 		session.put("servicio", servicio);
+		session.put("sector", sector);
+		session.put("area", area);
+		session.put("estado", estado);
+		session.put("seguridad", seguridad);
+		session.put("arquitectura", arquitectura);
+		session.put("intercambio", intercambio);
+		session.put("telefono", telefono);
+		session.put("correo", correo);
+	}
+
+	@SuppressWarnings("unchecked")
+	private void getSessionStack() {
+		session = ActionContext.getContext().getSession();
 		try {
 			servicio = (ServicioInformacion) session.get("servicio");
+			sector = (Long) session.get("sector");
+			area = (List<Long>) session.get("area");
+			estado = (Long) session.get("estado");
+			seguridad = (Long) session.get("seguridad");
+			arquitectura = (List<Long>) session.get("arquitectura");
+			intercambio = (Long) session.get("intercambio");
+			telefono = (String) session.get("telefono");
+			correo = (String) session.get("correo");
 		} catch (Exception e) {
-			System.out.println("FUCK");
+			// TODO Handling the exception?!
 		}
 	}
 }
