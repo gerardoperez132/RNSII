@@ -24,6 +24,7 @@ import ve.gob.cnti.srsi.modelo.UnionArquitecturaServicioInformacion;
 
 import com.opensymphony.xwork2.ActionContext;
 
+@SuppressWarnings("serial")
 public class ServicioInformacionControlador extends DAO implements Constants,
 		Tabs {
 	private List<Sector> sectores = new ArrayList<Sector>();
@@ -37,13 +38,14 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	private List<UnionAreaServicioInformacion> unionareas = new ArrayList<UnionAreaServicioInformacion>();
 	private List<UnionArquitecturaServicioInformacion> unionarquitecturas = new ArrayList<UnionArquitecturaServicioInformacion>();
 
+	private boolean modificar = false;
 	private int tab;
-	private long sector;
-	private long estado;
-	private List<Long> area = new ArrayList<Long>();
-	private long seguridad;
-	private List<Long> arquitectura = new ArrayList<Long>();
-	private long intercambio;
+	private static long sector;
+	private static long estado;
+	private static List<Long> area = new ArrayList<Long>();
+	private static long seguridad;
+	private static List<Long> arquitectura = new ArrayList<Long>();
+	private static long intercambio;
 	private String telefono;
 	private String correo;
 	private String codigo;
@@ -127,6 +129,14 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		this.unionarquitecturas = unionarquitecturas;
 	}
 
+	public boolean isModificar() {
+		return modificar;
+	}
+
+	public void setModificar(boolean modificar) {
+		this.modificar = modificar;
+	}
+
 	public int getTab() {
 		return tab;
 	}
@@ -140,7 +150,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	}
 
 	public void setSector(long sector) {
-		this.sector = sector;
+		ServicioInformacionControlador.sector = sector;
 	}
 
 	public long getEstado() {
@@ -148,7 +158,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	}
 
 	public void setEstado(long estado) {
-		this.estado = estado;
+		ServicioInformacionControlador.estado = estado;
 	}
 
 	public List<Long> getArea() {
@@ -156,7 +166,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	}
 
 	public void setArea(List<Long> area) {
-		this.area = area;
+		ServicioInformacionControlador.area = area;
 	}
 
 	public long getSeguridad() {
@@ -164,7 +174,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	}
 
 	public void setSeguridad(long seguridad) {
-		this.seguridad = seguridad;
+		ServicioInformacionControlador.seguridad = seguridad;
 	}
 
 	public List<Long> getArquitectura() {
@@ -172,7 +182,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	}
 
 	public void setArquitectura(List<Long> arquitectura) {
-		this.arquitectura = arquitectura;
+		ServicioInformacionControlador.arquitectura = arquitectura;
 	}
 
 	public long getIntercambio() {
@@ -180,7 +190,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	}
 
 	public void setIntercambio(long intercambio) {
-		this.intercambio = intercambio;
+		ServicioInformacionControlador.intercambio = intercambio;
 	}
 
 	public String getTelefono() {
@@ -220,7 +230,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	}
 
 	public void setServicio(ServicioInformacion servicio) {
-		this.servicio = servicio;
+		ServicioInformacionControlador.servicio = servicio;
 	}
 
 	public String getCodigo() {
@@ -239,6 +249,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		this.codigos = codigos;
 	}
 
+	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararDescripcionGeneral() {
 		tab = DESCRIPCION_GENERAL;
@@ -255,6 +266,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		return SUCCESS;
 	}
 
+	@SuppressWarnings("unchecked")
 	public String prepararDescripcionTecnica() {
 		tab = DESCRIPCION_TECNICA;
 		niveles = (List<Seguridad>) read(new Seguridad());
@@ -274,12 +286,11 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	public void validate() {
 		switch (tab) {
 		case DESCRIPCION_GENERAL:
-			System.out.println("Validando DESCRIPCION_GENERAL");
 			if (sector < 0)
 				addFieldError("sector", "Debe seleccionar un sector");
-			if (servicio.getNombre().isEmpty())
+			if (servicio.getNombre().trim().isEmpty())
 				addFieldError("servicio.nombre", "Debe introducir un nombre");
-			if (servicio.getDescripcion().isEmpty())
+			if (servicio.getDescripcion().trim().isEmpty())
 				addFieldError("servicio.descripcion",
 						"Debe introducir una descripción");
 			if (area.size() == 0)
@@ -294,10 +305,38 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			System.out.println("Validando ASPECTOS_LEGALES");
 			break;
 		case DESCRIPCION_TECNICA:
-			System.out.println("Validando DESCRIPCION_TECNICA");
+			if (seguridad < 0)
+				addFieldError("seguridad",
+						"Debe seleccionar un nivel de seguridad");
+			if (arquitectura.size() == 0)
+				addFieldError("arquitectura",
+						"Debe seleccionar un tipo de arquitectura");
+			if (servicio.getVersion().trim().isEmpty())
+				addFieldError("servicio.version", "Debe introducir la versión");
+			// TODO Se debe validar que la sesión esté conformada solamente por
+			// números y un solo punto. Además de que el formato sea con 0.X en
+			// caso de no introducir un primer caracter.
+			if (intercambio < 0)
+				addFieldError("intercambio",
+						"Debe seleccionar un tipo de intercambio");
+			prepararDescripcionTecnica();
 			break;
 		case DESCRIPCION_SOPORTE:
-			System.out.println("Validando DESCRIPCION_SOPORTE");
+			if (servicio.getResponsable().trim().isEmpty())
+				addFieldError("servicio.responsable",
+						"Debe introducir el nombre del responsable del servicio");
+			if (telefono.trim().isEmpty())
+				addFieldError("telefono",
+						"Debe introducir un número de teléfono");
+			if (!telefono.matches("\\d.*"))
+				addFieldError("telefono",
+						"El teléfono sólo puede estar conformado por números");
+			// TODO Se debe validar que el teléfono esté solamente conformado
+			// por números.
+			if (correo.trim().isEmpty())
+				addFieldError("correo", "Debe introducir un correo electrónico");
+			// TODO Se debe validar que el correo tenga un formato válido a
+			// través de una expresión regular u otro método.
 			break;
 		default:
 			break;
@@ -305,7 +344,9 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	}
 
 	public String registrarDescripcionGeneral() {
-		System.out.println("SERVICIO HASTA AHORA => " + servicio.toString());
+		setModificar(servicio != null);
+		System.out.println("SERVICIO => " + servicio.toString() + "\nMODI => "
+				+ isModificar());
 		// create(servicio);
 		return SUCCESS;
 	}
