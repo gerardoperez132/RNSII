@@ -1,5 +1,6 @@
 $(document).ready(function(){
-	/**Comprueba la fortaleza de las contraseñas mediante los siguientes criterios:
+	/***********************************************
+	 *  Comprueba la fortaleza de las contraseñas mediante los siguientes criterios:
 	 * 
 	 *  1 Contraseñas que contengan al menos una letra mayúscula.
 	 *	2 Contraseñas que contengan al menos una letra minúscula.
@@ -43,6 +44,11 @@ $(document).ready(function(){
 		 return true;  
 	});
 	
+	/*******************************************************
+	 * 
+	 * Validación de formulario de Modificar clave
+	 * 
+	 ******************************************************/
 	$("#modificar_clave").click(function (e){		  
 		var enoughRegex = new RegExp("(?=.{6,}).*", "g");
 		var error = false;
@@ -79,10 +85,66 @@ $(document).ready(function(){
         	$('#passequal').html('');
         }
         
-        if(error == false){
-        	//$("#modificar_clave").submit(); 
+        if(error == false){        	 
         	document.modificarClave.submit(); 
         }
     });
-	
+	/*******************************************************************
+	 * Validación de formulario de Modificar datos del usuario
+	 *******************************************************************/
+	$("#modificar_datos").click(function (e){
+		var error = false;
+		e.preventDefault();
+        
+		if( $("#nombre").val() == "" ){
+        	$('#nombre_required').html('Debe escribir su nombre completo'); 
+			$('#nombre_required').attr('class', 'error_pass');
+            error = true;
+        }else if($("#nombre").val().length < 4){
+        	$('#nombre_required').html('Su nombre debe poseer al menos 4 caracteres'); 
+			$('#nombre_required').attr('class', 'error_pass');
+            error = true;
+        }else{
+        	$('#nombre_required').html('');
+        }
+        
+        if( $("#apellido").val() == "" ){
+        	$('#apellido_required').html('Debe escribir su apellido completo'); 
+			$('#apellido_required').attr('class', 'error_pass');
+            error = true;
+        }else if($("#apellido").val().length < 4){
+        	$('#apellido_required').html('Su apellido debe poseer al menos 4 caracteres'); 
+			$('#apellido_required').attr('class', 'error_pass');
+            error = true;
+        }else{
+        	$('#apellido_required').html('');
+        }
+        
+        if( $("#cedula").val() == "" ){
+        	$('#cedula_required').html('Debe escribir su número de cédula.'); 
+			$('#cedula_required').attr('class', 'error_pass');
+            error = true;
+        }else if($.isNumeric($("#cedula").val()) == false){
+        	$('#cedula_required').html('Su cédula debe poseer solo números'); 
+			$('#cedula_required').attr('class', 'error_pass');
+            error = true;
+        }else if($.isNumeric($("#cedula").val()) == true){
+        	if($("#cedula").val() < 0){
+        		$('#cedula_required').html('Su número de cédula no es válido'); 
+    			$('#cedula_required').attr('class', 'error_pass');
+                error = true;
+        	}else if($("#cedula").val().length < 4 || $("#cedula").val().length > 9){
+        	$('#cedula_required').html('Su cédula debe poseer un mínimo 4 digitos y un máximo de 9 digitos'); 
+			$('#cedula_required').attr('class', 'error_pass');
+            error = true;
+        	}
+        } else{
+        	$('#cedula_required').html('');
+        }
+        
+        if(error == false){        	 
+        	document.modificarDatos.submit(); 
+        }
+		
+	});
 });

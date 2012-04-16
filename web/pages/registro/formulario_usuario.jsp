@@ -94,10 +94,69 @@
 					<tr>
 				</table>
 				</form>	
-			</s:if>						
+			</s:if>	
+								
+			
 			<s:elseif test="modificarDatos == true">
-				datos
+				<form action="modificarDatos" method="post" id="formModificarDatos" name="modificarDatos">
+				<table style="margin-top: 50px; margin-left: 20px;">
+					<tr>
+						<td colspan="4">							
+							<s:fielderror>
+								<s:param>datos</s:param>
+							</s:fielderror>
+						</td>						
+					<tr>
+					<tr>
+						<td colspan="4">							
+							<h5 class="requerido"><s:text name="usuario.modificar.requerido"/></h5>
+						</td>						
+					<tr>
+					<tr>
+						<td><s:text name="usuario.modificar.nombres"/></td>
+						<td><s:textfield name="usuario.nombre" id="nombre"/></td>
+						<td><h5 class="requerido">*</h5></td>
+						<td>
+							<span id="nombre_required"></span>
+							<s:fielderror>
+								<s:param>nombres</s:param>
+							</s:fielderror>
+						</td>
+					<tr>
+					<tr>
+						<td><s:text name="usuario.modificar.apellidos"/></td>
+						<td><s:textfield name="usuario.apellido" id="apellido" /></td>
+						<td><h5 class="requerido">*</h5></td>
+						<td>
+							<span id="apellido_required"></span>
+							<s:fielderror>
+								<s:param>apellidos</s:param>
+							</s:fielderror>						
+						</td>
+					<tr>
+					<tr>
+						<td><s:text name="usuario.modificar.cedula"/></td>
+						<td><s:textfield name="usuario.cedula" id="cedula" /></td>
+						<td><h5 class="requerido">*</h5></td>
+						<td>
+							<span id="cedula_required"></span>
+							<s:fielderror>
+								<s:param>cedula</s:param>
+							</s:fielderror>							
+						</td>
+					<tr>															
+					<tr>
+						<td colspan="4">
+							<s:token name="token" />
+							<s:hidden name="modificarDatos"></s:hidden>							
+							<input type="submit" id="modificar_datos" value="<s:text name="usuario.modificar.datos"></s:text>">
+						</td>						
+					<tr>
+				</table>
+				</form>		
 			</s:elseif>
+			
+			
 			<s:else>	
 				<span class="ok_pass"><s:actionmessage/></span>		
 				<table>
