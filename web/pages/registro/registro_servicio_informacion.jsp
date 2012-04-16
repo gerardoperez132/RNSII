@@ -60,7 +60,7 @@
 							<s:url id="prepararFormulario" action="prepararAspectosLegales" />
 							<li><s:a href="%{prepararFormulario}">
 									<s:text name="tab2.title"></s:text>
-								</s:a> </a></li>
+								</s:a></li>
 						</s:else>
 						<s:if test="%{tab==3}">
 							<li class="active"><a href="#tab3"><s:text
