@@ -40,21 +40,21 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 
 	private boolean modificar = false;
 	private int tab;
-	private static long sector;
-	private static long estado;
-	private static List<Long> area = new ArrayList<Long>();
-	private static long seguridad;
-	private static List<Long> arquitectura = new ArrayList<Long>();
-	private static long intercambio;
-	private static String telefono;
-	private static String correo;
-	private static String codigo;
+	private long sector;
+	private long estado;
+	private List<Long> area = new ArrayList<Long>();
+	private long seguridad;
+	private List<Long> arquitectura = new ArrayList<Long>();
+	private long intercambio;
+	private String telefono;
+	private String correo;
+	private String codigo;
 	private String codigos[] = COD;
 
 	private HttpServletRequest servletRequest;
 	private Ente ente;
 	private Map session;
-	private static ServicioInformacion servicio = new ServicioInformacion();
+	private ServicioInformacion servicio = new ServicioInformacion();
 
 	public List<Sector> getSectores() {
 		return sectores;
@@ -150,7 +150,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	}
 
 	public void setSector(long sector) {
-		ServicioInformacionControlador.sector = sector;
+		this.sector = sector;
 	}
 
 	public long getEstado() {
@@ -158,7 +158,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	}
 
 	public void setEstado(long estado) {
-		ServicioInformacionControlador.estado = estado;
+		this.estado = estado;
 	}
 
 	public List<Long> getArea() {
@@ -166,7 +166,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	}
 
 	public void setArea(List<Long> area) {
-		ServicioInformacionControlador.area = area;
+		this.area = area;
 	}
 
 	public long getSeguridad() {
@@ -174,7 +174,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	}
 
 	public void setSeguridad(long seguridad) {
-		ServicioInformacionControlador.seguridad = seguridad;
+		this.seguridad = seguridad;
 	}
 
 	public List<Long> getArquitectura() {
@@ -182,7 +182,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	}
 
 	public void setArquitectura(List<Long> arquitectura) {
-		ServicioInformacionControlador.arquitectura = arquitectura;
+		this.arquitectura = arquitectura;
 	}
 
 	public long getIntercambio() {
@@ -190,7 +190,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	}
 
 	public void setIntercambio(long intercambio) {
-		ServicioInformacionControlador.intercambio = intercambio;
+		this.intercambio = intercambio;
 	}
 
 	public String getTelefono() {
@@ -198,7 +198,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	}
 
 	public void setTelefono(String telefono) {
-		ServicioInformacionControlador.telefono = telefono;
+		this.telefono = telefono;
 	}
 
 	public String getCorreo() {
@@ -206,7 +206,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	}
 
 	public void setCorreo(String correo) {
-		ServicioInformacionControlador.correo = correo;
+		this.correo = correo;
 	}
 
 	public HttpServletRequest getServletRequest() {
@@ -230,7 +230,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	}
 
 	public void setServicio(ServicioInformacion servicio) {
-		ServicioInformacionControlador.servicio = servicio;
+		this.servicio = servicio;
 	}
 
 	public String getCodigo() {
@@ -238,7 +238,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	}
 
 	public void setCodigo(String codigo) {
-		ServicioInformacionControlador.codigo = codigo;
+		this.codigo = codigo;
 	}
 
 	public String[] getCodigos() {
@@ -252,23 +252,34 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararDescripcionGeneral() {
+		sessionStack();
 		tab = DESCRIPCION_GENERAL;
+		System.out.println("Estoy en prepararDescripcionGeneral");
 		sectores = (List<Sector>) read(new Sector());
 		estados = (List<Estado>) read(new Estado());
 		areas = (List<Area>) read(new Area());
-		session = ActionContext.getContext().getSession();
+		System.out.println("Servicio en Preparar Descripción General=> "
+				+ servicio.toString());
 		return SUCCESS;
 	}
 
+	@SkipValidation
 	public String prepararAspectosLegales() {
 		// TODO La tablita esa.
+		sessionStack();
+		System.out.println("Estoy en prepararAspectosLegales");
+		System.out.println("Servicio en Preparar Aspectos Legales => "
+				+ servicio.toString());
 		tab = ASPECTOS_LEGALES;
 		return SUCCESS;
 	}
 
 	@SuppressWarnings("unchecked")
+	@SkipValidation
 	public String prepararDescripcionTecnica() {
 		tab = DESCRIPCION_TECNICA;
+		System.out.println("Servicio en Preparar Descripción Técnica => "
+				+ servicio.toString());
 		niveles = (List<Seguridad>) read(new Seguridad());
 		arquitecturas = (List<Arquitectura>) read(new Arquitectura());
 		parents = (List<Intercambio>) getParents(new Intercambio());
@@ -276,9 +287,35 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		return SUCCESS;
 	}
 
+	@SkipValidation
 	public String prepararDescripcionSoporte() {
-		// TODO Descripción de Soporte.
+		// TODO Falta.
 		tab = DESCRIPCION_SOPORTE;
+		return SUCCESS;
+	}
+
+	public String registrarDescripcionGeneral() {
+		sessionStack();
+		System.out.println("Estoy en registrarDescripcionGeneral");
+		setModificar(servicio != null);
+		System.out.println("SERVICIO => " + servicio.toString() + "\nMODI => "
+				+ isModificar());
+		// create(servicio);
+		return SUCCESS;
+	}
+
+	public String registrarAspectosLegales() {
+		// update(servicio, servicio.getId());
+		return SUCCESS;
+	}
+
+	public String registrarDescripcionTecnica() {
+		// update(servicio, servicio.getId());
+		return SUCCESS;
+	}
+
+	public String registrarDescripcionSoporte() {
+		// update(servicio, servicio.getId());
 		return SUCCESS;
 	}
 
@@ -299,6 +336,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			if (estado < 0)
 				addFieldError("estado",
 						"Debe seleccionar el estado del servicio");
+			System.out.println("Estoy en el validate()");
 			prepararDescripcionGeneral();
 			break;
 		case ASPECTOS_LEGALES:
@@ -346,26 +384,14 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		}
 	}
 
-	public String registrarDescripcionGeneral() {
-		setModificar(servicio != null);
-		System.out.println("SERVICIO => " + servicio.toString() + "\nMODI => "
-				+ isModificar());
-		// create(servicio);
-		return SUCCESS;
-	}
-
-	public String registrarAspectosLegales() {
-		// update(servicio, servicio.getId());
-		return SUCCESS;
-	}
-
-	public String registrarDescripcionTecnica() {
-		// update(servicio, servicio.getId());
-		return SUCCESS;
-	}
-
-	public String registrarDescripcionSoporte() {
-		// update(servicio, servicio.getId());
-		return SUCCESS;
+	@SuppressWarnings("unchecked")
+	protected void sessionStack() {
+		session = ActionContext.getContext().getSession();
+		session.put("servicio", servicio);
+		try {
+			servicio = (ServicioInformacion) session.get("servicio");
+		} catch (Exception e) {
+			System.out.println("FUCK");
+		}
 	}
 }
