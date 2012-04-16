@@ -46,9 +46,9 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	private static long seguridad;
 	private static List<Long> arquitectura = new ArrayList<Long>();
 	private static long intercambio;
-	private String telefono;
-	private String correo;
-	private String codigo;
+	private static String telefono;
+	private static String correo;
+	private static String codigo;
 	private String codigos[] = COD;
 
 	private HttpServletRequest servletRequest;
@@ -198,7 +198,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	}
 
 	public void setTelefono(String telefono) {
-		this.telefono = telefono;
+		ServicioInformacionControlador.telefono = telefono;
 	}
 
 	public String getCorreo() {
@@ -206,7 +206,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	}
 
 	public void setCorreo(String correo) {
-		this.correo = correo;
+		ServicioInformacionControlador.correo = correo;
 	}
 
 	public HttpServletRequest getServletRequest() {
@@ -238,7 +238,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	}
 
 	public void setCodigo(String codigo) {
-		this.codigo = codigo;
+		ServicioInformacionControlador.codigo = codigo;
 	}
 
 	public String[] getCodigos() {
@@ -328,7 +328,10 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			if (telefono.trim().isEmpty())
 				addFieldError("telefono",
 						"Debe introducir un número de teléfono");
-			if (!telefono.matches("\\d.*"))
+			if (telefono.length() > 0 && telefono.length() < 7)
+				addFieldError("telefono",
+						"Debe introducir un número telefónico válido de 7 dígitos");
+			if (!telefono.matches("\\d.*") && !telefono.trim().isEmpty())
 				addFieldError("telefono",
 						"El teléfono sólo puede estar conformado por números");
 			// TODO Se debe validar que el teléfono esté solamente conformado
