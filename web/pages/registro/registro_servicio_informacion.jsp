@@ -13,9 +13,8 @@
 <script type="text/javascript" src="res/js/tabs.js"></script>
 <s:set name="submit" value="%{getText('guardar')}" />
 <s:set name="title" value="%{getText('registro.title')}" />
-<s:url id="prepararFormulario" action="prepararDescripcionGeneral"></s:url>
 <s:if test="tab==1">
-	<s:set name="action" value="%{'registrarDescripcionGeneral'}" />	
+	<s:set name="action" value="%{'registrarDescripcionGeneral'}" />
 </s:if>
 <s:if test="tab==2">
 	<s:set name="action" value="%{'registrarAspectosLegales'}" />
@@ -26,8 +25,7 @@
 <s:if test="tab==4">
 	<s:set name="action" value="%{'registrarDescripcionSoporte'}" />
 </s:if>
-<title><s:text name="title"></s:text>
-</title>
+<title><s:text name="title"></s:text></title>
 	</head>
 	<body>
 		<!-- Este es el div de la sombra del contenedor del maquetado de la página -->
@@ -44,39 +42,47 @@
 					<hr>
 					<ul class="tabs">
 						<s:if test="%{tab==1}">
-
 							<li class="active"><a href="#tab1"><s:text
 										name="tab1.title"></s:text> </a></li>
 						</s:if>
 						<s:else>
-							<li><s:a href="%{prepararFormulario}"><s:text
-										name="tab1.title"></s:text> </s:a></li>
+							<s:url id="prepararFormulario"
+								action="prepararDescripcionGeneral" />
+							<li><s:a href="%{prepararFormulario}">
+									<s:text name="tab1.title"></s:text>
+								</s:a></li>
 						</s:else>
 						<s:if test="%{tab==2}">
 							<li class="active"><a href="#tab2"><s:text
-										name="tab2.title"></s:text> </a>
-							</li>
+										name="tab2.title"></s:text> </a></li>
 						</s:if>
 						<s:else>
-							<li><a href="#tab2"><s:text name="tab2.title"></s:text>
-							</a>
-							</li>
+							<s:url id="prepararFormulario" action="prepararAspectosLegales" />
+							<li><s:a href="%{prepararFormulario}">
+									<s:text name="tab2.title"></s:text>
+								</s:a> </a></li>
 						</s:else>
 						<s:if test="%{tab==3}">
 							<li class="active"><a href="#tab3"><s:text
 										name="tab3.title"></s:text> </a></li>
 						</s:if>
 						<s:else>
-							<li><a href="#tab3"><s:text name="tab3.title"></s:text>
-							</a></li>
+							<s:url id="prepararFormulario"
+								action="prepararDescripcionTecnica" />
+							<li><s:a href="%{prepararFormulario}">
+									<s:text name="tab3.title"></s:text>
+								</s:a></li>
 						</s:else>
 						<s:if test="%{tab==4}">
 							<li class="active"><a href="#tab4"><s:text
 										name="tab4.title"></s:text> </a></li>
 						</s:if>
 						<s:else>
-							<li><a href="#tab4"><s:text name="tab4.title"></s:text>
-							</a></li>
+							<s:url id="prepararFormulario"
+								action="prepararDescripcionSoporte" />
+							<li><s:a href="%{prepararFormulario}">
+									<s:text name="tab4.title"></s:text>
+								</s:a></li>
 						</s:else>
 					</ul>
 					<div class="tab_container">
