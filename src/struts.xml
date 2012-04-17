@@ -16,6 +16,7 @@
 				<interceptor-ref name="validation" />
 				<interceptor-ref name="workflow" />
 				<interceptor-ref name="token" />
+				<interceptor-ref name="fileUpload" />
 				<interceptor-ref name="basicStack" />
 			</interceptor-stack>
 		</interceptors>
