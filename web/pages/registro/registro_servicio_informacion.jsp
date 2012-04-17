@@ -151,9 +151,33 @@
 									</p>
 									<small><s:text name="tab2.description"></s:text> </small>
 									<hr>
+									<h5 class="formulario">
+										<s:text name="documento.name"></s:text>
+									</h5>
+									<s:fielderror>
+										<s:param>name</s:param>
+									</s:fielderror>
+									<s:textfield name="name" />
+									<h5 class="formulario">
+										<s:text name="documento.file"></s:text>
+									</h5>
+									<s:fielderror>
+										<s:param>file</s:param>
+									</s:fielderror>
+									<s:file name="file" />
 									<s:token name="token" />
 									<s:hidden name="tab" value="2"></s:hidden>
 									<input type="submit" value='<s:property value="#submit"/>' />
+									<s:if test="files.size() > 0">
+										<table>
+											<s:iterator var="files">
+												<tr>
+													<td><s:property value="name" /></td>
+													<td><s:property value="fileName" /></td>
+												</tr>
+											</s:iterator>
+										</table>
+									</s:if>
 								</form>
 							</div>
 						</s:if>
