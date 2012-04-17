@@ -1,5 +1,6 @@
 package ve.gob.cnti.srsi.controlador;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -55,6 +56,11 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	private Ente ente;
 	private Map session;
 	private ServicioInformacion servicio = new ServicioInformacion();
+
+	private File file;
+	private String fileContentType;
+	private String fileFileName;
+	private String name;
 
 	public List<Sector> getSectores() {
 		return sectores;
@@ -249,6 +255,46 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		this.codigos = codigos;
 	}
 
+	public Map getSession() {
+		return session;
+	}
+
+	public void setSession(Map session) {
+		this.session = session;
+	}
+
+	public File getFile() {
+		return file;
+	}
+
+	public void setFile(File file) {
+		this.file = file;
+	}
+
+	public String getFileContentType() {
+		return fileContentType;
+	}
+
+	public void setFileContentType(String fileContentType) {
+		this.fileContentType = fileContentType;
+	}
+
+	public String getFileFileName() {
+		return fileFileName;
+	}
+
+	public void setFileFileName(String fileFileName) {
+		this.fileFileName = fileFileName;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararDescripcionGeneral() {
@@ -298,6 +344,10 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 
 	public String registrarAspectosLegales() {
 		setSessionStack();
+		System.out.println("File => " + file);
+		System.out.println("Name => " + name);
+		System.out.println("FileName => " + fileFileName);
+		System.out.println("ContentType => " + fileContentType);
 		// update(servicio, servicio.getId());
 		return SUCCESS;
 	}
@@ -335,7 +385,11 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			prepararDescripcionGeneral();
 			break;
 		case ASPECTOS_LEGALES:
-			System.out.println("Validando ASPECTOS_LEGALES");
+			if (name.trim().isEmpty() && file != null) {
+				addFieldError("name",
+						"Si va a subir un archivo debe introducir un nombre");
+				addFieldError("file", "Suba nuevamente el archivo");
+			}
 			break;
 		case DESCRIPCION_TECNICA:
 			if (seguridad < 0)
