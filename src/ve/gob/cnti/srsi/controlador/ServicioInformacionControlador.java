@@ -385,6 +385,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			prepararDescripcionGeneral();
 			break;
 		case ASPECTOS_LEGALES:
+			// TODO Esta validación parece no estar funcionando.
 			if (name.trim().isEmpty() && file != null) {
 				addFieldError("name",
 						"Si va a subir un archivo debe introducir un nombre");
