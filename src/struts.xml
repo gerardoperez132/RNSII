@@ -50,7 +50,7 @@
 		<action name="registrarAspectosLegales" method="registrarAspectosLegales"
 			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
 			<interceptor-ref name="doubleSubmit" />
-			<result name="success" type="redirectAction">prepararDescripcionTecnica
+			<result name="success">registro/registro_servicio_informacion.jsp
 			</result>
 			<result name="invalid.token">registro/registro_servicio_informacion.jsp
 			</result>
