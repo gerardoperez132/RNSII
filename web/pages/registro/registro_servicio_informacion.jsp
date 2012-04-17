@@ -168,17 +168,19 @@
 									<s:token name="token" />
 									<s:hidden name="tab" value="2"></s:hidden>
 									<input type="submit" value='<s:property value="#submit"/>' />
-									<s:if test="files.size() > 0">
-										<table>
-											<s:iterator var="files">
-												<tr>
-													<td><s:property value="name" /></td>
-													<td><s:property value="fileName" /></td>
-												</tr>
-											</s:iterator>
-										</table>
-									</s:if>
 								</form>
+								<s:if test="files.size() > 0">
+									<table>
+										<s:iterator var="files">
+											<tr>
+												<td><s:property value="name" />
+												</td>
+												<td><s:property value="fileName" />
+												</td>
+											</tr>
+										</s:iterator>
+									</table>
+								</s:if>
 							</div>
 						</s:if>
 						<!-- END TAB 2 -->
