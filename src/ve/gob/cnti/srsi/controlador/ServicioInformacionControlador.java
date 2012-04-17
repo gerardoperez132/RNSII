@@ -1,12 +1,15 @@
 package ve.gob.cnti.srsi.controlador;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
 import ve.gob.cnti.srsi.dao.Constants;
@@ -14,6 +17,7 @@ import ve.gob.cnti.srsi.dao.Constants.Tabs;
 import ve.gob.cnti.srsi.dao.DAO;
 import ve.gob.cnti.srsi.modelo.Area;
 import ve.gob.cnti.srsi.modelo.Arquitectura;
+import ve.gob.cnti.srsi.modelo.AspectoLegal;
 import ve.gob.cnti.srsi.modelo.Ente;
 import ve.gob.cnti.srsi.modelo.Estado;
 import ve.gob.cnti.srsi.modelo.Intercambio;
@@ -27,7 +31,7 @@ import com.opensymphony.xwork2.ActionContext;
 
 @SuppressWarnings("serial")
 public class ServicioInformacionControlador extends DAO implements Constants,
-		Tabs {
+		ServletRequestAware, Tabs {
 	private List<Sector> sectores = new ArrayList<Sector>();
 	private List<Estado> estados = new ArrayList<Estado>();
 	private List<Area> areas = new ArrayList<Area>();
@@ -39,7 +43,8 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	private List<UnionAreaServicioInformacion> unionareas = new ArrayList<UnionAreaServicioInformacion>();
 	private List<UnionArquitecturaServicioInformacion> unionarquitecturas = new ArrayList<UnionArquitecturaServicioInformacion>();
 
-	private boolean modificar = false;
+	private boolean modificar;
+	private long id_servicio_informacion;
 	private int tab;
 	private long sector;
 	private long estado;
@@ -57,6 +62,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	private Map session;
 	private ServicioInformacion servicio = new ServicioInformacion();
 
+	private List<Archivo> files;
 	private File file;
 	private String fileContentType;
 	private String fileFileName;
@@ -215,6 +221,14 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		this.correo = correo;
 	}
 
+	public long getId_servicio_informacion() {
+		return id_servicio_informacion;
+	}
+
+	public void setId_servicio_informacion(long id_servicio_informacion) {
+		this.id_servicio_informacion = id_servicio_informacion;
+	}
+
 	public HttpServletRequest getServletRequest() {
 		return servletRequest;
 	}
@@ -261,6 +275,14 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 
 	public void setSession(Map session) {
 		this.session = session;
+	}
+
+	public List<Archivo> getFiles() {
+		return files;
+	}
+
+	public void setFiles(List<Archivo> files) {
+		this.files = files;
 	}
 
 	public File getFile() {
@@ -335,21 +357,49 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 
 	public String registrarDescripcionGeneral() {
 		setSessionStack();
-		setModificar(servicio != null);
-		System.out.println("SERVICIO => " + servicio.toString() + "\nMODI => "
-				+ isModificar());
-		// create(servicio);
+		System.out.println("ID => " + id_servicio_informacion);
+		if (id_servicio_informacion == 0) {
+			servicio.setId_ente(1);
+			servicio.setId_estado(estado);
+			servicio.setId_intercambio(intercambio);
+			servicio.setId_sector(sector);
+			servicio.setId_seguridad(seguridad);
+			servicio.setId_usuario(1);
+			create(servicio);
+			id_servicio_informacion = getNextId(servicio) - 1;
+			System.out.println("ID => " + id_servicio_informacion);
+		}
 		return SUCCESS;
 	}
 
-	public String registrarAspectosLegales() {
+	public String registrarAspectosLegales() throws IOException {
 		setSessionStack();
 		System.out.println("File => " + file);
 		System.out.println("Name => " + name);
 		System.out.println("FileName => " + fileFileName);
 		System.out.println("ContentType => " + fileContentType);
+		Archivo archivo = new Archivo();
+		archivo.setFile(file);
+		archivo.setName(name);
+		archivo.setFileFileName(fileFileName);
+		archivo.setFileContentType(fileContentType);
+		// files.add(archivo);
+		AspectoLegal documento = new AspectoLegal();
+		documento.setId_servicio_informacion(id_servicio_informacion);
+		documento.setNombre(name);
+		documento.setUrl(saveFile());
+		create(documento);
 		// update(servicio, servicio.getId());
 		return SUCCESS;
+	}
+
+	private String saveFile() throws IOException {
+		session = ActionContext.getContext().getSession();
+		String siglas = (String) session.get("siglas");
+		String path = servletRequest.getSession().getServletContext()
+				.getRealPath("/archivos/" + siglas + "/");
+		FileUtils.copyFile(file, new File(path, fileFileName));
+		return "/archivos/" + siglas + "/" + fileFileName;
 	}
 
 	public String registrarDescripcionTecnica() {
@@ -381,22 +431,21 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			if (estado < 0)
 				addFieldError("estado",
 						"Debe seleccionar el estado del servicio");
-			System.out.println("Estoy en el validate()");
 			prepararDescripcionGeneral();
 			break;
 		case ASPECTOS_LEGALES:
 			// TODO Esta validación parece no estar funcionando.
-			if (name.trim().isEmpty() && file != null) {
-				addFieldError("name",
-						"Si va a subir un archivo debe introducir un nombre");
-				addFieldError("file", "Suba nuevamente el archivo");
-			}
-			if (!name.trim().isEmpty() && file == null) {
-				addFieldError("name",
-						"Si va a colocar un nombre debe subir un archivo");
-				addFieldError("file",
-						"Por favor seleccione un archivo para subir");
-			}
+			// if (name.trim().isEmpty() && file != null) {
+			// addFieldError("name",
+			// "Si va a subir un archivo debe introducir un nombre");
+			// addFieldError("file", "Suba nuevamente el archivo");
+			// }
+			// if (!name.trim().isEmpty() && file == null) {
+			// addFieldError("name",
+			// "Si va a colocar un nombre debe subir un archivo");
+			// addFieldError("file",
+			// "Por favor seleccione un archivo para subir");
+			// }
 			break;
 		case DESCRIPCION_TECNICA:
 			if (seguridad < 0)
