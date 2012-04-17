@@ -25,7 +25,7 @@ import javax.persistence.Table;
 
 /**
  * Tabla que manejara los formato de los distintos tipo de datos
- * {@link String}, {@link Integer}, Compuestos, entre otros.
+ * {@link Date}, {@link Integer},  entre otros.
  * 
  * @author Joaquín Pereira
  * 
