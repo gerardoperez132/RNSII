@@ -21,6 +21,7 @@
 		<mapping class="ve.gob.cnti.srsi.modelo.Ente" />
 		<mapping class="ve.gob.cnti.srsi.modelo.EntradaSalida" />
 		<mapping class="ve.gob.cnti.srsi.modelo.Estado" />
+		<mapping class="ve.gob.cnti.srsi.modelo.Formato" />
 		<mapping class="ve.gob.cnti.srsi.modelo.Funcionalidad" />
 		<mapping class="ve.gob.cnti.srsi.modelo.Intercambio" />
 		<mapping class="ve.gob.cnti.srsi.modelo.Rol" />
