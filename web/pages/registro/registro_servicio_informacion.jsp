@@ -11,8 +11,14 @@
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
 <link rel="stylesheet" type="text/css" href="res/css/menu_vertical.css">
 <script type="text/javascript" src="res/js/tabs.js"></script>
-<s:set name="submit" value="%{getText('guardar')}" />
-<s:set name="title" value="%{getText('registro.title')}" />
+<s:if test="modificar">
+	<s:set name="submit" value="%{getText('actualizar')}" />
+	<s:set name="title" value="%{getText('actualizar.title')}" />
+</s:if>
+<s:else>
+	<s:set name="submit" value="%{getText('guardar')}" />
+	<s:set name="title" value="%{getText('registro.title')}" />
+</s:else>
 <s:if test="tab==1">
 	<s:set name="action" value="%{'registrarDescripcionGeneral'}" />
 </s:if>
@@ -136,7 +142,9 @@
 										listValue="nombre" headerKey="-1"
 										headerValue="%{getText('estado.select')}"></s:select>
 									<s:token name="token" />
-									<s:hidden name="tab" value="1"></s:hidden>
+									<s:hidden name="tab" value="1" />
+									<s:hidden name="id_servicio_informacion"
+										value="%{id_servicio_informacion}" />
 									<input type="submit" value='<s:property value="#submit"/>' />
 								</form>
 							</div>
@@ -166,7 +174,9 @@
 									</s:fielderror>
 									<s:file name="file" />
 									<s:token name="token" />
-									<s:hidden name="tab" value="2"></s:hidden>
+									<s:hidden name="tab" value="2" />
+									<s:hidden name="id_servicio_informacion"
+										value="%{id_servicio_informacion}" />
 									<input type="submit" value='<s:property value="#submit"/>' />
 								</form>
 								<s:if test="files.size() > 0">
@@ -251,7 +261,9 @@
 										</s:iterator>
 									</select>
 									<s:token name="token" />
-									<s:hidden name="tab" value="3"></s:hidden>
+									<s:hidden name="tab" value="3" />
+									<s:hidden name="id_servicio_informacion"
+										value="%{id_servicio_informacion}" />
 									<input type="submit" value='<s:property value="#submit"/>' />
 								</form>
 							</div>
@@ -297,7 +309,9 @@
 									</s:fielderror>
 									<s:textfield name="correo"></s:textfield>
 									<s:token name="token" />
-									<s:hidden name="tab" value="4"></s:hidden>
+									<s:hidden name="tab" value="4" />
+									<s:hidden name="id_servicio_informacion"
+										value="%{id_servicio_informacion}" />
 									<input type="submit" value='<s:property value="#submit"/>' />
 								</form>
 							</div>
