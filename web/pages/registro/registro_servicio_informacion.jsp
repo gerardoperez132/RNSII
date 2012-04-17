@@ -39,8 +39,21 @@
 				</div>
 				<!-- Este es el div de contenidos -->
 				<div id="content">
+					<s:if test="modificar!=true">
 					<small><s:text name="title" /> / <strong>Paso 1:</strong>
-						/ Paso 2 / Paso 3</small>
+						/ Paso 2</small>
+					</s:if>
+					<s:else>
+
+						<form action="prepararFuncionalidades" method="post">
+							<s:hidden name="id_servicio_informacion"></s:hidden>
+							<small><s:text name="title" /> <strong> Paso 1: </strong> / 
+							<input type="submit" value='Paso 2' 
+							style="background: none; border: none; font-size: small; color: blue; font-style: italic; padding: 0;"/>
+							</small>
+						</form>
+						
+					</s:else>
 					<h3>
 						<s:text name="title"></s:text>
 					</h3>

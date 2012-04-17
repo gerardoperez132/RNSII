@@ -49,7 +49,15 @@
 				</div>
 				<!-- Este es el div de contenidos -->
 				<div id="content">
-					<small>Registro de Servicio de Información / Paso 1: / <strong>Paso 2</strong> / Paso 3</small>
+					 
+					<form action="prepararModificarServicioInformacion" method="POST">													
+						<s:hidden name="id_servicio_informacion" value="%{servicio.id_servicio_informacion}"></s:hidden>
+						<small>Registro de Servicio de Información / 													
+						<input type="submit" value='Paso 1' 
+							style="background: none; border: none; font-size: small; color: blue; font-style: italic; padding: 0;"/>
+						/ <strong>Paso 2</strong></small>
+					</form>		
+					
 					<h4>
 						<s:text name="registro.title" />
 					</h4>
@@ -115,8 +123,7 @@
 														<form action="prepararFuncionalidad" method="POST">
 															<s:hidden name="id_funcionalidad"
 																value="%{id_funcionalidad}"></s:hidden>
-															<s:hidden name="id_servicio_informacion"></s:hidden>
-															<s:hidden name="modificar" value="%{true}"></s:hidden>
+															<s:hidden name="id_servicio_informacion"></s:hidden>															
 															<input type="submit" value="<s:text name="modificar"/>"
 																style="font-size: 0.9em;" />
 														</form>
