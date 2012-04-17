@@ -63,10 +63,21 @@ public interface Constants {
 		public static final int SIMPLE = 1;
 	}
 
+	/**
+	 * Interfaz con los tipos de pestañas en la vista para el registro de un
+	 * servicio de información.
+	 * 
+	 * @author Richard Ricciardelli
+	 * 
+	 */
 	public interface Tabs {
+		/** Pestaña de descripción general. */
 		public static final int DESCRIPCION_GENERAL = 1;
+		/** Pestaña de aspectos legales. */
 		public static final int ASPECTOS_LEGALES = 2;
+		/** Pestaña de descripción técnica. */
 		public static final int DESCRIPCION_TECNICA = 3;
+		/** Pestaña de descripción de soporte. */
 		public static final int DESCRIPCION_SOPORTE = 4;
 	}
 
