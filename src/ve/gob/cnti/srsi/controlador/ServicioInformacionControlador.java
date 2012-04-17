@@ -390,6 +390,12 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 						"Si va a subir un archivo debe introducir un nombre");
 				addFieldError("file", "Suba nuevamente el archivo");
 			}
+			if (!name.trim().isEmpty() && file == null) {
+				addFieldError("name",
+						"Si va a colocar un nombre debe subir un archivo");
+				addFieldError("file",
+						"Por favor seleccione un archivo para subir");
+			}
 			break;
 		case DESCRIPCION_TECNICA:
 			if (seguridad < 0)
