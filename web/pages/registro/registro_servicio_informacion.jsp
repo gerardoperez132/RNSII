@@ -52,8 +52,10 @@
 										name="tab1.title"></s:text> </a></li>
 						</s:if>
 						<s:else>
-							<s:url id="prepararFormulario"
-								action="prepararDescripcionGeneral" />
+							<s:if test="nuevo==false">
+								<s:url id="prepararFormulario"
+									action="prepararDescripcionGeneral" />
+							</s:if>
 							<li><s:a href="%{prepararFormulario}">
 									<s:text name="tab1.title"></s:text>
 								</s:a></li>
@@ -63,7 +65,9 @@
 										name="tab2.title"></s:text> </a></li>
 						</s:if>
 						<s:else>
-							<s:url id="prepararFormulario" action="prepararAspectosLegales" />
+							<s:if test="!nuevo">
+								<s:url id="prepararFormulario" action="prepararAspectosLegales" />
+							</s:if>
 							<li><s:a href="%{prepararFormulario}">
 									<s:text name="tab2.title"></s:text>
 								</s:a></li>
@@ -73,8 +77,10 @@
 										name="tab3.title"></s:text> </a></li>
 						</s:if>
 						<s:else>
-							<s:url id="prepararFormulario"
-								action="prepararDescripcionTecnica" />
+							<s:if test="!nuevo">
+								<s:url id="prepararFormulario"
+									action="prepararDescripcionTecnica" />
+							</s:if>
 							<li><s:a href="%{prepararFormulario}">
 									<s:text name="tab3.title"></s:text>
 								</s:a></li>
@@ -84,11 +90,14 @@
 										name="tab4.title"></s:text> </a></li>
 						</s:if>
 						<s:else>
-							<s:url id="prepararFormulario"
-								action="prepararDescripcionSoporte" />
+							<s:if test="!nuevo">
+								<s:url id="prepararFormulario"
+									action="prepararDescripcionSoporte" />
+							</s:if>
 							<li><s:a href="%{prepararFormulario}">
 									<s:text name="tab4.title"></s:text>
 								</s:a></li>
+
 						</s:else>
 					</ul>
 					<div class="tab_container">
@@ -185,7 +194,7 @@
 											<tr>
 												<td><s:property value="name" />
 												</td>
-												<td><s:property value="fileName" />
+												<td><s:property value="fileFileName" />
 												</td>
 											</tr>
 										</s:iterator>

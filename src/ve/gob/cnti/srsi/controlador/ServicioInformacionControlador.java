@@ -13,6 +13,7 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
 import ve.gob.cnti.srsi.dao.Constants;
+import ve.gob.cnti.srsi.dao.Constants.Modelos;
 import ve.gob.cnti.srsi.dao.Constants.Tabs;
 import ve.gob.cnti.srsi.dao.DAO;
 import ve.gob.cnti.srsi.modelo.Area;
@@ -26,12 +27,13 @@ import ve.gob.cnti.srsi.modelo.Seguridad;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.UnionAreaServicioInformacion;
 import ve.gob.cnti.srsi.modelo.UnionArquitecturaServicioInformacion;
+import ve.gob.cnti.srsi.modelo.Usuario;
 
 import com.opensymphony.xwork2.ActionContext;
 
 @SuppressWarnings("serial")
 public class ServicioInformacionControlador extends DAO implements Constants,
-		ServletRequestAware, Tabs {
+		ServletRequestAware, Tabs, Modelos {
 	private List<Sector> sectores = new ArrayList<Sector>();
 	private List<Estado> estados = new ArrayList<Estado>();
 	private List<Area> areas = new ArrayList<Area>();
@@ -44,6 +46,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	private List<UnionArquitecturaServicioInformacion> unionarquitecturas = new ArrayList<UnionArquitecturaServicioInformacion>();
 
 	private boolean modificar;
+	private boolean nuevo;
 	private long id_servicio_informacion;
 	private int tab;
 	private long sector;
@@ -62,7 +65,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	private Map session;
 	private ServicioInformacion servicio = new ServicioInformacion();
 
-	private List<Archivo> files;
+	private List<AspectoLegal> files = new ArrayList<AspectoLegal>();
 	private File file;
 	private String fileContentType;
 	private String fileFileName;
@@ -277,11 +280,11 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		this.session = session;
 	}
 
-	public List<Archivo> getFiles() {
+	public List<AspectoLegal> getFiles() {
 		return files;
 	}
 
-	public void setFiles(List<Archivo> files) {
+	public void setFiles(List<AspectoLegal> files) {
 		this.files = files;
 	}
 
@@ -317,10 +320,22 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		this.name = name;
 	}
 
+	public boolean isNuevo() {
+		return nuevo;
+	}
+
+	public void setNuevo(boolean nuevo) {
+		this.nuevo = nuevo;
+	}
+
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararDescripcionGeneral() {
 		getSessionStack();
+		if (servicio == null)
+			setNuevo(true);
+		else
+			setNuevo(false);
 		tab = DESCRIPCION_GENERAL;
 		sectores = (List<Sector>) read(new Sector());
 		estados = (List<Estado>) read(new Estado());
@@ -357,38 +372,47 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 
 	public String registrarDescripcionGeneral() {
 		setSessionStack();
-		System.out.println("ID => " + id_servicio_informacion);
-		if (id_servicio_informacion == 0) {
-			servicio.setId_ente(1);
-			servicio.setId_estado(estado);
-			servicio.setId_intercambio(intercambio);
-			servicio.setId_sector(sector);
-			servicio.setId_seguridad(seguridad);
-			servicio.setId_usuario(1);
+		System.out.println("ID ANTES => " + id_servicio_informacion);
+		servicio.setId_ente(1);
+		servicio.setId_estado(estado);
+		servicio.setId_intercambio(intercambio);
+		servicio.setId_sector(sector);
+		servicio.setId_seguridad(seguridad);
+		servicio.setId_usuario(((Usuario) session.get("usuario"))
+				.getId_usuario());
+		if (isNuevo())
 			create(servicio);
-			id_servicio_informacion = getNextId(servicio) - 1;
-			System.out.println("ID => " + id_servicio_informacion);
-		}
+		// TODO else update
+		id_servicio_informacion = getNextId(servicio) - 1;
+		System.out.println("ID DESPUÉS => " + id_servicio_informacion);
 		return SUCCESS;
 	}
 
 	public String registrarAspectosLegales() throws IOException {
 		setSessionStack();
+		// TODO Borrar estos logs.
 		System.out.println("File => " + file);
 		System.out.println("Name => " + name);
 		System.out.println("FileName => " + fileFileName);
 		System.out.println("ContentType => " + fileContentType);
-		Archivo archivo = new Archivo();
-		archivo.setFile(file);
-		archivo.setName(name);
-		archivo.setFileFileName(fileFileName);
-		archivo.setFileContentType(fileContentType);
-		// files.add(archivo);
+		if (name.trim().isEmpty() && file != null) {
+			addFieldError("name",
+					"Si va a subir un archivo debe introducir un nombre");
+			addFieldError("file", "Suba nuevamente el archivo");
+			return INPUT;
+		}
+		if (!name.trim().isEmpty() && file == null) {
+			addFieldError("name",
+					"Si va a colocar un nombre debe subir un archivo");
+			addFieldError("file", "Por favor seleccione un archivo para subir");
+			return INPUT;
+		}
 		AspectoLegal documento = new AspectoLegal();
 		documento.setId_servicio_informacion(id_servicio_informacion);
 		documento.setNombre(name);
 		documento.setUrl(saveFile());
 		create(documento);
+		files = (List<AspectoLegal>) read(ALSI, id_servicio_informacion, -1);
 		// update(servicio, servicio.getId());
 		return SUCCESS;
 	}
@@ -432,20 +456,6 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 				addFieldError("estado",
 						"Debe seleccionar el estado del servicio");
 			prepararDescripcionGeneral();
-			break;
-		case ASPECTOS_LEGALES:
-			// TODO Esta validación parece no estar funcionando.
-			// if (name.trim().isEmpty() && file != null) {
-			// addFieldError("name",
-			// "Si va a subir un archivo debe introducir un nombre");
-			// addFieldError("file", "Suba nuevamente el archivo");
-			// }
-			// if (!name.trim().isEmpty() && file == null) {
-			// addFieldError("name",
-			// "Si va a colocar un nombre debe subir un archivo");
-			// addFieldError("file",
-			// "Por favor seleccione un archivo para subir");
-			// }
 			break;
 		case DESCRIPCION_TECNICA:
 			if (seguridad < 0)
@@ -518,6 +528,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			correo = (String) session.get("correo");
 		} catch (Exception e) {
 			// TODO Handling the exception?!
+			System.out.println("NO HAY NADA EN LA PILA");
 		}
 	}
 }
