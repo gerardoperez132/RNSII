@@ -79,7 +79,7 @@ public class LoginControlador extends DAO {
 				return INPUT;
 			}
 			ente = (Ente) read(ente, usuario.getId_ente());
-			session.put("siglas", ente.getSiglas().toString().toLowerCase());
+			session.put("ente", ente);
 			Object[] objetos = { new ServicioInformacion(), new Ente() };
 			servicios = (ArrayList<ServicioInformacion>) read(objetos,
 					ente.getId_ente(), -1);
