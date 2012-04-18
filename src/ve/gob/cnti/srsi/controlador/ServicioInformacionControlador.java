@@ -395,7 +395,8 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 
 	private String saveFile() throws IOException {
 		session = ActionContext.getContext().getSession();
-		String siglas = (String) session.get("siglas");
+		String siglas = ((Ente) session.get("ente")).getSiglas().toString()
+				.toLowerCase();
 		String path = servletRequest.getSession().getServletContext()
 				.getRealPath("/archivos/" + siglas + "/");
 		FileUtils.copyFile(file, new File(path, fileFileName));
