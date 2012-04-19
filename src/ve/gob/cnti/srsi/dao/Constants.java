@@ -1,5 +1,6 @@
 package ve.gob.cnti.srsi.dao;
 
+import ve.gob.cnti.srsi.modelo.AspectoLegal;
 import ve.gob.cnti.srsi.modelo.EntradaSalida;
 import ve.gob.cnti.srsi.modelo.Funcionalidad;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
@@ -93,6 +94,9 @@ public interface Constants {
 				new Funcionalidad() };
 		/** Relación 1 Servicio de Información tiene N Funcionalidades. */
 		public static final Object[] FSI = { new Funcionalidad(),
+				new ServicioInformacion() };
+		/** Relación 1 Servicio de Información tiene N Aspectos Legales. */
+		public static final Object[] ALSI = { new AspectoLegal(),
 				new ServicioInformacion() };
 	}
 
