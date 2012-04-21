@@ -11,10 +11,6 @@
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
 <link rel="stylesheet" type="text/css" href="res/css/menu_vertical.css">
 <script type="text/javascript" src="res/js/tabs.js"></script>
-<s:if test="modificar">
-	<s:set name="submit" value="%{getText('actualizar')}" />
-	<s:set name="title" value="%{getText('actualizar.title')}" />
-</s:if>
 <s:else>
 	<s:set name="submit" value="%{getText('guardar')}" />
 	<s:set name="title" value="%{getText('registro.title')}" />
@@ -31,7 +27,7 @@
 <s:if test="tab==4">
 	<s:set name="action" value="%{'registrarDescripcionSoporte'}" />
 </s:if>
-<title><s:text name="title"></s:text></title>
+<title><s:text name="title" /></title>
 	</head>
 	<body>
 		<!-- Este es el div de la sombra del contenedor del maquetado de la página -->
@@ -97,7 +93,6 @@
 							<li><s:a href="%{prepararFormulario}">
 									<s:text name="tab4.title"></s:text>
 								</s:a></li>
-
 						</s:else>
 					</ul>
 					<div class="tab_container">
@@ -152,8 +147,7 @@
 										headerValue="%{getText('estado.select')}"></s:select>
 									<s:token name="token" />
 									<s:hidden name="tab" value="1" />
-									<s:hidden name="id_servicio_informacion"
-										value="%{id_servicio_informacion}" />
+									<!-- ENVIAR EL ID DEL SERVICIO DE INFORMACIÓN A CONSULTAR -->
 									<input type="submit" value='<s:property value="#submit"/>' />
 								</form>
 							</div>
@@ -184,18 +178,16 @@
 									<s:file name="file" />
 									<s:token name="token" />
 									<s:hidden name="tab" value="2" />
-									<s:hidden name="id_servicio_informacion"
-										value="%{id_servicio_informacion}" />
+									<!-- ENVIAR EL ID DEL SERVICIO DE INFORMACIÓN A CONSULTAR -->
 									<input type="submit" value='<s:property value="#submit"/>' />
 								</form>
 								<s:if test="files.size() > 0">
 									<table>
-										<s:iterator var="files">
+										<s:iterator value="files">
 											<tr>
-												<td><s:property value="name" />
-												</td>
-												<td><s:property value="fileFileName" />
-												</td>
+												<td><s:property value="nombre" /></td>
+												<td><a href="<s:property value='url' />">Descargar</a></td>
+												<td><s:property value="fecha_creado" /></td>
 											</tr>
 										</s:iterator>
 									</table>
@@ -271,8 +263,7 @@
 									</select>
 									<s:token name="token" />
 									<s:hidden name="tab" value="3" />
-									<s:hidden name="id_servicio_informacion"
-										value="%{id_servicio_informacion}" />
+									<!-- ENVIAR EL ID DEL SERVICIO DE INFORMACIÓN A CONSULTAR -->
 									<input type="submit" value='<s:property value="#submit"/>' />
 								</form>
 							</div>
@@ -319,8 +310,7 @@
 									<s:textfield name="correo"></s:textfield>
 									<s:token name="token" />
 									<s:hidden name="tab" value="4" />
-									<s:hidden name="id_servicio_informacion"
-										value="%{id_servicio_informacion}" />
+									<!-- ENVIAR EL ID DEL SERVICIO DE INFORMACIÓN A CONSULTAR -->
 									<input type="submit" value='<s:property value="#submit"/>' />
 								</form>
 							</div>
