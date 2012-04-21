@@ -47,7 +47,6 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 
 	private boolean modificar;
 	private boolean nuevo;
-	private long id_servicio_informacion;
 	private int tab;
 	private long sector;
 	private long estado;
@@ -58,7 +57,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	private String telefono;
 	private String correo;
 	private String codigo;
-	private String codigos[] = COD;
+	private String codigos[] = CODES;
 
 	private HttpServletRequest servletRequest;
 	private Ente ente;
@@ -224,14 +223,6 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		this.correo = correo;
 	}
 
-	public long getId_servicio_informacion() {
-		return id_servicio_informacion;
-	}
-
-	public void setId_servicio_informacion(long id_servicio_informacion) {
-		this.id_servicio_informacion = id_servicio_informacion;
-	}
-
 	public HttpServletRequest getServletRequest() {
 		return servletRequest;
 	}
@@ -347,6 +338,10 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	public String prepararAspectosLegales() {
 		// TODO La tablita esa.
 		getSessionStack();
+		files = (List<AspectoLegal>) read(ALSI,
+				servicio.getId_servicio_informacion(), -1);
+		for (AspectoLegal as : files)
+			System.out.println("Aspectos Legales => " + as.toString());
 		tab = ASPECTOS_LEGALES;
 		return SUCCESS;
 	}
@@ -372,7 +367,6 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 
 	public String registrarDescripcionGeneral() {
 		setSessionStack();
-		System.out.println("ID ANTES => " + id_servicio_informacion);
 		servicio.setId_ente(1);
 		servicio.setId_estado(estado);
 		servicio.setId_intercambio(intercambio);
@@ -383,8 +377,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		if (isNuevo())
 			create(servicio);
 		// TODO else update
-		id_servicio_informacion = getNextId(servicio) - 1;
-		System.out.println("ID DESPUÉS => " + id_servicio_informacion);
+		servicio.setId_servicio_informacion(getNextId(servicio) - 1);
 		return SUCCESS;
 	}
 
@@ -408,11 +401,16 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			return INPUT;
 		}
 		AspectoLegal documento = new AspectoLegal();
-		documento.setId_servicio_informacion(id_servicio_informacion);
+		documento.setId_servicio_informacion(servicio
+				.getId_servicio_informacion());
 		documento.setNombre(name);
 		documento.setUrl(saveFile());
 		create(documento);
-		files = (List<AspectoLegal>) read(ALSI, id_servicio_informacion, -1);
+		files = (List<AspectoLegal>) read(ALSI,
+				servicio.getId_servicio_informacion(), -1);
+		for (AspectoLegal as : files)
+			System.out.println("Aspectos Legales (registrar) => "
+					+ as.toString());
 		// update(servicio, servicio.getId());
 		return SUCCESS;
 	}
@@ -422,9 +420,9 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		String siglas = ((Ente) session.get("ente")).getSiglas().toString()
 				.toLowerCase();
 		String path = servletRequest.getSession().getServletContext()
-				.getRealPath("/archivos/" + siglas + "/");
+				.getRealPath(PATH + siglas + "/");
 		FileUtils.copyFile(file, new File(path, fileFileName));
-		return "/archivos/" + siglas + "/" + fileFileName;
+		return PATH + siglas + "/" + fileFileName;
 	}
 
 	public String registrarDescripcionTecnica() {
@@ -468,7 +466,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			if (servicio.getVersion().trim().isEmpty())
 				addFieldError("servicio.version", "Debe introducir la versión");
 			// TODO Se debe validar que la sesión esté conformada solamente por
-			// números y un solo punto. Además de que el formato sea con 0.X en
+			// números y un solo punto. Además que el formato sea con 0.X en
 			// caso de no introducir un primer caracter.
 			if (intercambio < 0)
 				addFieldError("intercambio",
