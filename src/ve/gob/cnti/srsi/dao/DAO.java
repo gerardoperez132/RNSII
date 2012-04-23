@@ -516,38 +516,46 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 		List<UnionAreaServicioInformacion> unionareas;
 		List<UnionArquitecturaServicioInformacion> unionarquitecturas;
 		if (servicio.getId_sector() == 0) {
+			System.out.println("FALLÓ EN SECTOR");
 			return false;
 		}
 		unionareas = (List<UnionAreaServicioInformacion>) readUnion(
 				new UnionAreaServicioInformacion(), servicio,
 				servicio.getId_servicio_informacion());
-		if (!unionareas.isEmpty()) {
+		if (unionareas.isEmpty()) {
+			System.out.println("FALLÓ EN UNIÓN ÁREAS");
 			return false;
 		}
 		if (servicio.getId_estado() == 0) {
+			System.out.println("FALLÓ EN ESTADO");
 			return false;
 		}
 		if (servicio.getId_seguridad() == 0) {
+			System.out.println("FALLÓ EN SEGURIDAD");
 			return false;
 		}
 		unionarquitecturas = (List<UnionArquitecturaServicioInformacion>) readUnion(
 				new UnionArquitecturaServicioInformacion(), servicio,
 				servicio.getId_servicio_informacion());
-		if (!unionarquitecturas.isEmpty()) {
+		if (unionarquitecturas.isEmpty()) {
+			System.out.println("FALLÓ EN UNIÓN ARQUITECTURAS");
 			return false;
 		}
 		if (servicio.getId_intercambio() == 0) {
+			System.out.println("FALLÓ EN INTERCAMBIO");
 			return false;
 		}
 		Telefono phone = new Telefono();
 		phone = (Telefono) read(phone, servicio.getId_servicio_informacion());
 		if (phone == null) {
+			System.out.println("FALLÓ EN TELÉFONO");
 			return false;
 		}
 		Correo email = new Correo();
 		email = (Correo) getEmail(servicio,
 				servicio.getId_servicio_informacion());
 		if (email == null) {
+			System.out.println("FALLÓ EN CORREO");
 			return false;
 		}
 		return true;
