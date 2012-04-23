@@ -55,6 +55,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 
 	private List<List<EntradaSalida>> ios = new ArrayList<List<EntradaSalida>>();
 
+	private boolean modificar;
 	private boolean nuevo;
 	private int tab;
 	private long sector;
@@ -81,6 +82,17 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 
 	private long id_servicio_informacion;
 
+	@SkipValidation
+	public String prepararRegistro() {
+		tab = DESCRIPCION_GENERAL;
+		sectores = (List<Sector>) read(new Sector());
+		estados = (List<Estado>) read(new Estado());
+		areas = (List<Area>) read(new Area());
+		setNuevo(true);
+		cleanSessionStack();
+		return SUCCESS;
+	}
+
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararDescripcionGeneral() {
@@ -89,6 +101,8 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			setNuevo(true);
 		else
 			setNuevo(false);
+		if (isComplete(servicio))
+			setModificar(true);
 		tab = DESCRIPCION_GENERAL;
 		sectores = (List<Sector>) read(new Sector());
 		estados = (List<Estado>) read(new Estado());
@@ -96,14 +110,15 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		return SUCCESS;
 	}
 
+	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararAspectosLegales() {
 		// TODO La tablita esa.
 		getSessionStack();
 		files = (List<AspectoLegal>) read(ALSI,
 				servicio.getId_servicio_informacion(), -1);
-		for (AspectoLegal as : files)
-			System.out.println("Aspectos Legales => " + as.toString());
+		if (isComplete(servicio))
+			setModificar(true);
 		tab = ASPECTOS_LEGALES;
 		return SUCCESS;
 	}
@@ -112,6 +127,8 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	@SkipValidation
 	public String prepararDescripcionTecnica() {
 		getSessionStack();
+		if (isComplete(servicio))
+			setModificar(true);
 		tab = DESCRIPCION_TECNICA;
 		niveles = (List<Seguridad>) read(new Seguridad());
 		arquitecturas = (List<Arquitectura>) read(new Arquitectura());
@@ -123,6 +140,8 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	@SkipValidation
 	public String prepararDescripcionSoporte() {
 		getSessionStack();
+		if (isComplete(servicio))
+			setModificar(true);
 		tab = DESCRIPCION_SOPORTE;
 		return SUCCESS;
 	}
@@ -148,7 +167,6 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		// TODO else update
 		servicio.setId_servicio_informacion(getNextId(servicio) - 1);
 		setSessionStack();
-
 		return SUCCESS;
 	}
 
@@ -225,9 +243,10 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	}
 
 	public String registrarDescripcionSoporte() {
-		setSessionStack();
+		getSessionStack();
 		// TODO Utilizar otro método para la inserción de los datos en el mismo
 		// registro.
+		id_servicio_informacion = servicio.getId_servicio_informacion();
 		update(servicio, servicio.getId_servicio_informacion());
 		return SUCCESS;
 	}
@@ -330,6 +349,24 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		}
 	}
 
+	@SuppressWarnings("unchecked")
+	private void cleanSessionStack() {
+		session = ActionContext.getContext().getSession();
+		try {
+			session.remove("servicio");
+			session.remove("sector");
+			session.remove("area");
+			session.remove("estado");
+			session.remove("seguridad");
+			session.remove("arquitectura");
+			session.remove("intercambio");
+			session.remove("telefono");
+			session.remove("correo");
+		} catch (Exception e) {
+			// TODO Handling the exception?!
+		}
+	}
+
 	// Examinar
 	@SuppressWarnings("unchecked")
 	@SkipValidation
@@ -383,12 +420,139 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	}
 
 	// Publicar
+	@SkipValidation
+	public String publicarServicioInformacion() {
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		servicio.setPublicado(true);
+		update(servicio, id_servicio_informacion);
+		return SUCCESS;
+	}
 
 	// Despublicar
+	@SkipValidation
+	public String despublicarServicioInformacion() {
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		servicio.setPublicado(false);
+		update(servicio, id_servicio_informacion);
+		return SUCCESS;
+	}
 
 	// Eliminar
+	@SuppressWarnings("unchecked")
+	@SkipValidation
+	public String eliminarServicioInformacion() {
+		Funcionalidad funcion_del = new Funcionalidad();
+		EntradaSalida io_del = new EntradaSalida();
+		List<EntradaSalida> ios_del = new ArrayList<EntradaSalida>();
+		funcionalidades = (List<Funcionalidad>) read(FSI,
+				id_servicio_informacion, -1);
+		Iterator<Funcionalidad> iterador = funcionalidades.iterator();
+		while (iterador.hasNext()) {
+			funcion_del = iterador.next();
+			ios_del = (List<EntradaSalida>) read(ESF,
+					funcion_del.getId_funcionalidad(), -1);
+			Iterator<EntradaSalida> iterador2 = ios_del.iterator();
+			while (iterador2.hasNext()) {
+				io_del = iterador2.next();
+				delete(io_del, io_del.getId_entrada_salida());
+			}
+			delete(funcion_del, funcion_del.getId_funcionalidad());
+		}
+		delete(new ServicioInformacion(), id_servicio_informacion);
+		return SUCCESS;
+	}
 
 	// Modificar
+	public String modificarServicioInformacion() {
+		getSessionStack();
+		Usuario usuario = new Usuario();
+		usuario = (Usuario) session.get("usuario");
+		if (usuario == null) {
+			return "errorSession";
+		}
+		ServicioInformacion servicio2 = (ServicioInformacion) read(servicio,
+				id_servicio_informacion);
+		servicio.setFecha_creado(servicio2.getFecha_creado());
+		servicio.setFecha_modificado(servicio2.getFecha_modificado());
+		servicio.setId_ente(usuario.getId_ente());
+		servicio.setId_usuario(usuario.getId_usuario());
+		servicio.setId_sector(sector);
+		servicio.setId_estado(estado);
+		servicio.setId_seguridad(seguridad);
+		servicio.setId_intercambio(intercambio);
+		// TODO Verificar que el nombre no esté repetido.
+		update(servicio, id_servicio_informacion);
+		try {
+			updateUnion(new UnionAreaServicioInformacion(),
+					new ServicioInformacion(), new Area(),
+					id_servicio_informacion, area);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		try {
+			updateUnion(new UnionArquitecturaServicioInformacion(),
+					new ServicioInformacion(), new Arquitectura(),
+					id_servicio_informacion, arquitectura);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		Telefono phone = new Telefono();
+		phone = (Telefono) read(phone, id_servicio_informacion);
+		phone.setTelefono(codigo + telefono);
+		update(phone, phone.getId_telefono());
+		Correo email = new Correo();
+		email = (Correo) getEmail(servicio, id_servicio_informacion);
+		email.setCorreo(correo);
+		update(email, email.getId_correo());
+		// TODO actualizar documento
+		setModificar(false);
+		setNuevo(false);
+		return SUCCESS;
+	}
+
+	@SuppressWarnings("unchecked")
+	@SkipValidation
+	public String prepararModificarServicioInformacion() {
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		sector = servicio.getId_sector();
+		unionareas = (List<UnionAreaServicioInformacion>) readUnion(
+				new UnionAreaServicioInformacion(), servicio,
+				id_servicio_informacion);
+		Iterator<UnionAreaServicioInformacion> iterador = unionareas.iterator();
+		while (iterador.hasNext()) {
+			area.add(iterador.next().getId_area());
+		}
+		estado = servicio.getId_estado();
+		seguridad = servicio.getId_seguridad();
+		unionarquitecturas = (List<UnionArquitecturaServicioInformacion>) readUnion(
+				new UnionArquitecturaServicioInformacion(), servicio,
+				id_servicio_informacion);
+		Iterator<UnionArquitecturaServicioInformacion> iterador2 = unionarquitecturas
+				.iterator();
+		while (iterador2.hasNext()) {
+			arquitectura.add(iterador2.next().getId_arquitectura());
+		}
+		intercambio = servicio.getId_intercambio();
+		Telefono phone = new Telefono();
+		phone = (Telefono) read(phone, id_servicio_informacion);
+		telefono = phone.getTelefono().substring(3, 10);
+		codigo = phone.getTelefono().substring(0, 3);
+		Correo email = new Correo();
+		email = (Correo) getEmail(servicio, id_servicio_informacion);
+		correo = email.getCorreo();
+		sectores = (List<Sector>) read(new Sector());
+		estados = (List<Estado>) read(new Estado());
+		areas = (List<Area>) read(new Area());
+		niveles = (List<Seguridad>) read(new Seguridad());
+		arquitecturas = (List<Arquitectura>) read(new Arquitectura());
+		parents = (List<Intercambio>) getParents(new Intercambio());
+		children = (List<Intercambio>) getChildren(new Intercambio());
+		setModificar(true);
+		files = (List<AspectoLegal>) read(ALSI, id_servicio_informacion, -1);
+		setSessionStack();
+		prepararDescripcionGeneral();
+		return SUCCESS;
+	}
 
 	public List<Sector> getSectores() {
 		return sectores;
@@ -645,5 +809,29 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 
 	public void setFuncionalidades(List<Funcionalidad> funcionalidades) {
 		this.funcionalidades = funcionalidades;
+	}
+
+	public Funcionalidad getFuncionalidad() {
+		return funcionalidad;
+	}
+
+	public void setFuncionalidad(Funcionalidad funcionalidad) {
+		this.funcionalidad = funcionalidad;
+	}
+
+	public List<List<EntradaSalida>> getIos() {
+		return ios;
+	}
+
+	public void setIos(List<List<EntradaSalida>> ios) {
+		this.ios = ios;
+	}
+
+	public boolean isModificar() {
+		return modificar;
+	}
+
+	public void setModificar(boolean modificar) {
+		this.modificar = modificar;
 	}
 }
