@@ -9,8 +9,8 @@
 					style="font-size: 0.9em; padding-top: 9px; padding-left: 16px;">
 						<s:text name="servicios" /> </a>
 					<ul class="nivel2">
-						<li><a href="<s:url action="prepararDescripcionGeneral"/>">
-								<s:text name="registro" /> </a>
+						<li><a href="<s:url action="prepararRegistro"/>"> <s:text
+									name="registro" /> </a>
 						</li>
 					</ul>
 				</li>
