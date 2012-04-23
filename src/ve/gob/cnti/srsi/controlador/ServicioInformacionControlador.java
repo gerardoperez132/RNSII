@@ -372,6 +372,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		return SUCCESS;
 	}
 
+	@SuppressWarnings("unchecked")
 	public String registrarAspectosLegales() throws IOException {
 		getSessionStack();
 		// TODO Borrar estos logs.
@@ -424,13 +425,17 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 
 	public String registrarDescripcionTecnica() {
 		setSessionStack();
-		// update(servicio, servicio.getId());
+		// TODO Utilizar otro método para la inserción de los datos en el mismo
+		// registro.
+		update(servicio, servicio.getId_servicio_informacion());
 		return SUCCESS;
 	}
 
 	public String registrarDescripcionSoporte() {
 		setSessionStack();
-		// update(servicio, servicio.getId());
+		// TODO Utilizar otro método para la inserción de los datos en el mismo
+		// registro.
+		update(servicio, servicio.getId_servicio_informacion());
 		return SUCCESS;
 	}
 
