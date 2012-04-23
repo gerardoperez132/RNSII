@@ -15,6 +15,9 @@ import ve.gob.cnti.srsi.modelo.Ente;
 import ve.gob.cnti.srsi.modelo.EntradaSalida;
 import ve.gob.cnti.srsi.modelo.Funcionalidad;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
+import ve.gob.cnti.srsi.modelo.Telefono;
+import ve.gob.cnti.srsi.modelo.UnionAreaServicioInformacion;
+import ve.gob.cnti.srsi.modelo.UnionArquitecturaServicioInformacion;
 import ve.gob.cnti.srsi.modelo.Usuario;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -89,7 +92,10 @@ public class LoginControlador extends DAO {
 				if(servicio.getId_estado()==1){
 					ListaServicios.add(new ServiciosPublicables(false,
 							servicio));
-				}else{
+				}else if(!isComplete(servicio)){
+					ListaServicios.add(new ServiciosPublicables(false,
+							servicio));
+				}else{					
 					Object[] models = { new Funcionalidad(),
 							new ServicioInformacion() };
 					List<Funcionalidad> funcionalidades = (List<Funcionalidad>) read(
@@ -134,6 +140,47 @@ public class LoginControlador extends DAO {
 		} else if (correo.isEmpty() || password.isEmpty()) {
 			addFieldError("error", "Debe insertar todos los campos");
 		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public boolean isComplete(ServicioInformacion servicio){
+		List<UnionAreaServicioInformacion> unionareas;
+		List<UnionArquitecturaServicioInformacion> unionarquitecturas;
+		if(servicio.getId_sector() ==0 ){
+			return false;
+		}		
+		unionareas = (List<UnionAreaServicioInformacion>) readUnion(
+				new UnionAreaServicioInformacion(), servicio,
+				servicio.getId_servicio_informacion());
+		if(!unionareas.isEmpty()){
+			return false;
+		}						
+		if(servicio.getId_estado() == 0){		
+			return false;
+		}
+		if(servicio.getId_seguridad() == 0){			
+			return false;
+		}
+		unionarquitecturas = (List<UnionArquitecturaServicioInformacion>) readUnion(
+				new UnionArquitecturaServicioInformacion(), servicio,
+				servicio.getId_servicio_informacion());
+		if(!unionarquitecturas.isEmpty()){			
+			return false;
+		}
+		if(servicio.getId_intercambio() == 0){
+			return false;
+		}
+		Telefono phone = new Telefono();
+		phone = (Telefono)read(phone, servicio.getId_servicio_informacion());
+		if(phone == null){
+			return false;
+		}
+		Correo email = new Correo();
+		email = (Correo) getEmail(servicio, servicio.getId_servicio_informacion());
+		if(email == null){
+			return false;
+		}
+		return true;
 	}
 
 	public String getPassword() {
