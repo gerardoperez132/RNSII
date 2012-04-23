@@ -113,8 +113,8 @@ public class LoginControlador extends DAO {
 							List<EntradaSalida> salidas_tmp = (List<EntradaSalida>) read(
 									models2, fx.getId_funcionalidad(), SALIDA);
 							if (salidas_tmp.isEmpty()) {
-								publicable = false;
-							}
+								publicable = false;								
+							}							
 						}
 						ListaServicios.add(new ServiciosPublicables(publicable,
 								servicio));
