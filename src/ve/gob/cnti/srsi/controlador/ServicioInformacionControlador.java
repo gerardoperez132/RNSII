@@ -262,7 +262,6 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 
 	@Override
 	public void validate() {
-		setSessionStack();
 		switch (tab) {
 		case DESCRIPCION_GENERAL:
 			if (sector < 0)
@@ -386,24 +385,28 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			unionareas = (List<UnionAreaServicioInformacion>) readUnion(
 					new UnionAreaServicioInformacion(), servicio,
 					id_servicio_informacion);
-		} catch (Exception e) {}
+		} catch (Exception e) {
+		}
 		try {
 			unionarquitecturas = (List<UnionArquitecturaServicioInformacion>) readUnion(
 					new UnionArquitecturaServicioInformacion(), servicio,
 					id_servicio_informacion);
-		} catch (Exception e) {}		
+		} catch (Exception e) {
+		}
 		Telefono phone = new Telefono();
 		phone = (Telefono) getPhone(servicio,
 				servicio.getId_servicio_informacion());
 		try {
 			telefono = phone.getTelefono();
-		} catch (Exception e) {}
+		} catch (Exception e) {
+		}
 		Correo email = new Correo();
 		email = (Correo) getEmail(servicio,
 				servicio.getId_servicio_informacion());
 		try {
 			correo = email.getCorreo();
-		} catch (Exception e) {}
+		} catch (Exception e) {
+		}
 		funcionalidades = (List<Funcionalidad>) read(FSI,
 				id_servicio_informacion, -1);
 		Iterator<Funcionalidad> iterador = funcionalidades.iterator();
@@ -412,7 +415,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			try {
 				List<EntradaSalida> es_tmp = (List<EntradaSalida>) read(ESF,
 						funcionalidad.getId_funcionalidad(), -1);
-				ios.add(es_tmp);				
+				ios.add(es_tmp);
 			} catch (Exception e) {
 				// No tiene entradas ni salidas.
 			}
@@ -421,11 +424,11 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		estados = (List<Estado>) read(new Estado());
 		sectores = (List<Sector>) read(new Sector());
 		areas = (List<Area>) read(new Area());
-				
+
 		niveles = (List<Seguridad>) read(new Seguridad());
-		
+
 		arquitecturas = (List<Arquitectura>) read(new Arquitectura());
-		children = (List<Intercambio>) read(new Intercambio());		
+		children = (List<Intercambio>) read(new Intercambio());
 		return SUCCESS;
 	}
 
@@ -562,14 +565,6 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		setSessionStack();
 		prepararDescripcionGeneral();
 		return SUCCESS;
-	}
-
-	public List<List<EntradaSalida>> getIos() {
-		return ios;
-	}
-
-	public void setIos(List<List<EntradaSalida>> ios) {
-		this.ios = ios;
 	}
 
 	public List<Sector> getSectores() {
@@ -837,19 +832,19 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		this.funcionalidad = funcionalidad;
 	}
 
-	public List<List<EntradaSalida>> getIos() {
-		return ios;
-	}
-
-	public void setIos(List<List<EntradaSalida>> ios) {
-		this.ios = ios;
-	}
-
 	public boolean isModificar() {
 		return modificar;
 	}
 
 	public void setModificar(boolean modificar) {
 		this.modificar = modificar;
+	}
+
+	public List<List<EntradaSalida>> getIos() {
+		return ios;
+	}
+
+	public void setIos(List<List<EntradaSalida>> ios) {
+		this.ios = ios;
 	}
 }
