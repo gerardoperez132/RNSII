@@ -3,6 +3,7 @@ package ve.gob.cnti.srsi.controlador;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -19,12 +20,16 @@ import ve.gob.cnti.srsi.dao.DAO;
 import ve.gob.cnti.srsi.modelo.Area;
 import ve.gob.cnti.srsi.modelo.Arquitectura;
 import ve.gob.cnti.srsi.modelo.AspectoLegal;
+import ve.gob.cnti.srsi.modelo.Correo;
 import ve.gob.cnti.srsi.modelo.Ente;
+import ve.gob.cnti.srsi.modelo.EntradaSalida;
 import ve.gob.cnti.srsi.modelo.Estado;
+import ve.gob.cnti.srsi.modelo.Funcionalidad;
 import ve.gob.cnti.srsi.modelo.Intercambio;
 import ve.gob.cnti.srsi.modelo.Sector;
 import ve.gob.cnti.srsi.modelo.Seguridad;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
+import ve.gob.cnti.srsi.modelo.Telefono;
 import ve.gob.cnti.srsi.modelo.UnionAreaServicioInformacion;
 import ve.gob.cnti.srsi.modelo.UnionArquitecturaServicioInformacion;
 import ve.gob.cnti.srsi.modelo.Usuario;
@@ -44,6 +49,11 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 
 	private List<UnionAreaServicioInformacion> unionareas = new ArrayList<UnionAreaServicioInformacion>();
 	private List<UnionArquitecturaServicioInformacion> unionarquitecturas = new ArrayList<UnionArquitecturaServicioInformacion>();
+
+	private List<Funcionalidad> funcionalidades = new ArrayList<Funcionalidad>();
+	private Funcionalidad funcionalidad;
+
+	private List<List<EntradaSalida>> ios = new ArrayList<List<EntradaSalida>>();
 
 	private boolean nuevo;
 	private int tab;
@@ -68,6 +78,8 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	private String fileContentType;
 	private String fileFileName;
 	private String name;
+
+	private long id_servicio_informacion;
 
 	@SuppressWarnings("unchecked")
 	@SkipValidation
@@ -123,11 +135,20 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		servicio.setId_seguridad(seguridad);
 		servicio.setId_usuario(((Usuario) session.get("usuario"))
 				.getId_usuario());
-		if (isNuevo())
+		if (isNuevo()) {
 			create(servicio);
+			UnionAreaServicioInformacion unionAreaServicioInformacion = new UnionAreaServicioInformacion();
+			for (int i = 0; i < area.size(); i++) {
+				unionAreaServicioInformacion.setId_area(area.get(i));
+				unionAreaServicioInformacion
+						.setId_servicio_informacion(id_servicio_informacion);
+				createUnion(unionAreaServicioInformacion);
+			}
+		}
 		// TODO else update
 		servicio.setId_servicio_informacion(getNextId(servicio) - 1);
 		setSessionStack();
+
 		return SUCCESS;
 	}
 
@@ -186,7 +207,20 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		setSessionStack();
 		// TODO Utilizar otro método para la inserción de los datos en el mismo
 		// registro.
-		update(servicio, servicio.getId_servicio_informacion());
+		// update(servicio, servicio.getId_servicio_informacion());
+		if (isComplete(servicio)) {
+			update(servicio, servicio.getId_servicio_informacion());
+		} else {
+			// TODO Inserción física en la misma tupla.
+		}
+		UnionArquitecturaServicioInformacion unionArquitecturaServicioInformacion = new UnionArquitecturaServicioInformacion();
+		for (int i = 0; i < arquitectura.size(); i++) {
+			unionArquitecturaServicioInformacion
+					.setId_arquitectura(arquitectura.get(i));
+			unionArquitecturaServicioInformacion
+					.setId_servicio_informacion(id_servicio_informacion);
+			createUnion(unionArquitecturaServicioInformacion);
+		}
 		return SUCCESS;
 	}
 
@@ -295,6 +329,66 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			System.out.println("NO HAY NADA EN LA PILA");
 		}
 	}
+
+	// Examinar
+	@SuppressWarnings("unchecked")
+	@SkipValidation
+	public String examinarServicioInformacion() {
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		funcionalidades = (List<Funcionalidad>) read(FSI,
+				id_servicio_informacion, -1);
+		Iterator<Funcionalidad> iterador = funcionalidades.iterator();
+		while (iterador.hasNext()) {
+			funcionalidad = iterador.next();
+			try {
+				List<EntradaSalida> es_tmp = (List<EntradaSalida>) read(ESF,
+						funcionalidad.getId_funcionalidad(), -1);
+				ios.add(es_tmp);
+				for (EntradaSalida es : es_tmp)
+					System.out.println("Lista de la lista => " + es.toString());
+			} catch (Exception e) {
+				// No tiene entradas ni salidas.
+			}
+		}
+		sectores = (List<Sector>) read(new Sector());
+		estados = (List<Estado>) read(new Estado());
+		sectores = (List<Sector>) read(new Sector());
+		areas = (List<Area>) read(new Area());
+		unionareas = (List<UnionAreaServicioInformacion>) readUnion(
+				new UnionAreaServicioInformacion(), servicio,
+				id_servicio_informacion);
+		niveles = (List<Seguridad>) read(new Seguridad());
+		unionarquitecturas = (List<UnionArquitecturaServicioInformacion>) readUnion(
+				new UnionArquitecturaServicioInformacion(), servicio,
+				id_servicio_informacion);
+		arquitecturas = (List<Arquitectura>) read(new Arquitectura());
+		children = (List<Intercambio>) read(new Intercambio());
+		Telefono phone = new Telefono();
+		phone = (Telefono) getPhone(servicio,
+				servicio.getId_servicio_informacion());
+		try {
+			telefono = phone.getTelefono();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		Correo email = new Correo();
+		email = (Correo) getEmail(servicio,
+				servicio.getId_servicio_informacion());
+		try {
+			correo = email.getCorreo();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return SUCCESS;
+	}
+
+	// Publicar
+
+	// Despublicar
+
+	// Eliminar
+
+	// Modificar
 
 	public List<Sector> getSectores() {
 		return sectores;
@@ -535,5 +629,21 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public long getId_servicio_informacion() {
+		return id_servicio_informacion;
+	}
+
+	public void setId_servicio_informacion(long id_servicio_informacion) {
+		this.id_servicio_informacion = id_servicio_informacion;
+	}
+
+	public List<Funcionalidad> getFuncionalidades() {
+		return funcionalidades;
+	}
+
+	public void setFuncionalidades(List<Funcionalidad> funcionalidades) {
+		this.funcionalidades = funcionalidades;
 	}
 }
