@@ -24,6 +24,13 @@
 		<!--******************************************************* Actions para 
 			registros de servicios de información *************************************************** -->
 
+		<action name="prepararRegistro" method="prepararRegistro"
+			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
+			<result name="success">
+				registro/registro_servicio_informacion.jsp
+			</result>
+		</action>
+
 		<action name="prepararDescripcionGeneral" method="prepararDescripcionGeneral"
 			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
 			<result name="success">
