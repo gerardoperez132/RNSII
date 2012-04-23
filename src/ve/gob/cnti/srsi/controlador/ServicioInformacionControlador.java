@@ -366,7 +366,6 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	}
 
 	public String registrarDescripcionGeneral() {
-		setSessionStack();
 		servicio.setId_ente(1);
 		servicio.setId_estado(estado);
 		servicio.setId_intercambio(intercambio);
@@ -378,11 +377,12 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			create(servicio);
 		// TODO else update
 		servicio.setId_servicio_informacion(getNextId(servicio) - 1);
+		setSessionStack();
 		return SUCCESS;
 	}
 
 	public String registrarAspectosLegales() throws IOException {
-		setSessionStack();
+		getSessionStack();
 		// TODO Borrar estos logs.
 		System.out.println("File => " + file);
 		System.out.println("Name => " + name);
@@ -392,14 +392,20 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			addFieldError("name",
 					"Si va a subir un archivo debe introducir un nombre");
 			addFieldError("file", "Suba nuevamente el archivo");
+			files = (List<AspectoLegal>) read(ALSI,
+					servicio.getId_servicio_informacion(), -1);
 			return INPUT;
 		}
 		if (!name.trim().isEmpty() && file == null) {
 			addFieldError("name",
 					"Si va a colocar un nombre debe subir un archivo");
 			addFieldError("file", "Por favor seleccione un archivo para subir");
+			files = (List<AspectoLegal>) read(ALSI,
+					servicio.getId_servicio_informacion(), -1);
 			return INPUT;
 		}
+		System.out.println("IMPRIMIENDO EN SET ASPECTO LEGAL => "
+				+ servicio.getId_servicio_informacion());
 		AspectoLegal documento = new AspectoLegal();
 		documento.setId_servicio_informacion(servicio
 				.getId_servicio_informacion());
@@ -490,8 +496,12 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			// por números.
 			if (correo.trim().isEmpty())
 				addFieldError("correo", "Debe introducir un correo electrónico");
-			// TODO Se debe validar que el correo tenga un formato válido a
-			// través de una expresión regular u otro método.
+			if (!correo
+					.matches("^[a-zA-Z0-9_-].{1,}@[a-zA-Z0-9_-]{2,}\\.[a-zA-Z]{2,4}(\\.[a-zA-Z]{2,4})?$"))
+				addFieldError("correo",
+						"Debe introducir una dirección de correo válida");
+			// TODO Se debe validar que la expresión regular acepte solamente un
+			// arroba.
 			break;
 		default:
 			break;
