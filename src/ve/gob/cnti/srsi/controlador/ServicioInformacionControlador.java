@@ -99,10 +99,11 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		getSessionStack();
 		if (servicio == null)
 			setNuevo(true);
-		else
+		else {
 			setNuevo(false);
-		if (isComplete(servicio))
-			setModificar(true);
+			if (isComplete(servicio))
+				setModificar(true);
+		}
 		tab = DESCRIPCION_GENERAL;
 		sectores = (List<Sector>) read(new Sector());
 		estados = (List<Estado>) read(new Estado());
@@ -246,13 +247,22 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		getSessionStack();
 		// TODO Utilizar otro método para la inserción de los datos en el mismo
 		// registro.
+		Telefono phone = new Telefono();
+		phone.setId_servicio_informacion(servicio.getId_servicio_informacion());
+		phone.setTelefono(codigo + telefono);
+		Correo email = new Correo();
+		email.setId_servicio_informacion(servicio.getId_servicio_informacion());
+		email.setCorreo(correo);
 		id_servicio_informacion = servicio.getId_servicio_informacion();
-		update(servicio, servicio.getId_servicio_informacion());
+		create(phone);
+		create(email);
+		// update(servicio, servicio.getId_servicio_informacion());
 		return SUCCESS;
 	}
 
 	@Override
 	public void validate() {
+		setSessionStack();
 		switch (tab) {
 		case DESCRIPCION_GENERAL:
 			if (sector < 0)
