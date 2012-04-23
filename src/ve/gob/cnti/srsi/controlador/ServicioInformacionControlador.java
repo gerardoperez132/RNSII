@@ -45,7 +45,6 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	private List<UnionAreaServicioInformacion> unionareas = new ArrayList<UnionAreaServicioInformacion>();
 	private List<UnionArquitecturaServicioInformacion> unionarquitecturas = new ArrayList<UnionArquitecturaServicioInformacion>();
 
-	private boolean modificar;
 	private boolean nuevo;
 	private int tab;
 	private long sector;
@@ -141,14 +140,6 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	public void setUnionarquitecturas(
 			List<UnionArquitecturaServicioInformacion> unionarquitecturas) {
 		this.unionarquitecturas = unionarquitecturas;
-	}
-
-	public boolean isModificar() {
-		return modificar;
-	}
-
-	public void setModificar(boolean modificar) {
-		this.modificar = modificar;
 	}
 
 	public int getTab() {
