@@ -69,247 +69,6 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	private String fileFileName;
 	private String name;
 
-	public List<Sector> getSectores() {
-		return sectores;
-	}
-
-	public void setSectores(List<Sector> sectores) {
-		this.sectores = sectores;
-	}
-
-	public List<Estado> getEstados() {
-		return estados;
-	}
-
-	public void setEstados(List<Estado> estados) {
-		this.estados = estados;
-	}
-
-	public List<Area> getAreas() {
-		return areas;
-	}
-
-	public void setAreas(List<Area> areas) {
-		this.areas = areas;
-	}
-
-	public List<Seguridad> getNiveles() {
-		return niveles;
-	}
-
-	public void setNiveles(List<Seguridad> niveles) {
-		this.niveles = niveles;
-	}
-
-	public List<Arquitectura> getArquitecturas() {
-		return arquitecturas;
-	}
-
-	public void setArquitecturas(List<Arquitectura> arquitecturas) {
-		this.arquitecturas = arquitecturas;
-	}
-
-	public List<Intercambio> getParents() {
-		return parents;
-	}
-
-	public void setParents(List<Intercambio> parents) {
-		this.parents = parents;
-	}
-
-	public List<Intercambio> getChildren() {
-		return children;
-	}
-
-	public void setChildren(List<Intercambio> children) {
-		this.children = children;
-	}
-
-	public List<UnionAreaServicioInformacion> getUnionareas() {
-		return unionareas;
-	}
-
-	public void setUnionareas(List<UnionAreaServicioInformacion> unionareas) {
-		this.unionareas = unionareas;
-	}
-
-	public List<UnionArquitecturaServicioInformacion> getUnionarquitecturas() {
-		return unionarquitecturas;
-	}
-
-	public void setUnionarquitecturas(
-			List<UnionArquitecturaServicioInformacion> unionarquitecturas) {
-		this.unionarquitecturas = unionarquitecturas;
-	}
-
-	public int getTab() {
-		return tab;
-	}
-
-	public void setTab(int tab) {
-		this.tab = tab;
-	}
-
-	public long getSector() {
-		return sector;
-	}
-
-	public void setSector(long sector) {
-		this.sector = sector;
-	}
-
-	public long getEstado() {
-		return estado;
-	}
-
-	public void setEstado(long estado) {
-		this.estado = estado;
-	}
-
-	public List<Long> getArea() {
-		return area;
-	}
-
-	public void setArea(List<Long> area) {
-		this.area = area;
-	}
-
-	public long getSeguridad() {
-		return seguridad;
-	}
-
-	public void setSeguridad(long seguridad) {
-		this.seguridad = seguridad;
-	}
-
-	public List<Long> getArquitectura() {
-		return arquitectura;
-	}
-
-	public void setArquitectura(List<Long> arquitectura) {
-		this.arquitectura = arquitectura;
-	}
-
-	public long getIntercambio() {
-		return intercambio;
-	}
-
-	public void setIntercambio(long intercambio) {
-		this.intercambio = intercambio;
-	}
-
-	public String getTelefono() {
-		return telefono;
-	}
-
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
-
-	public String getCorreo() {
-		return correo;
-	}
-
-	public void setCorreo(String correo) {
-		this.correo = correo;
-	}
-
-	public HttpServletRequest getServletRequest() {
-		return servletRequest;
-	}
-
-	public void setServletRequest(HttpServletRequest servletRequest) {
-		this.servletRequest = servletRequest;
-	}
-
-	public Ente getEnte() {
-		return ente;
-	}
-
-	public void setEnte(Ente ente) {
-		this.ente = ente;
-	}
-
-	public ServicioInformacion getServicio() {
-		return servicio;
-	}
-
-	public void setServicio(ServicioInformacion servicio) {
-		this.servicio = servicio;
-	}
-
-	public String getCodigo() {
-		return codigo;
-	}
-
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
-	}
-
-	public String[] getCodigos() {
-		return codigos;
-	}
-
-	public void setCodigos(String[] codigos) {
-		this.codigos = codigos;
-	}
-
-	public Map getSession() {
-		return session;
-	}
-
-	public void setSession(Map session) {
-		this.session = session;
-	}
-
-	public List<AspectoLegal> getFiles() {
-		return files;
-	}
-
-	public void setFiles(List<AspectoLegal> files) {
-		this.files = files;
-	}
-
-	public File getFile() {
-		return file;
-	}
-
-	public void setFile(File file) {
-		this.file = file;
-	}
-
-	public String getFileContentType() {
-		return fileContentType;
-	}
-
-	public void setFileContentType(String fileContentType) {
-		this.fileContentType = fileContentType;
-	}
-
-	public String getFileFileName() {
-		return fileFileName;
-	}
-
-	public void setFileFileName(String fileFileName) {
-		this.fileFileName = fileFileName;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public boolean isNuevo() {
-		return nuevo;
-	}
-
-	public void setNuevo(boolean nuevo) {
-		this.nuevo = nuevo;
-	}
-
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararDescripcionGeneral() {
@@ -535,5 +294,246 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			// TODO Handling the exception?!
 			System.out.println("NO HAY NADA EN LA PILA");
 		}
+	}
+
+	public List<Sector> getSectores() {
+		return sectores;
+	}
+
+	public void setSectores(List<Sector> sectores) {
+		this.sectores = sectores;
+	}
+
+	public List<Estado> getEstados() {
+		return estados;
+	}
+
+	public void setEstados(List<Estado> estados) {
+		this.estados = estados;
+	}
+
+	public List<Area> getAreas() {
+		return areas;
+	}
+
+	public void setAreas(List<Area> areas) {
+		this.areas = areas;
+	}
+
+	public List<Seguridad> getNiveles() {
+		return niveles;
+	}
+
+	public void setNiveles(List<Seguridad> niveles) {
+		this.niveles = niveles;
+	}
+
+	public List<Arquitectura> getArquitecturas() {
+		return arquitecturas;
+	}
+
+	public void setArquitecturas(List<Arquitectura> arquitecturas) {
+		this.arquitecturas = arquitecturas;
+	}
+
+	public List<Intercambio> getParents() {
+		return parents;
+	}
+
+	public void setParents(List<Intercambio> parents) {
+		this.parents = parents;
+	}
+
+	public List<Intercambio> getChildren() {
+		return children;
+	}
+
+	public void setChildren(List<Intercambio> children) {
+		this.children = children;
+	}
+
+	public List<UnionAreaServicioInformacion> getUnionareas() {
+		return unionareas;
+	}
+
+	public void setUnionareas(List<UnionAreaServicioInformacion> unionareas) {
+		this.unionareas = unionareas;
+	}
+
+	public List<UnionArquitecturaServicioInformacion> getUnionarquitecturas() {
+		return unionarquitecturas;
+	}
+
+	public void setUnionarquitecturas(
+			List<UnionArquitecturaServicioInformacion> unionarquitecturas) {
+		this.unionarquitecturas = unionarquitecturas;
+	}
+
+	public boolean isNuevo() {
+		return nuevo;
+	}
+
+	public void setNuevo(boolean nuevo) {
+		this.nuevo = nuevo;
+	}
+
+	public int getTab() {
+		return tab;
+	}
+
+	public void setTab(int tab) {
+		this.tab = tab;
+	}
+
+	public long getSector() {
+		return sector;
+	}
+
+	public void setSector(long sector) {
+		this.sector = sector;
+	}
+
+	public long getEstado() {
+		return estado;
+	}
+
+	public void setEstado(long estado) {
+		this.estado = estado;
+	}
+
+	public List<Long> getArea() {
+		return area;
+	}
+
+	public void setArea(List<Long> area) {
+		this.area = area;
+	}
+
+	public long getSeguridad() {
+		return seguridad;
+	}
+
+	public void setSeguridad(long seguridad) {
+		this.seguridad = seguridad;
+	}
+
+	public List<Long> getArquitectura() {
+		return arquitectura;
+	}
+
+	public void setArquitectura(List<Long> arquitectura) {
+		this.arquitectura = arquitectura;
+	}
+
+	public long getIntercambio() {
+		return intercambio;
+	}
+
+	public void setIntercambio(long intercambio) {
+		this.intercambio = intercambio;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+	public String getCorreo() {
+		return correo;
+	}
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
+	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+
+	public String[] getCodigos() {
+		return codigos;
+	}
+
+	public void setCodigos(String[] codigos) {
+		this.codigos = codigos;
+	}
+
+	public HttpServletRequest getServletRequest() {
+		return servletRequest;
+	}
+
+	public void setServletRequest(HttpServletRequest servletRequest) {
+		this.servletRequest = servletRequest;
+	}
+
+	public Ente getEnte() {
+		return ente;
+	}
+
+	public void setEnte(Ente ente) {
+		this.ente = ente;
+	}
+
+	public Map getSession() {
+		return session;
+	}
+
+	public void setSession(Map session) {
+		this.session = session;
+	}
+
+	public ServicioInformacion getServicio() {
+		return servicio;
+	}
+
+	public void setServicio(ServicioInformacion servicio) {
+		this.servicio = servicio;
+	}
+
+	public List<AspectoLegal> getFiles() {
+		return files;
+	}
+
+	public void setFiles(List<AspectoLegal> files) {
+		this.files = files;
+	}
+
+	public File getFile() {
+		return file;
+	}
+
+	public void setFile(File file) {
+		this.file = file;
+	}
+
+	public String getFileContentType() {
+		return fileContentType;
+	}
+
+	public void setFileContentType(String fileContentType) {
+		this.fileContentType = fileContentType;
+	}
+
+	public String getFileFileName() {
+		return fileFileName;
+	}
+
+	public void setFileFileName(String fileFileName) {
+		this.fileFileName = fileFileName;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }

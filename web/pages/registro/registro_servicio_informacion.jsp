@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="/struts-tags" prefix="s"%>
+<%@include file="../layout/cache.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <s:i18n name="ve/gob/cnti/srsi/i18n/registro_servicio_informacion">
@@ -36,8 +37,21 @@
 				<%@include file="../layout/header.jsp"%>
 				<%@include file="../layout/sidebar.jsp"%>
 				<div id="content">
+					<s:if test="modificar!=true">
 					<small><s:text name="title" /> / <strong>Paso 1:</strong>
-						/ Paso 2 / Paso 3</small>
+						/ Paso 2</small>
+					</s:if>
+					<s:else>
+
+						<form action="prepararFuncionalidades" method="post">
+							<s:hidden name="id_servicio_informacion"></s:hidden>
+							<small><s:text name="title" /> <strong> Paso 1: </strong> / 
+							<input type="submit" value='Paso 2' 
+							style="background: none; border: none; font-size: small; color: blue; font-style: italic; padding: 0;"/>
+							</small>
+						</form>
+						
+					</s:else>
 					<h3>
 						<s:text name="title"></s:text>
 					</h3>

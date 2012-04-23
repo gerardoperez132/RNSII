@@ -45,9 +45,12 @@
 									</td>
 									<td><input type="text" name="correo" />
 									</td>
-									<td><a href="#" class="tooltip"><img
-											src="res/img/ayuda.gif"> <span>"Ingrese un
-												correo valido"</span> </a></td>
+									<td>
+										<a href="#" class="tooltip">
+										<img src="res/img/ayuda.gif" alt="ayuda">
+										<span>"Ingrese un correo valido"</span>
+									   </a>
+									 </td>
 								</tr>
 								<tr>
 									<td><s:text name="pass" />
