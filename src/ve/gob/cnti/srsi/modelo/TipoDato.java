@@ -42,6 +42,8 @@ public class TipoDato {
 	private int tipo;
 	private String nombre;
 	private String descripcion;
+	private boolean hasLength;
+	private boolean hasformatted;
 	private int status;
 	private Date fecha_creado;
 	private Date fecha_modificado;
@@ -110,11 +112,29 @@ public class TipoDato {
 		this.fecha_modificado = fecha_modificado;
 	}
 
+	public boolean isHasLength() {
+		return hasLength;
+	}
+
+	public void setHasLength(boolean hasLength) {
+		this.hasLength = hasLength;
+	}
+
+	public boolean isHasformatted() {
+		return hasformatted;
+	}
+
+	public void setHasformatted(boolean hasformatted) {
+		this.hasformatted = hasformatted;
+	}
+
 	@Override
 	public String toString() {
 		return "TipoDato [id=" + id + ", id_tipo_dato=" + id_tipo_dato
 				+ ", tipo=" + tipo + ", nombre=" + nombre + ", descripcion="
-				+ descripcion + ", status=" + status + ", fecha_creado="
+				+ descripcion + ", hasLength=" + hasLength + ", hasformatted="
+				+ hasformatted + ", status=" + status + ", fecha_creado="
 				+ fecha_creado + ", fecha_modificado=" + fecha_modificado + "]";
-	}
+	}	
+	
 }
