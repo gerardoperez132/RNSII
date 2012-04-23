@@ -24,14 +24,14 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * Tabla que manejara los formato de los distintos tipo de datos
+ * Tabla que manejara los formatos de los distintos tipo de datos
  * {@link Date}, {@link Integer},  entre otros.
  * 
  * @author Joaquín Pereira
  * 
  */
 @Entity
-@Table(name = "tipos_datos")
+@Table(name = "formato")
 public class Formato {
 	
 	@Id
