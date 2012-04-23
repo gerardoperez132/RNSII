@@ -12,6 +12,10 @@
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
 <link rel="stylesheet" type="text/css" href="res/css/menu_vertical.css">
 <script type="text/javascript" src="res/js/tabs.js"></script>
+<s:if test="modificar">
+	<s:set name="submit" value="%{getText('actualizar')}" />
+	<s:set name="title" value="%{getText('actualizar.title')}" />
+</s:if>
 <s:else>
 	<s:set name="submit" value="%{getText('guardar')}" />
 	<s:set name="title" value="%{getText('registro.title')}" />
@@ -28,7 +32,8 @@
 <s:if test="tab==4">
 	<s:set name="action" value="%{'registrarDescripcionSoporte'}" />
 </s:if>
-<title><s:text name="title" /></title>
+<title><s:text name="title" />
+</title>
 	</head>
 	<body>
 		<!-- Este es el div de la sombra del contenedor del maquetado de la página -->
@@ -37,20 +42,20 @@
 				<%@include file="../layout/header.jsp"%>
 				<%@include file="../layout/sidebar.jsp"%>
 				<div id="content">
-					<s:if test="modificar!=true">
-					<small><s:text name="title" /> / <strong>Paso 1:</strong>
-						/ Paso 2</small>
+					<s:if test="!modificar">
+						<small><s:text name="title" /> / <strong>Paso 1:</strong>
+							/ Paso 2</small>
 					</s:if>
 					<s:else>
 
 						<form action="prepararFuncionalidades" method="post">
 							<s:hidden name="id_servicio_informacion"></s:hidden>
-							<small><s:text name="title" /> <strong> Paso 1: </strong> / 
-							<input type="submit" value='Paso 2' 
-							style="background: none; border: none; font-size: small; color: blue; font-style: italic; padding: 0;"/>
+							<small><s:text name="title" /> <strong> Paso 1:
+							</strong> / <input type="submit" value='Paso 2'
+								style="background: none; border: none; font-size: small; color: blue; font-style: italic; padding: 0;" />
 							</small>
 						</form>
-						
+
 					</s:else>
 					<h3>
 						<s:text name="title"></s:text>
@@ -59,7 +64,8 @@
 					<ul class="tabs">
 						<s:if test="%{tab==1}">
 							<li class="active"><a href="#tab1"><s:text
-										name="tab1.title"></s:text> </a></li>
+										name="tab1.title"></s:text> </a>
+							</li>
 						</s:if>
 						<s:else>
 							<s:if test="nuevo==false">
@@ -68,11 +74,13 @@
 							</s:if>
 							<li><s:a href="%{prepararFormulario}">
 									<s:text name="tab1.title"></s:text>
-								</s:a></li>
+								</s:a>
+							</li>
 						</s:else>
 						<s:if test="%{tab==2}">
 							<li class="active"><a href="#tab2"><s:text
-										name="tab2.title"></s:text> </a></li>
+										name="tab2.title"></s:text> </a>
+							</li>
 						</s:if>
 						<s:else>
 							<s:if test="!nuevo">
@@ -80,11 +88,13 @@
 							</s:if>
 							<li><s:a href="%{prepararFormulario}">
 									<s:text name="tab2.title"></s:text>
-								</s:a></li>
+								</s:a>
+							</li>
 						</s:else>
 						<s:if test="%{tab==3}">
 							<li class="active"><a href="#tab3"><s:text
-										name="tab3.title"></s:text> </a></li>
+										name="tab3.title"></s:text> </a>
+							</li>
 						</s:if>
 						<s:else>
 							<s:if test="!nuevo">
@@ -93,11 +103,13 @@
 							</s:if>
 							<li><s:a href="%{prepararFormulario}">
 									<s:text name="tab3.title"></s:text>
-								</s:a></li>
+								</s:a>
+							</li>
 						</s:else>
 						<s:if test="%{tab==4}">
 							<li class="active"><a href="#tab4"><s:text
-										name="tab4.title"></s:text> </a></li>
+										name="tab4.title"></s:text> </a>
+							</li>
 						</s:if>
 						<s:else>
 							<s:if test="!nuevo">
@@ -106,7 +118,8 @@
 							</s:if>
 							<li><s:a href="%{prepararFormulario}">
 									<s:text name="tab4.title"></s:text>
-								</s:a></li>
+								</s:a>
+							</li>
 						</s:else>
 					</ul>
 					<div class="tab_container">
@@ -199,9 +212,12 @@
 									<table>
 										<s:iterator value="files">
 											<tr>
-												<td><s:property value="nombre" /></td>
-												<td><a href="<s:property value='url' />">Descargar</a></td>
-												<td><s:property value="fecha_creado" /></td>
+												<td><s:property value="nombre" />
+												</td>
+												<td><a href="<s:property value='url' />">Descargar</a>
+												</td>
+												<td><s:property value="fecha_creado" />
+												</td>
 											</tr>
 										</s:iterator>
 									</table>
@@ -308,7 +324,8 @@
 									</s:fielderror>
 									<table>
 										<tr>
-											<td><s:select name="codigo" list="codigos" /></td>
+											<td><s:select name="codigo" list="codigos" />
+											</td>
 											<td><s:textfield name="telefono" labelposition="top"
 													maxlength="7"
 													onkeyup="var no_digito = /\D/g; this.value = this.value.replace(no_digito , '');" />
