@@ -14,6 +14,7 @@
 	href="res/css/jquery.treeTable.css">
 <link rel="stylesheet" type="text/css" href="res/css/table_tree.css">
 <script type="text/javascript" src="res/js/jquery-1.7.1.js" charset="UTF-8"></script>
+<script src="res/js/jquery.validate.js"  type="text/javascript" charset="UTF-8"></script>
 <script src="res/js/validate.js"  type="text/javascript" charset="UTF-8"></script>
 <title><s:text name="inicio" /></title>
 </head>
