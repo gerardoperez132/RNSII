@@ -173,19 +173,25 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 		niveles = (List<Seguridad>) read(new Seguridad());
 		unionarquitecturas = (List<UnionArquitecturaServicioInformacion>) readUnion(
 				new UnionArquitecturaServicioInformacion(), servicio,
-				id_servicio_informacion);
-		System.out.println(unionarquitecturas.size());
-		arquitecturas = (List<Arquitectura>) read(new Arquitectura());
-		System.out.println(arquitecturas.size());
+				id_servicio_informacion);		
+		arquitecturas = (List<Arquitectura>) read(new Arquitectura());		
 		children = (List<Intercambio>) read(new Intercambio());
 		Telefono phone = new Telefono();
 		phone = (Telefono) getPhone(servicio,
 				servicio.getId_servicio_informacion());
-		telefono = phone.getTelefono();
+		try {
+			telefono = phone.getTelefono();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		Correo email = new Correo();
 		email = (Correo) getEmail(servicio,
 				servicio.getId_servicio_informacion());
-		correo = email.getCorreo();
+		try {
+			correo = email.getCorreo();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}		
 		return SUCCESS;
 	}
 
@@ -418,41 +424,71 @@ public class ServicioInformacionControlador extends DAO implements Formulario,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararModificarServicioInformacion() {
+		modificar = true;
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
-		sector = servicio.getId_sector();
+		if(servicio.getId_sector() !=0 ){
+			sector = servicio.getId_sector();
+		}else{
+			modificar = false;
+		}		
 		unionareas = (List<UnionAreaServicioInformacion>) readUnion(
 				new UnionAreaServicioInformacion(), servicio,
 				id_servicio_informacion);
-		Iterator<UnionAreaServicioInformacion> iterador = unionareas.iterator();
-		while (iterador.hasNext()) {
-			area.add(iterador.next().getId_area());
+		if(!unionareas.isEmpty()){
+			Iterator<UnionAreaServicioInformacion> iterador = unionareas.iterator();
+			while (iterador.hasNext()) {
+				area.add(iterador.next().getId_area());
+			}
+		}				
+		if(servicio.getId_estado() !=0 ){
+			estado = servicio.getId_estado();
+		}else{
+			modificar = false;
 		}
-		estado = servicio.getId_estado();
-		seguridad = servicio.getId_seguridad();
+		if(servicio.getId_seguridad() !=0 ){
+			seguridad = servicio.getId_seguridad();
+		}else{
+			modificar = false;
+		}
 		unionarquitecturas = (List<UnionArquitecturaServicioInformacion>) readUnion(
 				new UnionArquitecturaServicioInformacion(), servicio,
 				id_servicio_informacion);
-		Iterator<UnionArquitecturaServicioInformacion> iterador2 = unionarquitecturas
-				.iterator();
-		while (iterador2.hasNext()) {
-			arquitectura.add(iterador2.next().getId_arquitectura());
+		if(!unionarquitecturas.isEmpty()){
+			Iterator<UnionArquitecturaServicioInformacion> iterador2 = unionarquitecturas
+					.iterator();
+			while (iterador2.hasNext()) {
+				arquitectura.add(iterador2.next().getId_arquitectura());
+			}
+		}else{
+			modificar = false;
 		}
-		intercambio = servicio.getId_intercambio();
+		if(servicio.getId_intercambio()!=0){
+			intercambio = servicio.getId_intercambio();
+		}else{
+			modificar = false;
+		}
 		Telefono phone = new Telefono();
 		phone = (Telefono) read(phone, id_servicio_informacion);
+		if(phone != null){
 		telefono = phone.getTelefono().substring(3, 10);
 		codigo = phone.getTelefono().substring(0, 3);
+		}else{
+			modificar = false;
+		}
 		Correo email = new Correo();
 		email = (Correo) getEmail(servicio, id_servicio_informacion);
+		if(email != null){		
 		correo = email.getCorreo();
+		}else{
+			modificar = false;
+		}
 		sectores = (List<Sector>) read(new Sector());
 		estados = (List<Estado>) read(new Estado());
 		areas = (List<Area>) read(new Area());
 		niveles = (List<Seguridad>) read(new Seguridad());
 		arquitecturas = (List<Arquitectura>) read(new Arquitectura());
 		parents = (List<Intercambio>) getParents(new Intercambio());
-		children = (List<Intercambio>) getChildren(new Intercambio());
-		modificar = true;
+		children = (List<Intercambio>) getChildren(new Intercambio());		
 		return SUCCESS;
 	}
 
