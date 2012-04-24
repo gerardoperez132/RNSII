@@ -148,7 +148,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	}
 
 	public String registrarDescripcionGeneral() {
-		servicio.setId_ente(1);
+		servicio.setId_ente(((Ente) session.get("ente")).getId_ente());
 		servicio.setId_estado(estado);
 		servicio.setId_intercambio(intercambio);
 		servicio.setId_sector(sector);
@@ -165,9 +165,10 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 				createUnion(unionAreaServicioInformacion);
 			}
 		}
-		// TODO else update
 		servicio.setId_servicio_informacion(getNextId(servicio) - 1);
 		setSessionStack();
+		if (modificar && isComplete(servicio))
+			update(servicio, servicio.getId_servicio_informacion());
 		return SUCCESS;
 	}
 
@@ -209,6 +210,8 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			System.out.println("Aspectos Legales (registrar) => "
 					+ as.toString());
 		// update(servicio, servicio.getId());
+		if (modificar && isComplete(servicio))
+			update(servicio, servicio.getId_servicio_informacion());
 		return SUCCESS;
 	}
 
@@ -226,19 +229,17 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		setSessionStack();
 		// TODO Utilizar otro método para la inserción de los datos en el mismo
 		// registro.
-		// update(servicio, servicio.getId_servicio_informacion());
-		if (isComplete(servicio)) {
+		if (isModificar() && isComplete(servicio)) {
 			update(servicio, servicio.getId_servicio_informacion());
+			try {
+				updateUnion(new UnionArquitecturaServicioInformacion(),
+						new ServicioInformacion(), new Arquitectura(),
+						servicio.getId_servicio_informacion(), arquitectura);
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
 		} else {
-			// TODO Inserción física en la misma tupla.
-		}
-		UnionArquitecturaServicioInformacion unionArquitecturaServicioInformacion = new UnionArquitecturaServicioInformacion();
-		for (int i = 0; i < arquitectura.size(); i++) {
-			unionArquitecturaServicioInformacion
-					.setId_arquitectura(arquitectura.get(i));
-			unionArquitecturaServicioInformacion
-					.setId_servicio_informacion(id_servicio_informacion);
-			createUnion(unionArquitecturaServicioInformacion);
+			// TODO Inserción física e la misma tupla.
 		}
 		return SUCCESS;
 	}
@@ -254,9 +255,14 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		email.setId_servicio_informacion(servicio.getId_servicio_informacion());
 		email.setCorreo(correo);
 		id_servicio_informacion = servicio.getId_servicio_informacion();
-		create(phone);
-		create(email);
-		// update(servicio, servicio.getId_servicio_informacion());
+		if (!isModificar()) {
+			create(phone);
+			create(email);
+		} else if (isModificar() && isComplete(servicio)) {
+			update(servicio, servicio.getId_servicio_informacion());
+			update(phone, servicio.getId_servicio_informacion());
+			update(email, servicio.getId_servicio_informacion());
+		}
 		return SUCCESS;
 	}
 
@@ -319,6 +325,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 						"Debe introducir una dirección de correo válida");
 			// TODO Se debe validar que la expresión regular acepte solamente un
 			// arroba.
+			prepararDescripcionSoporte();
 			break;
 		default:
 			break;
@@ -337,6 +344,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		session.put("intercambio", intercambio);
 		session.put("telefono", telefono);
 		session.put("correo", correo);
+		session.put("modificar", modificar);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -352,6 +360,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			intercambio = (Long) session.get("intercambio");
 			telefono = (String) session.get("telefono");
 			correo = (String) session.get("correo");
+			setModificar((Boolean) session.get("modificar"));
 		} catch (Exception e) {
 			// TODO Handling the exception?!
 			System.out.println("NO HAY NADA EN LA PILA");
@@ -424,9 +433,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		estados = (List<Estado>) read(new Estado());
 		sectores = (List<Sector>) read(new Sector());
 		areas = (List<Area>) read(new Area());
-
 		niveles = (List<Seguridad>) read(new Seguridad());
-
 		arquitecturas = (List<Arquitectura>) read(new Arquitectura());
 		children = (List<Intercambio>) read(new Intercambio());
 		return SUCCESS;
@@ -476,53 +483,6 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	}
 
 	// Modificar
-	public String modificarServicioInformacion() {
-		getSessionStack();
-		Usuario usuario = new Usuario();
-		usuario = (Usuario) session.get("usuario");
-		if (usuario == null) {
-			return "errorSession";
-		}
-		ServicioInformacion servicio2 = (ServicioInformacion) read(servicio,
-				id_servicio_informacion);
-		servicio.setFecha_creado(servicio2.getFecha_creado());
-		servicio.setFecha_modificado(servicio2.getFecha_modificado());
-		servicio.setId_ente(usuario.getId_ente());
-		servicio.setId_usuario(usuario.getId_usuario());
-		servicio.setId_sector(sector);
-		servicio.setId_estado(estado);
-		servicio.setId_seguridad(seguridad);
-		servicio.setId_intercambio(intercambio);
-		// TODO Verificar que el nombre no esté repetido.
-		update(servicio, id_servicio_informacion);
-		try {
-			updateUnion(new UnionAreaServicioInformacion(),
-					new ServicioInformacion(), new Area(),
-					id_servicio_informacion, area);
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}
-		try {
-			updateUnion(new UnionArquitecturaServicioInformacion(),
-					new ServicioInformacion(), new Arquitectura(),
-					id_servicio_informacion, arquitectura);
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}
-		Telefono phone = new Telefono();
-		phone = (Telefono) read(phone, id_servicio_informacion);
-		phone.setTelefono(codigo + telefono);
-		update(phone, phone.getId_telefono());
-		Correo email = new Correo();
-		email = (Correo) getEmail(servicio, id_servicio_informacion);
-		email.setCorreo(correo);
-		update(email, email.getId_correo());
-		// TODO actualizar documento
-		setModificar(false);
-		setNuevo(false);
-		return SUCCESS;
-	}
-
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararModificarServicioInformacion() {
