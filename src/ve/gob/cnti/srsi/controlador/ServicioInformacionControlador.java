@@ -79,6 +79,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	private String fileContentType;
 	private String fileFileName;
 	private String name;
+	private boolean isValidate;	
 
 	private long id_servicio_informacion;
 
@@ -96,7 +97,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararDescripcionGeneral() {
-		getSessionStack();
+		getSessionStack(isValidate);
 		if (servicio == null)
 			setNuevo(true);
 		else {
@@ -115,11 +116,13 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	@SkipValidation
 	public String prepararAspectosLegales() {
 		// TODO La tablita esa.
-		getSessionStack();
-		files = (List<AspectoLegal>) read(ALSI,
-				servicio.getId_servicio_informacion(), -1);
-		if (isComplete(servicio))
-			setModificar(true);
+		getSessionStack(isValidate);
+		try {
+			files = (List<AspectoLegal>) read(ALSI,
+					servicio.getId_servicio_informacion(), -1);
+			if (isComplete(servicio))
+				setModificar(true);
+		} catch (Exception e) {}				
 		tab = ASPECTOS_LEGALES;
 		return SUCCESS;
 	}
@@ -127,7 +130,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararDescripcionTecnica() {
-		getSessionStack();
+		getSessionStack(isValidate);
 		if (isComplete(servicio))
 			setModificar(true);
 		tab = DESCRIPCION_TECNICA;
@@ -140,7 +143,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 
 	@SkipValidation
 	public String prepararDescripcionSoporte() {
-		getSessionStack();
+		getSessionStack(isValidate);
 		if (isComplete(servicio))
 			setModificar(true);
 		tab = DESCRIPCION_SOPORTE;
@@ -148,13 +151,19 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	}
 
 	public String registrarDescripcionGeneral() {
+		session = ActionContext.getContext().getSession();
+		try {
+			servicio.setId_usuario(((Usuario) session.get("usuario"))
+					.getId_usuario());
+		} catch (Exception e) {
+			return "errorSession";
+		}
 		servicio.setId_ente(1);
 		servicio.setId_estado(estado);
 		servicio.setId_intercambio(intercambio);
 		servicio.setId_sector(sector);
-		servicio.setId_seguridad(seguridad);
-		servicio.setId_usuario(((Usuario) session.get("usuario"))
-				.getId_usuario());
+		servicio.setId_seguridad(seguridad);	
+		System.out.println("isnuevo: " + isNuevo());
 		if (isNuevo()) {
 			create(servicio);
 			UnionAreaServicioInformacion unionAreaServicioInformacion = new UnionAreaServicioInformacion();
@@ -173,7 +182,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 
 	@SuppressWarnings("unchecked")
 	public String registrarAspectosLegales() throws IOException {
-		getSessionStack();
+		getSessionStack(false);
 		// TODO Borrar estos logs.
 		System.out.println("File => " + file);
 		System.out.println("Name => " + name);
@@ -222,8 +231,20 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		return PATH + siglas + "/" + fileFileName;
 	}
 
-	public String registrarDescripcionTecnica() {
-		setSessionStack();
+	public String registrarDescripcionTecnica() {	
+		String version = servicio.getVersion();
+		List<Long> arq = new ArrayList<Long>();
+		long seguridad_tmp = seguridad;
+		long intercambio_tmp = intercambio;
+		arq = arquitectura;
+		getSessionStack(false);
+		servicio.setId_seguridad(seguridad);
+		servicio.setId_intercambio(intercambio);
+		servicio.setVersion(version);
+		arquitectura = arq;
+		seguridad = seguridad_tmp;
+		intercambio = intercambio_tmp;
+		setSessionStack();		
 		// TODO Utilizar otro método para la inserción de los datos en el mismo
 		// registro.
 		// update(servicio, servicio.getId_servicio_informacion());
@@ -239,12 +260,12 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			unionArquitecturaServicioInformacion
 					.setId_servicio_informacion(id_servicio_informacion);
 			createUnion(unionArquitecturaServicioInformacion);
-		}
+		}		
 		return SUCCESS;
 	}
 
 	public String registrarDescripcionSoporte() {
-		getSessionStack();
+		getSessionStack(isValidate);
 		// TODO Utilizar otro método para la inserción de los datos en el mismo
 		// registro.
 		Telefono phone = new Telefono();
@@ -262,6 +283,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 
 	@Override
 	public void validate() {
+		isValidate = true;
 		switch (tab) {
 		case DESCRIPCION_GENERAL:
 			if (sector < 0)
@@ -328,49 +350,49 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	@SuppressWarnings("unchecked")
 	private void setSessionStack() {
 		session = ActionContext.getContext().getSession();
-		session.put("servicio", servicio);
-		session.put("sector", sector);
-		session.put("area", area);
-		session.put("estado", estado);
-		session.put("seguridad", seguridad);
-		session.put("arquitectura", arquitectura);
-		session.put("intercambio", intercambio);
-		session.put("telefono", telefono);
-		session.put("correo", correo);
+		session.put("servicio_tmp", servicio);
+		session.put("sector_tmp", sector);
+		session.put("area_tmp", area);
+		session.put("estado_tmp", estado);
+		session.put("seguridad_tmp", seguridad);
+		session.put("arquitectura_tmp", arquitectura);
+		session.put("intercambio_tmp", intercambio);
+		session.put("telefono_tmp", telefono);
+		session.put("correo_tmp", correo);
 	}
 
 	@SuppressWarnings("unchecked")
-	private void getSessionStack() {
+	private void getSessionStack(boolean isValidate) {
 		session = ActionContext.getContext().getSession();
+		if(!isValidate)		
 		try {
-			servicio = (ServicioInformacion) session.get("servicio");
-			sector = (Long) session.get("sector");
-			area = (List<Long>) session.get("area");
-			estado = (Long) session.get("estado");
-			seguridad = (Long) session.get("seguridad");
-			arquitectura = (List<Long>) session.get("arquitectura");
-			intercambio = (Long) session.get("intercambio");
-			telefono = (String) session.get("telefono");
-			correo = (String) session.get("correo");
+			servicio = (ServicioInformacion) session.get("servicio_tmp");
+			sector = (Long) session.get("sector_tmp");
+			area = (List<Long>) session.get("area_tmp");
+			estado = (Long) session.get("estado_tmp");
+			seguridad = (Long) session.get("seguridad_tmp");
+			arquitectura = (List<Long>) session.get("arquitectura_tmp");
+			intercambio = (Long) session.get("intercambio_tmp");
+			telefono = (String) session.get("telefono_tmp");
+			correo = (String) session.get("correo_tmp");
 		} catch (Exception e) {
 			// TODO Handling the exception?!
 			System.out.println("NO HAY NADA EN LA PILA");
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	private void cleanSessionStack() {
 		session = ActionContext.getContext().getSession();
 		try {
-			session.remove("servicio");
-			session.remove("sector");
-			session.remove("area");
-			session.remove("estado");
-			session.remove("seguridad");
-			session.remove("arquitectura");
-			session.remove("intercambio");
-			session.remove("telefono");
-			session.remove("correo");
+			session.remove("servicio_tmp");
+			session.remove("sector_tmp");
+			session.remove("area_tmp");
+			session.remove("estado_tmp");
+			session.remove("seguridad_tmp");
+			session.remove("arquitectura_tmp");
+			session.remove("intercambio_tmp");
+			session.remove("telefono_tmp");
+			session.remove("correo_tmp");
 		} catch (Exception e) {
 			// TODO Handling the exception?!
 		}
@@ -477,7 +499,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 
 	// Modificar
 	public String modificarServicioInformacion() {
-		getSessionStack();
+		getSessionStack(isValidate);
 		Usuario usuario = new Usuario();
 		usuario = (Usuario) session.get("usuario");
 		if (usuario == null) {
@@ -846,5 +868,13 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 
 	public void setIos(List<List<EntradaSalida>> ios) {
 		this.ios = ios;
+	}
+	
+	public boolean isValidate() {
+		return isValidate;
+	}
+
+	public void setValidate(boolean isValidate) {
+		this.isValidate = isValidate;
 	}
 }
