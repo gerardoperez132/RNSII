@@ -1,5 +1,6 @@
 package ve.gob.cnti.srsi.dao;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Date;
@@ -301,6 +302,28 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 							+ MODIFICADO
 							+ " ORDER BY fecha_modificado LIMIT 1) WHERE "
 							+ getField(model) + " = 0").executeUpdate();
+			transaction.commit();
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+	}
+
+	@Override
+	public void update(Object model) throws IllegalArgumentException,
+			SecurityException, IllegalAccessException,
+			InvocationTargetException, NoSuchMethodException {
+		try {
+			startConnection();
+			Class date[] = { Date.class };
+			Class status[] = { int.class };
+			model.getClass().getMethod("setFecha_modificado", date)
+					.invoke(model, new Date());
+			model.getClass().getMethod("setStatus", status)
+					.invoke(model, MODIFICADO);
+			session.update(model);
 			transaction.commit();
 		} catch (HibernateException he) {
 			handleException(he);

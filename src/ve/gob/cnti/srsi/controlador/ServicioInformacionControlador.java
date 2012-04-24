@@ -2,6 +2,7 @@ package ve.gob.cnti.srsi.controlador;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -156,6 +157,12 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	}
 
 	public String registrarDescripcionGeneral() {
+		long id_ente = servicio.getId_ente();
+		long id_estado = servicio.getId_estado();
+		long id_intercambio = servicio.getId_intercambio();
+		long id_sector = servicio.getId_sector();
+		long id_seguridad = servicio.getId_seguridad();
+		List<Long> id_areas = area;
 		session = ActionContext.getContext().getSession();
 		try {
 			servicio.setId_usuario(((Usuario) session.get("usuario"))
@@ -177,6 +184,26 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 				unionAreaServicioInformacion
 						.setId_servicio_informacion(getNextId(servicio) - 1);
 				createUnion(unionAreaServicioInformacion);
+			}
+		} else {
+			try {
+				System.out.println("SERVICIO => " + servicio.toString());
+				update(servicio);
+			} catch (IllegalArgumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InvocationTargetException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (NoSuchMethodException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 		servicio.setId_servicio_informacion(getNextId(servicio) - 1);

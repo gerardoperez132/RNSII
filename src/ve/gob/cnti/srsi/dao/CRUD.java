@@ -1,5 +1,6 @@
 package ve.gob.cnti.srsi.dao;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -232,12 +233,27 @@ public interface CRUD {
 	/**
 	 * Permite obtener el telefono unsa clase dada
 	 * 
-	 @param model
+	 * @param model
 	 *            Es la clase, modelo o tabla en la cual se realizará la
 	 *            consulta.
 	 * @param id
 	 *            Es el id del correo a consultar.
-	 * @return {@code telefono} 
+	 * @return {@code telefono}
 	 */
 	public Telefono getPhone(Object model, long id);
+
+	/**
+	 * Permite actualizar una misma tupla sobre los datos faltantes. No genera
+	 * trazas de auditoría.
+	 * 
+	 * @param model
+	 * @throws NoSuchMethodException
+	 * @throws InvocationTargetException
+	 * @throws IllegalAccessException
+	 * @throws SecurityException
+	 * @throws IllegalArgumentException
+	 */
+	public void update(Object model) throws IllegalArgumentException,
+			SecurityException, IllegalAccessException,
+			InvocationTargetException, NoSuchMethodException;
 }
