@@ -157,13 +157,15 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	}
 
 	public String registrarDescripcionGeneral() {
-		long id_ente = servicio.getId_ente();
-		long id_estado = servicio.getId_estado();
-		long id_intercambio = servicio.getId_intercambio();
-		long id_sector = servicio.getId_sector();
-		long id_seguridad = servicio.getId_seguridad();
-		List<Long> id_areas = area;
-		session = ActionContext.getContext().getSession();
+		// long id_ente = servicio.getId_ente();
+		// long id_estado = servicio.getId_estado();
+		// long id_intercambio = servicio.getId_intercambio();
+		// long id_sector = servicio.getId_sector();
+		// long id_seguridad = servicio.getId_seguridad();
+		// List<Long> id_areas = area;
+		String nombre = servicio.getNombre();
+		String descripcion = servicio.getDescripcion();
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		try {
 			servicio.setId_usuario(((Usuario) session.get("usuario"))
 					.getId_usuario());
@@ -171,6 +173,8 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		} catch (Exception e) {
 			return "errorSession";
 		}
+		servicio.setNombre(nombre);
+		servicio.setDescripcion(descripcion);
 		servicio.setId_ente(((Ente) session.get("ente")).getId_ente());
 		servicio.setId_estado(estado);
 		servicio.setId_intercambio(intercambio);
