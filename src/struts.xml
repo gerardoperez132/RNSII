@@ -376,5 +376,5 @@
 		</action>
 	</package>
 	<constant name="struts.devMode" value="true" />
-	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />	
 </struts>

@@ -32,7 +32,11 @@
 <s:if test="tab==4">
 	<s:set name="action" value="%{'registrarDescripcionSoporte'}" />
 </s:if>
-<title><s:text name="title" /></title>
+<s:if test="tab==0">
+	<s:set name="tab" value="%{setTab(2)}" />
+	jhdfgjkdfk
+</s:if>
+<title><s:text name="title" /> t: <s:property value="tab"/></title>
 	</head>
 	<body>
 		<!-- Este es el div de la sombra del contenedor del maquetado de la página -->
@@ -57,7 +61,7 @@
 
 					</s:else>
 					<h3>
-						<s:text name="title"></s:text><s:actionerror />
+						<s:text name="title"></s:text> t: <s:property value="tab"/> <s:actionerror />
 					</h3>
 					<hr>
 					<ul class="tabs">
