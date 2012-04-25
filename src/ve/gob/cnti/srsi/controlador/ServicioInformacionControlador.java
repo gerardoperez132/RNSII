@@ -239,6 +239,19 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			files = (List<AspectoLegal>) read(ALSI, id_servicio_informacion, -1);
 			return INPUT;
 		}
+		if (!fileContentType.equals("application/pdf")
+				&& !fileContentType.equals("application/x-pdf")
+				&& !fileContentType.equals("application/x-bzpdf")
+				&& !fileContentType.equals("application/x-gzpdf")) {
+			addFieldError("file", "Sólo se admiten archivos PDF");
+			files = (List<AspectoLegal>) read(ALSI, id_servicio_informacion, -1);
+			return INPUT;
+		}
+		if (file.length() > (FileUtils.ONE_MB * 2)) {
+			addFieldError("file", "Tamaño máximo por archivo => 2 MB");
+			files = (List<AspectoLegal>) read(ALSI, id_servicio_informacion, -1);
+			return INPUT;
+		}
 		System.out.println("IMPRIMIENDO EN SET ASPECTO LEGAL => "
 				+ id_servicio_informacion);
 		AspectoLegal documento = new AspectoLegal();
@@ -256,7 +269,8 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 				.toLowerCase();
 		String path = servletRequest.getSession().getServletContext()
 				.getRealPath(PATH + siglas + "/");
-		String filename = name.replace(" ", "_") + "_" + new Date().getTime();
+		String filename = name.replace(" ", "_") + "_" + new Date().getTime()
+				+ ".pdf";
 		FileUtils.copyFile(file, new File(path, filename));
 		return PATH + siglas + "/" + filename;
 	}
