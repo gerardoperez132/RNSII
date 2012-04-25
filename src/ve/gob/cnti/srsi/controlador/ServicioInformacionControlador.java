@@ -109,8 +109,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		tab = DESCRIPCION_GENERAL;
 		sectores = (List<Sector>) read(new Sector());
 		estados = (List<Estado>) read(new Estado());
-		areas = (List<Area>) read(new Area());
-		setSessionStack();
+		areas = (List<Area>) read(new Area());		
 		return SUCCESS;
 	}
 
