@@ -57,7 +57,7 @@
 
 					</s:else>
 					<h3>
-						<s:text name="title"></s:text>
+						<s:text name="title"></s:text><s:actionerror />
 					</h3>
 					<hr>
 					<ul class="tabs">
@@ -193,6 +193,7 @@
 									<s:fielderror>
 										<s:param>file</s:param>
 									</s:fielderror>
+									<s:actionerror />
 									<s:file name="file" />
 									<s:token name="token" />
 									<s:hidden name="tab" value="2" />
