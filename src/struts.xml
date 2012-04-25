@@ -10,10 +10,12 @@
 			***************************** -->
 		<interceptors>
 			<interceptor-stack name="doubleSubmit">
+				<interceptor-ref name="fileUpload">
+					<param name="maximumSize">2097152</param>
+				</interceptor-ref>
 				<interceptor-ref name="params">
 					<param name="excludeParams">dojo/..*,struts.token,struts.token.name</param>
 				</interceptor-ref>
-				<interceptor-ref name="fileUpload" />
 				<interceptor-ref name="validation" />
 				<interceptor-ref name="workflow" />
 				<interceptor-ref name="token" />
