@@ -34,9 +34,29 @@
 </s:if>
 <s:if test="tab==0">
 	<s:set name="tab" value="%{setTab(2)}" />
-	jhdfgjkdfk
+	<s:set name="action" value="%{'registrarAspectosLegales'}" />
+	<s:set name="id_servicio" value="#session.id_servicio_informacion" />
+		ID guardado => <s:property value="#id_servicio" />
+		TAB => <s:property value="tab" />
+	<s:property value="#session.id_servicio_informacion" />
+
+	<%@page
+		import="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador"%>
+	<%@page import="java.util.List"%>
+	<%@page import="ve.gob.cnti.srsi.modelo.AspectoLegal"%>
+	<%@page import="ve.gob.cnti.srsi.modelo.ServicioInformacion"%>
+	<%@page import="ve.gob.cnti.srsi.dao.Constants.Modelos"%>
+	<%@page extends="ve.gob.cnti.srsi.dao.DAO"%>
+	<%
+		ServicioInformacionControlador si = new ServicioInformacionControlador();
+				Object[] alsi = { new AspectoLegal(),
+						new ServicioInformacion() };
+				List<AspectoLegal> files = (List<AspectoLegal>) read(alsi,
+						53, -1);
+				si.setFiles(files);
+	%>
 </s:if>
-<title><s:text name="title" /> t: <s:property value="tab"/></title>
+<title><s:text name="title" /> t: <s:property value="tab" /></title>
 	</head>
 	<body>
 		<!-- Este es el div de la sombra del contenedor del maquetado de la página -->
@@ -61,7 +81,10 @@
 
 					</s:else>
 					<h3>
-						<s:text name="title"></s:text> t: <s:property value="tab"/> <s:actionerror />
+						<s:text name="title"></s:text>
+						t:
+						<s:property value="tab" />
+						<s:actionerror />
 					</h3>
 					<hr>
 					<ul class="tabs">
@@ -201,7 +224,13 @@
 									<s:file name="file" />
 									<s:token name="token" />
 									<s:hidden name="tab" value="2" />
-									<s:hidden name="id_servicio_informacion" />
+									<s:if test="#id_servicio > 0">
+										<s:hidden name="id_servicio_informacion"
+											value="%{id_servicio}" />
+									</s:if>
+									<s:else>
+										<s:hidden name="id_servicio_informacion" />
+									</s:else>
 									<input type="submit" value='<s:property value="#submit"/>' />
 								</form>
 								<s:if test="files.size() > 0">
