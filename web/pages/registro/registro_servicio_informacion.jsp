@@ -32,8 +32,7 @@
 <s:if test="tab==4">
 	<s:set name="action" value="%{'registrarDescripcionSoporte'}" />
 </s:if>
-<title><s:text name="title" />
-</title>
+<title><s:text name="title" /></title>
 	</head>
 	<body>
 		<!-- Este es el div de la sombra del contenedor del maquetado de la página -->
@@ -64,8 +63,7 @@
 					<ul class="tabs">
 						<s:if test="%{tab==1}">
 							<li class="active"><a href="#tab1"><s:text
-										name="tab1.title"></s:text> </a>
-							</li>
+										name="tab1.title"></s:text> </a></li>
 						</s:if>
 						<s:else>
 							<s:if test="nuevo==false">
@@ -74,13 +72,11 @@
 							</s:if>
 							<li><s:a href="%{prepararFormulario}">
 									<s:text name="tab1.title"></s:text>
-								</s:a>
-							</li>
+								</s:a></li>
 						</s:else>
 						<s:if test="%{tab==2}">
 							<li class="active"><a href="#tab2"><s:text
-										name="tab2.title"></s:text> </a>
-							</li>
+										name="tab2.title"></s:text> </a></li>
 						</s:if>
 						<s:else>
 							<s:if test="!nuevo">
@@ -88,13 +84,11 @@
 							</s:if>
 							<li><s:a href="%{prepararFormulario}">
 									<s:text name="tab2.title"></s:text>
-								</s:a>
-							</li>
+								</s:a></li>
 						</s:else>
 						<s:if test="%{tab==3}">
 							<li class="active"><a href="#tab3"><s:text
-										name="tab3.title"></s:text> </a>
-							</li>
+										name="tab3.title"></s:text> </a></li>
 						</s:if>
 						<s:else>
 							<s:if test="!nuevo">
@@ -103,13 +97,11 @@
 							</s:if>
 							<li><s:a href="%{prepararFormulario}">
 									<s:text name="tab3.title"></s:text>
-								</s:a>
-							</li>
+								</s:a></li>
 						</s:else>
 						<s:if test="%{tab==4}">
 							<li class="active"><a href="#tab4"><s:text
-										name="tab4.title"></s:text> </a>
-							</li>
+										name="tab4.title"></s:text> </a></li>
 						</s:if>
 						<s:else>
 							<s:if test="!nuevo">
@@ -118,8 +110,7 @@
 							</s:if>
 							<li><s:a href="%{prepararFormulario}">
 									<s:text name="tab4.title"></s:text>
-								</s:a>
-							</li>
+								</s:a></li>
 						</s:else>
 					</ul>
 					<div class="tab_container">
@@ -190,7 +181,7 @@
 									<small><s:text name="tab2.description"></s:text> </small>
 									<hr>
 									<h5 class="formulario">
-										<s:text name="documento.name"></s:text>
+										<s:text name="documento.name" />
 									</h5>
 									<s:fielderror>
 										<s:param>name</s:param>
@@ -212,12 +203,14 @@
 									<table>
 										<s:iterator value="files">
 											<tr>
-												<td><s:property value="nombre" />
-												</td>
+												<td><s:property value="nombre" /></td>
 												<td><a href="<s:property value='url' />">Descargar</a>
 												</td>
-												<td><s:property value="fecha_creado" />
-												</td>
+												<td><s:property value="fecha_creado" /></td>
+												<td><form action="eliminarAspectoLegal">
+														<s:hidden name="id_aspecto_legal" />
+														<input type="submit" value="<s:text name="eliminar"/>">
+													</form></td>
 											</tr>
 										</s:iterator>
 									</table>
@@ -324,8 +317,7 @@
 									</s:fielderror>
 									<table>
 										<tr>
-											<td><s:select name="codigo" list="codigos" />
-											</td>
+											<td><s:select name="codigo" list="codigos" /></td>
 											<td><s:textfield name="telefono" labelposition="top"
 													maxlength="7"
 													onkeyup="var no_digito = /\D/g; this.value = this.value.replace(no_digito , '');" />

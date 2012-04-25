@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -83,6 +84,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	private boolean isValidate;
 
 	private long id_servicio_informacion;
+	private long id_aspecto_legal;
 
 	@SuppressWarnings("unchecked")
 	@SkipValidation
@@ -109,7 +111,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		tab = DESCRIPCION_GENERAL;
 		sectores = (List<Sector>) read(new Sector());
 		estados = (List<Estado>) read(new Estado());
-		areas = (List<Area>) read(new Area());		
+		areas = (List<Area>) read(new Area());
 		return SUCCESS;
 	}
 
@@ -119,8 +121,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		// TODO La tablita esa.
 		getSessionStack(isValidate);
 		try {
-			files = (List<AspectoLegal>) read(ALSI,
-					servicio.getId_servicio_informacion(), -1);
+			files = (List<AspectoLegal>) read(ALSI, id_servicio_informacion, -1);
 			if (isComplete(servicio))
 				setModificar(true);
 		} catch (Exception e) {
@@ -218,43 +219,34 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	@SuppressWarnings("unchecked")
 	public String registrarAspectosLegales() throws IOException {
 		getSessionStack(isValidate);
-		// TODO Borrar estos logs.
-		System.out.println("File => " + file);
-		System.out.println("Name => " + name);
-		System.out.println("FileName => " + fileFileName);
-		System.out.println("ContentType => " + fileContentType);
 		if (name.trim().isEmpty() && file != null) {
 			addFieldError("name",
 					"Si va a subir un archivo debe introducir un nombre");
 			addFieldError("file", "Suba nuevamente el archivo");
-			files = (List<AspectoLegal>) read(ALSI,
-					servicio.getId_servicio_informacion(), -1);
+			files = (List<AspectoLegal>) read(ALSI, id_servicio_informacion, -1);
 			return INPUT;
 		}
 		if (!name.trim().isEmpty() && file == null) {
 			addFieldError("name",
 					"Si va a colocar un nombre debe subir un archivo");
 			addFieldError("file", "Por favor seleccione un archivo para subir");
-			files = (List<AspectoLegal>) read(ALSI,
-					servicio.getId_servicio_informacion(), -1);
+			files = (List<AspectoLegal>) read(ALSI, id_servicio_informacion, -1);
+			return INPUT;
+		}
+		if (name.trim().isEmpty() && file == null) {
+			addFieldError("name",
+					"Si va a subir un documento, rellene todos los campos");
+			files = (List<AspectoLegal>) read(ALSI, id_servicio_informacion, -1);
 			return INPUT;
 		}
 		System.out.println("IMPRIMIENDO EN SET ASPECTO LEGAL => "
-				+ servicio.getId_servicio_informacion());
+				+ id_servicio_informacion);
 		AspectoLegal documento = new AspectoLegal();
-		documento.setId_servicio_informacion(servicio
-				.getId_servicio_informacion());
+		documento.setId_servicio_informacion(id_servicio_informacion);
 		documento.setNombre(name);
 		documento.setUrl(saveFile());
 		create(documento);
-		files = (List<AspectoLegal>) read(ALSI,
-				servicio.getId_servicio_informacion(), -1);
-		for (AspectoLegal as : files)
-			System.out.println("Aspectos Legales (registrar) => "
-					+ as.toString());
-		// update(servicio, servicio.getId());
-		if (modificar && isComplete(servicio))
-			update(servicio, servicio.getId_servicio_informacion());
+		files = (List<AspectoLegal>) read(ALSI, id_servicio_informacion, -1);
 		return SUCCESS;
 	}
 
@@ -264,8 +256,29 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 				.toLowerCase();
 		String path = servletRequest.getSession().getServletContext()
 				.getRealPath(PATH + siglas + "/");
-		FileUtils.copyFile(file, new File(path, fileFileName));
-		return PATH + siglas + "/" + fileFileName;
+		String filename = name.replace(" ", "_") + "_" + new Date().getTime();
+		FileUtils.copyFile(file, new File(path, filename));
+		return PATH + siglas + "/" + filename;
+	}
+
+	public String deleteFile() {
+		// TODO Borrando archivos de manera física.
+		getSessionStack(isValidate);
+		AspectoLegal documento = (AspectoLegal) read(new AspectoLegal(),
+				id_aspecto_legal);
+		if (id_servicio_informacion == documento.getId_servicio_informacion()) {
+			String path = servletRequest.getSession().getServletContext()
+					.getRealPath(documento.getUrl());
+			File file = new File(path);
+			file.delete();
+			delete(documento, documento.getId_aspecto_legal());
+			prepararAspectosLegales();
+			return SUCCESS;
+		} else {
+			addFieldError("file", "Error. Credenciales inválidas");
+			prepararAspectosLegales();
+			return INPUT;
+		}
 	}
 
 	public String registrarDescripcionTecnica() {
@@ -285,11 +298,11 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		// TODO Utilizar otro método para la inserción de los datos en el mismo
 		// registro.
 		if (isModificar() && isComplete(servicio)) {
-			update(servicio, servicio.getId_servicio_informacion());
+			update(servicio, id_servicio_informacion);
 			try {
 				updateUnion(new UnionArquitecturaServicioInformacion(),
 						new ServicioInformacion(), new Arquitectura(),
-						servicio.getId_servicio_informacion(), arquitectura);
+						id_servicio_informacion, arquitectura);
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
@@ -312,19 +325,18 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		// TODO Utilizar otro método para la inserción de los datos en el mismo
 		// registro.
 		Telefono phone = new Telefono();
-		phone.setId_servicio_informacion(servicio.getId_servicio_informacion());
+		phone.setId_servicio_informacion(id_servicio_informacion);
 		phone.setTelefono(codigo + telefono);
 		Correo email = new Correo();
-		email.setId_servicio_informacion(servicio.getId_servicio_informacion());
+		email.setId_servicio_informacion(id_servicio_informacion);
 		email.setCorreo(correo);
-		id_servicio_informacion = servicio.getId_servicio_informacion();
 		if (!isModificar()) {
 			create(phone);
 			create(email);
 		} else if (isModificar() && isComplete(servicio)) {
-			update(servicio, servicio.getId_servicio_informacion());
-			update(phone, servicio.getId_servicio_informacion());
-			update(email, servicio.getId_servicio_informacion());
+			update(servicio, id_servicio_informacion);
+			update(phone, id_servicio_informacion);
+			update(email, id_servicio_informacion);
 		}
 		return SUCCESS;
 	}
@@ -479,15 +491,13 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		} catch (Exception e) {
 		}
 		Telefono phone = new Telefono();
-		phone = (Telefono) getPhone(servicio,
-				servicio.getId_servicio_informacion());
+		phone = (Telefono) getPhone(servicio, id_servicio_informacion);
 		try {
 			telefono = phone.getTelefono();
 		} catch (Exception e) {
 		}
 		Correo email = new Correo();
-		email = (Correo) getEmail(servicio,
-				servicio.getId_servicio_informacion());
+		email = (Correo) getEmail(servicio, id_servicio_informacion);
 		try {
 			correo = email.getCorreo();
 		} catch (Exception e) {
@@ -592,8 +602,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		}
 		Correo email = new Correo();
 		try {
-			email = (Correo) getEmail(servicio,
-					servicio.getId_servicio_informacion());
+			email = (Correo) getEmail(servicio, id_servicio_informacion);
 			correo = email.getCorreo();
 		} catch (Exception e) {
 		}
@@ -899,5 +908,13 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 
 	public void setValidate(boolean isValidate) {
 		this.isValidate = isValidate;
+	}
+
+	public long getId_aspecto_legal() {
+		return id_aspecto_legal;
+	}
+
+	public void setId_aspecto_legal(long id_aspecto_legal) {
+		this.id_aspecto_legal = id_aspecto_legal;
 	}
 }

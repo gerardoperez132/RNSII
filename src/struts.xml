@@ -67,6 +67,16 @@
 			<result name="errorSession" type="redirectAction">home</result>
 		</action>
 
+		<action name="eliminarAspectoLegal" method="deleteFile"
+			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
+			<result name="success">
+				registro/registro_servicio_informacion.jsp
+			</result>
+			<result name="input">
+				registro/registro_servicio_informacion.jsp
+			</result>
+		</action>
+
 		<action name="prepararDescripcionTecnica" method="prepararDescripcionTecnica"
 			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
 			<result name="success">registro/registro_servicio_informacion.jsp
