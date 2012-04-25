@@ -318,11 +318,8 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 		try {
 			startConnection();
 			Class date[] = { Date.class };
-			Class status[] = { int.class };
 			model.getClass().getMethod("setFecha_modificado", date)
 					.invoke(model, new Date());
-			model.getClass().getMethod("setStatus", status)
-					.invoke(model, MODIFICADO);
 			session.update(model);
 			transaction.commit();
 		} catch (HibernateException he) {

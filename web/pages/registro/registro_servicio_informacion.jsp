@@ -174,7 +174,7 @@
 										headerValue="%{getText('estado.select')}"></s:select>
 									<s:token name="token" />
 									<s:hidden name="tab" value="1" />
-									<!-- ENVIAR EL ID DEL SERVICIO DE INFORMACIÓN A CONSULTAR -->
+									<s:hidden name="id_servicio_informacion" />
 									<input type="submit" value='<s:property value="#submit"/>' />
 								</form>
 							</div>
@@ -205,7 +205,7 @@
 									<s:file name="file" />
 									<s:token name="token" />
 									<s:hidden name="tab" value="2" />
-									<!-- ENVIAR EL ID DEL SERVICIO DE INFORMACIÓN A CONSULTAR -->
+									<s:hidden name="id_servicio_informacion" />
 									<input type="submit" value='<s:property value="#submit"/>' />
 								</form>
 								<s:if test="files.size() > 0">
@@ -293,7 +293,7 @@
 									</select>
 									<s:token name="token" />
 									<s:hidden name="tab" value="3" />
-									<!-- ENVIAR EL ID DEL SERVICIO DE INFORMACIÓN A CONSULTAR -->
+									<s:hidden name="id_servicio_informacion" />
 									<input type="submit" value='<s:property value="#submit"/>' />
 								</form>
 							</div>
@@ -341,7 +341,7 @@
 									<s:textfield name="correo"></s:textfield>
 									<s:token name="token" />
 									<s:hidden name="tab" value="4" />
-									<!-- ENVIAR EL ID DEL SERVICIO DE INFORMACIÓN A CONSULTAR -->
+									<s:hidden name="id_servicio_informacion" />
 									<input type="submit" value='<s:property value="#submit"/>' />
 								</form>
 							</div>

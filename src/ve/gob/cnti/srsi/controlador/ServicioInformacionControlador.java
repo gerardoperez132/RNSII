@@ -33,7 +33,6 @@ import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.Telefono;
 import ve.gob.cnti.srsi.modelo.UnionAreaServicioInformacion;
 import ve.gob.cnti.srsi.modelo.UnionArquitecturaServicioInformacion;
-import ve.gob.cnti.srsi.modelo.Usuario;
 
 import com.opensymphony.xwork2.ActionContext;
 
@@ -92,6 +91,9 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		sectores = (List<Sector>) read(new Sector());
 		estados = (List<Estado>) read(new Estado());
 		areas = (List<Area>) read(new Area());
+		id_servicio_informacion = getNextId(servicio);
+		System.out.println("ID en prepararRegistro => "
+				+ id_servicio_informacion);
 		setNuevo(true);
 		cleanSessionStack();
 		setSessionStack();
@@ -102,17 +104,13 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	@SkipValidation
 	public String prepararDescripcionGeneral() {
 		getSessionStack(isValidate);
-		if (servicio == null)
-			setNuevo(true);
-		else {
-			setNuevo(false);
-			if (isComplete(servicio))
-				setModificar(true);
-		}
+		if (isComplete(servicio))
+			setModificar(true);
 		tab = DESCRIPCION_GENERAL;
 		sectores = (List<Sector>) read(new Sector());
 		estados = (List<Estado>) read(new Estado());
 		areas = (List<Area>) read(new Area());
+		setSessionStack();
 		return SUCCESS;
 	}
 
@@ -156,64 +154,65 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		return SUCCESS;
 	}
 
-	public String registrarDescripcionGeneral() {
-		// long id_ente = servicio.getId_ente();
-		// long id_estado = servicio.getId_estado();
-		// long id_intercambio = servicio.getId_intercambio();
-		// long id_sector = servicio.getId_sector();
-		// long id_seguridad = servicio.getId_seguridad();
-		// List<Long> id_areas = area;
+	public String registrarDescripcionGeneral()
+			throws IllegalArgumentException, SecurityException,
+			IllegalAccessException, InvocationTargetException,
+			NoSuchMethodException {
+		// Obtener de la sesión
+		try {
+			setNuevo((Boolean) session.get("nuevo"));
+			setModificar((Boolean) session.get("modificar"));
+			setEnte(((Ente) session.get("ente")));
+			setId_servicio_informacion((Long) session
+					.get("id_servicio_informacion"));
+		} catch (Exception e) {
+			// Exception.
+		}
 		String nombre = servicio.getNombre();
 		String descripcion = servicio.getDescripcion();
-		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
-		try {
-			servicio.setId_usuario(((Usuario) session.get("usuario"))
-					.getId_usuario());
-			nuevo = (Boolean) session.get("nuevo");
-		} catch (Exception e) {
-			return "errorSession";
-		}
-		servicio.setNombre(nombre);
-		servicio.setDescripcion(descripcion);
-		servicio.setId_ente(((Ente) session.get("ente")).getId_ente());
+		servicio.setId_ente(ente.getId_ente());
 		servicio.setId_estado(estado);
-		servicio.setId_intercambio(intercambio);
 		servicio.setId_sector(sector);
-		servicio.setId_seguridad(seguridad);
+		if (isModificar() && isComplete(servicio)) {
+			update(servicio, id_servicio_informacion);
+			try {
+				updateUnion(new UnionAreaServicioInformacion(),
+						new ServicioInformacion(), new Area(),
+						id_servicio_informacion, area);
+			} catch (Exception e) {
+				System.out.println("Error guardando las áreas");
+			}
+		}
 		if (isNuevo()) {
 			create(servicio);
 			UnionAreaServicioInformacion unionAreaServicioInformacion = new UnionAreaServicioInformacion();
 			for (int i = 0; i < area.size(); i++) {
 				unionAreaServicioInformacion.setId_area(area.get(i));
 				unionAreaServicioInformacion
-						.setId_servicio_informacion(getNextId(servicio) - 1);
+						.setId_servicio_informacion(id_servicio_informacion);
 				createUnion(unionAreaServicioInformacion);
 			}
+			setNuevo(false);
 		} else {
+			servicio = (ServicioInformacion) read(servicio,
+					id_servicio_informacion);
+			servicio.setNombre(nombre);
+			servicio.setDescripcion(descripcion);
+			servicio.setId_ente(ente.getId_ente());
+			servicio.setId_estado(estado);
+			servicio.setId_sector(sector);
+			System.out.println("ANTES DE USAR EL UPDATE EL SERVICIO ES => "
+					+ servicio.toString());
+			update(servicio);
 			try {
-				System.out.println("SERVICIO => " + servicio.toString());
-				update(servicio);
-			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SecurityException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (NoSuchMethodException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				updateUnion(new UnionAreaServicioInformacion(),
+						new ServicioInformacion(), new Area(),
+						id_servicio_informacion, area);
+			} catch (Exception e) {
+				System.out.println("Error guardando las áreas");
 			}
 		}
-		servicio.setId_servicio_informacion(getNextId(servicio) - 1);
 		setSessionStack();
-		if (modificar && isComplete(servicio))
-			update(servicio, servicio.getId_servicio_informacion());
 		return SUCCESS;
 	}
 
@@ -412,6 +411,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		session.put("correo", correo);
 		session.put("nuevo", nuevo);
 		session.put("modificar", modificar);
+		session.put("id_servicio_informacion", id_servicio_informacion);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -428,12 +428,18 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 				intercambio = (Long) session.get("intercambio");
 				telefono = (String) session.get("telefono");
 				correo = (String) session.get("correo");
-				setModificar((Boolean) session.get("modificar"));
-				setNuevo((Boolean) session.get("nuevo"));
 			} catch (Exception e) {
 				// TODO Handling the exception?!
 				System.out.println("NO HAY NADA EN LA PILA");
 			}
+		}
+		try {
+			setModificar((Boolean) session.get("modificar"));
+			setNuevo((Boolean) session.get("nuevo"));
+			setId_servicio_informacion((Long) session
+					.get("id_servicio_informacion"));
+		} catch (Exception e) {
+			System.out.println("Ha habido un problema.");
 		}
 	}
 
