@@ -198,10 +198,14 @@ a.tooltip:visited {text-decoration:none;color: transparent;}
 a.tooltip{text-decoration:none;color: transparent;}
 a.tooltip:active {text-decoration:none;color: transparent;}
 a.tooltip:hover {background:#ffffff; text-decoration:none;} /*BG color is a must for IE6*/
-a.tooltip span {display:none; padding:2px 3px; margin-left:8px; width:130px;}
+a.tooltip span {display:none; padding:2px 3px; margin-left:8px; width:180px; font-size: small;}
 a.tooltip:hover span{display:inline; position:absolute; border:1px solid #cccccc; background:#ffffff; color:#6c6c6c;}
 
 a.footer{color: #cccccc;}
 a.footer:hover{background:#ffffff;color: #6c6c6c;}
 	
-
+/*mensaje de fortaleza de contraseña*/
+.error_pass{color:red;font-size: small;}
+.ok_pass{color:green;font-size: small;}
+.alert_pass{color:orange;font-size: small;}
+.requerido{color:red;margin: 0px;}

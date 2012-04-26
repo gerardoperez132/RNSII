@@ -1,7 +1,6 @@
 package ve.gob.cnti.srsi.controlador;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.struts2.interceptor.validation.SkipValidation;
@@ -11,6 +10,7 @@ import ve.gob.cnti.srsi.dao.Constants.Modelos;
 import ve.gob.cnti.srsi.dao.Constants.TipoEntradaSalida;
 import ve.gob.cnti.srsi.dao.DAO;
 import ve.gob.cnti.srsi.modelo.EntradaSalida;
+import ve.gob.cnti.srsi.modelo.Formato;
 import ve.gob.cnti.srsi.modelo.Funcionalidad;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.TipoDato;
@@ -21,6 +21,7 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 
 	private List<EntradaSalida> entradas;
 	private List<TipoDato> tipoDatos;
+	private List<Formato> formatos;
 
 	private ServicioInformacion servicio = new ServicioInformacion();
 	private Funcionalidad funcionalidad = new Funcionalidad();
@@ -32,6 +33,188 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 	private boolean complejo;
 	private boolean modificar;
 
+	@SuppressWarnings("unchecked")
+	@Override
+	@SkipValidation
+	public String prepararFormulario() {
+		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,
+				ENTRADA);		
+		tipoDatos = (ArrayList<TipoDato>) read(new TipoDato());
+		complejo = false;
+		return SUCCESS;
+	}
+
+	@SuppressWarnings("unchecked")
+	@SkipValidation
+	public String prepararFormularioSimple() {
+		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,
+				ENTRADA);
+		tipoDatos = (List<TipoDato>) getSimple();
+		formatos = (ArrayList<Formato>) read(new Formato());
+		complejo = false;		
+		return SUCCESS;
+	}
+
+	@SuppressWarnings("unchecked")
+	@SkipValidation
+	public String prepararFormularioComplejo() {
+		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,
+				ENTRADA);
+		tipoDatos = (List<TipoDato>) getComplex();
+		complejo = true;
+		return SUCCESS;
+	}
+
+	@SuppressWarnings("unchecked")
+	@SkipValidation
+	public String prepararModificarEntradaSimple() {
+		entrada = (EntradaSalida) read(entrada, id_entrada_salida);
+		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		tipoDatos = (List<TipoDato>) getSimple();
+		formatos = (ArrayList<Formato>) read(new Formato());
+		return SUCCESS;
+	}
+
+	@SuppressWarnings("unchecked")
+	@SkipValidation
+	public String prepararModificarEntradaCompleja() {
+		entrada = (EntradaSalida) read(entrada, id_entrada_salida);
+		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		tipoDatos = (List<TipoDato>) getComplex();
+		return SUCCESS;
+	}
+
+	public String registrarEntrada() {
+		entrada.setId_funcionalidad(id_funcionalidad);
+		entrada.setTipo(ENTRADA);
+		if (id_entrada_salida > 0) {
+			entrada.setId_padre(id_entrada_salida);
+		}
+		create(entrada);
+		return SUCCESS;
+	}
+
+	@SuppressWarnings("unchecked")
+	public String modificarEntrada() {
+		EntradaSalida modificada = new EntradaSalida();
+		modificada = (EntradaSalida) read(entrada, id_entrada_salida);
+		modificada.setNombre(entrada.getNombre());
+		modificada.setDescripcion(entrada.getDescripcion());
+		modificada.setId_tipo_dato(entrada.getId_tipo_dato());
+		update(modificada, id_entrada_salida);
+		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,
+				ENTRADA);
+		tipoDatos = (List<TipoDato>) read(new TipoDato());
+		return SUCCESS;
+	}
+
+	@SuppressWarnings("unchecked")
+	@SkipValidation
+	public String eliminarEntradaSimple() {
+		delete(entrada, id_entrada_salida);
+		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,
+				ENTRADA);
+		tipoDatos = (List<TipoDato>) read(new TipoDato());
+		return SUCCESS;
+	}
+
+	@SuppressWarnings("unchecked")
+	@SkipValidation
+	public String eliminarEntradaCompleja() {
+		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,
+				ENTRADA);		
+		delete(entrada, id_entrada_salida);
+		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,
+				ENTRADA);
+		tipoDatos = (List<TipoDato>) read(new TipoDato());
+		return SUCCESS;
+	}
+
+	@Override
+	public void validate() {		
+		if (entrada.getNombre().isEmpty())
+			addFieldError("entrada.nombre",
+					"Debe introducir un nombre que identifique el dato");
+		if (entrada.getDescripcion().isEmpty())
+			addFieldError("entrada.descripcion",
+					"Debe introducir una descripción.");
+		
+		if (entrada.getId_tipo_dato() == -1 ){ 
+			addFieldError("tipodato", "Debe seleccionar un tipo de dato");	
+			entrada.setId_formato((long)-1);
+			entrada.setLongitud("");
+		}else{
+			TipoDato td = (TipoDato)read(new TipoDato(), entrada.getId_tipo_dato());
+			if(td.isHasformatted()){
+				if(entrada.getId_formato()==-1){
+					addFieldError("formato", "Debe seleccionar un tipo formato " +
+							"que corresponda con el dato elegido");
+				}else{
+					Formato f = (Formato)read(new Formato(), entrada.getId_formato());
+					if(f.getId_tipo_dato() != entrada.getId_tipo_dato())
+						addFieldError("formato", "Debe seleccionar un tipo formato " +
+								"que corresponda con el dato elegido");
+				}
+			}else{
+				entrada.setId_formato((long)-1);
+			}
+			if(td.isHasLength()){
+				if(!entrada.getLongitud().isEmpty()){
+					if(entrada.getId_tipo_dato()==4){						
+						try {
+							float num = Float.parseFloat(entrada.getLongitud().toString());
+							if(num<=0){
+								addFieldError("longitud", "Exprese la longitud sólo con números positivos mayores que cero");
+							}
+						} catch (Exception e) {
+							addFieldError("longitud", "Exprese la longitud sólo con números");
+						}						
+					}else{
+						try {
+							Long num = Long.parseLong(entrada.getLongitud().toString());
+							if(num<=0){
+								addFieldError("longitud", "Exprese la longitud sólo con números positivos mayores que cero");
+							}
+						} catch (Exception e) {
+							addFieldError("longitud", "Exprese la longitud sólo con números");
+						}
+					}
+				}else{
+					addFieldError("longitud", "Debe indicar la cantidad de digitos que acepta el dato");
+				}
+			}else{
+				entrada.setLongitud("No aplica");
+			}
+		}
+		
+
+		
+		
+		if (read(ESF, id_funcionalidad, entrada.getNombre()) && !modificar) {
+			addFieldError("entrada.nombre",
+					"Nombre de entrada duplicado, cambie el nombre por favor");
+		}		
+		if (complejo) {
+			prepararFormularioComplejo();
+		} else {
+			prepararFormularioSimple();
+		}
+	}	
+	
 	public List<EntradaSalida> getEntradas() {
 		return entradas;
 	}
@@ -112,139 +295,12 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 		this.modificar = modificar;
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	@SkipValidation
-	public String prepararFormulario() {
-		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
-		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
-		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,
-				ENTRADA);
-		tipoDatos = (List<TipoDato>) read(new TipoDato());
-		complejo = false;
-		return SUCCESS;
+	public List<Formato> getFormatos() {
+		return formatos;
 	}
 
-	@SuppressWarnings("unchecked")
-	@SkipValidation
-	public String prepararFormularioSimple() {
-		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
-		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
-		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,
-				ENTRADA);
-		tipoDatos = (List<TipoDato>) getSimple();
-		complejo = false;
-		return SUCCESS;
+	public void setFormatos(List<Formato> formatos) {
+		this.formatos = formatos;
 	}
 
-	@SuppressWarnings("unchecked")
-	@SkipValidation
-	public String prepararFormularioComplejo() {
-		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
-		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
-		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,
-				ENTRADA);
-		tipoDatos = (List<TipoDato>) getComplex();
-		complejo = true;
-		return SUCCESS;
-	}
-
-	@SuppressWarnings("unchecked")
-	@SkipValidation
-	public String prepararModificarEntradaSimple() {
-		entrada = (EntradaSalida) read(entrada, id_entrada_salida);
-		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
-		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
-		tipoDatos = (List<TipoDato>) getSimple();
-		return SUCCESS;
-	}
-
-	@SuppressWarnings("unchecked")
-	@SkipValidation
-	public String prepararModificarEntradaCompleja() {
-		entrada = (EntradaSalida) read(entrada, id_entrada_salida);
-		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
-		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
-		tipoDatos = (List<TipoDato>) getComplex();
-		return SUCCESS;
-	}
-
-	public String registrarEntrada() {
-		entrada.setId_funcionalidad(id_funcionalidad);
-		entrada.setTipo(ENTRADA);
-		if (id_entrada_salida > 0) {
-			entrada.setId_padre(id_entrada_salida);
-		}
-		create(entrada);
-		return SUCCESS;
-	}
-
-	@SuppressWarnings("unchecked")
-	public String modificarEntrada() {
-		EntradaSalida modificada = new EntradaSalida();
-		modificada = (EntradaSalida) read(entrada, id_entrada_salida);
-		modificada.setNombre(entrada.getNombre());
-		modificada.setDescripcion(entrada.getDescripcion());
-		modificada.setId_tipo_dato(entrada.getId_tipo_dato());
-		update(modificada, id_entrada_salida);
-		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
-		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
-		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,
-				ENTRADA);
-		tipoDatos = (List<TipoDato>) read(new TipoDato());
-		return SUCCESS;
-	}
-
-	@SuppressWarnings("unchecked")
-	@SkipValidation
-	public String eliminarEntradaSimple() {
-		delete(entrada, id_entrada_salida);
-		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
-		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
-		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,
-				ENTRADA);
-		tipoDatos = (List<TipoDato>) read(new TipoDato());
-		return SUCCESS;
-	}
-
-	@SuppressWarnings("unchecked")
-	@SkipValidation
-	public String eliminarEntradaCompleja() {
-		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,
-				ENTRADA);
-		Iterator<EntradaSalida> iterator = entradas.iterator();
-		while (iterator.hasNext()) {
-			entrada = iterator.next();
-			if (entrada.getId_padre() == id_entrada_salida)
-				delete(entrada, entrada.getId_entrada_salida());
-		}
-		delete(entrada, id_entrada_salida);
-		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
-		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
-		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,
-				ENTRADA);
-		tipoDatos = (List<TipoDato>) read(new TipoDato());
-		return SUCCESS;
-	}
-
-	@Override
-	public void validate() {
-		if (entrada.getNombre().isEmpty())
-			addFieldError("entrada.nombre",
-					"Debe introducir un nombre que identifique el dato");
-		if (entrada.getDescripcion().isEmpty())
-			addFieldError("entrada.descripcion",
-					"Debe introducir una descripción.");
-		if (entrada.getId_tipo_dato() == -1)
-			addFieldError("tipodato", "Debe seleccionar un tipo de dato");
-		if (read(ESF, id_funcionalidad, entrada.getNombre()) && !modificar) {
-			addFieldError("entrada.nombre",
-					"Nombre de entrada duplicado, cambie el nombre por favor");
-		}
-		if (complejo) {
-			prepararFormularioComplejo();
-		} else {
-			prepararFormularioSimple();
-		}
-	}
 }

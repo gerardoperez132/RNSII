@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@taglib uri="/struts-tags" prefix="s"%>
+<%@include file="../layout/cache.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <s:i18n name="ve/gob/cnti/srsi/i18n/formulario_salida">
@@ -102,7 +103,50 @@
 								<s:select name="salida.id_tipo_dato" list="tipoDatos"
 									listKey="id_tipo_dato" listValue="nombre" headerKey="-1"
 									headerValue="%{getText('dato.select')}"></s:select>
-								<br> <br>
+								<br> 
+								
+								
+								
+								<h5 class="formulario">
+									<s:text name="form.salida.formato"/>
+								</h5>
+								<s:fielderror>
+									<s:param>formato</s:param>
+								</s:fielderror>								
+								<select name="salida.id_formato">
+									<s:set var="idF" value="salida.id_formato"/>
+									<optgroup label="">
+										<option value="-1">
+											<s:text name="form.salida.formato.select"></s:text>
+										</option>
+									</optgroup>
+									<s:iterator value="tipoDatos" status="td_status">										
+										<s:set var="id_td" value="id_tipo_dato"/>
+										<s:if test="hasformatted == true">
+										<optgroup label="<s:property value="nombre"/>">
+											<s:iterator value="formatos">
+												<s:if test="%{#id_td==id_tipo_dato}">
+													<s:set var="cen" value="true"/>
+													<option  value="<s:property value="id_formato"/>" 
+													<s:if test="%{#idF == id_formato}">selected="selected"</s:if>>
+														<s:property value="formato"/>
+													</option>
+												</s:if>										
+											</s:iterator>											
+										</optgroup>
+										</s:if>										
+									</s:iterator>
+								</select>
+								
+								<h5 class="formulario">
+									<s:text name="form.salida.longitud"/>
+								</h5>
+								<s:fielderror>
+									<s:param>longitud</s:param>
+								</s:fielderror>
+								<s:textfield name="salida.longitud" maxlength="10" id="longitud"/>
+								
+								<br>
 								<s:hidden name="id_servicio_informacion"></s:hidden>
 								<s:hidden name="id_funcionalidad"></s:hidden>
 								<s:hidden name="id_entrada_salida"></s:hidden>

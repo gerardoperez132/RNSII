@@ -1,5 +1,6 @@
 package ve.gob.cnti.srsi.dao;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,8 +17,11 @@ import ve.gob.cnti.srsi.dao.Constants.ClaseDato;
 import ve.gob.cnti.srsi.dao.Constants.Status;
 import ve.gob.cnti.srsi.dao.Constants.TipoEntradaSalida;
 import ve.gob.cnti.srsi.modelo.Correo;
+import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.Telefono;
 import ve.gob.cnti.srsi.modelo.TipoDato;
+import ve.gob.cnti.srsi.modelo.UnionAreaServicioInformacion;
+import ve.gob.cnti.srsi.modelo.UnionArquitecturaServicioInformacion;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -249,7 +253,7 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 		}
 		return result;
 	}
-	
+
 	@Override
 	public Telefono getPhone(Object model, long id) {
 		Telefono result;
@@ -298,6 +302,25 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 							+ MODIFICADO
 							+ " ORDER BY fecha_modificado LIMIT 1) WHERE "
 							+ getField(model) + " = 0").executeUpdate();
+			transaction.commit();
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+	}
+
+	@Override
+	public void update(Object model) throws IllegalArgumentException,
+			SecurityException, IllegalAccessException,
+			InvocationTargetException, NoSuchMethodException {
+		try {
+			startConnection();
+			Class date[] = { Date.class };
+			model.getClass().getMethod("setFecha_modificado", date)
+					.invoke(model, new Date());
+			session.update(model);
 			transaction.commit();
 		} catch (HibernateException he) {
 			handleException(he);
@@ -506,5 +529,55 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 			closeConnection();
 		}
 		return complex;
+	}
+
+	@SuppressWarnings("unchecked")
+	public boolean isComplete(ServicioInformacion servicio) {
+		List<UnionAreaServicioInformacion> unionareas;
+		List<UnionArquitecturaServicioInformacion> unionarquitecturas;
+		if (servicio.getId_sector() == 0) {
+			System.out.println("FALLÓ EN SECTOR");
+			return false;
+		}
+		unionareas = (List<UnionAreaServicioInformacion>) readUnion(
+				new UnionAreaServicioInformacion(), servicio,
+				servicio.getId_servicio_informacion());
+		if (unionareas.isEmpty()) {
+			System.out.println("FALLÓ EN UNIÓN ÁREAS");
+			return false;
+		}
+		if (servicio.getId_estado() == 0) {
+			System.out.println("FALLÓ EN ESTADO");
+			return false;
+		}
+		if (servicio.getId_seguridad() == 0) {
+			System.out.println("FALLÓ EN SEGURIDAD");
+			return false;
+		}
+		unionarquitecturas = (List<UnionArquitecturaServicioInformacion>) readUnion(
+				new UnionArquitecturaServicioInformacion(), servicio,
+				servicio.getId_servicio_informacion());
+		if (unionarquitecturas.isEmpty()) {
+			System.out.println("FALLÓ EN UNIÓN ARQUITECTURAS");
+			return false;
+		}
+		if (servicio.getId_intercambio() == 0) {
+			System.out.println("FALLÓ EN INTERCAMBIO");
+			return false;
+		}
+		Telefono phone = new Telefono();
+		phone = (Telefono) read(phone, servicio.getId_servicio_informacion());
+		if (phone == null) {
+			System.out.println("FALLÓ EN TELÉFONO");
+			return false;
+		}
+		Correo email = new Correo();
+		email = (Correo) getEmail(servicio,
+				servicio.getId_servicio_informacion());
+		if (email == null) {
+			System.out.println("FALLÓ EN CORREO");
+			return false;
+		}
+		return true;
 	}
 }

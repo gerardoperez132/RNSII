@@ -10,10 +10,12 @@
 			***************************** -->
 		<interceptors>
 			<interceptor-stack name="doubleSubmit">
+				<interceptor-ref name="fileUpload">
+					<param name="maximumSize">2097152</param>
+				</interceptor-ref>
 				<interceptor-ref name="params">
 					<param name="excludeParams">dojo/..*,struts.token,struts.token.name</param>
 				</interceptor-ref>
-				<interceptor-ref name="fileUpload" />
 				<interceptor-ref name="validation" />
 				<interceptor-ref name="workflow" />
 				<interceptor-ref name="token" />
@@ -23,6 +25,13 @@
 
 		<!--******************************************************* Actions para 
 			registros de servicios de información *************************************************** -->
+
+		<action name="prepararRegistro" method="prepararRegistro"
+			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
+			<result name="success">
+				registro/registro_servicio_informacion.jsp
+			</result>
+		</action>
 
 		<action name="prepararDescripcionGeneral" method="prepararDescripcionGeneral"
 			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
@@ -58,6 +67,20 @@
 			<result name="input">registro/registro_servicio_informacion.jsp
 			</result>
 			<result name="errorSession" type="redirectAction">home</result>
+		</action>
+
+		<action name="eliminarAspectoLegal" method="deleteFile"
+			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
+			<interceptor-ref name="doubleSubmit" />
+			<result name="success">
+				registro/registro_servicio_informacion.jsp
+			</result>
+			<result name="input">
+				registro/registro_servicio_informacion.jsp
+			</result>
+			<result name="invalid.token" type="redirectAction">
+				prepararAspectosLegales
+			</result>
 		</action>
 
 		<action name="prepararDescripcionTecnica" method="prepararDescripcionTecnica"
@@ -332,6 +355,29 @@
 			<result name="errorSession" type="redirectAction">home</result>
 		</action>
 
+		<action name="prepararFormulario" method="prepararFormulario"
+			class="ve.gob.cnti.srsi.controlador.UsuarioControlador">
+			<result name="success">registro/formulario_usuario.jsp</result>
+			<result name="errorSession" type="redirectAction">home</result>
+		</action>
+
+		<action name="modificarClave" method="modificarClave"
+			class="ve.gob.cnti.srsi.controlador.UsuarioControlador">
+			<interceptor-ref name="doubleSubmit" />
+			<result name="invalid.token" type="redirectAction">home</result>
+			<result name="success">registro/formulario_usuario.jsp</result>
+			<result name="input">registro/formulario_usuario.jsp</result>
+			<result name="errorSession" type="redirectAction">salir</result>
+		</action>
+
+		<action name="modificarDatos" method="modificarDatos"
+			class="ve.gob.cnti.srsi.controlador.UsuarioControlador">
+			<interceptor-ref name="doubleSubmit" />
+			<result name="invalid.token" type="redirectAction">home</result>
+			<result name="success">registro/formulario_usuario.jsp</result>
+			<result name="input">registro/formulario_usuario.jsp</result>
+			<result name="errorSession" type="redirectAction">salir</result>
+		</action>
 	</package>
 	<constant name="struts.devMode" value="true" />
 	<constant name="struts.enable.DynamicMethodInvocation" value="true" />

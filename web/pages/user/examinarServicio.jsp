@@ -1,14 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@taglib uri="/struts-tags" prefix="s"%>
+<%@include file="../layout/cache.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <s:i18n name="ve/gob/cnti/srsi/i18n/userlogin">
 	<head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<s:if test="%{#session.logueado != true}">
-	<META HTTP-EQUIV="Refresh" CONTENT="0;URL=../index.action">
-</s:if>
 <!-- CSS (required) -->
 <link rel="stylesheet" type="text/css" href="res/css/styles.css">
 <link rel="stylesheet" type="text/css" href="res/css/menu_vertical.css">
@@ -32,44 +30,14 @@
 		<div id="sombra">
 			<!-- Este es el div contenedor del maquetado de la página -->
 			<div id="container">
-				<!-- Este es el div de la cabecera -->
-				<div id="header">
-					<img src="res/img/header.png" width="880" height="70"
-						alt="Cintillo Gobierno Bolivariano" /> <img src="res/img/mio.png"
-						width="874" height="116" alt="Marco de Interoperabilidad"
-						style="border: 3px solid #57cedc;" />
-				</div>
-
-				<!-- Este es el div de los menus -->
-				<div id="menu"></div>
-
-
-
+				
+				<%@include file="../layout/header.jsp"%>
+			
 				<!-- Esta es la barra lateral -->
 				<div id="sidebar">
-					<div id="menuv">
-						<ul>
-							<li class="nivel1 primera"><a href="<s:url action="home"/>"
-								class="nivel1"> <s:text name="inicio" />
-							</a></li>
-							<li class="nivel1"><a class="nivel1"> <s:text
-										name="servicios" />
-							</a>
-								<ul class="nivel2">
-									<li><a
-										href="<s:url action="prepararServicioInformacion"/>"> <s:text
-												name="registro" />
-									</a></li>
-								</ul></li>
-							<li class="nivel1"><a href="#" class="nivel1"> <s:text
-										name="configuración" />
-							</a></li>
-							<li class="nivel1"><a href="<s:url action="salir"/>"
-								class="nivel1"> <s:text name="salir" />
-							</a></li>
-						</ul>
-					</div>
+					<%@include file="../layout/sidebar.jsp"%>
 				</div>
+
 
 				<!-- Este es el div de contenidos -->
 				<div id="content">
@@ -158,8 +126,18 @@
 						
 						</div>
 						<!-- Descripción Legal -->
-						<div id="tab2" class="tab_content">
-							
+						<div id="tab2" class="tab_content">							
+							<table border="1">
+								<s:iterator value="files">
+									<tr>
+										<td><s:property value="nombre" /></td>											
+										<td><s:date name="fecha_creado" format="d 'de' MMMM 'del' yyyy" />
+										</td>
+										<td><a href="<s:property value='url' />">Descargar</a>
+										</td>											
+									</tr>
+								</s:iterator>
+							</table>							
 						</div>
 						<!-- Descripción Técnica -->
 						<div id="tab3" class="tab_content">
@@ -189,7 +167,7 @@
 								
 							</h5>
 							<h5 style="margin: 0;">
-								Servicio: "
+								Versión: "
 								<s:property value="servicio.version" />
 								"
 							</h5>

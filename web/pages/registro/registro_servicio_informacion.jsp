@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="/struts-tags" prefix="s"%>
+<%@include file="../layout/cache.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <s:i18n name="ve/gob/cnti/srsi/i18n/registro_servicio_informacion">
@@ -11,6 +12,10 @@
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
 <link rel="stylesheet" type="text/css" href="res/css/menu_vertical.css">
 <script type="text/javascript" src="res/js/tabs.js"></script>
+<s:if test="modificar">
+	<s:set name="submit" value="%{getText('actualizar')}" />
+	<s:set name="title" value="%{getText('actualizar.title')}" />
+</s:if>
 <s:else>
 	<s:set name="submit" value="%{getText('guardar')}" />
 	<s:set name="title" value="%{getText('registro.title')}" />
@@ -27,7 +32,12 @@
 <s:if test="tab==4">
 	<s:set name="action" value="%{'registrarDescripcionSoporte'}" />
 </s:if>
-<title><s:text name="title" /></title>
+<s:if test="tab==0">
+	<s:set name="tab" value="%{setTab(2)}" />
+	<s:set name="action" value="%{'registrarAspectosLegales'}" />
+	<s:set name="id_servicio" value="#session.id_servicio_informacion" />
+</s:if>
+<title><s:text name="title" /> t: <s:property value="tab" /></title>
 	</head>
 	<body>
 		<!-- Este es el div de la sombra del contenedor del maquetado de la página -->
@@ -36,8 +46,21 @@
 				<%@include file="../layout/header.jsp"%>
 				<%@include file="../layout/sidebar.jsp"%>
 				<div id="content">
-					<small><s:text name="title" /> / <strong>Paso 1:</strong>
-						/ Paso 2 / Paso 3</small>
+					<s:if test="!modificar">
+						<small><s:text name="title" /> / <strong>Paso 1:</strong>
+							/ Paso 2</small>
+					</s:if>
+					<s:else>
+
+						<form action="prepararFuncionalidades" method="post">
+							<s:hidden name="id_servicio_informacion"></s:hidden>
+							<small><s:text name="title" /> <strong> Paso 1:
+							</strong> / <input type="submit" value='Paso 2'
+								style="background: none; border: none; font-size: small; color: blue; font-style: italic; padding: 0;" />
+							</small>
+						</form>
+
+					</s:else>
 					<h3>
 						<s:text name="title"></s:text>
 					</h3>
@@ -147,7 +170,7 @@
 										headerValue="%{getText('estado.select')}"></s:select>
 									<s:token name="token" />
 									<s:hidden name="tab" value="1" />
-									<!-- ENVIAR EL ID DEL SERVICIO DE INFORMACIÓN A CONSULTAR -->
+									<s:hidden name="id_servicio_informacion" />
 									<input type="submit" value='<s:property value="#submit"/>' />
 								</form>
 							</div>
@@ -163,8 +186,12 @@
 									<small><s:text name="tab2.description"></s:text> </small>
 									<hr>
 									<h5 class="formulario">
-										<s:text name="documento.name"></s:text>
+										<s:text name="documento.name" />
 									</h5>
+									<s:if test="#id_servicio > 0">
+										<span class="errorMessage"><s:text
+												name="struts.messages.error.file.too.large" /></span>
+									</s:if>
 									<s:fielderror>
 										<s:param>name</s:param>
 									</s:fielderror>
@@ -178,7 +205,13 @@
 									<s:file name="file" />
 									<s:token name="token" />
 									<s:hidden name="tab" value="2" />
-									<!-- ENVIAR EL ID DEL SERVICIO DE INFORMACIÓN A CONSULTAR -->
+									<s:if test="#id_servicio > 0">
+										<s:hidden name="id_servicio_informacion"
+											value="%{id_servicio}" />
+									</s:if>
+									<s:else>
+										<s:hidden name="id_servicio_informacion" />
+									</s:else>
 									<input type="submit" value='<s:property value="#submit"/>' />
 								</form>
 								<s:if test="files.size() > 0">
@@ -186,11 +219,38 @@
 										<s:iterator value="files">
 											<tr>
 												<td><s:property value="nombre" /></td>
-												<td><a href="<s:property value='url' />">Descargar</a></td>
+												<td><a href="<s:property value='url' />">Descargar</a>
+												</td>
 												<td><s:property value="fecha_creado" /></td>
+												<td><form action="eliminarAspectoLegal" method="post">
+														<s:hidden name="id_aspecto_legal" />
+														<s:token name="token" />
+														<input type="submit" value="<s:text name="eliminar"/>">
+													</form></td>
 											</tr>
 										</s:iterator>
 									</table>
+								</s:if>
+								<s:if test="#id_servicio > 0">
+									<s:bean
+										name="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
+										<s:param name="id_servicio_informacion" value="%{id_servicio}"></s:param>
+										<table>
+											<s:iterator value="files2">
+												<tr>
+													<td><s:property value="nombre" /></td>
+													<td><a href="<s:property value='url' />">Descargar</a>
+													</td>
+													<td><s:property value="fecha_creado" /></td>
+													<td><form action="eliminarAspectoLegal" method="post">
+															<s:hidden name="id_aspecto_legal" />
+															<s:token name="token" />
+															<input type="submit" value="<s:text name="eliminar"/>">
+														</form></td>
+												</tr>
+											</s:iterator>
+										</table>
+									</s:bean>
 								</s:if>
 							</div>
 						</s:if>
@@ -263,7 +323,7 @@
 									</select>
 									<s:token name="token" />
 									<s:hidden name="tab" value="3" />
-									<!-- ENVIAR EL ID DEL SERVICIO DE INFORMACIÓN A CONSULTAR -->
+									<s:hidden name="id_servicio_informacion" />
 									<input type="submit" value='<s:property value="#submit"/>' />
 								</form>
 							</div>
@@ -310,7 +370,7 @@
 									<s:textfield name="correo"></s:textfield>
 									<s:token name="token" />
 									<s:hidden name="tab" value="4" />
-									<!-- ENVIAR EL ID DEL SERVICIO DE INFORMACIÓN A CONSULTAR -->
+									<s:hidden name="id_servicio_informacion" />
 									<input type="submit" value='<s:property value="#submit"/>' />
 								</form>
 							</div>
