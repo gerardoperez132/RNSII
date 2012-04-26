@@ -102,7 +102,7 @@ public interface Constants {
 				new ServicioInformacion() };
 		/** Relación 1 Servicio de Información tiene N Aspectos Legales. */
 		public static final Object[] ALSI = { new AspectoLegal(),
-				new ServicioInformacion() };
+				new ServicioInformacion() };		
 	}
 
 	/**

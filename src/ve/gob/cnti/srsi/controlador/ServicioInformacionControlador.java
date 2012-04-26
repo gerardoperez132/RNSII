@@ -34,6 +34,7 @@ import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.Telefono;
 import ve.gob.cnti.srsi.modelo.UnionAreaServicioInformacion;
 import ve.gob.cnti.srsi.modelo.UnionArquitecturaServicioInformacion;
+import ve.gob.cnti.srsi.modelo.Usuario;
 
 import com.opensymphony.xwork2.ActionContext;
 
@@ -148,6 +149,18 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	@SkipValidation
 	public String prepararDescripcionSoporte() {
 		getSessionStack(isValidate);
+		if(modificar){
+			Telefono phone = new Telefono();
+			try {
+				phone = (Telefono) getPhone(servicio, id_servicio_informacion);
+				telefono = phone.getTelefono();
+			} catch (Exception e) {}
+			Correo email = new Correo();		
+			try {
+				email = (Correo) getEmail(servicio, id_servicio_informacion);
+				correo = email.getCorreo();
+			} catch (Exception e) {}
+		}
 		if (isComplete(servicio)) {
 			setModificar(true);
 		}
@@ -166,6 +179,9 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			setEnte(((Ente) session.get("ente")));
 			setId_servicio_informacion((Long) session
 					.get("id_servicio_informacion"));
+			Usuario user = new Usuario();
+			user = (Usuario) session.get("usuario");
+			servicio.setId_usuario(user.getId_usuario());
 		} catch (Exception e) {
 			// Exception.
 		}		
@@ -200,7 +216,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			servicio.setNombre(nombre);
 			servicio.setDescripcion(descripcion);
 			servicio.setId_ente(ente.getId_ente());
-			servicio.setId_estado(estado);
+			servicio.setId_estado(estado);			
 			servicio.setId_sector(sector);			
 			update(servicio);
 			try {
@@ -295,7 +311,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	}
 
 	public String registrarDescripcionTecnica() throws IllegalArgumentException, SecurityException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
-		// Obtener de la sesión
+		// Obtener de la sesión TODO
 		try {		
 			setModificar((Boolean) session.get("modificar"));			
 			setId_servicio_informacion((Long) session
@@ -344,24 +360,48 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		return SUCCESS;
 	}
 
-	public String registrarDescripcionSoporte() {
-		getSessionStack(isValidate);
+	public String registrarDescripcionSoporte() throws IllegalArgumentException, SecurityException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {		
 		// TODO Utilizar otro método para la inserción de los datos en el mismo
 		// registro.
+		try {		
+			setModificar((Boolean) session.get("modificar"));			
+			setId_servicio_informacion((Long) session
+					.get("id_servicio_informacion"));
+		} catch (Exception e) {
+			// Exception.
+		}
+		String responsable = servicio.getResponsable();
 		Telefono phone = new Telefono();
 		phone.setId_servicio_informacion(id_servicio_informacion);
 		phone.setTelefono(codigo + telefono);
 		Correo email = new Correo();
 		email.setId_servicio_informacion(id_servicio_informacion);
 		email.setCorreo(correo);
-		if (!isModificar()) {
+		
+		servicio = (ServicioInformacion) read(servicio,
+				id_servicio_informacion);
+		servicio.setResponsable(responsable);
+		if (!isModificar()) {			
+			servicio.setResponsable(responsable);
+			update(servicio);
 			create(phone);
 			create(email);
-		} else if (isModificar() && isComplete(servicio)) {
+		} else if (isModificar() && isComplete(servicio)) {			
 			update(servicio, id_servicio_informacion);
 			update(phone, id_servicio_informacion);
 			update(email, id_servicio_informacion);
-		}
+		}else{
+			Telefono phone2 = getPhone(phone, id_servicio_informacion);
+			if(phone2 == null){
+				update(servicio, id_servicio_informacion);
+				create(phone);
+				create(email);
+			}else{
+				update(servicio, id_servicio_informacion);
+				update(phone, id_servicio_informacion);
+				update(email, id_servicio_informacion);
+			}			
+		}		
 		return SUCCESS;
 	}
 
@@ -484,8 +524,6 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 				seguridad = (Long) session.get("seguridad");
 				arquitectura = (List<Long>) session.get("arquitectura");
 				intercambio = (Long) session.get("intercambio");
-				telefono = (String) session.get("telefono");
-				correo = (String) session.get("correo");
 			} catch (Exception e) {
 				// TODO Handling the exception?!
 				System.out.println("NO HAY NADA EN LA PILA");
