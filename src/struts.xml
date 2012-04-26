@@ -374,7 +374,7 @@
 			<result name="input">registro/formulario_usuario.jsp</result>
 			<result name="errorSession" type="redirectAction">salir</result>
 		</action>
-	</package>
+	</package>		
 	<constant name="struts.devMode" value="true" />
 	<constant name="struts.enable.DynamicMethodInvocation" value="true" />	
 </struts>

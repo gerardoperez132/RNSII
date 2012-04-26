@@ -32,29 +32,10 @@
 <s:if test="tab==4">
 	<s:set name="action" value="%{'registrarDescripcionSoporte'}" />
 </s:if>
-<s:if test="tab==0">
+<s:if test="tab==0">	
 	<s:set name="tab" value="%{setTab(2)}" />
 	<s:set name="action" value="%{'registrarAspectosLegales'}" />
-	<s:set name="id_servicio" value="#session.id_servicio_informacion" />
-		ID guardado => <s:property value="#id_servicio" />
-		TAB => <s:property value="tab" />
-	<s:property value="#session.id_servicio_informacion" />
-
-	<%@page
-		import="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador"%>
-	<%@page import="java.util.List"%>
-	<%@page import="ve.gob.cnti.srsi.modelo.AspectoLegal"%>
-	<%@page import="ve.gob.cnti.srsi.modelo.ServicioInformacion"%>
-	<%@page import="ve.gob.cnti.srsi.dao.Constants.Modelos"%>
-	<%@page extends="ve.gob.cnti.srsi.dao.DAO"%>
-	<%
-		ServicioInformacionControlador si = new ServicioInformacionControlador();
-				Object[] alsi = { new AspectoLegal(),
-						new ServicioInformacion() };
-				List<AspectoLegal> files = (List<AspectoLegal>) read(alsi,
-						53, -1);
-				si.setFiles(files);
-	%>
+	<s:set name="id_servicio" value="#session.id_servicio_informacion" />				
 </s:if>
 <title><s:text name="title" /> t: <s:property value="tab" /></title>
 	</head>
@@ -82,9 +63,6 @@
 					</s:else>
 					<h3>
 						<s:text name="title"></s:text>
-						t:
-						<s:property value="tab" />
-						<s:actionerror />
 					</h3>
 					<hr>
 					<ul class="tabs">
@@ -210,6 +188,9 @@
 									<h5 class="formulario">
 										<s:text name="documento.name" />
 									</h5>
+									<s:if test="#id_servicio > 0">
+										<span class="errorMessage"><s:text name="struts.messages.error.file.too.large"/></span>
+									</s:if>	
 									<s:fielderror>
 										<s:param>name</s:param>
 									</s:fielderror>
@@ -219,8 +200,7 @@
 									</h5>
 									<s:fielderror>
 										<s:param>file</s:param>
-									</s:fielderror>
-									<s:actionerror />
+									</s:fielderror>																
 									<s:file name="file" />
 									<s:token name="token" />
 									<s:hidden name="tab" value="2" />
@@ -248,6 +228,26 @@
 											</tr>
 										</s:iterator>
 									</table>
+								</s:if>
+								<s:if test="#id_servicio > 0">									
+									<s:bean name="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
+										<s:param name="id_servicio_informacion"
+											value="%{id_servicio}"></s:param>									
+										<table>
+											<s:iterator value="files2">
+												<tr>
+													<td><s:property value="nombre" /></td>
+													<td><a href="<s:property value='url' />">Descargar</a>
+													</td>
+													<td><s:property value="fecha_creado" /></td>
+													<td><form action="eliminarAspectoLegal">
+															<s:hidden name="id_aspecto_legal" />
+															<input type="submit" value="<s:text name="eliminar"/>">
+														</form></td>
+												</tr>
+											</s:iterator>
+										</table>
+									</s:bean>
 								</s:if>
 							</div>
 						</s:if>

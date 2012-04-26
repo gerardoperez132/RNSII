@@ -77,6 +77,8 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	private ServicioInformacion servicio = new ServicioInformacion();
 
 	private List<AspectoLegal> files = new ArrayList<AspectoLegal>();
+	@SuppressWarnings("unused")
+	private List<AspectoLegal> files2 = new ArrayList<AspectoLegal>();
 	private File file;
 	private String fileContentType;
 	private String fileFileName;
@@ -260,6 +262,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		documento.setUrl(saveFile());
 		create(documento);
 		files = (List<AspectoLegal>) read(ALSI, id_servicio_informacion, -1);
+		name = "";
 		return SUCCESS;
 	}
 
@@ -930,5 +933,14 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 
 	public void setId_aspecto_legal(long id_aspecto_legal) {
 		this.id_aspecto_legal = id_aspecto_legal;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<AspectoLegal> getFiles2() {
+		return (List<AspectoLegal>) read(ALSI, id_servicio_informacion, -1);
+	}
+
+	public void setFiles2(List<AspectoLegal> files2) {
+		this.files2 = files2;
 	}
 }
