@@ -26,7 +26,7 @@ public interface Constants {
 	/**
 	 * La ruta original para guardar los archivos.
 	 */
-	public static final String PATH = "/SRSI/archivos/";
+	public static final String PATH = "/archivos/";
 
 	/**
 	 * Interfaz con los estados de registro en la base de datos.
