@@ -126,8 +126,18 @@
 						
 						</div>
 						<!-- Descripción Legal -->
-						<div id="tab2" class="tab_content">
-							
+						<div id="tab2" class="tab_content">							
+							<table border="1">
+								<s:iterator value="files">
+									<tr>
+										<td><s:property value="nombre" /></td>											
+										<td><s:date name="fecha_creado" format="d 'de' MMMM 'del' yyyy" />
+										</td>
+										<td><a href="<s:property value='url' />">Descargar</a>
+										</td>											
+									</tr>
+								</s:iterator>
+							</table>							
 						</div>
 						<!-- Descripción Técnica -->
 						<div id="tab3" class="tab_content">
@@ -157,7 +167,7 @@
 								
 							</h5>
 							<h5 style="margin: 0;">
-								Servicio: "
+								Versión: "
 								<s:property value="servicio.version" />
 								"
 							</h5>

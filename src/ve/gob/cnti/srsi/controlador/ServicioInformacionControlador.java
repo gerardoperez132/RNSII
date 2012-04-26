@@ -607,6 +607,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		niveles = (List<Seguridad>) read(new Seguridad());
 		arquitecturas = (List<Arquitectura>) read(new Arquitectura());
 		children = (List<Intercambio>) read(new Intercambio());
+		files = (List<AspectoLegal>) read(ALSI, id_servicio_informacion, -1);
 		return SUCCESS;
 	}
 
