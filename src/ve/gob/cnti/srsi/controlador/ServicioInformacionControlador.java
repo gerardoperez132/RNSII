@@ -318,7 +318,6 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			throws IllegalArgumentException, SecurityException,
 			IllegalAccessException, InvocationTargetException,
 			NoSuchMethodException {
-		// Obtener de la sesión TODO
 		try {
 			setModificar((Boolean) session.get("modificar"));
 			setId_servicio_informacion((Long) session
@@ -371,8 +370,6 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			throws IllegalArgumentException, SecurityException,
 			IllegalAccessException, InvocationTargetException,
 			NoSuchMethodException {
-		// TODO Utilizar otro método para la inserción de los datos en el mismo
-		// registro.
 		try {
 			setModificar((Boolean) session.get("modificar"));
 			setId_servicio_informacion((Long) session
@@ -443,9 +440,19 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 						"Debe seleccionar un tipo de arquitectura");
 			if (servicio.getVersion().trim().isEmpty())
 				addFieldError("servicio.version", "Debe introducir la versión");
-			// TODO Se debe validar que la sesión esté conformada solamente por
-			// números y un solo punto. Además que el formato sea con 0.X en
-			// caso de no introducir un primer caracter.
+			try {
+				float version = Float.parseFloat(servicio.getVersion()
+						.toString());
+				if (version < 0.0 || version > 999.999)
+					addFieldError(
+							"servicio.version",
+							getText("El número de versión está fuera del rango, el formato es XXX.XXX"));
+
+			} catch (NumberFormatException ex) {
+				addFieldError(
+						"servicio.version",
+						getText("La versión sólo debe tener números en un formato XXX.XXX"));
+			}
 			if (intercambio < 0)
 				addFieldError("intercambio",
 						"Debe seleccionar un tipo de intercambio");
@@ -464,8 +471,6 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			if (!telefono.matches("\\d.*") && !telefono.trim().isEmpty())
 				addFieldError("telefono",
 						"El teléfono sólo puede estar conformado por números");
-			// TODO Se debe validar que el teléfono esté solamente conformado
-			// por números.
 			if (correo.trim().isEmpty())
 				addFieldError("correo", "Debe introducir un correo electrónico");
 			if (!correo
@@ -534,8 +539,6 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 				arquitectura = (List<Long>) session.get("arquitectura");
 				intercambio = (Long) session.get("intercambio");
 			} catch (Exception e) {
-				// TODO Handling the exception?!
-				System.out.println("NO HAY NADA EN LA PILA");
 			}
 		}
 		try {
@@ -563,7 +566,6 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			session.remove("nuevo");
 			session.remove("modificar");
 		} catch (Exception e) {
-			// TODO Handling the exception?!
 		}
 	}
 
