@@ -284,9 +284,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		String filename = name.replace(" ", "_") + "_" + new Date().getTime()
 				+ ".pdf";
 		FileUtils.copyFile(file, new File(path, filename));
-		String app = servletRequest.getSession().getServletContext()
-				.getServletContextName();
-		return "/" + app + PATH + siglas + "/" + filename;
+		return PATH + siglas + "/" + filename;
 	}
 
 	public String deleteFile() {
@@ -296,6 +294,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		if (id_servicio_informacion == documento.getId_servicio_informacion()) {
 			String path = servletRequest.getSession().getServletContext()
 					.getRealPath(documento.getUrl());
+			System.out.println("PATH ON DELETE => " + path);
 			File file = new File(path);
 			file.delete();
 			delete(documento, documento.getId_aspecto_legal());
@@ -654,6 +653,19 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 				delete(io_del, io_del.getId_entrada_salida());
 			}
 			delete(funcion_del, funcion_del.getId_funcionalidad());
+		}
+		List<AspectoLegal> documentos = new ArrayList<AspectoLegal>();
+		AspectoLegal documento = new AspectoLegal();
+		documentos = (List<AspectoLegal>) read(ALSI, id_servicio_informacion,
+				-1);
+		Iterator<AspectoLegal> docIterator = documentos.iterator();
+		while (docIterator.hasNext()) {
+			documento = docIterator.next();
+			String path = servletRequest.getSession().getServletContext()
+					.getRealPath(documento.getUrl());
+			File file = new File(path);
+			file.delete();
+			delete(documento, documento.getId_aspecto_legal());
 		}
 		delete(new ServicioInformacion(), id_servicio_informacion);
 		return SUCCESS;
