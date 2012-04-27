@@ -264,8 +264,6 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			files = (List<AspectoLegal>) read(ALSI, id_servicio_informacion, -1);
 			return INPUT;
 		}
-		System.out.println("IMPRIMIENDO EN SET ASPECTO LEGAL => "
-				+ id_servicio_informacion);
 		AspectoLegal documento = new AspectoLegal();
 		documento.setId_servicio_informacion(id_servicio_informacion);
 		documento.setNombre(name);
