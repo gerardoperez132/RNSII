@@ -311,6 +311,7 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 		}
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public void update(Object model) throws IllegalArgumentException,
 			SecurityException, IllegalAccessException,
@@ -331,6 +332,7 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 	}
 
 	// TODO Quitar las advertencias
+	@SuppressWarnings({"rawtypes" })
 	@Override
 	public void updateUnion(Object unionModel, Object modelParent,
 			Object modelChild, long idParent, List<?> children)
@@ -531,7 +533,7 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 		return complex;
 	}
 
-	@SuppressWarnings({ "unchecked", "unused" })
+	@SuppressWarnings({ "unchecked" })
 	public boolean isComplete(ServicioInformacion servicio) {
 		List<UnionAreaServicioInformacion> unionareas;
 		List<UnionArquitecturaServicioInformacion> unionarquitecturas;
