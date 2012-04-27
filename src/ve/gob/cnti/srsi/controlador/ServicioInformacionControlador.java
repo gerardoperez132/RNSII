@@ -264,6 +264,11 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			files = (List<AspectoLegal>) read(ALSI, id_servicio_informacion, -1);
 			return INPUT;
 		}
+		if (read(ALSI, id_servicio_informacion, name)) {
+			addFieldError("name", "Este nombre de archivo ya existe");
+			files = (List<AspectoLegal>) read(ALSI, id_servicio_informacion, -1);
+			return INPUT;
+		}
 		// TODO Comprobar que el nombre del archivo no esté repetido.
 		AspectoLegal documento = new AspectoLegal();
 		documento.setId_servicio_informacion(id_servicio_informacion);
@@ -604,7 +609,8 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 				// No tiene entradas ni salidas.
 			}
 		}
-		System.out.println("id ente " + servicio.getId_ente());;
+		System.out.println("id ente " + servicio.getId_ente());
+		;
 		ente = (Ente) read(ente, servicio.getId_ente());
 		sectores = (List<Sector>) read(new Sector());
 		estados = (List<Estado>) read(new Estado());
