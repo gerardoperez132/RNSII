@@ -248,7 +248,7 @@
 													<tr
 														id="node-<s:property value="%{((100) +  (#index_100))}" />"
 														class="child-of-node-<s:property value="%{1 + #result_Status.index}" />">
-														<td><s:property value="nombre" /> e:<s:property value="#index_100"/></td>
+														<td><s:property value="nombre" /></td>
 														<td><s:property value="descripcion" /></td>
 														<td><s:date name="fecha_creado"
 																format="d'/'MM'/'yyyy" /></td>
