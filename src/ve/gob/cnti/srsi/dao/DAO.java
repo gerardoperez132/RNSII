@@ -531,7 +531,7 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 		return complex;
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "unused" })
 	public boolean isComplete(ServicioInformacion servicio) {
 		List<UnionAreaServicioInformacion> unionareas;
 		List<UnionArquitecturaServicioInformacion> unionarquitecturas;
@@ -564,11 +564,11 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 		if (servicio.getId_intercambio() == 0) {
 			System.out.println("FALLÓ EN INTERCAMBIO");
 			return false;
-		}
+		}		
 		Telefono phone = new Telefono();
-		phone = (Telefono) read(phone, servicio.getId_servicio_informacion());
+		phone = (Telefono) getPhone(servicio, servicio.getId_servicio_informacion());		
 		if (phone == null) {
-			System.out.println("FALLÓ EN TELÉFONO");
+			System.out.println("FALLÓ EN TELÉFONO");			
 			return false;
 		}
 		Correo email = new Correo();
