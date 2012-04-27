@@ -48,8 +48,8 @@ public interface CRUD {
 	 * 
 	 * 
 	 * @param id
-	 *            Es el identificador de la la clase, modelo o tabla que es
-	 *            padre de la unión
+	 *            Es el identificador de la clase, modelo o tabla que es padre
+	 *            de la unión
 	 */
 	public void deleteUnion(Object[] models, long id_u, long id);
 
@@ -63,6 +63,21 @@ public interface CRUD {
 	 */
 	public ArrayList<?> read(Object model);
 
+	/**
+	 * Permite obtener todos los registros activos del modelo resultante de la
+	 * unión M:N de dos modelos dados.
+	 * 
+	 * @param unionModel
+	 *            Modelo unión que contiene la relación resultante M:N de dos
+	 *            tablas.
+	 * @param model
+	 *            Es la clase, modelo o tabla en el cual se realizará la
+	 *            consulta como campo identificador.
+	 * @param id
+	 *            Es el identificador de la clase, modelo o tabla que sirve como
+	 *            campo identificador.
+	 * @return
+	 */
 	public ArrayList<?> readUnion(Object unionModel, Object model, long id);
 
 	/**
@@ -147,6 +162,24 @@ public interface CRUD {
 	 */
 	public void update(Object model, long id);
 
+	/**
+	 * Permite modificar el registro especificado por id del modelo resultante
+	 * de una relación M:N.
+	 * 
+	 * @param unionModel
+	 *            Es el modelo resultante de una relación M:N.
+	 * @param modelParent
+	 *            Es la clase, modelo o tabla padre en la relación.
+	 * @param modelChild
+	 *            Es la clase, modelo o tabla hija en la relación.
+	 * @param idParent
+	 *            Es el identificador en el modelo padre.
+	 * @param children
+	 *            Lista de objetos hijos.
+	 * @throws Exception
+	 *             Arroja una excepción de no poder realizarse la invocación de
+	 *             un método de alguna de las clases.
+	 */
 	public void updateUnion(Object unionModel, Object modelParent,
 			Object modelChild, long idParent, List<?> children)
 			throws Exception;
@@ -247,11 +280,18 @@ public interface CRUD {
 	 * trazas de auditoría.
 	 * 
 	 * @param model
+	 *            Es la clase, modelo o tabla en la cual se realizará la
+	 *            consulta.
 	 * @throws NoSuchMethodException
+	 *             Cuando no existe el método.
 	 * @throws InvocationTargetException
+	 *             Cuando la invocación no fue satisfactoria.
 	 * @throws IllegalAccessException
+	 *             Cuando es ilegal acceder a un comportamiento del objeto.
 	 * @throws SecurityException
+	 *             Excepción de seguridad.
 	 * @throws IllegalArgumentException
+	 *             Cuando es ilegal el argumento pasado.
 	 */
 	public void update(Object model) throws IllegalArgumentException,
 			SecurityException, IllegalAccessException,
