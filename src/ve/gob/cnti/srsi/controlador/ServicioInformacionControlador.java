@@ -264,11 +264,6 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			files = (List<AspectoLegal>) read(ALSI, id_servicio_informacion, -1);
 			return INPUT;
 		}
-		if (file.length() > (FileUtils.ONE_MB * 2)) {
-			addFieldError("file", "Tamaño máximo por archivo => 2 MB");
-			files = (List<AspectoLegal>) read(ALSI, id_servicio_informacion, -1);
-			return INPUT;
-		}
 		System.out.println("IMPRIMIENDO EN SET ASPECTO LEGAL => "
 				+ id_servicio_informacion);
 		AspectoLegal documento = new AspectoLegal();
