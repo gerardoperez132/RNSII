@@ -52,7 +52,7 @@
 							<td style="width: 350px;">
 								<div style="text-align: right;">
 									<s:text name="bienvenido" />
-									<s:property value="%{#session.usuario.nombre}" />
+									<s:property value="#session.usuario.nombre" />
 								</div>
 							</td>
 						</tr>

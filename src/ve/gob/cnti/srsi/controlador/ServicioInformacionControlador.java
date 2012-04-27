@@ -605,6 +605,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 				// No tiene entradas ni salidas.
 			}
 		}
+		ente = (Ente) read(ente, servicio.getId_ente());
 		sectores = (List<Sector>) read(new Sector());
 		estados = (List<Estado>) read(new Estado());
 		sectores = (List<Sector>) read(new Sector());
