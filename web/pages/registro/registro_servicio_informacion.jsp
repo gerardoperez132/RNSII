@@ -183,7 +183,9 @@
 									<p class="formulario">
 										<s:text name="tab2.subtitle" />
 									</p>
-									<small><s:text name="tab2.description"></s:text> </small>
+									<small><s:text name="tab2.description">
+											<s:param>2</s:param>
+										</s:text> </small>
 									<hr>
 									<h5 class="formulario">
 										<s:text name="documento.name" />
