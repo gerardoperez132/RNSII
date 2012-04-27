@@ -264,6 +264,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			files = (List<AspectoLegal>) read(ALSI, id_servicio_informacion, -1);
 			return INPUT;
 		}
+		// TODO Comprobar que el nombre del archivo no esté repetido.
 		AspectoLegal documento = new AspectoLegal();
 		documento.setId_servicio_informacion(id_servicio_informacion);
 		documento.setNombre(name);
@@ -326,7 +327,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		getSessionStack(isValidate);
 		servicio.setId_seguridad(seguridad);
 		servicio.setId_intercambio(intercambio);
-		servicio.setVersion(version);
+		servicio.setVersion(String.valueOf(Float.parseFloat(version)));
 		arquitectura = arq;
 		seguridad = seguridad_tmp;
 		intercambio = intercambio_tmp;
@@ -344,7 +345,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 					id_servicio_informacion);
 			servicio.setId_seguridad(seguridad);
 			servicio.setId_intercambio(intercambio);
-			servicio.setVersion(version);
+			servicio.setVersion(String.valueOf(Float.parseFloat(version)));
 			update(servicio);
 		}
 		UnionArquitecturaServicioInformacion unionArquitecturaServicioInformacion = new UnionArquitecturaServicioInformacion();
