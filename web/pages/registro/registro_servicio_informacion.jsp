@@ -221,7 +221,7 @@
 										<s:iterator value="files">
 											<tr>
 												<td><s:property value="nombre" /></td>
-												<td><a href="<s:property value='url' />">Descargar</a>
+												<td><a href="..<s:property value='url' />">Descargar</a>
 												</td>
 												<td><s:property value="fecha_creado" /></td>
 												<td><form action="eliminarAspectoLegal" method="post">
@@ -241,7 +241,7 @@
 											<s:iterator value="files2">
 												<tr>
 													<td><s:property value="nombre" /></td>
-													<td><a href="<s:property value='url' />">Descargar</a>
+													<td><a href="..<s:property value='url' />">Descargar</a>
 													</td>
 													<td><s:property value="fecha_creado" /></td>
 													<td><form action="eliminarAspectoLegal" method="post">
