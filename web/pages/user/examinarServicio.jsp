@@ -154,8 +154,7 @@
 									<tr>
 										<td><s:text name="nombre" /></td>
 										<td><s:text name="fecha" /></td>
-										<td><a href="..<s:property value='url' />"><s:text
-													name="descargar" /> </a></td>
+										<td><s:text name="descargar" /></td>
 									</tr>
 								<s:iterator value="files">
 									<tr>
