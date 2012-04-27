@@ -72,7 +72,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	private String codigos[] = CODES;
 
 	private HttpServletRequest servletRequest;
-	private Ente ente;
+	private Ente ente = new Ente();
 	@SuppressWarnings("rawtypes")
 	private Map session;
 	private ServicioInformacion servicio = new ServicioInformacion();
@@ -604,6 +604,8 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 				// No tiene entradas ni salidas.
 			}
 		}
+		System.out.println("id ente " + servicio.getId_ente());;
+		ente = (Ente) read(ente, servicio.getId_ente());
 		sectores = (List<Sector>) read(new Sector());
 		estados = (List<Estado>) read(new Estado());
 		sectores = (List<Sector>) read(new Sector());
