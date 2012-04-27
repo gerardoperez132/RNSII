@@ -22,9 +22,8 @@
 			<div id="container">
 				<%@include file="../layout/header.jsp"%>
 				<!-- Esta es la barra lateral -->
-				<div id="sidebar">
-					<%@include file="../layout/sidebar.jsp"%>
-				</div>
+				<%@include file="../layout/sidebar.jsp"%>
+				
 				<!-- Este es el div de contenidos -->
 				<div id="content">
 					<h3>

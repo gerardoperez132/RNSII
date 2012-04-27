@@ -10,6 +10,7 @@
 <!-- CSS (required) -->
 <link rel="stylesheet" type="text/css" href="res/css/styles.css">
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
+<link rel="stylesheet" type="text/css" href="res/css/menu_vertical.css">
 <title><s:text name="registro.title"></s:text></title>
 	</head>
 	<body>
@@ -18,13 +19,9 @@
 			<!-- Este es el div contenedor del maquetado de la página -->
 			<div id="container">
 				<%@include file="../layout/header.jsp"%>
-				<!-- Esta es la barra lateral -->
-				<div id="sidebar">
-					<small>Paso 1 Registro de Servicio de Información</small><br>
-					<br> <big>Paso 2 Registro de Funcionalidad(es)</big> <br>
-					<br> <small>Paso 3 Registro de Entradas/Salidas</small><br>
-					<br> <small>Paso 4 Verificar y guardar</small>
-				</div>
+				<!-- Esta es la barra lateral -->				
+				<%@include file="../layout/sidebar.jsp"%>
+				
 				<!-- Este es el div de contenidos -->
 				<div id="content">
 					<h3>
@@ -32,13 +29,13 @@
 					</h3>
 					<hr>
 					<ul class="tabs">
-						<li><a href="#tab1"><s:text name="tab1.title"></s:text> </a>
+						<li><a><s:text name="tab1.title"></s:text> </a>
 						</li>
 						<li><a><s:text name="tab2.title"></s:text> </a></li>
 						<li class="active"><a href="#tab3"><s:text
 									name="tab3.title"></s:text> </a>
 						</li>
-						<li><a href="#tab4"><s:text name="tab4.title"></s:text> </a>
+						<li><a><s:text name="tab4.title"></s:text> </a>
 						</li>
 					</ul>
 					<div class="tab_container">

@@ -10,6 +10,7 @@
 <!-- CSS (required) -->
 <link rel="stylesheet" type="text/css" href="res/css/styles.css">
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
+<link rel="stylesheet" type="text/css" href="res/css/menu_vertical.css">
 <link rel="stylesheet" type="text/css"
 	href="res/css/jquery.treeTable.css">
 <link rel="stylesheet" type="text/css" href="res/css/table_tree.css">
@@ -29,12 +30,7 @@
 			<div id="container">
 				<%@include file="../layout/header.jsp"%>
 				<!-- Esta es la barra lateral -->
-				<div id="sidebar">
-					<small>Paso 1 Registro de Servicio de Información</small><br>
-					<br> <big>Paso 2 Registro de Funcionalidad(es)</big> <br>
-					<br> <small>Paso 3 Registro de Entradas/Salidas</small><br>
-					<br> <small>Paso 4 Verificar y guardar</small>
-				</div>
+				<%@include file="../layout/sidebar.jsp"%>
 				<!-- Este es el div de contenidos -->
 				<div id="content">
 					<h3>
