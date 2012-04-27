@@ -133,7 +133,7 @@
 										<td><s:property value="nombre" /></td>											
 										<td><s:date name="fecha_creado" format="d 'de' MMMM 'del' yyyy" />
 										</td>
-										<td><a href="<s:property value='url' />">Descargar</a>
+										<td><a href="..<s:property value='url' />">Descargar</a>
 										</td>											
 									</tr>
 								</s:iterator>
