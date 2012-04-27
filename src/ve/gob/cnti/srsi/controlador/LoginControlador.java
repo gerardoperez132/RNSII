@@ -89,9 +89,11 @@ public class LoginControlador extends DAO {
 			while (siIterado.hasNext()) {
 				servicio = siIterado.next();
 				if (servicio.getId_estado() == 1) {
+					System.out.println("1 estado en desarrollo");
 					ListaServicios
 							.add(new ServiciosPublicables(false, servicio));
 				} else if (!isComplete(servicio)) {
+					System.out.println("2 el servicio no esta completo");
 					ListaServicios
 							.add(new ServiciosPublicables(false, servicio));
 				} else {
@@ -100,6 +102,7 @@ public class LoginControlador extends DAO {
 					List<Funcionalidad> funcionalidades = (List<Funcionalidad>) read(
 							models, servicio.getId_servicio_informacion(), -1);
 					if (funcionalidades.isEmpty()) {
+						System.out.println("3 no tiene funcionalidades");
 						ListaServicios.add(new ServiciosPublicables(false,
 								servicio));
 					} else {
@@ -113,6 +116,7 @@ public class LoginControlador extends DAO {
 							List<EntradaSalida> salidas_tmp = (List<EntradaSalida>) read(
 									models2, fx.getId_funcionalidad(), SALIDA);
 							if (salidas_tmp.isEmpty()) {
+								System.out.println("4 funcionalidad sin salidas");
 								publicable = false;								
 							}							
 						}
