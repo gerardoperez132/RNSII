@@ -151,12 +151,18 @@
 						<!-- Descripción Legal -->
 						<div id="tab2" class="tab_content">
 							<table border="1">
+									<tr>
+										<td><s:text name="nombre" /></td>
+										<td><s:text name="fecha" /></td>
+										<td><a href="..<s:property value='url' />"><s:text
+													name="descargar" /> </a></td>
+									</tr>
 								<s:iterator value="files">
 									<tr>
 										<td><s:property value="nombre" />
 										</td>
 										<td><s:date name="fecha_creado"
-												format="d 'de' MMMM 'del' yyyy" /></td>
+												format="d'/'MM'/'yyyy" /></td>
 										<td><a href="..<s:property value='url' />"><s:text
 													name="descargar" /> </a></td>
 									</tr>
@@ -242,7 +248,7 @@
 							<tr>
 								<th><s:text name="nombre"></s:text>
 								</th>
-								<th><s:text name="descipción"></s:text>
+								<th><s:text name="descripcion"></s:text>
 								</th>
 								<th><s:text name="fecha"></s:text>
 								</th>
