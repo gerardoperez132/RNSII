@@ -13,6 +13,7 @@
 <link rel="stylesheet" type="text/css"
 	href="res/css/jquery.treeTable.css">
 <link rel="stylesheet" type="text/css" href="res/css/table_tree.css">
+<link rel="stylesheet" type="text/css" href="res/css/table2.css">
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
 <script type="text/javascript" src="res/js/jquery-1.7.1.js"></script>
 <script type="text/javascript" src="res/js/tabs.js"></script>
@@ -150,19 +151,19 @@
 						</div>
 						<!-- Descripción Legal -->
 						<div id="tab2" class="tab_content">
-							<table border="1">
+							<table class="tb">
 									<tr>
-										<td><s:text name="nombre" /></td>
-										<td><s:text name="fecha" /></td>
-										<td><s:text name="descargar" /></td>
+										<th class="tb_th"><s:text name="nombre" /></th>
+										<th class="tb_th"><s:text name="fecha" /></th>
+										<th class="tb_th"><s:text name="descargar" /></th>
 									</tr>
-								<s:iterator value="files">
-									<tr>
-										<td><s:property value="nombre" />
+								<s:iterator value="files" status="i">
+									<tr <s:if test="#i.odd == true ">class="alt"</s:if>>
+										<td class="tb_td"><s:property value="nombre" />
 										</td>
-										<td><s:date name="fecha_creado"
+										<td class="tb_td"><s:date name="fecha_creado"
 												format="d'/'MM'/'yyyy" /></td>
-										<td><a href="..<s:property value='url' />"><s:text
+										<td class="tb_td"><a href="..<s:property value='url' />"><s:text
 													name="descargar" /> </a></td>
 									</tr>
 								</s:iterator>
