@@ -103,6 +103,7 @@
 								<br> 
 								
 								
+								<s:if test="complejo!=true">
 								
 								<h5 class="formulario">
 									<s:text name="form.salida.formato"/>
@@ -142,6 +143,8 @@
 									<s:param>longitud</s:param>
 								</s:fielderror>
 								<s:textfield name="salida.longitud" maxlength="10" id="longitud"/>
+								
+								</s:if>
 								
 								<br>
 								<s:hidden name="id_servicio_informacion"></s:hidden>
