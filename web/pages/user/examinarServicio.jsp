@@ -157,6 +157,7 @@
 										<th class="tb_th"><s:text name="fecha" /></th>
 										<th class="tb_th"><s:text name="descargar" /></th>
 									</tr>
+								<s:if test="files.size()>0">
 								<s:iterator value="files">
 									<tr>
 										<td class="tb_td"><s:property value="nombre" />
@@ -167,6 +168,12 @@
 													name="descargar" /> </a></td>
 									</tr>
 								</s:iterator>
+								</s:if>
+								<s:else>
+									<tr>
+										<th colspan="3"><s:text name="files.empty" /></th>
+									</tr>								
+								</s:else>
 							</table>
 						</div>
 						<!-- Descripción Técnica -->
