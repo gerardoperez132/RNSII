@@ -29,6 +29,11 @@
 					<h3>
 						<s:text name="form.entrada.registro.funcionalidades.title"></s:text>
 					</h3>
+					<form action="prepararEntradas" method="POST">
+						<s:hidden name="id_servicio_informacion"></s:hidden>
+						<s:hidden name="id_funcionalidad"></s:hidden>
+						<input type="submit" value="<s:text name="regresar"></s:text>">
+					</form>
 					<hr>
 					<ul class="tabs">
 						<li><a href="#tab1"><s:text name="tab1.title"></s:text> </a>
@@ -41,6 +46,9 @@
 						</li>
 					</ul>
 					<div class="tab_container">
+					
+						
+					
 						<s:if test="modificar!=true">
 							<s:set name="action" var="action">registrarEntrada</s:set>
 							<s:set name="modificar" value="%{false}" />

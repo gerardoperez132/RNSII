@@ -27,6 +27,13 @@
 					<h3>
 						<s:text name="registro.funcionalidades.title"></s:text>
 					</h3>
+															
+					<form action="prepararSalidas" method="POST">
+						<s:hidden name="id_servicio_informacion"></s:hidden>
+						<s:hidden name="id_funcionalidad"></s:hidden>
+						<input type="submit" value="<s:text name="regresar"></s:text>">
+					</form>
+					
 					<hr>
 					<ul class="tabs">
 						<li><a><s:text name="tab1.title"></s:text> </a>
