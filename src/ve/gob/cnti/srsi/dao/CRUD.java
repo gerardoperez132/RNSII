@@ -131,6 +131,19 @@ public interface CRUD {
 	public boolean read(Object[] models, long id, String name);
 
 	/**
+	 * Permite obtener una lista de objetos del modelo dado ordenado por nombre
+	 * de forma ascendente o descendente dependiendo del caso.
+	 * 
+	 * @param model
+	 *            Es la clase, modelo o tabla en la cual se realizará la
+	 *            consulta.
+	 * @param orderBy
+	 *            Tipo de ordenamiento de la lista de objetos obtenida.
+	 * @return
+	 */
+	public ArrayList<?> getSortedList(Object model, byte orderBy);
+
+	/**
 	 * Permite obtener el objeto correo de un usuario con el string dado.
 	 * 
 	 * @param email
