@@ -475,7 +475,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			if (correo.trim().isEmpty())
 				addFieldError("correo", "Debe introducir un correo electrónico");
 			if (!correo
-					.matches("^[a-zA-Z0-9_-].{1,}@[a-zA-Z0-9_-]{2,}\\.[a-zA-Z]{2,4}(\\.[a-zA-Z]{2,4})?$"))
+					.matches("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"))
 				addFieldError("correo",
 						"Debe introducir una dirección de correo válida");
 			// TODO Se debe validar que la expresión regular acepte solamente un
