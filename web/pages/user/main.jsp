@@ -69,7 +69,14 @@
 							<tr id="node-<s:property value="#result_datos.index"/>">								
 								<th><s:property value="servicio.id_servicio_informacion" /></th>
 								<td><s:property value="servicio.nombre" /></td>
-								<td><s:property value="servicio.id_estado" /></td>
+								<td>
+									<s:set name="estado" value="servicio.id_estado"></s:set>
+									<s:iterator value="estados">
+										<s:if test="#estado == id_estado">
+											<s:property value="nombre" />
+										</s:if>										
+									</s:iterator>									
+								</td>
 								<td><s:date name="servicio.fecha_creado" format="d'/'MM'/'yyyy" /></td>
 								<td>
 									<table style="margin: 0; padding: 0;">

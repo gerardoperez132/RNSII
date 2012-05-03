@@ -13,6 +13,7 @@ import ve.gob.cnti.srsi.dao.MD5Hashing;
 import ve.gob.cnti.srsi.modelo.Correo;
 import ve.gob.cnti.srsi.modelo.Ente;
 import ve.gob.cnti.srsi.modelo.EntradaSalida;
+import ve.gob.cnti.srsi.modelo.Estado;
 import ve.gob.cnti.srsi.modelo.Funcionalidad;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.Usuario;
@@ -29,6 +30,7 @@ public class LoginControlador extends DAO {
 	private Ente ente = new Ente();
 	private List<ServicioInformacion> servicios = new ArrayList<ServicioInformacion>();
 	private List<ServiciosPublicables> ListaServicios = new ArrayList<ServiciosPublicables>();
+	private List<Estado> estados = new ArrayList<Estado>();
 	@SuppressWarnings("rawtypes")
 	private Map session;
 
@@ -81,6 +83,7 @@ public class LoginControlador extends DAO {
 			}
 			ente = (Ente) read(ente, usuario.getId_ente());
 			session.put("ente", ente);
+			estados = (List<Estado>) read(new Estado());
 			Object[] objetos = { new ServicioInformacion(), new Ente() };
 			servicios = (ArrayList<ServicioInformacion>) read(objetos,
 					ente.getId_ente(), -1);
@@ -175,6 +178,14 @@ public class LoginControlador extends DAO {
 
 	public void setListaServicios(List<ServiciosPublicables> listaServicios) {
 		ListaServicios = listaServicios;
+	}
+	
+	public List<Estado> getEstados() {
+		return estados;
+	}
+
+	public void setEstados(List<Estado> estados) {
+		this.estados = estados;
 	}
 
 }
