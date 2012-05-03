@@ -332,7 +332,7 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 	}
 
 	// TODO Quitar las advertencias
-	@SuppressWarnings({"rawtypes" })
+	@SuppressWarnings({ "rawtypes" })
 	@Override
 	public void updateUnion(Object unionModel, Object modelParent,
 			Object modelChild, long idParent, List<?> children)
@@ -566,11 +566,12 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 		if (servicio.getId_intercambio() == 0) {
 			System.out.println("FALLÓ EN INTERCAMBIO");
 			return false;
-		}		
+		}
 		Telefono phone = new Telefono();
-		phone = (Telefono) getPhone(servicio, servicio.getId_servicio_informacion());		
+		phone = (Telefono) getPhone(servicio,
+				servicio.getId_servicio_informacion());
 		if (phone == null) {
-			System.out.println("FALLÓ EN TELÉFONO");			
+			System.out.println("FALLÓ EN TELÉFONO");
 			return false;
 		}
 		Correo email = new Correo();
@@ -581,5 +582,25 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 			return false;
 		}
 		return true;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public ArrayList<?> getSortedList(Object model, byte orderBy) {
+		ArrayList<?> list;
+		String order = orderBy > 0 ? "DESC" : "ASC";
+		try {
+			startConnection();
+			list = (ArrayList<Object>) session.createQuery(
+					"FROM " + model.getClass().getSimpleName()
+							+ " WHERE status = " + ACTIVO + " ORDER BY nombre "
+							+ order).list();
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+		return list;
 	}
 }

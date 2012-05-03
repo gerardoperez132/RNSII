@@ -102,7 +102,21 @@ public interface Constants {
 				new ServicioInformacion() };
 		/** Relación 1 Servicio de Información tiene N Aspectos Legales. */
 		public static final Object[] ALSI = { new AspectoLegal(),
-				new ServicioInformacion() };		
+				new ServicioInformacion() };
+	}
+
+	/**
+	 * Interfaz con los tipos de ordenamiento para una consulta a la base de
+	 * datos.
+	 * 
+	 * @author Richard Ricciardelli
+	 * 
+	 */
+	public interface Order {
+		/** Ordenar de forma ascendente. */
+		public static final byte ASC = 0;
+		/** Ordenar de forma descendente. */
+		public static final byte DESC = 1;
 	}
 
 	/**
