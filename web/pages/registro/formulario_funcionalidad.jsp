@@ -9,6 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <!-- CSS (required) -->
 <link rel="stylesheet" type="text/css" href="res/css/styles.css">
+<link rel="stylesheet" type="text/css" href="res/css/table2.css">
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
 <link rel="stylesheet" type="text/css" href="res/css/menu_vertical.css">
 <title><s:text name="registro.title"></s:text></title>
@@ -67,24 +68,32 @@
 						</ul>
 						<div class="tab_container">
 							<div id="tab1" class="tab_content">
-								<table>
+								<table class="tb">
 									<tr>
-										<td>
-											<h5>
-												<s:text name="nombre.title"></s:text>
-											</h5></td>
-										<td><s:property value="funcionalidad.nombre" />
+										<td class="tb_alt">
+											<span class="txt_small">
+												<s:text name="nombre.title"/>
+											</span>
 										</td>
-									</tr>
-									<tr>
-										<td>
-											<h5>
-												<s:text name="descripcion.title"></s:text>
-											</h5></td>
-										<td><s:property value="funcionalidad.descripcion" />
+										<td class="tb_td">
+											<span class="txt_small">
+												<s:property value="funcionalidad.nombre" />
+											</span>
 										</td>
-									</tr>
-								</table>
+									 </tr>
+									 <tr>
+										<td class="tb_alt">
+											<span class="txt_small">
+												<s:text name="descripcion.title"/>
+											</span>
+										</td>
+										<td class="tb_td">
+											<span class="txt_small">
+												<s:property value="funcionalidad.descripcion" />
+											</span>
+										</td>
+									 </tr>
+								</table>								
 								<form action="prepararFuncionalidad" method="POST">
 									<s:hidden name="id_servicio_informacion"></s:hidden>
 									<s:hidden name="id_funcionalidad"></s:hidden>
@@ -126,42 +135,58 @@
 						</ul>
 						<div class="tab_container">
 							<div id="tab1" class="tab_content">
-								<table>
+								<table class="tb">
 									<tr>
-										<td>
-											<h5>
+										<td class="tb_alt">
+											<span class="txt_small">
 												<s:text name="nombre.title"></s:text>
-											</h5></td>
-										<td><s:property value="funcionalidad.nombre" />
+											</span>
+										</td>
+										<td class="tb_td">
+											<span class="txt_small">
+												<s:property value="funcionalidad.nombre" />
+											</span>
 										</td>
 									</tr>
 									<tr>
-										<td>
-											<h5>
+										<td class="tb_alt">
+											<span class="txt_small">
 												<s:text name="descripcion.title"></s:text>
-											</h5>
+											</span>											
 										</td>
-										<td><s:property value="funcionalidad.descripcion" />
+										<td class="tb_td">
+											<span class="txt_small">
+												<s:property value="funcionalidad.descripcion" />
+											</span>
 										</td>
 									</tr>
+									
+									<s:fielderror>									
+										<s:param>Salidas</s:param>										
+									</s:fielderror>								
+									
 									<tr>
-										<td><s:fielderror>
-												<s:param>Salidas</s:param>
-											</s:fielderror>
-											<h5>
+									<td class="tb_alt">											
+											<span class="txt_small">
 												<s:text name="salidas.title"></s:text>
-											</h5>
+											</span>											
 										</td>
-										<td><s:property value="salidas.size" />
+										<td class="tb_td">
+											<span class="txt_small">
+												<s:property value="salidas.size" />
+											</span>
 										</td>
 									</tr>
 									<tr>
-										<td>
-											<h5>
+										<td class="tb_alt">
+											<span class="txt_small">
 												<s:text name="entradas.title"></s:text>
-											</h5>
+											</span>
 										</td>
-										<td><s:property value="entradas.size" />
+										<td class="tb_td">
+											<span class="txt_small">
+												<s:property value="entradas.size" />
+											</span>
 										</td>
 									</tr>
 								</table>
