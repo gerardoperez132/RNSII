@@ -32,7 +32,7 @@ public class SalidaControlador extends DAO implements Formulario,
 	private long id_servicio_informacion;
 	private long id_funcionalidad;
 	private boolean complejo;
-	private boolean modificar;	
+	private boolean modificar;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -152,55 +152,65 @@ public class SalidaControlador extends DAO implements Formulario,
 		if (salida.getDescripcion().isEmpty())
 			addFieldError("salida.descripcion",
 					"Debe introducir una descripción.");
-		if (salida.getId_tipo_dato() == -1){
+		if (salida.getId_tipo_dato() == -1) {
 			addFieldError("tipodato", "Debe seleccionar un tipo de dato");
-			salida.setId_formato((long)-1);
+			salida.setId_formato((long) -1);
 			salida.setLongitud("");
-		}else{
-			TipoDato td = (TipoDato)read(new TipoDato(), salida.getId_tipo_dato());
-			if(td.isHasformatted()){
-				if(salida.getId_formato()==-1){
-					addFieldError("formato", "Debe seleccionar un tipo formato " +
-							"que corresponda con el dato elegido");
-				}else{
-					Formato f = (Formato)read(new Formato(), salida.getId_formato());
-					if(f.getId_tipo_dato() != salida.getId_tipo_dato())
-						addFieldError("formato", "Debe seleccionar un tipo formato " +
-								"que corresponda con el dato elegido");
+		} else {
+			TipoDato td = (TipoDato) read(new TipoDato(),
+					salida.getId_tipo_dato());
+			if (td.isHasformatted()) {
+				if (salida.getId_formato() == -1) {
+					addFieldError("formato",
+							"Debe seleccionar un tipo formato "
+									+ "que corresponda con el dato elegido");
+				} else {
+					Formato f = (Formato) read(new Formato(),
+							salida.getId_formato());
+					if (f.getId_tipo_dato() != salida.getId_tipo_dato())
+						addFieldError("formato",
+								"Debe seleccionar un tipo formato "
+										+ "que corresponda con el dato elegido");
 				}
-			}else{
-				salida.setId_formato((long)-1);
+			} else {
+				salida.setId_formato((long) -1);
 			}
-			if(td.isHasLength()){
-				if(!salida.getLongitud().isEmpty()){
-					if(salida.getId_tipo_dato()==4){						
+			if (td.isHasLength()) {
+				if (!salida.getLongitud().isEmpty()) {
+					if (salida.getId_tipo_dato() == 4) {
 						try {
-							float num = Float.parseFloat(salida.getLongitud().toString());
-							if(num<=0){
-								addFieldError("longitud", "Exprese la longitud sólo con números positivos mayores que cero");
+							float num = Float.parseFloat(salida.getLongitud()
+									.toString());
+							if (num <= 0) {
+								addFieldError("longitud",
+										"Exprese la longitud sólo con números positivos mayores que cero");
 							}
 						} catch (Exception e) {
-							addFieldError("longitud", "Exprese la longitud sólo con números");
-						}						
-					}else{
+							addFieldError("longitud",
+									"Exprese la longitud sólo con números");
+						}
+					} else {
 						try {
-							Long num = Long.parseLong(salida.getLongitud().toString());
-							if(num<=0){
-								addFieldError("longitud", "Exprese la longitud sólo con números positivos mayores que cero");
+							Long num = Long.parseLong(salida.getLongitud()
+									.toString());
+							if (num <= 0) {
+								addFieldError("longitud",
+										"Exprese la longitud sólo con números positivos mayores que cero");
 							}
 						} catch (Exception e) {
-							addFieldError("longitud", "Exprese la longitud sólo con números");
+							addFieldError("longitud",
+									"Exprese la longitud sólo con números");
 						}
 					}
-				}else{
-					addFieldError("longitud", "Debe indicar la cantidad de digitos que acepta el dato");
+				} else {
+					addFieldError("longitud",
+							"Debe indicar la cantidad de digitos que acepta el dato");
 				}
-			}else{
+			} else {
 				salida.setLongitud("No aplica");
 			}
 		}
-		
-		
+
 		if (read(ESF, id_funcionalidad, salida.getNombre()) && !modificar) {
 			addFieldError("salida.nombre",
 					"Nombre de salida duplicado, cambie el nombre por favor");
@@ -211,7 +221,7 @@ public class SalidaControlador extends DAO implements Formulario,
 			prepararFormularioSimple();
 		}
 	}
-	
+
 	public List<EntradaSalida> getSalidas() {
 		return salidas;
 	}
@@ -291,7 +301,7 @@ public class SalidaControlador extends DAO implements Formulario,
 	public void setModificar(boolean modificar) {
 		this.modificar = modificar;
 	}
-	
+
 	public List<Formato> getFormatos() {
 		return formatos;
 	}
