@@ -29,6 +29,12 @@ public interface Constants {
 	public static final String PATH = "/archivos/";
 
 	/**
+	 * La expresión regular para validar los campos de los formularios.
+	 * Considerando que la cadena con la que se compara está en mayúsculas.
+	 */
+	public static final String REGEX = "^[A-Z0-9 _]*$";
+
+	/**
 	 * Interfaz con los estados de registro en la base de datos.
 	 * 
 	 * @author Richard Ricciardelli
