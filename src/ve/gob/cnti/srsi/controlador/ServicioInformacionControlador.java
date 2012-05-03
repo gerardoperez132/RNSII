@@ -20,6 +20,7 @@ import ve.gob.cnti.srsi.dao.Constants.Modelos;
 import ve.gob.cnti.srsi.dao.Constants.Order;
 import ve.gob.cnti.srsi.dao.Constants.Tabs;
 import ve.gob.cnti.srsi.dao.DAO;
+import ve.gob.cnti.srsi.i18n.Errors;
 import ve.gob.cnti.srsi.modelo.Area;
 import ve.gob.cnti.srsi.modelo.Arquitectura;
 import ve.gob.cnti.srsi.modelo.AspectoLegal;
@@ -272,7 +273,6 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			files = (List<AspectoLegal>) read(ALSI, id_servicio_informacion, -1);
 			return INPUT;
 		}
-		// TODO Comprobar que el nombre del archivo no esté repetido.
 		AspectoLegal documento = new AspectoLegal();
 		documento.setId_servicio_informacion(id_servicio_informacion);
 		documento.setNombre(name);
@@ -417,19 +417,30 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		isValidate = true;
 		switch (tab) {
 		case DESCRIPCION_GENERAL:
+			Errors error = new Errors();
 			if (sector < 0)
-				addFieldError("sector", "Debe seleccionar un sector");
+				addFieldError("sector",
+						error.getProperties().getProperty("error.sector"));
 			if (servicio.getNombre().trim().isEmpty())
-				addFieldError("servicio.nombre", "Debe introducir un nombre");
+				addFieldError("servicio.nombre", error.getProperties()
+						.getProperty("error.servicio.nombre").toString());
+			// TODO Validar que sólo introduzca caracteres válidos.
+			if (!servicio.getNombre().toUpperCase().matches(REGEX_TITLE))
+				addFieldError("servicio.nombre", error.getProperties()
+						.getProperty("error.servicio.nombre.regex"));
 			if (servicio.getDescripcion().trim().isEmpty())
-				addFieldError("servicio.descripcion",
-						"Debe introducir una descripción");
+				addFieldError("servicio.descripcion", error.getProperties()
+						.getProperty("error.servicio.descripcion"));
+			if (!servicio.getDescripcion().toUpperCase()
+					.matches(REGEX_DESCRIPTION))
+				addFieldError("servicio.descripcion", error.getProperties()
+						.getProperty("error.servicio.descripcion.regex"));
 			if (area.size() == 0)
 				addFieldError("area",
-						"Debe seleccionar un área a la que está orientado el servicio");
+						error.getProperties().getProperty("error.area"));
 			if (estado < 0)
 				addFieldError("estado",
-						"Debe seleccionar el estado del servicio");
+						error.getProperties().getProperty("error.estado"));
 			prepararDescripcionGeneral();
 			break;
 		case DESCRIPCION_TECNICA:
@@ -478,8 +489,6 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 					.matches("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"))
 				addFieldError("correo",
 						"Debe introducir una dirección de correo válida");
-			// TODO Se debe validar que la expresión regular acepte solamente un
-			// arroba.
 			prepararDescripcionSoporte();
 			break;
 		default:
