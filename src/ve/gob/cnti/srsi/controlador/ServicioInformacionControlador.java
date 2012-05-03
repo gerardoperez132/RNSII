@@ -17,6 +17,7 @@ import org.apache.struts2.interceptor.validation.SkipValidation;
 
 import ve.gob.cnti.srsi.dao.Constants;
 import ve.gob.cnti.srsi.dao.Constants.Modelos;
+import ve.gob.cnti.srsi.dao.Constants.Order;
 import ve.gob.cnti.srsi.dao.Constants.Tabs;
 import ve.gob.cnti.srsi.dao.DAO;
 import ve.gob.cnti.srsi.modelo.Area;
@@ -38,17 +39,9 @@ import ve.gob.cnti.srsi.modelo.Usuario;
 
 import com.opensymphony.xwork2.ActionContext;
 
-import com.opensymphony.xwork2.ActionContext;
-
-import com.opensymphony.xwork2.ActionContext;
-
-import com.opensymphony.xwork2.ActionContext;
-
-import com.opensymphony.xwork2.ActionContext;
-
 @SuppressWarnings("serial")
 public class ServicioInformacionControlador extends DAO implements Constants,
-		ServletRequestAware, Tabs, Modelos {
+		ServletRequestAware, Tabs, Modelos, Order {
 	private List<Sector> sectores = new ArrayList<Sector>();
 	private List<Estado> estados = new ArrayList<Estado>();
 	private List<Area> areas = new ArrayList<Area>();
@@ -101,7 +94,8 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	@SkipValidation
 	public String prepararRegistro() {
 		tab = DESCRIPCION_GENERAL;
-		sectores = (List<Sector>) read(new Sector());
+		// sectores = (List<Sector>) read(new Sector());
+		sectores = (List<Sector>) getSortedList(new Sector(), ASC);
 		estados = (List<Estado>) read(new Estado());
 		areas = (List<Area>) read(new Area());
 		id_servicio_informacion = getNextId(servicio);
@@ -120,7 +114,8 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		if (isComplete(servicio))
 			setModificar(true);
 		tab = DESCRIPCION_GENERAL;
-		sectores = (List<Sector>) read(new Sector());
+		// sectores = (List<Sector>) read(new Sector());
+		sectores = (List<Sector>) getSortedList(new Sector(), ASC);
 		estados = (List<Estado>) read(new Estado());
 		areas = (List<Area>) read(new Area());
 		return SUCCESS;
@@ -620,9 +615,9 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		System.out.println("id ente " + servicio.getId_ente());
 		;
 		ente = (Ente) read(ente, servicio.getId_ente());
-		sectores = (List<Sector>) read(new Sector());
+		// sectores = (List<Sector>) read(new Sector());
+		sectores = (List<Sector>) getSortedList(new Sector(), ASC);
 		estados = (List<Estado>) read(new Estado());
-		sectores = (List<Sector>) read(new Sector());
 		areas = (List<Area>) read(new Area());
 		niveles = (List<Seguridad>) read(new Seguridad());
 		arquitecturas = (List<Arquitectura>) read(new Arquitectura());
@@ -725,7 +720,8 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			correo = email.getCorreo();
 		} catch (Exception e) {
 		}
-		sectores = (List<Sector>) read(new Sector());
+		// sectores = (List<Sector>) read(new Sector());
+		sectores = (List<Sector>) getSortedList(new Sector(), ASC);
 		estados = (List<Estado>) read(new Estado());
 		areas = (List<Area>) read(new Area());
 		niveles = (List<Seguridad>) read(new Seguridad());
