@@ -77,7 +77,7 @@
 
 					<div class="tab_container">
 						<!-- Descripción general -->
-						<div id="tab1" class="tab_content">
+						<div id="tab1" class="tab_content">					
 
 							<h5 style="margin: 0;">
 								<s:text name="id" />
@@ -157,8 +157,9 @@
 										<th class="tb_th"><s:text name="fecha" /></th>
 										<th class="tb_th"><s:text name="descargar" /></th>
 									</tr>
-								<s:iterator value="files" status="i">
-									<tr <s:if test="#i.odd == true ">class="alt"</s:if>>
+								<s:if test="files.size()>0">
+								<s:iterator value="files">
+									<tr>
 										<td class="tb_td"><s:property value="nombre" />
 										</td>
 										<td class="tb_td"><s:date name="fecha_creado"
@@ -167,6 +168,12 @@
 													name="descargar" /> </a></td>
 									</tr>
 								</s:iterator>
+								</s:if>
+								<s:else>
+									<tr>
+										<th colspan="3"><s:text name="files.empty" /></th>
+									</tr>								
+								</s:else>
 							</table>
 						</div>
 						<!-- Descripción Técnica -->
