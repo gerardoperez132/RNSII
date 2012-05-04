@@ -5,17 +5,19 @@ import java.util.List;
 
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
+import ve.gob.cnti.srsi.dao.Constants;
 import ve.gob.cnti.srsi.dao.Constants.Formulario;
 import ve.gob.cnti.srsi.dao.Constants.Modelos;
 import ve.gob.cnti.srsi.dao.Constants.TipoEntradaSalida;
 import ve.gob.cnti.srsi.dao.DAO;
+import ve.gob.cnti.srsi.i18n.Errors;
 import ve.gob.cnti.srsi.modelo.EntradaSalida;
 import ve.gob.cnti.srsi.modelo.Funcionalidad;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 
 @SuppressWarnings("serial")
 public class FuncionalidadControlador extends DAO implements Formulario,
-		TipoEntradaSalida, Modelos {
+		TipoEntradaSalida, Modelos, Constants {
 
 	private List<EntradaSalida> entradas;
 	private List<EntradaSalida> salidas;
@@ -25,6 +27,8 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 	private Funcionalidad funcionalidad = new Funcionalidad();
 	private EntradaSalida entrada = new EntradaSalida();
 	private EntradaSalida salida = new EntradaSalida();
+
+	private Errors error = new Errors();
 
 	private long id_servicio_informacion;
 	private long id_funcionalidad;
@@ -130,7 +134,7 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 					id_funcionalidad);
 			funcionalidades = (List<Funcionalidad>) read(FSI, id_funcionalidad,
 					-1);
-		}		
+		}
 		return SUCCESS;
 	}
 
@@ -165,9 +169,10 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 
 	@SuppressWarnings("unchecked")
 	@SkipValidation
-	public String prepararFuncionalidades() {		
+	public String prepararFuncionalidades() {
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
-		funcionalidades = (List<Funcionalidad>) read(FSI, id_servicio_informacion, -1);
+		funcionalidades = (List<Funcionalidad>) read(FSI,
+				id_servicio_informacion, -1);
 		return SUCCESS;
 	}
 
@@ -185,10 +190,18 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 	}
 
 	public void validate() {
-		if (funcionalidad.getNombre().isEmpty())
-			addFieldError("funcionalidad.nombre", "Debe introducir un nombre.");
-		if (funcionalidad.getDescripcion().isEmpty())
-			addFieldError("funcionalidad.descripcion",
-					"Debe introducir una descripción.");
+		if (funcionalidad.getNombre().trim().isEmpty())
+			addFieldError("funcionalidad.nombre", error.getProperties()
+					.getProperty("error.funcionalidad.nombre"));
+		if (!funcionalidad.getNombre().toUpperCase().matches(REGEX_TITLE))
+			addFieldError("funcionalidad.nombre", error.getProperties()
+					.getProperty("error.regex.title"));
+		if (funcionalidad.getDescripcion().trim().isEmpty())
+			addFieldError("funcionalidad.descripcion", error.getProperties()
+					.getProperty("error.funcionalidad.descripcion"));
+		if (!funcionalidad.getDescripcion().toUpperCase()
+				.matches(REGEX_DESCRIPTION))
+			addFieldError("funcionalidad.descripcion", error.getProperties()
+					.getProperty("error.regex.description"));
 	}
 }
