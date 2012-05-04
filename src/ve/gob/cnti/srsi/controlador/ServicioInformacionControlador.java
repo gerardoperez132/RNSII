@@ -72,6 +72,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	private String correo;
 	private String codigo;
 	private String codigos[] = CODES;
+	Errors error = new Errors();
 
 	private HttpServletRequest servletRequest;
 	private Ente ente = new Ente();
@@ -417,14 +418,12 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		isValidate = true;
 		switch (tab) {
 		case DESCRIPCION_GENERAL:
-			Errors error = new Errors();
 			if (sector < 0)
 				addFieldError("sector",
 						error.getProperties().getProperty("error.sector"));
 			if (servicio.getNombre().trim().isEmpty())
 				addFieldError("servicio.nombre", error.getProperties()
 						.getProperty("error.servicio.nombre").toString());
-			// TODO Validar que sólo introduzca caracteres válidos.
 			if (!servicio.getNombre().toUpperCase().matches(REGEX_TITLE))
 				addFieldError("servicio.nombre", error.getProperties()
 						.getProperty("error.servicio.nombre.regex"));
@@ -446,28 +445,27 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		case DESCRIPCION_TECNICA:
 			if (seguridad < 0)
 				addFieldError("seguridad",
-						"Debe seleccionar un nivel de seguridad");
+						error.getProperties().getProperty("error.seguridad"));
 			if (arquitectura.size() == 0)
-				addFieldError("arquitectura",
-						"Debe seleccionar un tipo de arquitectura");
+				addFieldError("arquitectura", error.getProperties()
+						.getProperty("error.arquitectura"));
 			if (servicio.getVersion().trim().isEmpty())
-				addFieldError("servicio.version", "Debe introducir la versión");
+				addFieldError("servicio.version", error.getProperties()
+						.getProperty("error.version"));
 			try {
 				float version = Float.parseFloat(servicio.getVersion()
 						.toString());
 				if (version < 0.0 || version > 999.999)
-					addFieldError(
-							"servicio.version",
-							getText("El número de versión está fuera del rango, el formato es XXX.XXX"));
+					addFieldError("servicio.version", error.getProperties()
+							.getProperty("error.version.range"));
 
 			} catch (NumberFormatException ex) {
-				addFieldError(
-						"servicio.version",
-						getText("La versión sólo debe tener números en un formato XXX.XXX"));
+				addFieldError("servicio.version", error.getProperties()
+						.getProperty("error.version.format"));
 			}
 			if (intercambio < 0)
 				addFieldError("intercambio",
-						"Debe seleccionar un tipo de intercambio");
+						error.getProperties().getProperty("error.intercambio"));
 			prepararDescripcionTecnica();
 			break;
 		case DESCRIPCION_SOPORTE:
