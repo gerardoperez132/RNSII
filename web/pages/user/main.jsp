@@ -102,7 +102,7 @@
 											</td>
 											<td style="margin: 0; padding: 0;">
 												<form action="eliminarServicioInformacion" method="POST"												 
-												id="hhh_<s:property value="#result_datos.index" />"
+												id="id_<s:property value="#result_datos.index" />"
 												onsubmit="return false;">
 													<s:hidden name="id_servicio_informacion" value="%{servicio.id_servicio_informacion}"></s:hidden>													
 													<input type="submit" value="<s:text name="eliminar" />"

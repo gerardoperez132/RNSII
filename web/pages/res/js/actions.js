@@ -17,10 +17,10 @@ $(document).ready(function(){
 });
 
 function eliminar_SI(i){
-	var action = 'hhh_'+i;	
+	var action = 'id_'+i;	
 	var formulario = document.getElementById(action);	
 	jConfirm('¿Realemente desea eliminar el servicio de información?', '!Advertencia!', function(r) {
-		if(r == false){
+		if(r){
 			formulario.submit();
 		}else{
 			jAlert('Acción cancelada', 'Confirmación');			
