@@ -143,9 +143,11 @@ public class LoginControlador extends DAO {
 	public void validate() {
 		session = ActionContext.getContext().getSession();
 		if (correo == null && password == null) {
-			addFieldError("error", "Debe autenticarse para entrar al sistema");
+			addFieldError("error",
+					error.getProperties().getProperty("error.login"));
 		} else if (correo.isEmpty() || password.isEmpty()) {
-			addFieldError("error", "Debe insertar todos los campos");
+			addFieldError("error",
+					error.getProperties().getProperty("error.login.fields"));
 		}
 	}
 
@@ -180,7 +182,7 @@ public class LoginControlador extends DAO {
 	public void setListaServicios(List<ServiciosPublicables> listaServicios) {
 		ListaServicios = listaServicios;
 	}
-	
+
 	public List<Estado> getEstados() {
 		return estados;
 	}
