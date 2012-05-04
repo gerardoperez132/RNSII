@@ -47,22 +47,25 @@ public class UsuarioControlador extends DAO {
 			usuario = (Usuario) session.get("usuario");
 			if (clave_actual.isEmpty() || clave_nueva.isEmpty()
 					|| clave_nueva_confirme.isEmpty()) {
-				addFieldError("password", "Todos los campos son requeridos");
+				addFieldError("password",
+						error.getProperties().getProperty("error.login.fields"));
 				return INPUT;
 			} else if (usuario.getClave().equals(
 					new MD5Hashing(clave_actual).getPassword().toString())) {
 				if (!clave_nueva.equals(clave_nueva_confirme)) {
-					addFieldError("password", "Las contraseñas no coinciden");
+					addFieldError("password", error.getProperties()
+							.getProperty("error.login.password.match"));
 					return INPUT;
 				} else if (clave_nueva.length() < 6) {
-					addFieldError("password",
-							"La nueva contraseña debe tener al menos 6 caracteres");
+					addFieldError("password", error.getProperties()
+							.getProperty("error.login.password.length"));
 					return INPUT;
 				} else {
 					MD5Hashing pass = new MD5Hashing(clave_nueva);
 					usuario.setClave(pass.getPassword());
 					update(usuario, usuario.getId_usuario());
 					modificarClave = false;
+					// TODO Esto no es un error. ¿Qué se hace con esto?
 					addActionMessage("Clave modificada satifactoriamente");
 					return SUCCESS;
 				}
@@ -75,14 +78,16 @@ public class UsuarioControlador extends DAO {
 				}
 				intentos_fallidos++;
 				if (intentos_fallidos == 3) {
-					addFieldError("password",
-							"Su sesión ha sido cerrada por superar el máximo de intentos fallidos");
+					addFieldError("password", error.getProperties()
+							.getProperty("error.login.attempts"));
 					return "errorSession";
 				}
 				session.put("intentos_fallidos", intentos_fallidos);
-				addFieldError("password",
-						"Contraseña incorrecta - Intento N°: "
-								+ intentos_fallidos);
+				addFieldError(
+						"password",
+						error.getProperties().getProperty(
+								"error.login.password.attempt"));
+				// TODO Agregar intentos_fallidos
 				return INPUT;
 			}
 		}
@@ -102,6 +107,7 @@ public class UsuarioControlador extends DAO {
 			usuario = (Usuario) read(usuario, user.getId_usuario());
 			session.put("usuario", usuario);
 			modificarDatos = false;
+			// TODO Otro mensaje.
 			addActionMessage("Datos modificados satifactoriamente");
 		}
 		return SUCCESS;
@@ -123,9 +129,9 @@ public class UsuarioControlador extends DAO {
 	}
 
 	public void validate() {
-		if (modificarDatos == true) {
+		if (modificarDatos) {
 			long ci;
-			if (usuario.getNombre().isEmpty()
+			if (usuario.getNombre().trim().isEmpty()
 					|| usuario.getApellido().isEmpty()
 					|| usuario.getCedula().isEmpty()) {
 				addFieldError("datos", "Todos los campos son requeridos");
