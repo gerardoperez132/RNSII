@@ -10,9 +10,13 @@
 <!-- CSS (required) -->
 <link rel="stylesheet" type="text/css" href="res/css/styles.css">
 <link rel="stylesheet" type="text/css" href="res/css/menu_vertical.css">
+<link rel="stylesheet" type="text/css" href="res/css/jquery.alerts.css">
 <link rel="stylesheet" type="text/css"
 	href="res/css/jquery.treeTable.css">
 <link rel="stylesheet" type="text/css" href="res/css/table_tree.css">
+<script type="text/javascript" src="res/js/jquery-1.7.1.js" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/jquery.alerts.js" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/actions.js" charset="UTF-8"></script>
 <title><s:text name="inicio" /></title>
 </head>
 <body>
@@ -65,7 +69,7 @@
 				</thead>
 				<tbody>
 					<s:if test="ListaServicios.size() > 0">
-						<s:iterator value="ListaServicios" status="result_Status">
+						<s:iterator value="ListaServicios" status="result_datos">
 							<tr id="node-<s:property value="#result_datos.index"/>">								
 								<th><s:property value="servicio.id_servicio_informacion" /></th>
 								<td><s:property value="servicio.nombre" /></td>
@@ -82,6 +86,7 @@
 									<table style="margin: 0; padding: 0;">
 										<tr style="margin: 0; padding: 0;">
 											<td style="margin: 0; padding: 0;">
+												<s:set var="i" value="#result_datos.index"></s:set>												
 												<form action="examinarServicioInformacion" method="POST">													
 													<s:hidden name="id_servicio_informacion" value="%{servicio.id_servicio_informacion}"></s:hidden>													
 													<input type="submit" value="<s:text name="detalles"/>"
@@ -96,10 +101,12 @@
 												</form>
 											</td>
 											<td style="margin: 0; padding: 0;">
-												<form action="eliminarServicioInformacion" method="POST">
+												<form action="eliminarServicioInformacion" method="POST"												 
+												id="hhh_<s:property value="#result_datos.index" />"
+												onsubmit="return false;">
 													<s:hidden name="id_servicio_informacion" value="%{servicio.id_servicio_informacion}"></s:hidden>													
 													<input type="submit" value="<s:text name="eliminar" />"
-														style="font-size: 0.9em;" />
+														style="font-size: 0.9em;"  onclick="eliminar_SI(<s:property value="#i"/>);" />
 												</form>
 											</td>
 											<td style="margin: 0; padding: 0;">
@@ -108,7 +115,7 @@
 													<form action="publicarServicioInformacion" method="POST">
 														<s:hidden name="id_servicio_informacion" value="%{servicio.id_servicio_informacion}"></s:hidden>													
 														<input type="submit" value="<s:text name="publicar" />"
-															style="font-size: 0.9em;" />
+															style="font-size: 0.9em;"/>
 													</form>
 												</s:if>
 												<s:else>
