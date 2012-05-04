@@ -445,14 +445,14 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 						.getProperty("error.servicio.nombre").toString());
 			if (!servicio.getNombre().toUpperCase().matches(REGEX_TITLE))
 				addFieldError("servicio.nombre", error.getProperties()
-						.getProperty("error.servicio.nombre.regex"));
+						.getProperty("error.regex.title"));
 			if (servicio.getDescripcion().trim().isEmpty())
 				addFieldError("servicio.descripcion", error.getProperties()
 						.getProperty("error.servicio.descripcion"));
 			if (!servicio.getDescripcion().toUpperCase()
 					.matches(REGEX_DESCRIPTION))
 				addFieldError("servicio.descripcion", error.getProperties()
-						.getProperty("error.servicio.descripcion.regex"));
+						.getProperty("error.regex.description"));
 			if (area.size() == 0)
 				addFieldError("area",
 						error.getProperties()
