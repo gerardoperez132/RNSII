@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
+import ve.gob.cnti.srsi.dao.Constants;
 import ve.gob.cnti.srsi.dao.Constants.Formulario;
 import ve.gob.cnti.srsi.dao.Constants.Modelos;
 import ve.gob.cnti.srsi.dao.Constants.TipoEntradaSalida;
@@ -18,7 +19,7 @@ import ve.gob.cnti.srsi.modelo.TipoDato;
 
 @SuppressWarnings("serial")
 public class SalidaControlador extends DAO implements Formulario,
-		TipoEntradaSalida, Modelos {
+		TipoEntradaSalida, Modelos, Constants {
 
 	private List<EntradaSalida> salidas;
 	private List<TipoDato> tipoDatos;
@@ -146,14 +147,21 @@ public class SalidaControlador extends DAO implements Formulario,
 
 	@Override
 	public void validate() {
-		if (salida.getNombre().isEmpty())
+		if (salida.getNombre().trim().isEmpty())
 			addFieldError("salida.nombre",
-					"Debe introducir un nombre que identifique el dato");
-		if (salida.getDescripcion().isEmpty())
-			addFieldError("salida.descripcion",
-					"Debe introducir una descripción.");
+					error.getProperties().getProperty("error.salida.nombre"));
+		if (!salida.getNombre().toUpperCase().matches(REGEX_TITLE))
+			addFieldError("salida.nombre",
+					error.getProperties().getProperty("error.regex.title"));
+		if (salida.getDescripcion().trim().isEmpty())
+			addFieldError("salida.descripcion", error.getProperties()
+					.getProperty("error.salida.descripcion"));
+		if (salida.getDescripcion().toUpperCase().matches(REGEX_DESCRIPTION))
+			addFieldError("salida.descripcion", error.getProperties()
+					.getProperty("error.regex.description"));
 		if (salida.getId_tipo_dato() == -1) {
-			addFieldError("tipodato", "Debe seleccionar un tipo de dato");
+			addFieldError("tipodato",
+					error.getProperties().getProperty("error.salida.tipodato"));
 			salida.setId_formato((long) -1);
 			salida.setLongitud("");
 		} else {
@@ -161,16 +169,16 @@ public class SalidaControlador extends DAO implements Formulario,
 					salida.getId_tipo_dato());
 			if (td.isHasformatted()) {
 				if (salida.getId_formato() == -1) {
-					addFieldError("formato",
-							"Debe seleccionar un tipo formato "
-									+ "que corresponda con el dato elegido");
+					addFieldError(
+							"formato",
+							error.getProperties().getProperty(
+									"error.salida.format"));
 				} else {
 					Formato f = (Formato) read(new Formato(),
 							salida.getId_formato());
 					if (f.getId_tipo_dato() != salida.getId_tipo_dato())
-						addFieldError("formato",
-								"Debe seleccionar un tipo formato "
-										+ "que corresponda con el dato elegido");
+						addFieldError("formato", error.getProperties()
+								.getProperty("error.salida.format"));
 				}
 			} else {
 				salida.setId_formato((long) -1);
@@ -182,38 +190,39 @@ public class SalidaControlador extends DAO implements Formulario,
 							float num = Float.parseFloat(salida.getLongitud()
 									.toString());
 							if (num <= 0) {
-								addFieldError("longitud",
-										"Exprese la longitud sólo con números positivos mayores que cero");
+								addFieldError("longitud", error.getProperties()
+										.getProperty("error.salida.longitud"));
 							}
 						} catch (Exception e) {
-							addFieldError("longitud",
-									"Exprese la longitud sólo con números");
+							addFieldError("longitud", error.getProperties()
+									.getProperty("error.salida.longitud"));
 						}
 					} else {
 						try {
 							Long num = Long.parseLong(salida.getLongitud()
 									.toString());
 							if (num <= 0) {
-								addFieldError("longitud",
-										"Exprese la longitud sólo con números positivos mayores que cero");
+								addFieldError("longitud", error.getProperties()
+										.getProperty("error.salida.longitud"));
 							}
 						} catch (Exception e) {
-							addFieldError("longitud",
-									"Exprese la longitud sólo con números");
+							addFieldError("longitud", error.getProperties()
+									.getProperty("error.salida.longitud"));
 						}
 					}
 				} else {
-					addFieldError("longitud",
-							"Debe indicar la cantidad de digitos que acepta el dato");
+					addFieldError("longitud", error.getProperties()
+							.getProperty("error.salida.digit"));
 				}
 			} else {
-				salida.setLongitud("No aplica");
+				salida.setLongitud(error.getProperties().getProperty(
+						"error.length"));
 			}
 		}
-
 		if (read(ESF, id_funcionalidad, salida.getNombre()) && !modificar) {
 			addFieldError("salida.nombre",
-					"Nombre de salida duplicado, cambie el nombre por favor");
+					error.getProperties()
+							.getProperty("error.salida.duplicated"));
 		}
 		if (complejo) {
 			prepararFormularioComplejo();
