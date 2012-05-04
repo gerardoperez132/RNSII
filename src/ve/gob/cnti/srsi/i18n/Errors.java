@@ -22,11 +22,9 @@ public class Errors {
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("DAMN IT FILE NOT FOUND!");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("DAMN IT IO EXCEPTION FUCK OFF!!!");
 		}
 	}
 }

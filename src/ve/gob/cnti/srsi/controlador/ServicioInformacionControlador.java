@@ -20,7 +20,6 @@ import ve.gob.cnti.srsi.dao.Constants.Modelos;
 import ve.gob.cnti.srsi.dao.Constants.Order;
 import ve.gob.cnti.srsi.dao.Constants.Tabs;
 import ve.gob.cnti.srsi.dao.DAO;
-import ve.gob.cnti.srsi.i18n.Errors;
 import ve.gob.cnti.srsi.modelo.Area;
 import ve.gob.cnti.srsi.modelo.Arquitectura;
 import ve.gob.cnti.srsi.modelo.AspectoLegal;
@@ -241,22 +240,30 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	public String registrarAspectosLegales() throws IOException {
 		getSessionStack(isValidate);
 		if (name.trim().isEmpty() && file != null) {
-			addFieldError("name",
-					"Si va a subir un archivo debe introducir un nombre");
-			addFieldError("file", "Suba nuevamente el archivo");
+			addFieldError(
+					"name",
+					error.getProperties().getProperty(
+							"error.servicio.file.name"));
+			addFieldError("file",
+					error.getProperties().getProperty("error.servicio.file"));
 			files = (List<AspectoLegal>) read(ALSI, id_servicio_informacion, -1);
 			return INPUT;
 		}
 		if (!name.trim().isEmpty() && file == null) {
-			addFieldError("name",
-					"Si va a colocar un nombre debe subir un archivo");
-			addFieldError("file", "Por favor seleccione un archivo para subir");
+			addFieldError(
+					"name",
+					error.getProperties().getProperty(
+							"error.servicio.file.file"));
+			addFieldError("file",
+					error.getProperties().getProperty("error.servicio.file"));
 			files = (List<AspectoLegal>) read(ALSI, id_servicio_informacion, -1);
 			return INPUT;
 		}
 		if (name.trim().isEmpty() && file == null) {
-			addFieldError("name",
-					"Si va a subir un documento, rellene todos los campos");
+			addFieldError(
+					"name",
+					error.getProperties().getProperty(
+							"error.servicio.file.save"));
 			files = (List<AspectoLegal>) read(ALSI, id_servicio_informacion, -1);
 			return INPUT;
 		}
@@ -264,12 +271,18 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 				&& !fileContentType.equals("application/x-pdf")
 				&& !fileContentType.equals("application/x-bzpdf")
 				&& !fileContentType.equals("application/x-gzpdf")) {
-			addFieldError("file", "Sólo se admiten archivos PDF");
+			addFieldError(
+					"file",
+					error.getProperties().getProperty(
+							"error.servicio.file.format"));
 			files = (List<AspectoLegal>) read(ALSI, id_servicio_informacion, -1);
 			return INPUT;
 		}
 		if (read(ALSI, id_servicio_informacion, name)) {
-			addFieldError("name", "Este nombre de archivo ya existe");
+			addFieldError(
+					"name",
+					error.getProperties().getProperty(
+							"error.servicio.file.repeated"));
 			files = (List<AspectoLegal>) read(ALSI, id_servicio_informacion, -1);
 			return INPUT;
 		}
@@ -309,7 +322,10 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			prepararAspectosLegales();
 			return SUCCESS;
 		} else {
-			addFieldError("file", "Error. Credenciales inválidas");
+			addFieldError(
+					"file",
+					error.getProperties().getProperty(
+							"error.servicio.file.invalid"));
 			prepararAspectosLegales();
 			return INPUT;
 		}
@@ -417,78 +433,98 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		isValidate = true;
 		switch (tab) {
 		case DESCRIPCION_GENERAL:
-			Errors error = new Errors();
 			if (sector < 0)
-				addFieldError("sector",
-						error.getProperties().getProperty("error.sector"));
+				addFieldError(
+						"sector",
+						error.getProperties().getProperty(
+								"error.servicio.sector"));
 			if (servicio.getNombre().trim().isEmpty())
 				addFieldError("servicio.nombre", error.getProperties()
 						.getProperty("error.servicio.nombre").toString());
-			// TODO Validar que sólo introduzca caracteres válidos.
 			if (!servicio.getNombre().toUpperCase().matches(REGEX_TITLE))
 				addFieldError("servicio.nombre", error.getProperties()
-						.getProperty("error.servicio.nombre.regex"));
+						.getProperty("error.regex.title"));
 			if (servicio.getDescripcion().trim().isEmpty())
 				addFieldError("servicio.descripcion", error.getProperties()
 						.getProperty("error.servicio.descripcion"));
 			if (!servicio.getDescripcion().toUpperCase()
 					.matches(REGEX_DESCRIPTION))
 				addFieldError("servicio.descripcion", error.getProperties()
-						.getProperty("error.servicio.descripcion.regex"));
+						.getProperty("error.regex.description"));
 			if (area.size() == 0)
 				addFieldError("area",
-						error.getProperties().getProperty("error.area"));
+						error.getProperties()
+								.getProperty("error.servicio.area"));
 			if (estado < 0)
-				addFieldError("estado",
-						error.getProperties().getProperty("error.estado"));
+				addFieldError(
+						"estado",
+						error.getProperties().getProperty(
+								"error.servicio.estado"));
 			prepararDescripcionGeneral();
 			break;
 		case DESCRIPCION_TECNICA:
 			if (seguridad < 0)
-				addFieldError("seguridad",
-						"Debe seleccionar un nivel de seguridad");
+				addFieldError(
+						"seguridad",
+						error.getProperties().getProperty(
+								"error.servicio.seguridad"));
 			if (arquitectura.size() == 0)
-				addFieldError("arquitectura",
-						"Debe seleccionar un tipo de arquitectura");
+				addFieldError("arquitectura", error.getProperties()
+						.getProperty("error.servicio.arquitectura"));
 			if (servicio.getVersion().trim().isEmpty())
-				addFieldError("servicio.version", "Debe introducir la versión");
+				addFieldError("servicio.version", error.getProperties()
+						.getProperty("error.servicio.version"));
 			try {
 				float version = Float.parseFloat(servicio.getVersion()
 						.toString());
 				if (version < 0.0 || version > 999.999)
-					addFieldError(
-							"servicio.version",
-							getText("El número de versión está fuera del rango, el formato es XXX.XXX"));
+					addFieldError("servicio.version", error.getProperties()
+							.getProperty("error.servicio.version.range"));
 
 			} catch (NumberFormatException ex) {
-				addFieldError(
-						"servicio.version",
-						getText("La versión sólo debe tener números en un formato XXX.XXX"));
+				addFieldError("servicio.version", error.getProperties()
+						.getProperty("error.servicio.version.format"));
 			}
 			if (intercambio < 0)
-				addFieldError("intercambio",
-						"Debe seleccionar un tipo de intercambio");
+				addFieldError(
+						"intercambio",
+						error.getProperties().getProperty(
+								"error.servicio.intercambio"));
 			prepararDescripcionTecnica();
 			break;
 		case DESCRIPCION_SOPORTE:
 			if (servicio.getResponsable().trim().isEmpty())
-				addFieldError("servicio.responsable",
-						"Debe introducir el nombre del responsable del servicio");
+				addFieldError("servicio.responsable", error.getProperties()
+						.getProperty("error.servicio.responsable"));
+			if (!servicio.getResponsable().toUpperCase().matches(REGEX_TITLE))
+				addFieldError("servicio.responsable", error.getProperties()
+						.getProperty("error.servicio.responsable.regex"));
 			if (telefono.trim().isEmpty())
-				addFieldError("telefono",
-						"Debe introducir un número de teléfono");
+				addFieldError(
+						"telefono",
+						error.getProperties().getProperty(
+								"error.servicio.telefono"));
 			if (telefono.length() > 0 && telefono.length() < 7)
-				addFieldError("telefono",
-						"Debe introducir un número telefónico válido de 7 dígitos");
+				addFieldError(
+						"telefono",
+						error.getProperties().getProperty(
+								"error.servicio.telefono.digit"));
 			if (!telefono.matches("\\d.*") && !telefono.trim().isEmpty())
-				addFieldError("telefono",
-						"El teléfono sólo puede estar conformado por números");
+				addFieldError(
+						"telefono",
+						error.getProperties().getProperty(
+								"error.servicio.telefono.regex"));
 			if (correo.trim().isEmpty())
-				addFieldError("correo", "Debe introducir un correo electrónico");
+				addFieldError(
+						"correo",
+						error.getProperties().getProperty(
+								"error.servicio.correo"));
 			if (!correo
 					.matches("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"))
-				addFieldError("correo",
-						"Debe introducir una dirección de correo válida");
+				addFieldError(
+						"correo",
+						error.getProperties().getProperty(
+								"error.servicio.correo.regex"));
 			prepararDescripcionSoporte();
 			break;
 		default:

@@ -16,6 +16,7 @@ import org.hibernate.Transaction;
 import ve.gob.cnti.srsi.dao.Constants.ClaseDato;
 import ve.gob.cnti.srsi.dao.Constants.Status;
 import ve.gob.cnti.srsi.dao.Constants.TipoEntradaSalida;
+import ve.gob.cnti.srsi.i18n.Errors;
 import ve.gob.cnti.srsi.modelo.Correo;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.Telefono;
@@ -38,6 +39,7 @@ import com.opensymphony.xwork2.ActionSupport;
 public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 		TipoEntradaSalida {
 
+	public static Errors error = new Errors();
 	private static Session session;
 	private static Transaction transaction;
 

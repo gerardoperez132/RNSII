@@ -40,7 +40,7 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,
-				ENTRADA);		
+				ENTRADA);
 		tipoDatos = (ArrayList<TipoDato>) read(new TipoDato());
 		complejo = false;
 		return SUCCESS;
@@ -55,7 +55,7 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 				ENTRADA);
 		tipoDatos = (List<TipoDato>) getSimple();
 		formatos = (ArrayList<Formato>) read(new Formato());
-		complejo = false;		
+		complejo = false;
 		return SUCCESS;
 	}
 
@@ -134,7 +134,7 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 	@SkipValidation
 	public String eliminarEntradaCompleja() {
 		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,
-				ENTRADA);		
+				ENTRADA);
 		delete(entrada, id_entrada_salida);
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
@@ -145,76 +145,84 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 	}
 
 	@Override
-	public void validate() {		
+	public void validate() {
 		if (entrada.getNombre().isEmpty())
 			addFieldError("entrada.nombre",
 					"Debe introducir un nombre que identifique el dato");
 		if (entrada.getDescripcion().isEmpty())
 			addFieldError("entrada.descripcion",
 					"Debe introducir una descripción.");
-		
-		if (entrada.getId_tipo_dato() == -1 ){ 
-			addFieldError("tipodato", "Debe seleccionar un tipo de dato");	
-			entrada.setId_formato((long)-1);
+
+		if (entrada.getId_tipo_dato() == -1) {
+			addFieldError("tipodato", "Debe seleccionar un tipo de dato");
+			entrada.setId_formato((long) -1);
 			entrada.setLongitud("");
-		}else{
-			TipoDato td = (TipoDato)read(new TipoDato(), entrada.getId_tipo_dato());
-			if(td.isHasformatted()){
-				if(entrada.getId_formato()==-1){
-					addFieldError("formato", "Debe seleccionar un tipo formato " +
-							"que corresponda con el dato elegido");
-				}else{
-					Formato f = (Formato)read(new Formato(), entrada.getId_formato());
-					if(f.getId_tipo_dato() != entrada.getId_tipo_dato())
-						addFieldError("formato", "Debe seleccionar un tipo formato " +
-								"que corresponda con el dato elegido");
+		} else {
+			TipoDato td = (TipoDato) read(new TipoDato(),
+					entrada.getId_tipo_dato());
+			if (td.isHasformatted()) {
+				if (entrada.getId_formato() == -1) {
+					addFieldError("formato",
+							"Debe seleccionar un tipo formato "
+									+ "que corresponda con el dato elegido");
+				} else {
+					Formato f = (Formato) read(new Formato(),
+							entrada.getId_formato());
+					if (f.getId_tipo_dato() != entrada.getId_tipo_dato())
+						addFieldError("formato",
+								"Debe seleccionar un tipo formato "
+										+ "que corresponda con el dato elegido");
 				}
-			}else{
-				entrada.setId_formato((long)-1);
+			} else {
+				entrada.setId_formato((long) -1);
 			}
-			if(td.isHasLength()){
-				if(!entrada.getLongitud().isEmpty()){
-					if(entrada.getId_tipo_dato()==4){						
+			if (td.isHasLength()) {
+				if (!entrada.getLongitud().isEmpty()) {
+					if (entrada.getId_tipo_dato() == 4) {
 						try {
-							float num = Float.parseFloat(entrada.getLongitud().toString());
-							if(num<=0){
-								addFieldError("longitud", "Exprese la longitud sólo con números positivos mayores que cero");
+							float num = Float.parseFloat(entrada.getLongitud()
+									.toString());
+							if (num <= 0) {
+								addFieldError("longitud",
+										"Exprese la longitud sólo con números positivos mayores que cero");
 							}
 						} catch (Exception e) {
-							addFieldError("longitud", "Exprese la longitud sólo con números");
-						}						
-					}else{
+							addFieldError("longitud",
+									"Exprese la longitud sólo con números");
+						}
+					} else {
 						try {
-							Long num = Long.parseLong(entrada.getLongitud().toString());
-							if(num<=0){
-								addFieldError("longitud", "Exprese la longitud sólo con números positivos mayores que cero");
+							Long num = Long.parseLong(entrada.getLongitud()
+									.toString());
+							if (num <= 0) {
+								addFieldError("longitud",
+										"Exprese la longitud sólo con números positivos mayores que cero");
 							}
 						} catch (Exception e) {
-							addFieldError("longitud", "Exprese la longitud sólo con números");
+							addFieldError("longitud",
+									"Exprese la longitud sólo con números");
 						}
 					}
-				}else{
-					addFieldError("longitud", "Debe indicar la cantidad de digitos que acepta el dato");
+				} else {
+					addFieldError("longitud",
+							"Debe indicar la cantidad de digitos que acepta el dato");
 				}
-			}else{
+			} else {
 				entrada.setLongitud("No aplica");
 			}
 		}
-		
 
-		
-		
 		if (read(ESF, id_funcionalidad, entrada.getNombre()) && !modificar) {
 			addFieldError("entrada.nombre",
 					"Nombre de entrada duplicado, cambie el nombre por favor");
-		}		
+		}
 		if (complejo) {
 			prepararFormularioComplejo();
 		} else {
 			prepararFormularioSimple();
 		}
-	}	
-	
+	}
+
 	public List<EntradaSalida> getEntradas() {
 		return entradas;
 	}
@@ -302,5 +310,4 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 	public void setFormatos(List<Formato> formatos) {
 		this.formatos = formatos;
 	}
-
 }

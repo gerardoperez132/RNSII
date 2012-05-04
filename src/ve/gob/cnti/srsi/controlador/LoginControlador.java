@@ -38,18 +38,21 @@ public class LoginControlador extends DAO {
 	public String autenticarUsuario() throws NoSuchAlgorithmException {
 		user_correo = (Correo) getUserEmail(correo);
 		if (user_correo == null) {
-			addFieldError("correo", "Su usuario o contraseña son inválidos");
+			addFieldError("correo",
+					error.getProperties().getProperty("error.login.invalid"));
 			return INPUT;
 		} else {
 			usuario = (Usuario) read(usuario, user_correo.getId_usuario());
 			if (usuario == null) {
 				addFieldError("error",
-						"Ha ocurrido un problema recuperando sus datos!!!");
+						error.getProperties()
+								.getProperty("error.login.invalid"));
 				return INPUT;
 			} else if (!usuario.getClave().equals(
 					new MD5Hashing(password).getPassword().toString())) {
 				addFieldError("password",
-						"Su usuario o contraseña son inválidos");
+						error.getProperties()
+								.getProperty("error.login.invalid"));
 				return INPUT;
 			} else {
 				session.put("logueado", true);
@@ -143,9 +146,11 @@ public class LoginControlador extends DAO {
 	public void validate() {
 		session = ActionContext.getContext().getSession();
 		if (correo == null && password == null) {
-			addFieldError("error", "Debe autenticarse para entrar al sistema");
+			addFieldError("error",
+					error.getProperties().getProperty("error.login"));
 		} else if (correo.isEmpty() || password.isEmpty()) {
-			addFieldError("error", "Debe insertar todos los campos");
+			addFieldError("error",
+					error.getProperties().getProperty("error.login.fields"));
 		}
 	}
 
@@ -180,7 +185,7 @@ public class LoginControlador extends DAO {
 	public void setListaServicios(List<ServiciosPublicables> listaServicios) {
 		ListaServicios = listaServicios;
 	}
-	
+
 	public List<Estado> getEstados() {
 		return estados;
 	}

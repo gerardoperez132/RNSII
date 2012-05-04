@@ -32,13 +32,13 @@ public interface Constants {
 	 * La expresión regular para validar los campos de los formularios.
 	 * Considerando que la cadena con la que se compara está en mayúsculas.
 	 */
-	public static final String REGEX_TITLE = "^[A-Z0-9 _]*$";
+	public static final String REGEX_TITLE = "^[A-Z0-9 _AÉÍÓÚÑ]*$";
 	/**
 	 * La expresión regular para validar los campos de los formularios que
 	 * permiten introducir un área de texto más amplia. Considerando que la
 	 * cadena con la que se compara está en mayúsculas.
 	 */
-	public static final String REGEX_DESCRIPTION = "^[A-Z0-9 _.()-]*$";
+	public static final String REGEX_DESCRIPTION = "^[A-Z0-9 _.()-AÉÍÓÚÑ]*$";
 
 	/**
 	 * Interfaz con los estados de registro en la base de datos.
