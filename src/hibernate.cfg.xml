@@ -6,7 +6,7 @@
 <hibernate-configuration>
 	<session-factory>
 		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-		<property name="hibernate.connection.url">jdbc:postgresql://10.16.101.35:5432/srsi</property>
+		<property name="hibernate.connection.url">jdbc:postgresql://10.16.101.32:5432/srsi</property>
 		<property name="hibernate.connection.username">srsi</property>
 		<property name="hibernate.connection.password">srsi</property>
 		<property name="hibernate.connection.pool_size">1</property>
