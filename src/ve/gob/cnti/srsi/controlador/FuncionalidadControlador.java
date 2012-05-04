@@ -10,7 +10,6 @@ import ve.gob.cnti.srsi.dao.Constants.Formulario;
 import ve.gob.cnti.srsi.dao.Constants.Modelos;
 import ve.gob.cnti.srsi.dao.Constants.TipoEntradaSalida;
 import ve.gob.cnti.srsi.dao.DAO;
-import ve.gob.cnti.srsi.i18n.Errors;
 import ve.gob.cnti.srsi.modelo.EntradaSalida;
 import ve.gob.cnti.srsi.modelo.Funcionalidad;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
@@ -27,8 +26,6 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 	private Funcionalidad funcionalidad = new Funcionalidad();
 	private EntradaSalida entrada = new EntradaSalida();
 	private EntradaSalida salida = new EntradaSalida();
-
-	private Errors error = new Errors();
 
 	private long id_servicio_informacion;
 	private long id_funcionalidad;

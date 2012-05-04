@@ -20,7 +20,6 @@ import ve.gob.cnti.srsi.dao.Constants.Modelos;
 import ve.gob.cnti.srsi.dao.Constants.Order;
 import ve.gob.cnti.srsi.dao.Constants.Tabs;
 import ve.gob.cnti.srsi.dao.DAO;
-import ve.gob.cnti.srsi.i18n.Errors;
 import ve.gob.cnti.srsi.modelo.Area;
 import ve.gob.cnti.srsi.modelo.Arquitectura;
 import ve.gob.cnti.srsi.modelo.AspectoLegal;
@@ -72,7 +71,6 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	private String correo;
 	private String codigo;
 	private String codigos[] = CODES;
-	Errors error = new Errors();
 
 	private HttpServletRequest servletRequest;
 	private Ente ente = new Ente();
