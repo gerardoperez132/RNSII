@@ -33,7 +33,9 @@ import com.opensymphony.xwork2.ActionSupport;
  * @author Joaquín Pereira
  * @author Richard Ricciardelli
  * @see CRUD
- * 
+ * @see Status
+ * @see ClaseDato
+ * @see TipoEntradaSalida
  */
 @SuppressWarnings("serial")
 public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
