@@ -45,18 +45,22 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 	private static Session session;
 	private static Transaction transaction;
 
+	/** Inicia la conexión a la base de datos. */
 	public void startConnection() {
 		session = HibernateUtils.getSessionFactory().openSession();
 		transaction = session.beginTransaction();
 	}
 
+	/** Captura la excepción cuando no se logra conectar a la base de datos. */
 	public void handleException(HibernateException he)
 			throws HibernateException {
 		transaction.rollback();
+		// TODO Esto debería manejarse en la vista también.
 		throw new HibernateException(
 				"Ocurrió un error en la capa de acceso a datos", he);
 	}
 
+	/** Cierra la conexión a la base de datos. */
 	public void closeConnection() {
 		session.close();
 	}
