@@ -134,30 +134,35 @@ public class UsuarioControlador extends DAO {
 			if (usuario.getNombre().trim().isEmpty()
 					|| usuario.getApellido().isEmpty()
 					|| usuario.getCedula().isEmpty()) {
-				addFieldError("datos", "Todos los campos son requeridos");
+				addFieldError("datos",
+						error.getProperties().getProperty("error.login.fields"));
 			}
 			if (usuario.getNombre().length() < 4) {
 				addFieldError("nombres",
-						"Su nombre debe poseer al menos 4 caracteres");
+						error.getProperties().getProperty("error.login.nombre"));
 			}
 			if (usuario.getApellido().length() < 4) {
-				addFieldError("apellidos",
-						"Su apellido debe poseer al menos 4 caracteres");
+				addFieldError(
+						"apellidos",
+						error.getProperties().getProperty(
+								"error.login.apellido"));
 			}
 			if (!(usuario.getCedula().length() >= 4 && usuario.getCedula()
 					.length() <= 9)) {
 				addFieldError("cedula",
-						"Su cédula debe poseer un mínimo 4 digitos y un máximo de 9 digitos");
+						error.getProperties().getProperty("error.login.cedula"));
 			} else {
 				try {
 					ci = Integer.parseInt(usuario.getCedula());
 					if (ci < 0) {
-						addFieldError("cedula",
-								"Su número de cédula no es válido");
+						addFieldError("cedula", error.getProperties()
+								.getProperty("error.login.cedula.invalid"));
 					}
 				} catch (Exception e) {
-					addFieldError("cedula",
-							"Su cédula debe poseer solo números");
+					addFieldError(
+							"cedula",
+							error.getProperties().getProperty(
+									"error.login.cedula.regex"));
 				}
 			}
 		}
