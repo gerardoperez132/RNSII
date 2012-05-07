@@ -108,7 +108,7 @@ public class UsuarioControlador extends DAO {
 			session.put("usuario", usuario);
 			modificarDatos = false;
 			// TODO Otro mensaje.
-			addActionMessage("Datos modificados satifactoriamente");
+			addActionMessage("Datos modificados satisfactoriamente");
 		}
 		return SUCCESS;
 	}
@@ -132,8 +132,8 @@ public class UsuarioControlador extends DAO {
 		if (modificarDatos) {
 			long ci;
 			if (usuario.getNombre().trim().isEmpty()
-					|| usuario.getApellido().isEmpty()
-					|| usuario.getCedula().isEmpty()) {
+					|| usuario.getApellido().trim().isEmpty()
+					|| usuario.getCedula().trim().isEmpty()) {
 				addFieldError("datos",
 						error.getProperties().getProperty("error.login.fields"));
 			}
