@@ -24,8 +24,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * Tabla que manejara los formatos de los distintos tipo de datos
- * {@link Date}, {@link Integer},  entre otros.
+ * Tabla que manejará los formatos de los distintos tipo de datos. {@link Date},
+ * {@link Integer}, entre otros.
  * 
  * @author Joaquín Pereira
  * 
@@ -33,7 +33,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "formato")
 public class Formato {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
@@ -43,50 +43,63 @@ public class Formato {
 	private int status;
 	private Date fecha_creado;
 	private Date fecha_modificado;
-	
+
 	public long getId() {
 		return id;
 	}
+
 	public void setId(long id) {
 		this.id = id;
 	}
+
 	public long getId_formato() {
 		return id_formato;
 	}
+
 	public void setId_formato(long id_formato) {
 		this.id_formato = id_formato;
 	}
+
 	public long getId_tipo_dato() {
 		return id_tipo_dato;
 	}
+
 	public void setId_tipo_dato(long id_tipo_dato) {
 		this.id_tipo_dato = id_tipo_dato;
 	}
+
 	public String getFormato() {
 		return formato;
 	}
+
 	public void setFormato(String formato) {
 		this.formato = formato;
 	}
+
 	public int getStatus() {
 		return status;
 	}
+
 	public void setStatus(int status) {
 		this.status = status;
 	}
+
 	public Date getFecha_creado() {
 		return fecha_creado;
 	}
+
 	public void setFecha_creado(Date fecha_creado) {
 		this.fecha_creado = fecha_creado;
 	}
+
 	public Date getFecha_modificado() {
 		return fecha_modificado;
 	}
+
 	public void setFecha_modificado(Date fecha_modificado) {
 		this.fecha_modificado = fecha_modificado;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Formato [id=" + id + ", id_formato=" + id_formato
@@ -94,5 +107,4 @@ public class Formato {
 				+ ", status=" + status + ", fecha_creado=" + fecha_creado
 				+ ", fecha_modificado=" + fecha_modificado + "]";
 	}
-	
 }
