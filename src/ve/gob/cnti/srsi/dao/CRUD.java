@@ -309,4 +309,49 @@ public interface CRUD {
 	public void update(Object model) throws IllegalArgumentException,
 			SecurityException, IllegalAccessException,
 			InvocationTargetException, NoSuchMethodException;
+
+	/**
+	 * Permite saber si existe un registro activo mediante la llave foranea
+	 * con las relaciones de las dos entidades, pasadas como argumentos.
+	 * 
+	 * @param models
+	 * 			Son las dos entidades relacionadas, primero la entidad padre y
+	 * 				luego la entidad hija			
+	 * @param id	
+	 * 			clave foranea de la entidad hija
+	 * @return
+	 * 			retorna un valor booleano encaso de que que exista o no, un registro 
+	 * 			activo
+	 */
+	public boolean read(Object[] models, long id);
+	
+	/**
+	 * Permite saber si existe un registro activo mediante la llave foranea
+	 * con las relaciones de las dos entidades, pasadas como argumentos.
+	 * 
+	 * @param models
+	 * 			Son las dos entidades relacionadas, primero la entidad padre y
+	 * 				luego la entidad hija			
+	 * @param id	
+	 * 			clave foranea de la entidad hija
+	 * @return
+	 * 			retorna un objeto con sus atributos establecidos.
+	 * 			
+	 */
+	public Object readf(Object[] models, long id);
+	
+	/**
+	 * Permite saber si existe un registro activo mediante la llave foranea
+	 * con las relaciones de las dos entidades, pasadas como argumentos.
+	 * 
+	 * @param models
+	 * 			Son las dos entidades relacionadas, primero la entidad padre y
+	 * 				luego la entidad hija			
+	 * @param id	
+	 * 			clave foranea de la entidad hija
+	 * @return
+	 * 			retorna un objeto con sus atributos establecidos.
+	 * 			
+	 */
+	public Object getUrlRecoveryPass(Object model, String Url);
 }

@@ -355,7 +355,27 @@
 			<result name="success">user/main.jsp</result>
 			<result name="input" type="redirectAction">autenticarUsuario</result>
 		</action>
+		
+		<action name="cambiarClave" method="modificarClave"
+			class="ve.gob.cnti.srsi.controlador.LoginControlador">
+			<interceptor-ref name="doubleSubmit" />
+			<result name="success">user/login.jsp</result>
+			<result name="invalid.token">user/login.jsp</result>
+			<result name="input">user/login.jsp</result>
+		</action>
+		
+		<action name="recuperarClave" method="prepararRecuperarPass"
+			class="ve.gob.cnti.srsi.controlador.LoginControlador">
+			<result name="success">user/login.jsp</result>
+			<result name="input">user/login.jsp</result>
+		</action>
 
+		<action name="enviarDatos" method="enviarDatos"
+			class="ve.gob.cnti.srsi.controlador.LoginControlador">
+			<result name="success">user/login.jsp</result>
+			<result name="input">user/login.jsp</result>
+		</action>
+				
 		<!-- ********************************************* Actions para Usuarios 
 			**************************************************** -->
 		<action name="configuracionUsuario" method="configuracion"
