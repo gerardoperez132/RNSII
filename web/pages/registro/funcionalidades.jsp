@@ -23,9 +23,8 @@
 			<div id="container">
 				<%@include file="../layout/header.jsp"%>
 				<!-- Esta es la barra lateral -->
-				<div id="sidebar">
-					<%@include file="../layout/sidebar.jsp"%>
-				</div>
+				<%@include file="../layout/sidebar.jsp"%>
+				
 				<!-- Este es el div de contenidos -->
 				<div id="content">
 					 
@@ -91,7 +90,7 @@
 						<tbody>
 							<s:if test="funcionalidades.size() > 0">
 								<s:iterator value="funcionalidades" status="result_Status">
-									<tr id="node-<s:property value="#result_datos.index"/>">
+									<tr id="node-<s:property value="#result_Status.index"/>">
 										<th><s:property value="id_funcionalidad" /></th>
 										<td><s:property value="nombre" /></td>
 										<td><s:property value="fecha_creado" /></td>

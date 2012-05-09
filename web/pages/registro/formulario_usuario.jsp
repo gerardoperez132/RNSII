@@ -58,37 +58,37 @@
 								<s:param>password</s:param>
 							</s:fielderror>
 						</td>						
-					<tr>
+					</tr>
 					<tr>
 						<td colspan="4">							
 							<h5 class="requerido"><s:text name="usuario.modificar.requerido"/></h5>
 						</td>						
-					<tr>
+					</tr>
 					<tr>
 						<td><s:text name="usuario.modificar.clave.actual"/></td>
 						<td><input type="password" name="clave_actual" id="clave_actual"/></td>
 						<td><h5 class="requerido">*</h5></td>
 						<td><span id="passrequired"></span></td>
-					<tr>
+					</tr>
 					<tr>
 						<td><s:text name="usuario.modificar.clave.nueva"/></td>
 						<td><input type="password" name="clave_nueva" id="pass" /></td>
 						<td><h5 class="requerido">*</h5></td>
 						<td><span id="passstrength"></span></td>
-					<tr>
+					</tr>
 					<tr>
 						<td><s:text name="usuario.modificar.clave.confirma"/></td>
 						<td><input type="password" name="clave_nueva_confirme" id="pass2" /></td>
 						<td><h5 class="requerido">*</h5></td>
 						<td><span id="passequal"></span>  <br></td>
-					<tr>					
+					</tr>					
 					<tr>
 						<td colspan="4">
 							<s:token name="token" />
 							<s:hidden name="modificarClave"></s:hidden>							
 							<input type="submit" id="modificar_clave" value="<s:text name="usuario.modificar.clave"></s:text>">
 						</td>						
-					<tr>
+					</tr>
 				</table>
 				</form>	
 			</s:if>	
@@ -103,12 +103,12 @@
 								<s:param>datos</s:param>
 							</s:fielderror>
 						</td>						
-					<tr>
+					</tr>
 					<tr>
 						<td colspan="4">							
 							<h5 class="requerido"><s:text name="usuario.modificar.requerido"/></h5>
 						</td>						
-					<tr>
+					</tr>
 					<tr>
 						<td><s:text name="usuario.modificar.nombres"/></td>
 						<td><s:textfield name="usuario.nombre" id="nombre"/></td>
@@ -119,7 +119,7 @@
 								<s:param>nombres</s:param>
 							</s:fielderror>
 						</td>
-					<tr>
+					</tr>
 					<tr>
 						<td><s:text name="usuario.modificar.apellidos"/></td>
 						<td><s:textfield name="usuario.apellido" id="apellido" /></td>
@@ -130,7 +130,7 @@
 								<s:param>apellidos</s:param>
 							</s:fielderror>						
 						</td>
-					<tr>
+					</tr>
 					<tr>
 						<td><s:text name="usuario.modificar.cedula"/></td>
 						<td><s:textfield name="usuario.cedula" id="cedula" /></td>
@@ -141,14 +141,14 @@
 								<s:param>cedula</s:param>
 							</s:fielderror>							
 						</td>
-					<tr>															
+					</tr>															
 					<tr>
 						<td colspan="4">
 							<s:token name="token" />
 							<s:hidden name="modificarDatos"></s:hidden>							
 							<input type="submit" id="modificar_datos" value="<s:text name="usuario.modificar.datos"></s:text>">
 						</td>						
-					<tr>
+					</tr>
 				</table>
 				</form>		
 			</s:elseif>
