@@ -199,7 +199,7 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 		}
 		return result;
 	}
-
+	
 	@Override
 	public boolean read(Object[] models, long id, String name) {
 		boolean result = false;
@@ -219,6 +219,47 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 		}
 		return result;
 	}
+
+	@Override
+	public boolean read(Object[] models, long id) {
+		boolean result = false;
+		try {
+			startConnection();
+			if (session.createQuery(
+					"FROM " + models[0].getClass().getSimpleName() + " WHERE "
+							+ getField(models[1]) + " = " + id
+							+ " AND status = "
+							+ ACTIVO).uniqueResult() != null)
+				result = true;
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+		return result;
+	}
+	
+	@Override
+	public Object readf(Object[] models, long id) {
+		Object result;
+		try {
+			startConnection();
+			result = session.createQuery(
+					"FROM " + models[0].getClass().getSimpleName() + " WHERE "
+							+ getField(models[1]) + " = " + id
+							+ " AND status = "
+							+ ACTIVO).uniqueResult();
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+		return result;
+	}
+	
+	
 
 	@Override
 	public Correo getUserEmail(String email) {
@@ -605,4 +646,23 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 		}
 		return list;
 	}
+
+	@Override
+	public Object getUrlRecoveryPass(Object model, String Url) {
+		Object result;
+		try {
+			startConnection();
+			result = session.createQuery(
+					"FROM " + model.getClass().getSimpleName() + " WHERE "
+							+ " url = '" + Url + "' AND status = "
+							+ ACTIVO).uniqueResult();
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+		return result;
+	}
+
 }
