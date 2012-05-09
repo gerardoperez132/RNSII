@@ -24,6 +24,7 @@
 		<mapping class="ve.gob.cnti.srsi.modelo.Formato" />
 		<mapping class="ve.gob.cnti.srsi.modelo.Funcionalidad" />
 		<mapping class="ve.gob.cnti.srsi.modelo.Intercambio" />
+		<mapping class="ve.gob.cnti.srsi.modelo.RecuperarClave" />
 		<mapping class="ve.gob.cnti.srsi.modelo.Rol" />
 		<mapping class="ve.gob.cnti.srsi.modelo.Sector" />
 		<mapping class="ve.gob.cnti.srsi.modelo.Seguridad" />
