@@ -3,6 +3,13 @@ package ve.gob.cnti.srsi.dao;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * Clase que se encarga de encriptar una cadena de texto utilizando el algoritmo
+ * de codificación MD5.
+ * 
+ * @author Richard Ricciardelli
+ * 
+ */
 public class MD5Hashing {
 	private String password;
 

@@ -4,6 +4,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
+/**
+ * Carga el archivo de propiedades de internacionalización con los mensajes de
+ * error y excepciones consideradas en la aplicación.
+ * 
+ * @author Richard Ricciardelli
+ * 
+ */
 public class Errors {
 	private Properties properties = new Properties();
 

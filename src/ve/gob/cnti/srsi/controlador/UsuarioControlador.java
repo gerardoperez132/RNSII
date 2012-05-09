@@ -47,22 +47,25 @@ public class UsuarioControlador extends DAO {
 			usuario = (Usuario) session.get("usuario");
 			if (clave_actual.isEmpty() || clave_nueva.isEmpty()
 					|| clave_nueva_confirme.isEmpty()) {
-				addFieldError("password", "Todos los campos son requeridos");
+				addFieldError("password",
+						error.getProperties().getProperty("error.login.fields"));
 				return INPUT;
 			} else if (usuario.getClave().equals(
 					new MD5Hashing(clave_actual).getPassword().toString())) {
 				if (!clave_nueva.equals(clave_nueva_confirme)) {
-					addFieldError("password", "Las contraseñas no coinciden");
+					addFieldError("password", error.getProperties()
+							.getProperty("error.login.password.match"));
 					return INPUT;
 				} else if (clave_nueva.length() < 6) {
-					addFieldError("password",
-							"La nueva contraseña debe tener al menos 6 caracteres");
+					addFieldError("password", error.getProperties()
+							.getProperty("error.login.password.length"));
 					return INPUT;
 				} else {
 					MD5Hashing pass = new MD5Hashing(clave_nueva);
 					usuario.setClave(pass.getPassword());
 					update(usuario, usuario.getId_usuario());
 					modificarClave = false;
+					// TODO Esto no es un error. ¿Qué se hace con esto?
 					addActionMessage("Clave modificada satifactoriamente");
 					return SUCCESS;
 				}
@@ -75,14 +78,16 @@ public class UsuarioControlador extends DAO {
 				}
 				intentos_fallidos++;
 				if (intentos_fallidos == 3) {
-					addFieldError("password",
-							"Su sesión ha sido cerrada por superar el máximo de intentos fallidos");
+					addFieldError("password", error.getProperties()
+							.getProperty("error.login.attempts"));
 					return "errorSession";
 				}
 				session.put("intentos_fallidos", intentos_fallidos);
-				addFieldError("password",
-						"Contraseña incorrecta - Intento N°: "
-								+ intentos_fallidos);
+				addFieldError(
+						"password",
+						error.getProperties().getProperty(
+								"error.login.password.attempt"));
+				// TODO Agregar intentos_fallidos
 				return INPUT;
 			}
 		}
@@ -102,7 +107,8 @@ public class UsuarioControlador extends DAO {
 			usuario = (Usuario) read(usuario, user.getId_usuario());
 			session.put("usuario", usuario);
 			modificarDatos = false;
-			addActionMessage("Datos modificados satifactoriamente");
+			// TODO Otro mensaje.
+			addActionMessage("Datos modificados satisfactoriamente");
 		}
 		return SUCCESS;
 	}
@@ -123,35 +129,40 @@ public class UsuarioControlador extends DAO {
 	}
 
 	public void validate() {
-		if (modificarDatos == true) {
+		if (modificarDatos) {
 			long ci;
-			if (usuario.getNombre().isEmpty()
-					|| usuario.getApellido().isEmpty()
-					|| usuario.getCedula().isEmpty()) {
-				addFieldError("datos", "Todos los campos son requeridos");
+			if (usuario.getNombre().trim().isEmpty()
+					|| usuario.getApellido().trim().isEmpty()
+					|| usuario.getCedula().trim().isEmpty()) {
+				addFieldError("datos",
+						error.getProperties().getProperty("error.login.fields"));
 			}
 			if (usuario.getNombre().length() < 4) {
 				addFieldError("nombres",
-						"Su nombre debe poseer al menos 4 caracteres");
+						error.getProperties().getProperty("error.login.nombre"));
 			}
 			if (usuario.getApellido().length() < 4) {
-				addFieldError("apellidos",
-						"Su apellido debe poseer al menos 4 caracteres");
+				addFieldError(
+						"apellidos",
+						error.getProperties().getProperty(
+								"error.login.apellido"));
 			}
 			if (!(usuario.getCedula().length() >= 4 && usuario.getCedula()
 					.length() <= 9)) {
 				addFieldError("cedula",
-						"Su cédula debe poseer un mínimo 4 digitos y un máximo de 9 digitos");
+						error.getProperties().getProperty("error.login.cedula"));
 			} else {
 				try {
 					ci = Integer.parseInt(usuario.getCedula());
 					if (ci < 0) {
-						addFieldError("cedula",
-								"Su número de cédula no es válido");
+						addFieldError("cedula", error.getProperties()
+								.getProperty("error.login.cedula.invalid"));
 					}
 				} catch (Exception e) {
-					addFieldError("cedula",
-							"Su cédula debe poseer solo números");
+					addFieldError(
+							"cedula",
+							error.getProperties().getProperty(
+									"error.login.cedula.regex"));
 				}
 			}
 		}
