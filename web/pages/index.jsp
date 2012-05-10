@@ -4,8 +4,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<META HTTP-EQUIV="Refresh"
-	CONTENT="2;URL=pages/autenticarUsuario.action">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <!-- CSS (required) -->
 <link rel="stylesheet" type="text/css"
@@ -28,16 +26,34 @@
 			<!-- Este es el div de los menúes -->
 			<div id="menu"></div>
 			<!-- Esta es la barra lateral -->
-			<div id="sidebar"></div>
+			<div id="sidebar">
+				<table class="links">
+					<tr>
+						<th>Servicios de Información</th>
+					</tr>					
+				</table>
+				<table class="links">
+					<tr>
+						<th>Sectores</th>
+					</tr>
+					<s:iterator value="listaSectores" status="index">
+						<s:if test="#index.index<5">
+						<tr>
+							<td><s:property value="nombre"/> - (<s:property value="n"/>)</td>
+						</tr>
+						</s:if>
+					</s:iterator>
+					
+				</table>
+			
+			</div>
 			<!-- Este es el div de contenidos -->
 			<div id="content">
 				<br>
 				<s:url id="login" action="autenticarUsuario"></s:url>
 				<s:a href="%{login}">Entrar al Sistema</s:a>
-				<br>
-				<s:url id="registrarServicioInformacion"
-					action="prepararServicioInformacion"></s:url>
-				<s:a href="%{registrarServicioInformacion}">Registrar Servicio de Información</s:a>
+				<s:actionmessage/>
+				<br>				
 				<br>
 			</div>
 			<%@include file="layout/footer.jsp"%>

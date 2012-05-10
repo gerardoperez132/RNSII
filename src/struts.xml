@@ -38,7 +38,7 @@
 				<interceptor-ref name="basicStack" />
 			</interceptor-stack>
 		</interceptors>
-
+		
 		<!--******************************************************* Actions para 
 			registros de servicios de información *************************************************** -->
 
@@ -414,6 +414,18 @@
 			<result name="input">registro/formulario_usuario.jsp</result>
 			<result name="errorSession" type="redirectAction">salir</result>
 		</action>
+		
+		<!-- 
+		******************************
+		Actions para el usuario final
+		******************************
+		 -->
+		<action name="SRSI" method="inicio"
+			class="ve.gob.cnti.srsi.controlador.ConsultasControlador">			
+			<result name="success">index.jsp</result>		
+		</action>
+		 
+		
 	</package>
 	<constant name="struts.devMode" value="true" />
 	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
