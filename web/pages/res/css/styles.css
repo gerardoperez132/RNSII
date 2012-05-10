@@ -218,11 +218,22 @@ a.footer:hover{background:#ffffff;color: #6c6c6c;}
 	border-spacing: 0px;
 	width: 148px;	
 	color:#a8aa94;
+	text-decoration: none;
 }
 
 .links th{
 	padding: 2px;
 	background-color: #3b3939;
+}
+
+.links th:HOVER {
+	padding: 2px;
+	background-color: #cccccc;
+	color:blue;	
+}
+
+.links th:HOVER a {		
+	color:blue;
 }
 
 .links td{
@@ -233,7 +244,97 @@ a.footer:hover{background:#ffffff;color: #6c6c6c;}
 
 .links td:HOVER {
 	padding: 2px;
-	background-color: #cccccc;
+	background-color: #cccccc;	
+}
+
+.links td:HOVER a {		
 	color:blue;
 }
+
+.links a{
+	text-decoration: none;
+	width: 140px;
+	display:block;
+}
+
+.links a:LINK{
+	color: #a8aa94;	
+}
+
+.links a:HOVER {
+	color:blue;
+	text-decoration: underline;
+}
+
+.links a:VISITED{
+	color: #a8aa94;
+}
+
+/*tabla de resultados*/
+.results{
+	width: 650px;
+	padding: 0;
+	margin: 0;
+	border: 1px solid #e0e0e0;
+	font-size: 13px;
+}
+
+.results th{
+	font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+	color: #4f6b72;
+	border-right: 1px solid #e0e0e0;
+	border-bottom: 1px solid #e0e0e0;
+	border-top: 1px solid #e0e0e0;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	text-align: left;
+	padding: 6px 6px 6px 12px;
+	background: #e0e0e0;
+	text-align: center;
+}
+
+.results td{
+	border-right: 1px solid #e0e0e0;
+	border-bottom: 1px solid #e0e0e0;
+	padding: 6px 6px 6px 12px;
+	color: #4f6b72;
+}
+
+.results tr{
+	background: #F5FAFA;
+	color: #797268;
+}
+
+.results tr:HOVER{
+	background: #c5e1e8;	
+}
+
+.results a{
+	text-decoration: none;
+	padding:0;
+	display:block;
+}
+
+.results a:HOVER {	
+	text-decoration: underline;
+}
+
+.results a:VISITED{
+	color: blue;
+}
+
+.alt{
+	background: #e0e0e0;
+	text-align: right;
+	width: 200px;
+	font-size: small;
+}
+.alt2{
+	background: #f5f5ee;
+	text-align: left;	
+	font-size: small;
+	font-weight:bold;
+	color:blue;
+}
+
 

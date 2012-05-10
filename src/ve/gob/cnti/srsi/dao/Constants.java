@@ -3,6 +3,7 @@ package ve.gob.cnti.srsi.dao;
 import ve.gob.cnti.srsi.modelo.AspectoLegal;
 import ve.gob.cnti.srsi.modelo.EntradaSalida;
 import ve.gob.cnti.srsi.modelo.Funcionalidad;
+import ve.gob.cnti.srsi.modelo.Sector;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 
 /**
@@ -115,6 +116,9 @@ public interface Constants {
 		/** Relación 1 Servicio de Información tiene N Aspectos Legales. */
 		public static final Object[] ALSI = { new AspectoLegal(),
 				new ServicioInformacion() };
+		/** Relación 1 Sector tiene N Servicios de Información. */
+		public static final Object[] SISE = { new ServicioInformacion(), 
+			new Sector() };
 	}
 
 	/**

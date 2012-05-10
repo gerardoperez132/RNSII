@@ -424,6 +424,23 @@
 			class="ve.gob.cnti.srsi.controlador.ConsultasControlador">			
 			<result name="success">index.jsp</result>		
 		</action>
+		
+		<action name="listarSector" method="listarSector"
+			class="ve.gob.cnti.srsi.controlador.ConsultasControlador">			
+			<result name="success">index.jsp</result>		
+			<result name="input" type="redirectAction">SRSI</result>
+		</action>
+		
+		<action name="listarSectores" method="listarSectores"
+			class="ve.gob.cnti.srsi.controlador.ConsultasControlador">			
+			<result name="success">index.jsp</result>			
+		</action>
+		
+		<action name="servicio" method="examinarServicioInformacion"
+			class="ve.gob.cnti.srsi.controlador.ConsultasControlador">			
+			<result name="success">index.jsp</result>
+			<result name="input" type="redirectAction">SRSI</result>			
+		</action>
 		 
 		
 	</package>
