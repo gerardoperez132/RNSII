@@ -354,4 +354,16 @@ public interface CRUD {
 	 * 			
 	 */
 	public Object getUrlRecoveryPass(Object model, String Url);
+	
+	/**
+	 * Permite saber el número de servicios de información publicados 
+	 * en el sector solicitado.
+	 *			
+	 * @param id	
+	 * 			id del sector a consultar
+	 * @return
+	 * 			retorna el número de servicios publicados del sector
+	 * 			
+	 */
+	public long nSiSector(long id);
 }
