@@ -209,3 +209,31 @@ a.footer:hover{background:#ffffff;color: #6c6c6c;}
 .ok_pass{color:green;font-size: small;}
 .alert_pass{color:orange;font-size: small;}
 .requerido{color:red;margin: 0px;}
+
+/*tabla de links*/
+.links{
+	font-family: sans-serif;
+	font-size:x-small;
+	border: 2px solid #02cadc;
+	border-spacing: 0px;
+	width: 148px;	
+	color:#a8aa94;
+}
+
+.links th{
+	padding: 2px;
+	background-color: #3b3939;
+}
+
+.links td{
+	border-top:1px dotted #cccccc;
+	padding: 2px;
+	background-color: #3b3939;
+}
+
+.links td:HOVER {
+	padding: 2px;
+	background-color: #cccccc;
+	color:blue;
+}
+

@@ -135,6 +135,9 @@
 						</ul>
 						<div class="tab_container">
 							<div id="tab1" class="tab_content">
+								<s:fielderror>									
+									<s:param>Salidas</s:param>										
+								</s:fielderror>
 								<table class="tb">
 									<tr>
 										<td class="tb_alt">
@@ -161,9 +164,7 @@
 										</td>
 									</tr>
 									
-									<s:fielderror>									
-										<s:param>Salidas</s:param>										
-									</s:fielderror>								
+																	
 									
 									<tr>
 									<td class="tb_alt">											

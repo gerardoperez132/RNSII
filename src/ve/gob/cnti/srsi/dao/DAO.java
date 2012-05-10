@@ -670,5 +670,22 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 		}
 		return result;
 	}
+	
+	public long nSiSector(long id){
+		long result;
+		try {
+			startConnection();
+			result = session.createQuery(
+					"FROM ServicioInformacion WHERE "
+					+ " id_sector = " + id + " AND status = "
+					+ ACTIVO +" AND publicado = true").list().size();
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+		return result;
+	}
 
 }

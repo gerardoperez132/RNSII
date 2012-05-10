@@ -156,7 +156,7 @@ public class SalidaControlador extends DAO implements Formulario,
 		if (salida.getDescripcion().trim().isEmpty())
 			addFieldError("salida.descripcion", error.getProperties()
 					.getProperty("error.salida.descripcion"));
-		if (salida.getDescripcion().toUpperCase().matches(REGEX_DESCRIPTION))
+		if (!salida.getDescripcion().toUpperCase().matches(REGEX_DESCRIPTION))
 			addFieldError("salida.descripcion", error.getProperties()
 					.getProperty("error.regex.description"));
 		if (salida.getId_tipo_dato() == -1) {
