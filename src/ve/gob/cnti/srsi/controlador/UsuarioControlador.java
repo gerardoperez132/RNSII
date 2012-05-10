@@ -85,8 +85,10 @@ public class UsuarioControlador extends DAO {
 				session.put("intentos_fallidos", intentos_fallidos);
 				addFieldError(
 						"password",
-						error.getProperties().getProperty(
-								"error.login.password.attempt"));
+						error.getProperties()
+								.getProperty("error.login.password.attempt")
+								.replace("{0}",
+										String.valueOf(intentos_fallidos)));
 				// TODO Agregar intentos_fallidos
 				return INPUT;
 			}
