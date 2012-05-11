@@ -7,6 +7,11 @@
 				</table>
 				<table class="links">
 					<tr>
+						<th><a href="autenticarUsuario"><s:text name="login" /></a></th>
+					</tr>					
+				</table>
+				<table class="links">
+					<tr>
 						<th><a href="listarServicios"><s:text name="SI" /></a></th>
 					</tr>					
 				</table>

@@ -6,6 +6,7 @@ import java.util.List;
 
 import ve.gob.cnti.srsi.modelo.Correo;
 import ve.gob.cnti.srsi.modelo.Telefono;
+import ve.gob.cnti.srsi.modelo.ServicioInformacion;;
 
 /**
  * Definición de métodos para las operaciones en la base de datos.
@@ -366,4 +367,15 @@ public interface CRUD {
 	 * 			
 	 */
 	public long nSiSector(long id);
+	
+	/**
+	 * Permite buscar servicios en el que el nombre de estos, se asemejen 
+	 * a la cadena pasada
+	 * 
+	 * @param cadena
+	 *            Es la cadena a consultar
+	 *            
+	 * @return Retorna una lista de servicios 
+	 */
+	public ArrayList<ServicioInformacion> buscarServicio(String cadena, byte orderBy);
 }

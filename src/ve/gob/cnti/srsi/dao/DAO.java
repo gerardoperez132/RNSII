@@ -688,4 +688,28 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 		return result;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public ArrayList<ServicioInformacion> buscarServicio(String cadena, byte orderBy) {
+		// TODO Auto-generated method stub
+		ArrayList<ServicioInformacion> list;
+		String order = orderBy > 0 ? "DESC" : "ASC";
+		try {
+			startConnection();
+			list = (ArrayList<ServicioInformacion>) session.createQuery(
+					" FROM ServicioInformacion s WHERE s.status = " + ACTIVO + " AND " +
+					" (UPPER(translate(s. nombre, 'áéíóúÁÉÍÓÚ', 'aeiouAEIOU')) " +
+					" LIKE UPPER(translate('%"+cadena+"%', 'áéíóúÁÉÍÓÚ', 'aeiouAEIOU')) " +
+					" or UPPER(translate(s. descripcion, 'áéíóúÁÉÍÓÚ', 'aeiouAEIOU')) " +
+					" LIKE UPPER(translate('%"+cadena+"%', 'áéíóúÁÉÍÓÚ', 'aeiouAEIOU'))) " +
+					" ORDER BY nombre "	+ order).list();
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+		return list;		
+	}
+
 }

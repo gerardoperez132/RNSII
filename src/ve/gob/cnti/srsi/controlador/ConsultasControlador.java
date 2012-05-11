@@ -53,6 +53,7 @@ public class ConsultasControlador extends DAO implements Constants, Order, Model
 	private List<ServicioInformacion> servicios = new ArrayList<ServicioInformacion>();
 	private List<ListaSectores> listaSectores = new ArrayList<ListaSectores>();
 	
+	private String cadena;
 	private String telefono;
 	private String correo;
 	private String codigo;
@@ -65,6 +66,7 @@ public class ConsultasControlador extends DAO implements Constants, Order, Model
 	private boolean consulta_listarSectores;
 	private boolean consulta_listarServicios;
 	private boolean examinarServicio;
+	private boolean buscarServicio;
 	
 	
 	public String inicio(){
@@ -98,6 +100,21 @@ public class ConsultasControlador extends DAO implements Constants, Order, Model
 		numeroDeServiciosPorSector();
 		consulta_listarServicios = true;
 		servicios = (List<ServicioInformacion>) getSortedList(servicio, ASC);
+		entes = (List<Ente>) read(new Ente());
+		return SUCCESS;
+	}
+	
+	//TODO
+	@SuppressWarnings("unchecked")
+	public String buscar_servicio(){				
+		numeroDeServiciosPorSector();
+		buscarServicio = true;
+		if (!cadena.toUpperCase().matches(REGEX_TITLE)){
+			addFieldError("error",
+					error.getProperties().getProperty("error.regex.title"));
+			buscarServicio = false;
+		}						
+		servicios = buscarServicio(cadena, ASC);
 		entes = (List<Ente>) read(new Ente());
 		return SUCCESS;
 	}
@@ -433,6 +450,24 @@ public class ConsultasControlador extends DAO implements Constants, Order, Model
 	public void setConsulta_listarServicios(boolean consulta_listarServicios) {
 		this.consulta_listarServicios = consulta_listarServicios;
 	}
+
+	public String getCadena() {
+		return cadena;
+	}
+
+	public void setCadena(String cadena) {
+		this.cadena = cadena;
+	}
+
+	public boolean isBuscarServicio() {
+		return buscarServicio;
+	}
+
+	public void setBuscarServicio(boolean buscarServicio) {
+		this.buscarServicio = buscarServicio;
+	}
+
+	
 }
 
 class ListaSectores{

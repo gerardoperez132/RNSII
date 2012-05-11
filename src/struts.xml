@@ -446,6 +446,17 @@
 			class="ve.gob.cnti.srsi.controlador.ConsultasControlador">			
 			<result name="success">index.jsp</result>			
 		</action>
+		
+		<action name="buscar_servicio" method="buscar_servicio"
+			class="ve.gob.cnti.srsi.controlador.ConsultasControlador">			
+			<result name="success">index.jsp</result>
+			<result name="input" type="redirectAction">SRSI</result>			
+		</action>
+		
+		<action name="error404" method="inicio"
+			class="ve.gob.cnti.srsi.controlador.ConsultasControlador">			
+			<result name="success">error404.jsp</result>		
+		</action>
 		 
 		
 	</package>
