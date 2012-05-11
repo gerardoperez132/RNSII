@@ -441,6 +441,11 @@
 			<result name="success">index.jsp</result>
 			<result name="input" type="redirectAction">SRSI</result>			
 		</action>
+		
+		<action name="listarServicios" method="listarServicios"
+			class="ve.gob.cnti.srsi.controlador.ConsultasControlador">			
+			<result name="success">index.jsp</result>			
+		</action>
 		 
 		
 	</package>

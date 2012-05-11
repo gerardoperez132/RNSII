@@ -42,7 +42,7 @@
 				<br>				
 				<br>
 				<s:if test="consulta_SIxSector == true">
-				<!-- Lista de servicios de información por sector -->					
+<!-- Lista de servicios de información por sector -->					
 					<table class="results">
 						<tr>
 							<th colspan="3">
@@ -84,7 +84,7 @@
 					</table>
 				</s:if>
 				<s:elseif test="consulta_listarSectores==true">
-					<!-- Lista de sectores con la cantidad servicios publicados -->
+<!-- Lista de sectores con la cantidad servicios publicados -->
 						<table class="results">
 							<tr>
 								<th colspan="2">
@@ -114,10 +114,8 @@
 						</table>					
 					</s:elseif>	
 					<s:elseif test="examinarServicio == true">
-					<!-- Detalles de un servicio de información -->
-					
+<!-- Detalles de un servicio de información -->					
 					<hr>
-
 					<ul class="tabs">
 						<li><a href="#tab1"><s:text name="tab1.title"></s:text> </a>
 						</li>
@@ -128,7 +126,6 @@
 						<li><a href="#tab4"><s:text name="tab4.title"></s:text> </a>
 						</li>
 					</ul>
-
 					<div class="tab_container">
 						<!-- Descripción general -->
 						<div id="tab1" class="tab_content">					
@@ -425,9 +422,44 @@
 							</table>							
 						</div>
 					</div>
-
-					
-					
+					</s:elseif>
+					<s:elseif test="consulta_listarServicios == true">
+<!-- Lista completa de todos los servicios públicados -->
+						<table class="results">
+							<tr>
+								<th colspan="3"><s:text name="listaServicios" /></th>								
+							</tr>
+							<tr>
+								<th><s:text name="nombre" /></th>
+								<th><s:text name="ente1" /></th>
+								<th><s:text name="fecha_creado" /></th>
+							</tr>
+							<s:if test="servicios.size()>0">
+								<s:iterator value="servicios">
+									<tr>
+										<td>
+											<a href="servicio?id_servicio=<s:property value="id_servicio_informacion"/>">
+												<s:property value="nombre"/>
+											</a>
+										</td>
+										<td>
+											<s:set name="id_e" value="id_ente"/>
+											<s:iterator value="entes">
+												<s:if test="id_ente = #id_e">
+													<s:property value="nombre"/>		
+												</s:if>
+											</s:iterator>
+										</td>
+										<td><s:date name="fecha_creado" format="d'/'MM'/'yyyy"/></td>
+									</tr>
+								</s:iterator>									
+							</s:if>
+							<s:else>
+								<tr>
+									<td colspan="3"><s:text name="sis_null" /></td>
+								</tr>
+							</s:else>																																	
+							</table>					
 					</s:elseif>
 			</div>
 			<%@include file="layout/footer.jsp"%>

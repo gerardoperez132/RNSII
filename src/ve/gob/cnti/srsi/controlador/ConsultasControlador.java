@@ -63,6 +63,7 @@ public class ConsultasControlador extends DAO implements Constants, Order, Model
 	
 	private boolean consulta_SIxSector;
 	private boolean consulta_listarSectores;
+	private boolean consulta_listarServicios;
 	private boolean examinarServicio;
 	
 	
@@ -91,16 +92,16 @@ public class ConsultasControlador extends DAO implements Constants, Order, Model
 		return SUCCESS;
 	}
 	
-	public String examinarServicio(){
-		//TODO
-		if(!verificarLong(id_servicio))
-			return INPUT;		
+	//TODO
+	@SuppressWarnings("unchecked")
+	public String listarServicios(){				
 		numeroDeServiciosPorSector();
-		ServicioInformacionControlador siControlador = new ServicioInformacionControlador();
-		examinarServicio = true;
-		return siControlador.examinarServicioInformacion();		
+		consulta_listarServicios = true;
+		servicios = (List<ServicioInformacion>) getSortedList(servicio, ASC);
+		entes = (List<Ente>) read(new Ente());
+		return SUCCESS;
 	}
-	
+			
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void numeroDeServiciosPorSector(){
 		sectores = (List<Sector>) getSortedList(new Sector(), DESC);
@@ -423,6 +424,14 @@ public class ConsultasControlador extends DAO implements Constants, Order, Model
 
 	public void setCodigos(String[] codigos) {
 		this.codigos = codigos;
+	}
+
+	public boolean isConsulta_listarServicios() {
+		return consulta_listarServicios;
+	}
+
+	public void setConsulta_listarServicios(boolean consulta_listarServicios) {
+		this.consulta_listarServicios = consulta_listarServicios;
 	}
 }
 

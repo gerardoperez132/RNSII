@@ -7,7 +7,7 @@
 				</table>
 				<table class="links">
 					<tr>
-						<th><s:text name="SI" /></th>
+						<th><a href="listarServicios"><s:text name="SI" /></a></th>
 					</tr>					
 				</table>
 				<table class="links">
