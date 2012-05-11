@@ -27,6 +27,7 @@ import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.Telefono;
 import ve.gob.cnti.srsi.modelo.UnionAreaServicioInformacion;
 import ve.gob.cnti.srsi.modelo.UnionArquitecturaServicioInformacion;
+import ve.gob.cnti.srsi.modelo.Visita;
 
 
 @SuppressWarnings("serial")
@@ -35,7 +36,8 @@ public class ConsultasControlador extends DAO implements Constants, Order, Model
 	private Sector sector = new Sector();
 	private ServicioInformacion servicio = new ServicioInformacion();
 	private Funcionalidad funcionalidad;
-	private Ente ente = new Ente();	
+	private Ente ente = new Ente();
+	private Visita visita = new Visita();
 	
 	private List<Estado> estados = new ArrayList<Estado>();
 	private List<Area> areas = new ArrayList<Area>();
@@ -57,8 +59,9 @@ public class ConsultasControlador extends DAO implements Constants, Order, Model
 	private String telefono;
 	private String correo;
 	private String codigo;
-	private String codigos[] = CODES;	
+	private String codigos[] = CODES;
 	
+	private long nVisitas;	
 	private long id_sector;
 	private long id_servicio;
 	
@@ -93,8 +96,7 @@ public class ConsultasControlador extends DAO implements Constants, Order, Model
 		numeroDeServiciosPorSector();
 		return SUCCESS;
 	}
-	
-	//TODO
+		
 	@SuppressWarnings("unchecked")
 	public String listarServicios(){				
 		numeroDeServiciosPorSector();
@@ -103,8 +105,7 @@ public class ConsultasControlador extends DAO implements Constants, Order, Model
 		entes = (List<Ente>) read(new Ente());
 		return SUCCESS;
 	}
-	
-	//TODO
+		
 	@SuppressWarnings("unchecked")
 	public String buscar_servicio(){				
 		numeroDeServiciosPorSector();
@@ -148,7 +149,7 @@ public class ConsultasControlador extends DAO implements Constants, Order, Model
         });
 	}
 	
-	
+	//TODO contar servicio visitado
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String examinarServicioInformacion() {
@@ -205,6 +206,9 @@ public class ConsultasControlador extends DAO implements Constants, Order, Model
 		arquitecturas = (List<Arquitectura>) read(new Arquitectura());
 		children = (List<Intercambio>) read(new Intercambio());
 		files = (List<AspectoLegal>) read(ALSI, id_servicio, -1);
+		visita.setId_servicio_informacion(id_servicio);				
+		create(visita);		
+		nVisitas = readf(visita, id_servicio);
 		return SUCCESS;
 	}
 	
@@ -465,6 +469,22 @@ public class ConsultasControlador extends DAO implements Constants, Order, Model
 
 	public void setBuscarServicio(boolean buscarServicio) {
 		this.buscarServicio = buscarServicio;
+	}
+
+	public long getnVisitas() {
+		return nVisitas;
+	}
+
+	public void setnVisitas(long nVisitas) {
+		this.nVisitas = nVisitas;
+	}
+
+	public Visita getVisita() {
+		return visita;
+	}
+
+	public void setVisita(Visita visita) {
+		this.visita = visita;
 	}
 
 	

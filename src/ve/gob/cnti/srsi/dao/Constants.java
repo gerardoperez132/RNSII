@@ -5,6 +5,7 @@ import ve.gob.cnti.srsi.modelo.EntradaSalida;
 import ve.gob.cnti.srsi.modelo.Funcionalidad;
 import ve.gob.cnti.srsi.modelo.Sector;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
+import ve.gob.cnti.srsi.modelo.Visita;
 
 /**
  * Interfaz de constantes del Sistema de Registro de Servicio de Información.
@@ -119,6 +120,9 @@ public interface Constants {
 		/** Relación 1 Sector tiene N Servicios de Información. */
 		public static final Object[] SISE = { new ServicioInformacion(), 
 			new Sector() };
+		/** Relación 1 Servicio de Información tiene N Visitas. */
+		public static final Object[] SIVI = { new Visita(), 
+			new ServicioInformacion(),};
 	}
 
 	/**

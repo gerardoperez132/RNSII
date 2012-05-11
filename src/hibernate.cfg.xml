@@ -55,5 +55,6 @@
 		<mapping class="ve.gob.cnti.srsi.modelo.UnionUsuarioRol" />
 		<mapping class="ve.gob.cnti.srsi.modelo.Url" />
 		<mapping class="ve.gob.cnti.srsi.modelo.Usuario" />
+		<mapping class="ve.gob.cnti.srsi.modelo.Visita" />
 	</session-factory>
 </hibernate-configuration>

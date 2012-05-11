@@ -711,5 +711,32 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 		}
 		return list;		
 	}
+	
+	@Override
+	public long readf(Object model, long id) {
+		long result;
+		try {
+			startConnection();
+//			result = session.createQuery(
+//					"FROM " + model.getClass().getSimpleName() + " WHERE "
+//							+ getField(model) + " = " + id + " AND status = "
+//							+ ACTIVO).uniqueResult();
+
+			
+//			Query query = session.createSQLQuery("select count(id_servicio_informacion)" +
+//					" from visitas where id_servicio_informacion = " +id);
+			
+			Query query = session.createQuery("select count(id_servicio_informacion)" +
+			" from " + model.getClass().getSimpleName() + " where id_servicio_informacion = " +id);			
+			result = (Long) query.uniqueResult();
+			
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+		return result;
+	}
 
 }

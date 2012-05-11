@@ -155,7 +155,7 @@
 											</s:if>
 										</s:iterator>
 									</td>
-								</tr>
+								</tr>								
 								<tr>
 									<td class="alt"><s:text name="orientado" /></td>
 									<td class="alt2">
@@ -182,6 +182,10 @@
 											</s:if>
 										</s:iterator>
 									</td>
+								</tr>
+								<tr>
+									<td class="alt"><s:text name="visitas" /></td>
+									<td class="alt2"><s:property value="nVisitas" /></td>
 								</tr>						
 							</table>
 							<hr>

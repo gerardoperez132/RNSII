@@ -378,4 +378,6 @@ public interface CRUD {
 	 * @return Retorna una lista de servicios 
 	 */
 	public ArrayList<ServicioInformacion> buscarServicio(String cadena, byte orderBy);
+
+	public long readf(Object model, long id);
 }
