@@ -33,13 +33,16 @@
 		<div id="container">
 			<%@include file="layout/header.jsp"%>
 			<%@include file="layout/sidebar_user_final.jsp"%>
-			<!-- Este es el div de contenidos -->
-			<div id="content">				
-				<br>
-				<s:url id="entrar" action="autenticarUsuario"></s:url>
-				<s:a href="%{entrar}"><s:text name="login" /></s:a>
-				<s:actionmessage/>
-				<br>				
+			<!-- Este es el div de contenidos -->			
+			<div id="content">	
+				<form action="buscar_servicio" method="post">				
+				<table align="center">
+					<tr>						
+						<td><s:textfield name="cadena" size="50"/></td>
+						<td><input type="submit" value="<s:text name="buscarServicio"/>"></td>
+					</tr>
+				</table>		
+				</form>									
 				<br>
 				<s:if test="consulta_SIxSector == true">
 <!-- Lista de servicios de información por sector -->					
@@ -137,6 +140,10 @@
 								<tr>
 									<td class="alt"><s:text name="servicio_nombre" /></td>
 									<td class="alt2"><s:property value="servicio.nombre" /></td>
+								</tr>
+								<tr>
+									<td class="alt"><s:text name="descripcion" /></td>
+									<td class="alt2"><s:property value="servicio.descripcion" /></td>
 								</tr>
 								<tr>
 									<td class="alt"><s:text name="sector" /></td>
@@ -461,9 +468,59 @@
 							</s:else>																																	
 							</table>					
 					</s:elseif>
+					<s:elseif test="buscarServicio == true">
+<!-- Lista de servicios encontrados -->
+						<table class="results">
+							<tr>
+								<th colspan="3"><s:text name="listaServiciosEncontrados" /></th>								
+							</tr>
+							<tr>
+								<th><s:text name="argumentoConsultado" /></th>
+								<td colspan="2"><s:property value="cadena"/></td>																
+							</tr>
+							<tr>
+								<th><s:text name="nombre" /></th>
+								<th><s:text name="ente1" /></th>
+								<th><s:text name="fecha_creado" /></th>
+							</tr>
+							<s:if test="servicios.size()>0">
+								<s:iterator value="servicios">
+									<tr>
+										<td>
+											<a href="servicio?id_servicio=<s:property value="id_servicio_informacion"/>">
+												<s:property value="nombre"/>
+											</a>
+										</td>
+										<td>
+											<s:set name="id_e" value="id_ente"/>
+											<s:iterator value="entes">
+												<s:if test="id_ente = #id_e">
+													<s:property value="nombre"/>		
+												</s:if>
+											</s:iterator>
+										</td>
+										<td><s:date name="fecha_creado" format="d'/'MM'/'yyyy"/></td>
+									</tr>
+								</s:iterator>									
+							</s:if>
+							<s:else>
+								<tr>									
+									<td colspan="3"><span class="ok_pass"><s:text name="sis_null2" /></span></td>
+								</tr>
+							</s:else>																																	
+							</table>					
+					</s:elseif>
+					<s:else>
+						<h3>						
+						<s:fielderror>
+							<s:param>error</s:param>
+						</s:fielderror>
+						</h3>						
+					</s:else>
+						
 			</div>
 			<%@include file="layout/footer.jsp"%>
-		</div>
+		</div>		
 	</div>
 </body>
 </s:i18n>
