@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ve.gob.cnti.modelo.temporales.ListaSImasVisitados;
 import ve.gob.cnti.srsi.modelo.Correo;
 import ve.gob.cnti.srsi.modelo.Telefono;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;;
@@ -380,4 +381,11 @@ public interface CRUD {
 	public ArrayList<ServicioInformacion> buscarServicio(String cadena, byte orderBy);
 
 	public long readf(Object model, long id);
+
+	/**
+	 * Permite Consultar los 5 servicios de información más visitados.
+	 *            
+	 * @return Retorna una lista con los servicios de información más visitados.
+	 */
+	public List<ListaSImasVisitados> SImasVisitados();
 }

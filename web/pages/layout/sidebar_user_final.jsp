@@ -30,5 +30,19 @@
 						</tr>
 						</s:if>
 					</s:iterator>					
-				</table>			
+				</table>	
+				<table class="links">
+					<tr>
+						<th><s:text name="si_mas_Visitados" /></th>
+					</tr>
+					<s:iterator value="SI_masVisitados" status="index">						
+						<tr>
+							<td>
+								<a href="servicio?id_servicio=<s:property value="id_servicio_informacion"/>">
+										<s:property value="nombre"/> - (<s:property value="visitas"/>)
+								</a>
+							</td>
+						</tr>						
+					</s:iterator>					
+				</table>		
 			</div>

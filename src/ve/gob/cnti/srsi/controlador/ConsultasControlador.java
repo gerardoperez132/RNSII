@@ -6,8 +6,10 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
+
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
+import ve.gob.cnti.modelo.temporales.ListaSImasVisitados;
 import ve.gob.cnti.srsi.dao.Constants;
 import ve.gob.cnti.srsi.dao.Constants.Order;
 import ve.gob.cnti.srsi.dao.Constants.Modelos;
@@ -54,6 +56,7 @@ public class ConsultasControlador extends DAO implements Constants, Order, Model
 	private List<Ente> entes = new ArrayList<Ente>();
 	private List<ServicioInformacion> servicios = new ArrayList<ServicioInformacion>();
 	private List<ListaSectores> listaSectores = new ArrayList<ListaSectores>();
+	private List<ListaSImasVisitados> SI_masVisitados = new ArrayList<ListaSImasVisitados>();
 	
 	private String cadena;
 	private String telefono;
@@ -72,14 +75,17 @@ public class ConsultasControlador extends DAO implements Constants, Order, Model
 	private boolean buscarServicio;
 	
 	
+	
 	public String inicio(){
-		numeroDeServiciosPorSector();		
+		numeroDeServiciosPorSector();
+		SI_masVisitados = SImasVisitados();		
 		return SUCCESS;		
 	}
 	
 	@SuppressWarnings("unchecked")
 	public String listarSector(){
-		numeroDeServiciosPorSector();			
+		numeroDeServiciosPorSector();
+		SI_masVisitados = SImasVisitados();	
 		if(!verificarLong(id_sector))
 			return INPUT;
 		sector = (Sector)read(sector, id_sector);
@@ -94,12 +100,14 @@ public class ConsultasControlador extends DAO implements Constants, Order, Model
 	public String listarSectores(){
 		consulta_listarSectores = true;
 		numeroDeServiciosPorSector();
+		SI_masVisitados = SImasVisitados();	
 		return SUCCESS;
 	}
 		
 	@SuppressWarnings("unchecked")
 	public String listarServicios(){				
 		numeroDeServiciosPorSector();
+		SI_masVisitados = SImasVisitados();	
 		consulta_listarServicios = true;
 		servicios = (List<ServicioInformacion>) getSortedList(servicio, ASC);
 		entes = (List<Ente>) read(new Ente());
@@ -109,6 +117,7 @@ public class ConsultasControlador extends DAO implements Constants, Order, Model
 	@SuppressWarnings("unchecked")
 	public String buscar_servicio(){				
 		numeroDeServiciosPorSector();
+		SI_masVisitados = SImasVisitados();	
 		buscarServicio = true;
 		if (!cadena.toUpperCase().matches(REGEX_TITLE)){
 			addFieldError("error",
@@ -149,13 +158,12 @@ public class ConsultasControlador extends DAO implements Constants, Order, Model
         });
 	}
 	
-	//TODO contar servicio visitado
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String examinarServicioInformacion() {
 		if(!verificarLong(id_servicio))
 			return INPUT;		
-		numeroDeServiciosPorSector();
+		numeroDeServiciosPorSector();		
 		examinarServicio=true;		
 		servicio = (ServicioInformacion) read(servicio, id_servicio);
 		try {
@@ -195,10 +203,8 @@ public class ConsultasControlador extends DAO implements Constants, Order, Model
 				// No tiene entradas ni salidas.
 			}
 		}
-		System.out.println("id ente " + servicio.getId_ente());
-		;
-		ente = (Ente) read(ente, servicio.getId_ente());
-		// sectores = (List<Sector>) read(new Sector());
+		System.out.println("id ente " + servicio.getId_ente());		
+		ente = (Ente) read(ente, servicio.getId_ente());		
 		sectores = (List<Sector>) getSortedList(new Sector(), ASC);
 		estados = (List<Estado>) read(new Estado());
 		areas = (List<Area>) read(new Area());
@@ -209,6 +215,7 @@ public class ConsultasControlador extends DAO implements Constants, Order, Model
 		visita.setId_servicio_informacion(id_servicio);				
 		create(visita);		
 		nVisitas = readf(visita, id_servicio);
+		SI_masVisitados = SImasVisitados();	
 		return SUCCESS;
 	}
 	
@@ -487,6 +494,14 @@ public class ConsultasControlador extends DAO implements Constants, Order, Model
 		this.visita = visita;
 	}
 
+	public List<ListaSImasVisitados> getSI_masVisitados() {
+		return SI_masVisitados;
+	}
+
+	public void setSI_masVisitados(List<ListaSImasVisitados> sI_masVisitados) {
+		SI_masVisitados = sI_masVisitados;
+	}
+
 	
 }
 
@@ -522,3 +537,4 @@ class ListaSectores{
 		this.n = n;
 	}	
 }
+

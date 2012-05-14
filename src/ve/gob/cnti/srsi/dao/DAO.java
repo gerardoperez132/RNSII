@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.Table;
@@ -13,6 +14,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import ve.gob.cnti.modelo.temporales.ListaSImasVisitados;
 import ve.gob.cnti.srsi.dao.Constants.ClaseDato;
 import ve.gob.cnti.srsi.dao.Constants.Status;
 import ve.gob.cnti.srsi.dao.Constants.TipoEntradaSalida;
@@ -717,19 +719,50 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 		long result;
 		try {
 			startConnection();
-//			result = session.createQuery(
-//					"FROM " + model.getClass().getSimpleName() + " WHERE "
-//							+ getField(model) + " = " + id + " AND status = "
-//							+ ACTIVO).uniqueResult();
-
-			
-//			Query query = session.createSQLQuery("select count(id_servicio_informacion)" +
-//					" from visitas where id_servicio_informacion = " +id);
+			//TODO
+			//arreglar query
 			
 			Query query = session.createQuery("select count(id_servicio_informacion)" +
 			" from " + model.getClass().getSimpleName() + " where id_servicio_informacion = " +id);			
 			result = (Long) query.uniqueResult();
 			
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+		return result;
+	}
+	
+	@SuppressWarnings("rawtypes")		
+	@Override
+	public List<ListaSImasVisitados> SImasVisitados() {
+		List<ListaSImasVisitados> result = new ArrayList<ListaSImasVisitados>();
+		try {
+			startConnection();			
+			Query query =  session.createSQLQuery(" select visitas.id_servicio_informacion, Servicios_informacion.nombre, count(visitas.id_servicio_informacion) "+
+				" from visitas, Servicios_informacion " + 
+				" where (select Servicios_informacion.status where Servicios_informacion.id_servicio_informacion = visitas.id_servicio_informacion) = 0 "+
+				" AND " +
+				" (select Servicios_informacion.id_estado where Servicios_informacion.id_servicio_informacion = visitas.id_servicio_informacion) = 2 " +
+				" AND " +
+				" (select Servicios_informacion.publicado where Servicios_informacion.id_servicio_informacion = visitas.id_servicio_informacion) = TRUE " +
+				" GROUP BY visitas.id_servicio_informacion, Servicios_informacion.nombre " + 
+				" ORDER BY count(visitas.id_servicio_informacion) desc " + 
+				" limit 5");	
+			List list=query.list();			
+			Iterator it=list.iterator();
+			while(it.hasNext())
+			{
+			Object[] st = (Object[])it.next();
+			ListaSImasVisitados si = new ListaSImasVisitados();
+			si.setId_servicio_informacion((Long) Long.parseLong(st[0].toString()));
+			si.setNombre((String) st[1]);
+			si.setVisitas((Long) Long.parseLong(st[2].toString()));
+			System.out.println(si.toString());
+			result.add(si);
+			}
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;
