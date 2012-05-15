@@ -7,8 +7,8 @@ import java.util.List;
 import ve.gob.cnti.modelo.temporales.ListaSImasVisitados;
 import ve.gob.cnti.modelo.temporales.SectoresMasPublicados;
 import ve.gob.cnti.srsi.modelo.Correo;
+import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.Telefono;
-import ve.gob.cnti.srsi.modelo.ServicioInformacion;;
 
 /**
  * Definición de métodos para las operaciones en la base de datos.
@@ -314,103 +314,114 @@ public interface CRUD {
 			InvocationTargetException, NoSuchMethodException;
 
 	/**
-	 * Permite saber si existe un registro activo mediante la llave foranea
-	 * con las relaciones de las dos entidades, pasadas como argumentos.
+	 * Permite saber si existe un registro activo mediante la llave foranea con
+	 * las relaciones de las dos entidades, pasadas como argumentos.
 	 * 
 	 * @param models
-	 * 			Son las dos entidades relacionadas, primero la entidad padre y
-	 * 				luego la entidad hija			
-	 * @param id	
-	 * 			clave foranea de la entidad hija
-	 * @return
-	 * 			retorna un valor booleano encaso de que que exista o no, un registro 
-	 * 			activo
+	 *            Son las dos entidades relacionadas, primero la entidad padre y
+	 *            luego la entidad hija
+	 * @param id
+	 *            clave foranea de la entidad hija
+	 * @return retorna un valor booleano encaso de que que exista o no, un
+	 *         registro activo
 	 */
 	public boolean read(Object[] models, long id);
-	
+
 	/**
-	 * Permite saber si existe un registro activo mediante la llave foranea
-	 * con las relaciones de las dos entidades, pasadas como argumentos.
+	 * Permite saber si existe un registro activo mediante la llave foranea con
+	 * las relaciones de las dos entidades, pasadas como argumentos.
 	 * 
 	 * @param models
-	 * 			Son las dos entidades relacionadas, primero la entidad padre y
-	 * 				luego la entidad hija			
-	 * @param id	
-	 * 			clave foranea de la entidad hija
-	 * @return
-	 * 			retorna un objeto con sus atributos establecidos.
-	 * 			
+	 *            Son las dos entidades relacionadas, primero la entidad padre y
+	 *            luego la entidad hija
+	 * @param id
+	 *            clave foranea de la entidad hija
+	 * @return retorna un objeto con sus atributos establecidos.
+	 * 
 	 */
 	public Object readf(Object[] models, long id);
-	
+
 	/**
-	 * Permite saber si existe un registro activo mediante la llave foranea
-	 * con las relaciones de las dos entidades, pasadas como argumentos.
+	 * Permite saber si existe un registro activo mediante la llave foranea con
+	 * las relaciones de las dos entidades, pasadas como argumentos.
 	 * 
 	 * @param models
-	 * 			Son las dos entidades relacionadas, primero la entidad padre y
-	 * 				luego la entidad hija			
-	 * @param id	
-	 * 			clave foranea de la entidad hija
-	 * @return
-	 * 			retorna un objeto con sus atributos establecidos.
-	 * 			
+	 *            Son las dos entidades relacionadas, primero la entidad padre y
+	 *            luego la entidad hija
+	 * @param id
+	 *            clave foranea de la entidad hija
+	 * @return retorna un objeto con sus atributos establecidos.
+	 * 
 	 */
 	public Object getUrlRecoveryPass(Object model, String Url);
-	
+
 	/**
-	 * Permite saber el número de servicios de información publicados 
-	 * en el sector solicitado.
-	 *			
-	 * @param id	
-	 * 			id del sector a consultar
-	 * @return
-	 * 			retorna el número de servicios publicados del sector
-	 * 			
+	 * Permite saber el número de servicios de información publicados en el
+	 * sector solicitado.
+	 * 
+	 * @param id
+	 *            id del sector a consultar
+	 * @return retorna el número de servicios publicados del sector
+	 * 
 	 */
 	public long nSiSector(long id);
-	
+
 	/**
-	 * Permite buscar servicios en el que el nombre de estos, se asemejen 
-	 * a la cadena pasada
+	 * Permite buscar servicios en el que el nombre de estos, se asemejen a la
+	 * cadena pasada
 	 * 
 	 * @param cadena
 	 *            Es la cadena a consultar
-	 *            
-	 * @return Retorna una lista de servicios 
+	 * 
+	 * @return Retorna una lista de servicios
 	 */
-	public ArrayList<ServicioInformacion> buscarServicio(String cadena, byte orderBy);
+	public ArrayList<ServicioInformacion> buscarServicio(String cadena,
+			byte orderBy);
 
-	public long readf(Object model, long id);
+	public long getNumeroVisitas(Object model, long id);
 
 	/**
 	 * Permite Consultar los 5 servicios de información más visitados.
-	 *            
+	 * 
 	 * @return Retorna una lista con los servicios de información más visitados.
 	 */
 	public List<ListaSImasVisitados> SImasVisitados();
 
 	/**
-	 * Permite Consultar los 5 sectores con más servicios de información 
+	 * Permite Consultar los 5 sectores con más servicios de información
 	 * implemantados y públicados.
 	 * 
-	 * @param n 
-	 * 		Numero para limitar la consulta, un valor menor o igual a cero se considera
-	 *      como una consulta sin limitante.
-	 *            
-	 * @return Retorna una lista con los 5 sectores con más servicios de información.
+	 * @param n
+	 *            Numero para limitar la consulta, un valor menor o igual a cero
+	 *            se considera como una consulta sin limitante.
+	 * 
+	 * @return Retorna una lista con los 5 sectores con más servicios de
+	 *         información.
 	 */
 	public List<SectoresMasPublicados> SectoresmasPublicados(int n);
 
 	/**
-	 * Permite Consultar los servicios de información 
-	 * implemantados y públicados.
+	 * Permite Consultar los servicios de información implemantados y
+	 * públicados.
 	 * 
-	 * @param n 
-	 * 		Numero para limitar la consulta, un valor menor o igual a cero se considera
-	 *      como una consulta sin limitante.
-	 *            
-	 * @return Retorna una lista con los servicios de información implemantados y públicados.
+	 * @param n
+	 *            Numero para limitar la consulta, un valor menor o igual a cero
+	 *            se considera como una consulta sin limitante.
+	 * 
+	 * @return Retorna una lista con los servicios de información implemantados
+	 *         y públicados.
 	 */
 	public ArrayList<ServicioInformacion> getSIList(byte orderBy);
+
+	/**
+	 * Retorna una lista de los servicios de información implementados, activos
+	 * y publicados en el sector dado.
+	 * 
+	 * @param id_sector
+	 *            Identificador del sector al cual pertenecen los servicios de
+	 *            información.
+	 * @return Lista de los servicios de información con los criterios dados.
+	 */
+	public ArrayList<ServicioInformacion> getServicioInformacionPorSectorList(
+			long id_sector, byte orderBy);
 }

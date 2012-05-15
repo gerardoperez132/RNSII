@@ -31,6 +31,11 @@ public interface Constants {
 	public static final String PATH = "/archivos/";
 
 	/**
+	 * Número de servicios de información más visitados.
+	 */
+	public static final String VISITADOS = "5";
+
+	/**
 	 * La expresión regular para validar los campos de los formularios.
 	 * Considerando que la cadena con la que se compara está en mayúsculas.
 	 */
@@ -118,11 +123,11 @@ public interface Constants {
 		public static final Object[] ALSI = { new AspectoLegal(),
 				new ServicioInformacion() };
 		/** Relación 1 Sector tiene N Servicios de Información. */
-		public static final Object[] SISE = { new ServicioInformacion(), 
-			new Sector() };
+		public static final Object[] SISE = { new ServicioInformacion(),
+				new Sector() };
 		/** Relación 1 Servicio de Información tiene N Visitas. */
-		public static final Object[] SIVI = { new Visita(), 
-			new ServicioInformacion(),};
+		public static final Object[] SIVI = { new Visita(),
+				new ServicioInformacion(), };
 	}
 
 	/**

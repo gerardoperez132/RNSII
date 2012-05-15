@@ -41,8 +41,8 @@ import com.opensymphony.xwork2.ActionSupport;
  * @see TipoEntradaSalida
  */
 @SuppressWarnings("serial")
-public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
-		TipoEntradaSalida {
+public class DAO extends ActionSupport implements Constants, CRUD, Status,
+		ClaseDato, TipoEntradaSalida {
 
 	public static Errors error = new Errors();
 	private static Session session;
@@ -723,19 +723,15 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 	}
 
 	@Override
-	public long readf(Object model, long id) {
+	public long getNumeroVisitas(Object model, long id) {
 		long result;
 		try {
 			startConnection();
-			// TODO
-			// arreglar query
-
 			Query query = session
-					.createQuery("select count(id_servicio_informacion)"
-							+ " from " + model.getClass().getSimpleName()
-							+ " where id_servicio_informacion = " + id);
+					.createQuery("SELECT count(id_servicio_informacion)"
+							+ " FROM " + model.getClass().getSimpleName()
+							+ " WHERE id_servicio_informacion = " + id);
 			result = (Long) query.uniqueResult();
-
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;
@@ -761,7 +757,7 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 							+ " (select Servicios_informacion.publicado where Servicios_informacion.id_servicio_informacion = visitas.id_servicio_informacion) = TRUE "
 							+ " GROUP BY visitas.id_servicio_informacion, Servicios_informacion.nombre "
 							+ " ORDER BY count(visitas.id_servicio_informacion) desc "
-							+ " limit 5");
+							+ " limit " + VISITADOS);
 			List list = query.list();
 			Iterator it = list.iterator();
 			while (it.hasNext()) {
@@ -789,24 +785,25 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 		try {
 			startConnection();
 			String consulta;
-			if(n>0){
-				consulta = " select sectores.id_sector, sectores.nombre, " +
-					"((select count(servicios_informacion.id_sector) from servicios_informacion where servicios_informacion.id_sector = sectores.id_sector AND Servicios_informacion.status = 0 AND Servicios_informacion.id_estado = 2 AND Servicios_informacion.publicado =TRUE)) " +
-					"from  sectores,Servicios_informacion " +
-					"where (select Servicios_informacion.status where Servicios_informacion.id_sector = sectores.id_sector) = 0 " +
-					"AND " +
-					"(select Servicios_informacion.id_estado where Servicios_informacion.id_sector = sectores.id_sector) = 2  " +
-					"AND " +
-					"(select Servicios_informacion.publicado where Servicios_informacion.id_sector = sectores.id_sector) = TRUE  " +
-					"GROUP BY sectores.nombre, sectores.id_sector ORDER BY count(Servicios_informacion.id_sector) limit "+n;			
-			}else{
-				consulta = "select sectores.id_sector, sectores.nombre, " +
-				"((select count(servicios_informacion.id_sector) from servicios_informacion where servicios_informacion.id_sector = sectores.id_sector AND Servicios_informacion.status = 0 AND Servicios_informacion.id_estado = 2 AND Servicios_informacion.publicado =TRUE)) as S " +
-				"from  sectores,Servicios_informacion GROUP BY sectores.nombre, sectores.id_sector " +
-				"ORDER BY s Desc";
+			if (n > 0) {
+				consulta = " select sectores.id_sector, sectores.nombre, "
+						+ "((select count(servicios_informacion.id_sector) from servicios_informacion where servicios_informacion.id_sector = sectores.id_sector AND Servicios_informacion.status = 0 AND Servicios_informacion.id_estado = 2 AND Servicios_informacion.publicado =TRUE)) "
+						+ "from  sectores,Servicios_informacion "
+						+ "where (select Servicios_informacion.status where Servicios_informacion.id_sector = sectores.id_sector) = 0 "
+						+ "AND "
+						+ "(select Servicios_informacion.id_estado where Servicios_informacion.id_sector = sectores.id_sector) = 2  "
+						+ "AND "
+						+ "(select Servicios_informacion.publicado where Servicios_informacion.id_sector = sectores.id_sector) = TRUE  "
+						+ "GROUP BY sectores.nombre, sectores.id_sector ORDER BY count(Servicios_informacion.id_sector) limit "
+						+ n;
+			} else {
+				consulta = "select sectores.id_sector, sectores.nombre, "
+						+ "((select count(servicios_informacion.id_sector) from servicios_informacion where servicios_informacion.id_sector = sectores.id_sector AND Servicios_informacion.status = 0 AND Servicios_informacion.id_estado = 2 AND Servicios_informacion.publicado =TRUE)) as S "
+						+ "from  sectores,Servicios_informacion GROUP BY sectores.nombre, sectores.id_sector "
+						+ "ORDER BY s Desc";
 			}
 			System.out.println("consulta " + consulta);
-			Query query = session.createSQLQuery(consulta);						
+			Query query = session.createSQLQuery(consulta);
 			List list = query.list();
 			Iterator it = list.iterator();
 			while (it.hasNext()) {
@@ -825,19 +822,44 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 		}
 		return result;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
-	public ArrayList<ServicioInformacion> getSIList( byte orderBy) {
+	public ArrayList<ServicioInformacion> getSIList(byte orderBy) {
 		ArrayList<ServicioInformacion> list;
 		String order = orderBy > 0 ? "DESC" : "ASC";
 		try {
 			startConnection();
 			list = (ArrayList<ServicioInformacion>) session.createQuery(
-					" FROM ServicioInformacion s WHERE s.status = "
-					+ ACTIVO  + " AND " + " s.publicado = TRUE "
-					+ " AND " + " s.id_estado = 2 "
-					+" ORDER BY s.id_servicio_informacion "+ order).list();
+					" FROM ServicioInformacion s WHERE s.status = " + ACTIVO
+							+ " AND " + " s.publicado = TRUE " + " AND "
+							+ " s.id_estado = 2 "
+							+ " ORDER BY s.id_servicio_informacion " + order)
+					.list();
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public ArrayList<ServicioInformacion> getServicioInformacionPorSectorList(
+			long id_sector, byte orderBy) {
+		ArrayList<ServicioInformacion> list;
+		String order = orderBy > 0 ? "DESC" : "ASC";
+		try {
+			startConnection();
+			list = (ArrayList<ServicioInformacion>) session.createQuery(
+					" FROM ServicioInformacion s WHERE s.status = " + ACTIVO
+							+ " AND " + " s.publicado = TRUE " + " AND "
+							+ " s.id_estado = 2 " + " AND s.id_sector = "
+							+ id_sector
+							+ " ORDER BY s.id_servicio_informacion " + order)
+					.list();
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;

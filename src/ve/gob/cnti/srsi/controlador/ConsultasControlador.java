@@ -88,7 +88,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 		sector = (Sector) read(sector, id_sector);
 		if (sector == null)
 			return INPUT;
-		servicios = (List<ServicioInformacion>) read(SISE, id_sector, -1);
+		servicios = getServicioInformacionPorSectorList(id_sector, DESC);
 		entes = (List<Ente>) read(new Ente());
 		consulta_SIxSector = true;
 		return SUCCESS;
@@ -182,7 +182,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 		files = (List<AspectoLegal>) read(ALSI, id_servicio, -1);
 		visita.setId_servicio_informacion(id_servicio);
 		create(visita);
-		nVisitas = readf(visita, id_servicio);
+		nVisitas = getNumeroVisitas(visita, id_servicio);
 		SI_masVisitados = SImasVisitados();
 		return SUCCESS;
 	}
