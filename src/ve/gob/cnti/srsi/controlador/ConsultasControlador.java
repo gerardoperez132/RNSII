@@ -1,14 +1,13 @@
 package ve.gob.cnti.srsi.controlador;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
 import ve.gob.cnti.modelo.temporales.ListaSImasVisitados;
+import ve.gob.cnti.modelo.temporales.SectoresMasPublicados;
 import ve.gob.cnti.srsi.dao.Constants;
 import ve.gob.cnti.srsi.dao.Constants.Modelos;
 import ve.gob.cnti.srsi.dao.Constants.Order;
@@ -54,7 +53,8 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 	private List<Sector> sectores = new ArrayList<Sector>();
 	private List<Ente> entes = new ArrayList<Ente>();
 	private List<ServicioInformacion> servicios = new ArrayList<ServicioInformacion>();
-	private List<ListaSectores> listaSectores = new ArrayList<ListaSectores>();
+	List<SectoresMasPublicados> listaSectores = new ArrayList<SectoresMasPublicados>();
+	List<SectoresMasPublicados> listaSectores2 = new ArrayList<SectoresMasPublicados>();
 	private List<ListaSImasVisitados> SI_masVisitados = new ArrayList<ListaSImasVisitados>();
 
 	private String cadena;
@@ -74,14 +74,14 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 	private boolean buscarServicio;
 
 	public String inicio() {
-		numeroDeServiciosPorSector();
+		listaSectores = SectoresmasPublicados(5);
 		SI_masVisitados = SImasVisitados();
 		return SUCCESS;
 	}
 
 	@SuppressWarnings("unchecked")
 	public String listarSector() {
-		numeroDeServiciosPorSector();
+		listaSectores = SectoresmasPublicados(5);
 		SI_masVisitados = SImasVisitados();
 		if (!verificarLong(id_sector))
 			return INPUT;
@@ -96,24 +96,26 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 
 	public String listarSectores() {
 		consulta_listarSectores = true;
-		numeroDeServiciosPorSector();
+		listaSectores = SectoresmasPublicados(5);
+		listaSectores2 = SectoresmasPublicados(0);
 		SI_masVisitados = SImasVisitados();
+		System.out.println("ls " + listaSectores2.size());
 		return SUCCESS;
 	}
 
 	@SuppressWarnings("unchecked")
 	public String listarServicios() {
-		numeroDeServiciosPorSector();
+		listaSectores = SectoresmasPublicados(5);
 		SI_masVisitados = SImasVisitados();
 		consulta_listarServicios = true;
-		servicios = (List<ServicioInformacion>) getSortedList(servicio, ASC);
+		servicios = getSIList(ASC);
 		entes = (List<Ente>) read(new Ente());
 		return SUCCESS;
 	}
 
 	@SuppressWarnings("unchecked")
 	public String buscar_servicio() {
-		numeroDeServiciosPorSector();
+		listaSectores = SectoresmasPublicados(5);
 		SI_masVisitados = SImasVisitados();
 		buscarServicio = true;
 		if (!cadena.toUpperCase().matches(REGEX_TITLE)) {
@@ -126,42 +128,12 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 		return SUCCESS;
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void numeroDeServiciosPorSector() {
-		sectores = (List<Sector>) getSortedList(new Sector(), DESC);
-		Iterator<Sector> ite = sectores.iterator();
-		Sector sector = new Sector();
-		long n;
-		while (ite.hasNext()) {
-			sector = ite.next();
-			n = nSiSector(sector.getId_sector());
-			listaSectores.add(new ListaSectores(sector.getId_sector(), sector
-					.getNombre(), n));
-		}
-
-		Collections.sort(listaSectores, new Comparator() {
-			public int compare(Object o1, Object o2) {
-				ListaSectores e1 = (ListaSectores) o1;
-				ListaSectores e2 = (ListaSectores) o2;
-				long n1 = e1.getN();
-				long n2 = e2.getN();
-				if (n1 < n2) {
-					return 1;
-				} else if (n1 > n2) {
-					return -1;
-				} else {
-					return 0;
-				}
-			}
-		});
-	}
-
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String examinarServicioInformacion() {
 		if (!verificarLong(id_servicio))
 			return INPUT;
-		numeroDeServiciosPorSector();
+		listaSectores = SectoresmasPublicados(5);
 		examinarServicio = true;
 		servicio = (ServicioInformacion) read(servicio, id_servicio);
 		try {
@@ -229,14 +201,6 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 
 	public void setExaminarServicio(boolean examinarServicio) {
 		this.examinarServicio = examinarServicio;
-	}
-
-	public List<ListaSectores> getListaSectores() {
-		return listaSectores;
-	}
-
-	public void setListaSectores(List<ListaSectores> listaSectores) {
-		this.listaSectores = listaSectores;
 	}
 
 	public long getId_sector() {
@@ -496,41 +460,19 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 		SI_masVisitados = sI_masVisitados;
 	}
 
-}
-
-class ListaSectores {
-	private long id_sector;
-	private String nombre;
-	private long n;
-
-	public ListaSectores(long id_sector, String nombre, long n) {
-		super();
-		this.id_sector = id_sector;
-		this.nombre = nombre;
-		this.n = n;
+	public List<SectoresMasPublicados> getListaSectores() {
+		return listaSectores;
 	}
 
-	public long getId_sector() {
-		return id_sector;
+	public void setListaSectores(List<SectoresMasPublicados> listaSectores) {
+		this.listaSectores = listaSectores;
 	}
 
-	public void setId_sector(long id_sector) {
-		this.id_sector = id_sector;
+	public List<SectoresMasPublicados> getListaSectores2() {
+		return listaSectores2;
 	}
 
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public long getN() {
-		return n;
-	}
-
-	public void setN(long n) {
-		this.n = n;
+	public void setListaSectores2(List<SectoresMasPublicados> listaSectores2) {
+		this.listaSectores2 = listaSectores2;
 	}
 }

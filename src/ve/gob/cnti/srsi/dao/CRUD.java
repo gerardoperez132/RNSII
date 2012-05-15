@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ve.gob.cnti.modelo.temporales.ListaSImasVisitados;
+import ve.gob.cnti.modelo.temporales.SectoresMasPublicados;
 import ve.gob.cnti.srsi.modelo.Correo;
 import ve.gob.cnti.srsi.modelo.Telefono;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;;
@@ -388,4 +389,28 @@ public interface CRUD {
 	 * @return Retorna una lista con los servicios de información más visitados.
 	 */
 	public List<ListaSImasVisitados> SImasVisitados();
+
+	/**
+	 * Permite Consultar los 5 sectores con más servicios de información 
+	 * implemantados y públicados.
+	 * 
+	 * @param n 
+	 * 		Numero para limitar la consulta, un valor menor o igual a cero se considera
+	 *      como una consulta sin limitante.
+	 *            
+	 * @return Retorna una lista con los 5 sectores con más servicios de información.
+	 */
+	public List<SectoresMasPublicados> SectoresmasPublicados(int n);
+
+	/**
+	 * Permite Consultar los servicios de información 
+	 * implemantados y públicados.
+	 * 
+	 * @param n 
+	 * 		Numero para limitar la consulta, un valor menor o igual a cero se considera
+	 *      como una consulta sin limitante.
+	 *            
+	 * @return Retorna una lista con los servicios de información implemantados y públicados.
+	 */
+	public ArrayList<ServicioInformacion> getSIList(byte orderBy);
 }

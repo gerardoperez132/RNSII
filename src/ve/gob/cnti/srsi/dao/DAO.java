@@ -15,6 +15,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import ve.gob.cnti.modelo.temporales.ListaSImasVisitados;
+import ve.gob.cnti.modelo.temporales.SectoresMasPublicados;
 import ve.gob.cnti.srsi.dao.Constants.ClaseDato;
 import ve.gob.cnti.srsi.dao.Constants.Status;
 import ve.gob.cnti.srsi.dao.Constants.TipoEntradaSalida;
@@ -207,7 +208,7 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 		}
 		return result;
 	}
-	
+
 	@Override
 	public boolean read(Object[] models, long id, String name) {
 		boolean result = false;
@@ -236,8 +237,7 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 			if (session.createQuery(
 					"FROM " + models[0].getClass().getSimpleName() + " WHERE "
 							+ getField(models[1]) + " = " + id
-							+ " AND status = "
-							+ ACTIVO).uniqueResult() != null)
+							+ " AND status = " + ACTIVO).uniqueResult() != null)
 				result = true;
 		} catch (HibernateException he) {
 			handleException(he);
@@ -247,7 +247,7 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 		}
 		return result;
 	}
-	
+
 	@Override
 	public Object readf(Object[] models, long id) {
 		Object result;
@@ -256,8 +256,7 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 			result = session.createQuery(
 					"FROM " + models[0].getClass().getSimpleName() + " WHERE "
 							+ getField(models[1]) + " = " + id
-							+ " AND status = "
-							+ ACTIVO).uniqueResult();
+							+ " AND status = " + ACTIVO).uniqueResult();
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;
@@ -266,8 +265,6 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 		}
 		return result;
 	}
-	
-	
 
 	@Override
 	public Correo getUserEmail(String email) {
@@ -662,8 +659,8 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 			startConnection();
 			result = session.createQuery(
 					"FROM " + model.getClass().getSimpleName() + " WHERE "
-							+ " url = '" + Url + "' AND status = "
-							+ ACTIVO).uniqueResult();
+							+ " url = '" + Url + "' AND status = " + ACTIVO)
+					.uniqueResult();
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;
@@ -672,15 +669,16 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 		}
 		return result;
 	}
-	
-	public long nSiSector(long id){
+
+	public long nSiSector(long id) {
 		long result;
 		try {
 			startConnection();
-			result = session.createQuery(
-					"FROM ServicioInformacion WHERE "
-					+ " id_sector = " + id + " AND status = "
-					+ ACTIVO +" AND publicado = true").list().size();
+			result = session
+					.createQuery(
+							"FROM ServicioInformacion WHERE " + " id_sector = "
+									+ id + " AND status = " + ACTIVO
+									+ " AND publicado = true").list().size();
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;
@@ -692,40 +690,52 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public ArrayList<ServicioInformacion> buscarServicio(String cadena, byte orderBy) {
-		// TODO Auto-generated method stub
+	public ArrayList<ServicioInformacion> buscarServicio(String cadena,
+			byte orderBy) {
 		ArrayList<ServicioInformacion> list;
 		String order = orderBy > 0 ? "DESC" : "ASC";
 		try {
 			startConnection();
-			list = (ArrayList<ServicioInformacion>) session.createQuery(
-					" FROM ServicioInformacion s WHERE s.status = " + ACTIVO + " AND " +
-					" (UPPER(translate(s. nombre, 'áéíóúÁÉÍÓÚ', 'aeiouAEIOU')) " +
-					" LIKE UPPER(translate('%"+cadena+"%', 'áéíóúÁÉÍÓÚ', 'aeiouAEIOU')) " +
-					" or UPPER(translate(s. descripcion, 'áéíóúÁÉÍÓÚ', 'aeiouAEIOU')) " +
-					" LIKE UPPER(translate('%"+cadena+"%', 'áéíóúÁÉÍÓÚ', 'aeiouAEIOU'))) " +
-					" ORDER BY nombre "	+ order).list();
+			list = (ArrayList<ServicioInformacion>) session
+					.createQuery(
+							" FROM ServicioInformacion s WHERE s.status = "
+									+ ACTIVO
+									+ " AND "
+									+ " s.publicado = TRUE"
+									+ " AND "
+									+ " s.id_estado = 2 "
+									+ " AND "
+									+ " (UPPER(translate(s. nombre, 'áéíóúÁÉÍÓÚ', 'aeiouAEIOU')) "
+									+ " LIKE UPPER(translate('%"
+									+ cadena
+									+ "%', 'áéíóúÁÉÍÓÚ', 'aeiouAEIOU')) "
+									+ " or UPPER(translate(s. descripcion, 'áéíóúÁÉÍÓÚ', 'aeiouAEIOU')) "
+									+ " LIKE UPPER(translate('%" + cadena
+									+ "%', 'áéíóúÁÉÍÓÚ', 'aeiouAEIOU'))) "
+									+ " ORDER BY nombre " + order).list();
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;
 		} finally {
 			closeConnection();
 		}
-		return list;		
+		return list;
 	}
-	
+
 	@Override
 	public long readf(Object model, long id) {
 		long result;
 		try {
 			startConnection();
-			//TODO
-			//arreglar query
-			
-			Query query = session.createQuery("select count(id_servicio_informacion)" +
-			" from " + model.getClass().getSimpleName() + " where id_servicio_informacion = " +id);			
+			// TODO
+			// arreglar query
+
+			Query query = session
+					.createQuery("select count(id_servicio_informacion)"
+							+ " from " + model.getClass().getSimpleName()
+							+ " where id_servicio_informacion = " + id);
 			result = (Long) query.uniqueResult();
-			
+
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;
@@ -734,34 +744,34 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 		}
 		return result;
 	}
-	
-	@SuppressWarnings("rawtypes")		
+
+	@SuppressWarnings("rawtypes")
 	@Override
 	public List<ListaSImasVisitados> SImasVisitados() {
 		List<ListaSImasVisitados> result = new ArrayList<ListaSImasVisitados>();
 		try {
-			startConnection();			
-			Query query =  session.createSQLQuery(" select visitas.id_servicio_informacion, Servicios_informacion.nombre, count(visitas.id_servicio_informacion) "+
-				" from visitas, Servicios_informacion " + 
-				" where (select Servicios_informacion.status where Servicios_informacion.id_servicio_informacion = visitas.id_servicio_informacion) = 0 "+
-				" AND " +
-				" (select Servicios_informacion.id_estado where Servicios_informacion.id_servicio_informacion = visitas.id_servicio_informacion) = 2 " +
-				" AND " +
-				" (select Servicios_informacion.publicado where Servicios_informacion.id_servicio_informacion = visitas.id_servicio_informacion) = TRUE " +
-				" GROUP BY visitas.id_servicio_informacion, Servicios_informacion.nombre " + 
-				" ORDER BY count(visitas.id_servicio_informacion) desc " + 
-				" limit 5");	
-			List list=query.list();			
-			Iterator it=list.iterator();
-			while(it.hasNext())
-			{
-			Object[] st = (Object[])it.next();
-			ListaSImasVisitados si = new ListaSImasVisitados();
-			si.setId_servicio_informacion((Long) Long.parseLong(st[0].toString()));
-			si.setNombre((String) st[1]);
-			si.setVisitas((Long) Long.parseLong(st[2].toString()));
-			System.out.println(si.toString());
-			result.add(si);
+			startConnection();
+			Query query = session
+					.createSQLQuery(" select visitas.id_servicio_informacion, Servicios_informacion.nombre, count(visitas.id_servicio_informacion) "
+							+ " from visitas, Servicios_informacion "
+							+ " where (select Servicios_informacion.status where Servicios_informacion.id_servicio_informacion = visitas.id_servicio_informacion) = 0 "
+							+ " AND "
+							+ " (select Servicios_informacion.id_estado where Servicios_informacion.id_servicio_informacion = visitas.id_servicio_informacion) = 2 "
+							+ " AND "
+							+ " (select Servicios_informacion.publicado where Servicios_informacion.id_servicio_informacion = visitas.id_servicio_informacion) = TRUE "
+							+ " GROUP BY visitas.id_servicio_informacion, Servicios_informacion.nombre "
+							+ " ORDER BY count(visitas.id_servicio_informacion) desc "
+							+ " limit 5");
+			List list = query.list();
+			Iterator it = list.iterator();
+			while (it.hasNext()) {
+				Object[] st = (Object[]) it.next();
+				ListaSImasVisitados si = new ListaSImasVisitados();
+				si.setId_servicio_informacion((Long) Long.parseLong(st[0]
+						.toString()));
+				si.setNombre((String) st[1]);
+				si.setVisitas((Long) Long.parseLong(st[2].toString()));
+				result.add(si);
 			}
 		} catch (HibernateException he) {
 			handleException(he);
@@ -772,4 +782,68 @@ public class DAO extends ActionSupport implements CRUD, Status, ClaseDato,
 		return result;
 	}
 
+	@SuppressWarnings("rawtypes")
+	@Override
+	public List<SectoresMasPublicados> SectoresmasPublicados(int n) {
+		List<SectoresMasPublicados> result = new ArrayList<SectoresMasPublicados>();
+		try {
+			startConnection();
+			String consulta;
+			if(n>0){
+				consulta = " select sectores.id_sector, sectores.nombre, " +
+					"((select count(servicios_informacion.id_sector) from servicios_informacion where servicios_informacion.id_sector = sectores.id_sector AND Servicios_informacion.status = 0 AND Servicios_informacion.id_estado = 2 AND Servicios_informacion.publicado =TRUE)) " +
+					"from  sectores,Servicios_informacion " +
+					"where (select Servicios_informacion.status where Servicios_informacion.id_sector = sectores.id_sector) = 0 " +
+					"AND " +
+					"(select Servicios_informacion.id_estado where Servicios_informacion.id_sector = sectores.id_sector) = 2  " +
+					"AND " +
+					"(select Servicios_informacion.publicado where Servicios_informacion.id_sector = sectores.id_sector) = TRUE  " +
+					"GROUP BY sectores.nombre, sectores.id_sector ORDER BY count(Servicios_informacion.id_sector) limit "+n;			
+			}else{
+				consulta = "select sectores.id_sector, sectores.nombre, " +
+				"((select count(servicios_informacion.id_sector) from servicios_informacion where servicios_informacion.id_sector = sectores.id_sector AND Servicios_informacion.status = 0 AND Servicios_informacion.id_estado = 2 AND Servicios_informacion.publicado =TRUE)) as S " +
+				"from  sectores,Servicios_informacion GROUP BY sectores.nombre, sectores.id_sector " +
+				"ORDER BY s Desc";
+			}
+			System.out.println("consulta " + consulta);
+			Query query = session.createSQLQuery(consulta);						
+			List list = query.list();
+			Iterator it = list.iterator();
+			while (it.hasNext()) {
+				Object[] st = (Object[]) it.next();
+				SectoresMasPublicados si = new SectoresMasPublicados();
+				si.setId_sector((Long) Long.parseLong(st[0].toString()));
+				si.setNombre((String) st[1]);
+				si.setN((Long) Long.parseLong(st[2].toString()));
+				result.add(si);
+			}
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+		return result;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public ArrayList<ServicioInformacion> getSIList( byte orderBy) {
+		ArrayList<ServicioInformacion> list;
+		String order = orderBy > 0 ? "DESC" : "ASC";
+		try {
+			startConnection();
+			list = (ArrayList<ServicioInformacion>) session.createQuery(
+					" FROM ServicioInformacion s WHERE s.status = "
+					+ ACTIVO  + " AND " + " s.publicado = TRUE "
+					+ " AND " + " s.id_estado = 2 "
+					+" ORDER BY s.id_servicio_informacion "+ order).list();
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+		return list;
+	}
 }
