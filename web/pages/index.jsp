@@ -520,12 +520,10 @@
 							</s:else>																																	
 							</table>					
 					</s:elseif>
-					<s:else>
-						<h3>						
-						<s:fielderror>
-							<s:param>error</s:param>
-						</s:fielderror>
-						</h3>						
+					<s:else>												
+						<s:fielderror>						
+							<s:param>error</s:param>						
+						</s:fielderror>												
 					</s:else>
 						
 			</div>

@@ -71,7 +71,7 @@
 									</tr>						
 									<tr>
 										<td colspan="3" align="right" style="padding-right: 28px;">
-											<input type="submit" value="<s:text name="entrar" />" />
+											<input type="submit" value="<s:text name="recoveryPass" />" />
 										</td>
 									</tr>								
 								</table>
