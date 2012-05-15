@@ -378,6 +378,17 @@ public interface CRUD {
 	public ArrayList<ServicioInformacion> buscarServicio(String cadena,
 			byte orderBy);
 
+	/**
+	 * Permite obtener el número de visitas de un modelo determinado. Aplica a
+	 * servicios de información.
+	 * 
+	 * @see ServicioInformacion
+	 * @param model
+	 *            Modelo al cual se le desea conocer el número de visitas.
+	 * @param id
+	 *            Identificador del modelo dado.
+	 * @return El número de visitas del modelo dado.
+	 */
 	public long getNumeroVisitas(Object model, long id);
 
 	/**
