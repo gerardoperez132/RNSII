@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
@@ -27,7 +28,7 @@ import ve.gob.cnti.srsi.modelo.Usuario;
 import com.opensymphony.xwork2.ActionContext;
 
 @SuppressWarnings("serial")
-public class LoginControlador extends DAO implements ServletRequestAware{
+public class LoginControlador extends DAO implements ServletRequestAware {
 
 	private String correo;
 	private String password;
@@ -72,7 +73,7 @@ public class LoginControlador extends DAO implements ServletRequestAware{
 				return SUCCESS;
 			}
 		}
-	}	
+	}
 
 	@SkipValidation
 	public String mostrarLogin() {
@@ -106,10 +107,10 @@ public class LoginControlador extends DAO implements ServletRequestAware{
 			ServicioInformacion servicio = new ServicioInformacion();
 			while (siIterado.hasNext()) {
 				servicio = siIterado.next();
-				if (servicio.getId_estado() == 1) {					
+				if (servicio.getId_estado() == 1) {
 					ListaServicios
 							.add(new ServiciosPublicables(false, servicio));
-				} else if (!isComplete(servicio)) {					
+				} else if (!isComplete(servicio)) {
 					ListaServicios
 							.add(new ServiciosPublicables(false, servicio));
 				} else {
@@ -117,7 +118,7 @@ public class LoginControlador extends DAO implements ServletRequestAware{
 							new ServicioInformacion() };
 					List<Funcionalidad> funcionalidades = (List<Funcionalidad>) read(
 							models, servicio.getId_servicio_informacion(), -1);
-					if (funcionalidades.isEmpty()) {						
+					if (funcionalidades.isEmpty()) {
 						ListaServicios.add(new ServiciosPublicables(false,
 								servicio));
 					} else {
@@ -130,7 +131,7 @@ public class LoginControlador extends DAO implements ServletRequestAware{
 									new Funcionalidad() };
 							List<EntradaSalida> salidas_tmp = (List<EntradaSalida>) read(
 									models2, fx.getId_funcionalidad(), SALIDA);
-							if (salidas_tmp.isEmpty()) {								
+							if (salidas_tmp.isEmpty()) {
 								publicable = false;
 							}
 						}
@@ -151,7 +152,8 @@ public class LoginControlador extends DAO implements ServletRequestAware{
 	}
 
 	@SkipValidation
-	public String enviarDatos() throws NoSuchAlgorithmException, UnknownHostException {
+	public String enviarDatos() throws NoSuchAlgorithmException,
+			UnknownHostException {
 		user_correo = (Correo) getUserEmail(correo);
 		recoveryPass = true;
 		if (user_correo == null) {
@@ -179,9 +181,10 @@ public class LoginControlador extends DAO implements ServletRequestAware{
 					addFieldError(
 							"error",
 							error.getProperties().getProperty(
-									"error.request.isProccess"));				 
-//					String ruta = LoginControlador.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-//					System.out.println("ruta: "+ruta);
+									"error.request.isProccess"));
+					// String ruta =
+					// LoginControlador.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+					// System.out.println("ruta: "+ruta);
 					datosEnviados = true;
 					recoveryPass = false;
 					return INPUT;
@@ -190,69 +193,73 @@ public class LoginControlador extends DAO implements ServletRequestAware{
 		}
 		MD5Hashing mail = new MD5Hashing(user_correo.getCorreo());
 		MD5Hashing id = new MD5Hashing(getNextId(r_clave) + "");
-		
+
 		String asunto = "SRSI - Restablecer Contraseña";
 		String mensaje = "\n\nEstimado "
 				+ usuario.getNombre()
 				+ " si se le ha olvidado su contraseña puede acceder al suguiente link para cambiarla por una nueva: \n\n"
-				+ error.getProperties().getProperty("dominio") + "pages/recuperarClave?cuenta="
+				+ error.getProperties().getProperty("dominio")
+				+ "pages/recuperarClave?cuenta="
 				+ mail.getPassword().toString() + id.getPassword().toString();
 		System.out.println(mensaje);
 		r_clave.setId_usuario(usuario.getId_usuario());
-		r_clave.setUrl(mail.getPassword().toString() + id.getPassword().toString());
+		r_clave.setUrl(mail.getPassword().toString()
+				+ id.getPassword().toString());
 		datosEnviados = true;
-		recoveryPass = false;		
+		recoveryPass = false;
 		EnviarCorreo enviarMail = new EnviarCorreo();
 		if (!enviarMail.send(user_correo.getCorreo(), asunto, mensaje)) {
 			addFieldError("error",
 					error.getProperties().getProperty("error.email.fail"));
 		} else {
 			create(r_clave);
-			System.out.println("m "+mensaje);
+			System.out.println("m " + mensaje);
 			addActionMessage("Su petición de recuperar la contraseña ya ha sido procesada, por favor revise su bandeja de correo para que proceda al cambio de su clave de ingreso");
 		}
 		return SUCCESS;
 	}
-	
-	//TODO
+
+	// TODO
 	@SkipValidation
 	public String prepararRecuperarPass() {
 		RecuperarClave r_clave = new RecuperarClave();
 		datosEnviados = true;
-		if(cuenta==null){
+		if (cuenta == null) {
 			datosEnviados = false;
 			recoveryPass = true;
 			return SUCCESS;
-		}	
-		System.out.println("cuenta: "+cuenta);
-		if(getUrlRecoveryPass(new RecuperarClave(),cuenta)!=null){			
-			r_clave = (RecuperarClave) getUrlRecoveryPass(new RecuperarClave(),cuenta);
+		}
+		System.out.println("cuenta: " + cuenta);
+		if (getUrlRecoveryPass(new RecuperarClave(), cuenta) != null) {
+			r_clave = (RecuperarClave) getUrlRecoveryPass(new RecuperarClave(),
+					cuenta);
 			if ((new Date().getTime() - r_clave.getFecha_creado().getTime()) > 172800000) {
 				delete(r_clave, r_clave.getId_recuperar_clave());
 				r_clave = new RecuperarClave();
 				addFieldError("error",
 						error.getProperties().getProperty("error.recovery.old"));
 				return INPUT;
-			}else{
+			} else {
 				recoveryPassForm = true;
 				datosEnviados = false;
 				return SUCCESS;
-			}	
-		}else{
+			}
+		} else {
 			addFieldError("error",
 					error.getProperties().getProperty("error.recovery.invalid"));
 			return INPUT;
 		}
 	}
-	
+
 	@SkipValidation
 	public String modificarClave() throws NoSuchAlgorithmException {
-		//TODO		
-		//IMPLEMENTAR CAPTCHA ALOS TRES INTENTOS
+		// TODO
+		// IMPLEMENTAR CAPTCHA ALOS TRES INTENTOS
 		RecuperarClave r_clave = new RecuperarClave();
-		r_clave = (RecuperarClave) getUrlRecoveryPass(new RecuperarClave(),cuenta);
-		datosEnviados = true;		
-	 	if (!clave_nueva.equals(clave_nueva_confirme)) {
+		r_clave = (RecuperarClave) getUrlRecoveryPass(new RecuperarClave(),
+				cuenta);
+		datosEnviados = true;
+		if (!clave_nueva.equals(clave_nueva_confirme)) {
 			addFieldError("password", "Las contraseñas no coinciden");
 			return INPUT;
 		} else if (clave_nueva.length() < 6) {
@@ -264,10 +271,10 @@ public class LoginControlador extends DAO implements ServletRequestAware{
 			usuario = (Usuario) read(usuario, r_clave.getId_usuario());
 			usuario.setClave(pass.getPassword());
 			delete(r_clave, r_clave.getId_recuperar_clave());
-			update(usuario, usuario.getId_usuario());				
+			update(usuario, usuario.getId_usuario());
 			addActionMessage("Clave modificada satifactoriamente");
 			return SUCCESS;
-		}		
+		}
 	}
 
 	public void validate() {
@@ -280,7 +287,7 @@ public class LoginControlador extends DAO implements ServletRequestAware{
 					error.getProperties().getProperty("error.login.fields"));
 		}
 	}
-		
+
 	public String getPassword() {
 		return password;
 	}
@@ -340,7 +347,7 @@ public class LoginControlador extends DAO implements ServletRequestAware{
 	@Override
 	public void setServletRequest(HttpServletRequest arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public String getCuenta() {
@@ -350,21 +357,27 @@ public class LoginControlador extends DAO implements ServletRequestAware{
 	public void setCuenta(String cuenta) {
 		this.cuenta = cuenta;
 	}
+
 	public boolean isRecoveryPassForm() {
 		return recoveryPassForm;
 	}
+
 	public void setRecoveryPassForm(boolean recoveryPassForm) {
 		this.recoveryPassForm = recoveryPassForm;
 	}
+
 	public String getClave_nueva() {
 		return clave_nueva;
 	}
+
 	public void setClave_nueva(String clave_nueva) {
 		this.clave_nueva = clave_nueva;
 	}
+
 	public String getClave_nueva_confirme() {
 		return clave_nueva_confirme;
 	}
+
 	public void setClave_nueva_confirme(String clave_nueva_confirme) {
 		this.clave_nueva_confirme = clave_nueva_confirme;
 	}
