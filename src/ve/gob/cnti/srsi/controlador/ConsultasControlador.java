@@ -6,13 +6,12 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
-
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
 import ve.gob.cnti.modelo.temporales.ListaSImasVisitados;
 import ve.gob.cnti.srsi.dao.Constants;
-import ve.gob.cnti.srsi.dao.Constants.Order;
 import ve.gob.cnti.srsi.dao.Constants.Modelos;
+import ve.gob.cnti.srsi.dao.Constants.Order;
 import ve.gob.cnti.srsi.dao.DAO;
 import ve.gob.cnti.srsi.modelo.Area;
 import ve.gob.cnti.srsi.modelo.Arquitectura;
@@ -31,16 +30,16 @@ import ve.gob.cnti.srsi.modelo.UnionAreaServicioInformacion;
 import ve.gob.cnti.srsi.modelo.UnionArquitecturaServicioInformacion;
 import ve.gob.cnti.srsi.modelo.Visita;
 
-
 @SuppressWarnings("serial")
-public class ConsultasControlador extends DAO implements Constants, Order, Modelos{
-	
+public class ConsultasControlador extends DAO implements Constants, Order,
+		Modelos {
+
 	private Sector sector = new Sector();
 	private ServicioInformacion servicio = new ServicioInformacion();
 	private Funcionalidad funcionalidad;
 	private Ente ente = new Ente();
 	private Visita visita = new Visita();
-	
+
 	private List<Estado> estados = new ArrayList<Estado>();
 	private List<Area> areas = new ArrayList<Area>();
 	private List<Seguridad> niveles = new ArrayList<Seguridad>();
@@ -57,119 +56,117 @@ public class ConsultasControlador extends DAO implements Constants, Order, Model
 	private List<ServicioInformacion> servicios = new ArrayList<ServicioInformacion>();
 	private List<ListaSectores> listaSectores = new ArrayList<ListaSectores>();
 	private List<ListaSImasVisitados> SI_masVisitados = new ArrayList<ListaSImasVisitados>();
-	
+
 	private String cadena;
 	private String telefono;
 	private String correo;
 	private String codigo;
 	private String codigos[] = CODES;
-	
-	private long nVisitas;	
+
+	private long nVisitas;
 	private long id_sector;
 	private long id_servicio;
-	
+
 	private boolean consulta_SIxSector;
 	private boolean consulta_listarSectores;
 	private boolean consulta_listarServicios;
 	private boolean examinarServicio;
 	private boolean buscarServicio;
-	
-	
-	
-	public String inicio(){
+
+	public String inicio() {
 		numeroDeServiciosPorSector();
-		SI_masVisitados = SImasVisitados();		
-		return SUCCESS;		
+		SI_masVisitados = SImasVisitados();
+		return SUCCESS;
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public String listarSector(){
+	public String listarSector() {
 		numeroDeServiciosPorSector();
-		SI_masVisitados = SImasVisitados();	
-		if(!verificarLong(id_sector))
+		SI_masVisitados = SImasVisitados();
+		if (!verificarLong(id_sector))
 			return INPUT;
-		sector = (Sector)read(sector, id_sector);
-		if(sector == null)
-			return INPUT;		
-		servicios =(List<ServicioInformacion>) read(SISE, id_sector, -1);
+		sector = (Sector) read(sector, id_sector);
+		if (sector == null)
+			return INPUT;
+		servicios = (List<ServicioInformacion>) read(SISE, id_sector, -1);
 		entes = (List<Ente>) read(new Ente());
 		consulta_SIxSector = true;
 		return SUCCESS;
 	}
-		
-	public String listarSectores(){
+
+	public String listarSectores() {
 		consulta_listarSectores = true;
 		numeroDeServiciosPorSector();
-		SI_masVisitados = SImasVisitados();	
+		SI_masVisitados = SImasVisitados();
 		return SUCCESS;
 	}
-		
+
 	@SuppressWarnings("unchecked")
-	public String listarServicios(){				
+	public String listarServicios() {
 		numeroDeServiciosPorSector();
-		SI_masVisitados = SImasVisitados();	
+		SI_masVisitados = SImasVisitados();
 		consulta_listarServicios = true;
 		servicios = (List<ServicioInformacion>) getSortedList(servicio, ASC);
 		entes = (List<Ente>) read(new Ente());
 		return SUCCESS;
 	}
-		
+
 	@SuppressWarnings("unchecked")
-	public String buscar_servicio(){				
+	public String buscar_servicio() {
 		numeroDeServiciosPorSector();
-		SI_masVisitados = SImasVisitados();	
+		SI_masVisitados = SImasVisitados();
 		buscarServicio = true;
-		if (!cadena.toUpperCase().matches(REGEX_TITLE)){
+		if (!cadena.toUpperCase().matches(REGEX_TITLE)) {
 			addFieldError("error",
 					error.getProperties().getProperty("error.regex.title"));
 			buscarServicio = false;
-		}						
+		}
 		servicios = buscarServicio(cadena, ASC);
 		entes = (List<Ente>) read(new Ente());
 		return SUCCESS;
 	}
-			
+
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void numeroDeServiciosPorSector(){
+	public void numeroDeServiciosPorSector() {
 		sectores = (List<Sector>) getSortedList(new Sector(), DESC);
 		Iterator<Sector> ite = sectores.iterator();
 		Sector sector = new Sector();
 		long n;
-		while(ite.hasNext()){
+		while (ite.hasNext()) {
 			sector = ite.next();
-			n = nSiSector(sector.getId_sector());			
-			listaSectores.add(new ListaSectores(sector.getId_sector(),sector.getNombre(), n));			
+			n = nSiSector(sector.getId_sector());
+			listaSectores.add(new ListaSectores(sector.getId_sector(), sector
+					.getNombre(), n));
 		}
-		
+
 		Collections.sort(listaSectores, new Comparator() {
-            public int compare(Object o1, Object o2) {
-                ListaSectores e1 = (ListaSectores) o1;
-                ListaSectores e2 = (ListaSectores) o2;
-                long n1 = e1.getN();
-                long n2 = e2.getN();
-                if (n1 < n2) {
-                    return 1;
-                } else if (n1 > n2) {
-                    return -1;
-                } else {
-                    return 0;
-                }
-            }
-        });
+			public int compare(Object o1, Object o2) {
+				ListaSectores e1 = (ListaSectores) o1;
+				ListaSectores e2 = (ListaSectores) o2;
+				long n1 = e1.getN();
+				long n2 = e2.getN();
+				if (n1 < n2) {
+					return 1;
+				} else if (n1 > n2) {
+					return -1;
+				} else {
+					return 0;
+				}
+			}
+		});
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String examinarServicioInformacion() {
-		if(!verificarLong(id_servicio))
-			return INPUT;		
-		numeroDeServiciosPorSector();		
-		examinarServicio=true;		
+		if (!verificarLong(id_servicio))
+			return INPUT;
+		numeroDeServiciosPorSector();
+		examinarServicio = true;
 		servicio = (ServicioInformacion) read(servicio, id_servicio);
 		try {
 			unionareas = (List<UnionAreaServicioInformacion>) readUnion(
-					new UnionAreaServicioInformacion(), servicio,
-					id_servicio);
+					new UnionAreaServicioInformacion(), servicio, id_servicio);
 		} catch (Exception e) {
 		}
 		try {
@@ -190,8 +187,7 @@ public class ConsultasControlador extends DAO implements Constants, Order, Model
 			correo = email.getCorreo();
 		} catch (Exception e) {
 		}
-		funcionalidades = (List<Funcionalidad>) read(FSI,
-				id_servicio, -1);
+		funcionalidades = (List<Funcionalidad>) read(FSI, id_servicio, -1);
 		Iterator<Funcionalidad> iterador = funcionalidades.iterator();
 		while (iterador.hasNext()) {
 			funcionalidad = iterador.next();
@@ -203,8 +199,8 @@ public class ConsultasControlador extends DAO implements Constants, Order, Model
 				// No tiene entradas ni salidas.
 			}
 		}
-		System.out.println("id ente " + servicio.getId_ente());		
-		ente = (Ente) read(ente, servicio.getId_ente());		
+		System.out.println("id ente " + servicio.getId_ente());
+		ente = (Ente) read(ente, servicio.getId_ente());
 		sectores = (List<Sector>) getSortedList(new Sector(), ASC);
 		estados = (List<Estado>) read(new Estado());
 		areas = (List<Area>) read(new Area());
@@ -212,23 +208,21 @@ public class ConsultasControlador extends DAO implements Constants, Order, Model
 		arquitecturas = (List<Arquitectura>) read(new Arquitectura());
 		children = (List<Intercambio>) read(new Intercambio());
 		files = (List<AspectoLegal>) read(ALSI, id_servicio, -1);
-		visita.setId_servicio_informacion(id_servicio);				
-		create(visita);		
+		visita.setId_servicio_informacion(id_servicio);
+		create(visita);
 		nVisitas = readf(visita, id_servicio);
-		SI_masVisitados = SImasVisitados();	
+		SI_masVisitados = SImasVisitados();
 		return SUCCESS;
 	}
-	
-	
-	
-	public boolean verificarLong(long n){
-		try {			
-			if(n == 0)
-				return false;
-		} catch (Exception e) {	return false;	}
-		return true;
+
+	public boolean verificarLong(long n) {
+		try {
+			return n != 0;
+		} catch (Exception e) {
+			return false;
+		}
 	}
-	
+
 	public boolean isExaminarServicio() {
 		return examinarServicio;
 	}
@@ -236,7 +230,7 @@ public class ConsultasControlador extends DAO implements Constants, Order, Model
 	public void setExaminarServicio(boolean examinarServicio) {
 		this.examinarServicio = examinarServicio;
 	}
-	
+
 	public List<ListaSectores> getListaSectores() {
 		return listaSectores;
 	}
@@ -502,39 +496,41 @@ public class ConsultasControlador extends DAO implements Constants, Order, Model
 		SI_masVisitados = sI_masVisitados;
 	}
 
-	
 }
 
-class ListaSectores{
+class ListaSectores {
 	private long id_sector;
 	private String nombre;
 	private long n;
-		
+
 	public ListaSectores(long id_sector, String nombre, long n) {
 		super();
 		this.id_sector = id_sector;
 		this.nombre = nombre;
 		this.n = n;
 	}
-	
+
 	public long getId_sector() {
 		return id_sector;
 	}
+
 	public void setId_sector(long id_sector) {
 		this.id_sector = id_sector;
 	}
+
 	public String getNombre() {
 		return nombre;
 	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}	
-	
+	}
+
 	public long getN() {
 		return n;
 	}
+
 	public void setN(long n) {
 		this.n = n;
-	}	
+	}
 }
-
