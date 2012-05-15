@@ -1,12 +1,18 @@
 package ve.gob.cnti.modelo.temporales;
 
+/**
+ * Modelo para listar los servicios de información más visitados.
+ * 
+ * @author Joaquín Pereira
+ * 
+ */
 public class ListaSImasVisitados {
 
 	private long id_servicio_informacion;
 	private String nombre;
 	private long visitas;
-	
-	public ListaSImasVisitados(){		
+
+	public ListaSImasVisitados() {
 	}
 
 	public long getId_servicio_informacion() {
@@ -39,6 +45,4 @@ public class ListaSImasVisitados {
 				+ id_servicio_informacion + ", nombre=" + nombre + ", visitas="
 				+ visitas + "]";
 	}
-	
-	
 }
