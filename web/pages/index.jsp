@@ -102,7 +102,7 @@
 									<s:text name="numero_si" /> 
 								</th>
 							</tr>
-							<s:iterator value="listaSectores" status="index">								
+							<s:iterator value="listaSectores2" status="index">								
 								<tr>
 									<td>
 										<a href="listarSector?id_sector=<s:property value="id_sector"/>">
@@ -438,9 +438,10 @@
 <!-- Lista completa de todos los servicios públicados -->
 						<table class="results">
 							<tr>
-								<th colspan="3"><s:text name="listaServicios" /></th>								
+								<th colspan="4"><s:text name="listaServicios" /></th>								
 							</tr>
 							<tr>
+								<th><s:text name="n_servicio" /></th>
 								<th><s:text name="nombre" /></th>
 								<th><s:text name="ente1" /></th>
 								<th><s:text name="fecha_creado" /></th>
@@ -448,6 +449,11 @@
 							<s:if test="servicios.size()>0">
 								<s:iterator value="servicios">
 									<tr>
+										<td align="center">
+											<a href="servicio?id_servicio=<s:property value="id_servicio_informacion"/>">
+												<s:property value="id_servicio_informacion"/>
+											</a>
+										</td>
 										<td>
 											<a href="servicio?id_servicio=<s:property value="id_servicio_informacion"/>">
 												<s:property value="nombre"/>
