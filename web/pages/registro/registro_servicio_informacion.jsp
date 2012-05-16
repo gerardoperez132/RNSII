@@ -62,6 +62,7 @@
 								<s:if test="modificar">					
 									<form action="prepararFuncionalidades" method="post">
 										<s:hidden name="id_servicio_informacion"></s:hidden>
+										<s:hidden name="modificar"></s:hidden>
 										- <input type="submit" value='<s:text name="paso2" />'
 											style="background: none; border: none; font-size: small; color: blue; font-style: italic; padding: 0;" />						
 									</form>						
