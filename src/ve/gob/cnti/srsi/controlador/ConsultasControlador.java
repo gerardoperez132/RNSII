@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
 import ve.gob.cnti.modelo.temporales.ListaSImasVisitados;
@@ -74,14 +77,14 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 	private boolean buscarServicio;
 
 	public String inicio() {
-		listaSectores = SectoresmasPublicados(5);
+		listaSectores = sectoresMasPublicados(LIMITE_SECTORES);
 		SI_masVisitados = SImasVisitados();
 		return SUCCESS;
 	}
 
 	@SuppressWarnings("unchecked")
 	public String listarSector() {
-		listaSectores = SectoresmasPublicados(5);
+		listaSectores = sectoresMasPublicados(LIMITE_SECTORES);
 		SI_masVisitados = SImasVisitados();
 		if (!verificarLong(id_sector))
 			return INPUT;
@@ -96,8 +99,8 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 
 	public String listarSectores() {
 		consulta_listarSectores = true;
-		listaSectores = SectoresmasPublicados(5);
-		listaSectores2 = SectoresmasPublicados(0);
+		listaSectores = sectoresMasPublicados(LIMITE_SECTORES);
+		listaSectores2 = sectoresMasPublicados(0);
 		SI_masVisitados = SImasVisitados();
 		System.out.println("ls " + listaSectores2.size());
 		return SUCCESS;
@@ -105,7 +108,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 
 	@SuppressWarnings("unchecked")
 	public String listarServicios() {
-		listaSectores = SectoresmasPublicados(5);
+		listaSectores = sectoresMasPublicados(LIMITE_SECTORES);
 		SI_masVisitados = SImasVisitados();
 		consulta_listarServicios = true;
 		servicios = getSIList(ASC);
@@ -115,7 +118,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 
 	@SuppressWarnings("unchecked")
 	public String buscar_servicio() {
-		listaSectores = SectoresmasPublicados(5);
+		listaSectores = sectoresMasPublicados(LIMITE_SECTORES);
 		SI_masVisitados = SImasVisitados();
 		buscarServicio = true;
 		if (!cadena.toUpperCase().matches(REGEX_TITLE)) {
@@ -133,7 +136,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 	public String examinarServicioInformacion() {
 		if (!verificarLong(id_servicio))
 			return INPUT;
-		listaSectores = SectoresmasPublicados(5);
+		listaSectores = sectoresMasPublicados(LIMITE_VISITADOS);
 		examinarServicio = true;
 		servicio = (ServicioInformacion) read(servicio, id_servicio);
 		try {
@@ -181,8 +184,14 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 		children = (List<Intercambio>) read(new Intercambio());
 		files = (List<AspectoLegal>) read(ALSI, id_servicio, -1);
 		visita.setId_servicio_informacion(id_servicio);
-		create(visita);
-		nVisitas = getNumeroVisitas(visita, id_servicio);
+		HttpServletRequest request = ServletActionContext.getRequest();
+		String ipAddress = request.getHeader("X-FORWARDED-FOR");
+		if (ipAddress == null) {
+			ipAddress = request.getRemoteAddr();
+		}
+		visita.setIp(ipAddress);
+		saveVisit(visita);
+		nVisitas = getVisits(id_servicio);
 		SI_masVisitados = SImasVisitados();
 		return SUCCESS;
 	}
