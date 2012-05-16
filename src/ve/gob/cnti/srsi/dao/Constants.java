@@ -36,6 +36,12 @@ public interface Constants {
 	public static final int LIMITE_VISITADOS = 5;
 
 	/**
+	 * Número de sectores con más servicios de información publicados e
+	 * implementados a ser mostrados en la vista final.
+	 */
+	public static final int LIMITE_SECTORES = 5;
+
+	/**
 	 * La expresión regular para validar los campos de los formularios.
 	 * Considerando que la cadena con la que se compara está en mayúsculas.
 	 */
