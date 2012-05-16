@@ -4,7 +4,7 @@
 <%@include file="../layout/cache.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<s:i18n name="ve/gob/cnti/srsi/i18n/funcionalidades">
+<s:i18n name="ve/gob/cnti/srsi/i18n/I18">
 	<head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <!-- CSS (required) -->
@@ -37,7 +37,7 @@
 					</form>		
 					
 					<h4>
-						<s:text name="registro.title" />
+						<s:text name="funcionalidades.title" />
 					</h4>
 					<hr>
 					<h5 class="formulario">
