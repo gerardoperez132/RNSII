@@ -36,7 +36,7 @@ public class Visita {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private long id_visita;
 	private long id_servicio_informacion;
 	private String ip;
 	private Date fecha;
@@ -44,12 +44,12 @@ public class Visita {
 	public Visita() {
 	}
 
-	public long getId() {
-		return id;
+	public long getId_visita() {
+		return id_visita;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setId_visita(long id_visita) {
+		this.id_visita = id_visita;
 	}
 
 	public long getId_servicio_informacion() {
@@ -74,12 +74,5 @@ public class Visita {
 
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
-	}
-
-	@Override
-	public String toString() {
-		return "Visita [id=" + id + ", id_servicio_informacion="
-				+ id_servicio_informacion + ", ip=" + ip + ", fecha=" + fecha
-				+ "]";
 	}
 }
