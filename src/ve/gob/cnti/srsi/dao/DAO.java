@@ -758,7 +758,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 							+ " (select Servicios_informacion.publicado where Servicios_informacion.id_servicio_informacion = visitas.id_servicio_informacion) = TRUE "
 							+ " GROUP BY visitas.id_servicio_informacion, Servicios_informacion.nombre "
 							+ " ORDER BY count(visitas.id_servicio_informacion) desc "
-							+ " limit " + VISITADOS);
+							+ " limit " + LIMITE_VISITADOS);
 			List list = query.list();
 			Iterator it = list.iterator();
 			while (it.hasNext()) {
