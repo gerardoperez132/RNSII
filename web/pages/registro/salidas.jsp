@@ -33,6 +33,19 @@
 				<%@include file="../layout/sidebar.jsp"%>
 				<!-- Este es el div de contenidos -->
 				<div id="content">
+					<table>
+						<tr>
+							<td>						
+								<small>									
+									<strong>
+										<s:text name="paso2.1.2" />									
+										<s:text name="funcionalidades" /> -										
+									</strong>
+									<s:text name="tab3.title"/>
+								</small>
+							</td>							
+						</tr>
+					</table>
 					<h3>
 						<s:text name="registro.title"></s:text>
 					</h3>

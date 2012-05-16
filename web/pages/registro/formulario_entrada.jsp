@@ -26,6 +26,19 @@
 				
 				<!-- Este es el div de contenidos -->
 				<div id="content">
+					<table>
+						<tr>
+							<td>						
+								<small>									
+									<strong>
+										<s:text name="paso2.1.1" />									
+										<s:text name="funcionalidades" /> -										
+									</strong>
+									<s:text name="entrada.tab2.title"/>
+								</small>
+							</td>							
+						</tr>
+					</table>
 					<h3>
 						<s:text name="form.entrada.registro.funcionalidades.title"></s:text>
 					</h3>

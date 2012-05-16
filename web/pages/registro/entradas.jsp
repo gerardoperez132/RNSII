@@ -34,6 +34,19 @@
 				
 				<!-- Este es el div de contenidos -->
 				<div id="content">
+					<table>
+						<tr>
+							<td>						
+								<small>									
+									<strong>
+										<s:text name="paso2.1.1" />									
+										<s:text name="funcionalidades" /> -										
+									</strong>
+									<s:text name="entrada.tab2.title"/>
+								</small>
+							</td>							
+						</tr>
+					</table>
 					<h3>
 						<s:text name="entrada.registro.title"></s:text>
 					</h3>
@@ -50,6 +63,7 @@
 							<form action="prepararFuncionalidad" method="POST">
 								<s:hidden name="id_servicio_informacion"></s:hidden>
 								<s:hidden name="id_funcionalidad"></s:hidden>
+								<s:hidden name="modificar"></s:hidden>
 								<input type="submit" value="<s:text name="entrada.tab1.title"></s:text>"
 									style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
 							</form>
@@ -60,6 +74,7 @@
 							<form action="prepararSalidas" method="POST">
 								<s:hidden name="id_servicio_informacion"></s:hidden>
 								<s:hidden name="id_funcionalidad"></s:hidden>
+								<s:hidden name="modificar"></s:hidden>
 								<input type="submit" value="<s:text name="entrada.tab3.title"></s:text>"
 									style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
 							</form>
@@ -68,6 +83,7 @@
 							<form action="prepararResumen" method="POST">
 								<s:hidden name="id_servicio_informacion"></s:hidden>
 								<s:hidden name="id_funcionalidad"></s:hidden>
+								<s:hidden name="modificar"></s:hidden>
 								<input type="submit" value="<s:text name="entrada.tab4.title" />"
 									style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
 							</form>
@@ -89,6 +105,7 @@
 										<form action="prepararEntradaSimple" method="POST">
 											<s:hidden name="id_servicio_informacion"></s:hidden>
 											<s:hidden name="id_funcionalidad"></s:hidden>
+											<s:hidden name="modificar"></s:hidden>
 											<input type="submit"
 												value="<s:text name="entrada.simple.title"></s:text>" />
 										</form>
@@ -97,6 +114,7 @@
 										<form action="prepararEntradaCompleja" method="POST">
 											<s:hidden name="id_servicio_informacion"></s:hidden>
 											<s:hidden name="id_funcionalidad"></s:hidden>
+											<s:hidden name="modificar"></s:hidden>
 											<input type="submit"
 												value="<s:text name="entrada.complejo.title"></s:text>">
 										</form>
@@ -151,7 +169,7 @@
 																				<form action="prepararEntradaSimple" method="POST">
 																					<s:hidden name="id_servicio_informacion"></s:hidden>
 																					<s:hidden name="id_funcionalidad"></s:hidden>
-																					<s:hidden name="id_entrada_salida"></s:hidden>
+																					<s:hidden name="id_entrada_salida"></s:hidden>																					
 																					<input type="submit"
 																						value="<s:text name="entrada.simple.add"></s:text>"
 																						style="font-size: 0.7em;" />
