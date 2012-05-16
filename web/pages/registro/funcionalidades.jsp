@@ -5,6 +5,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <s:i18n name="ve/gob/cnti/srsi/i18n/I18">
+<s:if test="modificar">
+	<s:set name="submit" value="%{getText('actualizar')}" />
+	<s:set name="title" value="%{getText('actualizar.title')}" />
+</s:if>
+<s:else>
+	<s:set name="submit" value="%{getText('guardar')}" />
+	<s:set name="title" value="%{getText('registro.title')}" />
+</s:else>
 	<head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <!-- CSS (required) -->
@@ -27,18 +35,29 @@
 				
 				<!-- Este es el div de contenidos -->
 				<div id="content">
-					 
-					<form action="prepararModificarServicioInformacion" method="POST">													
-						<s:hidden name="id_servicio_informacion" value="%{servicio.id_servicio_informacion}"></s:hidden>
-						<small>Registro de Servicio de Información / 													
-						<input type="submit" value='Paso 1' 
-							style="background: none; border: none; font-size: small; color: blue; font-style: italic; padding: 0;"/>
-						/ <strong>Paso 2</strong></small>
-					</form>		
-					
-					<h4>
+					<table>
+						<tr>
+							<td>						
+								<small>
+									<s:text name="title" />
+									<strong>
+										<s:text name="paso2" />									
+										<s:text name="funcionalidades" />
+									</strong>
+								</small>
+							</td>
+							<td>								
+								<form action="prepararModificarServicioInformacion" method="POST">													
+									<s:hidden name="id_servicio_informacion" value="%{servicio.id_servicio_informacion}"></s:hidden>																			
+									- <input type="submit" value='<s:text name="paso1" />' 
+										style="background: none; border: none; font-size: small; color: blue; font-style: italic; padding: 0;"/>						
+								</form>	
+							</td>
+						</tr>
+					</table>					
+					<h3>
 						<s:text name="funcionalidades.title" />
-					</h4>
+					</h3>
 					<hr>
 					<h5 class="formulario">
 						<s:text name="servicio.title">
@@ -48,11 +67,8 @@
 						</s:text>
 					</h5>
 					<h5 class="formulario">
-						<s:text name="descripcion.title">
-							<s:param>
-								<s:property value="servicio.descripcion" />
-							</s:param>
-						</s:text>
+						<s:text name="descripcion.title"/>
+						<s:property value="servicio.descripcion" />
 					</h5>
 					<h5 class="formulario">
 						<s:text name="id.title">
