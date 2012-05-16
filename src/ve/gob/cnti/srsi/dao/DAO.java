@@ -872,7 +872,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 
 	@Override
 	public void saveVisit(Visita visita) {
-		visita.setId(getNextId(visita));
+		visita.setId_visita(getNextId(visita));
 		visita.setFecha(new Date());
 		try {
 			startConnection();
@@ -891,7 +891,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 			startConnection();
 			return (Long) session.createQuery(
 					"SELECT COUNT(id_servicio_informacion)" + " FROM "
-							+ new Visita()
+							+ new Visita().getClass().getSimpleName()
 							+ " WHERE id_servicio_informacion = " + id)
 					.uniqueResult();
 		} catch (HibernateException he) {
