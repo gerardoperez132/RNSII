@@ -414,7 +414,7 @@ public interface CRUD {
 	 * @return Retorna una lista con los n sectores con más servicios de
 	 *         información.
 	 */
-	public List<SectoresMasPublicados> SectoresmasPublicados(int n);
+	public List<SectoresMasPublicados> sectoresMasPublicados(int n);
 
 	/**
 	 * Permite Consultar los servicios de información implemantados y

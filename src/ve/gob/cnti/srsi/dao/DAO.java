@@ -781,7 +781,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 
 	@SuppressWarnings("rawtypes")
 	@Override
-	public List<SectoresMasPublicados> SectoresmasPublicados(int n) {
+	public List<SectoresMasPublicados> sectoresMasPublicados(int n) {
 		List<SectoresMasPublicados> result = new ArrayList<SectoresMasPublicados>();
 		try {
 			startConnection();
