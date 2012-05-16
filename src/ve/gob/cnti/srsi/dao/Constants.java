@@ -33,7 +33,7 @@ public interface Constants {
 	/**
 	 * Número de servicios de información más visitados.
 	 */
-	public static final String VISITADOS = "5";
+	public static final int LIMITE_VISITADOS = 5;
 
 	/**
 	 * La expresión regular para validar los campos de los formularios.
