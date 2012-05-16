@@ -890,10 +890,26 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		try {
 			startConnection();
 			return (Long) session.createQuery(
-					"SELECT COUNT(id_servicio_informacion)" + " FROM "
+					"SELECT COUNT(id_servicio_informacion) FROM "
 							+ new Visita().getClass().getSimpleName()
 							+ " WHERE id_servicio_informacion = " + id)
 					.uniqueResult();
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+	}
+
+	@Override
+	public boolean verifyClientAccess(String ip) {
+		try {
+			startConnection();
+			return (new Date().getTime() - ((Date) session.createSQLQuery(
+					"SELECT fecha FROM visitas WHERE ip = '" + ip
+							+ "' ORDER BY fecha DESC LIMIT 1").uniqueResult())
+					.getTime()) > (3600 * 24 * 1000);
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;
