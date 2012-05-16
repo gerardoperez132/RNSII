@@ -4,7 +4,7 @@
 <%@include file="../layout/cache.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<s:i18n name="ve/gob/cnti/srsi/i18n/registro_servicio_informacion">
+<s:i18n name="ve/gob/cnti/srsi/i18n/I18">
 	<head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- CSS (required) -->
@@ -37,7 +37,7 @@
 	<s:set name="action" value="%{'registrarAspectosLegales'}" />
 	<s:set name="id_servicio" value="#session.id_servicio_informacion" />
 </s:if>
-<title><s:text name="title" /> t: <s:property value="tab" /></title>
+<title><s:text name="title" /></title>
 	</head>
 	<body>
 		<!-- Este es el div de la sombra del contenedor del maquetado de la página -->
@@ -46,21 +46,30 @@
 				<%@include file="../layout/header.jsp"%>
 				<%@include file="../layout/sidebar.jsp"%>
 				<div id="content">
-					<s:if test="!modificar">
-						<small><s:text name="title" /> / <strong>Paso 1:</strong>
-							/ Paso 2</small>
-					</s:if>
-					<s:else>
-
-						<form action="prepararFuncionalidades" method="post">
-							<s:hidden name="id_servicio_informacion"></s:hidden>
-							<small><s:text name="title" /> <strong> Paso 1:
-							</strong> / <input type="submit" value='Paso 2'
-								style="background: none; border: none; font-size: small; color: blue; font-style: italic; padding: 0;" />
-							</small>
-						</form>
-
-					</s:else>
+					<table>
+						<tr>
+							<td>						
+								<small>
+									<s:text name="title" />
+									<strong>
+										<s:text name="paso1" />.<s:property value="tab"/>:
+									</strong>
+										<s:text name="tab%{tab}.title" />
+								</small>
+							</td>
+							<td>					
+								<small>
+								<s:if test="modificar">					
+									<form action="prepararFuncionalidades" method="post">
+										<s:hidden name="id_servicio_informacion"></s:hidden>
+										- <input type="submit" value='<s:text name="paso2" />'
+											style="background: none; border: none; font-size: small; color: blue; font-style: italic; padding: 0;" />						
+									</form>						
+								</s:if>
+								</small>
+							</td>
+						</tr>
+					</table>
 					<h3>
 						<s:text name="title"></s:text>
 					</h3>
