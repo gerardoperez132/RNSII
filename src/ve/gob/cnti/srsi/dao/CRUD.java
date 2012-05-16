@@ -410,7 +410,6 @@ public interface CRUD {
 	 * @param n
 	 *            Número para limitar la consulta, un valor menor o igual a cero
 	 *            se considera como una consulta sin limitante.
-	 * 
 	 * @return Retorna una lista con los n sectores con más servicios de
 	 *         información.
 	 */
