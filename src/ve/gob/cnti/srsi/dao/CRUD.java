@@ -397,6 +397,17 @@ public interface CRUD {
 	public long getVisits(long id);
 
 	/**
+	 * Permite verificar el acceso de un cliente en un límite de tiempo
+	 * determinado para poder contarse como una visita única.
+	 * 
+	 * @param ip
+	 *            Dirección IP del cliente que está realizando la visita
+	 * @return {@code true} si es una visita nueva fuera del lapso establecido,
+	 *         de lo contrario {@code false}
+	 */
+	public boolean verifyClientAccess(String ip);
+
+	/**
 	 * Permite Consultar los 5 servicios de información más visitados.
 	 * 
 	 * @return Retorna una lista con los servicios de información más visitados.

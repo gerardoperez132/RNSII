@@ -190,7 +190,8 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 			ipAddress = request.getRemoteAddr();
 		}
 		visita.setIp(ipAddress);
-		saveVisit(visita);
+		if (verifyClientAccess(ipAddress))
+			saveVisit(visita);
 		nVisitas = getVisits(id_servicio);
 		SI_masVisitados = SImasVisitados();
 		return SUCCESS;
