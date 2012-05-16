@@ -9,6 +9,7 @@ import ve.gob.cnti.modelo.temporales.SectoresMasPublicados;
 import ve.gob.cnti.srsi.modelo.Correo;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.Telefono;
+import ve.gob.cnti.srsi.modelo.Visita;
 
 /**
  * Definición de métodos para las operaciones en la base de datos.
@@ -378,18 +379,22 @@ public interface CRUD {
 	public ArrayList<ServicioInformacion> buscarServicio(String cadena,
 			byte orderBy);
 
-	/**
-	 * Permite obtener el número de visitas de un modelo determinado. Aplica a
-	 * servicios de información.
-	 * 
-	 * @see ServicioInformacion
-	 * @param model
-	 *            Modelo al cual se le desea conocer el número de visitas.
-	 * @param id
-	 *            Identificador del modelo dado.
-	 * @return El número de visitas del modelo dado.
-	 */
-	public long getNumeroVisitas(Object model, long id);
+	// /**
+	// * Permite obtener el número de visitas de un modelo determinado. Aplica a
+	// * servicios de información.
+	// *
+	// * @see ServicioInformacion
+	// * @param model
+	// * Modelo al cual se le desea conocer el número de visitas.
+	// * @param id
+	// * Identificador del modelo dado.
+	// * @return El número de visitas del modelo dado.
+	// */
+	// public long getNumeroVisitas(Object model, long id);
+
+	public void saveVisit(Visita visita);
+
+	public long getVisits(long id);
 
 	/**
 	 * Permite Consultar los 5 servicios de información más visitados.
@@ -399,17 +404,16 @@ public interface CRUD {
 	public List<ListaSImasVisitados> SImasVisitados();
 
 	/**
-	 * Permite Consultar los 5 sectores con más servicios de información
-	 * implemantados y públicados.
+	 * Permite consultar una cantidad n de sectores con más servicios de
+	 * información implementados y publicados.
 	 * 
 	 * @param n
-	 *            Numero para limitar la consulta, un valor menor o igual a cero
+	 *            Número para limitar la consulta, un valor menor o igual a cero
 	 *            se considera como una consulta sin limitante.
-	 * 
-	 * @return Retorna una lista con los 5 sectores con más servicios de
+	 * @return Retorna una lista con los n sectores con más servicios de
 	 *         información.
 	 */
-	public List<SectoresMasPublicados> SectoresmasPublicados(int n);
+	public List<SectoresMasPublicados> sectoresMasPublicados(int n);
 
 	/**
 	 * Permite Consultar los servicios de información implemantados y

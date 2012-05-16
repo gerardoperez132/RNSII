@@ -26,6 +26,7 @@ import ve.gob.cnti.srsi.modelo.Telefono;
 import ve.gob.cnti.srsi.modelo.TipoDato;
 import ve.gob.cnti.srsi.modelo.UnionAreaServicioInformacion;
 import ve.gob.cnti.srsi.modelo.UnionArquitecturaServicioInformacion;
+import ve.gob.cnti.srsi.modelo.Visita;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -722,24 +723,24 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		return list;
 	}
 
-	@Override
-	public long getNumeroVisitas(Object model, long id) {
-		long result;
-		try {
-			startConnection();
-			Query query = session
-					.createQuery("SELECT count(id_servicio_informacion)"
-							+ " FROM " + model.getClass().getSimpleName()
-							+ " WHERE id_servicio_informacion = " + id);
-			result = (Long) query.uniqueResult();
-		} catch (HibernateException he) {
-			handleException(he);
-			throw he;
-		} finally {
-			closeConnection();
-		}
-		return result;
-	}
+	// @Override
+	// public long getNumeroVisitas(Object model, long id) {
+	// long result;
+	// try {
+	// startConnection();
+	// Query query = session
+	// .createQuery("SELECT count(id_servicio_informacion)"
+	// + " FROM " + model.getClass().getSimpleName()
+	// + " WHERE id_servicio_informacion = " + id);
+	// result = (Long) query.uniqueResult();
+	// } catch (HibernateException he) {
+	// handleException(he);
+	// throw he;
+	// } finally {
+	// closeConnection();
+	// }
+	// return result;
+	// }
 
 	@SuppressWarnings("rawtypes")
 	@Override
@@ -757,7 +758,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 							+ " (select Servicios_informacion.publicado where Servicios_informacion.id_servicio_informacion = visitas.id_servicio_informacion) = TRUE "
 							+ " GROUP BY visitas.id_servicio_informacion, Servicios_informacion.nombre "
 							+ " ORDER BY count(visitas.id_servicio_informacion) desc "
-							+ " limit " + VISITADOS);
+							+ " limit " + LIMITE_VISITADOS);
 			List list = query.list();
 			Iterator it = list.iterator();
 			while (it.hasNext()) {
@@ -780,7 +781,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 
 	@SuppressWarnings("rawtypes")
 	@Override
-	public List<SectoresMasPublicados> SectoresmasPublicados(int n) {
+	public List<SectoresMasPublicados> sectoresMasPublicados(int n) {
 		List<SectoresMasPublicados> result = new ArrayList<SectoresMasPublicados>();
 		try {
 			startConnection();
@@ -867,5 +868,37 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 			closeConnection();
 		}
 		return list;
+	}
+
+	@Override
+	public void saveVisit(Visita visita) {
+		visita.setId_visita(getNextId(visita));
+		visita.setFecha(new Date());
+		try {
+			startConnection();
+			session.save(visita);
+			transaction.commit();
+		} catch (HibernateException he) {
+			handleException(he);
+		} finally {
+			closeConnection();
+		}
+	}
+
+	@Override
+	public long getVisits(long id) {
+		try {
+			startConnection();
+			return (Long) session.createQuery(
+					"SELECT COUNT(id_servicio_informacion)" + " FROM "
+							+ new Visita().getClass().getSimpleName()
+							+ " WHERE id_servicio_informacion = " + id)
+					.uniqueResult();
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
 	}
 }

@@ -24,9 +24,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * Visitas que recibe un servicio de información particular.
+ * Visitas únicas diarias que recibe un servicio de información particular.
  * 
  * @author Joaquín Pereira
+ * @author Richard Ricciardelli
  * @see ServicioInformacion
  */
 @Entity
@@ -35,22 +36,12 @@ public class Visita {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
 	private long id_visita;
 	private long id_servicio_informacion;
-	private int status;
-	private Date fecha_creado;
-	private Date fecha_modificado;
+	private String ip;
+	private Date fecha;
 
 	public Visita() {
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public long getId_visita() {
@@ -69,35 +60,19 @@ public class Visita {
 		this.id_servicio_informacion = id_servicio_informacion;
 	}
 
-	public int getStatus() {
-		return status;
+	public String getIp() {
+		return ip;
 	}
 
-	public void setStatus(int status) {
-		this.status = status;
+	public void setIp(String ip) {
+		this.ip = ip;
 	}
 
-	public Date getFecha_creado() {
-		return fecha_creado;
+	public Date getFecha() {
+		return fecha;
 	}
 
-	public void setFecha_creado(Date fecha_creado) {
-		this.fecha_creado = fecha_creado;
-	}
-
-	public Date getFecha_modificado() {
-		return fecha_modificado;
-	}
-
-	public void setFecha_modificado(Date fecha_modificado) {
-		this.fecha_modificado = fecha_modificado;
-	}
-
-	@Override
-	public String toString() {
-		return "Visita [id=" + id + ", id_visita=" + id_visita
-				+ ", id_servicio_informacion=" + id_servicio_informacion
-				+ ", status=" + status + ", fecha_creado=" + fecha_creado
-				+ ", fecha_modificado=" + fecha_modificado + "]";
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
 }
