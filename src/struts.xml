@@ -12,7 +12,7 @@
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
-	<package name="default" extends="struts-default">
+	<package name="default" extends="struts-default" >		
 
 		<!--**************************** interceptores para evitar el doubleSubmit 
 			***************************** -->
@@ -30,7 +30,7 @@
 				<interceptor-ref name="basicStack" />
 			</interceptor-stack>
 		</interceptors>
-
+		
 		<!--******************************************************* Actions para 
 			registros de servicios de información *************************************************** -->
 
@@ -327,6 +327,7 @@
 
 		<action name="index" method="autenticarUsuario"
 			class="ve.gob.cnti.srsi.controlador.LoginControlador">
+			<result name="404ERROR" type="redirectAction">error404</result>
 			<result name="input">user/login.jsp</result>
 			<result name="success" type="redirectAction">home</result>
 			<result name="accesoInvalido" type="redirectAction">index</result>
@@ -444,7 +445,8 @@
 		<action name="error404" method="inicio"
 			class="ve.gob.cnti.srsi.controlador.ConsultasControlador">
 			<result name="success">error404.jsp</result>
-		</action>
+		</action>		
+		
 	</package>
 	<constant name="struts.devMode" value="true" />
 	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
