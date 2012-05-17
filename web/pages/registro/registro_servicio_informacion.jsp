@@ -70,6 +70,7 @@
 							</td>
 						</tr>
 					</table>
+					<hr>
 					<h3>
 						<s:text name="title"></s:text>
 					</h3>
