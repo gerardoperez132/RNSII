@@ -46,12 +46,18 @@ public interface Constants {
 	 * Considerando que la cadena con la que se compara está en mayúsculas.
 	 */
 	public static final String REGEX_TITLE = "^[A-Z _AÉÍÓÚÑ]*$";
+
 	/**
 	 * La expresión regular para validar los campos de los formularios que
 	 * permiten introducir un área de texto más amplia. Considerando que la
 	 * cadena con la que se compara está en mayúsculas.
 	 */
 	public static final String REGEX_DESCRIPTION = "^[A-Z0-9 _.()-AÉÍÓÚÑ]*$";
+
+	/**
+	 * La expresión regular para el correo electrónico válido.
+	 */
+	public static final String REGEX_EMAIL = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
 
 	/**
 	 * Interfaz con los estados de registro en la base de datos.
