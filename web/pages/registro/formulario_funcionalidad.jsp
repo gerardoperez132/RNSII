@@ -191,14 +191,11 @@
 												<s:property value="funcionalidad.descripcion" />
 											</span>
 										</td>
-									</tr>
-									
-																	
-									
+									</tr>	
 									<tr>
 									<td class="tb_alt">											
 											<span class="txt_small">
-												<s:text name="salidas.title"></s:text>
+												<s:text name="salidas.cargadas"></s:text>
 											</span>											
 										</td>
 										<td class="tb_td">
@@ -210,7 +207,7 @@
 									<tr>
 										<td class="tb_alt">
 											<span class="txt_small">
-												<s:text name="entradas.title"></s:text>
+												<s:text name="entradas.cargadas"></s:text>
 											</span>
 										</td>
 										<td class="tb_td">
