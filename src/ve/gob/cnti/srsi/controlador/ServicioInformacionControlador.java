@@ -519,8 +519,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 						"correo",
 						error.getProperties().getProperty(
 								"error.servicio.correo"));
-			if (!correo
-					.matches("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"))
+			if (!correo.matches(REGEX_EMAIL))
 				addFieldError(
 						"correo",
 						error.getProperties().getProperty(
