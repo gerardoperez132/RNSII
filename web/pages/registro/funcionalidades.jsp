@@ -45,29 +45,26 @@
 								</form>	
 							</td>
 						</tr>
-					</table>					
+					</table>
+					<hr>
 					<h3>
 						<s:text name="funcionalidades.title" />
-					</h3>
+					</h3>	
 					<hr>
-					<h5 class="formulario">
-						<s:text name="servicio.title">
-							<s:param>
-								<s:property value="servicio.nombre" />
-							</s:param>
-						</s:text>
-					</h5>
-					<h5 class="formulario">
-						<s:text name="descripcion.title"/>
-						<s:property value="servicio.descripcion" />
-					</h5>
-					<h5 class="formulario">
-						<s:text name="id.title">
-							<s:param>								
-								<s:property value="id_servicio_informacion" />
-							</s:param>
-						</s:text>
-					</h5>
+					<table class="results">
+						<tr>
+							<td class="alt"><s:text name="n_servicio"/></td>
+							<td class="alt2"><s:property value="id_servicio_informacion" /></td>
+						</tr>
+						<tr>
+							<td class="alt"><s:text name="servicio.title"/></td>
+							<td class="alt2"><s:property value="servicio.nombre" /></td>
+						</tr>
+						<tr>
+							<td class="alt"><s:text name="descripcion.title"/></td>
+							<td class="alt2"><s:property value="servicio.descripcion" /></td>
+						</tr>						
+					</table>									
 					<hr>
 					<s:fielderror>
 						<s:param>funcionalidades</s:param>
