@@ -836,7 +836,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 							+ " AND " + " s.publicado = TRUE " + " AND "
 							+ " s.id_estado = 2 "
 							+ " ORDER BY s.id_servicio_informacion " + order)
-					.list();
+					.list();			
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;

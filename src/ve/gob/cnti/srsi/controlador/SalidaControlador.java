@@ -118,18 +118,22 @@ public class SalidaControlador extends DAO implements Formulario,
 
 	@SuppressWarnings("unchecked")
 	@SkipValidation
-	public String eliminarEntradaSimple() {
+	public String eliminarSalidaSimple() {
 		delete(salida, id_entrada_salida);
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		salidas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad, SALIDA);
+		if(salidas.size()==0){
+			servicio.setPublicado(false);
+			update(servicio, id_servicio_informacion);
+		}
 		tipoDatos = (List<TipoDato>) read(new TipoDato());
 		return SUCCESS;
 	}
 
 	@SuppressWarnings("unchecked")
 	@SkipValidation
-	public String eliminarEntradaCompleja() {
+	public String eliminarSalidaCompleja() {
 		salidas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad, SALIDA);
 		Iterator<EntradaSalida> iterator = salidas.iterator();
 		while (iterator.hasNext()) {
@@ -140,7 +144,11 @@ public class SalidaControlador extends DAO implements Formulario,
 		delete(salida, id_entrada_salida);
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
-		salidas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad, SALIDA);
+		salidas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad, SALIDA);				
+		if(salidas.size()==0){
+			servicio.setPublicado(false);
+			update(servicio, id_servicio_informacion);
+		}
 		tipoDatos = (List<TipoDato>) read(new TipoDato());
 		return SUCCESS;
 	}

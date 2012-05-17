@@ -94,8 +94,17 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 		return SUCCESS;
 	}
 
+	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String eliminarFuncionalidad() {
+		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
+		servicio = (ServicioInformacion) read(servicio,funcionalidad.getId_servicio_informacion());
+		funcionalidades = (List<Funcionalidad>) read(FSI,
+				id_servicio_informacion, -1);
+		if(funcionalidades.size()==0){
+			servicio.setPublicado(false);
+			update(servicio, id_servicio_informacion);
+		}		
 		delete(funcionalidad, id_funcionalidad);
 		prepararFuncionalidades();
 		return SUCCESS;
