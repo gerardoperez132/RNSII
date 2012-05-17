@@ -498,7 +498,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 						.getProperty("error.servicio.responsable"));
 			if (!servicio.getResponsable().toUpperCase().matches(REGEX_TITLE))
 				addFieldError("servicio.responsable", error.getProperties()
-						.getProperty("error.servicio.responsable.regex"));
+						.getProperty("error.regex.title"));
 			if (telefono.trim().isEmpty())
 				addFieldError(
 						"telefono",
@@ -520,10 +520,8 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 						error.getProperties().getProperty(
 								"error.servicio.correo"));
 			if (!correo.matches(REGEX_EMAIL))
-				addFieldError(
-						"correo",
-						error.getProperties().getProperty(
-								"error.servicio.correo.regex"));
+				addFieldError("correo",
+						error.getProperties().getProperty("error.regex.email"));
 			prepararDescripcionSoporte();
 			break;
 		default:
