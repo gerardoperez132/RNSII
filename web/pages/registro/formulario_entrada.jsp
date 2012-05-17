@@ -51,11 +51,11 @@
 					<ul class="tabs">
 						<li><a href="#tab1"><s:text name="tab1.title"></s:text> </a>
 						</li>
-						<li class="active"><a><s:text name="tab2.title"></s:text>
+						<li class="active"><a><s:text name="tab.entrada"></s:text>
 						</a></li>
-						<li><a href="#tab3"><s:text name="tab3.title"></s:text> </a>
+						<li><a href="#tab3"><s:text name="tab.salida"></s:text> </a>
 						</li>
-						<li><a href="#tab4"><s:text name="tab4.title"></s:text> </a>
+						<li><a href="#tab4"><s:text name="tab.resumen"></s:text> </a>
 						</li>
 					</ul>
 					<div class="tab_container">
