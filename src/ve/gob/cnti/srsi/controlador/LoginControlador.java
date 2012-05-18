@@ -51,7 +51,7 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 	public String autenticarUsuario() throws Exception {
 		session = ActionContext.getContext().getSession();
 		if (correo == null && password == null) {
-			return "404ERROR";			
+			return "404ERROR";
 		} else if (correo.isEmpty() || password.isEmpty()) {
 			addFieldError("error",
 					error.getProperties().getProperty("error.login.fields"));
@@ -162,24 +162,13 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 	@SkipValidation
 	public String enviarDatos() throws NoSuchAlgorithmException,
 			UnknownHostException {
-		user_correo = (Correo) getUserEmail(correo);
 		recoveryPass = true;
-		// TODO Validar las comillas simples.
-		if (!correo.matches(REGEX_QUOTES)) {
-			addFieldError("correo",
-					error.getProperties().getProperty("error.regex.email")
-							+ "QUOTES");
-			return INPUT;
-		}
 		if (!correo.matches(REGEX_EMAIL)) {
 			addFieldError("correo",
 					error.getProperties().getProperty("error.regex.email"));
-			/**
-			 * var s = ' function(){ return " Is big \\"problem\\", \\no? "; }';
-			 * var m = s.match(/"(?:[^"\\]|\\.)*"/); if (m != null) alert(m);
-			 */
 			return INPUT;
 		}
+		user_correo = (Correo) getUserEmail(correo);
 		if (user_correo == null) {
 			addFieldError("correo",
 					error.getProperties().getProperty("error.email.invalid"));
@@ -301,16 +290,15 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 	}
 
 	public void validate() {
-		
-	}
-	
-	public String execute() throws Exception {
-	    // if the method * does not exist, we will return a "404ERROR" result
-		System.out.println("entro 2");
-		return "404ERROR";
-	    
+
 	}
 
+	public String execute() throws Exception {
+		// if the method * does not exist, we will return a "404ERROR" result
+		System.out.println("entro 2");
+		return "404ERROR";
+
+	}
 
 	public String getPassword() {
 		return password;

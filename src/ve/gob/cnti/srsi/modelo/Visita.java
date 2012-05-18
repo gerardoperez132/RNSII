@@ -75,4 +75,11 @@ public class Visita {
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
+
+	@Override
+	public String toString() {
+		return "Visita [id_visita=" + id_visita + ", id_servicio_informacion="
+				+ id_servicio_informacion + ", ip=" + ip + ", fecha=" + fecha
+				+ "]";
+	}
 }
