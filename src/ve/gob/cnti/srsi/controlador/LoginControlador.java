@@ -165,7 +165,7 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 		user_correo = (Correo) getUserEmail(correo);
 		recoveryPass = true;
 		// TODO Validar las comillas simples.
-		if (correo.matches(REGEX_QUOTES)) {
+		if (!correo.matches(REGEX_QUOTES)) {
 			addFieldError("correo",
 					error.getProperties().getProperty("error.regex.email")
 							+ "QUOTES");

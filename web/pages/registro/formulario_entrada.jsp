@@ -12,7 +12,7 @@
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
 <link rel="stylesheet" type="text/css" href="res/css/menu_vertical.css">
 <script type="text/javascript" src="res/js/jquery-1.7.1.js" charset="UTF-8"></script>
-<script src="res/js/datos.js"  type="text/javascript" charset="UTF-8"></script>
+<script src="res/js/validacion_datos.js"  type="text/javascript" charset="UTF-8"></script>
 <title><s:text name="form.entrada.registro.title"></s:text></title>
 	</head>
 	<body>
@@ -58,9 +58,7 @@
 						<li><a href="#tab4"><s:text name="tab.resumen"></s:text> </a>
 						</li>
 					</ul>
-					<div class="tab_container">
-					
-						
+					<div class="tab_container">			
 					
 						<s:if test="modificar!=true">
 							<s:set name="action" var="action">registrarEntrada</s:set>
@@ -78,7 +76,7 @@
 						</s:else>
 						<!-- Formulario para registrar o modificar entrada -->
 						<form action="<s:property value="#action"></s:property>"
-							method="post">
+							method="post" id="myForm">
 							<div id="tab2" class="tab_content">
 								<h5 class="formulario">
 									<s:if test="modificar!=true">
@@ -127,44 +125,52 @@
 								<br>								
 								 
 								<s:if test="complejo!=true"> 
-								<h5 class="formulario">
-									<s:text name="form.entrada.formato"/>
-								</h5>
-								<s:fielderror>
-									<s:param>formato</s:param>
-								</s:fielderror>								
-								<select name="entrada.id_formato">
-									<s:set var="idF" value="entrada.id_formato"/>
-									<optgroup label="">
-										<option value="-1">
-											<s:text name="form.entrada.formato.select"></s:text>
-										</option>
-									</optgroup>
-									<s:iterator value="tipoDatos" status="td_status">										
-										<s:set var="id_td" value="id_tipo_dato"/>
-										<s:if test="hasformatted == true">
-										<optgroup label="<s:property value="nombre"/>">
-											<s:iterator value="formatos">
-												<s:if test="%{#id_td==id_tipo_dato}">
-													<s:set var="cen" value="true"/>
-													<option  value="<s:property value="id_formato"/>" 
-													<s:if test="%{#idF == id_formato}">selected="selected"</s:if>>
-														<s:property value="formato"/>
-													</option>
-												</s:if>										
-											</s:iterator>											
+								<div id="capa_formato" style="visibility: visible; position:relative;">
+									<h5 class="formulario">
+										<s:text name="form.entrada.formato"/>
+									</h5>
+									<s:fielderror>
+										<s:param>formato</s:param>
+									</s:fielderror>								
+									<select name="entrada.id_formato" id="formato">
+										<s:set var="idF" value="entrada.id_formato"/>
+										<optgroup label="">
+											<option value="-1">
+												<s:text name="form.entrada.formato.select"></s:text>
+											</option>
 										</optgroup>
-										</s:if>										
-									</s:iterator>
-								</select>
+										<s:iterator value="tipoDatos" status="td_status">										
+											<s:set var="id_td" value="id_tipo_dato"/>
+											<s:if test="hasformatted == true">
+											<optgroup label="<s:property value="nombre"/>" 
+											id="opt_group_<s:property value="id_tipo_dato"/>">
+												<s:iterator value="formatos">
+													<s:if test="%{#id_td==id_tipo_dato}">
+														<s:set var="cen" value="true"/>
+														<option class="opt_element" id="opt_element_<s:property value="id_formato"/>"  
+															value="<s:property value="id_formato"/>" 
+														<s:if test="%{#idF == id_formato}">selected="selected"</s:if>>
+															<s:property value="formato"/>
+														</option>
+													</s:if>										
+												</s:iterator>											
+											</optgroup>
+											</s:if>										
+										</s:iterator>
+									</select>
+								</div>
+								<div id="capa_longitud" style="visibility: visible; position:relative;">
+									<h5 class="formulario">
+										<s:text name="form.entrada.longitud"/>
+									</h5>
+									<s:fielderror>
+										<s:param>longitud</s:param>
+									</s:fielderror>
+									
+										<s:textfield name="entrada.longitud" maxlength="10" id="longitud"/>
+										<span id="longitud_msj"></span>
+								</div>
 								
-								<h5 class="formulario">
-									<s:text name="form.entrada.longitud"/>
-								</h5>
-								<s:fielderror>
-									<s:param>longitud</s:param>
-								</s:fielderror>
-								<s:textfield name="entrada.longitud" maxlength="10" id="longitud"/>
 								</s:if>
 								
 								<br>

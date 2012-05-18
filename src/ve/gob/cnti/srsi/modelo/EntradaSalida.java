@@ -45,13 +45,16 @@ public class EntradaSalida {
 	private long id_padre;
 	private String nombre;
 	private String descripcion;
-	private Long id_formato;	
+	private long id_formato;
 	private String longitud;
 	/** Entrada o Salida. */
 	private int tipo;
 	private int status;
 	private Date fecha_creado;
 	private Date fecha_modificado;
+			
+	public EntradaSalida() {		
+	}
 	
 	public long getId() {
 		return id;
@@ -95,10 +98,10 @@ public class EntradaSalida {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public Long getId_formato() {
+	public long getId_formato() {
 		return id_formato;
 	}
-	public void setId_formato(Long id_formato) {
+	public void setId_formato(long id_formato) {
 		this.id_formato = id_formato;
 	}
 	public String getLongitud() {
@@ -131,7 +134,7 @@ public class EntradaSalida {
 	public void setFecha_modificado(Date fecha_modificado) {
 		this.fecha_modificado = fecha_modificado;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "EntradaSalida [id=" + id + ", id_entrada_salida="
@@ -141,5 +144,6 @@ public class EntradaSalida {
 				+ ", id_formato=" + id_formato + ", longitud=" + longitud
 				+ ", tipo=" + tipo + ", status=" + status + ", fecha_creado="
 				+ fecha_creado + ", fecha_modificado=" + fecha_modificado + "]";
-	}	
+	}
+	
 }

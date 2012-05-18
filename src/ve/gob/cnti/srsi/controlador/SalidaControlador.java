@@ -108,6 +108,8 @@ public class SalidaControlador extends DAO implements Formulario,
 		modificada.setNombre(salida.getNombre());
 		modificada.setDescripcion(salida.getDescripcion());
 		modificada.setId_tipo_dato(salida.getId_tipo_dato());
+		modificada.setId_formato(salida.getId_formato());
+		modificada.setLongitud(salida.getLongitud());
 		update(modificada, id_entrada_salida);
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);

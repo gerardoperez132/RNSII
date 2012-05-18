@@ -304,7 +304,7 @@
 									<s:textfield name="servicio.version"
 										onkeyup="var pattern = /[^0-9\.]/g;
 								this.value = this.value.replace(pattern, '');"
-										maxlength="7" />
+										maxlength="7" />									
 									<br>
 									<h5 class="formulario">
 										<s:text name="intercambio.title"></s:text>

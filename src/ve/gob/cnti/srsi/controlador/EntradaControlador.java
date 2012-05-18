@@ -110,6 +110,8 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 		modificada.setNombre(entrada.getNombre());
 		modificada.setDescripcion(entrada.getDescripcion());
 		modificada.setId_tipo_dato(entrada.getId_tipo_dato());
+		modificada.setId_formato(entrada.getId_formato());
+		modificada.setLongitud(entrada.getLongitud());
 		update(modificada, id_entrada_salida);
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
