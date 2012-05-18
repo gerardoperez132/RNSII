@@ -156,10 +156,25 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 			UnknownHostException {
 		user_correo = (Correo) getUserEmail(correo);
 		recoveryPass = true;
+		// TODO Validar las comillas simples.
+		if (correo.matches(REGEX_QUOTES)) {
+			addFieldError("correo",
+					error.getProperties().getProperty("error.regex.email")
+							+ "QUOTES");
+			return INPUT;
+		}
+		if (!correo.matches(REGEX_EMAIL)) {
+			addFieldError("correo",
+					error.getProperties().getProperty("error.regex.email"));
+			/**
+			 * var s = ' function(){ return " Is big \\"problem\\", \\no? "; }';
+			 * var m = s.match(/"(?:[^"\\]|\\.)*"/); if (m != null) alert(m);
+			 */
+			return INPUT;
+		}
 		if (user_correo == null) {
 			addFieldError("correo",
 					error.getProperties().getProperty("error.email.invalid"));
-
 			return INPUT;
 		} else {
 			usuario = (Usuario) read(usuario, user_correo.getId_usuario());
@@ -254,7 +269,7 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 	@SkipValidation
 	public String modificarClave() throws NoSuchAlgorithmException {
 		// TODO
-		// IMPLEMENTAR CAPTCHA ALOS TRES INTENTOS
+		// IMPLEMENTAR CAPTCHA A LOS TRES INTENTOS
 		RecuperarClave r_clave = new RecuperarClave();
 		r_clave = (RecuperarClave) getUrlRecoveryPass(new RecuperarClave(),
 				cuenta);
@@ -347,7 +362,6 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 	@Override
 	public void setServletRequest(HttpServletRequest arg0) {
 		// TODO Auto-generated method stub
-
 	}
 
 	public String getCuenta() {
@@ -381,7 +395,6 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 	public void setClave_nueva_confirme(String clave_nueva_confirme) {
 		this.clave_nueva_confirme = clave_nueva_confirme;
 	}
-
 }
 
 class ServiciosPublicables {
