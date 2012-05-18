@@ -22,6 +22,8 @@
 				<%@include file="../layout/header.jsp"%>				
 				<!-- Este es el div de contenidos -->
 				<div id="content2">
+				
+				
 					<br>					
 					
 					<s:if test="recoveryPass == true">

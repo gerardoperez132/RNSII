@@ -4,7 +4,7 @@
 <%@include file="../layout/cache.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<s:i18n name="ve/gob/cnti/srsi/i18n/formulario_salida">
+<s:i18n name="ve/gob/cnti/srsi/i18n/I18">
 	<head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <!-- CSS (required) -->
@@ -24,8 +24,21 @@
 				
 				<!-- Este es el div de contenidos -->
 				<div id="content">
+					<table>
+						<tr>
+							<td>						
+								<small>									
+									<strong>
+										<s:text name="paso2.1.2" />									
+										<s:text name="funcionalidades" /> -										
+									</strong>
+									<s:text name="tab.salida"/>
+								</small>
+							</td>							
+						</tr>
+					</table>
 					<h3>
-						<s:text name="registro.funcionalidades.title"></s:text>
+						<s:text name="funcionalidades.title" />
 					</h3>
 															
 					<form action="prepararSalidas" method="POST">
@@ -36,13 +49,13 @@
 					
 					<hr>
 					<ul class="tabs">
-						<li><a><s:text name="tab1.title"></s:text> </a>
+						<li><a href="#tab1"><s:text name="tab1.title"></s:text> </a>
 						</li>
-						<li><a><s:text name="tab2.title"></s:text> </a></li>
-						<li class="active"><a href="#tab3"><s:text
-									name="tab3.title"></s:text> </a>
+						<li><a><s:text name="tab.entrada"></s:text>
+						</a></li>
+						<li  class="active"><a href="#tab3"><s:text name="tab.salida"></s:text> </a>
 						</li>
-						<li><a><s:text name="tab4.title"></s:text> </a>
+						<li><a href="#tab4"><s:text name="tab.resumen"></s:text> </a>
 						</li>
 					</ul>
 					<div class="tab_container">

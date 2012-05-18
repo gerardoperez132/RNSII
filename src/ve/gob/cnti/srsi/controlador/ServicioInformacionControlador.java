@@ -89,6 +89,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 
 	private long id_servicio_informacion;
 	private long id_aspecto_legal;
+	private long nVisitas;
 
 	@SuppressWarnings("unchecked")
 	@SkipValidation
@@ -665,6 +666,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		arquitecturas = (List<Arquitectura>) read(new Arquitectura());
 		children = (List<Intercambio>) read(new Intercambio());
 		files = (List<AspectoLegal>) read(ALSI, id_servicio_informacion, -1);
+		setnVisitas(getVisits(id_servicio_informacion));
 		return SUCCESS;
 	}
 
@@ -1082,5 +1084,13 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 
 	public void setFiles2(List<AspectoLegal> files2) {
 		this.files2 = files2;
+	}
+
+	public long getnVisitas() {
+		return nVisitas;
+	}
+
+	public void setnVisitas(long nVisitas) {
+		this.nVisitas = nVisitas;
 	}
 }

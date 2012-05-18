@@ -133,7 +133,7 @@
 							<div id="tab1" class="tab_content">
 								<table class="results">
 									<tr>
-										<td class="alt"><s:text name="id" /></td>
+										<td class="alt"><s:text name="n_servicio"/></td>
 										<td class="alt2"><s:property
 												value="servicio.id_servicio_informacion" /></td>
 									</tr>

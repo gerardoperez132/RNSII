@@ -31,8 +31,101 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 	private long id_funcionalidad;
 
 	private boolean modificar;
+	private boolean modificarf;
 	private boolean resumen;
 
+	
+
+	@SuppressWarnings("unchecked")
+	@Override
+	@SkipValidation
+	public String prepararFormulario() {
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		if (id_funcionalidad > 0) {
+			funcionalidad = (Funcionalidad) read(funcionalidad,
+					id_funcionalidad);
+			funcionalidades = (List<Funcionalidad>) read(FSI, id_funcionalidad,
+					-1);
+		}
+		return SUCCESS;
+	}
+
+	public String registrarFuncionalidad() {
+		id_funcionalidad = getNextId(funcionalidad);
+		funcionalidad.setId_servicio_informacion(id_servicio_informacion);
+		create(funcionalidad);
+		return SUCCESS;
+	}
+
+	@SkipValidation
+	public String prepararModificaciones() {
+		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
+		return SUCCESS;
+	}
+
+	@SuppressWarnings("unchecked")
+	@SkipValidation
+	public String prepararResumen() {
+		resumen = true;
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
+		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,
+				ENTRADA);
+		salidas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad, SALIDA);
+		if (salidas.size() < 1) {
+			addFieldError("Salidas", "Aún no ha cargado datos de salidas");
+			return INPUT;
+		}
+		return SUCCESS;
+	}
+
+	@SuppressWarnings("unchecked")
+	@SkipValidation
+	public String prepararFuncionalidades() {
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		funcionalidades = (List<Funcionalidad>) read(FSI,
+				id_servicio_informacion, -1);
+		return SUCCESS;
+	}
+
+	public String modificarFuncionalidad() {
+		funcionalidad.setId_servicio_informacion(id_servicio_informacion);
+		update(funcionalidad, id_funcionalidad);
+		return SUCCESS;
+	}
+
+	@SuppressWarnings("unchecked")
+	@SkipValidation
+	public String eliminarFuncionalidad() {
+		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
+		servicio = (ServicioInformacion) read(servicio,funcionalidad.getId_servicio_informacion());
+		funcionalidades = (List<Funcionalidad>) read(FSI,
+				id_servicio_informacion, -1);
+		if(funcionalidades.size()==0){
+			servicio.setPublicado(false);
+			update(servicio, id_servicio_informacion);
+		}		
+		delete(funcionalidad, id_funcionalidad);
+		prepararFuncionalidades();
+		return SUCCESS;
+	}
+
+	public void validate() {
+		if (funcionalidad.getNombre().trim().isEmpty())
+			addFieldError("funcionalidad.nombre", error.getProperties()
+					.getProperty("error.funcionalidad.nombre"));
+		if (!funcionalidad.getNombre().toUpperCase().matches(REGEX_TITLE))
+			addFieldError("funcionalidad.nombre", error.getProperties()
+					.getProperty("error.regex.title"));
+		if (funcionalidad.getDescripcion().trim().isEmpty())
+			addFieldError("funcionalidad.descripcion", error.getProperties()
+					.getProperty("error.funcionalidad.descripcion"));
+		if (!funcionalidad.getDescripcion().toUpperCase()
+				.matches(REGEX_DESCRIPTION))
+			addFieldError("funcionalidad.descripcion", error.getProperties()
+					.getProperty("error.regex.description"));
+	}
+	
 	public List<EntradaSalida> getEntradas() {
 		return entradas;
 	}
@@ -121,84 +214,11 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 		this.resumen = resumen;
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	@SkipValidation
-	public String prepararFormulario() {
-		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
-		if (id_funcionalidad > 0) {
-			funcionalidad = (Funcionalidad) read(funcionalidad,
-					id_funcionalidad);
-			funcionalidades = (List<Funcionalidad>) read(FSI, id_funcionalidad,
-					-1);
-		}
-		return SUCCESS;
+	public boolean isModificarf() {
+		return modificarf;
 	}
 
-	public String registrarFuncionalidad() {
-		id_funcionalidad = getNextId(funcionalidad);
-		funcionalidad.setId_servicio_informacion(id_servicio_informacion);
-		create(funcionalidad);
-		return SUCCESS;
-	}
-
-	@SkipValidation
-	public String prepararModificaciones() {
-		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
-		return SUCCESS;
-	}
-
-	@SuppressWarnings("unchecked")
-	@SkipValidation
-	public String prepararResumen() {
-		resumen = true;
-		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
-		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
-		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,
-				ENTRADA);
-		salidas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad, SALIDA);
-		if (salidas.size() < 1) {
-			addFieldError("Salidas", "Aún no ha cargado datos de salidas");
-			return INPUT;
-		}
-		return SUCCESS;
-	}
-
-	@SuppressWarnings("unchecked")
-	@SkipValidation
-	public String prepararFuncionalidades() {
-		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
-		funcionalidades = (List<Funcionalidad>) read(FSI,
-				id_servicio_informacion, -1);
-		return SUCCESS;
-	}
-
-	public String modificarFuncionalidad() {
-		funcionalidad.setId_servicio_informacion(id_servicio_informacion);
-		update(funcionalidad, id_funcionalidad);
-		return SUCCESS;
-	}
-
-	@SkipValidation
-	public String eliminarFuncionalidad() {
-		delete(funcionalidad, id_funcionalidad);
-		prepararFuncionalidades();
-		return SUCCESS;
-	}
-
-	public void validate() {
-		if (funcionalidad.getNombre().trim().isEmpty())
-			addFieldError("funcionalidad.nombre", error.getProperties()
-					.getProperty("error.funcionalidad.nombre"));
-		if (!funcionalidad.getNombre().toUpperCase().matches(REGEX_TITLE))
-			addFieldError("funcionalidad.nombre", error.getProperties()
-					.getProperty("error.regex.title"));
-		if (funcionalidad.getDescripcion().trim().isEmpty())
-			addFieldError("funcionalidad.descripcion", error.getProperties()
-					.getProperty("error.funcionalidad.descripcion"));
-		if (!funcionalidad.getDescripcion().toUpperCase()
-				.matches(REGEX_DESCRIPTION))
-			addFieldError("funcionalidad.descripcion", error.getProperties()
-					.getProperty("error.regex.description"));
+	public void setModificarf(boolean modificarf) {
+		this.modificarf = modificarf;
 	}
 }

@@ -48,7 +48,15 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 	private String clave_nueva_confirme;
 
 	@SuppressWarnings("unchecked")
-	public String autenticarUsuario() throws NoSuchAlgorithmException {
+	public String autenticarUsuario() throws Exception {
+		session = ActionContext.getContext().getSession();
+		if (correo == null && password == null) {
+			return "404ERROR";			
+		} else if (correo.isEmpty() || password.isEmpty()) {
+			addFieldError("error",
+					error.getProperties().getProperty("error.login.fields"));
+			return INPUT;
+		}
 		user_correo = (Correo) getUserEmail(correo);
 		if (user_correo == null) {
 			addFieldError("correo",
@@ -293,15 +301,16 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 	}
 
 	public void validate() {
-		session = ActionContext.getContext().getSession();
-		if (correo == null && password == null) {
-			addFieldError("error",
-					error.getProperties().getProperty("error.login"));
-		} else if (correo.isEmpty() || password.isEmpty()) {
-			addFieldError("error",
-					error.getProperties().getProperty("error.login.fields"));
-		}
+		
 	}
+	
+	public String execute() throws Exception {
+	    // if the method * does not exist, we will return a "404ERROR" result
+		System.out.println("entro 2");
+		return "404ERROR";
+	    
+	}
+
 
 	public String getPassword() {
 		return password;

@@ -5,14 +5,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <s:i18n name="ve/gob/cnti/srsi/i18n/I18">
-<s:if test="modificar">
-	<s:set name="submit" value="%{getText('actualizar')}" />
-	<s:set name="title" value="%{getText('actualizar.title')}" />
-</s:if>
-<s:else>
-	<s:set name="submit" value="%{getText('guardar')}" />
-	<s:set name="title" value="%{getText('registro.title')}" />
-</s:else>
 	<head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <!-- CSS (required) -->
@@ -38,10 +30,9 @@
 					<table>
 						<tr>
 							<td>						
-								<small>
-									<s:text name="title" />
+								<small>									
 									<strong>
-										<s:text name="paso2" />									
+										<s:text name="paso2.1" />									
 										<s:text name="funcionalidades" />
 									</strong>
 								</small>
@@ -54,29 +45,26 @@
 								</form>	
 							</td>
 						</tr>
-					</table>					
+					</table>
+					<hr>
 					<h3>
 						<s:text name="funcionalidades.title" />
-					</h3>
+					</h3>	
 					<hr>
-					<h5 class="formulario">
-						<s:text name="servicio.title">
-							<s:param>
-								<s:property value="servicio.nombre" />
-							</s:param>
-						</s:text>
-					</h5>
-					<h5 class="formulario">
-						<s:text name="descripcion.title"/>
-						<s:property value="servicio.descripcion" />
-					</h5>
-					<h5 class="formulario">
-						<s:text name="id.title">
-							<s:param>								
-								<s:property value="id_servicio_informacion" />
-							</s:param>
-						</s:text>
-					</h5>
+					<table class="results">
+						<tr>
+							<td class="alt"><s:text name="n_servicio"/></td>
+							<td class="alt2"><s:property value="id_servicio_informacion" /></td>
+						</tr>
+						<tr>
+							<td class="alt"><s:text name="servicio.title"/></td>
+							<td class="alt2"><s:property value="servicio.nombre" /></td>
+						</tr>
+						<tr>
+							<td class="alt"><s:text name="descripcion.title"/></td>
+							<td class="alt2"><s:property value="servicio.descripcion" /></td>
+						</tr>						
+					</table>									
 					<hr>
 					<s:fielderror>
 						<s:param>funcionalidades</s:param>
@@ -85,6 +73,7 @@
 					<tr><td>
 					<form action="prepararFuncionalidad" method="POST">
 						<s:hidden name="id_servicio_informacion"></s:hidden>
+						<s:hidden name="modificar"></s:hidden>
 						<input type="submit" value="<s:text name="funcionalidad.add"/>" />
 					</form>
 					</td><td>						

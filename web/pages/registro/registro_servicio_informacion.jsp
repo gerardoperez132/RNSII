@@ -49,8 +49,7 @@
 					<table>
 						<tr>
 							<td>						
-								<small>
-									<s:text name="title" />
+								<small>									
 									<strong>
 										<s:text name="paso1" />.<s:property value="tab"/>:
 									</strong>
@@ -71,6 +70,7 @@
 							</td>
 						</tr>
 					</table>
+					<hr>
 					<h3>
 						<s:text name="title"></s:text>
 					</h3>

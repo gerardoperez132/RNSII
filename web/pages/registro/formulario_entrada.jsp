@@ -26,6 +26,19 @@
 				
 				<!-- Este es el div de contenidos -->
 				<div id="content">
+					<table>
+						<tr>
+							<td>						
+								<small>									
+									<strong>
+										<s:text name="paso2.1.1" />									
+										<s:text name="funcionalidades" /> -										
+									</strong>
+									<s:text name="entrada.tab2.title"/>
+								</small>
+							</td>							
+						</tr>
+					</table>
 					<h3>
 						<s:text name="form.entrada.registro.funcionalidades.title"></s:text>
 					</h3>
@@ -38,11 +51,11 @@
 					<ul class="tabs">
 						<li><a href="#tab1"><s:text name="tab1.title"></s:text> </a>
 						</li>
-						<li class="active"><a><s:text name="tab2.title"></s:text>
+						<li class="active"><a><s:text name="tab.entrada"></s:text>
 						</a></li>
-						<li><a href="#tab3"><s:text name="tab3.title"></s:text> </a>
+						<li><a href="#tab3"><s:text name="tab.salida"></s:text> </a>
 						</li>
-						<li><a href="#tab4"><s:text name="tab4.title"></s:text> </a>
+						<li><a href="#tab4"><s:text name="tab.resumen"></s:text> </a>
 						</li>
 					</ul>
 					<div class="tab_container">
