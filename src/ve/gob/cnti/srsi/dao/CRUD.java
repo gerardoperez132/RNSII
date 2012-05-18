@@ -405,7 +405,7 @@ public interface CRUD {
 	 * @return {@code true} si es una visita nueva fuera del lapso establecido,
 	 *         de lo contrario {@code false}
 	 */
-	public boolean verifyClientAccess(String ip);
+	public boolean verifyClientAccess(String ip, long id);
 
 	/**
 	 * Permite Consultar los 5 servicios de información más visitados.

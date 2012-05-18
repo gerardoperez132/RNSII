@@ -903,13 +903,18 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 	}
 
 	@Override
-	public boolean verifyClientAccess(String ip) {
+	public boolean verifyClientAccess(String ip, long id) {
 		try {
 			startConnection();
-			return (new Date().getTime() - ((Date) session.createSQLQuery(
-					"SELECT fecha FROM visitas WHERE ip = '" + ip
-							+ "' ORDER BY fecha DESC LIMIT 1").uniqueResult())
-					.getTime()) > (3600 * 24 * 1000);
+			try {
+				return (new Date().getTime() - ((Date) session.createSQLQuery(
+						"SELECT fecha FROM visitas WHERE ip = '" + ip
+								+ "' AND id_servicio_informacion = " + id
+								+ " ORDER BY fecha DESC LIMIT 1")
+						.uniqueResult()).getTime()) > (3600 * 24 * 1000);
+			} catch (Exception e) {
+				return true;
+			}
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;
