@@ -129,8 +129,7 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 							models, servicio.getId_servicio_informacion(), -1);
 					if (funcionalidades.isEmpty()) {
 						ListaServicios.add(new ServiciosPublicables(false,
-								servicio));
-						System.out.println("funcionalidades empty : id_s " +servicio.getId_servicio_informacion());
+								servicio));						
 					} else {
 						Iterator<Funcionalidad> fxIterado = funcionalidades
 								.iterator();
@@ -143,8 +142,7 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 							salidas_tmp = (List<EntradaSalida>) read(
 									models2, fx.getId_funcionalidad(), SALIDA);
 							if (salidas_tmp.isEmpty()) {
-								publicable = false;
-								System.out.println("salidas empty : id_s " +servicio.getId_servicio_informacion());
+								publicable = false;								
 							}
 						}
 						ListaServicios.add(new ServiciosPublicables(publicable,
