@@ -114,6 +114,7 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 			Iterator<ServicioInformacion> siIterado = servicios.iterator();
 			ServicioInformacion servicio = new ServicioInformacion();
 			while (siIterado.hasNext()) {
+				publicable = true;
 				servicio = siIterado.next();
 				if (servicio.getId_estado() == 1) {
 					ListaServicios
@@ -122,13 +123,14 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 					ListaServicios
 							.add(new ServiciosPublicables(false, servicio));
 				} else {
-					Object[] models = { new Funcionalidad(),
-							new ServicioInformacion() };
-					List<Funcionalidad> funcionalidades = (List<Funcionalidad>) read(
+					Object[] models = { new Funcionalidad(),new ServicioInformacion() };
+					List<Funcionalidad> funcionalidades = new ArrayList<Funcionalidad>();					
+					funcionalidades = (List<Funcionalidad>) read(
 							models, servicio.getId_servicio_informacion(), -1);
 					if (funcionalidades.isEmpty()) {
 						ListaServicios.add(new ServiciosPublicables(false,
 								servicio));
+						System.out.println("funcionalidades empty : id_s " +servicio.getId_servicio_informacion());
 					} else {
 						Iterator<Funcionalidad> fxIterado = funcionalidades
 								.iterator();
@@ -137,10 +139,12 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 							fx = fxIterado.next();
 							Object[] models2 = { new EntradaSalida(),
 									new Funcionalidad() };
-							List<EntradaSalida> salidas_tmp = (List<EntradaSalida>) read(
+							List<EntradaSalida> salidas_tmp = new ArrayList<EntradaSalida>();
+							salidas_tmp = (List<EntradaSalida>) read(
 									models2, fx.getId_funcionalidad(), SALIDA);
 							if (salidas_tmp.isEmpty()) {
 								publicable = false;
+								System.out.println("salidas empty : id_s " +servicio.getId_servicio_informacion());
 							}
 						}
 						ListaServicios.add(new ServiciosPublicables(publicable,
@@ -294,8 +298,7 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 	}
 
 	public String execute() throws Exception {
-		// if the method * does not exist, we will return a "404ERROR" result
-		System.out.println("entro 2");
+		// if the method * does not exist, we will return a "404ERROR" result		
 		return "404ERROR";
 
 	}
