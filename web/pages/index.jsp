@@ -86,7 +86,7 @@
 							</s:else>
 						</table>
 					</s:if>
-					<s:elseif test="consulta_listarSectores==true">
+					<s:elseif test="consulta_listarSectores">
 						<!-- Lista de sectores con la cantidad servicios publicados -->
 						<table class="results">
 							<tr>
@@ -133,7 +133,7 @@
 							<div id="tab1" class="tab_content">
 								<table class="results">
 									<tr>
-										<td class="alt"><s:text name="n_servicio"/></td>
+										<td class="alt"><s:text name="n_servicio" /></td>
 										<td class="alt2"><s:property
 												value="servicio.id_servicio_informacion" /></td>
 									</tr>
@@ -449,7 +449,7 @@
 								<th><s:text name="n_servicio" /></th>
 								<th><s:text name="nombre" /></th>
 								<th><s:text name="ente1" /></th>
-								<th><s:text name="fecha_creado" /></th>
+								<th><s:text name="fecha_creacion" /></th>
 							</tr>
 							<s:if test="servicios.size()>0">
 								<s:iterator value="servicios">
@@ -476,7 +476,7 @@
 							</s:if>
 							<s:else>
 								<tr>
-									<td colspan="3"><s:text name="sis_null" /></td>
+									<td colspan="4"><s:text name="sis_null" /></td>
 								</tr>
 							</s:else>
 						</table>
