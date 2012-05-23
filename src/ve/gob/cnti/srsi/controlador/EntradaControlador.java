@@ -22,7 +22,7 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 
 	private List<EntradaSalida> entradas;
 	private List<TipoDato> tipoDatos;
-	private List<Formato> formatos;
+	private List<Formato> formatos = new ArrayList<Formato>();
 
 	private ServicioInformacion servicio = new ServicioInformacion();
 	private Funcionalidad funcionalidad = new Funcionalidad();
@@ -31,8 +31,11 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 	private long id_entrada_salida;
 	private long id_servicio_informacion;
 	private long id_funcionalidad;
+	private long id_tipo_dato;
 	private boolean complejo;
 	private boolean modificar;
+	private boolean hasLength;
+	private boolean hasformatted;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -233,6 +236,31 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 			prepararFormularioSimple();
 		}
 	}
+		
+	@SkipValidation
+	public String dato_haslength() {
+		TipoDato td = new TipoDato();		
+		td = (TipoDato) read(td, id_tipo_dato);
+		hasLength = td.isHasLength();		
+		return SUCCESS;
+	}
+		
+	@SkipValidation
+	public String dato_hasformatted() {
+		TipoDato td = new TipoDato();		
+		td = (TipoDato) read(td, id_tipo_dato);
+		hasformatted = td.isHasformatted();		
+		return SUCCESS;
+	}
+		
+	@SuppressWarnings("unchecked")
+	@SkipValidation
+	public String list_format() {
+		Object[] models = {new Formato(),new TipoDato()};
+		formatos = (List<Formato>) read(models, id_tipo_dato, -1);			
+		return SUCCESS;
+	}
+	
 
 	public List<EntradaSalida> getEntradas() {
 		return entradas;
@@ -320,5 +348,29 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 
 	public void setFormatos(List<Formato> formatos) {
 		this.formatos = formatos;
+	}
+
+	public boolean isHasLength() {
+		return hasLength;
+	}
+
+	public void setHasLength(boolean hasLength) {
+		this.hasLength = hasLength;
+	}
+
+	public long getId_tipo_dato() {
+		return id_tipo_dato;
+	}
+
+	public void setId_tipo_dato(long id_tipo_dato) {
+		this.id_tipo_dato = id_tipo_dato;
+	}
+
+	public boolean isHasformatted() {
+		return hasformatted;
+	}
+
+	public void setHasformatted(boolean hasformatted) {
+		this.hasformatted = hasformatted;
 	}
 }
