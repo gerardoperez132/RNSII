@@ -58,7 +58,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 	private List<ServicioInformacion> servicios = new ArrayList<ServicioInformacion>();
 	List<SectoresMasPublicados> listaSectores = new ArrayList<SectoresMasPublicados>();
 	List<SectoresMasPublicados> listaSectores2 = new ArrayList<SectoresMasPublicados>();
-	private List<ListaSImasVisitados> SI_masVisitados = new ArrayList<ListaSImasVisitados>();
+	private List<ListaSImasVisitados> SI_masVisitados = new ArrayList<ListaSImasVisitados>();	
 
 	private String cadena;
 	private String telefono;
@@ -81,7 +81,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 		SI_masVisitados = SImasVisitados();
 		return SUCCESS;
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	public String listarSector() {
 		listaSectores = sectoresMasPublicados(LIMITE_SECTORES);
