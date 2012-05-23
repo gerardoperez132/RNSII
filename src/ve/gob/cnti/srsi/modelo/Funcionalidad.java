@@ -28,6 +28,7 @@ import javax.persistence.Table;
  * información puede tener muchas funcionalidades.
  * 
  * @see ServicioInformacion
+ * @see Usuario
  * @author Richard Ricciardelli
  * 
  */
@@ -40,6 +41,7 @@ public class Funcionalidad {
 	private long id;
 	private long id_funcionalidad;
 	private long id_servicio_informacion;
+	private long id_usuario;
 	private String nombre;
 	private String descripcion;
 	private int status;
@@ -71,6 +73,14 @@ public class Funcionalidad {
 
 	public void setId_servicio_informacion(long id_servicio_informacion) {
 		this.id_servicio_informacion = id_servicio_informacion;
+	}
+
+	public long getId_usuario() {
+		return id_usuario;
+	}
+
+	public void setId_usuario(long id_usuario) {
+		this.id_usuario = id_usuario;
 	}
 
 	public String getNombre() {
@@ -117,10 +127,9 @@ public class Funcionalidad {
 	public String toString() {
 		return "Funcionalidad [id=" + id + ", id_funcionalidad="
 				+ id_funcionalidad + ", id_servicio_informacion="
-				+ id_servicio_informacion + ", nombre=" + nombre
-				+ ", descripcion=" + descripcion + ", status=" + status
-				+ ", fecha_creado=" + fecha_creado + ", fecha_modificado="
-				+ fecha_modificado + "]";
+				+ id_servicio_informacion + ", id_usuario=" + id_usuario
+				+ ", nombre=" + nombre + ", descripcion=" + descripcion
+				+ ", status=" + status + ", fecha_creado=" + fecha_creado
+				+ ", fecha_modificado=" + fecha_modificado + "]";
 	}
-
 }

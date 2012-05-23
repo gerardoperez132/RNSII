@@ -26,6 +26,8 @@ import javax.persistence.Table;
 /**
  * Aspectos legales del servicio de información.
  * 
+ * @see ServicioInformacion
+ * @see Usuario
  * @author Richard Ricciardelli
  * 
  */
@@ -38,6 +40,7 @@ public class AspectoLegal {
 	private long id;
 	private long id_aspecto_legal;
 	private long id_servicio_informacion;
+	private long id_usuario;
 	private String nombre;
 	private String url;
 	private int status;
@@ -69,6 +72,14 @@ public class AspectoLegal {
 
 	public void setId_servicio_informacion(long id_servicio_informacion) {
 		this.id_servicio_informacion = id_servicio_informacion;
+	}
+
+	public long getId_usuario() {
+		return id_usuario;
+	}
+
+	public void setId_usuario(long id_usuario) {
+		this.id_usuario = id_usuario;
 	}
 
 	public String getNombre() {
@@ -115,8 +126,10 @@ public class AspectoLegal {
 	public String toString() {
 		return "AspectoLegal [id=" + id + ", id_aspecto_legal="
 				+ id_aspecto_legal + ", id_servicio_informacion="
-				+ id_servicio_informacion + ", nombre=" + nombre + ", url="
-				+ url + ", status=" + status + ", fecha_creado=" + fecha_creado
-				+ ", fecha_modificado=" + fecha_modificado + "]";
+				+ id_servicio_informacion + ", id_usuario=" + id_usuario
+				+ ", nombre=" + nombre + ", url=" + url + ", status=" + status
+				+ ", fecha_creado=" + fecha_creado + ", fecha_modificado="
+				+ fecha_modificado + "]";
 	}
+
 }
