@@ -63,75 +63,53 @@ $(document).ready(function(){
 		limpiar_options();
 	}
 	
-	function fomato_longitud_visible(){
+	function fomato_longitud_visible(){			
+		
 		/*
 		 * Oculta las capas formato y longitud si el usuario no selecciona ningún tipo de dato.
 		 */
 		if($("#tipoDato").val()==-1){
 			$('#capa_formato').attr('style', 'visibility: hidden; position:fixed;');
 			$('#capa_longitud').attr('style', 'visibility: hidden; position:fixed;');			
-		}
-		
-		/*$("#formato").append('');
-		 *Muestra la capa longitud cuando el tipo de dato es string 
-		 */
-		if($("#tipoDato").val()==2){
-			$('#capa_longitud').attr('style', 'visibility: visible; position:relative;');
-			$('#capa_formato').attr('style', 'visibility: hidden; position:fixed;');
-		}
-		
-		/*
-		 *Muestra la capa longitud y formato cuando el tipo de dato es integer 
-		 */
-		if($("#tipoDato").val()==3){
-			$('#capa_longitud').attr('style', 'visibility: visible; position:relative;');
-			$('#capa_formato').attr('style', 'visibility: visible; position:relative;');
-			$("#formato").append('<option id="opt_element_1" value="1">Con Signo</option>');
-			$("#formato").append('<option id="opt_element_2" value="2">Sin Signo</option>');
-		}
-		
-		/*
-		 *Muestra la capa longitud y formato cuando el tipo de dato es decimal
-		 */
-		if($("#tipoDato").val()==4){
-			$('#capa_longitud').attr('style', 'visibility: visible; position:relative;');
-			$('#capa_formato').attr('style', 'visibility: visible; position:relative;');
-			$("#formato").append('<option id="opt_element_3" value="3">Con Signo</option>');
-			$("#formato").append('<option id="opt_element_4" value="4">Sin Signo</option>');
-		}
-		
-		/*
-		 *Muestra la capa formato cuando el tipo de dato es boolean
-		 */
-		if($("#tipoDato").val()==5){
-			$('#capa_longitud').attr('style', 'visibility: hidden; position:fixed;');
-			$('#capa_formato').attr('style', 'visibility: visible; position:relative;');
-			$("#formato").append('<option id="opt_element_5" value="5">True - False</option>');
-			$("#formato").append('<option id="opt_element_6" value="6">Verdadero - Falso</option>');
-			$("#formato").append('<option id="opt_element_7" value="7">1 - 0</option>');
-		}
-		
-		/*
-		 *Muestra la capa formato cuando el tipo de dato es date
-		 */
-		if($("#tipoDato").val()==6){
-			$('#capa_longitud').attr('style', 'visibility: hidden; position:fixed;');
-			$('#capa_formato').attr('style', 'visibility: visible; position:relative;');
-			$("#formato").append('<option id="opt_element_8" value="8">YYYY-MM-DD</option>');
-			$("#formato").append('<option id="opt_element_9" value="9">DD-MM-YYYY</option>');
-			$("#formato").append('<option id="opt_element_10" value="10">YYYY-MM-DDThh:mm:ss</option>');
-			$("#formato").append('<option id="opt_element_11" value="11">DD-MM-YYYYThh:mm:ss</option>');
-		}		
-		
-		/*
-		 *Muestra la capa formato cuando el tipo de dato es time			
-		 */
-		if($("#tipoDato").val()==7){
-			$('#capa_longitud').attr('style', 'visibility: hidden; position:fixed;');
-			$('#capa_formato').attr('style', 'visibility: visible; position:relative;');
-			$("#formato").append('<option id="opt_element_12" value="12">hh:mm:ss</option>');
-			$("#formato").append('<option id="opt_element_13" value="13">hh:mm</option>');
-		}		
+		}else{
+			//Muestra la capa longitud si el dato posse esta caracteristica
+			  $.ajax({
+				    type: 'GET',
+				    url: 'dato_haslength.action',
+				    cache: false,
+				    async: false,
+				    data: { id_tipo_dato: $("#tipoDato").val() },
+				    success: function(result){ 
+				    	var boleano = new String ('' + result);
+						if(boleano.toLowerCase().indexOf('l=true') != -1){					
+							$('#capa_longitud').attr('style', 'visibility: visible; position:relative;');
+						}else{					
+							$('#capa_longitud').attr('style', 'visibility: hidden; position:fixed;');
+						}
+				    }
+			 });
+			//Muestra la capa formato si el dato posse esta caracteristica
+			  $.ajax({type: 'GET',url: 'dato_hasformatted.action',cache: false,async: false,
+				    data: { id_tipo_dato: $("#tipoDato").val() },
+				    success: function(result2){ 
+				    	var boleano = new String ('' + result2);				
+						if(boleano.toLowerCase().indexOf('f=true') != -1){					
+							$('#capa_formato').attr('style', 'visibility: visible; position:relative;');
+							//Crea las opciones	del select formato	
+							$.ajax({type: 'GET',url: 'list_format.action',cache: false,async: false,
+							    data: { id_tipo_dato: $("#tipoDato").val() },
+							    success: function(result3){ 
+							    	$("#formato").append(result3);	
+							    }
+							});														
+						}else{					
+							$('#capa_formato').attr('style', 'visibility: hidden; position:fixed;');
+						}
+				    }				    
+			 });			
+		}	
 		
 	}
+	
+	
 });
