@@ -453,7 +453,29 @@
 		<action name="error404" method="inicio"
 			class="ve.gob.cnti.srsi.controlador.ConsultasControlador">
 			<result name="success">error404.jsp</result>
-		</action>		
+		</action>	
+		
+		<!-- 
+		******* ******* ******* *******
+		ajax consultas
+		******* ******* ******* *******
+		 -->
+		<action name="dato_haslength" method="dato_haslength"
+			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
+			<result name="success">ajax/bool.jsp</result>
+		</action>	
+		
+		<action name="dato_hasformatted" method="dato_hasformatted"
+			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
+			<result name="success">ajax/bool.jsp</result>
+		</action>
+		
+		<action name="list_format" method="list_format"
+			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
+			<result name="success">ajax/list_formats.jsp</result>
+		</action>
+		
+		
 		
 	</package>
 	<constant name="struts.devMode" value="true" />
