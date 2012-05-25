@@ -91,8 +91,6 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	private long id_aspecto_legal;
 	private long nVisitas;
 
-	private Usuario user = (Usuario) session.get("usuario");
-
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararRegistro() {
@@ -187,7 +185,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			setEnte(((Ente) session.get("ente")));
 			setId_servicio_informacion((Long) session
 					.get("id_servicio_informacion"));
-
+			Usuario user = (Usuario) session.get("usuario");
 			servicio.setId_usuario(user.getId_usuario());
 		} catch (Exception e) {
 			// Exception.
@@ -199,6 +197,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		servicio.setId_sector(sector);
 		if (isModificar() && isComplete(servicio)) {
 			update(servicio, id_servicio_informacion);
+			Usuario user = (Usuario) session.get("usuario");
 			UnionAreaServicioInformacion unionAreaServicioInformacion = new UnionAreaServicioInformacion();
 			unionAreaServicioInformacion.setId_usuario(user.getId_usuario());
 			try {
@@ -213,6 +212,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			create(servicio);
 			UnionAreaServicioInformacion unionAreaServicioInformacion = new UnionAreaServicioInformacion();
 			for (int i = 0; i < area.size(); i++) {
+				Usuario user = (Usuario) session.get("usuario");
 				unionAreaServicioInformacion.setId_area(area.get(i));
 				unionAreaServicioInformacion
 						.setId_usuario(user.getId_usuario());
@@ -230,6 +230,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			servicio.setId_estado(estado);
 			servicio.setId_sector(sector);
 			update(servicio);
+			Usuario user = (Usuario) session.get("usuario");
 			UnionAreaServicioInformacion unionAreaServicioInformacion = new UnionAreaServicioInformacion();
 			unionAreaServicioInformacion.setId_usuario(user.getId_usuario());
 			try {
@@ -367,6 +368,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		intercambio = intercambio_tmp;
 		if (isModificar() && isComplete(servicio)) {
 			update(servicio, id_servicio_informacion);
+			Usuario user = (Usuario) session.get("usuario");
 			UnionArquitecturaServicioInformacion unionArquitecturaServicioInformacion = new UnionArquitecturaServicioInformacion();
 			unionArquitecturaServicioInformacion.setId_usuario(user
 					.getId_usuario());
@@ -387,6 +389,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		}
 		UnionArquitecturaServicioInformacion unionArquitecturaServicioInformacion = new UnionArquitecturaServicioInformacion();
 		for (int i = 0; i < arquitectura.size(); i++) {
+			Usuario user = (Usuario) session.get("usuario");
 			unionArquitecturaServicioInformacion
 					.setId_arquitectura(arquitectura.get(i));
 			unionArquitecturaServicioInformacion
