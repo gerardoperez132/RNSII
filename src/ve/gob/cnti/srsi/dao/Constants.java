@@ -59,8 +59,6 @@ public interface Constants {
 	 */
 	public static final String REGEX_EMAIL = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
 
-	public static final String REGEX_QUOTES = "[']*$";
-
 	/**
 	 * Interfaz con los estados de registro en la base de datos.
 	 * 
