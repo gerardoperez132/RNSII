@@ -2,6 +2,7 @@ package ve.gob.cnti.srsi.controlador;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
@@ -15,6 +16,7 @@ import ve.gob.cnti.srsi.modelo.Formato;
 import ve.gob.cnti.srsi.modelo.Funcionalidad;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.TipoDato;
+import ve.gob.cnti.srsi.modelo.Usuario;
 
 @SuppressWarnings("serial")
 public class EntradaControlador extends DAO implements TipoEntradaSalida,
@@ -27,6 +29,7 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 	private ServicioInformacion servicio = new ServicioInformacion();
 	private Funcionalidad funcionalidad = new Funcionalidad();
 	private EntradaSalida entrada = new EntradaSalida();
+	private Map session;
 
 	private long id_entrada_salida;
 	private long id_servicio_informacion;
@@ -97,7 +100,10 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 	}
 
 	public String registrarEntrada() {
+		Usuario user = new Usuario();
+		user = (Usuario) session.get("usuario");
 		entrada.setId_funcionalidad(id_funcionalidad);
+		entrada.setId_usuario(user.getId_usuario());
 		entrada.setTipo(ENTRADA);
 		if (id_entrada_salida > 0) {
 			entrada.setId_padre(id_entrada_salida);
@@ -115,6 +121,7 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 		modificada.setId_tipo_dato(entrada.getId_tipo_dato());
 		modificada.setId_formato(entrada.getId_formato());
 		modificada.setLongitud(entrada.getLongitud());
+		modificada.setId_usuario(entrada.getId_usuario());
 		update(modificada, id_entrada_salida);
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
@@ -236,31 +243,30 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 			prepararFormularioSimple();
 		}
 	}
-		
+
 	@SkipValidation
 	public String dato_haslength() {
-		TipoDato td = new TipoDato();		
+		TipoDato td = new TipoDato();
 		td = (TipoDato) read(td, id_tipo_dato);
-		hasLength = td.isHasLength();		
+		hasLength = td.isHasLength();
 		return SUCCESS;
 	}
-		
+
 	@SkipValidation
 	public String dato_hasformatted() {
-		TipoDato td = new TipoDato();		
+		TipoDato td = new TipoDato();
 		td = (TipoDato) read(td, id_tipo_dato);
-		hasformatted = td.isHasformatted();		
+		hasformatted = td.isHasformatted();
 		return SUCCESS;
 	}
-		
+
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String list_format() {
-		Object[] models = {new Formato(),new TipoDato()};
-		formatos = (List<Formato>) read(models, id_tipo_dato, -1);			
+		Object[] models = { new Formato(), new TipoDato() };
+		formatos = (List<Formato>) read(models, id_tipo_dato, -1);
 		return SUCCESS;
 	}
-	
 
 	public List<EntradaSalida> getEntradas() {
 		return entradas;
@@ -372,5 +378,13 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 
 	public void setHasformatted(boolean hasformatted) {
 		this.hasformatted = hasformatted;
+	}
+
+	public Map getSession() {
+		return session;
+	}
+
+	public void setSession(Map session) {
+		this.session = session;
 	}
 }

@@ -3,6 +3,7 @@ package ve.gob.cnti.srsi.controlador;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
@@ -16,6 +17,7 @@ import ve.gob.cnti.srsi.modelo.Formato;
 import ve.gob.cnti.srsi.modelo.Funcionalidad;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.TipoDato;
+import ve.gob.cnti.srsi.modelo.Usuario;
 
 @SuppressWarnings("serial")
 public class SalidaControlador extends DAO implements Formulario,
@@ -28,6 +30,7 @@ public class SalidaControlador extends DAO implements Formulario,
 	private ServicioInformacion servicio = new ServicioInformacion();
 	private Funcionalidad funcionalidad = new Funcionalidad();
 	private EntradaSalida salida = new EntradaSalida();
+	private Map session;
 
 	private long id_entrada_salida;
 	private long id_servicio_informacion;
@@ -92,7 +95,10 @@ public class SalidaControlador extends DAO implements Formulario,
 	}
 
 	public String registrarSalida() {
+		Usuario user = new Usuario();
+		user = (Usuario) session.get("usuario");
 		salida.setId_funcionalidad(id_funcionalidad);
+		salida.setId_usuario(user.getId_usuario());
 		salida.setTipo(SALIDA);
 		if (id_entrada_salida > 0) {
 			salida.setId_padre(id_entrada_salida);
@@ -110,6 +116,7 @@ public class SalidaControlador extends DAO implements Formulario,
 		modificada.setId_tipo_dato(salida.getId_tipo_dato());
 		modificada.setId_formato(salida.getId_formato());
 		modificada.setLongitud(salida.getLongitud());
+		modificada.setId_usuario(salida.getId_usuario());
 		update(modificada, id_entrada_salida);
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
@@ -125,7 +132,7 @@ public class SalidaControlador extends DAO implements Formulario,
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		salidas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad, SALIDA);
-		if(salidas.size()==0){
+		if (salidas.size() == 0) {
 			servicio.setPublicado(false);
 			update(servicio, id_servicio_informacion);
 		}
@@ -146,8 +153,8 @@ public class SalidaControlador extends DAO implements Formulario,
 		delete(salida, id_entrada_salida);
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
-		salidas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad, SALIDA);				
-		if(salidas.size()==0){
+		salidas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad, SALIDA);
+		if (salidas.size() == 0) {
 			servicio.setPublicado(false);
 			update(servicio, id_servicio_informacion);
 		}
@@ -328,4 +335,13 @@ public class SalidaControlador extends DAO implements Formulario,
 	public void setFormatos(List<Formato> formatos) {
 		this.formatos = formatos;
 	}
+
+	public Map getSession() {
+		return session;
+	}
+
+	public void setSession(Map session) {
+		this.session = session;
+	}
+
 }

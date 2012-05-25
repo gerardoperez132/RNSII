@@ -2,6 +2,7 @@ package ve.gob.cnti.srsi.controlador;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
@@ -13,6 +14,7 @@ import ve.gob.cnti.srsi.dao.DAO;
 import ve.gob.cnti.srsi.modelo.EntradaSalida;
 import ve.gob.cnti.srsi.modelo.Funcionalidad;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
+import ve.gob.cnti.srsi.modelo.Usuario;
 
 @SuppressWarnings("serial")
 public class FuncionalidadControlador extends DAO implements Formulario,
@@ -26,6 +28,7 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 	private Funcionalidad funcionalidad = new Funcionalidad();
 	private EntradaSalida entrada = new EntradaSalida();
 	private EntradaSalida salida = new EntradaSalida();
+	private Map session;
 
 	private long id_servicio_informacion;
 	private long id_funcionalidad;
@@ -33,8 +36,6 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 	private boolean modificar;
 	private boolean modificarf;
 	private boolean resumen;
-
-	
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -51,8 +52,11 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 	}
 
 	public String registrarFuncionalidad() {
+		Usuario user = new Usuario();
+		user = (Usuario) session.get("usuario");
 		id_funcionalidad = getNextId(funcionalidad);
 		funcionalidad.setId_servicio_informacion(id_servicio_informacion);
+		funcionalidad.setId_usuario(user.getId_usuario());
 		create(funcionalidad);
 		return SUCCESS;
 	}
@@ -89,7 +93,10 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 	}
 
 	public String modificarFuncionalidad() {
+		Usuario user = new Usuario();
+		user = (Usuario) session.get("usuario");
 		funcionalidad.setId_servicio_informacion(id_servicio_informacion);
+		funcionalidad.setId_usuario(user.getId_usuario());
 		update(funcionalidad, id_funcionalidad);
 		return SUCCESS;
 	}
@@ -98,13 +105,14 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 	@SkipValidation
 	public String eliminarFuncionalidad() {
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
-		servicio = (ServicioInformacion) read(servicio,funcionalidad.getId_servicio_informacion());
+		servicio = (ServicioInformacion) read(servicio,
+				funcionalidad.getId_servicio_informacion());
 		funcionalidades = (List<Funcionalidad>) read(FSI,
 				id_servicio_informacion, -1);
-		if(funcionalidades.size()==0){
+		if (funcionalidades.size() == 0) {
 			servicio.setPublicado(false);
 			update(servicio, id_servicio_informacion);
-		}		
+		}
 		delete(funcionalidad, id_funcionalidad);
 		prepararFuncionalidades();
 		return SUCCESS;
@@ -125,7 +133,7 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 			addFieldError("funcionalidad.descripcion", error.getProperties()
 					.getProperty("error.regex.description"));
 	}
-	
+
 	public List<EntradaSalida> getEntradas() {
 		return entradas;
 	}
@@ -220,5 +228,13 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 
 	public void setModificarf(boolean modificarf) {
 		this.modificarf = modificarf;
+	}
+
+	public Map getSession() {
+		return session;
+	}
+
+	public void setSession(Map session) {
+		this.session = session;
 	}
 }

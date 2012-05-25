@@ -287,8 +287,11 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			files = (List<AspectoLegal>) read(ALSI, id_servicio_informacion, -1);
 			return INPUT;
 		}
+		Usuario user = new Usuario();
+		user = (Usuario) session.get("usuario");
 		AspectoLegal documento = new AspectoLegal();
 		documento.setId_servicio_informacion(id_servicio_informacion);
+		documento.setId_usuario(user.getId_usuario());
 		documento.setNombre(name);
 		documento.setUrl(saveFile());
 		create(documento);
