@@ -50,6 +50,11 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 	@SuppressWarnings("unchecked")
 	public String autenticarUsuario() throws Exception {
 		session = ActionContext.getContext().getSession();
+		if (!correo.matches(REGEX_EMAIL)) {
+			addFieldError("error",
+					error.getProperties().getProperty("error.regex.email"));
+			return INPUT;
+		}
 		if (correo == null && password == null) {
 			return "404ERROR";
 		} else if (correo.isEmpty() || password.isEmpty()) {
@@ -123,13 +128,14 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 					ListaServicios
 							.add(new ServiciosPublicables(false, servicio));
 				} else {
-					Object[] models = { new Funcionalidad(),new ServicioInformacion() };
-					List<Funcionalidad> funcionalidades = new ArrayList<Funcionalidad>();					
-					funcionalidades = (List<Funcionalidad>) read(
-							models, servicio.getId_servicio_informacion(), -1);
+					Object[] models = { new Funcionalidad(),
+							new ServicioInformacion() };
+					List<Funcionalidad> funcionalidades = new ArrayList<Funcionalidad>();
+					funcionalidades = (List<Funcionalidad>) read(models,
+							servicio.getId_servicio_informacion(), -1);
 					if (funcionalidades.isEmpty()) {
 						ListaServicios.add(new ServiciosPublicables(false,
-								servicio));						
+								servicio));
 					} else {
 						Iterator<Funcionalidad> fxIterado = funcionalidades
 								.iterator();
@@ -139,10 +145,10 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 							Object[] models2 = { new EntradaSalida(),
 									new Funcionalidad() };
 							List<EntradaSalida> salidas_tmp = new ArrayList<EntradaSalida>();
-							salidas_tmp = (List<EntradaSalida>) read(
-									models2, fx.getId_funcionalidad(), SALIDA);
+							salidas_tmp = (List<EntradaSalida>) read(models2,
+									fx.getId_funcionalidad(), SALIDA);
 							if (salidas_tmp.isEmpty()) {
-								publicable = false;								
+								publicable = false;
 							}
 						}
 						ListaServicios.add(new ServiciosPublicables(publicable,
@@ -296,7 +302,7 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 	}
 
 	public String execute() throws Exception {
-		// if the method * does not exist, we will return a "404ERROR" result		
+		// if the method * does not exist, we will return a "404ERROR" result
 		return "404ERROR";
 
 	}
