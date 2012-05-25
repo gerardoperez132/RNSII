@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <s:i18n name="ve/gob/cnti/srsi/i18n/I18">
-	<head>
+<head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <!-- CSS (required) -->
 <link rel="stylesheet" type="text/css"
@@ -25,7 +25,7 @@
 
 <title><s:text name="inicio" /></title>
 <!-- Donde dice inicio debería ir una var que identifique el lugar -->
-	</head>
+</head>
 	<body>
 		<!-- Este es el div de la sombra del contenedor del maquetado de la página -->
 		<div id="sombra">
