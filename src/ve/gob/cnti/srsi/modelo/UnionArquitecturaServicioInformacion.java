@@ -30,6 +30,7 @@ import javax.persistence.Table;
  * @author Richard Ricciardelli
  * @see Arquitectura
  * @see SistemaInformacion
+ * @see Usuario
  * 
  */
 @Entity
@@ -41,6 +42,7 @@ public class UnionArquitecturaServicioInformacion {
 	private long id;
 	private long id_servicio_informacion;
 	private long id_arquitectura;
+	private long id_usuario;
 	private int status;
 	private Date fecha_creado;
 	private Date fecha_modificado;
@@ -72,6 +74,14 @@ public class UnionArquitecturaServicioInformacion {
 		this.id_arquitectura = id_arquitectura;
 	}
 
+	public long getId_usuario() {
+		return id_usuario;
+	}
+
+	public void setId_usuario(long id_usuario) {
+		this.id_usuario = id_usuario;
+	}
+
 	public int getStatus() {
 		return status;
 	}
@@ -100,9 +110,8 @@ public class UnionArquitecturaServicioInformacion {
 	public String toString() {
 		return "UnionArquitecturaServicioInformacion [id=" + id
 				+ ", id_servicio_informacion=" + id_servicio_informacion
-				+ ", id_arquitectura=" + id_arquitectura + ", status=" + status
-				+ ", fecha_creado=" + fecha_creado + ", fecha_modificado="
-				+ fecha_modificado + "]";
+				+ ", id_arquitectura=" + id_arquitectura + ", id_usuario="
+				+ id_usuario + ", status=" + status + ", fecha_creado="
+				+ fecha_creado + ", fecha_modificado=" + fecha_modificado + "]";
 	}
-
 }

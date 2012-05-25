@@ -30,6 +30,7 @@ import javax.persistence.Table;
  * @author Richard Ricciardelli
  * @see Area
  * @see SistemaInformacion
+ * @see Usuario
  * 
  */
 @Entity
@@ -40,6 +41,7 @@ public class UnionAreaServicioInformacion {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private long id_servicio_informacion;
+	private long id_usuario;
 	private long id_area;
 	private int status;
 	private Date fecha_creado;
@@ -62,6 +64,14 @@ public class UnionAreaServicioInformacion {
 
 	public void setId_servicio_informacion(long id_servicio_informacion) {
 		this.id_servicio_informacion = id_servicio_informacion;
+	}
+
+	public long getId_usuario() {
+		return id_usuario;
+	}
+
+	public void setId_usuario(long id_usuario) {
+		this.id_usuario = id_usuario;
 	}
 
 	public long getId_area() {
@@ -100,9 +110,8 @@ public class UnionAreaServicioInformacion {
 	public String toString() {
 		return "UnionAreaServicioInformacion [id=" + id
 				+ ", id_servicio_informacion=" + id_servicio_informacion
-				+ ", id_area=" + id_area + ", status=" + status
-				+ ", fecha_creado=" + fecha_creado + ", fecha_modificado="
-				+ fecha_modificado + "]";
+				+ ", id_usuario=" + id_usuario + ", id_area=" + id_area
+				+ ", status=" + status + ", fecha_creado=" + fecha_creado
+				+ ", fecha_modificado=" + fecha_modificado + "]";
 	}
-
 }

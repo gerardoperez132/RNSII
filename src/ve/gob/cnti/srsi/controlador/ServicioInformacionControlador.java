@@ -91,6 +91,8 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	private long id_aspecto_legal;
 	private long nVisitas;
 
+	private Usuario user = (Usuario) session.get("usuario");
+
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararRegistro() {
@@ -185,8 +187,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			setEnte(((Ente) session.get("ente")));
 			setId_servicio_informacion((Long) session
 					.get("id_servicio_informacion"));
-			Usuario user = new Usuario();
-			user = (Usuario) session.get("usuario");
+
 			servicio.setId_usuario(user.getId_usuario());
 		} catch (Exception e) {
 			// Exception.
@@ -198,8 +199,10 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		servicio.setId_sector(sector);
 		if (isModificar() && isComplete(servicio)) {
 			update(servicio, id_servicio_informacion);
+			UnionAreaServicioInformacion unionAreaServicioInformacion = new UnionAreaServicioInformacion();
+			unionAreaServicioInformacion.setId_usuario(user.getId_usuario());
 			try {
-				updateUnion(new UnionAreaServicioInformacion(),
+				updateUnion(unionAreaServicioInformacion,
 						new ServicioInformacion(), new Area(),
 						id_servicio_informacion, area);
 			} catch (Exception e) {
@@ -211,6 +214,8 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			UnionAreaServicioInformacion unionAreaServicioInformacion = new UnionAreaServicioInformacion();
 			for (int i = 0; i < area.size(); i++) {
 				unionAreaServicioInformacion.setId_area(area.get(i));
+				unionAreaServicioInformacion
+						.setId_usuario(user.getId_usuario());
 				unionAreaServicioInformacion
 						.setId_servicio_informacion(id_servicio_informacion);
 				createUnion(unionAreaServicioInformacion);
@@ -225,8 +230,10 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			servicio.setId_estado(estado);
 			servicio.setId_sector(sector);
 			update(servicio);
+			UnionAreaServicioInformacion unionAreaServicioInformacion = new UnionAreaServicioInformacion();
+			unionAreaServicioInformacion.setId_usuario(user.getId_usuario());
 			try {
-				updateUnion(new UnionAreaServicioInformacion(),
+				updateUnion(unionAreaServicioInformacion,
 						new ServicioInformacion(), new Area(),
 						id_servicio_informacion, area);
 			} catch (Exception e) {
@@ -360,8 +367,11 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		intercambio = intercambio_tmp;
 		if (isModificar() && isComplete(servicio)) {
 			update(servicio, id_servicio_informacion);
+			UnionArquitecturaServicioInformacion unionArquitecturaServicioInformacion = new UnionArquitecturaServicioInformacion();
+			unionArquitecturaServicioInformacion.setId_usuario(user
+					.getId_usuario());
 			try {
-				updateUnion(new UnionArquitecturaServicioInformacion(),
+				updateUnion(unionArquitecturaServicioInformacion,
 						new ServicioInformacion(), new Arquitectura(),
 						id_servicio_informacion, arquitectura);
 			} catch (Exception e1) {
@@ -381,6 +391,8 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 					.setId_arquitectura(arquitectura.get(i));
 			unionArquitecturaServicioInformacion
 					.setId_servicio_informacion(id_servicio_informacion);
+			unionArquitecturaServicioInformacion.setId_usuario(user
+					.getId_usuario());
 			createUnion(unionArquitecturaServicioInformacion);
 		}
 		setSessionStacktechnique();

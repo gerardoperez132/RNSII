@@ -30,6 +30,7 @@ import javax.persistence.Table;
  * @author Joaquín Pereira
  * @see Sector
  * @see Ente
+ * @see Usuario
  * 
  */
 @Entity
@@ -41,6 +42,7 @@ public class UnionSectorEnte {
 	private long id;
 	private long id_sector;
 	private long id_ente;
+	private long id_usuario;
 	private int status;
 	private Date fecha_creado;
 	private Date fecha_modificado;
@@ -72,6 +74,14 @@ public class UnionSectorEnte {
 		this.id_ente = id_ente;
 	}
 
+	public long getId_usuario() {
+		return id_usuario;
+	}
+
+	public void setId_usuario(long id_usuario) {
+		this.id_usuario = id_usuario;
+	}
+
 	public int getStatus() {
 		return status;
 	}
@@ -99,8 +109,8 @@ public class UnionSectorEnte {
 	@Override
 	public String toString() {
 		return "UnionSectorEnte [id=" + id + ", id_sector=" + id_sector
-				+ ", id_ente=" + id_ente + ", status=" + status
-				+ ", fecha_creado=" + fecha_creado + ", fecha_modificado="
-				+ fecha_modificado + "]";
+				+ ", id_ente=" + id_ente + ", id_usuario=" + id_usuario
+				+ ", status=" + status + ", fecha_creado=" + fecha_creado
+				+ ", fecha_modificado=" + fecha_modificado + "]";
 	}
 }
