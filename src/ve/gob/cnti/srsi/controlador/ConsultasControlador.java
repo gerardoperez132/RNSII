@@ -58,7 +58,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 	private List<ServicioInformacion> servicios = new ArrayList<ServicioInformacion>();
 	List<SectoresMasPublicados> listaSectores = new ArrayList<SectoresMasPublicados>();
 	List<SectoresMasPublicados> listaSectores2 = new ArrayList<SectoresMasPublicados>();
-	private List<ListaSImasVisitados> SI_masVisitados = new ArrayList<ListaSImasVisitados>();	
+	private List<ListaSImasVisitados> SI_masVisitados = new ArrayList<ListaSImasVisitados>();
 
 	private String cadena;
 	private String telefono;
@@ -81,7 +81,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 		SI_masVisitados = SImasVisitados();
 		return SUCCESS;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public String listarSector() {
 		listaSectores = sectoresMasPublicados(LIMITE_SECTORES);
@@ -121,10 +121,11 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 		listaSectores = sectoresMasPublicados(LIMITE_SECTORES);
 		SI_masVisitados = SImasVisitados();
 		buscarServicio = true;
-		if (!cadena.toUpperCase().matches(REGEX_TITLE)) {
+		if (!cadena.toString().toUpperCase().matches(REGEX_TITLE)) {
 			addFieldError("error",
 					error.getProperties().getProperty("error.regex.title"));
 			buscarServicio = false;
+			return INPUT;
 		}
 		servicios = buscarServicio(cadena, ASC);
 		entes = (List<Ente>) read(new Ente());
