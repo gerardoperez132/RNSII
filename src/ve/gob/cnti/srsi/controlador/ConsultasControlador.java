@@ -127,6 +127,12 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 			buscarServicio = false;
 			return INPUT;
 		}
+		if (cadena.toString().trim().isEmpty()) {
+			addFieldError("error",
+					error.getProperties().getProperty("error.search.empty"));
+			buscarServicio = false;
+			return INPUT;
+		}
 		servicios = buscarServicio(cadena, ASC);
 		entes = (List<Ente>) read(new Ente());
 		return SUCCESS;
