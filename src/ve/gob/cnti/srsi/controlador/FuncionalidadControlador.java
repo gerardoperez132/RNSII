@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
+import com.opensymphony.xwork2.ActionContext;
+
 import ve.gob.cnti.srsi.dao.Constants;
 import ve.gob.cnti.srsi.dao.Constants.Formulario;
 import ve.gob.cnti.srsi.dao.Constants.Modelos;
@@ -28,6 +30,7 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 	private Funcionalidad funcionalidad = new Funcionalidad();
 	private EntradaSalida entrada = new EntradaSalida();
 	private EntradaSalida salida = new EntradaSalida();
+	@SuppressWarnings("rawtypes")
 	private Map session;
 
 	private long id_servicio_informacion;
@@ -53,6 +56,7 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 
 	public String registrarFuncionalidad() {
 		Usuario user = new Usuario();
+		session = ActionContext.getContext().getSession();
 		user = (Usuario) session.get("usuario");
 		id_funcionalidad = getNextId(funcionalidad);
 		funcionalidad.setId_servicio_informacion(id_servicio_informacion);
@@ -94,17 +98,24 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 
 	public String modificarFuncionalidad() {
 		Usuario user = new Usuario();
-		user = (Usuario) session.get("usuario");
+		session = ActionContext.getContext().getSession();
+		user = (Usuario) session.get("usuario");		
 		funcionalidad.setId_servicio_informacion(id_servicio_informacion);
 		funcionalidad.setId_usuario(user.getId_usuario());
 		update(funcionalidad, id_funcionalidad);
 		return SUCCESS;
 	}
 
+	//TODO Eliminar identificando el usuario
+	//TODO Eliminar los datos E/S de la funcionalidad
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String eliminarFuncionalidad() {
+		Usuario user = new Usuario();
+		session = ActionContext.getContext().getSession();
+		user = (Usuario) session.get("usuario");
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
+		funcionalidad.setId_usuario(user.getId_usuario());
 		servicio = (ServicioInformacion) read(servicio,
 				funcionalidad.getId_servicio_informacion());
 		funcionalidades = (List<Funcionalidad>) read(FSI,
@@ -230,11 +241,4 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 		this.modificarf = modificarf;
 	}
 
-	public Map getSession() {
-		return session;
-	}
-
-	public void setSession(Map session) {
-		this.session = session;
-	}
 }

@@ -1,10 +1,13 @@
 package ve.gob.cnti.srsi.controlador;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.validation.SkipValidation;
+
+import com.opensymphony.xwork2.ActionContext;
 
 import ve.gob.cnti.srsi.dao.Constants;
 import ve.gob.cnti.srsi.dao.Constants.Formulario;
@@ -29,6 +32,7 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 	private ServicioInformacion servicio = new ServicioInformacion();
 	private Funcionalidad funcionalidad = new Funcionalidad();
 	private EntradaSalida entrada = new EntradaSalida();
+	@SuppressWarnings("rawtypes")
 	private Map session;
 
 	private long id_entrada_salida;
@@ -101,6 +105,7 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 
 	public String registrarEntrada() {
 		Usuario user = new Usuario();
+		session = ActionContext.getContext().getSession();
 		user = (Usuario) session.get("usuario");
 		entrada.setId_funcionalidad(id_funcionalidad);
 		entrada.setId_usuario(user.getId_usuario());
@@ -114,6 +119,9 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 
 	@SuppressWarnings("unchecked")
 	public String modificarEntrada() {
+		Usuario user = new Usuario();
+		session = ActionContext.getContext().getSession();
+		user = (Usuario) session.get("usuario");
 		EntradaSalida modificada = new EntradaSalida();
 		modificada = (EntradaSalida) read(entrada, id_entrada_salida);
 		modificada.setNombre(entrada.getNombre());
@@ -121,7 +129,7 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 		modificada.setId_tipo_dato(entrada.getId_tipo_dato());
 		modificada.setId_formato(entrada.getId_formato());
 		modificada.setLongitud(entrada.getLongitud());
-		modificada.setId_usuario(entrada.getId_usuario());
+		modificada.setId_usuario(user.getId_usuario());
 		update(modificada, id_entrada_salida);
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
@@ -134,6 +142,10 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String eliminarEntradaSimple() {
+		Usuario user = new Usuario();
+		session = ActionContext.getContext().getSession();
+		user = (Usuario) session.get("usuario");
+		entrada.setId_usuario(user.getId_usuario());
 		delete(entrada, id_entrada_salida);
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
@@ -142,12 +154,20 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 		tipoDatos = (List<TipoDato>) read(new TipoDato());
 		return SUCCESS;
 	}
-
+	
+	//TODO hay que borrar con le id del usuario, seria bueno que sea directamente del metodo del dao
 	@SuppressWarnings("unchecked")
 	@SkipValidation
-	public String eliminarEntradaCompleja() {
+	public String eliminarEntradaCompleja() {			
 		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,
 				ENTRADA);
+		Iterator<EntradaSalida> iterator = entradas.iterator();
+		while(iterator.hasNext()){
+			entrada = iterator.next();
+			if (entrada.getId_padre() == id_entrada_salida){				
+				delete(entrada, entrada.getId_entrada_salida());
+			}
+		}
 		delete(entrada, id_entrada_salida);
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
@@ -378,13 +398,5 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 
 	public void setHasformatted(boolean hasformatted) {
 		this.hasformatted = hasformatted;
-	}
-
-	public Map getSession() {
-		return session;
-	}
-
-	public void setSession(Map session) {
-		this.session = session;
 	}
 }

@@ -7,6 +7,8 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
+import com.opensymphony.xwork2.ActionContext;
+
 import ve.gob.cnti.srsi.dao.Constants;
 import ve.gob.cnti.srsi.dao.Constants.Formulario;
 import ve.gob.cnti.srsi.dao.Constants.Modelos;
@@ -30,6 +32,7 @@ public class SalidaControlador extends DAO implements Formulario,
 	private ServicioInformacion servicio = new ServicioInformacion();
 	private Funcionalidad funcionalidad = new Funcionalidad();
 	private EntradaSalida salida = new EntradaSalida();
+	@SuppressWarnings("rawtypes")
 	private Map session;
 
 	private long id_entrada_salida;
@@ -96,6 +99,7 @@ public class SalidaControlador extends DAO implements Formulario,
 
 	public String registrarSalida() {
 		Usuario user = new Usuario();
+		session = ActionContext.getContext().getSession();
 		user = (Usuario) session.get("usuario");
 		salida.setId_funcionalidad(id_funcionalidad);
 		salida.setId_usuario(user.getId_usuario());
@@ -109,6 +113,9 @@ public class SalidaControlador extends DAO implements Formulario,
 
 	@SuppressWarnings("unchecked")
 	public String modificarSalida() {
+		Usuario user = new Usuario();
+		session = ActionContext.getContext().getSession();
+		user = (Usuario) session.get("usuario");
 		EntradaSalida modificada = new EntradaSalida();
 		modificada = (EntradaSalida) read(salida, id_entrada_salida);
 		modificada.setNombre(salida.getNombre());
@@ -116,7 +123,7 @@ public class SalidaControlador extends DAO implements Formulario,
 		modificada.setId_tipo_dato(salida.getId_tipo_dato());
 		modificada.setId_formato(salida.getId_formato());
 		modificada.setLongitud(salida.getLongitud());
-		modificada.setId_usuario(salida.getId_usuario());
+		modificada.setId_usuario(user.getId_usuario());
 		update(modificada, id_entrada_salida);
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
@@ -127,7 +134,7 @@ public class SalidaControlador extends DAO implements Formulario,
 
 	@SuppressWarnings("unchecked")
 	@SkipValidation
-	public String eliminarSalidaSimple() {
+	public String eliminarSalidaSimple() {		
 		delete(salida, id_entrada_salida);
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
@@ -140,15 +147,17 @@ public class SalidaControlador extends DAO implements Formulario,
 		return SUCCESS;
 	}
 
+	//TODO hay que borrar con le id del usuario, seria bueno que sea directamente del metodo del dao
 	@SuppressWarnings("unchecked")
 	@SkipValidation
-	public String eliminarSalidaCompleja() {
+	public String eliminarSalidaCompleja() {		
 		salidas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad, SALIDA);
 		Iterator<EntradaSalida> iterator = salidas.iterator();
 		while (iterator.hasNext()) {
 			salida = iterator.next();
-			if (salida.getId_padre() == id_entrada_salida)
+			if (salida.getId_padre() == id_entrada_salida){				
 				delete(salida, salida.getId_entrada_salida());
+			}
 		}
 		delete(salida, id_entrada_salida);
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
@@ -334,14 +343,6 @@ public class SalidaControlador extends DAO implements Formulario,
 
 	public void setFormatos(List<Formato> formatos) {
 		this.formatos = formatos;
-	}
-
-	public Map getSession() {
-		return session;
-	}
-
-	public void setSession(Map session) {
-		this.session = session;
 	}
 
 }
