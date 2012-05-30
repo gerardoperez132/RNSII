@@ -1,16 +1,17 @@
-<s:i18n name="ve/gob/cnti/srsi/i18n/sidebar">
 	<div id="sidebar">
 		<div id="menuv">
 			<ul>
 				<li class="nivel1 primera"><a href="<s:url action="home"/>"
-					class="nivel1"> <s:text name="inicio" /> </a>
+					class="nivel1"> <s:text name="home" /> </a>
 				</li>
 				<li class="nivel1"><a class="nivel1"
 					style="font-size: 0.9em; padding-top: 9px; padding-left: 16px;">
-						<s:text name="servicios" /> </a>
+						<s:text name="servicio_nombre" /> </a>
 					<ul class="nivel2">
 						<li><a href="<s:url action="prepararRegistro"/>"> <s:text
 									name="registro" /> </a>
+						</li>
+						<li><a href=""><s:text name="suscripciones" /> </a>
 						</li>
 					</ul>
 				</li>
@@ -24,4 +25,3 @@
 			</ul>
 		</div>
 	</div>
-</s:i18n>
