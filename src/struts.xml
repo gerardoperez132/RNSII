@@ -415,6 +415,12 @@
 			<result name="input">registro/formulario_usuario.jsp</result>
 			<result name="errorSession" type="redirectAction">salir</result>
 		</action>
+		
+		<action name="Buscar_Servicio" method="buscar_servicio2"
+			class="ve.gob.cnti.srsi.controlador.ConsultasControlador">
+			<result name="success">registro/suscripcion.jsp</result>
+			<result name="input">registro/suscripcion.jsp</result>
+		</action>
 
 		<!-- ****************************** Actions para el usuario final ****************************** -->
 		<action name="SRSI" method="inicio"
