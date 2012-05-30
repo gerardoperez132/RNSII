@@ -68,7 +68,7 @@
 										</td>
 										<td><s:set name="id_e" value="id_ente" /> <s:iterator
 												value="entes">
-												<s:if test="id_ente = #id_e">
+												<s:if test="id_ente == #id_e">
 													<s:property value="nombre" />
 												</s:if>
 											</s:iterator>
@@ -464,7 +464,7 @@
 										</td>
 										<td><s:set name="id_e" value="id_ente" /> <s:iterator
 												value="entes">
-												<s:if test="id_ente = #id_e">
+												<s:if test="id_ente == #id_e">
 													<s:property value="nombre" />
 												</s:if>
 											</s:iterator>
@@ -506,7 +506,7 @@
 										</td>
 										<td><s:set name="id_e" value="id_ente" /> <s:iterator
 												value="entes">
-												<s:if test="id_ente = #id_e">
+												<s:if test="id_ente == #id_e">
 													<s:property value="nombre" />
 												</s:if>
 											</s:iterator>
