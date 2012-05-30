@@ -4,7 +4,7 @@
 <%@include file="../layout/cache.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<s:i18n name="ve/gob/cnti/srsi/i18n/userlogin">
+<s:i18n name="ve/gob/cnti/srsi/i18n/I18">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <!-- CSS (required) -->
@@ -32,7 +32,17 @@
 
 			<!-- Este es el div de contenidos -->
 			<div id="content">
-			<table class="main">
+			<form action="Buscar_Servicio" method="post">
+				<table align="center">
+					<tr>
+						<td><s:textfield name="cadena" size="50" /></td>
+						<td><input type="submit"
+							value="<s:text name="buscarServicio"/>"></td>
+					</tr>
+				</table>
+			</form>
+			<hr>
+			<table class="main">			
 			<tr>
 				<td style="width: 350px;">
 					<h4 style="margin: 0;"><s:text name="catalogo" /></h4>
@@ -128,7 +138,7 @@
 												<s:else>
 													<form action="prepararModificarServicioInformacion" method="POST">
 														<s:hidden name="id_servicio_informacion" value="%{servicio.id_servicio_informacion}"></s:hidden>													
-														<input type="submit" value="continuar registro"
+														<input type="submit" value="Continuar registro"
 															style="font-size: 0.9em;" />
 													</form>
 												</s:else>
@@ -141,7 +151,7 @@
 					</s:if>
 					<s:else>
 						<tr>
-							<th colspan="5"><s:text name="servicios.error" /></th>
+							<th colspan="5"><s:text name="sis_null3" /></th>
 						</tr>
 					</s:else>
 				</tbody>
