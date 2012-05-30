@@ -722,26 +722,43 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		}
 		return list;
 	}
-
-	// @Override
-	// public long getNumeroVisitas(Object model, long id) {
-	// long result;
-	// try {
-	// startConnection();
-	// Query query = session
-	// .createQuery("SELECT count(id_servicio_informacion)"
-	// + " FROM " + model.getClass().getSimpleName()
-	// + " WHERE id_servicio_informacion = " + id);
-	// result = (Long) query.uniqueResult();
-	// } catch (HibernateException he) {
-	// handleException(he);
-	// throw he;
-	// } finally {
-	// closeConnection();
-	// }
-	// return result;
-	// }
-
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public ArrayList<ServicioInformacion> buscarServicio2(String cadena,
+			byte orderBy,long id_ente) {
+		ArrayList<ServicioInformacion> list;
+		String order = orderBy > 0 ? "DESC" : "ASC";
+		try {
+			startConnection();
+			list = (ArrayList<ServicioInformacion>) session
+					.createQuery(
+							" FROM ServicioInformacion s WHERE s.status = "
+									+ ACTIVO
+									+ " AND "
+									+ " s.publicado = TRUE"
+									+ " AND "
+									+ " s.id_estado = 2 "
+									+ " AND "
+									+ " s.id_ente !=  " + id_ente 
+									+ " AND "
+									+ " (UPPER(translate(s. nombre, 'áéíóúÁÉÍÓÚ', 'aeiouAEIOU')) "
+									+ " LIKE UPPER(translate('%"
+									+ cadena
+									+ "%', 'áéíóúÁÉÍÓÚ', 'aeiouAEIOU')) "
+									+ " or UPPER(translate(s. descripcion, 'áéíóúÁÉÍÓÚ', 'aeiouAEIOU')) "
+									+ " LIKE UPPER(translate('%" + cadena
+									+ "%', 'áéíóúÁÉÍÓÚ', 'aeiouAEIOU'))) "
+									+ " ORDER BY nombre " + order).list();
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+		return list;
+	}
+	
 	@SuppressWarnings("rawtypes")
 	@Override
 	public List<ListaSImasVisitados> SImasVisitados() {

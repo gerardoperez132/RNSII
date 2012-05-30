@@ -450,4 +450,19 @@ public interface CRUD {
 	 */
 	public ArrayList<ServicioInformacion> getServicioInformacionPorSectorList(
 			long id_sector, byte orderBy);
+	
+	
+	/**
+	 * Permite buscar servicios en el que el nombre de estos, se asemejen a la
+	 * cadena pasada
+	 * 
+	 * @param cadena
+	 *            Es la cadena a consultar
+	 *        id_ente
+	 *        	  Sirve para discriminar los servicio de información del propio ente
+	 * 
+	 * @return Retorna una lista de servicios
+	 */
+	public ArrayList<ServicioInformacion> buscarServicio2(String cadena, byte orderBy,
+			long id_ente);
 }
