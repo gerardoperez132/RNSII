@@ -3,11 +3,14 @@ package ve.gob.cnti.srsi.controlador;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.validation.SkipValidation;
+
+import com.opensymphony.xwork2.ActionContext;
 
 import ve.gob.cnti.modelo.temporales.ListaSImasVisitados;
 import ve.gob.cnti.modelo.temporales.SectoresMasPublicados;
@@ -30,6 +33,7 @@ import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.Telefono;
 import ve.gob.cnti.srsi.modelo.UnionAreaServicioInformacion;
 import ve.gob.cnti.srsi.modelo.UnionArquitecturaServicioInformacion;
+import ve.gob.cnti.srsi.modelo.Usuario;
 import ve.gob.cnti.srsi.modelo.Visita;
 
 @SuppressWarnings("serial")
@@ -58,7 +62,10 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 	private List<ServicioInformacion> servicios = new ArrayList<ServicioInformacion>();
 	List<SectoresMasPublicados> listaSectores = new ArrayList<SectoresMasPublicados>();
 	List<SectoresMasPublicados> listaSectores2 = new ArrayList<SectoresMasPublicados>();
-	private List<ListaSImasVisitados> SI_masVisitados = new ArrayList<ListaSImasVisitados>();	
+	private List<ListaSImasVisitados> SI_masVisitados = new ArrayList<ListaSImasVisitados>();
+	
+	@SuppressWarnings("rawtypes")
+	private Map session;
 
 	private String cadena;
 	private String telefono;
@@ -128,6 +135,26 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 		}
 		servicios = buscarServicio(cadena, ASC);
 		entes = (List<Ente>) read(new Ente());
+		return SUCCESS;
+	}
+		
+	public String buscar_servicio2() {
+		session = ActionContext.getContext().getSession();
+		if (session.isEmpty()) {
+			return INPUT;
+		}
+		Usuario usuario = (Usuario) session.get("usuario");
+		if (usuario == null) {
+			return INPUT;
+		}
+		buscarServicio = true;
+		if (!cadena.toUpperCase().matches(REGEX_TITLE)) {
+			addFieldError("error",
+					error.getProperties().getProperty("error.regex.title"));
+			buscarServicio = false;
+			return INPUT;
+		}
+		servicios = buscarServicio2(cadena, ASC,usuario.getId_ente());		
 		return SUCCESS;
 	}
 
