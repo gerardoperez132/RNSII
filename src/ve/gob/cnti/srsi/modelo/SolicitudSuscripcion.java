@@ -9,13 +9,18 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * @author Richard Ricciardelli
+ * Clase que maneja las solicitudes de suscripción a un servicio de información.
+ * 
+ * @see ServicioInformacion
+ * @see Usuario
+ * @see Ente
+ * @author Joaquín Pereira
  * 
  */
 @Entity
 @Table(name = "solicitudes_suscripciones")
 public class SolicitudSuscripcion {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
@@ -23,6 +28,7 @@ public class SolicitudSuscripcion {
 	private long id_ente_solicitante;
 	private long id_ente_proveedor;
 	private long id_servicio_informacion;
+	private long id_usuario;
 	private boolean leido;
 	private int sentencia;
 	private int status;
@@ -33,8 +39,8 @@ public class SolicitudSuscripcion {
 	private String telefono;
 	private String correo;
 	private String motivo;
-			
-	public SolicitudSuscripcion() {	
+
+	public SolicitudSuscripcion() {
 	}
 
 	public long getId() {
@@ -157,18 +163,25 @@ public class SolicitudSuscripcion {
 		this.motivo = motivo;
 	}
 
+	public long getId_usuario() {
+		return id_usuario;
+	}
+
+	public void setId_usuario(long id_usuario) {
+		this.id_usuario = id_usuario;
+	}
+
 	@Override
 	public String toString() {
 		return "SolicitudSuscripcion [id=" + id + ", id_solicitud_suscripcion="
 				+ id_solicitud_suscripcion + ", id_ente_solicitante="
 				+ id_ente_solicitante + ", id_ente_proveedor="
 				+ id_ente_proveedor + ", id_servicio_informacion="
-				+ id_servicio_informacion + ", leido=" + leido + ", sentencia="
-				+ sentencia + ", status=" + status + ", fecha_creado="
-				+ fecha_creado + ", fecha_modificado=" + fecha_modificado
-				+ ", solicitante=" + solicitante + ", cargo=" + cargo
-				+ ", telefono=" + telefono + ", correo=" + correo + ", motivo="
-				+ motivo + "]";
+				+ id_servicio_informacion + ", id_usuario=" + id_usuario
+				+ ", leido=" + leido + ", sentencia=" + sentencia + ", status="
+				+ status + ", fecha_creado=" + fecha_creado
+				+ ", fecha_modificado=" + fecha_modificado + ", solicitante="
+				+ solicitante + ", cargo=" + cargo + ", telefono=" + telefono
+				+ ", correo=" + correo + ", motivo=" + motivo + "]";
 	}
-		
 }
