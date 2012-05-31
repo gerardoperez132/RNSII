@@ -50,11 +50,6 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 	@SuppressWarnings("unchecked")
 	public String autenticarUsuario() throws Exception {
 		session = ActionContext.getContext().getSession();
-		if (!correo.matches(REGEX_EMAIL)) {
-			addFieldError("error",
-					error.getProperties().getProperty("error.regex.email"));
-			return INPUT;
-		}
 		if (correo == null && password == null) {
 			return "404ERROR";
 		} else if (correo.isEmpty() || password.isEmpty()) {
@@ -62,6 +57,11 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 					error.getProperties().getProperty("error.login.fields"));
 			return INPUT;
 		}
+		if (!correo.matches(REGEX_EMAIL)) {
+			addFieldError("error",
+					error.getProperties().getProperty("error.regex.email"));
+			return INPUT;
+		}		
 		user_correo = (Correo) getUserEmail(correo);
 		if (user_correo == null) {
 			addFieldError("correo",
