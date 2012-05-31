@@ -136,6 +136,13 @@
 										</td>
 									</tr>
 									<tr>
+										<td class="alt"><s:text name="ente1" />
+										</td>
+										<td class="alt2"><s:property
+												value="ente.nombre" />
+										</td>
+									</tr>
+									<tr>
 										<td class="alt"><s:text name="servicio_nombre" />
 										</td>
 										<td class="alt2"><s:property value="servicio.nombre" />
