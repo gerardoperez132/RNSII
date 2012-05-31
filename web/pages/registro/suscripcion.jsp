@@ -461,27 +461,27 @@
 									</tr>
 									<tr>
 										<td align="right"><s:text name="nombre_solicitante"/></td>
-										<td><input type="text" name="usuario_solicitante" /></td>
+										<td><input type="text" name="usuario_solicitante" id="nombre" /></td>
 										<td><h5 class="requerido">*</h5></td>		
 									</tr>
 									<tr>
 										<td align="right"><s:text name="cargo_solicitante"/></td>
-										<td><input type="text" name="usuario_cargo" /></td>
+										<td><input type="text" name="usuario_cargo" id="cargo" /></td>
 										<td><h5 class="requerido">*</h5></td>		
 									</tr>
 									<tr>
 										<td align="right"><s:text name="telefono"/></td>
-										<td><input type="text" name="telefono" /></td>
+										<td><input type="text" name="telefono" id="telefono"/></td>
 										<td><h5 class="requerido">*</h5></td>		
 									</tr>
 									<tr>
 										<td align="right"><s:text name="correo"/></td>
-										<td><input type="text" name="correo" /></td>
+										<td><input type="text" name="correo" id="correo"/></td>
 										<td><h5 class="requerido">*</h5></td>		
 									</tr>
 									<tr>
 										<td align="right"><s:text name="motivo_solicitud"/></td>
-										<td><textarea name="" rows="6" cols="19"></textarea></td>	
+										<td><textarea name="" rows="6" cols="19" id="motivo"></textarea></td>	
 										<td><h5 class="requerido">*</h5></td>	
 									</tr>	
 									<tr>										
