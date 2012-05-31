@@ -73,22 +73,31 @@ public interface Constants {
 		/** Estado ELIMINADO no se muestra en la vista. */
 		public static final int ELIMINADO = 2;
 	}
-	
+
 	/**
-	 * Interfaz con los estados de registro en la base de datos.
+	 * Interfaz con los estados de sentencias en las solicitudes de suscripción
+	 * en la base de datos.
 	 * 
-	 * @author Richard Ricciardelli
+	 * @author Joaquín Pereira
 	 * 
 	 */
 	public interface Sentencias {
-		/** Estado ACTIVO se muestra en la vista. */
+		/**
+		 * Estado PENDIENTE no ha sido revisado, independientemente si ha sido
+		 * leído o no.
+		 */
 		public static final int PENDIENTE = 0;
-		/** Estado MODIFICADO no se muestra en la vista. */
+		/**
+		 * Estado ACEPTADO ha sido revisada la solicitud y aceptada para
+		 * permitir la suscripción.
+		 */
 		public static final int ACEPTADO = 1;
-		/** Estado ELIMINADO no se muestra en la vista. */
+		/**
+		 * Estado RECHAZADO ha sido revisada la solicitud y rechazada para no
+		 * permitir la suscripción.
+		 */
 		public static final int RECHAZADO = 2;
 	}
-	
 
 	/**
 	 * Interfaz con los tipos de entrada en la tabla de entradas y salidas.
