@@ -1,23 +1,25 @@
 package ve.gob.cnti.srsi.controlador;
 
 import ve.gob.cnti.srsi.dao.Constants;
-import ve.gob.cnti.srsi.dao.DAO;
 import ve.gob.cnti.srsi.dao.Constants.Modelos;
 import ve.gob.cnti.srsi.dao.Constants.Order;
+import ve.gob.cnti.srsi.dao.DAO;
 import ve.gob.cnti.srsi.modelo.Ente;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 
 @SuppressWarnings("serial")
 public class SuscripcionControlador extends DAO implements Constants, Order,
-Modelos{
-	
-	private ServicioInformacion servicio = new ServicioInformacion();	
+		Modelos {
+
+	private String codigo;
+	private String codigos[] = CODES;
+	private ServicioInformacion servicio = new ServicioInformacion();
 	private Ente ente = new Ente();
-	
+
 	private long id_servicio;
 	private boolean suscripcion_form;
-	
-	public String prepaparaSuscripcion(){		
+
+	public String prepararSuscripcion() {
 		if (!verificarLong(id_servicio))
 			return INPUT;
 		servicio = (ServicioInformacion) read(servicio, id_servicio);
@@ -25,9 +27,11 @@ Modelos{
 		suscripcion_form = true;
 		return SUCCESS;
 	}
-	
-	//public String solicitarSuscripcion(){}
-	
+
+	public String solicitarSuscripcion() {
+		return SUCCESS;
+	}
+
 	public boolean verificarLong(long n) {
 		try {
 			return n != 0;
@@ -66,6 +70,22 @@ Modelos{
 
 	public void setSuscripcion_form(boolean suscripcion_form) {
 		this.suscripcion_form = suscripcion_form;
-	}	
+	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+
+	public String[] getCodigos() {
+		return codigos;
+	}
+
+	public void setCodigos(String[] codigos) {
+		this.codigos = codigos;
+	}
 
 }

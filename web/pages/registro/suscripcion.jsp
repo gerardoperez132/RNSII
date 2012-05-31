@@ -31,67 +31,68 @@
 				<%@include file="../layout/header.jsp"%>
 				<!-- Esta es la barra lateral -->
 				<%@include file="../layout/sidebar.jsp"%>
-				
+
 				<!-- Este es el div de contenidos -->
 				<div id="content">
-								
-						<form action="Buscar_Servicio" method="post">
-							<table align="center">
-								<tr>
-									<td><s:textfield name="cadena" size="50" /></td>
-									<td><input type="submit"
-										value="<s:text name="buscarServicio"/>"></td>
-								</tr>
-							</table>
-						</form>
-						<hr>										
-						<s:if test="buscarServicio==true">
-							<!-- Lista de servicios encontrados -->
-							<table class="results">
-								<tr>
-									<th colspan="3"><s:text name="listaServiciosEncontrados" />
-									</th>
-								</tr>
-								<tr>
-									<th><s:text name="argumentoConsultado" /></th>
-									<td colspan="2"><s:property value="cadena" /></td>
-								</tr>
-								<tr>
-									<th><s:text name="nombre" /></th>
-									<th><s:text name="ente1" /></th>
-									<th><s:text name="fecha_creado" /></th>
-								</tr>
-								<s:if test="servicios.size()>0">
-									<s:iterator value="servicios">
-										<tr>
-											<td><a
-												href="Servicio?id_servicio=<s:property value="id_servicio_informacion"/>">
-													<s:property value="nombre" /> </a>
-											</td>
-											<td><s:set name="id_e" value="id_ente" /> <s:iterator
-													value="entes">
-													<s:if test="id_ente == #id_e">
-														<s:property value="siglas" />
-													</s:if>
-												</s:iterator>
-											</td>
-											<td><s:date name="fecha_creado" format="d'/'MM'/'yyyy" />
-											</td>
-										</tr>
-									</s:iterator>
-								</s:if>
-								<s:else>
+
+					<form action="Buscar_Servicio" method="post">
+						<table align="center">
+							<tr>
+								<td><s:textfield name="cadena" size="50" /></td>
+								<td><input type="submit"
+									value="<s:text name="buscarServicio"/>"></td>
+							</tr>
+						</table>
+					</form>
+					<hr>
+					<s:if test="buscarServicio==true">
+						<!-- Lista de servicios encontrados -->
+						<table class="results">
+							<tr>
+								<th colspan="3"><s:text name="listaServiciosEncontrados" />
+								</th>
+							</tr>
+							<tr>
+								<th><s:text name="argumentoConsultado" /></th>
+								<td colspan="2"><s:property value="cadena" /></td>
+							</tr>
+							<tr>
+								<th><s:text name="nombre" /></th>
+								<th><s:text name="ente1" /></th>
+								<th><s:text name="fecha_creado" /></th>
+							</tr>
+							<s:if test="servicios.size()>0">
+								<s:iterator value="servicios">
 									<tr>
-										<td colspan="3"><span class="ok_pass"><s:text
-													name="sis_null2" /> </span></td>
+										<td><a
+											href="Servicio?id_servicio=<s:property value="id_servicio_informacion"/>">
+												<s:property value="nombre" /> </a>
+										</td>
+										<td><s:set name="id_e" value="id_ente" /> <s:iterator
+												value="entes">
+												<s:if test="id_ente == #id_e">
+													<s:property value="siglas" />
+												</s:if>
+											</s:iterator>
+										</td>
+										<td><s:date name="fecha_creado" format="d'/'MM'/'yyyy" />
+										</td>
 									</tr>
-								</s:else>
-							</table>					
-						</s:if>
-						<s:elseif test="examinarServicio == true">
+								</s:iterator>
+							</s:if>
+							<s:else>
+								<tr>
+									<td colspan="3"><span class="ok_pass"><s:text
+												name="sis_null2" /> </span></td>
+								</tr>
+							</s:else>
+						</table>
+					</s:if>
+					<s:elseif test="examinarServicio == true">
 						<!-- Detalles de un servicio de información -->
-						<form action="Solicitar_Suscripcion.action">
-							<s:hidden name="id_servicio" value="%{servicio.id_servicio_informacion}"/>
+						<form action="prepararSuscripcion">
+							<s:hidden name="id_servicio"
+								value="%{servicio.id_servicio_informacion}" />
 							<input type="submit" value="<s:text name="solicitud2"/>" />
 						</form>
 						<hr>
@@ -121,8 +122,7 @@
 									<tr>
 										<td class="alt"><s:text name="ente1" />
 										</td>
-										<td class="alt2"><s:property
-												value="ente.nombre" />
+										<td class="alt2"><s:property value="ente.nombre" />
 										</td>
 									</tr>
 									<tr>
@@ -425,31 +425,68 @@
 									</tr>
 								</table>
 							</div>
-						</div>						
-						</s:elseif>
-						<s:elseif test="suscripcion_form == true">
+						</div>
+					</s:elseif>
+					<s:elseif test="suscripcion_form == true">
 						<!-- Formulario para solicitar una suscripción a un servicio de información<td><s:text name=""/></td> -->
-							<table class="results">
+						<table class="results">
+							<tr>
+								<th colspan="2"><s:text name="solicitud3" />
+								</th>
+							</tr>
+							<tr>
+								<th><s:text name="servicio_nombre" />
+								</th>
+								<td><s:property value="servicio.nombre" />
+								</td>
+							</tr>
+							<tr>
+								<th><s:text name="ente1" />
+								</th>
+								<td><s:property value="ente.nombre" />
+								</td>
+							</tr>
+						</table>
+						<hr>
+						<form action="" method="post" id="myForm">
+							<table>
 								<tr>
-									<th colspan="2"><s:text name="solicitud3" />
-									</th>
-								</tr>
-								<tr>
-									<th>
-										<s:text name="servicio_nombre" />
-									</th>
-									<td>
-										<s:property value="servicio.nombre"/>
+									<td colspan="3">
+										<h5 class="requerido">
+											<s:text name="requerido" />
+										</h5>
 									</td>
 								</tr>
 								<tr>
-									<th>
-										<s:text name="ente1"/>
-									</th>
-									<td>
-										<s:property value="ente.nombre"/>
-									</td>
-								</tr>								
+									<td align="right"><s:text name="nombre_solicitante" /></td>
+									<td><input type="text" name="usuario_solicitante" /></td>
+									<td><h5 class="requerido">*</h5></td>
+								</tr>
+								<tr>
+									<td align="right"><s:text name="cargo_solicitante" /></td>
+									<td><input type="text" name="usuario_cargo" /></td>
+									<td><h5 class="requerido">*</h5></td>
+								</tr>
+								<tr>
+									<td align="right"><s:text name="telefono" /></td>
+									<td><s:select name="codigo" list="codigos" /><input
+										type="text" name="telefono" size="14" maxlength="7" /></td>
+									<td><h5 class="requerido">*</h5></td>
+								</tr>
+								<tr>
+									<td align="right"><s:text name="correo" /></td>
+									<td><input type="text" name="correo" /></td>
+									<td><h5 class="requerido">*</h5></td>
+								</tr>
+								<tr>
+									<td align="right"><s:text name="motivo_solicitud" /></td>
+									<td><textarea name="" rows="6" cols="19"></textarea></td>
+									<td><h5 class="requerido">*</h5></td>
+								</tr>
+								<tr>
+									<td colspan="3"><input type="submit"
+										value="<s:text name="enviar_solicitud_suscripcion"/>" /></td>
+								</tr>
 							</table>
 							<hr>
 							<form action="" method="post" id="myForm">
@@ -495,8 +532,8 @@
 							<s:fielderror>
 								<s:param>error</s:param>
 							</s:fielderror>
-						</s:else>					
-				</div>
+						</s:else>
+					</div>
 				<%@include file="../layout/footer.jsp"%>
 			</div>
 		</div>
