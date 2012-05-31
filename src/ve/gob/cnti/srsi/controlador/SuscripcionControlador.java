@@ -26,6 +26,8 @@ Modelos{
 		return SUCCESS;
 	}
 	
+	//public String solicitarSuscripcion(){}
+	
 	public boolean verificarLong(long n) {
 		try {
 			return n != 0;

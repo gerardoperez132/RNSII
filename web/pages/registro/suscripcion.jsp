@@ -91,7 +91,7 @@
 						<s:elseif test="examinarServicio == true">
 						<!-- Detalles de un servicio de información -->
 						<form action="Solicitar_Suscripcion.action">
-							<s:hidden name="id_servicio" value="servicio.id_servicio_informacion"/>
+							<s:hidden name="id_servicio" value="%{servicio.id_servicio_informacion}"/>
 							<input type="submit" value="<s:text name="solicitud2"/>" />
 						</form>
 						<hr>
@@ -427,15 +427,68 @@
 							</div>
 						</div>						
 						</s:elseif>
-						<s:elseif test="">
-							<!-- Formulario para solicitar una suscripción a un servicio de información -->
-							<form action="<s:property value="#action"></s:property>"
-								method="post" id="myForm">
-								<div id="tab2" class="tab_content">								
-									suscripción
-									<input type="submit"
-										value="<s:property value="#submit"></s:property>" />
-								</div>								
+						<s:elseif test="suscripcion_form == true">
+						<!-- Formulario para solicitar una suscripción a un servicio de información<td><s:text name=""/></td> -->
+							<table class="results">
+								<tr>
+									<th colspan="2"><s:text name="solicitud3" />
+									</th>
+								</tr>
+								<tr>
+									<th>
+										<s:text name="servicio_nombre" />
+									</th>
+									<td>
+										<s:property value="servicio.nombre"/>
+									</td>
+								</tr>
+								<tr>
+									<th>
+										<s:text name="ente1"/>
+									</th>
+									<td>
+										<s:property value="ente.nombre"/>
+									</td>
+								</tr>								
+							</table>
+							<hr>
+							<form action="" method="post" id="myForm">
+								<table>
+									<tr>
+										<td colspan="3">							
+											<h5 class="requerido"><s:text name="requerido"/></h5>
+										</td>						
+									</tr>
+									<tr>
+										<td align="right"><s:text name="nombre_solicitante"/></td>
+										<td><input type="text" name="usuario_solicitante" /></td>
+										<td><h5 class="requerido">*</h5></td>		
+									</tr>
+									<tr>
+										<td align="right"><s:text name="cargo_solicitante"/></td>
+										<td><input type="text" name="usuario_cargo" /></td>
+										<td><h5 class="requerido">*</h5></td>		
+									</tr>
+									<tr>
+										<td align="right"><s:text name="telefono"/></td>
+										<td><input type="text" name="telefono" /></td>
+										<td><h5 class="requerido">*</h5></td>		
+									</tr>
+									<tr>
+										<td align="right"><s:text name="correo"/></td>
+										<td><input type="text" name="correo" /></td>
+										<td><h5 class="requerido">*</h5></td>		
+									</tr>
+									<tr>
+										<td align="right"><s:text name="motivo_solicitud"/></td>
+										<td><textarea name="" rows="6" cols="19"></textarea></td>	
+										<td><h5 class="requerido">*</h5></td>	
+									</tr>	
+									<tr>										
+										<td colspan="3"><input type="submit" value="<s:text name="enviar_solicitud_suscripcion"/>" /></td>		
+									</tr>
+								</table>
+								<s:hidden name="id_servicio" value="%{servicio.id_servicio_informacion}"/>								
 							</form>	
 						</s:elseif>						
 						<s:else>
