@@ -432,7 +432,7 @@
 		<action name="solicitarSuscripcion" method="solicitarSuscripcion"
 			class="ve.gob.cnti.srsi.controlador.SuscripcionControlador">
 			<result name="success">registro/suscripcion.jsp</result>
-			<result name="input" type="redirectAction">home</result>
+			<result name="input">registro/suscripcion.jsp</result>
 		</action>
 
 

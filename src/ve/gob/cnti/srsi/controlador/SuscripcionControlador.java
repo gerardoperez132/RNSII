@@ -2,6 +2,8 @@ package ve.gob.cnti.srsi.controlador;
 
 import java.util.Map;
 
+import org.apache.struts2.interceptor.validation.SkipValidation;
+
 import ve.gob.cnti.srsi.dao.Constants;
 import ve.gob.cnti.srsi.dao.Constants.Modelos;
 import ve.gob.cnti.srsi.dao.Constants.Order;
@@ -28,6 +30,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 	private long id_servicio;
 	private boolean suscripcion_form;
 
+	@SkipValidation
 	public String prepararSuscripcion() {
 		if (!verificarLong(id_servicio))
 			return INPUT;
@@ -51,6 +54,14 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 		System.out.println(solicitud.toString());
 		create(solicitud);
 		return SUCCESS;
+	}
+
+	@Override
+	public void validate() {
+		if (solicitud.getSolicitante().trim().isEmpty())
+			addFieldError("solicitante",
+					"El nombre no puede estar vacío, no sea animal");
+		prepararSuscripcion();
 	}
 
 	public boolean verificarLong(long n) {
