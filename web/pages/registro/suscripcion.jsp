@@ -90,6 +90,10 @@
 						</s:if>
 						<s:elseif test="examinarServicio == true">
 						<!-- Detalles de un servicio de información -->
+						<form action="Solicitar_Suscripción.action">
+							<s:hidden value="servicio.id_servicio_informacion"></s:hidden>
+							<input type="submit" value="<s:text name="solicitud2"/>" />
+						</form>
 						<hr>
 						<ul class="tabs">
 							<li><a href="#tab1"><s:text name="tab1.title"></s:text>
@@ -113,6 +117,13 @@
 										<td class="alt"><s:text name="n_servicio" /></td>
 										<td class="alt2"><s:property
 												value="servicio.id_servicio_informacion" /></td>
+									</tr>
+									<tr>
+										<td class="alt"><s:text name="ente1" />
+										</td>
+										<td class="alt2"><s:property
+												value="ente.nombre" />
+										</td>
 									</tr>
 									<tr>
 										<td class="alt"><s:text name="servicio_nombre" /></td>
