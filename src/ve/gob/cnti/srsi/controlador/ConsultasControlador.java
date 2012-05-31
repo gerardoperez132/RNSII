@@ -165,8 +165,6 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 		return SUCCESS;
 	}
 
-	//TODO validar sesión y compara el id_ente del user con el si consultado, retorna input si los ids 
-	//son iguales
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String examinarServicioInformacion() {				
