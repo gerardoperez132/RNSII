@@ -448,7 +448,7 @@
 							</tr>
 						</table>
 						<hr>
-						<form action="" method="post" id="myForm">
+						<form action="solicitarSuscripcion" method="post" id="myForm">
 							<table>
 								<tr>
 									<td colspan="3">
@@ -459,28 +459,31 @@
 								</tr>
 								<tr>
 									<td align="right"><s:text name="nombre_solicitante" /></td>
-									<td><input type="text" name="usuario_solicitante" /></td>
+									<td><input type="text" name="solicitud.solicitante" />
+									</td>
 									<td><h5 class="requerido">*</h5></td>
 								</tr>
 								<tr>
 									<td align="right"><s:text name="cargo_solicitante" /></td>
-									<td><input type="text" name="usuario_cargo" /></td>
+									<td><input type="text" name="solicitud.cargo" /></td>
 									<td><h5 class="requerido">*</h5></td>
 								</tr>
 								<tr>
 									<td align="right"><s:text name="telefono" /></td>
 									<td><s:select name="codigo" list="codigos" /><input
-										type="text" name="telefono" size="14" maxlength="7" /></td>
+										type="text" name="solicitud.telefono" size="14" maxlength="7" />
+									</td>
 									<td><h5 class="requerido">*</h5></td>
 								</tr>
 								<tr>
 									<td align="right"><s:text name="correo" /></td>
-									<td><input type="text" name="correo" /></td>
+									<td><input type="text" name="solicitud.correo" /></td>
 									<td><h5 class="requerido">*</h5></td>
 								</tr>
 								<tr>
 									<td align="right"><s:text name="motivo_solicitud" /></td>
-									<td><textarea name="" rows="6" cols="19"></textarea></td>
+									<td><textarea name="solicitud.motivo" rows="6" cols="19"></textarea>
+									</td>
 									<td><h5 class="requerido">*</h5></td>
 								</tr>
 								<tr>
