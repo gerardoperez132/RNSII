@@ -14,8 +14,11 @@
 <struts>
 	<package name="default" extends="struts-default">
 
-		<!--**************************** interceptores para evitar el doubleSubmit 
-			***************************** -->
+		<!--
+			******* ******* ****** ******* 
+			 interceptores para evitar el doubleSubmit 
+			******* ******* ****** *******  
+		-->
 		<interceptors>
 			<interceptor-stack name="doubleSubmit">
 				<interceptor-ref name="fileUpload">
@@ -31,8 +34,11 @@
 			</interceptor-stack>
 		</interceptors>
 
-		<!--******************************************************* Actions para 
-			registros de servicios de información *************************************************** -->
+		<!--
+			******* ******* ****** *******  
+			Actions de servicios de información
+			******* ******* ****** ******* 
+		-->
 
 		<action name="prepararRegistro" method="prepararRegistro"
 			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
@@ -159,10 +165,24 @@
 			</result>
 			<result name="errorSession" type="redirectAction">home</result>
 		</action>
+		
+		<action name="Buscar_Servicio" method="buscar_servicio2"
+			class="ve.gob.cnti.srsi.controlador.ConsultasControlador">
+			<result name="success">registro/suscripcion.jsp</result>
+			<result name="input">registro/suscripcion.jsp</result>
+		</action>
+		
+		<action name="Servicio" method="examinarServicioInformacion"
+			class="ve.gob.cnti.srsi.controlador.ConsultasControlador">
+			<result name="success">registro/suscripcion.jsp</result>
+			<result name="input" type="redirectAction">home</result>
+		</action>
 
 
-		<!--******************************************** Actions para Funcionalidades 
-			*************************************** -->
+		<!--******* ******* ****** ******* 
+			 Actions para Funcionalidades 
+			******* ******* ****** ******* 
+		-->
 
 		<action name="prepararModificacionesServicioInformacion"
 			method="prepararModificaciones" class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
@@ -214,8 +234,10 @@
 			<result name="success">registro/funcionalidades.jsp</result>
 		</action>
 
-		<!--********************************************* Actions para Entradas 
-			********************************************* -->
+		<!--******* ******* ****** ******* 
+			 Actions para Entradas 
+			******* ******* ****** ******* 
+		-->
 
 		<action name="prepararEntradas" method="prepararFormulario"
 			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
@@ -266,8 +288,11 @@
 			<result name="success">registro/entradas.jsp</result>
 		</action>
 
-		<!--*********************************************** Actions para Salidas 
-			*********************************************** -->
+		<!--
+			******* ******* ****** ******* 
+			 Actions para Salidas 
+			******* ******* ****** ******* 
+		 -->
 		<action name="prepararSalidas" method="prepararFormulario"
 			class="ve.gob.cnti.srsi.controlador.SalidaControlador">
 			<result name="success">registro/salidas.jsp</result>
@@ -317,8 +342,10 @@
 			<result name="success">registro/salidas.jsp</result>
 		</action>
 
-		<!-- *********************************************************** Logins 
-			*********************************************************** -->
+		<!-- ******* ******* ****** ******* 
+				 Logins 
+			******* ******* ****** ******* 
+		-->
 
 		<action name="autenticarUsuario" method="mostrarLogin"
 			class="ve.gob.cnti.srsi.controlador.LoginControlador">
@@ -369,8 +396,10 @@
 			<result name="input">user/login.jsp</result>
 		</action>
 
-		<!-- ********************************************* Actions para Usuarios 
-			**************************************************** -->
+		<!-- ******* ******* ****** ******* 
+			 Actions para Usuarios 
+			 ******* ******* ****** ******* 
+		-->
 		<action name="configuracionUsuario" method="configuracion"
 			class="ve.gob.cnti.srsi.controlador.UsuarioControlador">
 			<result name="success">registro/formulario_usuario.jsp</result>
@@ -408,19 +437,25 @@
 			<result name="errorSession" type="redirectAction">salir</result>
 		</action>
 		
-		<action name="Buscar_Servicio" method="buscar_servicio2"
-			class="ve.gob.cnti.srsi.controlador.ConsultasControlador">
-			<result name="success">registro/suscripcion.jsp</result>
-			<result name="input">registro/suscripcion.jsp</result>
-		</action>
 		
-		<action name="Servicio" method="examinarServicioInformacion"
-			class="ve.gob.cnti.srsi.controlador.ConsultasControlador">
+		
+		<!-- 
+		******* ******* ******* ******* 
+		        Suscriciones
+		******* ******* ******* ******* 
+		-->
+		<action name="Solicitar_Suscripcion" method="prepaparaSuscripcion"
+			class="ve.gob.cnti.srsi.controlador.SuscripcionControlador">
 			<result name="success">registro/suscripcion.jsp</result>
 			<result name="input" type="redirectAction">home</result>
 		</action>
+		
 
-		<!-- ****************************** Actions para el usuario final ****************************** -->
+		<!-- 
+			******* ******* ****** ******* 
+		     Actions para el usuario final
+		    ******* ******* ****** *******  
+		 -->
 		<action name="SRSI" method="inicio"
 			class="ve.gob.cnti.srsi.controlador.ConsultasControlador">
 			<result name="success">index.jsp</result>
@@ -459,8 +494,11 @@
 			<result name="success">error404.jsp</result>
 		</action>
 
-		<!-- ******* ******* ******* ******* ajax consultas ******* ******* ******* 
-			******* -->
+		<!-- 
+		******* ******* ******* ******* 
+		           ajax consultas 
+		******* ******* ******* ******* 
+		-->
 		<action name="dato_haslength" method="dato_haslength"
 			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
 			<result name="success">ajax/bool.jsp</result>
