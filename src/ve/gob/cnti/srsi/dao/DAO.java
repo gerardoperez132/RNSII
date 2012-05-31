@@ -349,7 +349,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 									.name().toLowerCase() + " WHERE "
 							+ getField(model) + " = " + id + " AND status = "
 							+ MODIFICADO
-							+ " ORDER BY fecha_modificado LIMIT 1) WHERE "
+							+ " ORDER BY fecha_modificado DESC LIMIT 1) WHERE "
 							+ getField(model) + " = 0").executeUpdate();
 			transaction.commit();
 		} catch (HibernateException he) {

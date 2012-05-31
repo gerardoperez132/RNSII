@@ -1,26 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
- * This file is part of SRSI.
- * 
- * SRSI is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- * 
- * SRSI is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with SRSI. If not, see <http://www.gnu.org/licenses/>.
--->
+<!-- * This file is part of SRSI. * * SRSI is free software: you can redistribute 
+	it and/or modify * it under the terms of the GNU General Public License as 
+	published by * the Free Software Foundation, either version 3 of the License, 
+	or * (at your option) any later version. * * SRSI is distributed in the hope 
+	that it will be useful, * but WITHOUT ANY WARRANTY; without even the implied 
+	warranty of * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
+	* GNU General Public License for more details. * * You should have received 
+	a copy of the GNU General Public License * along with SRSI. If not, see <http://www.gnu.org/licenses/>. -->
 <!DOCTYPE struts PUBLIC
 "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
-	<package name="default" extends="struts-default" >		
+	<package name="default" extends="struts-default">
 
 		<!--**************************** interceptores para evitar el doubleSubmit 
 			***************************** -->
@@ -38,7 +30,7 @@
 				<interceptor-ref name="basicStack" />
 			</interceptor-stack>
 		</interceptors>
-		
+
 		<!--******************************************************* Actions para 
 			registros de servicios de información *************************************************** -->
 
@@ -459,36 +451,33 @@
 		<action name="buscar_servicio" method="buscar_servicio"
 			class="ve.gob.cnti.srsi.controlador.ConsultasControlador">
 			<result name="success">index.jsp</result>
-			<result name="input" type="redirectAction">SRSI</result>
+			<result name="input">index.jsp</result>
 		</action>
 
 		<action name="error404" method="inicio"
 			class="ve.gob.cnti.srsi.controlador.ConsultasControlador">
 			<result name="success">error404.jsp</result>
-		</action>	
-		
-		<!-- 
-		******* ******* ******* *******
-		ajax consultas
-		******* ******* ******* *******
-		 -->
+		</action>
+
+		<!-- ******* ******* ******* ******* ajax consultas ******* ******* ******* 
+			******* -->
 		<action name="dato_haslength" method="dato_haslength"
 			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
 			<result name="success">ajax/bool.jsp</result>
-		</action>	
-		
+		</action>
+
 		<action name="dato_hasformatted" method="dato_hasformatted"
 			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
 			<result name="success">ajax/bool.jsp</result>
 		</action>
-		
+
 		<action name="list_format" method="list_format"
 			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
 			<result name="success">ajax/list_formats.jsp</result>
 		</action>
-		
-		
-		
+
+
+
 	</package>
 	<constant name="struts.devMode" value="true" />
 	<constant name="struts.enable.DynamicMethodInvocation" value="true" />

@@ -12,7 +12,8 @@
 <link rel="stylesheet" type="text/css" href="res/css/table2.css">
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
 <link rel="stylesheet" type="text/css" href="res/css/menu_vertical.css">
-<title><s:text name="registro.title"></s:text></title>
+<title><s:text name="registro.title"></s:text>
+</title>
 	</head>
 	<body>
 		<!-- Este es el div de la sombra del contenedor del maquetado de la página -->
@@ -26,43 +27,32 @@
 				<div id="content">
 					<table>
 						<tr>
-							<td>						
-								<small>									
-									<strong>
-										<s:if test="resumen == true">
+							<td><small> <strong> <s:if test="resumen">
 											<s:text name="paso2.2" />
-										</s:if>
-										<s:else>
+										</s:if> <s:else>
 											<s:text name="paso2.1" />
-										</s:else>																			
-										<s:text name="funcionalidades" /> -										
-									</strong>
-									<s:if test="resumen == true">
-										<s:text name="tab.resumen"/>
-									</s:if>
-									<s:else>
-										<s:text name="tab1.title"/>
-									</s:else>									
-								</small>
-							</td>							
+										</s:else> <s:text name="funcionalidades" /> - </strong> <s:if
+										test="resumen == true">
+										<s:text name="tab.resumen" />
+									</s:if> <s:else>
+										<s:text name="tab1.title" />
+									</s:else> </small></td>
 						</tr>
 					</table>
 					<h3>
 						<s:text name="funcionalidades.title" />
 					</h3>
 					<h4>
-						<s:text name="servicio.title">
-							<s:param>
-								<s:property value="servicio.nombre" />
-							</s:param>
-						</s:text>
+						<s:text name="servicio.title" />
+						<s:property value="servicio.nombre" />
 					</h4>
 					<hr>
 					<s:if
 						test="id_funcionalidad > 0 && modificarf != true && resumen != true">
 						<ul class="tabs">
 							<li class="active"><a><s:text name="tab1.title"></s:text>
-							</a></li>
+							</a>
+							</li>
 							<li>
 								<form action="prepararEntradas" method="POST">
 									<s:hidden name="id_servicio_informacion"></s:hidden>
@@ -71,7 +61,8 @@
 									<input type="submit"
 										value='<s:text name="tab.entrada"></s:text>'
 										style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
-								</form></li>
+								</form>
+							</li>
 							<li>
 								<form action="prepararSalidas" method="POST">
 									<s:hidden name="id_servicio_informacion"></s:hidden>
@@ -80,7 +71,8 @@
 									<input type="submit"
 										value='<s:text name="tab.salida"></s:text>'
 										style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
-								</form></li>
+								</form>
+							</li>
 							<li>
 								<form action="prepararResumen" method="POST">
 									<s:hidden name="id_servicio_informacion"></s:hidden>
@@ -88,37 +80,24 @@
 									<s:hidden name="modificar"></s:hidden>
 									<input type="submit" value="<s:text name="tab.resumen" />"
 										style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
-								</form>
-							</li>
+								</form></li>
 						</ul>
 						<div class="tab_container">
 							<div id="tab1" class="tab_content">
 								<table class="tb">
 									<tr>
-										<td class="tb_alt">
-											<span class="txt_small">
-												<s:text name="nombre.title"/>
-											</span>
-										</td>
-										<td class="tb_td">
-											<span class="txt_small">
-												<s:property value="funcionalidad.nombre" />
-											</span>
-										</td>
-									 </tr>
-									 <tr>
-										<td class="tb_alt">
-											<span class="txt_small">
-												<s:text name="descripcion.title"/>
-											</span>
-										</td>
-										<td class="tb_td">
-											<span class="txt_small">
-												<s:property value="funcionalidad.descripcion" />
-											</span>
-										</td>
-									 </tr>
-								</table>								
+										<td class="tb_alt"><span class="txt_small"> <s:text
+													name="nombre.title" /> </span></td>
+										<td class="tb_td"><span class="txt_small"> <s:property
+													value="funcionalidad.nombre" /> </span></td>
+									</tr>
+									<tr>
+										<td class="tb_alt"><span class="txt_small"> <s:text
+													name="descripcion.title" /> </span></td>
+										<td class="tb_td"><span class="txt_small"> <s:property
+													value="funcionalidad.descripcion" /> </span></td>
+									</tr>
+								</table>
 								<form action="prepararFuncionalidad" method="POST">
 									<s:hidden name="id_servicio_informacion"></s:hidden>
 									<s:hidden name="id_funcionalidad"></s:hidden>
@@ -129,7 +108,7 @@
 							</div>
 						</div>
 					</s:if>
-					<s:elseif test="resumen == true">
+					<s:elseif test="resumen">
 						<ul class="tabs">
 							<li>
 								<form action="prepararFuncionalidad" method="POST">
@@ -139,8 +118,7 @@
 									<input type="submit"
 										value="<s:text name="tab1.title"></s:text>"
 										style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
-								</form>
-							</li>
+								</form></li>
 							<li>
 								<form action="prepararEntradas" method="POST">
 									<s:hidden name="id_servicio_informacion"></s:hidden>
@@ -149,7 +127,8 @@
 									<input type="submit"
 										value='<s:text name="tab.entrada"></s:text>'
 										style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
-								</form></li>
+								</form>
+							</li>
 							<li>
 								<form action="prepararSalidas" method="POST">
 									<s:hidden name="id_servicio_informacion"></s:hidden>
@@ -158,63 +137,41 @@
 									<input type="submit"
 										value='<s:text name="tab.salida"></s:text>'
 										style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
-								</form></li>
+								</form>
+							</li>
 							<li class="active"><a><s:text name="tab.resumen"></s:text>
-							</a></li>
+							</a>
+							</li>
 						</ul>
 						<div class="tab_container">
 							<div id="tab1" class="tab_content">
-								<s:fielderror>									
-									<s:param>Salidas</s:param>										
+								<s:fielderror>
+									<s:param>Salidas</s:param>
 								</s:fielderror>
 								<table class="tb">
 									<tr>
-										<td class="tb_alt">
-											<span class="txt_small">
-												<s:text name="nombre.title"></s:text>
-											</span>
-										</td>
-										<td class="tb_td">
-											<span class="txt_small">
-												<s:property value="funcionalidad.nombre" />
-											</span>
-										</td>
+										<td class="tb_alt"><span class="txt_small"> <s:text
+													name="nombre.title"></s:text> </span></td>
+										<td class="tb_td"><span class="txt_small"> <s:property
+													value="funcionalidad.nombre" /> </span></td>
 									</tr>
 									<tr>
-										<td class="tb_alt">
-											<span class="txt_small">
-												<s:text name="descripcion.title"></s:text>
-											</span>											
-										</td>
-										<td class="tb_td">
-											<span class="txt_small">
-												<s:property value="funcionalidad.descripcion" />
-											</span>
-										</td>
-									</tr>	
-									<tr>
-									<td class="tb_alt">											
-											<span class="txt_small">
-												<s:text name="salidas.cargadas"></s:text>
-											</span>											
-										</td>
-										<td class="tb_td">
-											<span class="txt_small">
-												<s:property value="salidas.size" />
-											</span>
-										</td>
+										<td class="tb_alt"><span class="txt_small"> <s:text
+													name="descripcion.title"></s:text> </span></td>
+										<td class="tb_td"><span class="txt_small"> <s:property
+													value="funcionalidad.descripcion" /> </span></td>
 									</tr>
 									<tr>
-										<td class="tb_alt">
-											<span class="txt_small">
-												<s:text name="entradas.cargadas"></s:text>
-											</span>
-										</td>
-										<td class="tb_td">
-											<span class="txt_small">
-												<s:property value="entradas.size" />
-											</span>
-										</td>
+										<td class="tb_alt"><span class="txt_small"> <s:text
+													name="salidas.cargadas"></s:text> </span></td>
+										<td class="tb_td"><span class="txt_small"> <s:property
+													value="salidas.size" /> </span></td>
+									</tr>
+									<tr>
+										<td class="tb_alt"><span class="txt_small"> <s:text
+													name="entradas.cargadas"></s:text> </span></td>
+										<td class="tb_td"><span class="txt_small"> <s:property
+													value="entradas.size" /> </span></td>
 									</tr>
 								</table>
 								<s:if test="salidas.size>0">
@@ -231,10 +188,14 @@
 					<s:else>
 						<ul class="tabs">
 							<li class="active"><a><s:text name="tab1.title"></s:text>
-							</a></li>
-							<li><a><s:text name="tab.entrada"></s:text> </a></li>
-							<li><a><s:text name="tab.salida"></s:text> </a></li>
-							<li><a><s:text name="tab.resumen"></s:text> </a></li>
+							</a>
+							</li>
+							<li><a><s:text name="tab.entrada"></s:text> </a>
+							</li>
+							<li><a><s:text name="tab.salida"></s:text> </a>
+							</li>
+							<li><a><s:text name="tab.resumen"></s:text> </a>
+							</li>
 						</ul>
 						<div class="tab_container">
 							<div id="tab1" class="tab_content">
