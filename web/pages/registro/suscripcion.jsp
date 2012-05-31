@@ -90,7 +90,7 @@
 						</s:if>
 						<s:elseif test="examinarServicio == true">
 						<!-- Detalles de un servicio de información -->
-						<form action="Solicitar_Suscripción.action">
+						<form action="Solicitar_Suscripcion.action">
 							<s:hidden value="servicio.id_servicio_informacion"></s:hidden>
 							<input type="submit" value="<s:text name="solicitud2"/>" />
 						</form>
