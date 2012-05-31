@@ -421,6 +421,12 @@
 			<result name="success">registro/suscripcion.jsp</result>
 			<result name="input">registro/suscripcion.jsp</result>
 		</action>
+		
+		<action name="Servicio" method="examinarServicioInformacion"
+			class="ve.gob.cnti.srsi.controlador.ConsultasControlador">
+			<result name="success">registro/suscripcion.jsp</result>
+			<result name="input" type="redirectAction">home</result>
+		</action>
 
 		<!-- ****************************** Actions para el usuario final ****************************** -->
 		<action name="SRSI" method="inicio"

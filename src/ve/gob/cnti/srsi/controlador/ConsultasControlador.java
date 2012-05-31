@@ -138,6 +138,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 		return SUCCESS;
 	}
 		
+	@SuppressWarnings("unchecked")
 	public String buscar_servicio2() {
 		session = ActionContext.getContext().getSession();
 		if (session.isEmpty()) {
@@ -154,18 +155,34 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 			buscarServicio = false;
 			return INPUT;
 		}
-		servicios = buscarServicio2(cadena, ASC,usuario.getId_ente());		
+		servicios = buscarServicio2(cadena, ASC,usuario.getId_ente());	
+		entes = (List<Ente>) read(new Ente());
 		return SUCCESS;
 	}
 
+	//TODO validar sesión y compara el id_ente del user con el si consultado, retorna input si los ids 
+	//son iguales
 	@SuppressWarnings("unchecked")
 	@SkipValidation
-	public String examinarServicioInformacion() {
+	public String examinarServicioInformacion() {				
 		if (!verificarLong(id_servicio))
 			return INPUT;
 		listaSectores = sectoresMasPublicados(LIMITE_VISITADOS);
 		examinarServicio = true;
 		servicio = (ServicioInformacion) read(servicio, id_servicio);
+		if(!servicio.isPublicado())
+			return INPUT;
+		if(!isComplete(servicio))
+			return INPUT;
+		try {
+			session = ActionContext.getContext().getSession();		
+			Usuario usuario = (Usuario) session.get("usuario");
+			if (usuario != null) {
+				if(servicio.getId_ente() == usuario.getId_ente()){
+					return INPUT;
+				}
+			}
+		} catch (Exception e) {	}
 		try {
 			unionareas = (List<UnionAreaServicioInformacion>) readUnion(
 					new UnionAreaServicioInformacion(), servicio, id_servicio);
@@ -200,8 +217,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 			} catch (Exception e) {
 				// No tiene entradas ni salidas.
 			}
-		}
-		System.out.println("id ente " + servicio.getId_ente());
+		}		
 		ente = (Ente) read(ente, servicio.getId_ente());
 		sectores = (List<Sector>) getSortedList(new Sector(), ASC);
 		estados = (List<Estado>) read(new Estado());
