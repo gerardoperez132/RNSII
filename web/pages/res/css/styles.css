@@ -205,10 +205,10 @@ a.footer{color: #cccccc;}
 a.footer:hover{background:#ffffff;color: #6c6c6c;}
 	
 /*mensaje de fortaleza de contraseña*/
-.error_pass{color:red;font-size: small;}
-.ok_pass{color:green;font-size: small;}
-.alert_pass{color:orange;font-size: small;}
-.requerido{color:red;margin: 0px;}
+.error_pass{color:red;font-size: small; margin-bottom: 0; margin-top: 0;}
+.ok_pass{color:green;font-size: small; margin-bottom: 0; margin-top: 0;}
+.alert_pass{color:orange;font-size: small; margin-bottom: 0; margin-top: 0;}
+.requerido{color:red;margin: 0px; margin-bottom: 0; margin-top: 0;}
 
 /*tabla de links*/
 .links{
