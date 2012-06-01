@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).ready(function(){	
 	/*******************************************************
 	 * 
 	 * Validación de formulario de suscripción
@@ -10,7 +10,7 @@ $(document).ready(function(){
 		
 		var enoughRegex = new RegExp("^[a-zA-Z áéíóúAÉÍÓÚÑñ]+$");
 		var enoughRegex2 = new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
-		var enoughRegex3 = new RegExp("^[a-zA-Z0-9 áéíóúAÉÍÓÚÑñ]+$");
+		var enoughRegex3 = new RegExp("^[a-zA-Z0-9 _.()áéíóúAÉÍÓÚÑñ]+$");
 		
 		var error = false;
 		
@@ -74,7 +74,7 @@ $(document).ready(function(){
         	$('#m_motivo').attr('class','error_pass').html('Su motivo debe poseer al menos 20 caracteres');
         	error = true;
         }else if(!enoughRegex3.test($('#motivo').val())){        	
-        	$('#m_motivo').html('Sólo puede introducir letras y espacios');
+        	$('#m_motivo').html('Sólo puede introducir letras, números y puntos');
         	$('#m_motivo').attr('class','error_pass');
         	error = true;
         }else{        	
@@ -83,6 +83,101 @@ $(document).ready(function(){
 		
 		if(error == false){        	 
         	document.suscripcionForm.submit(); 
+        }
+	});
+	
+	/*******************************************************
+	 * 
+	 * Validando el campo nombre al teclear
+	 * 
+	 ******************************************************/	
+	$('#nombre').keyup(function(e) {		
+		var enoughRegex = new RegExp("^[a-zA-Z áéíóúAÉÍÓÚÑñ]+$");
+		
+		if($(this).val() == ''){       	
+        	$('#m_nombre').attr('class','error_pass').html('*');        	
+        }else if(!enoughRegex.test($(this).val())){        	
+        	$('#m_nombre').html('Sólo puede introducir letras y espacios');
+        	$('#m_nombre').attr('class','error_pass');        	
+        }else if($(this).val().length < 4){       	
+        	$('#m_nombre').attr('class','alert_pass').html(''+(4 - $(this).val().length));        	
+        }else{        	
+        	$('#m_nombre').attr('class','ok_pass').html('OK');
+        }
+	});
+	
+	/*******************************************************
+	 * 
+	 * Validando el campo cargo al teclear
+	 * 
+	 ******************************************************/	
+	$('#cargo').keyup(function(e) {		
+		var enoughRegex = new RegExp("^[a-zA-Z áéíóúAÉÍÓÚÑñ]+$");
+		
+		if($(this).val() == ''){       	
+        	$('#m_cargo').attr('class','error_pass').html('*');        	
+        }else if(!enoughRegex.test($(this).val())){        	
+        	$('#m_cargo').html('Sólo puede introducir letras y espacios');
+        	$('#m_cargo').attr('class','error_pass');        	
+        }else if($(this).val().length < 4){       	
+        	$('#m_cargo').attr('class','alert_pass').html(''+(4 - $(this).val().length));        	
+        }else{        	
+        	$('#m_cargo').attr('class','ok_pass').html('OK');
+        }
+	});
+	
+	/*******************************************************
+	 * 
+	 * Validando el campo telefono al teclear
+	 * 
+	 ******************************************************/	
+	$('#telefono').keyup(function(e) {		
+		if($(this).val() == ''){       	
+        	$('#m_telefono').attr('class','error_pass').html('*');        	
+        }else if(!$.isNumeric($(this).val())){        	
+        	$('#m_telefono').html('Sólo puede introducir números');
+        	$('#m_telefono').attr('class','error_pass');       	
+        }else if($(this).val().length < 7){       	
+        	$('#m_telefono').attr('class','alert_pass').html(''+(7 - $(this).val().length));        	
+        }else{        	
+        	$('#m_telefono').attr('class','ok_pass').html('OK');
+        }
+	});
+	
+	/*******************************************************
+	 * 
+	 * Validando el campo correo al teclear
+	 * 
+	 ******************************************************/	
+	$('#correo').change(function(e) {		
+		var enoughRegex = new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");		
+		if($(this).val() == ''){       	
+        	$('#m_correo').attr('class','error_pass').html('*');        	
+        }else if(!enoughRegex.test($(this).val())){        	
+        	$('#m_correo').html('Esta dirección de correo electrónico es inválida');
+        	$('#m_correo').attr('class','error_pass');        	
+        }else{        	
+        	$('#m_correo').attr('class','ok_pass').html('OK');
+        }
+	});
+	
+	/*******************************************************
+	 * 
+	 * Validando el campo motivo al teclear
+	 * 
+	 ******************************************************/	
+	$('#motivo').keyup(function(e) {		
+		var enoughRegex = new RegExp("^[a-zA-Z0-9 _.()áéíóúAÉÍÓÚÑñ]+$");
+		
+		if($(this).val() == ''){       	
+        	$('#m_motivo').attr('class','error_pass').html('*');        	
+        }else if(!enoughRegex.test($(this).val())){        	
+        	$('#m_motivo').html('Sólo puede introducir letras, números y puntos');
+        	$('#m_motivo').attr('class','error_pass');        	
+        }else if($(this).val().length < 20){       	
+        	$('#m_motivo').attr('class','alert_pass').html(''+(20 - $(this).val().length));        	
+        }else{        	
+        	$('#m_motivo').attr('class','ok_pass').html('OK');
         }
 	});
 });
