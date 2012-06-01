@@ -419,11 +419,8 @@
 			<result name="errorSession" type="redirectAction">salir</result>
 		</action>
 
-		<!-- 
-		******* ******* ******* ******* 
-		        Suscriciones
-		******* ******* ******* ******* 
-		-->
+		<!-- ******* ******* ******* ******* Suscripciones ******* ******* ******* 
+			******* -->
 		<action name="prepararSuscripcion" method="prepararSuscripcion"
 			class="ve.gob.cnti.srsi.controlador.SuscripcionControlador">
 			<result name="success">registro/suscripcion.jsp</result>
@@ -432,6 +429,7 @@
 
 		<action name="solicitarSuscripcion" method="solicitarSuscripcion"
 			class="ve.gob.cnti.srsi.controlador.SuscripcionControlador">
+			<interceptor-ref name="doubleSubmit" />
 			<result name="success">registro/suscripcion.jsp</result>
 			<result name="input">registro/suscripcion.jsp</result>
 		</action>
