@@ -87,7 +87,18 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 					"telefono",
 					error.getProperties().getProperty(
 							"error.suscripcion.telefono"));
-		// TODO Faltan dos más del teléfono.
+		if (solicitud.getTelefono().length() > 0
+				&& solicitud.getTelefono().length() < 7)
+			addFieldError(
+					"telefono",
+					error.getProperties().getProperty(
+							"error.suscripcion.telefono.digit"));
+		if (!solicitud.getTelefono().matches("\\d.*")
+				&& !solicitud.getTelefono().trim().isEmpty())
+			addFieldError(
+					"telefono",
+					error.getProperties().getProperty(
+							"error.suscripcion.telefono.regex"));
 		if (solicitud.getMotivo().trim().isEmpty())
 			addFieldError(
 					"motivo",
