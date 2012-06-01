@@ -151,8 +151,7 @@
 					</tr>
 				</table>
 				</form>		
-			</s:elseif>
-			
+			</s:elseif>	
 			
 			<s:else>	
 				<span class="ok_pass"><s:actionmessage/></span>		

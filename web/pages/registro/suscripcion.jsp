@@ -522,7 +522,7 @@
 										<td><h5 class="requerido">*</h5></td>	
 									</tr>	
 									<tr>										
-										<td colspan="3"><input type="submit" value="<s:text name="enviar_solicitud_suscripcion"/>" /></td>		
+										<td colspan="3"><input type="submit" value="<s:text name="enviar_solicitud_suscripcion"/>" id="enviar_solicitud" /></td>		
 									</tr>
 								</table>
 								<s:hidden name="id_servicio" value="%{servicio.id_servicio_informacion}"/>								
