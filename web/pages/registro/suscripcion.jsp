@@ -442,7 +442,7 @@
 							</tr>
 						</table>
 						<hr>
-							<form action="solicitarSuscripcion" method="post" id="myForm">
+							<form action="solicitarSuscripcion" method="post" name="suscripcionForm">
 								<table>
 									<tr>
 										<td colspan="3">							
