@@ -424,7 +424,7 @@
 		        Suscriciones
 		******* ******* ******* ******* 
 		-->
-		<action name="prepararSuscripcion" method="prepaparaSuscripcion"
+		<action name="prepararSuscripcion" method="prepararSuscripcion"
 			class="ve.gob.cnti.srsi.controlador.SuscripcionControlador">
 			<result name="success">registro/suscripcion.jsp</result>
 			<result name="input" type="redirectAction">home</result>

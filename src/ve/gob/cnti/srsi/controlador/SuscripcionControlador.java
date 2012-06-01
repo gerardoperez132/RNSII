@@ -25,6 +25,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 	private ServicioInformacion servicio = new ServicioInformacion();
 	private Ente ente = new Ente();
 	private SolicitudSuscripcion solicitud = new SolicitudSuscripcion();
+	@SuppressWarnings("rawtypes")
 	private Map session;
 
 	private long id_servicio;
@@ -50,8 +51,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 		solicitud.setId_ente_solicitante(user.getId_ente());
 		solicitud.setId_servicio_informacion(id_servicio);
 		solicitud.setId_usuario(user.getId_usuario());
-		solicitud.setSentencia(PENDIENTE);
-		System.out.println(solicitud.toString());
+		solicitud.setSentencia(PENDIENTE);		
 		create(solicitud);
 		return SUCCESS;
 	}
