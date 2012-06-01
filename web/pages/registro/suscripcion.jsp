@@ -22,8 +22,7 @@
 		$("#tree").treeTable();
 	});
 </script>
-<title><s:text name="form.entrada.registro.title"></s:text>
-</title>
+<title><s:text name="form.entrada.registro.title"></s:text></title>
 	</head>
 	<body>
 		<!-- Este es el div de la sombra del contenedor del maquetado de la página -->
@@ -40,11 +39,9 @@
 					<form action="Buscar_Servicio" method="post">
 						<table align="center">
 							<tr>
-								<td><s:textfield name="cadena" size="50" />
-								</td>
+								<td><s:textfield name="cadena" size="50" /></td>
 								<td><input type="submit"
-									value="<s:text name="buscarServicio"/>">
-								</td>
+									value="<s:text name="buscarServicio"/>"></td>
 							</tr>
 						</table>
 					</form>
@@ -57,31 +54,28 @@
 								</th>
 							</tr>
 							<tr>
-								<th><s:text name="argumentoConsultado" />
-								</th>
-								<td colspan="2"><s:property value="cadena" />
-								</td>
+								<th><s:text name="argumentoConsultado" /></th>
+								<td colspan="2"><s:property value="cadena" /></td>
 							</tr>
 							<tr>
-								<th><s:text name="nombre" />
-								</th>
-								<th><s:text name="ente1" />
-								</th>
-								<th><s:text name="fecha_creado" />
-								</th>
+								<th><s:text name="nombre" /></th>
+								<th><s:text name="ente1" /></th>
+								<th><s:text name="fecha_creacion" /></th>
 							</tr>
 							<s:if test="servicios.size()>0">
 								<s:iterator value="servicios">
 									<tr>
 										<td><a
 											href="Servicio?id_servicio=<s:property value="id_servicio_informacion"/>">
-												<s:property value="nombre" /> </a></td>
+												<s:property value="nombre" /> </a>
+										</td>
 										<td><s:set name="id_e" value="id_ente" /> <s:iterator
 												value="entes">
 												<s:if test="id_ente == #id_e">
 													<s:property value="siglas" />
 												</s:if>
-											</s:iterator></td>
+											</s:iterator>
+										</td>
 										<td><s:date name="fecha_creado" format="d'/'MM'/'yyyy" />
 										</td>
 									</tr>
@@ -90,8 +84,7 @@
 							<s:else>
 								<tr>
 									<td colspan="3"><span class="ok_pass"><s:text
-												name="sis_null2" /> </span>
-									</td>
+												name="sis_null2" /> </span></td>
 								</tr>
 							</s:else>
 						</table>
@@ -106,55 +99,56 @@
 						<hr>
 						<ul class="tabs">
 							<li><a href="#tab1"><s:text name="tab1.title"></s:text>
-							</a></li>
+							</a>
+							</li>
 							<li><a href="#tab2"><s:text name="tab2.title"></s:text>
-							</a></li>
+							</a>
+							</li>
 							<li><a href="#tab3"><s:text name="tab3.title"></s:text>
-							</a></li>
+							</a>
+							</li>
 							<li><a href="#tab4"><s:text name="tab4.title"></s:text>
-							</a></li>
+							</a>
+							</li>
 						</ul>
 						<div class="tab_container">
 							<!-- Descripción general -->
 							<div id="tab1" class="tab_content">
 								<table class="results">
 									<tr>
-										<td class="alt"><s:text name="n_servicio" />
-										</td>
+										<td class="alt"><s:text name="n_servicio" /></td>
 										<td class="alt2"><s:property
-												value="servicio.id_servicio_informacion" />
+												value="servicio.id_servicio_informacion" /></td>
+									</tr>
+									<tr>
+										<td class="alt"><s:text name="ente1" />
+										</td>
+										<td class="alt2"><s:property value="ente.nombre" />
 										</td>
 									</tr>
 									<tr>
-										<td class="alt"><s:text name="ente1" /></td>
-										<td class="alt2"><s:property value="ente.nombre" /></td>
-									</tr>
-									<tr>
-										<td class="alt"><s:text name="servicio_nombre" />
-										</td>
+										<td class="alt"><s:text name="servicio_nombre" /></td>
 										<td class="alt2"><s:property value="servicio.nombre" />
 										</td>
 									</tr>
 									<tr>
-										<td class="alt"><s:text name="descripcion" />
-										</td>
+										<td class="alt"><s:text name="descripcion" /></td>
 										<td class="alt2"><s:property value="servicio.descripcion" />
 										</td>
 									</tr>
 									<tr>
-										<td class="alt"><s:text name="sector" />
-										</td>
+										<td class="alt"><s:text name="sector" /></td>
 										<td class="alt2"><s:set var="sector"
 												value="servicio.id_sector"></s:set> <s:iterator
 												value="sectores">
 												<s:if test="%{id_sector == #sector}">
 													<s:property value="nombre" />
 												</s:if>
-											</s:iterator></td>
+											</s:iterator>
+										</td>
 									</tr>
 									<tr>
-										<td class="alt"><s:text name="orientado" />
-										</td>
+										<td class="alt"><s:text name="orientado" /></td>
 										<td class="alt2"><s:set var="id_si"
 												value="servicio.id_servicio_informacion"></s:set> <s:iterator
 												value="unionareas">
@@ -166,24 +160,23 @@
 														</s:if>
 													</s:iterator>
 												</s:if>
-											</s:iterator></td>
+											</s:iterator>
+										</td>
 									</tr>
 									<tr>
-										<td class="alt"><s:text name="estado" />
-										</td>
+										<td class="alt"><s:text name="estado" /></td>
 										<td class="alt2"><s:set var="estado"
 												value="servicio.id_estado"></s:set> <s:iterator
 												value="estados">
 												<s:if test="%{id_estado == #estado}">
 													<s:property value="nombre" />
 												</s:if>
-											</s:iterator></td>
+											</s:iterator>
+										</td>
 									</tr>
 									<tr>
-										<td class="alt"><s:text name="visitas" />
-										</td>
-										<td class="alt2"><s:property value="nVisitas" />
-										</td>
+										<td class="alt"><s:text name="visitas" /></td>
+										<td class="alt2"><s:property value="nVisitas" /></td>
 									</tr>
 								</table>
 								<hr>
@@ -192,31 +185,26 @@
 							<div id="tab2" class="tab_content">
 								<table class="tb">
 									<tr>
-										<th class="tb_th"><s:text name="nombre" />
-										</th>
-										<th class="tb_th"><s:text name="fecha" />
-										</th>
-										<th class="tb_th"><s:text name="descargar" />
-										</th>
+										<th class="tb_th"><s:text name="nombre" /></th>
+										<th class="tb_th"><s:text name="fecha" /></th>
+										<th class="tb_th"><s:text name="descargar" /></th>
 									</tr>
 									<s:if test="files.size()>0">
 										<s:iterator value="files">
 											<tr>
-												<td class="tb_td"><s:property value="nombre" /></td>
-												<td class="tb_td"><s:date name="fecha_creado"
-														format="d'/'MM'/'yyyy" />
+												<td class="tb_td"><s:property value="nombre" />
 												</td>
+												<td class="tb_td"><s:date name="fecha_creado"
+														format="d'/'MM'/'yyyy" /></td>
 												<td class="tb_td"><a
 													href="..<s:property value='url' />"><s:text
-															name="descargar" /> </a>
-												</td>
+															name="descargar" /> </a></td>
 											</tr>
 										</s:iterator>
 									</s:if>
 									<s:else>
 										<tr>
-											<th colspan="3"><s:text name="files.empty" />
-											</th>
+											<th colspan="3"><s:text name="files.empty" /></th>
 										</tr>
 									</s:else>
 								</table>
@@ -226,8 +214,7 @@
 
 								<table class="results">
 									<tr>
-										<td class="alt"><s:text name="seguridad" />
-										</td>
+										<td class="alt"><s:text name="seguridad" /></td>
 										<td class="alt2"><s:set var="seguridad"
 												value="servicio.id_seguridad"></s:set> <s:iterator
 												value="niveles">
@@ -238,8 +225,7 @@
 										</td>
 									</tr>
 									<tr>
-										<td class="alt"><s:text name="arquitectura" />
-										</td>
+										<td class="alt"><s:text name="arquitectura" /></td>
 										<td class="alt2"><s:set var="id_si"
 												value="servicio.id_servicio_informacion"></s:set> 
 												<s:iterator	value="unionarquitecturas">
@@ -255,21 +241,20 @@
 										</td>
 									</tr>
 									<tr>
-										<td class="alt"><s:text name="version" />
-										</td>
+										<td class="alt"><s:text name="version" /></td>
 										<td class="alt2"><s:property value="servicio.version" />
 										</td>
 									</tr>
 									<tr>
-										<td class="alt"><s:text name="intercambio" />
-										</td>
+										<td class="alt"><s:text name="intercambio" /></td>
 										<td class="alt2"><s:set var="intercambio"
 												value="servicio.id_intercambio"></s:set> <s:iterator
 												value="children">
 												<s:if test="%{id_intercambio == #intercambio}">
 													<s:property value="nombre" />
 												</s:if>
-											</s:iterator></td>
+											</s:iterator>
+										</td>
 									</tr>
 								</table>
 								<hr>
@@ -278,14 +263,17 @@
 									<thead>
 										<tr>
 											<th colspan="4" style="text-align: center;"><s:text
-													name="funcionalidades_&_datos" />
-											</th>
+													name="funcionalidades_&_datos" /></th>
 										</tr>
 										<tr>
-											<th><s:text name="nombre"></s:text></th>
-											<th><s:text name="descripcion"></s:text></th>
-											<th><s:text name="fecha"></s:text></th>
-											<th><s:text name="tipo" /></th>
+											<th><s:text name="nombre"></s:text>
+											</th>
+											<th><s:text name="descripcion"></s:text>
+											</th>
+											<th><s:text name="fecha"></s:text>
+											</th>
+											<th><s:text name="tipo" />
+											</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -295,11 +283,14 @@
 											<s:iterator value="funcionalidades" status="result_Status">
 												<tr
 													id="node-<s:property value="%{1 + #result_Status.index}" />">
-													<td><s:property value="nombre" /></td>
-													<td><s:property value="descripcion" /></td>
+													<td><s:property value="nombre" />
+													</td>
+													<td><s:property value="descripcion" />
+													</td>
 													<td><s:date name="fecha_creado" format="d'/'MM'/'yyyy" />
 													</td>
-													<td><s:text name="funcion" /></td>
+													<td><s:text name="funcion" />
+													</td>
 												</tr>
 												<s:set name="id_funcion" value="id_funcionalidad" />
 												<s:if test="ios.size() > 0">
@@ -318,11 +309,15 @@
 																<tr
 																	id="node-<s:property value="%{((100) +  (#index_100))}" />"
 																	class="child-of-node-<s:property value="%{1 + #result_Status.index}" />">
-																	<td><s:property value="nombre" /></td>
-																	<td><s:property value="descripcion" /></td>
+																	<td><s:property value="nombre" />
+																	</td>
+																	<td><s:property value="descripcion" />
+																	</td>
 																	<td><s:date name="fecha_creado"
-																			format="d'/'MM'/'yyyy" /></td>
-																	<td><s:text name="dato_entrada" /></td>
+																			format="d'/'MM'/'yyyy" />
+																	</td>
+																	<td><s:text name="dato_entrada" />
+																	</td>
 																</tr>
 															</s:if>
 															<s:elseif
@@ -335,11 +330,15 @@
 																		<tr
 																			id="node-<s:property value="%{((1000) +  (#index_1000))}" />"
 																			class="child-of-node-<s:property value="%{(100 + #index_100)}"/>">
-																			<td><s:property value="nombre" /></td>
-																			<td><s:property value="descripcion" /></td>
+																			<td><s:property value="nombre" />
+																			</td>
+																			<td><s:property value="descripcion" />
+																			</td>
 																			<td><s:date name="fecha_creado"
-																					format="d'/'MM'/'yyyy" /></td>
-																			<td><s:text name="dato_entrada" /></td>
+																					format="d'/'MM'/'yyyy" />
+																			</td>
+																			<td><s:text name="dato_entrada" />
+																			</td>
 																		</tr>
 																	</s:if>
 																</s:iterator>
@@ -362,11 +361,15 @@
 																<tr
 																	id="node-<s:property value="%{((100) +  (#index_100))}" />"
 																	class="child-of-node-<s:property value="%{1 + #result_Status.index}" />">
-																	<td><s:property value="nombre" /></td>
-																	<td><s:property value="descripcion" /></td>
+																	<td><s:property value="nombre" />
+																	</td>
+																	<td><s:property value="descripcion" />
+																	</td>
 																	<td><s:date name="fecha_creado"
-																			format="d'/'MM'/'yyyy" /></td>
-																	<td><s:text name="dato_salida" /></td>
+																			format="d'/'MM'/'yyyy" />
+																	</td>
+																	<td><s:text name="dato_salida" />
+																	</td>
 																</tr>
 															</s:if>
 															<s:elseif
@@ -379,11 +382,15 @@
 																		<tr
 																			id="node-<s:property value="%{((1000) +  (#index_1000))}" />"
 																			class="child-of-node-<s:property value="%{(100 + #index_100)}"/>">
-																			<td><s:property value="nombre" /></td>
-																			<td><s:property value="descripcion" /></td>
+																			<td><s:property value="nombre" />
+																			</td>
+																			<td><s:property value="descripcion" />
+																			</td>
 																			<td><s:date name="fecha_creado"
-																					format="d'/'MM'/'yyyy" /></td>
-																			<td><s:text name="dato_salida" /></td>
+																					format="d'/'MM'/'yyyy" />
+																			</td>
+																			<td><s:text name="dato_salida" />
+																			</td>
 																		</tr>
 																	</s:if>
 																</s:iterator>
@@ -405,22 +412,17 @@
 							<div id="tab4" class="tab_content">
 								<table class="results">
 									<tr>
-										<td class="alt"><s:text name="responsable" />
-										</td>
+										<td class="alt"><s:text name="responsable" /></td>
 										<td class="alt2"><s:property value="servicio.responsable" />
 										</td>
 									</tr>
 									<tr>
-										<td class="alt"><s:text name="telefono" />
-										</td>
-										<td class="alt2"><s:property value="telefono" />
-										</td>
+										<td class="alt"><s:text name="telefono" /></td>
+										<td class="alt2"><s:property value="telefono" /></td>
 									</tr>
 									<tr>
-										<td class="alt"><s:text name="correo" />
-										</td>
-										<td class="alt2"><s:property value="correo" />
-										</td>
+										<td class="alt"><s:text name="correo" /></td>
+										<td class="alt2"><s:property value="correo" /></td>
 									</tr>
 								</table>
 							</div>
@@ -430,15 +432,20 @@
 						<!-- Formulario para solicitar una suscripción a un servicio de información<td><s:text name=""/></td> -->
 						<table class="results">
 							<tr>
-								<th colspan="2"><s:text name="solicitud3" /></th>
+								<th colspan="2"><s:text name="solicitud3" />
+								</th>
 							</tr>
 							<tr>
-								<th><s:text name="servicio_nombre" /></th>
-								<td><s:property value="servicio.nombre" /></td>
+								<th><s:text name="servicio_nombre" />
+								</th>
+								<td><s:property value="servicio.nombre" />
+								</td>
 							</tr>
 							<tr>
-								<th><s:text name="ente1" /></th>
-								<td><s:property value="ente.nombre" /></td>
+								<th><s:text name="ente1" />
+								</th>
+								<td><s:property value="ente.nombre" />
+								</td>
 							</tr>
 						</table>
 						<hr>
@@ -450,28 +457,50 @@
 										</td>						
 									</tr>
 									<tr>
-										<td align="right"><s:text name="nombre_solicitante"/></td>
-										<td><input type="text" name="usuario_solicitante" id="nombre" /></td>
+										<td align="right">
+											<s:fielderror>
+												<s:param>solicitante</s:param>
+											</s:fielderror>
+											<s:text name="nombre_solicitante"/>
+										</td>
+										<td><input type="text" name="solicitud.solicitante" id="nombre" /></td>
 										<td><h5 id="m_nombre" class="requerido">*</h5></td>		
 									</tr>
 									<tr>
-										<td align="right"><s:text name="cargo_solicitante"/></td>
-										<td><input type="text" name="usuario_cargo" id="cargo" /></td>
+										<td align="right">
+											<s:fielderror>
+												<s:param>cargo</s:param>
+											</s:fielderror>
+											<s:text name="cargo_solicitante"/>
+										</td>
+										<td><input type="text" name="solicitud.cargo" id="cargo" /></td>
 										<td><h5 id="m_cargo" class="requerido">*</h5></td>		
 									</tr>
 									<tr>
-										<td align="right"><s:text name="telefono"/></td>
-										<td><s:select name="codigo" list="codigos" /><input type="text" name="telefono" id="telefono" size="14" maxlength="7"/></td>
+										<td align="right">
+											<s:fielderror>
+												<s:param>telefono</s:param>
+											</s:fielderror>
+											<s:text name="telefono"/></td>
+										<td><s:select name="codigo" list="codigos" /><input type="text" name="solicitud.telefono" id="telefono" size="14" maxlength="7"/></td>
 										<td><h5 id="m_telefono" class="requerido">*</h5></td>		
 									</tr>
 									<tr>
-										<td align="right"><s:text name="correo"/></td>
-										<td><input type="text" name="correo" id="correo"/></td>
+										<td align="right">
+											<s:fielderror>
+												<s:param>correo</s:param>
+											</s:fielderror>
+											<s:text name="correo"/>
+										</td>
+										<td><input type="text" name="solicitud.correo" id="correo"/></td>
 										<td><h5 id="m_correo" class="requerido">*</h5></td>		
 									</tr>
 									<tr>
-										<td align="right"><s:text name="motivo_solicitud"/></td>
-										<td><textarea name="" rows="6" cols="19" id="motivo"></textarea></td>	
+										<td align="right">
+											<s:fielderror><s:param>motivo</s:param></s:fielderror>
+											<s:text name="motivo_solicitud"/>
+										</td>
+										<td><textarea name="solicitud.motivo" rows="6" cols="19" id="motivo"></textarea></td>	
 										<td><h5 id="m_motivo" class="requerido">*</h5></td>	
 									</tr>	
 									<tr>										

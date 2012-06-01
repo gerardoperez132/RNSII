@@ -51,16 +51,52 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 		solicitud.setId_ente_solicitante(user.getId_ente());
 		solicitud.setId_servicio_informacion(id_servicio);
 		solicitud.setId_usuario(user.getId_usuario());
-		solicitud.setSentencia(PENDIENTE);		
-		create(solicitud);
+		solicitud.setSentencia(PENDIENTE);
+		solicitud.setTelefono(codigo + solicitud.getTelefono());
+		// create(solicitud);
+		System.out.println(solicitud.toString());
 		return SUCCESS;
 	}
 
 	@Override
 	public void validate() {
 		if (solicitud.getSolicitante().trim().isEmpty())
+			addFieldError(
+					"solicitante",
+					error.getProperties().getProperty(
+							"error.suscripcion.solicitante"));
+		if (!solicitud.getSolicitante().toUpperCase().matches(REGEX_TITLE))
 			addFieldError("solicitante",
-					"El nombre no puede estar vacío, no sea animal");
+					error.getProperties().getProperty("error.regex.title"));
+		if (solicitud.getCargo().trim().isEmpty())
+			addFieldError("cargo",
+					error.getProperties()
+							.getProperty("error.suscripcion.cargo"));
+		if (!solicitud.getCargo().toUpperCase().matches(REGEX_TITLE))
+			addFieldError("cargo",
+					error.getProperties().getProperty("error.regex.title"));
+		if (solicitud.getCorreo().trim().isEmpty())
+			addFieldError("correo",
+					error.getProperties()
+							.getProperty("error.suscripcion.email"));
+		if (solicitud.getCorreo().toUpperCase().matches(REGEX_EMAIL))
+			addFieldError("correo",
+					error.getProperties().getProperty("error.regex.email"));
+		if (solicitud.getTelefono().trim().isEmpty())
+			addFieldError(
+					"telefono",
+					error.getProperties().getProperty(
+							"error.suscripcion.telefono"));
+		// TODO Faltan dos más del teléfono.
+		if (solicitud.getMotivo().trim().isEmpty())
+			addFieldError(
+					"motivo",
+					error.getProperties().getProperty(
+							"error.suscripcion.motivo"));
+		if (!solicitud.getMotivo().toUpperCase().matches(REGEX_DESCRIPTION))
+			addFieldError("motivo",
+					error.getProperties()
+							.getProperty("error.regex.description"));
 		prepararSuscripcion();
 	}
 
