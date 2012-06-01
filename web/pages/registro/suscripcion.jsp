@@ -457,51 +457,40 @@
 										</td>						
 									</tr>
 									<tr>
-										<td align="right">
-											<s:fielderror>
-												<s:param>solicitante</s:param>
-											</s:fielderror>
+										<td align="right">											
 											<s:text name="nombre_solicitante"/>
 										</td>
-										<td><input type="text" name="solicitud.solicitante" id="nombre" /></td>
-										<td><h5 id="m_nombre" class="requerido">*</h5></td>		
+										<td><s:textfield name="solicitud.solicitante" id="nombre"  /></td>
+										<td><h5 id="m_nombre" class="requerido">*<s:fielderror><s:param>solicitante</s:param></s:fielderror></h5>
+										</td>		
 									</tr>
 									<tr>
-										<td align="right">
-											<s:fielderror>
-												<s:param>cargo</s:param>
-											</s:fielderror>
+										<td align="right">											
 											<s:text name="cargo_solicitante"/>
 										</td>
-										<td><input type="text" name="solicitud.cargo" id="cargo" /></td>
-										<td><h5 id="m_cargo" class="requerido">*</h5></td>		
+										<td><s:textfield name="solicitud.cargo" id="cargo"  /></td>
+										<td><h5 id="m_cargo" class="requerido">*<s:fielderror><s:param>cargo</s:param></s:fielderror></h5></td>		
 									</tr>
 									<tr>
-										<td align="right">
-											<s:fielderror>
-												<s:param>telefono</s:param>
-											</s:fielderror>
-											<s:text name="telefono"/></td>
-										<td><s:select name="codigo" list="codigos" /><input type="text" name="solicitud.telefono" id="telefono" size="14" maxlength="7"/></td>
-										<td><h5 id="m_telefono" class="requerido">*</h5></td>		
+										<td align="right">											
+											<s:text name="telefono"/>
+										</td>
+										<td><s:select name="codigo" list="codigos" /><s:textfield name="solicitud.telefono" id="telefono" size="14" maxlength="7" /></td>
+										<td><h5 id="m_telefono" class="requerido">*<s:fielderror><s:param>telefono</s:param></s:fielderror></h5></td>		
 									</tr>
 									<tr>
-										<td align="right">
-											<s:fielderror>
-												<s:param>correo</s:param>
-											</s:fielderror>
+										<td align="right">											
 											<s:text name="correo"/>
 										</td>
-										<td><input type="text" name="solicitud.correo" id="correo"/></td>
-										<td><h5 id="m_correo" class="requerido">*</h5></td>		
+										<td><s:textfield name="solicitud.correo" id="correo" /></td>
+										<td><h5 id="m_correo" class="requerido">*<s:fielderror><s:param>correo</s:param></s:fielderror></h5></td>		
 									</tr>
 									<tr>
-										<td align="right">
-											<s:fielderror><s:param>motivo</s:param></s:fielderror>
+										<td align="right">											
 											<s:text name="motivo_solicitud"/>
 										</td>
-										<td><textarea name="solicitud.motivo" rows="6" cols="19" id="motivo"></textarea></td>	
-										<td><h5 id="m_motivo" class="requerido">*</h5></td>	
+										<td><s:textarea name="solicitud.motivo" rows="6" cols="19" id="motivo"/></td>	
+										<td><h5 id="m_motivo" class="requerido">*<s:fielderror><s:param>motivo</s:param></s:fielderror></h5></td>	
 									</tr>	
 									<tr>										
 										<td colspan="3"><input type="submit" value="<s:text name="enviar_solicitud_suscripcion"/>" id="enviar_solicitud" /></td>		
