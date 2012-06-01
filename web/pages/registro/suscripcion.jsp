@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@taglib uri="/struts-tags" prefix="s"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <%@include file="../layout/cache.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <s:i18n name="ve/gob/cnti/srsi/i18n/I18">
-	<head>
+<head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <!-- CSS (required) -->
 <link rel="stylesheet" type="text/css" href="res/css/styles.css">
@@ -13,11 +13,11 @@
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
 <link rel="stylesheet" type="text/css" href="res/css/table_tree.css">
 <link rel="stylesheet" type="text/css" href="res/css/table2.css">
-<script type="text/javascript" src="res/js/jquery-1.7.1.js"></script>
-<script type="text/javascript" src="res/js/tabs.js"></script>
-<script type="text/javascript" src="res/js/jquery.treeTable.js"></script>
-<script type="text/javascript" src="res/js/suscripcion.js"></script>
-<script type="text/javascript">
+<script type="text/javascript" src="res/js/jquery-1.7.1.js" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/suscripcion.js" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/tabs.js" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/jquery.treeTable.js" charset="UTF-8"></script>
+<script type="text/javascript" charset="UTF-8">
 	$(document).ready(function() {
 		$("#tree").treeTable();
 	});
@@ -234,14 +234,15 @@
 												<s:if test="%{id_seguridad == #seguridad}">
 													<s:property value="nombre" />
 												</s:if>
-											</s:iterator></td>
+											</s:iterator>
+										</td>
 									</tr>
 									<tr>
 										<td class="alt"><s:text name="arquitectura" />
 										</td>
 										<td class="alt2"><s:set var="id_si"
-												value="servicio.id_servicio_informacion"></s:set> <s:iterator
-												value="unionarquitecturas">
+												value="servicio.id_servicio_informacion"></s:set> 
+												<s:iterator	value="unionarquitecturas">
 												<s:if test="%{id_servicio_informacion == #id_si}">
 													<s:set var="arquitectura" value="id_arquitectura"></s:set>
 													<s:iterator value="arquitecturas">
@@ -250,7 +251,8 @@
 														</s:if>
 													</s:iterator>
 												</s:if>
-											</s:iterator></td>
+											</s:iterator>
+										</td>
 									</tr>
 									<tr>
 										<td class="alt"><s:text name="version" />
@@ -450,27 +452,27 @@
 									<tr>
 										<td align="right"><s:text name="nombre_solicitante"/></td>
 										<td><input type="text" name="usuario_solicitante" id="nombre" /></td>
-										<td><h5 class="requerido">*</h5></td>		
+										<td><h5 id="m_nombre" class="requerido">*</h5></td>		
 									</tr>
 									<tr>
 										<td align="right"><s:text name="cargo_solicitante"/></td>
 										<td><input type="text" name="usuario_cargo" id="cargo" /></td>
-										<td><h5 class="requerido">*</h5></td>		
+										<td><h5 id="m_cargo" class="requerido">*</h5></td>		
 									</tr>
 									<tr>
 										<td align="right"><s:text name="telefono"/></td>
 										<td><s:select name="codigo" list="codigos" /><input type="text" name="telefono" id="telefono" size="14" maxlength="7"/></td>
-										<td id="mtel"><h5 class="requerido">*</h5></td>		
+										<td><h5 id="m_telefono" class="requerido">*</h5></td>		
 									</tr>
 									<tr>
 										<td align="right"><s:text name="correo"/></td>
 										<td><input type="text" name="correo" id="correo"/></td>
-										<td><h5 class="requerido">*</h5></td>		
+										<td><h5 id="m_correo" class="requerido">*</h5></td>		
 									</tr>
 									<tr>
 										<td align="right"><s:text name="motivo_solicitud"/></td>
 										<td><textarea name="" rows="6" cols="19" id="motivo"></textarea></td>	
-										<td><h5 class="requerido">*</h5></td>	
+										<td><h5 id="m_motivo" class="requerido">*</h5></td>	
 									</tr>	
 									<tr>										
 										<td colspan="3"><input type="submit" value="<s:text name="enviar_solicitud_suscripcion"/>" id="enviar_solicitud" /></td>		
