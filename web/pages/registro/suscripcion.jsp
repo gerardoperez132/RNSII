@@ -449,11 +449,11 @@
 							</tr>
 						</table>
 						<hr>
+						<s:fielderror>
+							<s:param>error</s:param>
+						</s:fielderror>
 							<form action="solicitarSuscripcion" method="post" name="suscripcionForm">
 								<table>
-								<tr><th><s:fielderror>
-								<s:param>error</s:param>
-							</s:fielderror></th></tr>
 									<tr>
 										<td colspan="3">							
 											<h5 class="requerido"><s:text name="requerido"/></h5>

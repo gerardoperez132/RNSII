@@ -32,6 +32,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 	private long id_servicio;
 	private boolean suscripcion_form;
 	private boolean invalid;
+	private boolean requested;
 
 	@SkipValidation
 	public String prepararSuscripcion() {
@@ -52,6 +53,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 								+ ente.getSiglas().toUpperCase()
 								+ " ya ha solicitado la suscripción a este servicio de información");
 				setInvalid(true);
+				setRequested(true);
 			}
 		return SUCCESS;
 	}
@@ -79,75 +81,80 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 
 	@Override
 	public void validate() {
-		if (solicitud.getSolicitante().trim().isEmpty()) {
-			addFieldError(
-					"solicitante",
-					error.getProperties().getProperty(
-							"error.suscripcion.solicitante"));
-			setInvalid(true);
-		}
-		if (!solicitud.getSolicitante().toUpperCase().matches(REGEX_TITLE)) {
-			addFieldError("solicitante",
-					error.getProperties().getProperty("error.regex.title"));
-			setInvalid(true);
-		}
-		if (solicitud.getCargo().trim().isEmpty()) {
-			addFieldError("cargo",
-					error.getProperties()
-							.getProperty("error.suscripcion.cargo"));
-			setInvalid(true);
-		}
-		if (!solicitud.getCargo().toUpperCase().matches(REGEX_TITLE)) {
-			addFieldError("cargo",
-					error.getProperties().getProperty("error.regex.title"));
-			setInvalid(true);
-		}
-		if (solicitud.getCorreo().trim().isEmpty()) {
-			addFieldError("correo",
-					error.getProperties()
-							.getProperty("error.suscripcion.email"));
-			setInvalid(true);
-		}
-		if (!solicitud.getCorreo().matches(REGEX_EMAIL)) {
-			addFieldError("correo",
-					error.getProperties().getProperty("error.regex.email"));
-			setInvalid(true);
-		}
-		if (solicitud.getTelefono().trim().isEmpty()) {
-			addFieldError(
-					"telefono",
-					error.getProperties().getProperty(
-							"error.suscripcion.telefono"));
-			setInvalid(true);
-		}
-		if (solicitud.getTelefono().length() > 0
-				&& solicitud.getTelefono().length() < 7) {
-			addFieldError(
-					"telefono",
-					error.getProperties().getProperty(
-							"error.suscripcion.telefono.digit"));
-			setInvalid(true);
-		}
-		if (!solicitud.getTelefono().matches("\\d.*")
-				&& !solicitud.getTelefono().trim().isEmpty()) {
-			addFieldError(
-					"telefono",
-					error.getProperties().getProperty(
-							"error.suscripcion.telefono.regex"));
-			setInvalid(true);
-		}
-		if (solicitud.getMotivo().trim().isEmpty()) {
-			addFieldError(
-					"motivo",
-					error.getProperties().getProperty(
-							"error.suscripcion.motivo"));
-			setInvalid(true);
-		}
-		if (!solicitud.getMotivo().toUpperCase().matches(REGEX_DESCRIPTION)) {
-			addFieldError("motivo",
-					error.getProperties()
-							.getProperty("error.regex.description"));
-			setInvalid(true);
+		if (!isRequested()) {
+			if (solicitud.getSolicitante().trim().isEmpty()) {
+				addFieldError(
+						"solicitante",
+						error.getProperties().getProperty(
+								"error.suscripcion.solicitante"));
+				setInvalid(true);
+			}
+			if (!solicitud.getSolicitante().toUpperCase().matches(REGEX_TITLE)) {
+				addFieldError("solicitante",
+						error.getProperties().getProperty("error.regex.title"));
+				setInvalid(true);
+			}
+			if (solicitud.getCargo().trim().isEmpty()) {
+				addFieldError(
+						"cargo",
+						error.getProperties().getProperty(
+								"error.suscripcion.cargo"));
+				setInvalid(true);
+			}
+			if (!solicitud.getCargo().toUpperCase().matches(REGEX_TITLE)) {
+				addFieldError("cargo",
+						error.getProperties().getProperty("error.regex.title"));
+				setInvalid(true);
+			}
+			if (solicitud.getCorreo().trim().isEmpty()) {
+				addFieldError(
+						"correo",
+						error.getProperties().getProperty(
+								"error.suscripcion.email"));
+				setInvalid(true);
+			}
+			if (!solicitud.getCorreo().matches(REGEX_EMAIL)) {
+				addFieldError("correo",
+						error.getProperties().getProperty("error.regex.email"));
+				setInvalid(true);
+			}
+			if (solicitud.getTelefono().trim().isEmpty()) {
+				addFieldError(
+						"telefono",
+						error.getProperties().getProperty(
+								"error.suscripcion.telefono"));
+				setInvalid(true);
+			}
+			if (solicitud.getTelefono().length() > 0
+					&& solicitud.getTelefono().length() < 7) {
+				addFieldError(
+						"telefono",
+						error.getProperties().getProperty(
+								"error.suscripcion.telefono.digit"));
+				setInvalid(true);
+			}
+			if (!solicitud.getTelefono().matches("\\d.*")
+					&& !solicitud.getTelefono().trim().isEmpty()) {
+				addFieldError(
+						"telefono",
+						error.getProperties().getProperty(
+								"error.suscripcion.telefono.regex"));
+				setInvalid(true);
+			}
+			if (solicitud.getMotivo().trim().isEmpty()) {
+				addFieldError(
+						"motivo",
+						error.getProperties().getProperty(
+								"error.suscripcion.motivo"));
+				setInvalid(true);
+			}
+			if (!solicitud.getMotivo().toUpperCase().matches(REGEX_DESCRIPTION)) {
+				addFieldError(
+						"motivo",
+						error.getProperties().getProperty(
+								"error.regex.description"));
+				setInvalid(true);
+			}
 		}
 		if (isInvalid())
 			prepararSuscripcion();
@@ -233,6 +240,14 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 
 	public void setInvalid(boolean invalid) {
 		this.invalid = invalid;
+	}
+
+	public boolean isRequested() {
+		return requested;
+	}
+
+	public void setRequested(boolean requested) {
+		this.requested = requested;
 	}
 
 }
