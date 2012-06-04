@@ -432,6 +432,7 @@
 			<interceptor-ref name="doubleSubmit" />
 			<result name="success">registro/suscripcion.jsp</result>
 			<result name="input">registro/suscripcion.jsp</result>
+			<result name="invalid.token">registro/suscripcion.jsp</result>
 		</action>
 
 
