@@ -40,12 +40,33 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 		servicio = (ServicioInformacion) read(servicio, id_servicio);
 		ente = (Ente) read(ente, servicio.getId_ente());
 		suscripcion_form = true;
+		prepareRequest();
+		if (read(solicitud).size() > 0)
+			if (verifySuscriptionRequest(
+					solicitud.getId_servicio_informacion(),
+					solicitud.getId_ente_proveedor(),
+					solicitud.getId_ente_solicitante())) {
+				addFieldError(
+						"error",
+						"El "
+								+ ente.getSiglas().toUpperCase()
+								+ " ya ha solicitado la suscripción a este servicio de información");
+				setInvalid(true);
+			}
 		return SUCCESS;
 	}
 
 	// TODO Mandar notificación por correo al ente proveedor. Un mensaje
 	// cualquier para ir probando...
 	public String solicitarSuscripcion() {
+		prepareRequest();
+		solicitud.setTelefono(codigo + solicitud.getTelefono());
+		create(solicitud);
+		System.out.println(solicitud.toString());
+		return SUCCESS;
+	}
+
+	private void prepareRequest() {
 		session = ActionContext.getContext().getSession();
 		Usuario user = (Usuario) session.get("usuario");
 		solicitud.setId_ente_proveedor(((ServicioInformacion) read(servicio,
@@ -54,10 +75,6 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 		solicitud.setId_servicio_informacion(id_servicio);
 		solicitud.setId_usuario(user.getId_usuario());
 		solicitud.setSentencia(PENDIENTE);
-		solicitud.setTelefono(codigo + solicitud.getTelefono());
-		create(solicitud);
-		System.out.println(solicitud.toString());
-		return SUCCESS;
 	}
 
 	@Override
