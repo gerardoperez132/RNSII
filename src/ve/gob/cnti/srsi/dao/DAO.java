@@ -724,11 +724,11 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		}
 		return list;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public ArrayList<ServicioInformacion> buscarServicio2(String cadena,
-			byte orderBy,long id_ente) {
+			byte orderBy, long id_ente) {
 		ArrayList<ServicioInformacion> list;
 		String order = orderBy > 0 ? "DESC" : "ASC";
 		try {
@@ -742,7 +742,8 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 									+ " AND "
 									+ " s.id_estado = 2 "
 									+ " AND "
-									+ " s.id_ente !=  " + id_ente 
+									+ " s.id_ente !=  "
+									+ id_ente
 									+ " AND "
 									+ " (UPPER(translate(s. nombre, 'áéíóúÁÉÍÓÚ', 'aeiouAEIOU')) "
 									+ " LIKE UPPER(translate('%"
@@ -760,7 +761,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		}
 		return list;
 	}
-	
+
 	@SuppressWarnings("rawtypes")
 	@Override
 	public List<ListaSImasVisitados> SImasVisitados() {
@@ -855,7 +856,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 							+ " AND " + " s.publicado = TRUE " + " AND "
 							+ " s.id_estado = 2 "
 							+ " ORDER BY s.id_servicio_informacion " + order)
-					.list();			
+					.list();
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;
@@ -941,6 +942,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 			closeConnection();
 		}
 	}
+
 	
 	@Override
 	public long peticionesSuscripcion(long id) {
@@ -952,13 +954,39 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 							"FROM SolicitudSuscripcion WHERE " + " id_ente_proveedor = "
 									+ id + " AND status = " + ACTIVO
 									+ " AND leido = false").list().size();
+		
+
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}	
+		return result;
+	}
+
+	@Override
+	public boolean verifySuscriptionRequest(long service, long provider,
+			long client) {
+		try {
+			startConnection();
+			try {
+				return ((SolicitudSuscripcion) session.createQuery(
+						"FROM " + SolicitudSuscripcion.class.getSimpleName()
+								+ " WHERE id_servicio_informacion = " + service
+								+ " AND id_ente_proveedor = " + provider
+								+ " AND id_ente_solicitante = " + client)
+						.uniqueResult()) != null;
+			} catch (Exception e) {
+				return true;
+			}
+
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;
 		} finally {
 			closeConnection();
 		}
-		return result;
 	}
 	
 	@Override
