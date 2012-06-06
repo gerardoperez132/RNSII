@@ -47,7 +47,8 @@
 					</form>
 					<hr>
 					<s:if test="buscarServicio==true">
-						<!-- Lista de servicios encontrados -->
+<!--	01) 
+Lista de servicios encontrados -->
 						<table class="results">
 							<tr>
 								<th colspan="3"><s:text name="listaServiciosEncontrados" />
@@ -90,7 +91,8 @@
 						</table>
 					</s:if>
 					<s:elseif test="examinarServicio == true">
-						<!-- Detalles de un servicio de información -->
+<!--  02)
+Detalles de un servicio de información -->
 						<form action="prepararSuscripcion">
 							<s:hidden name="id_servicio"
 								value="%{servicio.id_servicio_informacion}" />
@@ -429,7 +431,8 @@
 						</div>
 					</s:elseif>
 					<s:elseif test="suscripcion_form == true">
-						<!-- Formulario para solicitar una suscripción a un servicio de información<td><s:text name=""/></td> -->
+<!--	03)
+Formulario para solicitar una suscripción a un servicio de información -->
 						<table class="results">
 							<tr>
 								<th colspan="2"><s:text name="solicitud3" />
@@ -498,6 +501,13 @@
 								</table>
 								<s:hidden name="id_servicio" value="%{servicio.id_servicio_informacion}"/>								
 							</form>	
+						</s:elseif>
+						<s:elseif test="ListarSuscricionesPendientes == true">
+<!--	04)
+Lista de suscriciones pendientes -->
+							<h4>Lista de solicitudes de Suscrición</h4>
+							
+							
 						</s:elseif>						
 						<s:else>
 							<s:fielderror>
