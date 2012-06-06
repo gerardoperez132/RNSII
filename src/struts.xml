@@ -420,7 +420,7 @@
 		</action>
 
 		<!-- ******* ******* ******* ******* Suscripciones ******* ******* ******* 
-			******* -->
+			******* SuscricionesPendientes-->
 		<action name="prepararSuscripcion" method="prepararSuscripcion"
 			class="ve.gob.cnti.srsi.controlador.SuscripcionControlador">
 			<result name="success">registro/suscripcion.jsp</result>
