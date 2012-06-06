@@ -508,7 +508,40 @@ Formulario para solicitar una suscripción a un servicio de información -->
 						<s:elseif test="ListarSuscricionesPendientes == true">
 <!--	04)
 Lista de suscriciones pendientes -->
-							<h4>Lista de solicitudes de Suscrición</h4>
+							
+							<table class="results">
+								<tr>
+									<th colspan="5">
+										Lista de solicitudes de Suscrición
+									</th>
+								</tr>								
+								<tr>
+									<th>Servicio Solicitado</th>
+									<th><s:text name="ente1" /></th>
+									<th><s:text name="fecha_creacion" /></th>
+									<th><s:text name="detalles" /></th>
+									<th><s:text name="sentenciar" /></th>
+								</tr>
+								<s:iterator value="solicitudes">
+								<tr>
+									<td>
+										<s:property value="servicio"/>
+									</td>
+									<td>
+										<s:property value="ente"/>
+									</td>
+									<td>
+										<s:date name="fecha_creado" format="d'/'MM'/'yyyy" />
+									</td>
+									<td>
+										
+									</td>
+									<td>
+										
+									</td>
+								</tr>
+								</s:iterator>
+							</table>
 							
 							
 						</s:elseif>						

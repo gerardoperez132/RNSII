@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
+import ve.gob.cnti.modelo.temporales.Solicitud_Suscripcion;
 import ve.gob.cnti.srsi.dao.Constants;
 import ve.gob.cnti.srsi.dao.Constants.Modelos;
 import ve.gob.cnti.srsi.dao.Constants.Order;
@@ -22,7 +23,7 @@ import com.opensymphony.xwork2.ActionContext;
 public class SuscripcionControlador extends DAO implements Constants, Order,
 		Modelos, Sentencias {
 	
-	private List<SolicitudSuscripcion> solicitudes = new ArrayList<SolicitudSuscripcion>();
+	private List<Solicitud_Suscripcion> solicitudes = new ArrayList<Solicitud_Suscripcion>();
 
 	private String codigo;
 	private String codigos[] = CODES;
@@ -169,12 +170,13 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 	}
 	
 	//TODO listar solicitudes
+	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String listaSuscripcionesPendientes() {
 		//Lista solicitudes en base a las no leidas, pendientes,
 		session = ActionContext.getContext().getSession();
 		Usuario user = (Usuario) session.get("usuario");
-		solicitudes = getSolicitudesSuscripcionPendientes(user.getId_ente(),ASC);
+		solicitudes = (List<Solicitud_Suscripcion>) getSolicitudesSuscripcionPendientes(user.getId_ente(),ASC);
 		ListarSuscricionesPendientes = true;
 		return SUCCESS;
 	}
@@ -259,12 +261,12 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 		ListarSuscricionesPendientes = listarSuscricionesPendientes;
 	}
 
-	public List<SolicitudSuscripcion> getSolicitudes() {
+	public List<Solicitud_Suscripcion> getSolicitudes() {
 		return solicitudes;
 	}
 
-	public void setSolicitudes(List<SolicitudSuscripcion> solicitudes) {
+	public void setSolicitudes(List<Solicitud_Suscripcion> solicitudes) {
 		this.solicitudes = solicitudes;
 	}
-
 }
+
