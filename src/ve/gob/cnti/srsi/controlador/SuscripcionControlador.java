@@ -80,12 +80,6 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 		solicitud.setId_servicio_informacion(id_servicio);
 		solicitud.setId_usuario(user.getId_usuario());
 		solicitud.setSentencia(PENDIENTE);
-<<<<<<< HEAD
-		solicitud.setTelefono(codigo + solicitud.getTelefono());
-		create(solicitud);		
-		return SUCCESS;
-=======
->>>>>>> ec0734e3b5280e4dfaf6648756483a5b056b27d0
 	}
 
 	@Override
