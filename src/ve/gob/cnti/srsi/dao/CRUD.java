@@ -6,6 +6,7 @@ import java.util.List;
 
 import ve.gob.cnti.modelo.temporales.ListaSImasVisitados;
 import ve.gob.cnti.modelo.temporales.SectoresMasPublicados;
+import ve.gob.cnti.modelo.temporales.Solicitud_Suscripcion;
 import ve.gob.cnti.srsi.modelo.Correo;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.SolicitudSuscripcion;
@@ -496,7 +497,7 @@ public interface CRUD {
 	 *            suscripción a los servicios de información publicados.
 	 * @return Lista de las solicitudes de suscrición a los servicios información.
 	 */
-	public ArrayList<SolicitudSuscripcion> getSolicitudesSuscripcionPendientes(
+	public ArrayList<Solicitud_Suscripcion> getSolicitudesSuscripcionPendientes(
 			long id_ente, byte orderBy);
 	
 	public boolean verifySuscriptionRequest(long service, long provider,
