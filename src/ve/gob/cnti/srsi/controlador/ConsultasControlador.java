@@ -167,14 +167,14 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 
 	@SuppressWarnings("unchecked")
 	@SkipValidation
-	public String examinarServicioInformacion() {				
+	public String examinarServicioInformacion() {		
 		if (!verificarLong(id_servicio))
 			return INPUT;
 		listaSectores = sectoresMasPublicados(LIMITE_VISITADOS);
 		examinarServicio = true;
-		servicio = (ServicioInformacion) read(servicio, id_servicio);
+		servicio = (ServicioInformacion) read(servicio, id_servicio);		
 		if(!servicio.isPublicado())
-			return INPUT;
+			return INPUT;		
 		if(!isComplete(servicio))
 			return INPUT;
 		try {
