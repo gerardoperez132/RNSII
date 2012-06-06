@@ -18,10 +18,12 @@ import ve.gob.cnti.modelo.temporales.ListaSImasVisitados;
 import ve.gob.cnti.modelo.temporales.SectoresMasPublicados;
 import ve.gob.cnti.srsi.dao.Constants.ClaseDato;
 import ve.gob.cnti.srsi.dao.Constants.Status;
+import ve.gob.cnti.srsi.dao.Constants.Sentencias;
 import ve.gob.cnti.srsi.dao.Constants.TipoEntradaSalida;
 import ve.gob.cnti.srsi.i18n.Errors;
 import ve.gob.cnti.srsi.modelo.Correo;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
+import ve.gob.cnti.srsi.modelo.SolicitudSuscripcion;
 import ve.gob.cnti.srsi.modelo.Telefono;
 import ve.gob.cnti.srsi.modelo.TipoDato;
 import ve.gob.cnti.srsi.modelo.UnionAreaServicioInformacion;
@@ -43,7 +45,7 @@ import com.opensymphony.xwork2.ActionSupport;
  */
 @SuppressWarnings("serial")
 public class DAO extends ActionSupport implements Constants, CRUD, Status,
-		ClaseDato, TipoEntradaSalida {
+		ClaseDato, TipoEntradaSalida,Sentencias {
 
 	public static Errors error = new Errors();
 	private static Session session;
@@ -938,5 +940,65 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		} finally {
 			closeConnection();
 		}
+	}
+	
+	@Override
+	public long peticionesSuscripcion(long id) {
+		long result;
+		try {
+			startConnection();
+			result = session
+					.createQuery(
+							"FROM SolicitudSuscripcion WHERE " + " id_ente_proveedor = "
+									+ id + " AND status = " + ACTIVO
+									+ " AND leido = false").list().size();
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+		return result;
+	}
+	
+	@Override
+	public long peticionesSuscripcionPendientes(long id){
+		long result;
+		try {
+			startConnection();
+			result = session
+					.createQuery(
+							"FROM SolicitudSuscripcion WHERE " + " id_ente_proveedor = "
+									+ id + " AND status = " + ACTIVO
+									+ " AND sentencia = " + PENDIENTE).list().size();
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+		return result;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public ArrayList<SolicitudSuscripcion> getSolicitudesSuscripcionPendientes(
+			long id_ente, byte orderBy) {
+		ArrayList<SolicitudSuscripcion> list;
+		String order = orderBy > 0 ? "DESC" : "ASC";
+		try {
+			startConnection();
+			list = (ArrayList<SolicitudSuscripcion>) session.createQuery(
+					" FROM SolicitudSuscripcion s WHERE s.status = " + ACTIVO
+					+ " AND s.id_ente_proveedor = "	+ id_ente
+					+ " ORDER BY s.leido " + order)
+					.list();
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+		return list;
 	}
 }
