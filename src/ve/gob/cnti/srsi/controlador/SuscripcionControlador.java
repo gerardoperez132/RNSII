@@ -1,5 +1,7 @@
 package ve.gob.cnti.srsi.controlador;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.validation.SkipValidation;
@@ -19,6 +21,8 @@ import com.opensymphony.xwork2.ActionContext;
 @SuppressWarnings("serial")
 public class SuscripcionControlador extends DAO implements Constants, Order,
 		Modelos, Sentencias {
+	
+	private List<SolicitudSuscripcion> solicitudes = new ArrayList<SolicitudSuscripcion>();
 
 	private String codigo;
 	private String codigos[] = CODES;
@@ -32,6 +36,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 	private long id_servicio;
 	private boolean suscripcion_form;
 	private boolean invalid;
+	private boolean ListarSuscricionesPendientes;
 
 	@SkipValidation
 	public String prepararSuscripcion() {
@@ -55,8 +60,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 		solicitud.setId_usuario(user.getId_usuario());
 		solicitud.setSentencia(PENDIENTE);
 		solicitud.setTelefono(codigo + solicitud.getTelefono());
-		create(solicitud);
-		System.out.println(solicitud.toString());
+		create(solicitud);		
 		return SUCCESS;
 	}
 
@@ -145,6 +149,17 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 			return false;
 		}
 	}
+	
+	//TODO listar solicitudes
+	@SkipValidation
+	public String listaSuscripcionesPendientes() {
+		//Lista solicitudes en base a las no leidas, pendientes,
+		session = ActionContext.getContext().getSession();
+		Usuario user = (Usuario) session.get("usuario");
+		solicitudes = getSolicitudesSuscripcionPendientes(user.getId_ente(),ASC);
+		ListarSuscricionesPendientes = true;
+		return SUCCESS;
+	}
 
 	public ServicioInformacion getServicio() {
 		return servicio;
@@ -216,6 +231,22 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 
 	public void setInvalid(boolean invalid) {
 		this.invalid = invalid;
+	}
+
+	public boolean isListarSuscricionesPendientes() {
+		return ListarSuscricionesPendientes;
+	}
+
+	public void setListarSuscricionesPendientes(boolean listarSuscricionesPendientes) {
+		ListarSuscricionesPendientes = listarSuscricionesPendientes;
+	}
+
+	public List<SolicitudSuscripcion> getSolicitudes() {
+		return solicitudes;
+	}
+
+	public void setSolicitudes(List<SolicitudSuscripcion> solicitudes) {
+		this.solicitudes = solicitudes;
 	}
 
 }
