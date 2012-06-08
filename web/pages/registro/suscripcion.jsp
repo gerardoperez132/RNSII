@@ -22,7 +22,7 @@
 		$("#tree").treeTable();
 	});
 </script>
-<title><s:text name="form.entrada.registro.title"></s:text></title>
+<title><s:text name="suscripciones"></s:text></title>
 	</head>
 	<body>
 		<!-- Este es el div de la sombra del contenedor del maquetado de la página -->
@@ -331,7 +331,7 @@ Detalles de un servicio de información -->
 																		<s:set name="index_1000" value="%{#index_1000 + 1}" />
 																		<tr
 																			id="node-<s:property value="%{((1000) +  (#index_1000))}" />"
-																			class="child-of-node-<s:property value="%{(100 + #index_100)}"/>">
+				form.entrada.registro.title															class="child-of-node-<s:property value="%{(100 + #index_100)}"/>">
 																			<td><s:property value="nombre" />
 																			</td>
 																			<td><s:property value="descripcion" />
@@ -512,12 +512,12 @@ Lista de suscriciones pendientes -->
 							<table class="results">
 								<tr>
 									<th colspan="5">
-										Lista de solicitudes de Suscrición
+										<s:text name="listaSolicitudesSuscripcion"/>
 									</th>
 								</tr>								
 								<tr>
-									<th>Servicio Solicitado</th>
-									<th><s:text name="ente1" /></th>
+									<th><s:text name="servicio_solicitado" /></th>
+									<th><s:text name="solicitante" /></th>
 									<th><s:text name="fecha_creacion" /></th>
 									<th><s:text name="detalles" /></th>
 									<th><s:text name="sentenciar" /></th>
@@ -530,21 +530,70 @@ Lista de suscriciones pendientes -->
 									<td>
 										<s:property value="ente"/>
 									</td>
-									<td>
+									<td align="center">
 										<s:date name="fecha_creado" format="d'/'MM'/'yyyy" />
 									</td>
 									<td>
-										
+										<form action="examinarSolicitud" method="post">
+											<s:hidden value="%{id_suscripcion}" name="id_solicitud_suscripcion"/>
+											<input type="submit" value="<s:text name="detalles"/>">
+										</form>										
 									</td>
 									<td>
 										
 									</td>
 								</tr>
 								</s:iterator>
-							</table>
-							
-							
-						</s:elseif>						
+							</table>							
+						</s:elseif>			
+						<s:elseif test="detalles_solicitud = true">
+<!--	04)
+Muestra los detalles de una solicitud de suscripción -->
+							<table class="results">
+								<tr>
+									<th colspan="2">
+										<s:text name="peticion_suscripcion"/>
+									</th>
+								</tr>
+								<tr>
+									<td class="alt"><s:text name="servicio_solicitado" /></td>
+									<td class="alt2"><s:property value="servicio.nombre" /></td>
+								</tr>
+								<tr>
+									<td class="alt"><s:text name="n_servicio" /></td>
+									<td class="alt2"><s:property value="servicio.id_servicio_informacion" /></td>
+								</tr>
+								<tr>
+									<th colspan="2">
+										<s:text name="datos_solicitud"/>
+									</th>
+								</tr>
+								<tr>
+									<td class="alt"><s:text name="ente2" /></td>
+									<td class="alt2"><s:property value="ente.nombre" /></td>
+								</tr>
+								<tr>
+									<td class="alt"><s:text name="nombre_solicitante"/></td>
+									<td class="alt2"><s:property value="solicitud.solicitante" /></td>
+								</tr>
+								<tr>
+									<td class="alt"><s:text name="cargo_solicitante"/></td>
+									<td class="alt2"><s:property value="solicitud.cargo" /></td>
+								</tr>
+								<tr>
+									<td class="alt"><s:text name="telefono"/></td>
+									<td class="alt2"><s:property value="solicitud.telefono" /></td>
+								</tr>
+								<tr>
+									<td class="alt"><s:text name="correo"/></td>
+									<td class="alt2"><s:property value="solicitud.correo" /></td>
+								</tr>
+								<tr>
+									<td class="alt"><s:text name="motivo_solicitud"/></td>
+									<td class="alt2"><s:property value="solicitud.motivo" /></td>
+								</tr>								
+							</table>						
+						</s:elseif>			
 						<s:else>
 							<s:fielderror>
 								<s:param>error</s:param>
