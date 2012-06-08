@@ -35,9 +35,11 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 
 	/** Identificador del servicio de información. */
 	private long id_servicio;
+	private long id_solicitud_suscripcion;
 	private boolean suscripcion_form;
 	private boolean invalid;
 	private boolean ListarSuscricionesPendientes;
+	private boolean detalles_solicitud;
 
 	@SkipValidation
 	public String prepararSuscripcion() {
@@ -168,9 +170,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 			return false;
 		}
 	}
-	
-	//TODO listar solicitudes
-	@SuppressWarnings("unchecked")
+		
 	@SkipValidation
 	public String listaSuscripcionesPendientes() {
 		//Lista solicitudes en base a las no leidas, pendientes,
@@ -178,6 +178,27 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 		Usuario user = (Usuario) session.get("usuario");
 		solicitudes = (List<Solicitud_Suscripcion>) getSolicitudesSuscripcionPendientes(user.getId_ente(),ASC);
 		ListarSuscricionesPendientes = true;
+		return SUCCESS;
+	}
+	
+	//TODO examinar solicitud examinarSolicitud, poner a true leido
+	@SkipValidation
+	public String examinarSolicitud() {		
+		session = ActionContext.getContext().getSession();
+		Usuario user = (Usuario) session.get("usuario");				
+		solicitud = (SolicitudSuscripcion) read(solicitud, id_solicitud_suscripcion);
+		//Valida que un trol quiera acceder a las solicitudes de otros entes	
+		if(user.getId_ente() != solicitud.getId_ente_proveedor())
+			return INPUT;
+		//Guardo que la solicitud ya ha sido revisada y por quien fue leida
+		if(!solicitud.isLeido()){
+			solicitud.setLeido(true);
+			solicitud.setId_usuario(user.getId_usuario());
+			update(solicitud, id_solicitud_suscripcion);
+		}
+		ente = (Ente) read(ente, solicitud.getId_ente_solicitante());
+		servicio = (ServicioInformacion) read(servicio,solicitud.getId_servicio_informacion());
+		detalles_solicitud = true;
 		return SUCCESS;
 	}
 
@@ -267,6 +288,22 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 
 	public void setSolicitudes(List<Solicitud_Suscripcion> solicitudes) {
 		this.solicitudes = solicitudes;
+	}
+
+	public boolean isDetalles_solicitud() {
+		return detalles_solicitud;
+	}
+
+	public void setDetalles_solicitud(boolean detalles_solicitud) {
+		this.detalles_solicitud = detalles_solicitud;
+	}
+
+	public long getId_solicitud_suscripcion() {
+		return id_solicitud_suscripcion;
+	}
+
+	public void setId_solicitud_suscripcion(long id_solicitud_suscripcion) {
+		this.id_solicitud_suscripcion = id_solicitud_suscripcion;
 	}
 }
 
