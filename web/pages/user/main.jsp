@@ -62,6 +62,27 @@
 			</tr>						
 			</table>
 			<hr>
+			
+			<s:if test="peticionesNoLeidas > 0 || peticionesPendientes >0">
+			<!-- Peticiones de suscripción no leidas y pendientes   -->			
+				<s:if test="peticionesNoLeidas > 0">
+					<span style="color:blue;">Números de solicitudes de suscripción nueva no leidas: <s:property value="peticionesNoLeidas"/></span>	<br>				
+				</s:if>
+				<s:if test="peticionesPendientes > 0">
+					<span style="color:blue;">Números de solicitudes de suscripción pendientes por setenciar: <s:property value="peticionesPendientes"/></span>					
+				</s:if>	
+				<form action="ListarSuscricionesPendientes" method="post">
+					<table align="center">
+						<tr>							
+							<td>
+								<input type="submit" value="Ir a solicitudes de suscrición">
+							</td>
+						</tr>						
+					</table>					
+				</form>	
+				<hr>
+			</s:if>
+			
 			<!-- Tabla en árbol. -->
 			<table id="tree" class="treeTable">
 				<thead>

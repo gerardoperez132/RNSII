@@ -46,6 +46,8 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 	private String cuenta;
 	private String clave_nueva;
 	private String clave_nueva_confirme;
+	private long peticionesNoLeidas;
+	private long peticionesPendientes;
 
 	@SuppressWarnings("unchecked")
 	public String autenticarUsuario() throws Exception {
@@ -97,7 +99,7 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 	public String inicio() {
 		return SUCCESS;
 	}
-
+	//TODO Leer cantidad de peticiones a servicios
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String home() {
@@ -157,6 +159,8 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 				}
 			}
 		}
+		peticionesNoLeidas = peticionesSuscripcion(ente.getId_ente());
+		peticionesPendientes = peticionesSuscripcionPendientes(ente.getId_ente());
 		return SUCCESS;
 	}
 
@@ -399,6 +403,24 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 	public void setClave_nueva_confirme(String clave_nueva_confirme) {
 		this.clave_nueva_confirme = clave_nueva_confirme;
 	}
+
+	public long getPeticionesNoLeidas() {
+		return peticionesNoLeidas;
+	}
+
+	public void setPeticionesNoLeidas(long peticionesNoLeidas) {
+		this.peticionesNoLeidas = peticionesNoLeidas;
+	}
+
+	public long getPeticionesPendientes() {
+		return peticionesPendientes;
+	}
+
+	public void setPeticionesPendientes(long peticionesPendientes) {
+		this.peticionesPendientes = peticionesPendientes;
+	}
+
+	
 }
 
 class ServiciosPublicables {

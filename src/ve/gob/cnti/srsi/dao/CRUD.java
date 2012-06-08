@@ -6,8 +6,10 @@ import java.util.List;
 
 import ve.gob.cnti.modelo.temporales.ListaSImasVisitados;
 import ve.gob.cnti.modelo.temporales.SectoresMasPublicados;
+import ve.gob.cnti.modelo.temporales.Solicitud_Suscripcion;
 import ve.gob.cnti.srsi.modelo.Correo;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
+import ve.gob.cnti.srsi.modelo.SolicitudSuscripcion;
 import ve.gob.cnti.srsi.modelo.Telefono;
 import ve.gob.cnti.srsi.modelo.Visita;
 
@@ -461,9 +463,43 @@ public interface CRUD {
 	 * 
 	 * @return Retorna una lista de servicios
 	 */
-	public ArrayList<ServicioInformacion> buscarServicio2(String cadena,
-			byte orderBy, long id_ente);
-
+	public ArrayList<ServicioInformacion> buscarServicio2(String cadena, byte orderBy,
+			long id_ente);
+	
+	/**
+	 * Permite saber el número solicitudes de suscripción no leidos que posee el
+	 * ente
+	 * 
+	 * @param id
+	 *            id del ente a consultar
+	 * @return retorna el número solicitudes de suscripción no leidas
+	 * 
+	 */
+	public long peticionesSuscripcion(long id);
+	
+	/**
+	 * Permite saber el número solicitudes de suscripción pendientes que posee el
+	 * ente
+	 * 
+	 * @param id
+	 *            id del ente a consultar
+	 * @return retorna el número solicitudes de suscripción pendientes
+	 * 
+	 */
+	public long peticionesSuscripcionPendientes(long id);
+	
+	/**
+	 * Retorna una lista de las solicitudes de suscrición a los servicios
+	 * de información publicados por el ente
+	 * 
+	 * @param id_ente
+	 *            Identificador del ente al cual pertenecen las solicitudes de 
+	 *            suscripción a los servicios de información publicados.
+	 * @return Lista de las solicitudes de suscrición a los servicios información.
+	 */
+	public ArrayList<Solicitud_Suscripcion> getSolicitudesSuscripcionPendientes(
+			long id_ente, byte orderBy);
+	
 	public boolean verifySuscriptionRequest(long service, long provider,
 			long client);
 }

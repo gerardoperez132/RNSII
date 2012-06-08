@@ -16,8 +16,10 @@ import org.hibernate.Transaction;
 
 import ve.gob.cnti.modelo.temporales.ListaSImasVisitados;
 import ve.gob.cnti.modelo.temporales.SectoresMasPublicados;
+import ve.gob.cnti.modelo.temporales.Solicitud_Suscripcion;
 import ve.gob.cnti.srsi.dao.Constants.ClaseDato;
 import ve.gob.cnti.srsi.dao.Constants.Status;
+import ve.gob.cnti.srsi.dao.Constants.Sentencias;
 import ve.gob.cnti.srsi.dao.Constants.TipoEntradaSalida;
 import ve.gob.cnti.srsi.i18n.Errors;
 import ve.gob.cnti.srsi.modelo.Correo;
@@ -44,7 +46,7 @@ import com.opensymphony.xwork2.ActionSupport;
  */
 @SuppressWarnings("serial")
 public class DAO extends ActionSupport implements Constants, CRUD, Status,
-		ClaseDato, TipoEntradaSalida {
+		ClaseDato, TipoEntradaSalida,Sentencias {
 
 	public static Errors error = new Errors();
 	private static Session session;
@@ -797,7 +799,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		}
 		return result;
 	}
-
+	//TODO
 	@SuppressWarnings("rawtypes")
 	@Override
 	public List<SectoresMasPublicados> sectoresMasPublicados(int n) {
@@ -821,8 +823,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 						+ "((select count(servicios_informacion.id_sector) from servicios_informacion where servicios_informacion.id_sector = sectores.id_sector AND Servicios_informacion.status = 0 AND Servicios_informacion.id_estado = 2 AND Servicios_informacion.publicado =TRUE)) as S "
 						+ "from  sectores,Servicios_informacion GROUP BY sectores.nombre, sectores.id_sector "
 						+ "ORDER BY s Desc";
-			}
-			System.out.println("consulta " + consulta);
+			}			
 			Query query = session.createSQLQuery(consulta);
 			List list = query.list();
 			Iterator it = list.iterator();
@@ -942,6 +943,28 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		}
 	}
 
+	
+	@Override
+	public long peticionesSuscripcion(long id) {
+		long result;
+		try {
+			startConnection();
+			result = session
+					.createQuery(
+							"FROM SolicitudSuscripcion WHERE " + " id_ente_proveedor = "
+									+ id + " AND status = " + ACTIVO
+									+ " AND leido = false").list().size();
+		
+
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}	
+		return result;
+	}
+
 	@Override
 	public boolean verifySuscriptionRequest(long service, long provider,
 			long client) {
@@ -957,11 +980,70 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 			} catch (Exception e) {
 				return true;
 			}
+
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;
 		} finally {
 			closeConnection();
 		}
+	}
+	
+	@Override
+	public long peticionesSuscripcionPendientes(long id){
+		long result;
+		try {
+			startConnection();
+			result = session
+					.createQuery(
+							"FROM SolicitudSuscripcion WHERE " + " id_ente_proveedor = "
+									+ id + " AND status = " + ACTIVO
+									+ " AND sentencia = " + PENDIENTE).list().size();
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+		return result;
+	}
+	
+	//TODO
+	@Override
+	public ArrayList<Solicitud_Suscripcion> getSolicitudesSuscripcionPendientes(
+			long id_ente, byte orderBy) {
+		List<Solicitud_Suscripcion> result =  new ArrayList<Solicitud_Suscripcion>();
+		ArrayList<?> list;
+		Query query;
+		String order = orderBy > 0 ? "DESC" : "ASC";
+		try {
+			startConnection();
+			query = session.createSQLQuery("select s.id_solicitud_suscripcion,s.id_servicio_informacion,s.leido,s.fecha_creado," +						
+						" (select si.nombre from servicios_informacion as si where si.id_servicio_informacion = s.id_servicio_informacion and si.status=0) as servicio, "+
+						" (select e.siglas from entes as e where e.id_ente = s.id_ente_solicitante and e.status=0) as ente"+
+						" from solicitudes_suscripciones as s"+
+						" where s.id_ente_proveedor = " + id_ente +
+						" AND s.status = 0" +
+						" ORDER BY s.leido "+ order);
+			list = (ArrayList<?>) query.list();			
+			Iterator<?> it = list.iterator();
+			while (it.hasNext()) {
+				Object[] st = (Object[]) it.next();
+				Solicitud_Suscripcion s = new Solicitud_Suscripcion();
+				s.setId_suscripcion((Long) Long.parseLong(st[0].toString()));
+				s.setId_servicio_informacion((Long) Long.parseLong(st[1].toString()));
+				s.setLeido((Boolean) Boolean.parseBoolean(st[2].toString()));
+				s.setFecha_creado((Date)st[3]);				
+				s.setServicio((String)st[4].toString());
+				s.setEnte((String)st[5].toString());				
+				result.add(s);
+			}
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+		return (ArrayList<Solicitud_Suscripcion>) result;
 	}
 }
