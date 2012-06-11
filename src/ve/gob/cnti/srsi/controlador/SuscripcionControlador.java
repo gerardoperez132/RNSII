@@ -41,6 +41,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 	private boolean ListarSuscricionesPendientes;
 	private boolean detalles_solicitud;
 	private boolean aprobarRechasar;
+	private String sentencia[] = {"Aceptado","Rechazado"};
 
 	@SkipValidation
 	public String prepararSuscripcion() {
@@ -201,8 +202,27 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 		detalles_solicitud = true;
 		return SUCCESS;
 	}
+		
+	@SkipValidation
+	public String preparar_AprobarRechasarSuscripcion() {
+		//Lee los detalles de la suscripción
+		session = ActionContext.getContext().getSession();
+		Usuario user = (Usuario) session.get("usuario");
+		solicitud = (SolicitudSuscripcion) read(solicitud, id_solicitud_suscripcion);		
+		//Valida que un trol quiera acceder a las solicitudes de otros entes	
+		if(user.getId_ente() != solicitud.getId_ente_proveedor())
+			return INPUT;				
+		//Valida que la solicitud.sentencia sea igual a cero (0 = pendiente).
+		if(!(solicitud.getSentencia()==0))
+			return INPUT;			
+		ente = (Ente) read(ente, solicitud.getId_ente_solicitante());
+		servicio = (ServicioInformacion) read(servicio,solicitud.getId_servicio_informacion());
+		//Variable necesaria para la vista.
+		aprobarRechasar = true;		
+		return SUCCESS;
+	}
 	
-	//TODO examinar solicitud examinarSolicitud, poner a true leido
+	//TODO 
 	@SkipValidation
 	public String AprobarRechasarSuscripcion() {
 		//validar datos y guardar
@@ -322,6 +342,14 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 
 	public void setAprobarRechasar(boolean aprobarRechasar) {
 		this.aprobarRechasar = aprobarRechasar;
+	}
+
+	public String[] getSentencia() {
+		return sentencia;
+	}
+
+	public void setSentencia(String sentencia[]) {
+		this.sentencia = sentencia;
 	}
 }
 
