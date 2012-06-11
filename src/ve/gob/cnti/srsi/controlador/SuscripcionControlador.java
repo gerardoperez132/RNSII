@@ -40,6 +40,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 	private boolean invalid;
 	private boolean ListarSuscricionesPendientes;
 	private boolean detalles_solicitud;
+	private boolean aprobarRechasar;
 
 	@SkipValidation
 	public String prepararSuscripcion() {
@@ -144,14 +145,14 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 							"error.suscripcion.telefono.regex"));
 			setInvalid(true);
 		}
-		if (solicitud.getMotivo().trim().isEmpty()) {
+		if (solicitud.getMotivo_solicitante().trim().isEmpty()) {
 			addFieldError(
 					"motivo",
 					error.getProperties().getProperty(
 							"error.suscripcion.motivo"));
 			setInvalid(true);
 		}
-		if (!solicitud.getMotivo().toUpperCase().matches(REGEX_DESCRIPTION)) {
+		if (!solicitud.getMotivo_solicitante().toUpperCase().matches(REGEX_DESCRIPTION)) {
 			addFieldError("motivo",
 					error.getProperties()
 							.getProperty("error.regex.description"));
@@ -180,8 +181,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 		ListarSuscricionesPendientes = true;
 		return SUCCESS;
 	}
-	
-	//TODO examinar solicitud examinarSolicitud, poner a true leido
+		
 	@SkipValidation
 	public String examinarSolicitud() {		
 		session = ActionContext.getContext().getSession();
@@ -199,6 +199,16 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 		ente = (Ente) read(ente, solicitud.getId_ente_solicitante());
 		servicio = (ServicioInformacion) read(servicio,solicitud.getId_servicio_informacion());
 		detalles_solicitud = true;
+		return SUCCESS;
+	}
+	
+	//TODO examinar solicitud examinarSolicitud, poner a true leido
+	@SkipValidation
+	public String AprobarRechasarSuscripcion() {
+		//validar datos y guardar
+		session = ActionContext.getContext().getSession();
+		Usuario user = (Usuario) session.get("usuario");				
+		
 		return SUCCESS;
 	}
 
@@ -304,6 +314,14 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 
 	public void setId_solicitud_suscripcion(long id_solicitud_suscripcion) {
 		this.id_solicitud_suscripcion = id_solicitud_suscripcion;
+	}
+
+	public boolean isAprobarRechasar() {
+		return aprobarRechasar;
+	}
+
+	public void setAprobarRechasar(boolean aprobarRechasar) {
+		this.aprobarRechasar = aprobarRechasar;
 	}
 }
 
