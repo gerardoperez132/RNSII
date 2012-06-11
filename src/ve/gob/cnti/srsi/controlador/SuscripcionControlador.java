@@ -22,7 +22,7 @@ import com.opensymphony.xwork2.ActionContext;
 @SuppressWarnings("serial")
 public class SuscripcionControlador extends DAO implements Constants, Order,
 		Modelos, Sentencias {
-	
+
 	private List<Solicitud_Suscripcion> solicitudes = new ArrayList<Solicitud_Suscripcion>();
 
 	private String codigo;
@@ -38,6 +38,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 	private long id_solicitud_suscripcion;
 	private boolean suscripcion_form;
 	private boolean invalid;
+	private boolean requested;
 	private boolean ListarSuscricionesPendientes;
 	private boolean detalles_solicitud;
 	private boolean aprobarRechasar;
@@ -62,6 +63,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 								+ ente.getSiglas().toUpperCase()
 								+ " ya ha solicitado la suscripción a este servicio de información");
 				setInvalid(true);
+				setRequested(true);
 			}
 		return SUCCESS;
 	}
@@ -89,75 +91,81 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 
 	@Override
 	public void validate() {
-		if (solicitud.getSolicitante().trim().isEmpty()) {
-			addFieldError(
-					"solicitante",
-					error.getProperties().getProperty(
-							"error.suscripcion.solicitante"));
-			setInvalid(true);
-		}
-		if (!solicitud.getSolicitante().toUpperCase().matches(REGEX_TITLE)) {
-			addFieldError("solicitante",
-					error.getProperties().getProperty("error.regex.title"));
-			setInvalid(true);
-		}
-		if (solicitud.getCargo().trim().isEmpty()) {
-			addFieldError("cargo",
-					error.getProperties()
-							.getProperty("error.suscripcion.cargo"));
-			setInvalid(true);
-		}
-		if (!solicitud.getCargo().toUpperCase().matches(REGEX_TITLE)) {
-			addFieldError("cargo",
-					error.getProperties().getProperty("error.regex.title"));
-			setInvalid(true);
-		}
-		if (solicitud.getCorreo().trim().isEmpty()) {
-			addFieldError("correo",
-					error.getProperties()
-							.getProperty("error.suscripcion.email"));
-			setInvalid(true);
-		}
-		if (!solicitud.getCorreo().matches(REGEX_EMAIL)) {
-			addFieldError("correo",
-					error.getProperties().getProperty("error.regex.email"));
-			setInvalid(true);
-		}
-		if (solicitud.getTelefono().trim().isEmpty()) {
-			addFieldError(
-					"telefono",
-					error.getProperties().getProperty(
-							"error.suscripcion.telefono"));
-			setInvalid(true);
-		}
-		if (solicitud.getTelefono().length() > 0
-				&& solicitud.getTelefono().length() < 7) {
-			addFieldError(
-					"telefono",
-					error.getProperties().getProperty(
-							"error.suscripcion.telefono.digit"));
-			setInvalid(true);
-		}
-		if (!solicitud.getTelefono().matches("\\d.*")
-				&& !solicitud.getTelefono().trim().isEmpty()) {
-			addFieldError(
-					"telefono",
-					error.getProperties().getProperty(
-							"error.suscripcion.telefono.regex"));
-			setInvalid(true);
-		}
-		if (solicitud.getMotivo_solicitante().trim().isEmpty()) {
-			addFieldError(
-					"motivo",
-					error.getProperties().getProperty(
-							"error.suscripcion.motivo"));
-			setInvalid(true);
-		}
-		if (!solicitud.getMotivo_solicitante().toUpperCase().matches(REGEX_DESCRIPTION)) {
-			addFieldError("motivo",
-					error.getProperties()
-							.getProperty("error.regex.description"));
-			setInvalid(true);
+		if (!isRequested()) {
+			if (solicitud.getSolicitante().trim().isEmpty()) {
+				addFieldError(
+						"solicitante",
+						error.getProperties().getProperty(
+								"error.suscripcion.solicitante"));
+				setInvalid(true);
+			}
+			if (!solicitud.getSolicitante().toUpperCase().matches(REGEX_TITLE)) {
+				addFieldError("solicitante",
+						error.getProperties().getProperty("error.regex.title"));
+				setInvalid(true);
+			}
+			if (solicitud.getCargo().trim().isEmpty()) {
+				addFieldError(
+						"cargo",
+						error.getProperties().getProperty(
+								"error.suscripcion.cargo"));
+				setInvalid(true);
+			}
+			if (!solicitud.getCargo().toUpperCase().matches(REGEX_TITLE)) {
+				addFieldError("cargo",
+						error.getProperties().getProperty("error.regex.title"));
+				setInvalid(true);
+			}
+			if (solicitud.getCorreo().trim().isEmpty()) {
+				addFieldError(
+						"correo",
+						error.getProperties().getProperty(
+								"error.suscripcion.email"));
+				setInvalid(true);
+			}
+			if (!solicitud.getCorreo().matches(REGEX_EMAIL)) {
+				addFieldError("correo",
+						error.getProperties().getProperty("error.regex.email"));
+				setInvalid(true);
+			}
+			if (solicitud.getTelefono().trim().isEmpty()) {
+				addFieldError(
+						"telefono",
+						error.getProperties().getProperty(
+								"error.suscripcion.telefono"));
+				setInvalid(true);
+			}
+			if (solicitud.getTelefono().length() > 0
+					&& solicitud.getTelefono().length() < 7) {
+				addFieldError(
+						"telefono",
+						error.getProperties().getProperty(
+								"error.suscripcion.telefono.digit"));
+				setInvalid(true);
+			}
+			if (!solicitud.getTelefono().matches("\\d.*")
+					&& !solicitud.getTelefono().trim().isEmpty()) {
+				addFieldError(
+						"telefono",
+						error.getProperties().getProperty(
+								"error.suscripcion.telefono.regex"));
+				setInvalid(true);
+			}
+			if (solicitud.getMotivo_solicitante().trim().isEmpty()) {
+				addFieldError(
+						"motivo",
+						error.getProperties().getProperty(
+								"error.suscripcion.motivo"));
+				setInvalid(true);
+			}
+			if (!solicitud.getMotivo_solicitante().matches(REGEX_DESCRIPTION)) {
+				addFieldError(
+						"motivo",
+						error.getProperties().getProperty(
+								"error.regex.description"));
+				setInvalid(true);
+			}
+
 		}
 		if (isInvalid())
 			prepararSuscripcion();
@@ -172,33 +180,36 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 			return false;
 		}
 	}
-		
+
 	@SkipValidation
 	public String listaSuscripcionesPendientes() {
-		//Lista solicitudes en base a las no leidas, pendientes,
+		// Lista solicitudes en base a las no leidas, pendientes,
 		session = ActionContext.getContext().getSession();
 		Usuario user = (Usuario) session.get("usuario");
-		solicitudes = (List<Solicitud_Suscripcion>) getSolicitudesSuscripcionPendientes(user.getId_ente(),ASC);
+		solicitudes = (List<Solicitud_Suscripcion>) getSolicitudesSuscripcionPendientes(
+				user.getId_ente(), ASC);
 		ListarSuscricionesPendientes = true;
 		return SUCCESS;
 	}
-		
+
 	@SkipValidation
-	public String examinarSolicitud() {		
+	public String examinarSolicitud() {
 		session = ActionContext.getContext().getSession();
-		Usuario user = (Usuario) session.get("usuario");				
-		solicitud = (SolicitudSuscripcion) read(solicitud, id_solicitud_suscripcion);
-		//Valida que un trol quiera acceder a las solicitudes de otros entes	
-		if(user.getId_ente() != solicitud.getId_ente_proveedor())
+		Usuario user = (Usuario) session.get("usuario");
+		solicitud = (SolicitudSuscripcion) read(solicitud,
+				id_solicitud_suscripcion);
+		// Valida que un trol quiera acceder a las solicitudes de otros entes
+		if (user.getId_ente() != solicitud.getId_ente_proveedor())
 			return INPUT;
-		//Guardo que la solicitud ya ha sido revisada y por quien fue leida
-		if(!solicitud.isLeido()){
+		// Guardo que la solicitud ya ha sido revisada y por quien fue leida
+		if (!solicitud.isLeido()) {
 			solicitud.setLeido(true);
 			solicitud.setId_usuario(user.getId_usuario());
 			update(solicitud, id_solicitud_suscripcion);
 		}
 		ente = (Ente) read(ente, solicitud.getId_ente_solicitante());
-		servicio = (ServicioInformacion) read(servicio,solicitud.getId_servicio_informacion());
+		servicio = (ServicioInformacion) read(servicio,
+				solicitud.getId_servicio_informacion());
 		detalles_solicitud = true;
 		return SUCCESS;
 	}
@@ -304,11 +315,20 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 		this.invalid = invalid;
 	}
 
+	public boolean isRequested() {
+		return requested;
+	}
+
+	public void setRequested(boolean requested) {
+		this.requested = requested;
+	}
+
 	public boolean isListarSuscricionesPendientes() {
 		return ListarSuscricionesPendientes;
 	}
 
-	public void setListarSuscricionesPendientes(boolean listarSuscricionesPendientes) {
+	public void setListarSuscricionesPendientes(
+			boolean listarSuscricionesPendientes) {
 		ListarSuscricionesPendientes = listarSuscricionesPendientes;
 	}
 
@@ -352,4 +372,5 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 		this.sentencia = sentencia;
 	}
 }
+
 
