@@ -322,24 +322,24 @@ Detalles de un servicio de información -->
 																	</td>
 																</tr>
 															</s:if>
-															<s:elseif
-																test="id_padre > 0 && tipo == 0 && #id_funcion == id_funcionalidad">
+															<s:elseif test='id_padre > 0 && tipo == 0 && #id_funcion == id_funcionalidad'>
 																<s:set var="padre" value="id_padre"></s:set>
 																<s:iterator value="hijos" status="hijos_Status">
-																	<s:if
-																		test="%{id_padre > 0 && id_padre == #padre && tipo == 0 && #id_funcion == id_funcionalidad}">
+																	<s:if test='%{id_padre > 0 && id_padre == #padre && tipo == 0 && #id_funcion == id_funcionalidad}'>
 																		<s:set name="index_1000" value="%{#index_1000 + 1}" />
-																		<tr
-																			id="node-<s:property value="%{((1000) +  (#index_1000))}" />"
-				form.entrada.registro.title															class="child-of-node-<s:property value="%{(100 + #index_100)}"/>">
-																			<td><s:property value="nombre" />
+																		<tr	id="node-<s:property value="%{((1000) +  (#index_1000))}" />"
+																			class="child-of-node-<s:property value="%{(100 + #index_100)}"/>">
+																			<td>
+																				<s:property value="nombre" />
 																			</td>
-																			<td><s:property value="descripcion" />
+																			<td>
+																				<s:property value="descripcion" />
 																			</td>
-																			<td><s:date name="fecha_creado"
-																					format="d'/'MM'/'yyyy" />
+																			<td>
+																				<s:date name="fecha_creado" format="d'/'MM'/'yyyy" />
 																			</td>
-																			<td><s:text name="dato_entrada" />
+																			<td>
+																				<s:text name="dato_entrada" />
 																			</td>
 																		</tr>
 																	</s:if>
@@ -495,7 +495,7 @@ Formulario para solicitar una suscripción a un servicio de información -->
 										<td align="right">											
 											<s:text name="motivo_solicitud"/>
 										</td>
-										<td><s:textarea name="solicitud.motivo" rows="6" cols="19" id="motivo"/></td>	
+										<td><s:textarea name="solicitud.motivo_solicitante" rows="6" cols="19" id="motivo"/></td>	
 										<td><h5 id="m_motivo" class="requerido">*<s:fielderror><s:param>motivo</s:param></s:fielderror></h5></td>	
 									</tr>	
 									<tr>										
@@ -546,9 +546,9 @@ Lista de suscriciones pendientes -->
 								</s:iterator>
 							</table>							
 						</s:elseif>			
-						<s:elseif test="detalles_solicitud = true">
-<!--	04)
-Muestra los detalles de una solicitud de suscripción -->
+						<s:elseif test="detalles_solicitud == true">
+<!--	05)
+Muestra los detalles de una solicitud de suscripción aprobarRechasar-->
 							<table class="results">
 								<tr>
 									<th colspan="2">
@@ -590,10 +590,69 @@ Muestra los detalles de una solicitud de suscripción -->
 								</tr>
 								<tr>
 									<td class="alt"><s:text name="motivo_solicitud"/></td>
-									<td class="alt2"><s:property value="solicitud.motivo" /></td>
-								</tr>								
+									<td class="alt2"><s:property value="solicitud.motivo_solicitante" /></td>
+								</tr>			
+								<tr>
+									<th colspan="2" >
+										<form action="preparar_AprobarRechasarSuscripcion">
+											<s:hidden value="%{solicitud.id_solicitud_suscripcion}" name="id_solicitud_suscripcion"/>
+											<input type="submit" value="<s:text name="aceptarRechazarSuscripcion"/>">
+										</form>
+									</th>
+								</tr>					
 							</table>						
-						</s:elseif>			
+						</s:elseif>	
+						<s:elseif test="aprobarRechasar == true">
+<!--	06)
+Muestra los detalles de una solicitud de suscripción -->
+							<table class="results">
+								<tr>
+									<th colspan="2">
+										<s:text name="peticion_suscripcion"/>
+									</th>
+								</tr>
+								<tr>
+									<td class="alt"><s:text name="servicio_solicitado" /></td>
+									<td class="alt2"><s:property value="servicio.nombre" /></td>
+								</tr>							
+								<tr>
+									<td class="alt"><s:text name="ente2" /></td>
+									<td class="alt2"><s:property value="ente.nombre" /></td>
+								</tr>
+								<tr>
+									<td class="alt"><s:text name="nombre_solicitante"/></td>
+									<td class="alt2"><s:property value="solicitud.solicitante" /></td>
+								</tr>
+								<tr>
+									<td class="alt"><s:text name="motivo_solicitud"/></td>
+									<td class="alt2"><s:property value="solicitud.motivo_solicitante" /></td>
+								</tr>
+								<tr>
+									<th colspan="2">
+										<s:text name="veredicto_solicitud"/>
+									</th>
+								</tr>
+								<tr>
+									<td class="alt">
+										<input type="radio" name="decision" value="0" />
+										<s:property value="sentencia[0]"/>
+									</td>
+									<td class="alt">
+										<input type="radio" name="decision" value="1" />
+										<s:property value="sentencia[1]"/>
+									</td>
+								</tr>	
+								<tr>
+									<td class="alt">
+										<s:text name="motivo_proveedor"/>
+									</td>
+									<td class="alt2">
+										<s:textarea name="solicitud.motivo_proveedor" rows="6" cols="19" id="motivo"/>
+									</td>
+								</tr>
+								<s:hidden value="%{solicitud.id_solicitud_suscripcion}" name="id_solicitud_suscripcion"/>				
+							</table>						
+						</s:elseif>		
 						<s:else>
 							<s:fielderror>
 								<s:param>error</s:param>
