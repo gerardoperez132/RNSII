@@ -646,10 +646,10 @@ Muestra los detalles de una solicitud de suscripción -->
 									</td>
 									<td class="alt2">
 										<input type="radio" name="solicitud.sentencia" value="1"
-										<s:if test="solicitud.sentencia == 1">checked</s:if> id="ops1" name="ops"/>
+										<s:if test="solicitud.sentencia == 1">checked</s:if> id="ops1"/>
 										<s:property value="sentencia[0]"/>
 										<input type="radio" name="solicitud.sentencia" value="2"
-										<s:if test="solicitud.sentencia == 2">checked</s:if> id="ops2" name="ops"/>
+										<s:if test="solicitud.sentencia == 2">checked</s:if> id="ops2"/>
 										<s:property value="sentencia[1]"/>										
 									</td>
 									<td class="alt2"><h5 id="m_sentencia" class="requerido">*<s:fielderror><s:param>sentencia</s:param></s:fielderror></h5></td>

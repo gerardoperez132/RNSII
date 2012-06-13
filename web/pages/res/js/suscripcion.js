@@ -223,12 +223,8 @@ $(document).ready(function(){
 	 * mostrando un mensaje 'OK' en el dictamen
 	 * 
 	 ******************************************************/
-	$("input[@name='ops']:radio").change(function(e) {		
+	$("input[@name='solicitud.sentencia']:radio").change(function(e) {		
 		$('#m_sentencia').attr('class','ok_pass').html('OK');
 	});
-	
-	
-	
-	
 	
 });
