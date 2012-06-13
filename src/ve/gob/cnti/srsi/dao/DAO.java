@@ -799,7 +799,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		}
 		return result;
 	}
-	//TODO
+	
 	@SuppressWarnings("rawtypes")
 	@Override
 	public List<SectoresMasPublicados> sectoresMasPublicados(int n) {
@@ -953,7 +953,8 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 					.createQuery(
 							"FROM SolicitudSuscripcion WHERE " + " id_ente_proveedor = "
 									+ id + " AND status = " + ACTIVO
-									+ " AND leido = false").list().size();
+									+ " AND leido = false"
+									+ " AND sentencia = " + PENDIENTE).list().size();
 		
 
 		} catch (HibernateException he) {
@@ -1007,8 +1008,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		}
 		return result;
 	}
-	
-	//TODO
+		
 	@Override
 	public ArrayList<Solicitud_Suscripcion> getSolicitudesSuscripcionPendientes(
 			long id_ente, byte orderBy) {
@@ -1024,6 +1024,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 						" from solicitudes_suscripciones as s"+
 						" where s.id_ente_proveedor = " + id_ente +
 						" AND s.status = 0" +
+						" AND s.sentencia = " + PENDIENTE +
 						" ORDER BY s.leido "+ order);
 			list = (ArrayList<?>) query.list();			
 			Iterator<?> it = list.iterator();
