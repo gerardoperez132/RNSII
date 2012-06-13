@@ -212,7 +212,7 @@ $(document).ready(function(){
         	error = true;
         }
 		
-		if(error == false){        	 
+		if(error == false){
         	document.dictamenForm.submit(); 
         }
 		

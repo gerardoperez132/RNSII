@@ -678,6 +678,9 @@ Muestra los detalles de una solicitud de suscripción -->
 							<s:fielderror>
 								<s:param>error</s:param>
 							</s:fielderror>
+							<span class="ok_pass">
+								<s:actionmessage/>
+							</span>
 						</s:else>
 					</div>
 				<%@include file="../layout/footer.jsp"%>

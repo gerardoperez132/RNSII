@@ -273,9 +273,8 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 		if(user.getId_ente() != solicitud.getId_ente_proveedor())
 			return INPUT;				
 		//Valida que la solicitud.sentencia sea igual a cero (0 = pendiente).
-		if(!(solicitud.getSentencia()==0))
-			return INPUT;	
-		
+		if(solicitud.getSentencia()==0)
+			return INPUT;			
 		//Actualiza la solicitud de suscripción
 		update(solicitud,solicitud.getId_solicitud_suscripcion());
 		//Si la desición es ACEPTADO se crea el registro suscrito
@@ -285,6 +284,8 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 			suscrito.setId_servicio_informacion(solicitud.getId_servicio_informacion());
 			create(suscrito);
 		}
+		addActionMessage("EL VEREDICTO DE LA SOLICITUD DE SUSCRIPCIÓN HA SIDO PROCESADA CORRECTAMENTE");
+		aprobarRechasar = false;	
 		return SUCCESS;
 	}
 
