@@ -636,9 +636,9 @@ Muestra los detalles de una solicitud de suscripción -->
 									</th>
 								</tr>
 								<tr>
-									<td class="alt" colspan="3">							
+									<th colspan="3">							
 										<h5 class="requerido"><s:text name="requerido"/></h5>
-									</td>
+									</th>
 								</tr>
 								<tr>
 									<td class="alt">										
