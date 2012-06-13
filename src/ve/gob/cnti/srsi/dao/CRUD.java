@@ -500,6 +500,16 @@ public interface CRUD {
 	public ArrayList<Solicitud_Suscripcion> getSolicitudesSuscripcionPendientes(
 			long id_ente, byte orderBy);
 	
+	/**
+	 * Permite saber el número solicitudes de suscripción Aceptadas por leer
+	 * 
+	 * @param id
+	 *            id del ente a consultar
+	 * @return retorna el número solicitudes de suscripción Aceptadas por leer
+	 * 
+	 */
+	public long getNumeroSuscrionesAceptadas(long id);
+	
 	public boolean verifySuscriptionRequest(long service, long provider,
 			long client);
 }

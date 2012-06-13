@@ -1047,4 +1047,27 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		}
 		return (ArrayList<Solicitud_Suscripcion>) result;
 	}
+	
+	@Override
+	public long getNumeroSuscrionesAceptadas(long id) {
+		long result;
+		try {
+			startConnection();
+			result = session
+					.createQuery(
+							"FROM SolicitudSuscripcion WHERE " + " id_ente_solicitante = "
+									+ id + " AND status = " + ACTIVO
+									+ " AND leido = false"
+									+ " AND sentencia = " + ACEPTADO).list().size();
+		
+
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}	
+		return result;
+	}
 }
+
