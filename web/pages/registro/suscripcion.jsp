@@ -594,7 +594,7 @@ Muestra los detalles de una solicitud de suscripción aprobarRechasar-->
 								</tr>			
 								<tr>
 									<th colspan="2" >
-										<form action="preparar_AprobarRechasarSuscripcion">
+										<form action="preparar_AprobarRechasarSuscripcion" method="post">
 											<s:hidden value="%{solicitud.id_solicitud_suscripcion}" name="id_solicitud_suscripcion"/>
 											<input type="submit" value="<s:text name="aceptarRechazarSuscripcion"/>">
 										</form>
@@ -605,6 +605,7 @@ Muestra los detalles de una solicitud de suscripción aprobarRechasar-->
 						<s:elseif test="aprobarRechasar == true">
 <!--	06)
 Muestra los detalles de una solicitud de suscripción -->
+							<form action="AprobarRechasarSuscripcion" method="post" name="dictamenForm">
 							<table class="results">
 								<tr>
 									<th colspan="2">
@@ -627,31 +628,51 @@ Muestra los detalles de una solicitud de suscripción -->
 									<td class="alt"><s:text name="motivo_solicitud"/></td>
 									<td class="alt2"><s:property value="solicitud.motivo_solicitante" /></td>
 								</tr>
+							</table>
+							<table class="results">
 								<tr>
-									<th colspan="2">
-										<s:text name="veredicto_solicitud"/>
+									<th colspan="3">										
+										<s:text name="veredicto_solicitud"/>										
 									</th>
 								</tr>
 								<tr>
-									<td class="alt">
-										<input type="radio" name="decision" value="0" />
+									<td class="alt" colspan="3">							
+										<h5 class="requerido"><s:text name="requerido"/></h5>
+									</td>
+								</tr>
+								<tr>
+									<td class="alt">										
+										<s:text name="dictamen"/>
+									</td>
+									<td class="alt2">
+										<input type="radio" name="solicitud.sentencia" value="1"
+										<s:if test="solicitud.sentencia == 1">checked</s:if> id="ops1" name="ops"/>
 										<s:property value="sentencia[0]"/>
+										<input type="radio" name="solicitud.sentencia" value="2"
+										<s:if test="solicitud.sentencia == 2">checked</s:if> id="ops2" name="ops"/>
+										<s:property value="sentencia[1]"/>										
 									</td>
-									<td class="alt">
-										<input type="radio" name="decision" value="1" />
-										<s:property value="sentencia[1]"/>
-									</td>
+									<td class="alt2"><h5 id="m_sentencia" class="requerido">*<s:fielderror><s:param>sentencia</s:param></s:fielderror></h5></td>
 								</tr>	
 								<tr>
-									<td class="alt">
+									<td class="alt">										
 										<s:text name="motivo_proveedor"/>
 									</td>
 									<td class="alt2">
-										<s:textarea name="solicitud.motivo_proveedor" rows="6" cols="19" id="motivo"/>
+										<s:textarea name="solicitud.motivo_proveedor" rows="6" cols="19" id="motivo"/>										
 									</td>
-								</tr>
-								<s:hidden value="%{solicitud.id_solicitud_suscripcion}" name="id_solicitud_suscripcion"/>				
-							</table>						
+									<td class="alt2"><h5 id="m_motivo" class="requerido">*<s:fielderror><s:param>motivo_proveedor</s:param></s:fielderror></h5></td>
+								</tr>											
+								<tr>
+									<th colspan="3">
+										<input type="submit" value="<s:text name='enviar'/>" id="sentenciar">
+									</th>
+								</tr>	
+							</table>
+							<s:hidden value="%{true}" name="aprobarRechasar"/>
+							<s:hidden value="%{solicitud.id_solicitud_suscripcion}" name="id_solicitud_suscripcion"/>
+							<s:token name="token" />								
+							</form>						
 						</s:elseif>		
 						<s:else>
 							<s:fielderror>

@@ -15,6 +15,7 @@ import ve.gob.cnti.srsi.dao.DAO;
 import ve.gob.cnti.srsi.modelo.Ente;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.SolicitudSuscripcion;
+import ve.gob.cnti.srsi.modelo.Suscrito;
 import ve.gob.cnti.srsi.modelo.Usuario;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -43,6 +44,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 	private boolean detalles_solicitud;
 	private boolean aprobarRechasar;
 	private String sentencia[] = {"Aceptado","Rechazado"};
+	
 
 	@SkipValidation
 	public String prepararSuscripcion() {
@@ -166,7 +168,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 				setInvalid(true);
 			}
 
-		}
+		}else
 		if (isInvalid())
 			prepararSuscripcion();
 		else
@@ -180,7 +182,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 			return false;
 		}
 	}
-
+	
 	@SkipValidation
 	public String listaSuscripcionesPendientes() {
 		// Lista solicitudes en base a las no leidas, pendientes,
@@ -233,13 +235,56 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 		return SUCCESS;
 	}
 	
-	//TODO 
+	//TODO Enviar notificación por correo, falta colocar el mensaje registro exitoso para la vista	
 	@SkipValidation
 	public String AprobarRechasarSuscripcion() {
+		boolean err = false;		
+		String motivo_proveedor;
+		int decision;
 		//validar datos y guardar
+		motivo_proveedor = solicitud.getMotivo_proveedor();
+		decision = solicitud.getSentencia();
 		session = ActionContext.getContext().getSession();
 		Usuario user = (Usuario) session.get("usuario");				
+		if (solicitud.getMotivo_proveedor().trim().isEmpty()) {
+			addFieldError(
+					"motivo_proveedor",
+					error.getProperties().getProperty(
+							"error.suscripcion.motivo_proveedor"));
+			err = true;
+		}else if (!solicitud.getMotivo_proveedor().toUpperCase().matches(REGEX_TITLE)) {
+			addFieldError("motivo_proveedor",
+					error.getProperties().getProperty("error.regex.title"));
+			err = true;
+		}
+		if(!(solicitud.getSentencia() >= 1 && solicitud.getSentencia() <=2)){
+			addFieldError("sentencia",
+					error.getProperties().getProperty("error.suscripcion.sentencia"));
+			err = true;
+		}
+		solicitud = (SolicitudSuscripcion) read(solicitud, id_solicitud_suscripcion);	
+		solicitud.setSentencia(decision);
+		solicitud.setMotivo_proveedor(motivo_proveedor);
+		ente = (Ente) read(ente, solicitud.getId_ente_solicitante());
+		servicio = (ServicioInformacion) read(servicio,solicitud.getId_servicio_informacion());
+		if(err)
+			return INPUT;			
+		//Valida que un trol quiera acceder a las solicitudes de otros entes	
+		if(user.getId_ente() != solicitud.getId_ente_proveedor())
+			return INPUT;				
+		//Valida que la solicitud.sentencia sea igual a cero (0 = pendiente).
+		if(!(solicitud.getSentencia()==0))
+			return INPUT;	
 		
+		//Actualiza la solicitud de suscripción
+		update(solicitud,solicitud.getId_solicitud_suscripcion());
+		//Si la desición es ACEPTADO se crea el registro suscrito
+		if(decision == 1){
+			Suscrito suscrito = new Suscrito();
+			suscrito.setId_ente(solicitud.getId_ente_solicitante());
+			suscrito.setId_servicio_informacion(solicitud.getId_servicio_informacion());
+			create(suscrito);
+		}
 		return SUCCESS;
 	}
 

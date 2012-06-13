@@ -432,6 +432,14 @@
 			<result name="success">registro/suscripcion.jsp</result>
 			<result name="input" type="redirectAction">home</result>
 		</action>
+		
+		<action name="AprobarRechasarSuscripcion" method="AprobarRechasarSuscripcion"
+			class="ve.gob.cnti.srsi.controlador.SuscripcionControlador">
+			<interceptor-ref name="doubleSubmit" />
+			<result name="success">registro/suscripcion.jsp</result>
+			<result name="input">registro/suscripcion.jsp</result>
+			<result name="invalid.token">registro/suscripcion.jsp</result>
+		</action>
 
 		<action name="solicitarSuscripcion" method="solicitarSuscripcion"
 			class="ve.gob.cnti.srsi.controlador.SuscripcionControlador">

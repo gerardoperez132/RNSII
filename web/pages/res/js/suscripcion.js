@@ -180,4 +180,55 @@ $(document).ready(function(){
         	$('#m_motivo').attr('class','ok_pass').html('OK');
         }
 	});
+	
+	
+	/*******************************************************
+	 * 
+	 * Validando el formulario para sentenciar la solicitud de una suscripción
+	 * 
+	 ******************************************************/	
+	$('#sentenciar').click(function (e){	
+		
+		e.preventDefault();		
+		var enoughRegex = new RegExp("^[a-zA-Z0-9 _.()áéíóúAÉÍÓÚÑñ]+$");
+		var error = false;
+		
+		//Validando el motivo de la decisión
+		if($('#motivo').val() == ''){       	
+        	$('#m_motivo').attr('class','error_pass').html('* Debe introducir el motivo del dictamen');  
+        	error = true;
+        }else if(!enoughRegex.test($('#motivo').val())){        	
+        	$('#m_motivo').html('Sólo puede introducir letras, números y puntos');
+        	$('#m_motivo').attr('class','error_pass');     
+        	error = true;
+        }else if($('#motivo').val().length < 20){       	
+        	$('#m_motivo').attr('class','alert_pass').html('Su motivo debe poseer al menos 20 caracteres');
+        	error = true;
+        }
+		
+		//validando que escoja una decisión
+		if($('#ops1').val() == '' && $('#ops2').val() == '' ){       	
+        	$('#m_sentencia').attr('class','error_pass').html('Debe elegir un dictamen de la solicitud de suscripción');
+        	error = true;
+        }
+		
+		if(error == false){        	 
+        	document.dictamenForm.submit(); 
+        }
+		
+	});	
+	
+	/*******************************************************
+	 * 
+	 * mostrando un mensaje 'OK' en el dictamen
+	 * 
+	 ******************************************************/
+	$("input[@name='ops']:radio").change(function(e) {		
+		$('#m_sentencia').attr('class','ok_pass').html('OK');
+	});
+	
+	
+	
+	
+	
 });
