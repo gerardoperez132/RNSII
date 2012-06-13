@@ -604,7 +604,7 @@ Muestra los detalles de una solicitud de suscripción aprobarRechasar-->
 						</s:elseif>	
 						<s:elseif test="aprobarRechasar == true">
 <!--	06)
-Muestra los detalles de una solicitud de suscripción -->
+Formulario para dar el dictamen de una solicitud de suscripción -->
 							<form action="AprobarRechasarSuscripcion" method="post" name="dictamenForm">
 							<table class="results">
 								<tr>
