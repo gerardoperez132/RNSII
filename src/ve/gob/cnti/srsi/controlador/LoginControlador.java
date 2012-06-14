@@ -48,6 +48,7 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 	private String clave_nueva_confirme;
 	private long peticionesNoLeidas;
 	private long peticionesPendientes;
+	private long solicitudesAceptadasRechazadas;
 
 	@SuppressWarnings("unchecked")
 	public String autenticarUsuario() throws Exception {
@@ -161,6 +162,7 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 		}
 		peticionesNoLeidas = peticionesSuscripcion(ente.getId_ente());
 		peticionesPendientes = peticionesSuscripcionPendientes(ente.getId_ente());
+		solicitudesAceptadasRechazadas = getNumeroSuscrionesAceptadasRechazadas(ente.getId_ente());
 		return SUCCESS;
 	}
 
@@ -418,6 +420,14 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 
 	public void setPeticionesPendientes(long peticionesPendientes) {
 		this.peticionesPendientes = peticionesPendientes;
+	}
+
+	public long getSolicitudesAceptadasRechazadas() {
+		return solicitudesAceptadasRechazadas;
+	}
+
+	public void setSolicitudesAceptadasRechazadas(long solicitudesAceptadasRechazadas) {
+		this.solicitudesAceptadasRechazadas = solicitudesAceptadasRechazadas;
 	}
 
 	
