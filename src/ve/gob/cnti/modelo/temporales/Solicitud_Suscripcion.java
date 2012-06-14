@@ -2,7 +2,7 @@ package ve.gob.cnti.modelo.temporales;
 
 import java.util.Date;
 
-/*Clase temporar creada para llevar los datos que son necesarios a la petición  
+/*Clase temporal creada para llevar los datos que son necesarios a la petición  
  *de listar solicitudes de suscripción, evitando llevar datos demas que se encuentran en el modelo
  */
 public class Solicitud_Suscripcion{
