@@ -1071,7 +1071,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 	}
 	
 	@Override
-	public ArrayList<Solicitud_Suscripcion> getlistaSolicitudesAceptadas(
+	public ArrayList<Solicitud_Suscripcion> getlistaSolicitudesAceptadasRechazadas(
 			long id_ente, byte orderBy) {
 		List<Solicitud_Suscripcion> result =  new ArrayList<Solicitud_Suscripcion>();
 		ArrayList<?> list;
@@ -1085,7 +1085,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 						" from solicitudes_suscripciones as s"+
 						" where s.id_ente_proveedor = " + id_ente +
 						" AND s.status = 0" +
-						" AND s.sentencia = " + ACEPTADO +
+						" AND s.sentencia != " + PENDIENTE +
 						" AND s.leido = false " +
 						" ORDER BY s.leido "+ order);
 			list = (ArrayList<?>) query.list();			

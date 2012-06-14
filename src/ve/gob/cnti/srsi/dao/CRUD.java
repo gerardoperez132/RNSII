@@ -511,14 +511,14 @@ public interface CRUD {
 	public long getNumeroSuscrionesAceptadas(long id);
 	
 	/**
-	 * Retorna una lista de las solicitudes de suscrición Aceptadas
+	 * Retorna una lista de las solicitudes de suscrición Aceptadas - Rechazadas
 	 *  
 	 * @param id_ente
 	 *            Identificador del ente al cual pertenecen las solicitudes de 
-	 *            suscripción aceptadas a buscar.
-	 * @return Lista de las solicitudes de suscrición Aceptadas.
+	 *            suscripción aceptadas - rechazadas a buscar.
+	 * @return Lista de las solicitudes de suscrición Aceptadas -Rechazadas.
 	 */
-	public ArrayList<Solicitud_Suscripcion> getlistaSolicitudesAceptadas(long id_ente, byte orderBy);
+	public ArrayList<Solicitud_Suscripcion> getlistaSolicitudesAceptadasRechazadas(long id_ente, byte orderBy);
 	
 	public boolean verifySuscriptionRequest(long service, long provider,
 			long client);
