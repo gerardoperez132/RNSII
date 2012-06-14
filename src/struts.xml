@@ -420,7 +420,7 @@
 		</action>
 
 		<!-- ******* ******* ******* ******* Suscripciones ******* ******* ******* 
-			******* AprobarRechasarSuscripcion-->
+			******* -->
 		<action name="prepararSuscripcion" method="prepararSuscripcion"
 			class="ve.gob.cnti.srsi.controlador.SuscripcionControlador">
 			<result name="success">registro/suscripcion.jsp</result>
@@ -450,6 +450,12 @@
 		</action>
 		
 		<action name="ListarSuscricionesPendientes" method="listaSuscripcionesPendientes"
+			class="ve.gob.cnti.srsi.controlador.SuscripcionControlador">
+			<result name="success">registro/suscripcion.jsp</result>
+			<result name="input" type="redirectAction">home</result>
+		</action>
+		
+		<action name="listarSolicitudesAceptadas" method="listarSolicitudesAceptadas"
 			class="ve.gob.cnti.srsi.controlador.SuscripcionControlador">
 			<result name="success">registro/suscripcion.jsp</result>
 			<result name="input" type="redirectAction">home</result>
