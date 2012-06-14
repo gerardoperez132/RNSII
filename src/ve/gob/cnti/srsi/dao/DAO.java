@@ -1069,5 +1069,45 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		}	
 		return result;
 	}
+	
+	@Override
+	public ArrayList<Solicitud_Suscripcion> getlistaSolicitudesAceptadas(
+			long id_ente, byte orderBy) {
+		List<Solicitud_Suscripcion> result =  new ArrayList<Solicitud_Suscripcion>();
+		ArrayList<?> list;
+		Query query;
+		String order = orderBy > 0 ? "DESC" : "ASC";
+		try {
+			startConnection();
+			query = session.createSQLQuery("select s.id_solicitud_suscripcion,s.id_servicio_informacion,s.leido,s.fecha_creado," +						
+						" (select si.nombre from servicios_informacion as si where si.id_servicio_informacion = s.id_servicio_informacion and si.status=0) as servicio, "+
+						" (select e.siglas from entes as e where e.id_ente = s.id_ente_solicitante and e.status=0) as ente"+
+						" from solicitudes_suscripciones as s"+
+						" where s.id_ente_proveedor = " + id_ente +
+						" AND s.status = 0" +
+						" AND s.sentencia = " + ACEPTADO +
+						" AND s.leido = false " +
+						" ORDER BY s.leido "+ order);
+			list = (ArrayList<?>) query.list();			
+			Iterator<?> it = list.iterator();
+			while (it.hasNext()) {
+				Object[] st = (Object[]) it.next();
+				Solicitud_Suscripcion s = new Solicitud_Suscripcion();
+				s.setId_suscripcion((Long) Long.parseLong(st[0].toString()));
+				s.setId_servicio_informacion((Long) Long.parseLong(st[1].toString()));
+				s.setLeido((Boolean) Boolean.parseBoolean(st[2].toString()));
+				s.setFecha_creado((Date)st[3]);				
+				s.setServicio((String)st[4].toString());
+				s.setEnte((String)st[5].toString());				
+				result.add(s);
+			}
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+		return (ArrayList<Solicitud_Suscripcion>) result;
+	}
 }
 
