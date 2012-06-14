@@ -6,6 +6,7 @@ import java.util.List;
 
 import ve.gob.cnti.modelo.temporales.ListaSImasVisitados;
 import ve.gob.cnti.modelo.temporales.SectoresMasPublicados;
+import ve.gob.cnti.modelo.temporales.Solicitud_Respuesta;
 import ve.gob.cnti.modelo.temporales.Solicitud_Suscripcion;
 import ve.gob.cnti.srsi.modelo.Correo;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
@@ -518,7 +519,7 @@ public interface CRUD {
 	 *            suscripción aceptadas - rechazadas a buscar.
 	 * @return Lista de las solicitudes de suscrición Aceptadas -Rechazadas.
 	 */
-	public ArrayList<Solicitud_Suscripcion> getlistaSolicitudesAceptadasRechazadas(long id_ente, byte orderBy);
+	public ArrayList<Solicitud_Respuesta> getlistaSolicitudesAceptadasRechazadas(long id_ente, byte orderBy);
 	
 	public boolean verifySuscriptionRequest(long service, long provider,
 			long client);

@@ -16,6 +16,7 @@ import org.hibernate.Transaction;
 
 import ve.gob.cnti.modelo.temporales.ListaSImasVisitados;
 import ve.gob.cnti.modelo.temporales.SectoresMasPublicados;
+import ve.gob.cnti.modelo.temporales.Solicitud_Respuesta;
 import ve.gob.cnti.modelo.temporales.Solicitud_Suscripcion;
 import ve.gob.cnti.srsi.dao.Constants.ClaseDato;
 import ve.gob.cnti.srsi.dao.Constants.Status;
@@ -1071,9 +1072,9 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 	}
 	
 	@Override
-	public ArrayList<Solicitud_Suscripcion> getlistaSolicitudesAceptadasRechazadas(
+	public ArrayList<Solicitud_Respuesta> getlistaSolicitudesAceptadasRechazadas(
 			long id_ente, byte orderBy) {
-		List<Solicitud_Suscripcion> result =  new ArrayList<Solicitud_Suscripcion>();
+		List<Solicitud_Respuesta> result =  new ArrayList<Solicitud_Respuesta>();
 		ArrayList<?> list;
 		Query query;
 		String order = orderBy > 0 ? "DESC" : "ASC";
@@ -1081,9 +1082,10 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 			startConnection();
 			query = session.createSQLQuery("select s.id_solicitud_suscripcion,s.id_servicio_informacion,s.leido,s.fecha_creado," +						
 						" (select si.nombre from servicios_informacion as si where si.id_servicio_informacion = s.id_servicio_informacion and si.status=0) as servicio, "+
-						" (select e.siglas from entes as e where e.id_ente = s.id_ente_solicitante and e.status=0) as ente"+
+						" (select e.siglas from entes as e where e.id_ente = s.id_ente_proveedor and e.status=0) as ente,"+
+						" s.sentencia "+
 						" from solicitudes_suscripciones as s"+
-						" where s.id_ente_proveedor = " + id_ente +
+						" where s.id_ente_solicitante = " + id_ente +
 						" AND s.status = 0" +
 						" AND s.sentencia != " + PENDIENTE +
 						" AND s.leido = false " +
@@ -1092,13 +1094,14 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 			Iterator<?> it = list.iterator();
 			while (it.hasNext()) {
 				Object[] st = (Object[]) it.next();
-				Solicitud_Suscripcion s = new Solicitud_Suscripcion();
+				Solicitud_Respuesta s = new Solicitud_Respuesta();
 				s.setId_suscripcion((Long) Long.parseLong(st[0].toString()));
 				s.setId_servicio_informacion((Long) Long.parseLong(st[1].toString()));
 				s.setLeido((Boolean) Boolean.parseBoolean(st[2].toString()));
 				s.setFecha_creado((Date)st[3]);				
 				s.setServicio((String)st[4].toString());
-				s.setEnte((String)st[5].toString());				
+				s.setEnte((String)st[5].toString());	
+				s.setSentencia((int) Integer.parseInt(st[6].toString()));
 				result.add(s);
 			}
 		} catch (HibernateException he) {
@@ -1107,7 +1110,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		} finally {
 			closeConnection();
 		}
-		return (ArrayList<Solicitud_Suscripcion>) result;
+		return (ArrayList<Solicitud_Respuesta>) result;
 	}
 }
 
