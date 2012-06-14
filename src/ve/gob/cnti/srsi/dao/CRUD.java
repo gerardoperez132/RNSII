@@ -501,14 +501,14 @@ public interface CRUD {
 			long id_ente, byte orderBy);
 	
 	/**
-	 * Permite saber el número solicitudes de suscripción Aceptadas por leer
+	 * Permite saber el número solicitudes de suscripción Aceptadas-Rechazadas por leer
 	 * 
 	 * @param id
 	 *            id del ente a consultar
-	 * @return retorna el número solicitudes de suscripción Aceptadas por leer
+	 * @return retorna el número solicitudes de suscripción Aceptadas-Rechazadas por leer
 	 * 
 	 */
-	public long getNumeroSuscrionesAceptadas(long id);
+	public long getNumeroSuscrionesAceptadasRechazadas(long id);
 	
 	/**
 	 * Retorna una lista de las solicitudes de suscrición Aceptadas - Rechazadas

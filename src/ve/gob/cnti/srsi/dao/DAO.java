@@ -1049,7 +1049,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 	}
 	
 	@Override
-	public long getNumeroSuscrionesAceptadas(long id) {
+	public long getNumeroSuscrionesAceptadasRechazadas(long id) {
 		long result;
 		try {
 			startConnection();
@@ -1058,7 +1058,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 							"FROM SolicitudSuscripcion WHERE " + " id_ente_solicitante = "
 									+ id + " AND status = " + ACTIVO
 									+ " AND leido = false"
-									+ " AND sentencia = " + ACEPTADO).list().size();
+									+ " AND sentencia != " + PENDIENTE).list().size();
 		
 
 		} catch (HibernateException he) {
