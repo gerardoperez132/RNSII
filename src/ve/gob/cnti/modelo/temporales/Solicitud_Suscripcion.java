@@ -13,7 +13,7 @@ public class Solicitud_Suscripcion{
 	private Date fecha_creado;
 	private String servicio;
 	private String ente;
-	
+	private int sentencia;
 	public long getId_suscripcion() {
 		return id_suscripcion;
 	}
@@ -50,13 +50,19 @@ public class Solicitud_Suscripcion{
 	public void setEnte(String ente) {
 		this.ente = ente;
 	}
+	public int getSentencia() {
+		return sentencia;
+	}
+	public void setSentencia(int sentencia) {
+		this.sentencia = sentencia;
+	}
 	@Override
 	public String toString() {
 		return "Solicitud_Suscripcion [id_suscripcion=" + id_suscripcion
 				+ ", id_servicio_informacion=" + id_servicio_informacion
 				+ ", leido=" + leido + ", fecha_creado=" + fecha_creado
-				+ ", servicio=" + servicio + ", ente=" + ente + "]";
-	}	
-	
-	
+				+ ", servicio=" + servicio + ", ente=" + ente + ", sentencia="
+				+ sentencia + "]";
+	}
+		
 }

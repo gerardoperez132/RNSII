@@ -1021,12 +1021,14 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 			startConnection();
 			query = session.createSQLQuery("select s.id_solicitud_suscripcion,s.id_servicio_informacion,s.leido,s.fecha_creado," +						
 						" (select si.nombre from servicios_informacion as si where si.id_servicio_informacion = s.id_servicio_informacion and si.status=0) as servicio, "+
-						" (select e.siglas from entes as e where e.id_ente = s.id_ente_solicitante and e.status=0) as ente"+
+						" (select e.siglas from entes as e where e.id_ente = s.id_ente_solicitante and e.status=0) as ente, "+
+						" s.sentencia"+
 						" from solicitudes_suscripciones as s"+
 						" where s.id_ente_proveedor = " + id_ente +
-						" AND s.status = 0" +
-						" AND s.sentencia = " + PENDIENTE +
-						" ORDER BY s.leido "+ order);
+						" AND s.status = 0" +						
+						" ORDER BY s.leido "+ order +
+						" , s.fecha_creado "+ order+
+						" , s.sentencia "+ order);
 			list = (ArrayList<?>) query.list();			
 			Iterator<?> it = list.iterator();
 			while (it.hasNext()) {
@@ -1037,7 +1039,8 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 				s.setLeido((Boolean) Boolean.parseBoolean(st[2].toString()));
 				s.setFecha_creado((Date)st[3]);				
 				s.setServicio((String)st[4].toString());
-				s.setEnte((String)st[5].toString());				
+				s.setEnte((String)st[5].toString());
+				s.setSentencia((int) Integer.parseInt(st[6].toString()));
 				result.add(s);
 			}
 		} catch (HibernateException he) {
@@ -1088,7 +1091,9 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 						" where s.id_ente_solicitante = " + id_ente +
 						" AND s.status = 0" +
 						" AND s.sentencia != " + PENDIENTE +						
-						" ORDER BY s.leido "+ order);
+						" ORDER BY s.leido "+ order +
+						" , s.fecha_creado "+ order+
+						" , s.sentencia "+ order);
 			list = (ArrayList<?>) query.list();			
 			Iterator<?> it = list.iterator();
 			while (it.hasNext()) {
