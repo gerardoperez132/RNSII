@@ -520,8 +520,9 @@ Lista de suscriciones pendientes -->
 									<th><s:text name="solicitante" /></th>
 									<th><s:text name="fecha_creacion" /></th>
 									<th><s:text name="detalles" /></th>
-									<th><s:text name="sentenciar" /></th>
+									<th><s:text name="dictamen" /></th>
 								</tr>
+								<s:if test="solicitudes.size()>0">
 								<s:iterator value="solicitudes">
 								<tr>
 									<td>
@@ -540,10 +541,27 @@ Lista de suscriciones pendientes -->
 										</form>										
 									</td>
 									<td>
-										
+										<s:if test="sentencia==0">
+											<form action="preparar_AprobarRechasarSuscripcion" method="post">
+												<s:hidden value="%{solicitud.id_solicitud_suscripcion}" name="id_solicitud_suscripcion"/>
+												<input type="submit" value="<s:text name="sentenciar"/>">
+											</form>	
+										</s:if>
+										<s:else>
+											<s:if test="sentencia==1"><s:text name="aprobado" /></s:if>
+											<s:if test="sentencia==2"><s:text name="rechazado" /></s:if>
+										</s:else>																			
 									</td>
 								</tr>
 								</s:iterator>
+								</s:if>
+								<s:else>
+								<tr>
+									<td colspan="5">
+										<s:text name="solicitudesNull"/>
+									</td>
+								</tr>
+								</s:else>
 							</table>							
 						</s:elseif>			
 						<s:elseif test="detalles_solicitud == true">
@@ -591,7 +609,8 @@ Muestra los detalles de una solicitud de suscripción aprobarRechasar-->
 								<tr>
 									<td class="alt"><s:text name="motivo_solicitud"/></td>
 									<td class="alt2"><s:property value="solicitud.motivo_solicitante" /></td>
-								</tr>			
+								</tr>	
+								<s:if test="sentenciar==0">		
 								<tr>
 									<th colspan="2" >
 										<form action="preparar_AprobarRechasarSuscripcion" method="post">
@@ -599,7 +618,8 @@ Muestra los detalles de una solicitud de suscripción aprobarRechasar-->
 											<input type="submit" value="<s:text name="aceptarRechazarSuscripcion"/>">
 										</form>
 									</th>
-								</tr>					
+								</tr>
+								</s:if>					
 							</table>						
 						</s:elseif>	
 						<s:elseif test="aprobarRechasar == true">
