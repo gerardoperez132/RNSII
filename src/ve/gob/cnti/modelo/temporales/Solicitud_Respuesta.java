@@ -14,7 +14,7 @@ public class Solicitud_Respuesta {
 	private Date fecha_creado;
 	private String servicio;
 	private String ente;
-	private String sentencia;
+	private int sentencia;
 	
 	public long getId_suscripcion() {
 		return id_suscripcion;
@@ -52,13 +52,12 @@ public class Solicitud_Respuesta {
 	public void setEnte(String ente) {
 		this.ente = ente;
 	}
-	public String getSentencia() {
+	public int getSentencia() {
 		return sentencia;
 	}
-	public void setSentencia(String sentencia) {
+	public void setSentencia(int sentencia) {
 		this.sentencia = sentencia;
 	}
-	
 	@Override
 	public String toString() {
 		return "Solicitud_Respuesta [id_suscripcion=" + id_suscripcion
@@ -66,5 +65,5 @@ public class Solicitud_Respuesta {
 				+ ", leido=" + leido + ", fecha_creado=" + fecha_creado
 				+ ", servicio=" + servicio + ", ente=" + ente + ", sentencia="
 				+ sentencia + "]";
-	}
+	}	
 }

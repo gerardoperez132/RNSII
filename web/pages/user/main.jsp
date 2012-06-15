@@ -83,6 +83,28 @@
 				<hr>
 			</s:if>
 			
+			<s:if test="solicitudesAceptadasRechazadas > 0">
+			<!-- Numero de solicitudes aceptadas no leidas   -->
+				<form action="listarSolicitudesAceptadasRechazadas" method="post">				
+				<table>
+					<tr>
+						<td>
+							<s:if test="solicitudesAceptadasRechazadas == 1">
+							<span style="color:blue;">Hay una respuesta a una solicitud de suscripción</span>
+							</s:if>		
+							<s:else>
+							<span style="color:blue;">Hay <s:property value="solicitudesAceptadasRechazadas"/> respuestas a solicitudes de suscripción</span>
+							</s:else>						
+						</td>
+						<td>			
+							<input type="submit" value="ver detalles">
+						</td>
+					</tr>
+				</table>
+				</form>					
+				<hr>
+			</s:if>
+			
 			<!-- Tabla en árbol. -->
 			<table id="tree" class="treeTable">
 				<thead>

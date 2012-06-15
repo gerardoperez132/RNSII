@@ -673,7 +673,126 @@ Formulario para dar el dictamen de una solicitud de suscripción -->
 							<s:hidden value="%{solicitud.id_solicitud_suscripcion}" name="id_solicitud_suscripcion"/>
 							<s:token name="token" />								
 							</form>						
-						</s:elseif>		
+						</s:elseif>	
+						<s:elseif test="ListarSuscricionesAceptadasRechazadas == true">
+<!--	07)
+Lista con las respuestas a las solicitudes de suscripción a servicios de información de otros entes -->
+							<table class="results">
+								<tr>
+									<th colspan="5">
+										<s:text name="listaSolicitudesRespuesta"/>
+									</th>
+								</tr>								
+								<tr>
+									<th><s:text name="servicio_solicitado" /></th>
+									<th><s:text name="ente3" /></th>
+									<th><s:text name="fecha_creacion" /></th>
+									<th><s:text name="sentencia" /></th>									
+									<th><s:text name="detalles" /></th>
+								</tr>
+								<s:if test="solicitudesRespondidas.size() > 0">
+								<s:iterator value="solicitudesRespondidas">
+								<tr>
+									<td <s:if test="leido==false">style="text-transform: uppercase;font-weight: bold;"</s:if>>
+										<s:property value="servicio"/>
+									</td>
+									<td <s:if test="leido==false">style="text-transform: uppercase;font-weight: bold;"</s:if>>
+										<s:property value="ente"/>
+									</td>
+									<td align="center" <s:if test="leido==false">style="text-transform: uppercase;font-weight: bold;"</s:if>>
+										<s:date name="fecha_creado" format="d'/'MM'/'yyyy" />
+									</td>
+									<td <s:if test="leido==false">style="text-transform: uppercase;font-weight: bold;"</s:if>>
+										<s:if test="sentencia==1"><s:text name="aprobado" /></s:if>
+										<s:if test="sentencia==2"><s:text name="rechazado" /></s:if>																			
+									</td>									
+									<td <s:if test="leido==false">style="text-transform: uppercase;font-weight: bold;"</s:if>>
+										<form action="examinarSolicitud" method="post">
+											<s:hidden value="%{id_suscripcion}" name="id_solicitud_suscripcion"/>
+											<s:hidden value="%{true}" name="detalles_respuesta"/>
+											<input type="submit" value="<s:text name="detalles"/>">
+										</form>	
+									</td>
+								</tr>
+								</s:iterator>
+								</s:if>
+								<s:else>
+								<tr>
+									<td colspan="5">
+										<s:text name="solicitudesRespondidasNull"></s:text>
+									</td>
+								</tr>	
+								</s:else>
+							</table>						
+						</s:elseif>	
+						<s:elseif test="detalles_respuesta == true">
+<!--	08)
+Muestra los detalles de una respuesta a una solicitud de suscripción-->
+							<table class="results">
+								<tr>
+									<th colspan="2">
+										<s:text name="detallesRespuestaSolicitud"/>
+									</th>
+								</tr>
+								<tr>
+									<td class="alt"><s:text name="n_servicio" /></td>
+									<td class="alt2"><s:property value="servicio.id_servicio_informacion" /></td>
+								</tr>
+								<tr>
+									<td class="alt"><s:text name="servicio_solicitado" /></td>
+									<td class="alt2"><s:property value="servicio.nombre" /></td>
+								</tr>								
+								<tr>
+									<td class="alt"><s:text name="ente3" /></td>
+									<td class="alt2"><s:property value="ente.nombre" /></td>
+								</tr>
+								<tr>
+									<td class="alt"><s:text name="fecha_respuesta" /></td>
+									<td class="alt2"><s:date name="solicitud.fecha_modificado" format="d'/'MM'/'yyyy" /></td>
+								</tr>
+								<tr>
+									<td class="alt"><s:text name="dictamen" /></td>
+									<td class="alt2">
+										<s:if test="solicitud.sentencia==1"><s:text name="aprobado" /></s:if>
+										<s:if test="solicitud.sentencia==2"><s:text name="rechazado" /></s:if>
+									</td>
+								</tr>								
+								<tr>
+									<td class="alt"><s:text name="motivo_proveedor"/></td>
+									<td class="alt2"><s:property value="solicitud.motivo_proveedor" /></td>
+								</tr>
+								<tr>
+									<th colspan="2">
+										<s:text name="datos_solicitud"/>
+									</th>
+								</tr>								
+								<tr>
+									<td class="alt"><s:text name="nombre_solicitante"/></td>
+									<td class="alt2"><s:property value="solicitud.solicitante" /></td>
+								</tr>
+								<tr>
+									<td class="alt"><s:text name="cargo_solicitante"/></td>
+									<td class="alt2"><s:property value="solicitud.cargo" /></td>
+								</tr>
+								<tr>
+									<td class="alt"><s:text name="fecha_creacion"/></td>
+									<td class="alt2"><s:date name="solicitud.fecha_creado" format="d'/'MM'/'yyyy" /></td>
+								</tr>
+								<tr>
+									<td class="alt"><s:text name="telefono"/></td>
+									<td class="alt2"><s:property value="solicitud.telefono" /></td>
+								</tr>
+								<tr>
+									<td class="alt"><s:text name="correo"/></td>
+									<td class="alt2"><s:property value="solicitud.correo" /></td>
+								</tr>
+								<tr>
+									<td class="alt"><s:text name="motivo_solicitud"/></td>
+									<td class="alt2"><s:property value="solicitud.motivo_solicitante" /></td>
+								</tr>													
+							</table>
+							<br>						
+						</s:elseif>
 						<s:else>
 							<s:fielderror>
 								<s:param>error</s:param>

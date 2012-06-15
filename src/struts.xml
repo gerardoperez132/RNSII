@@ -466,8 +466,7 @@
 			<result name="success">registro/suscripcion.jsp</result>
 			<result name="input" type="redirectAction">home</result>
 		</action>
-
-
+		
 		<!-- ******* ******* ****** ******* Actions para el usuario final ******* 
 			******* ****** ******* -->
 		<action name="SRSI" method="inicio"

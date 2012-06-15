@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
+import ve.gob.cnti.modelo.temporales.Solicitud_Respuesta;
 import ve.gob.cnti.modelo.temporales.Solicitud_Suscripcion;
 import ve.gob.cnti.srsi.dao.Constants;
 import ve.gob.cnti.srsi.dao.Constants.Modelos;
@@ -25,6 +26,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 		Modelos, Sentencias {
 
 	private List<Solicitud_Suscripcion> solicitudes = new ArrayList<Solicitud_Suscripcion>();
+	private List<Solicitud_Respuesta> solicitudesRespondidas = new ArrayList<Solicitud_Respuesta>();
 
 	private String codigo;
 	private String codigos[] = CODES;
@@ -42,7 +44,9 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 	private boolean requested;
 	private boolean ListarSuscricionesPendientes;
 	private boolean detalles_solicitud;
+	private boolean detalles_respuesta;
 	private boolean aprobarRechasar;
+	private boolean ListarSuscricionesAceptadasRechazadas;
 	private String sentencia[] = {"Aceptado","Rechazado"};
 	
 
@@ -183,6 +187,18 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 		}
 	}
 	
+	//TODO listarSolicitudesAceptadas	
+	@SkipValidation
+	public String listarSolicitudesAceptadasRechazadas() {
+		// Lista solicitudes en base a las no leidas, pendientes,
+		session = ActionContext.getContext().getSession();
+		Usuario user = (Usuario) session.get("usuario");
+		setSolicitudesRespondidas((List<Solicitud_Respuesta>) getlistaSolicitudesAceptadasRechazadas(
+				user.getId_ente(), ASC));
+		ListarSuscricionesAceptadasRechazadas = true;
+		return SUCCESS;
+	}
+	
 	@SkipValidation
 	public String listaSuscripcionesPendientes() {
 		// Lista solicitudes en base a las no leidas, pendientes,
@@ -201,21 +217,30 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 		solicitud = (SolicitudSuscripcion) read(solicitud,
 				id_solicitud_suscripcion);
 		// Valida que un trol quiera acceder a las solicitudes de otros entes
-		if (user.getId_ente() != solicitud.getId_ente_proveedor())
-			return INPUT;
+		if(!detalles_respuesta){
+			if (user.getId_ente() != solicitud.getId_ente_proveedor())
+				return INPUT;
+		}else{
+			if (user.getId_ente() != solicitud.getId_ente_solicitante())
+				return INPUT;
+		}
 		// Guardo que la solicitud ya ha sido revisada y por quien fue leida
 		if (!solicitud.isLeido()) {
 			solicitud.setLeido(true);
 			solicitud.setId_usuario(user.getId_usuario());
 			update(solicitud, id_solicitud_suscripcion);
-		}
-		ente = (Ente) read(ente, solicitud.getId_ente_solicitante());
+		}		
+		if(!detalles_respuesta){
+			detalles_solicitud = true;
+			ente = (Ente) read(ente, solicitud.getId_ente_solicitante());
+		}else{
+			ente = (Ente) read(ente, solicitud.getId_ente_proveedor());
+		}		
 		servicio = (ServicioInformacion) read(servicio,
 				solicitud.getId_servicio_informacion());
-		detalles_solicitud = true;
 		return SUCCESS;
 	}
-		
+				
 	@SkipValidation
 	public String preparar_AprobarRechasarSuscripcion() {
 		//Lee los detalles de la suscripción
@@ -274,16 +299,18 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 			return INPUT;				
 		//Valida que la solicitud.sentencia sea igual a cero (0 = pendiente).
 		if(solicitud.getSentencia()==0)
-			return INPUT;			
-		//Actualiza la solicitud de suscripción
-		update(solicitud,solicitud.getId_solicitud_suscripcion());
+			return INPUT;		
 		//Si la desición es ACEPTADO se crea el registro suscrito
 		if(decision == 1){
 			Suscrito suscrito = new Suscrito();
 			suscrito.setId_ente(solicitud.getId_ente_solicitante());
 			suscrito.setId_servicio_informacion(solicitud.getId_servicio_informacion());
-			create(suscrito);
+			create(suscrito);			
 		}
+		//Coloco a false leido para utilizarlo con el ente solicitante, en las notificaciones.
+		solicitud.setLeido(false);
+		//Actualiza la solicitud de suscripción
+		update(solicitud,solicitud.getId_solicitud_suscripcion());
 		addActionMessage("EL VEREDICTO DE LA SOLICITUD DE SUSCRIPCIÓN HA SIDO PROCESADA CORRECTAMENTE");
 		aprobarRechasar = false;	
 		return SUCCESS;
@@ -416,6 +443,31 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 
 	public void setSentencia(String sentencia[]) {
 		this.sentencia = sentencia;
+	}
+
+	public boolean isListarSuscricionesAceptadasRechazadas() {
+		return ListarSuscricionesAceptadasRechazadas;
+	}
+
+	public void setListarSuscricionesAceptadasRechazadas(
+			boolean listarSuscricionesAceptadasRechazadas) {
+		ListarSuscricionesAceptadasRechazadas = listarSuscricionesAceptadasRechazadas;
+	}
+
+	public List<Solicitud_Respuesta> getSolicitudesRespondidas() {
+		return solicitudesRespondidas;
+	}
+
+	public void setSolicitudesRespondidas(List<Solicitud_Respuesta> solicitudesRespondidas) {
+		this.solicitudesRespondidas = solicitudesRespondidas;
+	}
+
+	public boolean isDetalles_respuesta() {
+		return detalles_respuesta;
+	}
+
+	public void setDetalles_respuesta(boolean detalles_respuesta) {
+		this.detalles_respuesta = detalles_respuesta;
 	}
 }
 
