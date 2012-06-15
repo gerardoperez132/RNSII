@@ -566,7 +566,7 @@ Lista de suscriciones pendientes -->
 									<td>
 										<s:if test="sentencia==0">
 											<form action="preparar_AprobarRechasarSuscripcion" method="post">
-												<s:hidden value="%{solicitud.id_solicitud_suscripcion}" name="id_solicitud_suscripcion"/>
+												<s:hidden value="%{id_suscripcion}" name="id_solicitud_suscripcion"/>
 												<input type="submit" value="<s:text name="sentenciar"/>">
 											</form>	
 										</s:if>
@@ -633,7 +633,7 @@ Muestra los detalles de una solicitud de suscripción aprobarRechasar-->
 									<td class="alt"><s:text name="motivo_solicitud"/></td>
 									<td class="alt2"><s:property value="solicitud.motivo_solicitante" /></td>
 								</tr>	
-								<s:if test="sentencia==0">		
+								<s:if test="solicitud.sentencia==0">		
 								<tr>
 									<th colspan="2" >
 										<form action="preparar_AprobarRechasarSuscripcion" method="post">
@@ -646,7 +646,7 @@ Muestra los detalles de una solicitud de suscripción aprobarRechasar-->
 								<s:else>
 								<tr>
 									<th colspan="2">										
-										<s:text name="veredicto_solicitud"/>										
+										<s:text name="veredicto_solicitud"/>									
 									</th>
 								</tr>
 								<tr>
