@@ -6,8 +6,6 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
-import com.opensymphony.xwork2.ActionContext;
-
 import ve.gob.cnti.srsi.dao.Constants;
 import ve.gob.cnti.srsi.dao.Constants.Formulario;
 import ve.gob.cnti.srsi.dao.Constants.Modelos;
@@ -17,6 +15,8 @@ import ve.gob.cnti.srsi.modelo.EntradaSalida;
 import ve.gob.cnti.srsi.modelo.Funcionalidad;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.Usuario;
+
+import com.opensymphony.xwork2.ActionContext;
 
 @SuppressWarnings("serial")
 public class FuncionalidadControlador extends DAO implements Formulario,
@@ -99,15 +99,15 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 	public String modificarFuncionalidad() {
 		Usuario user = new Usuario();
 		session = ActionContext.getContext().getSession();
-		user = (Usuario) session.get("usuario");		
+		user = (Usuario) session.get("usuario");
 		funcionalidad.setId_servicio_informacion(id_servicio_informacion);
 		funcionalidad.setId_usuario(user.getId_usuario());
 		update(funcionalidad, id_funcionalidad);
 		return SUCCESS;
 	}
 
-	//TODO Eliminar identificando el usuario
-	//TODO Eliminar los datos E/S de la funcionalidad
+	// TODO Eliminar identificando el usuario
+	// TODO Eliminar los datos E/S de la funcionalidad
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String eliminarFuncionalidad() {

@@ -47,15 +47,13 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 	private boolean detalles_respuesta;
 	private boolean aprobarRechasar;
 	private boolean ListarSuscricionesAceptadasRechazadas;
-	private String sentencia[] = {"Aceptado","Rechazado"};
-	
+	private String sentencia[] = { "Aceptado", "Rechazado" };
 
 	@SkipValidation
 	public String prepararSuscripcion() {
 		if (!verificarLong(id_servicio))
 			return INPUT;
 		servicio = (ServicioInformacion) read(servicio, id_servicio);
-		ente = (Ente) read(ente, servicio.getId_ente());
 		suscripcion_form = true;
 		prepareRequest();
 		if (read(solicitud).size() > 0)
@@ -65,9 +63,9 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 					solicitud.getId_ente_solicitante())) {
 				addFieldError(
 						"error",
-						"El "
-								+ ente.getSiglas().toUpperCase()
-								+ " ya ha solicitado la suscripción a este servicio de información");
+						error.getProperties()
+								.getProperty("error.suscripcion.duplicated")
+								.replace("{0}", ente.getSiglas().toUpperCase()));
 				setInvalid(true);
 				setRequested(true);
 			}
@@ -87,6 +85,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 	private void prepareRequest() {
 		session = ActionContext.getContext().getSession();
 		Usuario user = (Usuario) session.get("usuario");
+		ente = (Ente) session.get("ente");
 		solicitud.setId_ente_proveedor(((ServicioInformacion) read(servicio,
 				id_servicio)).getId_ente());
 		solicitud.setId_ente_solicitante(user.getId_ente());
@@ -172,8 +171,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 				setInvalid(true);
 			}
 
-		}else
-		if (isInvalid())
+		} else if (isInvalid())
 			prepararSuscripcion();
 		else
 			solicitarSuscripcion();
@@ -186,8 +184,8 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 			return false;
 		}
 	}
-	
-	//TODO listarSolicitudesAceptadas	
+
+	// TODO listarSolicitudesAceptadas
 	@SkipValidation
 	public String listarSolicitudesAceptadasRechazadas() {
 		// Lista solicitudes en base a las no leidas, pendientes,
@@ -198,7 +196,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 		ListarSuscricionesAceptadasRechazadas = true;
 		return SUCCESS;
 	}
-	
+
 	@SkipValidation
 	public String listaSuscripcionesPendientes() {
 		// Lista solicitudes en base a las no leidas, pendientes,
@@ -217,10 +215,10 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 		solicitud = (SolicitudSuscripcion) read(solicitud,
 				id_solicitud_suscripcion);
 		// Valida que un trol quiera acceder a las solicitudes de otros entes
-		if(!detalles_respuesta){
+		if (!detalles_respuesta) {
 			if (user.getId_ente() != solicitud.getId_ente_proveedor())
 				return INPUT;
-		}else{
+		} else {
 			if (user.getId_ente() != solicitud.getId_ente_solicitante())
 				return INPUT;
 		}
@@ -229,90 +227,98 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 			solicitud.setLeido(true);
 			solicitud.setId_usuario(user.getId_usuario());
 			update(solicitud, id_solicitud_suscripcion);
-		}		
-		if(!detalles_respuesta){
+		}
+		if (!detalles_respuesta) {
 			detalles_solicitud = true;
 			ente = (Ente) read(ente, solicitud.getId_ente_solicitante());
-		}else{
+		} else {
 			ente = (Ente) read(ente, solicitud.getId_ente_proveedor());
-		}		
+		}
 		servicio = (ServicioInformacion) read(servicio,
 				solicitud.getId_servicio_informacion());
 		return SUCCESS;
 	}
-				
+
 	@SkipValidation
 	public String preparar_AprobarRechasarSuscripcion() {
-		//Lee los detalles de la suscripción
+		// Lee los detalles de la suscripción
 		session = ActionContext.getContext().getSession();
 		Usuario user = (Usuario) session.get("usuario");
-		solicitud = (SolicitudSuscripcion) read(solicitud, id_solicitud_suscripcion);		
-		//Valida que un trol quiera acceder a las solicitudes de otros entes	
-		if(user.getId_ente() != solicitud.getId_ente_proveedor())
-			return INPUT;				
-		//Valida que la solicitud.sentencia sea igual a cero (0 = pendiente).
-		if(!(solicitud.getSentencia()==0))
-			return INPUT;			
+		solicitud = (SolicitudSuscripcion) read(solicitud,
+				id_solicitud_suscripcion);
+		// Valida que un trol quiera acceder a las solicitudes de otros entes
+		if (user.getId_ente() != solicitud.getId_ente_proveedor())
+			return INPUT;
+		// Valida que la solicitud.sentencia sea igual a cero (0 = pendiente).
+		if (!(solicitud.getSentencia() == 0))
+			return INPUT;
 		ente = (Ente) read(ente, solicitud.getId_ente_solicitante());
-		servicio = (ServicioInformacion) read(servicio,solicitud.getId_servicio_informacion());
-		//Variable necesaria para la vista.
-		aprobarRechasar = true;		
+		servicio = (ServicioInformacion) read(servicio,
+				solicitud.getId_servicio_informacion());
+		// Variable necesaria para la vista.
+		aprobarRechasar = true;
 		return SUCCESS;
 	}
-	
-	//TODO Enviar notificación por correo, falta colocar el mensaje registro exitoso para la vista	
+
+	// TODO Enviar notificación por correo, falta colocar el mensaje registro
+	// exitoso para la vista
 	@SkipValidation
 	public String AprobarRechasarSuscripcion() {
-		boolean err = false;		
+		boolean err = false;
 		String motivo_proveedor;
 		int decision;
-		//validar datos y guardar
+		// validar datos y guardar
 		motivo_proveedor = solicitud.getMotivo_proveedor();
 		decision = solicitud.getSentencia();
 		session = ActionContext.getContext().getSession();
-		Usuario user = (Usuario) session.get("usuario");				
+		Usuario user = (Usuario) session.get("usuario");
 		if (solicitud.getMotivo_proveedor().trim().isEmpty()) {
+			addFieldError("motivo_proveedor", error.getProperties()
+					.getProperty("error.suscripcion.motivo_proveedor"));
+			err = true;
+		} else if (!solicitud.getMotivo_proveedor().toUpperCase()
+				.matches(REGEX_TITLE)) {
+			addFieldError("motivo_proveedor", error.getProperties()
+					.getProperty("error.regex.title"));
+			err = true;
+		}
+		if (!(solicitud.getSentencia() >= 1 && solicitud.getSentencia() <= 2)) {
 			addFieldError(
-					"motivo_proveedor",
+					"sentencia",
 					error.getProperties().getProperty(
-							"error.suscripcion.motivo_proveedor"));
-			err = true;
-		}else if (!solicitud.getMotivo_proveedor().toUpperCase().matches(REGEX_TITLE)) {
-			addFieldError("motivo_proveedor",
-					error.getProperties().getProperty("error.regex.title"));
+							"error.suscripcion.sentencia"));
 			err = true;
 		}
-		if(!(solicitud.getSentencia() >= 1 && solicitud.getSentencia() <=2)){
-			addFieldError("sentencia",
-					error.getProperties().getProperty("error.suscripcion.sentencia"));
-			err = true;
-		}
-		solicitud = (SolicitudSuscripcion) read(solicitud, id_solicitud_suscripcion);	
+		solicitud = (SolicitudSuscripcion) read(solicitud,
+				id_solicitud_suscripcion);
 		solicitud.setSentencia(decision);
 		solicitud.setMotivo_proveedor(motivo_proveedor);
 		ente = (Ente) read(ente, solicitud.getId_ente_solicitante());
-		servicio = (ServicioInformacion) read(servicio,solicitud.getId_servicio_informacion());
-		if(err)
-			return INPUT;			
-		//Valida que un trol quiera acceder a las solicitudes de otros entes	
-		if(user.getId_ente() != solicitud.getId_ente_proveedor())
-			return INPUT;				
-		//Valida que la solicitud.sentencia sea igual a cero (0 = pendiente).
-		if(solicitud.getSentencia()==0)
-			return INPUT;		
-		//Si la desición es ACEPTADO se crea el registro suscrito
-		if(decision == 1){
+		servicio = (ServicioInformacion) read(servicio,
+				solicitud.getId_servicio_informacion());
+		if (err)
+			return INPUT;
+		// Valida que un trol quiera acceder a las solicitudes de otros entes
+		if (user.getId_ente() != solicitud.getId_ente_proveedor())
+			return INPUT;
+		// Valida que la solicitud.sentencia sea igual a cero (0 = pendiente).
+		if (solicitud.getSentencia() == 0)
+			return INPUT;
+		// Si la desición es ACEPTADO se crea el registro suscrito
+		if (decision == 1) {
 			Suscrito suscrito = new Suscrito();
 			suscrito.setId_ente(solicitud.getId_ente_solicitante());
-			suscrito.setId_servicio_informacion(solicitud.getId_servicio_informacion());
-			create(suscrito);			
+			suscrito.setId_servicio_informacion(solicitud
+					.getId_servicio_informacion());
+			create(suscrito);
 		}
-		//Coloco a false leido para utilizarlo con el ente solicitante, en las notificaciones.
+		// Coloco a false leido para utilizarlo con el ente solicitante, en las
+		// notificaciones.
 		solicitud.setLeido(false);
-		//Actualiza la solicitud de suscripción
-		update(solicitud,solicitud.getId_solicitud_suscripcion());
+		// Actualiza la solicitud de suscripción
+		update(solicitud, solicitud.getId_solicitud_suscripcion());
 		addActionMessage("EL VEREDICTO DE LA SOLICITUD DE SUSCRIPCIÓN HA SIDO PROCESADA CORRECTAMENTE");
-		aprobarRechasar = false;	
+		aprobarRechasar = false;
 		return SUCCESS;
 	}
 
@@ -458,7 +464,8 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 		return solicitudesRespondidas;
 	}
 
-	public void setSolicitudesRespondidas(List<Solicitud_Respuesta> solicitudesRespondidas) {
+	public void setSolicitudesRespondidas(
+			List<Solicitud_Respuesta> solicitudesRespondidas) {
 		this.solicitudesRespondidas = solicitudesRespondidas;
 	}
 
@@ -470,5 +477,3 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 		this.detalles_respuesta = detalles_respuesta;
 	}
 }
-
-
