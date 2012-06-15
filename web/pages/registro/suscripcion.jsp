@@ -574,13 +574,13 @@ Muestra los detalles de una solicitud de suscripción aprobarRechasar-->
 									</th>
 								</tr>
 								<tr>
-									<td class="alt"><s:text name="servicio_solicitado" /></td>
-									<td class="alt2"><s:property value="servicio.nombre" /></td>
-								</tr>
-								<tr>
 									<td class="alt"><s:text name="n_servicio" /></td>
 									<td class="alt2"><s:property value="servicio.id_servicio_informacion" /></td>
 								</tr>
+								<tr>
+									<td class="alt"><s:text name="servicio_solicitado" /></td>
+									<td class="alt2"><s:property value="servicio.nombre" /></td>
+								</tr>								
 								<tr>
 									<th colspan="2">
 										<s:text name="datos_solicitud"/>
@@ -610,7 +610,7 @@ Muestra los detalles de una solicitud de suscripción aprobarRechasar-->
 									<td class="alt"><s:text name="motivo_solicitud"/></td>
 									<td class="alt2"><s:property value="solicitud.motivo_solicitante" /></td>
 								</tr>	
-								<s:if test="sentenciar==0">		
+								<s:if test="sentencia==0">		
 								<tr>
 									<th colspan="2" >
 										<form action="preparar_AprobarRechasarSuscripcion" method="post">
@@ -619,8 +619,31 @@ Muestra los detalles de una solicitud de suscripción aprobarRechasar-->
 										</form>
 									</th>
 								</tr>
-								</s:if>					
-							</table>						
+								</s:if>	
+								<s:else>
+								<tr>
+									<th colspan="2">										
+										<s:text name="veredicto_solicitud"/>										
+									</th>
+								</tr>
+								<tr>
+									<td class="alt"><s:text name="sentencia"/></td>
+									<td class="alt2">
+										<s:if test="solicitud.sentencia==1"><s:text name="aprobado" /></s:if>
+										<s:if test="solicitud.sentencia==2"><s:text name="rechazado" /></s:if>										
+									</td>
+								</tr>
+								<tr>
+									<td class="alt"><s:text name="motivo_proveedor"/></td>
+									<td class="alt2"><s:property value="solicitud.motivo_proveedor" /></td>
+								</tr>								
+								<tr>
+									<td class="alt"><s:text name="fecha"/></td>
+									<td class="alt2"><s:date name="solicitud.fecha_creado" format="d'/'MM'/'yyyy" /></td>
+								</tr>								
+								</s:else>				
+							</table>
+							<br>						
 						</s:elseif>	
 						<s:elseif test="aprobarRechasar == true">
 <!--	06)
