@@ -32,27 +32,39 @@
 										<td colspan="3">
 											<h5 style="margin: 0;">
 												<s:text name="recoveryPass" />
-											</h5></td>
+											</h5>
+										</td>
 									</tr>
 									<tr>
 										<td colspan="3">
 											<p style="font-size: x-small; font-family: sans-serif;">
 												<s:text name="recoveryPassInfo" />
-											</p></td>
+											</p>
+										</td>
 									</tr>
 									<tr>
 										<td colspan="3"><s:fielderror>
 												<s:param>error</s:param>
 											</s:fielderror> <s:fielderror>
 												<s:param>correo</s:param>
-											</s:fielderror> <span class="ok_pass"> <s:actionmessage /> </span></td>
+											</s:fielderror> <span class="ok_pass"> <s:actionmessage />
+										</span></td>
 									</tr>
 									<tr>
 										<td><s:text name="correo" /></td>
 										<td><input type="text" name="correo" /></td>
 										<td><a href="#" class="tooltip" tabindex="-1"> <img
 												src="res/img/ayuda.gif" alt="ayuda"> <span><s:text
-														name="mailHelp" /> </span> </a></td>
+														name="mailHelp" /> </span>
+										</a></td>
+									</tr>
+									<tr>
+										<td><s:text name="captcha" /></td>
+										<td><input type="text" name="captcha" /></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td colspan="3"><img src="user/captcha.jsp" id="captcha"></td>
 									</tr>
 									<tr>
 										<td colspan="3" align="right" style="padding-right: 28px;">
@@ -72,12 +84,14 @@
 									<td colspan="3">
 										<h5 style="margin: 0;">
 											<s:text name="recoveryPass" />
-										</h5></td>
+										</h5>
+									</td>
 								</tr>
 								<tr>
 									<td colspan="3"><s:fielderror>
 											<s:param>error</s:param>
-										</s:fielderror> <span class="ok_pass"> <s:actionmessage /> </span></td>
+										</s:fielderror> <span class="ok_pass"> <s:actionmessage />
+									</span></td>
 								</tr>
 								<tr>
 									<td colspan="3" align="center"><s:a
@@ -88,7 +102,7 @@
 							</table>
 						</div>
 					</s:elseif>
-					<s:elseif test="recoveryPassForm == true">
+					<s:elseif test="recoveryPassForm">
 						<div
 							Style="margin-left: 25%; margin-top: 5%; margin-bottom: 15%; width: 500px; padding: 15px;">
 							<form action="cambiarClave" method="post" id="formModificarClave"
@@ -103,28 +117,22 @@
 										<td colspan="4">
 											<h5 class="requerido">
 												<s:text name="usuario.modificar.requerido" />
-											</h5></td>
-									<tr>
-									<tr>
-										<td><s:text name="usuario.modificar.clave.nueva" />
+											</h5>
 										</td>
+									<tr>
+									<tr>
+										<td><s:text name="usuario.modificar.clave.nueva" /></td>
 										<td><input type="password" name="clave_nueva" id="pass" />
 										</td>
-										<td><h5 class="requerido">*</h5>
-										</td>
-										<td><span id="passstrength"></span>
-										</td>
+										<td><h5 class="requerido">*</h5></td>
+										<td><span id="passstrength"></span></td>
 									<tr>
 									<tr>
-										<td><s:text name="usuario.modificar.clave.confirma" />
-										</td>
+										<td><s:text name="usuario.modificar.clave.confirma" /></td>
 										<td><input type="password" name="clave_nueva_confirme"
-											id="pass2" />
-										</td>
-										<td><h5 class="requerido">*</h5>
-										</td>
-										<td><span id="passequal"></span> <br>
-										</td>
+											id="pass2" /></td>
+										<td><h5 class="requerido">*</h5></td>
+										<td><span id="passequal"></span> <br></td>
 									<tr>
 									<tr>
 										<td colspan="4"><s:token name="token" /> <s:hidden
@@ -156,15 +164,15 @@
 												<s:param>correo</s:param>
 											</s:fielderror> <s:fielderror>
 												<s:param>password</s:param>
-											</s:fielderror>
-										</td>
+											</s:fielderror></td>
 									</tr>
 									<tr>
 										<td><s:text name="user" /></td>
 										<td><input type="text" name="correo" /></td>
-										<td><a href="#" class="tooltip"> <img
+										<td><a href="#" class="tooltip" tabindex="-1"> <img
 												src="res/img/ayuda.gif" alt="ayuda"> <span><s:text
-														name="mailHelp" /> </span> </a></td>
+														name="mailHelp" /> </span>
+										</a></td>
 									</tr>
 									<tr>
 										<td><s:text name="pass" /></td>
@@ -172,14 +180,24 @@
 										<td></td>
 									</tr>
 									<tr>
-										<td colspan="3" align="right" style="padding-right: 28px;">
-											<s:a href="recuperarClave">
-												<s:text name="accessSystem" />
-											</s:a></td>
+										<td><s:text name="captcha" /></td>
+										<td><input type="text" name="captcha" /></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td colspan="3"><img src="user/captcha.jsp" id="captcha"></td>
 									</tr>
 									<tr>
 										<td colspan="3" align="right" style="padding-right: 28px;">
-											<input type="submit" value="<s:text name="entrar" />" /></td>
+											<s:a href="recuperarClave">
+												<s:text name="accessSystem" />
+											</s:a>
+										</td>
+									</tr>
+									<tr>
+										<td colspan="3" align="right" style="padding-right: 28px;">
+											<input type="submit" value="<s:text name="entrar" />" />
+										</td>
 									</tr>
 								</table>
 							</form>

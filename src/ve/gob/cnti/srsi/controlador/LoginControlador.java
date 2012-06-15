@@ -32,6 +32,7 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 
 	private String correo;
 	private String password;
+	private String captcha;
 	private Usuario usuario = new Usuario();
 	private Correo user_correo = new Correo();
 	private Ente ente = new Ente();
@@ -53,6 +54,12 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 	@SuppressWarnings("unchecked")
 	public String autenticarUsuario() throws Exception {
 		session = ActionContext.getContext().getSession();
+		if (!((String) session.get("captcha")).toUpperCase().equals(
+				captcha.toUpperCase())) {
+			addFieldError("error",
+					error.getProperties().getProperty("error.login.captcha"));
+			return INPUT;
+		}
 		if (correo == null && password == null) {
 			return "404ERROR";
 		} else if (correo.isEmpty() || password.isEmpty()) {
@@ -180,6 +187,13 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 	public String enviarDatos() throws NoSuchAlgorithmException,
 			UnknownHostException {
 		recoveryPass = true;
+		session = ActionContext.getContext().getSession();
+		if (!((String) session.get("captcha")).toUpperCase().equals(
+				captcha.toUpperCase())) {
+			addFieldError("error",
+					error.getProperties().getProperty("error.login.captcha"));
+			return INPUT;
+		}
 		if (!correo.matches(REGEX_EMAIL)) {
 			addFieldError("correo",
 					error.getProperties().getProperty("error.regex.email"));
@@ -432,6 +446,14 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 	public void setSolicitudesAceptadasRechazadas(
 			long solicitudesAceptadasRechazadas) {
 		this.solicitudesAceptadasRechazadas = solicitudesAceptadasRechazadas;
+	}
+
+	public String getCaptcha() {
+		return captcha;
+	}
+
+	public void setCaptcha(String captcha) {
+		this.captcha = captcha;
 	}
 }
 

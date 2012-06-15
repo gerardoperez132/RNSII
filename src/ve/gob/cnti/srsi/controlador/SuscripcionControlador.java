@@ -78,6 +78,8 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 		prepareRequest();
 		solicitud.setTelefono(codigo + solicitud.getTelefono());
 		create(solicitud);
+		setSuscripcion_form(false);
+		addActionMessage("Su solicitud de suscripción ha sido procesada.");
 		System.out.println(solicitud.toString());
 		return SUCCESS;
 	}
@@ -170,8 +172,8 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 								"error.regex.description"));
 				setInvalid(true);
 			}
-
-		} else if (isInvalid())
+		}
+		if (isInvalid())
 			prepararSuscripcion();
 		else
 			solicitarSuscripcion();
