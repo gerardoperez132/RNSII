@@ -64,7 +64,7 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 			addFieldError("error",
 					error.getProperties().getProperty("error.regex.email"));
 			return INPUT;
-		}		
+		}
 		user_correo = (Correo) getUserEmail(correo);
 		if (user_correo == null) {
 			addFieldError("correo",
@@ -100,7 +100,8 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 	public String inicio() {
 		return SUCCESS;
 	}
-	//TODO Leer cantidad de peticiones a servicios
+
+	// TODO Leer cantidad de peticiones a servicios
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String home() {
@@ -161,8 +162,10 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 			}
 		}
 		peticionesNoLeidas = peticionesSuscripcion(ente.getId_ente());
-		peticionesPendientes = peticionesSuscripcionPendientes(ente.getId_ente());
-		solicitudesAceptadasRechazadas = getNumeroSuscrionesAceptadasRechazadas(ente.getId_ente());
+		peticionesPendientes = peticionesSuscripcionPendientes(ente
+				.getId_ente());
+		solicitudesAceptadasRechazadas = getNumeroSuscrionesAceptadasRechazadas(ente
+				.getId_ente());
 		return SUCCESS;
 	}
 
@@ -426,15 +429,13 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 		return solicitudesAceptadasRechazadas;
 	}
 
-	public void setSolicitudesAceptadasRechazadas(long solicitudesAceptadasRechazadas) {
+	public void setSolicitudesAceptadasRechazadas(
+			long solicitudesAceptadasRechazadas) {
 		this.solicitudesAceptadasRechazadas = solicitudesAceptadasRechazadas;
 	}
-
-	
 }
 
 class ServiciosPublicables {
-
 	boolean publicable;
 	ServicioInformacion servicio = new ServicioInformacion();
 
