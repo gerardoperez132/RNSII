@@ -1087,8 +1087,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 						" from solicitudes_suscripciones as s"+
 						" where s.id_ente_solicitante = " + id_ente +
 						" AND s.status = 0" +
-						" AND s.sentencia != " + PENDIENTE +
-						" AND s.leido = false " +
+						" AND s.sentencia != " + PENDIENTE +						
 						" ORDER BY s.leido "+ order);
 			list = (ArrayList<?>) query.list();			
 			Iterator<?> it = list.iterator();
