@@ -63,9 +63,9 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 					solicitud.getId_ente_solicitante())) {
 				addFieldError(
 						"error",
-						"El "
-								+ ente.getSiglas().toUpperCase()
-								+ " ya ha solicitado la suscripción a este servicio de información");
+						error.getProperties()
+								.getProperty("error.suscripcion.duplicated")
+								.replace("{0}", ente.getSiglas().toUpperCase()));
 				setInvalid(true);
 				setRequested(true);
 			}
