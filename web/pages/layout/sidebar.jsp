@@ -19,7 +19,7 @@
 						<li>
 							<a class="nivel2"> <s:text name="suscripciones" /> </a>
 							<ul>
-								<li><a class="nivel3"><s:text name="solicitud3" /></a></li>
+								<li><a href="<s:url action="prepararSolicitarSuscripcion"/>" class="nivel3"><s:text name="solicitud3" /></a></li>
 								<li>
 									<a href="<s:url action="ListarSuscricionesPendientes"/>" class="nivel3">
 										<s:text name="peticiones_otros_entes" />
