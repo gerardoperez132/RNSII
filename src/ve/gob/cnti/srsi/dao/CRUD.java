@@ -521,6 +521,9 @@ public interface CRUD {
 	 */
 	public ArrayList<Solicitud_Respuesta> getlistaSolicitudesAceptadasRechazadas(long id_ente, byte orderBy);
 	
+	
+	public long getId_solicitud_sucripcion(long service, long provider,	long client);
+	
 	public boolean verifySuscriptionRequest(long service, long provider,
 			long client);
 }

@@ -532,8 +532,12 @@ Formulario para solicitar una suscripción a un servicio de información -->
 									value="%{servicio.id_servicio_informacion}" />
 							</form>
 						</s:if>
-						<s:else>
-							<input type="submit" value="<s:text name="detalles"/>" />
+						<s:else>							
+							<form action="examinarSolicitud" method="post">
+								<s:hidden value="%{id_solicitud_suscripcion}" name="id_solicitud_suscripcion"/>
+								<s:hidden value="%{true}" name="detalles_respuesta"/>
+								<input type="submit" value="<s:text name="detalles"/>">
+							</form>						
 						</s:else>
 					</s:elseif>
 						<s:elseif test="ListarSuscricionesPendientes == true">
@@ -869,7 +873,7 @@ Muestra los detalles de una respuesta a una solicitud de suscripción-->
 						</s:elseif>
 						<s:elseif test="solicitarSuscripcion == true">
 <!--	09)
-Muestra los detalles de una respuesta a una solicitud de suscripción-->
+Muestra las opciones de busqueda para encontrar servicios de información-->
 							<span class="ok_pass">
 								<s:text name="solicitud4"/>	
 							</span>						

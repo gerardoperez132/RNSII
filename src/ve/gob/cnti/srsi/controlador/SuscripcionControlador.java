@@ -69,6 +69,10 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 						error.getProperties()
 								.getProperty("error.suscripcion.duplicated")
 								.replace("{0}", ente.getSiglas().toUpperCase()));
+				id_solicitud_suscripcion  = getId_solicitud_sucripcion(
+						solicitud.getId_servicio_informacion(),
+						solicitud.getId_ente_proveedor(),
+						solicitud.getId_ente_solicitante());
 				setInvalid(true);
 				setRequested(true);
 			}

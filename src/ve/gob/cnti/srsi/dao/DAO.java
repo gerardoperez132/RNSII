@@ -1116,5 +1116,30 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		}
 		return (ArrayList<Solicitud_Respuesta>) result;
 	}
+	
+	@Override
+	public long getId_solicitud_sucripcion(long service, long provider,
+			long client) {
+		try {
+			startConnection();
+			try {
+				return ((SolicitudSuscripcion) session.createQuery(
+						"FROM " + SolicitudSuscripcion.class.getSimpleName()
+								+ " WHERE id_servicio_informacion = " + service
+								+ " AND id_ente_proveedor = " + provider
+								+ " AND id_ente_solicitante = " + client
+								+ " AND status = " + ACTIVO)
+						.uniqueResult()).getId_solicitud_suscripcion();
+			} catch (Exception e) {
+				return 0;
+			}
+
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+	}
 }
 
