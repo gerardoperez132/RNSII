@@ -271,8 +271,7 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 			datosEnviados = false;
 			recoveryPass = true;
 			return SUCCESS;
-		}
-		System.out.println("cuenta: " + cuenta);
+		}		
 		if (getUrlRecoveryPass(new RecuperarClave(), cuenta) != null) {
 			r_clave = (RecuperarClave) getUrlRecoveryPass(new RecuperarClave(),
 					cuenta);
