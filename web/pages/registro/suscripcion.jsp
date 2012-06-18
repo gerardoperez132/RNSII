@@ -51,17 +51,18 @@
 Lista de servicios encontrados -->
 						<table class="results">
 							<tr>
-								<th colspan="3"><s:text name="listaServiciosEncontrados" />
+								<th colspan="4"><s:text name="listaServiciosEncontrados" />
 								</th>
 							</tr>
 							<tr>
 								<th><s:text name="argumentoConsultado" /></th>
-								<td colspan="2"><s:property value="cadena" /></td>
+								<td colspan="3"><s:property value="cadena" /></td>
 							</tr>
 							<tr>
 								<th><s:text name="nombre" /></th>
 								<th><s:text name="ente1" /></th>
 								<th><s:text name="fecha_creacion" /></th>
+								<th><s:text name="suscripcion" /></th>
 							</tr>
 							<s:if test="servicios.size()>0">
 								<s:iterator value="servicios">
@@ -77,7 +78,14 @@ Lista de servicios encontrados -->
 												</s:if>
 											</s:iterator>
 										</td>
-										<td><s:date name="fecha_creado" format="d'/'MM'/'yyyy" />
+										<td align="center">
+											<s:date name="fecha_creado" format="d'/'MM'/'yyyy" />
+										</td>
+										<td align="center">
+											<form action="prepararSuscripcion">
+												<s:hidden name="id_servicio" value="%{id_servicio_informacion}" />
+												<input type="submit" value="<s:text name="solicitar"/>" />
+											</form>
 										</td>
 									</tr>
 								</s:iterator>
@@ -858,6 +866,13 @@ Muestra los detalles de una respuesta a una solicitud de suscripción-->
 								</tr>													
 							</table>
 							<br>						
+						</s:elseif>
+						<s:elseif test="solicitarSuscripcion == true">
+<!--	09)
+Muestra los detalles de una respuesta a una solicitud de suscripción-->
+							<span class="ok_pass">
+								<s:text name="solicitud4"/>	
+							</span>						
 						</s:elseif>
 						<s:else>
 							<s:fielderror>
