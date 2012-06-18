@@ -420,7 +420,13 @@
 		</action>
 
 		<!-- ******* ******* ******* ******* Suscripciones ******* ******* ******* 
-			******* -->
+			******* prepararSolicitarSuscripcion-->
+		<action name="prepararSolicitarSuscripcion" method="prepararSolicitarSuscripcion"
+			class="ve.gob.cnti.srsi.controlador.SuscripcionControlador">
+			<result name="success">registro/suscripcion.jsp</result>
+			<result name="input" type="redirectAction">home</result>
+		</action>	
+			
 		<action name="prepararSuscripcion" method="prepararSuscripcion"
 			class="ve.gob.cnti.srsi.controlador.SuscripcionControlador">
 			<result name="success">registro/suscripcion.jsp</result>
