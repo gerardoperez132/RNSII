@@ -47,10 +47,13 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 	private boolean detalles_respuesta;
 	private boolean aprobarRechasar;
 	private boolean ListarSuscricionesAceptadasRechazadas;
+	private boolean solicitarSuscripcion;
 	private String sentencia[] = { "Aceptado", "Rechazado" };
 
 	@SkipValidation
 	public String prepararSuscripcion() {
+		if(!sessionValidate())
+			return INPUT;
 		if (!verificarLong(id_servicio))
 			return INPUT;
 		servicio = (ServicioInformacion) read(servicio, id_servicio);
@@ -75,6 +78,8 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 	// TODO Mandar notificación por correo al ente proveedor. Un mensaje
 	// cualquier para ir probando...
 	public String solicitarSuscripcion() {
+		if(!sessionValidate())
+			return INPUT;
 		prepareRequest();
 		solicitud.setTelefono(codigo + solicitud.getTelefono());
 		create(solicitud);
@@ -186,10 +191,11 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 			return false;
 		}
 	}
-
-	// TODO listarSolicitudesAceptadas
+	
 	@SkipValidation
 	public String listarSolicitudesAceptadasRechazadas() {
+		if(!sessionValidate())
+			return INPUT;
 		// Lista solicitudes en base a las no leidas, pendientes,
 		session = ActionContext.getContext().getSession();
 		Usuario user = (Usuario) session.get("usuario");
@@ -201,6 +207,8 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 
 	@SkipValidation
 	public String listaSuscripcionesPendientes() {
+		if(!sessionValidate())
+			return INPUT;
 		// Lista solicitudes en base a las no leidas, pendientes,
 		session = ActionContext.getContext().getSession();
 		Usuario user = (Usuario) session.get("usuario");
@@ -212,6 +220,8 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 
 	@SkipValidation
 	public String examinarSolicitud() {
+		if(!sessionValidate())
+			return INPUT;
 		session = ActionContext.getContext().getSession();
 		Usuario user = (Usuario) session.get("usuario");
 		solicitud = (SolicitudSuscripcion) read(solicitud,
@@ -243,6 +253,8 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 
 	@SkipValidation
 	public String preparar_AprobarRechasarSuscripcion() {
+		if(!sessionValidate())
+			return INPUT;
 		// Lee los detalles de la suscripción
 		session = ActionContext.getContext().getSession();
 		Usuario user = (Usuario) session.get("usuario");
@@ -266,6 +278,8 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 	// exitoso para la vista
 	@SkipValidation
 	public String AprobarRechasarSuscripcion() {
+		if(!sessionValidate())
+			return INPUT;
 		boolean err = false;
 		String motivo_proveedor;
 		int decision;
@@ -322,6 +336,28 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 		addActionMessage("EL VEREDICTO DE LA SOLICITUD DE SUSCRIPCIÓN HA SIDO PROCESADA CORRECTAMENTE");
 		aprobarRechasar = false;
 		return SUCCESS;
+	}
+	
+	// TODO Hay que listar los sectores y los servicios publicados
+	@SkipValidation
+	public String prepararSolicitarSuscripcion() {
+		if(!sessionValidate())
+			return INPUT;		
+		//variable para la vista.
+		solicitarSuscripcion = true;
+		return SUCCESS;
+	}
+	
+	//Valida que la sesión este activa
+	@SkipValidation
+	public boolean sessionValidate() {
+		session = ActionContext.getContext().getSession();
+		Usuario usuario = new Usuario();
+		usuario = (Usuario) session.get("usuario");
+		if (usuario == null) {
+			return false;
+		}		
+		return true;
 	}
 
 	public ServicioInformacion getServicio() {
@@ -477,5 +513,13 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 
 	public void setDetalles_respuesta(boolean detalles_respuesta) {
 		this.detalles_respuesta = detalles_respuesta;
+	}
+
+	public boolean isSolicitarSuscripcion() {
+		return solicitarSuscripcion;
+	}
+
+	public void setSolicitarSuscripcion(boolean solicitarSuscripcion) {
+		this.solicitarSuscripcion = solicitarSuscripcion;
 	}
 }
