@@ -60,7 +60,7 @@
 									</tr>
 									<tr>
 										<td><s:text name="captcha" /></td>
-										<td><input type="text" name="captcha" /></td>
+										<td><input type="text" name="captcha" maxlength="6" /></td>
 										<td></td>
 									</tr>
 									<tr>
@@ -181,7 +181,7 @@
 									</tr>
 									<tr>
 										<td><s:text name="captcha" /></td>
-										<td><input type="text" name="captcha" /></td>
+										<td><input type="text" name="captcha" maxlength="6" /></td>
 										<td></td>
 									</tr>
 									<tr>
