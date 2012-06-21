@@ -338,4 +338,17 @@ a.footer:hover{background:#ffffff;color: #6c6c6c;}
 	color:blue;
 }
 
-
+label { float: inherit; font-family: sans-serif; }
+br { clear: both; }
+label.error {
+	color: #ff0000;
+	display:block;
+	font-size: .7em !important;
+    font-weight:lighter;    
+    padding-left: 10px;    
+}
+label.valid {	
+	display: block;
+	width: 16px;
+	height: 16px;
+}
