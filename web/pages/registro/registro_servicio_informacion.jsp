@@ -12,6 +12,10 @@
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
 <link rel="stylesheet" type="text/css" href="res/css/menu_vertical.css">
 <script type="text/javascript" src="res/js/tabs.js"></script>
+<script type="text/javascript" src="res/js/jquery-1.7.1.js" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/jquery.validate.js" charset="UTF-8"></script>
+<script src="res/js/messages_es.js" type="text/javascript" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/registro/registro_servicio_informacion.js" charset="UTF-8"></script>
 <s:if test="modificar">
 	<s:set name="submit" value="%{getText('actualizar')}" />
 	<s:set name="title" value="%{getText('actualizar.title')}" />
@@ -131,20 +135,21 @@
 					<div class="tab_container">
 						<s:if test="%{tab==1}">
 							<div id="tab1" class="tab_content">
-								<form action="<s:property value="#action"/>" method="post"
-									enctype="multipart/form-data">
+								<form action="<s:property value="#action"/>" id="formSI" name="formSI" method="post" enctype="multipart/form-data">
 									<p class="formulario">
 										<s:text name="tab1.subtitle" />
 									</p>
 									<small><s:text name="tab1.description"></s:text> </small>
 									<hr>
 									<h5 class="formulario">
+										<label for="sector">
 										<s:text name="sector.title" />
+										</label>
 									</h5>
 									<s:fielderror>
 										<s:param>sector</s:param>
 									</s:fielderror>
-									<s:select name="sector" list="sectores" listKey="id_sector"
+									<s:select name="sector" id="sector" list="sectores" listKey="id_sector"
 										listValue="nombre" headerKey="-1"
 										headerValue="%{getText('sector.select')}"></s:select>
 									<h5 class="formulario">
@@ -153,29 +158,28 @@
 									<s:fielderror>
 										<s:param>servicio.nombre</s:param>
 									</s:fielderror>
-									<s:textfield name="servicio.nombre" />
+									<s:textfield name="servicio.nombre" id='servicio.nombre'/>
 									<h5 class="formulario">
 										<s:text name="descripcion.title"></s:text>
 									</h5>
 									<s:fielderror>
 										<s:param>servicio.descripcion</s:param>
 									</s:fielderror>
-									<s:textarea name="servicio.descripcion" cols="40" rows="10" />
+									<s:textarea name="servicio.descripcion" id="servicio.descripcion" cols="40" rows="10" />
 									<h5 class="formulario">
 										<s:text name="area.title"></s:text>
 									</h5>
 									<s:fielderror>
 										<s:param>area</s:param>
 									</s:fielderror>
-									<s:checkboxlist list="areas" listValue="nombre" name="area"
-										listKey="id_area" />
+									<s:checkboxlist list="areas" listValue="nombre" name="area" id="area" listKey="id_area" />
 									<h5 class="formulario">
 										<s:text name="estado.title"></s:text>
 									</h5>
 									<s:fielderror>
 										<s:param>estado</s:param>
 									</s:fielderror>
-									<s:select name="estado" list="estados" listKey="id_estado"
+									<s:select name="estado" id="estado" list="estados" listKey="id_estado"
 										listValue="nombre" headerKey="-1"
 										headerValue="%{getText('estado.select')}"></s:select>
 									<s:token name="token" />
