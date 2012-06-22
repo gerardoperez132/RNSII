@@ -12,6 +12,10 @@
 <link rel="stylesheet" type="text/css" href="res/css/table2.css">
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
 <link rel="stylesheet" type="text/css" href="res/css/menu_vertical.css">
+<script type="text/javascript" src="res/js/jquery-1.7.1.js" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/jquery.validate.js" charset="UTF-8"></script>
+<script src="res/js/messages_es.js" type="text/javascript" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/registro/formulario_funcionalidad.js" charset="UTF-8"></script>
 <title><s:text name="registro.title"></s:text>
 </title>
 	</head>
@@ -47,8 +51,7 @@
 						<s:property value="servicio.nombre" />
 					</h4>
 					<hr>
-					<s:if
-						test="id_funcionalidad > 0 && modificarf != true && resumen != true">
+					<s:if test='id_funcionalidad > 0 && modificarf != true && resumen != true'>
 						<ul class="tabs">
 							<li class="active"><a><s:text name="tab1.title"></s:text>
 							</a>
@@ -200,7 +203,7 @@
 						<div class="tab_container">
 							<div id="tab1" class="tab_content">
 								<s:if test="modificarf == true">
-									<form action="modificarFuncionalidad" method="POST">
+									<form action="modificarFuncionalidad" method="POST" id="formFunc" name="formFunc">
 										<p>
 											<s:text name="tab1.title"></s:text>
 										</p>
@@ -212,7 +215,7 @@
 										<s:fielderror>
 											<s:param>funcionalidad.nombre</s:param>
 										</s:fielderror>
-										<s:textfield name="funcionalidad.nombre" />
+										<s:textfield name="funcionalidad.nombre" id="funcionalidad.nombre"/>
 										<br>
 										<!-- Descripción de la funcionalidad u operación del servicio. -->
 										<h5 class="formulario">
@@ -222,7 +225,7 @@
 											<s:param>funcionalidad.descripcion</s:param>
 										</s:fielderror>
 										<s:textarea name="funcionalidad.descripcion" cols="30"
-											rows="5" />
+											rows="5" id="funcionalidad.descripcion"/>
 										<br>
 										<s:hidden name="id_servicio_informacion"></s:hidden>
 										<s:hidden name="id_funcionalidad"></s:hidden>
@@ -232,7 +235,7 @@
 									</form>
 								</s:if>
 								<s:else>
-									<form action="registrarFuncionalidad" method="POST">
+									<form action="registrarFuncionalidad" method="POST" id="formFunc" name="formFunc">
 										<p>
 											<s:text name="tab1.title"></s:text>
 										</p>
@@ -243,7 +246,7 @@
 										<s:fielderror>
 											<s:param>funcionalidad.nombre</s:param>
 										</s:fielderror>
-										<s:textfield labelposition="top" name="funcionalidad.nombre" />
+										<s:textfield labelposition="top" name="funcionalidad.nombre" id="funcionalidad.nombre"/>
 										<br>
 										<!-- Descripción de la funcionalidad u operación del servicio. -->
 										<h5 class="formulario">
@@ -253,7 +256,7 @@
 											<s:param>funcionalidad.descripcion</s:param>
 										</s:fielderror>
 										<s:textarea name="funcionalidad.descripcion" cols="30"
-											rows="5" />
+											rows="5" id="funcionalidad.descripcion"/>
 										<br>
 										<s:hidden name="id_servicio_informacion"></s:hidden>
 										<s:hidden name="modificar"></s:hidden>
