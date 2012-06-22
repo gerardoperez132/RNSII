@@ -1,3 +1,18 @@
+/* This file is part of SRSI.
+ * 
+ * SRSI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * SRSI is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with SRSI. If not, see <http://www.gnu.org/licenses/>.
+ */
 package ve.gob.cnti.srsi.controlador;
 
 import java.util.ArrayList;
@@ -9,8 +24,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.validation.SkipValidation;
-
-import com.opensymphony.xwork2.ActionContext;
 
 import ve.gob.cnti.modelo.temporales.ListaSImasVisitados;
 import ve.gob.cnti.modelo.temporales.SectoresMasPublicados;
@@ -35,6 +48,8 @@ import ve.gob.cnti.srsi.modelo.UnionAreaServicioInformacion;
 import ve.gob.cnti.srsi.modelo.UnionArquitecturaServicioInformacion;
 import ve.gob.cnti.srsi.modelo.Usuario;
 import ve.gob.cnti.srsi.modelo.Visita;
+
+import com.opensymphony.xwork2.ActionContext;
 
 @SuppressWarnings("serial")
 public class ConsultasControlador extends DAO implements Constants, Order,
@@ -62,7 +77,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 	private List<ServicioInformacion> servicios = new ArrayList<ServicioInformacion>();
 	List<SectoresMasPublicados> listaSectores = new ArrayList<SectoresMasPublicados>();
 	List<SectoresMasPublicados> listaSectores2 = new ArrayList<SectoresMasPublicados>();
-	private List<ListaSImasVisitados> SI_masVisitados = new ArrayList<ListaSImasVisitados>();	
+	private List<ListaSImasVisitados> SI_masVisitados = new ArrayList<ListaSImasVisitados>();
 	@SuppressWarnings("rawtypes")
 	private Map session;
 	private String cadena;
@@ -142,7 +157,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 		entes = (List<Ente>) read(new Ente());
 		return SUCCESS;
 	}
-		
+
 	@SuppressWarnings("unchecked")
 	public String buscar_servicio2() {
 		session = ActionContext.getContext().getSession();
@@ -160,32 +175,33 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 			buscarServicio = false;
 			return INPUT;
 		}
-		servicios = buscarServicio2(cadena, ASC,usuario.getId_ente());	
+		servicios = buscarServicio2(cadena, ASC, usuario.getId_ente());
 		entes = (List<Ente>) read(new Ente());
 		return SUCCESS;
 	}
 
 	@SuppressWarnings("unchecked")
 	@SkipValidation
-	public String examinarServicioInformacion() {		
+	public String examinarServicioInformacion() {
 		if (!verificarLong(id_servicio))
 			return INPUT;
 		listaSectores = sectoresMasPublicados(LIMITE_VISITADOS);
 		examinarServicio = true;
-		servicio = (ServicioInformacion) read(servicio, id_servicio);		
-		if(!servicio.isPublicado())
-			return INPUT;		
-		if(!isComplete(servicio))
+		servicio = (ServicioInformacion) read(servicio, id_servicio);
+		if (!servicio.isPublicado())
+			return INPUT;
+		if (!isComplete(servicio))
 			return INPUT;
 		try {
-			session = ActionContext.getContext().getSession();		
+			session = ActionContext.getContext().getSession();
 			Usuario usuario = (Usuario) session.get("usuario");
 			if (usuario != null) {
-				if(servicio.getId_ente() == usuario.getId_ente()){
+				if (servicio.getId_ente() == usuario.getId_ente()) {
 					return INPUT;
 				}
 			}
-		} catch (Exception e) {	}
+		} catch (Exception e) {
+		}
 		try {
 			unionareas = (List<UnionAreaServicioInformacion>) readUnion(
 					new UnionAreaServicioInformacion(), servicio, id_servicio);
@@ -220,7 +236,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 			} catch (Exception e) {
 				// No tiene entradas ni salidas.
 			}
-		}		
+		}
 		ente = (Ente) read(ente, servicio.getId_ente());
 		sectores = (List<Sector>) getSortedList(new Sector(), ASC);
 		estados = (List<Estado>) read(new Estado());
