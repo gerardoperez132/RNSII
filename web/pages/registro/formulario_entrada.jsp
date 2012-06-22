@@ -12,7 +12,9 @@
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
 <link rel="stylesheet" type="text/css" href="res/css/menu_vertical.css">
 <script type="text/javascript" src="res/js/jquery-1.7.1.js" charset="UTF-8"></script>
-<script src="res/js/validacion_datos.js"  type="text/javascript" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/jquery.validate.js" charset="UTF-8"></script>
+<script src="res/js/messages_es.js" type="text/javascript" charset="UTF-8"></script>
+<script src="res/js/registro/formulario_entrada.js" type="text/javascript" charset="UTF-8"></script>
 <title><s:text name="form.entrada.registro.title"></s:text></title>
 	</head>
 	<body>
@@ -76,7 +78,7 @@
 						</s:else>
 						<!-- Formulario para registrar o modificar entrada -->
 						<form action="<s:property value="#action"></s:property>"
-							method="post" id="myForm">
+							method="post" name="formES" id="formES">
 							<div id="tab2" class="tab_content">
 								<h5 class="formulario">
 									<s:if test="modificar!=true">
@@ -101,7 +103,7 @@
 								<s:fielderror>
 									<s:param>entrada.nombre</s:param>
 								</s:fielderror>
-								<s:textfield name="entrada.nombre" />
+								<s:textfield name="entrada.nombre" id="entrada.nombre"/>
 								<br>
 								<!-- Descripción de la entrada. -->
 								<h5 class="formulario">
@@ -110,7 +112,7 @@
 								<s:fielderror>
 									<s:param>entrada.descripcion</s:param>
 								</s:fielderror>
-								<s:textarea name="entrada.descripcion" cols="30" rows="5" />
+								<s:textarea name="entrada.descripcion" id="entrada.descripcion" cols="30" rows="5" />
 								<br>
 								<h5 class="formulario">
 									<s:text name="form.entrada.dato.title"></s:text>
@@ -118,9 +120,9 @@
 								<s:fielderror>
 									<s:param>tipodato</s:param>
 								</s:fielderror>
-								<s:select name="entrada.id_tipo_dato" list="tipoDatos"
+								<s:select name="entrada.id_tipo_dato" id="entrada.id_tipo_dato" list="tipoDatos"
 									listKey="id_tipo_dato" listValue="nombre" headerKey="-1"
-									headerValue="%{getText('form.entrada.dato.select')}" id="tipoDato">
+									headerValue="%{getText('form.entrada.dato.select')}" >
 								</s:select>
 								<br>								
 								 
@@ -132,7 +134,7 @@
 									<s:fielderror>
 										<s:param>formato</s:param>
 									</s:fielderror>								
-									<select name="entrada.id_formato" id="formato">
+									<select name="entrada.id_formato" id="entrada.id_formato">
 										<s:set var="idF" value="entrada.id_formato"/>
 										<optgroup label="">
 											<option value="-1">
@@ -167,7 +169,7 @@
 										<s:param>longitud</s:param>
 									</s:fielderror>
 									
-										<s:textfield name="entrada.longitud" maxlength="10" id="longitud"/>
+										<s:textfield name="entrada.longitud" maxlength="10" id="entrada.longitud"/>
 										<span id="longitud_msj"></span>
 								</div>
 								
