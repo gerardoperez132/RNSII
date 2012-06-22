@@ -188,12 +188,12 @@
 									<input type="submit" value='<s:property value="#submit"/>' />
 								</form>
 							</div>
-						</s:if>
-						<!-- START TAB 2 -->
+						</s:if>						
 						<s:if test="%{tab==2}">
+						<!-- START TAB 2 -->
 							<div id="tab2" class="tab_content">
 								<form action="<s:property value="#action"/>" method="post"
-									enctype="multipart/form-data">
+									enctype="multipart/form-data" id="formSI_Tab2" name="formSI_Tab2">
 									<p class="formulario">
 										<s:text name="tab2.subtitle" />
 									</p>
@@ -211,14 +211,14 @@
 									<s:fielderror>
 										<s:param>name</s:param>
 									</s:fielderror>
-									<s:textfield name="name" />
+									<s:textfield name="name" id="name"/>
 									<h5 class="formulario">
 										<s:text name="documento.file"></s:text>
 									</h5>
 									<s:fielderror>
 										<s:param>file</s:param>
 									</s:fielderror>
-									<s:file name="file" />
+									<s:file name="file" id="file"/>
 									<s:token name="token" />
 									<s:hidden name="tab" value="2" />
 									<s:if test="#id_servicio > 0">
@@ -230,26 +230,33 @@
 									</s:else>
 									<input type="submit" value='<s:property value="#submit"/>' />
 								</form>
+								<br>
 								<s:if test="files.size() > 0">
-									<table>
+									<table class="results">
+										<tr>
+											<th><s:text name="nombre"/></th>
+											<th><s:text name="fecha"/></th>
+											<th><s:text name="descargar"/></th>
+											<th><s:text name="eliminar"/></th>
+										</tr>
 										<s:iterator value="files">
 											<tr>
-												<td><s:property value="nombre" /></td>
-												<td><a href="..<s:property value='url' />">Descargar</a>
-												</td>
-												<td><s:property value="fecha_creado" /></td>
-												<td><form action="eliminarAspectoLegal" method="post">
+												<td><s:property value="nombre" /></td>												
+												<td><s:date name="fecha_creado" format="d'/'MM'/'yyyy" /></td>
+												<td><a href="..<s:property value='url' />"><s:text name="descargar"/></a></td>
+												<td>
+													<form action="eliminarAspectoLegal" method="post">
 														<s:hidden name="id_aspecto_legal" />
 														<s:token name="token" />
 														<input type="submit" value="<s:text name="eliminar"/>">
-													</form></td>
+													</form>
+												</td>
 											</tr>
 										</s:iterator>
 									</table>
 								</s:if>
 								<s:if test="#id_servicio > 0">
-									<s:bean
-										name="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
+									<s:bean	name="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
 										<s:param name="id_servicio_informacion" value="%{id_servicio}"></s:param>
 										<table>
 											<s:iterator value="files2">
@@ -269,13 +276,13 @@
 									</s:bean>
 								</s:if>
 							</div>
-						</s:if>
 						<!-- END TAB 2 -->
-						<!-- START TAB 3 -->
+						</s:if>
 						<s:if test="%{tab==3}">
+						<!-- START TAB 3 -->
 							<div id="tab3" class="tab_content">
 								<form action="<s:property value="#action"/>" method="post"
-									enctype="multipart/form-data">
+									enctype="multipart/form-data" id="formSI_Tab3" name="formSI_Tab3">
 									<p class="formulario">
 										<s:text name="tab3.subtitle" />
 									</p>
@@ -289,7 +296,8 @@
 									</s:fielderror>
 									<s:select list="niveles" listKey="id_seguridad"
 										listValue="nombre" headerKey="-1"
-										headerValue="%{getText('seguridad.select')}" name="seguridad"></s:select>
+										headerValue="%{getText('seguridad.select')}" name="seguridad"
+										id="seguridad"></s:select>
 									<h5 class="formulario">
 										<s:text name="arquitectura.title"></s:text>
 									</h5>
@@ -297,7 +305,7 @@
 										<s:param>arquitectura</s:param>
 									</s:fielderror>
 									<s:checkboxlist list="arquitecturas" listValue="nombre"
-										name="arquitectura" listKey="id_arquitectura" />
+										name="arquitectura" id="arquitectura" listKey="id_arquitectura" />
 									<br>
 									<h5 class="formulario">
 										<s:text name="version.title"></s:text>
@@ -305,7 +313,7 @@
 									<s:fielderror>
 										<s:param>servicio.version</s:param>
 									</s:fielderror>
-									<s:textfield name="servicio.version"
+									<s:textfield name="servicio.version" id="servicio.version"
 										onkeyup="var pattern = /[^0-9\.]/g;
 								this.value = this.value.replace(pattern, '');"
 										maxlength="7" />									
@@ -316,7 +324,7 @@
 									<s:fielderror>
 										<s:param>intercambio</s:param>
 									</s:fielderror>
-									<select name="intercambio">
+									<select name="intercambio" id="intercambio">
 										<optgroup label="">
 											<option value="-1">
 												<s:text name="intercambio.select"></s:text>
@@ -343,13 +351,13 @@
 									<input type="submit" value='<s:property value="#submit"/>' />
 								</form>
 							</div>
-						</s:if>
 						<!-- END TAB 3 -->
-						<!-- START TAB 4 -->
+						</s:if>						
 						<s:if test="%{tab==4}">
+						<!-- START TAB 4 -->
 							<div id="tab4" class="tab_content">
 								<form action="<s:property value="#action"/>" method="post"
-									enctype="multipart/form-data">
+									enctype="multipart/form-data" id="formSI_Tab4" name="formSI_Tab4">
 									<p class="formulario">
 										<s:text name="tab4.subtitle" />
 									</p>
@@ -361,7 +369,7 @@
 									<s:fielderror>
 										<s:param>servicio.responsable</s:param>
 									</s:fielderror>
-									<s:textfield name="servicio.responsable" labelposition="top" />
+									<s:textfield name="servicio.responsable" id="servicio.responsable" labelposition="top" />
 									<h5 class="formulario">
 										<s:text name="telefono.title"></s:text>
 									</h5>
@@ -372,7 +380,7 @@
 										<tr>
 											<td><s:select name="codigo" list="codigos" /></td>
 											<td><s:textfield name="telefono" labelposition="top"
-													maxlength="7"
+													maxlength="7" id="telefono"
 													onkeyup="var no_digito = /\D/g; this.value = this.value.replace(no_digito , '');" />
 											</td>
 										</tr>
@@ -383,7 +391,7 @@
 									<s:fielderror>
 										<s:param>correo</s:param>
 									</s:fielderror>
-									<s:textfield name="correo"></s:textfield>
+									<s:textfield name="correo" id="correo"/>
 									<s:token name="token" />
 									<s:hidden name="tab" value="4" />
 									<s:hidden name="id_servicio_informacion" />
