@@ -11,7 +11,7 @@ $.validator.addMethod('regexDescription', function (value) {
 $(document).ready(function() {
 	/********************************************************************
 	 * Validaciones para el formulario creación/modificación de una 
-	 * funcionalidad. funcionalidad.nombre funcionalidad.descripcion
+	 * funcionalidad. 
 	 */
   $("#formFunc").validate({
 	  errorPlacement: function (error, element) { 

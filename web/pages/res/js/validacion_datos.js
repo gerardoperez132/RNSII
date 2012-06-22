@@ -1,4 +1,33 @@
-$(document).ready(function(){	
+$.validator.addMethod('regexTitle', function (value) {
+	var soloTexto = new RegExp("^[a-zA-Z áéíóúAÉÍÓÚÑñ]+$");		    	
+	return soloTexto.test(value);
+}, 'Sólo puede introducir letras y espacios');
+
+$.validator.addMethod('regexDescription', function (value) {
+	var soloTexto = new RegExp("^[a-zA-Z0-9 _.()áéíóúAÉÍÓÚÑñ]+$");		    	
+	return soloTexto.test(value);
+}, 'Sólo puede introducir letras, números y puntos');
+
+
+$(document).ready(function(){
+	
+	/********************************************************************
+	 * Validaciones para el formulario creación/modificación de una 
+	 * Entrada/Salida.     entrada.nombre  entrada.descripcion entrada.id_tipo_dato
+	 */
+	  $("#formES").validate({
+		  errorPlacement: function (error, element) { 
+		        error.insertBefore(element);    
+		     },
+		     rules: {	    	
+		    	'funcionalidad.nombre': {required: true, regexTitle: true},
+		    	'funcionalidad.descripcion': {required: true, regexDescription: true}
+		    },
+		    messages: {	    	
+		    	'servicio.nombre': {required:"Debe introducir un nombre",regexTitle:'Sólo puede introducir letras y espacios'},
+		    	'servicio.descripcion': {required:"Debe introducir una descripción",regexDescription:'Sólo puede introducir letras, números y puntos'},	    	
+		    }
+	  });
 	
 	var select = $("#formato").val();
 	var i;
@@ -20,7 +49,7 @@ $(document).ready(function(){
 	select=-1;
 	
 	
-	$("#tipoDato").change(function (e){
+	$("#entrada.id_tipo_dato").change(function (e){
 		
 		limpiar_longitud_formato();	
 		fomato_longitud_visible();
@@ -31,7 +60,7 @@ $(document).ready(function(){
 	 * Valida que solo metan números.
 	 */	
 	$('#longitud').keyup(function(e) {
-		if($("#tipoDato").val()==4){//decimales
+		if($("#entrada.id_tipo_dato").val()==4){//decimales
 			if($.isNumeric($("#longitud").val()) == false){			
 				this.value = this.value.substring(0,(this.value.length-1));
 				$('#longitud_msj').html('Debe escribir solo números. '); 
@@ -68,7 +97,7 @@ $(document).ready(function(){
 		/*
 		 * Oculta las capas formato y longitud si el usuario no selecciona ningún tipo de dato.
 		 */
-		if($("#tipoDato").val()==-1){
+		if($("#entrada.id_tipo_dato").val()==-1){
 			$('#capa_formato').attr('style', 'visibility: hidden; position:fixed;');
 			$('#capa_longitud').attr('style', 'visibility: hidden; position:fixed;');			
 		}else{
@@ -78,7 +107,7 @@ $(document).ready(function(){
 				    url: 'dato_haslength.action',
 				    cache: false,
 				    async: false,
-				    data: { id_tipo_dato: $("#tipoDato").val() },
+				    data: { id_tipo_dato: $("#entrada.id_tipo_dato").val() },
 				    success: function(result){ 
 				    	var boleano = new String ('' + result);
 						if(boleano.toLowerCase().indexOf('l=true') != -1){					
@@ -90,14 +119,14 @@ $(document).ready(function(){
 			 });
 			//Muestra la capa formato si el dato posse esta caracteristica
 			  $.ajax({type: 'GET',url: 'dato_hasformatted.action',cache: false,async: false,
-				    data: { id_tipo_dato: $("#tipoDato").val() },
+				    data: { id_tipo_dato: $("#entrada.id_tipo_dato").val() },
 				    success: function(result2){ 
 				    	var boleano = new String ('' + result2);				
 						if(boleano.toLowerCase().indexOf('f=true') != -1){					
 							$('#capa_formato').attr('style', 'visibility: visible; position:relative;');
 							//Crea las opciones	del select formato	
 							$.ajax({type: 'GET',url: 'list_format.action',cache: false,async: false,
-							    data: { id_tipo_dato: $("#tipoDato").val() },
+							    data: { id_tipo_dato: $("#entrada.id_tipo_dato").val() },
 							    success: function(result3){ 
 							    	$("#formato").append(result3);	
 							    }
