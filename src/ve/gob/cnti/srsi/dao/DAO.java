@@ -1,3 +1,18 @@
+/* This file is part of SRSI.
+ * 
+ * SRSI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * SRSI is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with SRSI. If not, see <http://www.gnu.org/licenses/>.
+ */
 package ve.gob.cnti.srsi.dao;
 
 import java.lang.reflect.InvocationTargetException;
@@ -19,8 +34,8 @@ import ve.gob.cnti.modelo.temporales.SectoresMasPublicados;
 import ve.gob.cnti.modelo.temporales.Solicitud_Respuesta;
 import ve.gob.cnti.modelo.temporales.Solicitud_Suscripcion;
 import ve.gob.cnti.srsi.dao.Constants.ClaseDato;
-import ve.gob.cnti.srsi.dao.Constants.Status;
 import ve.gob.cnti.srsi.dao.Constants.Sentencias;
+import ve.gob.cnti.srsi.dao.Constants.Status;
 import ve.gob.cnti.srsi.dao.Constants.TipoEntradaSalida;
 import ve.gob.cnti.srsi.i18n.Errors;
 import ve.gob.cnti.srsi.modelo.Correo;
@@ -47,7 +62,7 @@ import com.opensymphony.xwork2.ActionSupport;
  */
 @SuppressWarnings("serial")
 public class DAO extends ActionSupport implements Constants, CRUD, Status,
-		ClaseDato, TipoEntradaSalida,Sentencias {
+		ClaseDato, TipoEntradaSalida, Sentencias {
 
 	public static Errors error = new Errors();
 	private static Session session;
@@ -800,7 +815,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		}
 		return result;
 	}
-	
+
 	@SuppressWarnings("rawtypes")
 	@Override
 	public List<SectoresMasPublicados> sectoresMasPublicados(int n) {
@@ -824,7 +839,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 						+ "((select count(servicios_informacion.id_sector) from servicios_informacion where servicios_informacion.id_sector = sectores.id_sector AND Servicios_informacion.status = 0 AND Servicios_informacion.id_estado = 2 AND Servicios_informacion.publicado =TRUE)) as S "
 						+ "from  sectores,Servicios_informacion GROUP BY sectores.nombre, sectores.id_sector "
 						+ "ORDER BY s Desc";
-			}			
+			}
 			Query query = session.createSQLQuery(consulta);
 			List list = query.list();
 			Iterator it = list.iterator();
@@ -944,7 +959,6 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		}
 	}
 
-	
 	@Override
 	public long peticionesSuscripcion(long id) {
 		long result;
@@ -952,18 +966,19 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 			startConnection();
 			result = session
 					.createQuery(
-							"FROM SolicitudSuscripcion WHERE " + " id_ente_proveedor = "
-									+ id + " AND status = " + ACTIVO
+							"FROM SolicitudSuscripcion WHERE "
+									+ " id_ente_proveedor = " + id
+									+ " AND status = " + ACTIVO
 									+ " AND leido = false"
-									+ " AND sentencia = " + PENDIENTE).list().size();
-		
+									+ " AND sentencia = " + PENDIENTE).list()
+					.size();
 
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;
 		} finally {
 			closeConnection();
-		}	
+		}
 		return result;
 	}
 
@@ -990,17 +1005,19 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 			closeConnection();
 		}
 	}
-	
+
 	@Override
-	public long peticionesSuscripcionPendientes(long id){
+	public long peticionesSuscripcionPendientes(long id) {
 		long result;
 		try {
 			startConnection();
 			result = session
 					.createQuery(
-							"FROM SolicitudSuscripcion WHERE " + " id_ente_proveedor = "
-									+ id + " AND status = " + ACTIVO
-									+ " AND sentencia = " + PENDIENTE).list().size();
+							"FROM SolicitudSuscripcion WHERE "
+									+ " id_ente_proveedor = " + id
+									+ " AND status = " + ACTIVO
+									+ " AND sentencia = " + PENDIENTE).list()
+					.size();
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;
@@ -1009,37 +1026,42 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		}
 		return result;
 	}
-		
+
 	@Override
 	public ArrayList<Solicitud_Suscripcion> getSolicitudesSuscripcionPendientes(
 			long id_ente, byte orderBy) {
-		List<Solicitud_Suscripcion> result =  new ArrayList<Solicitud_Suscripcion>();
+		List<Solicitud_Suscripcion> result = new ArrayList<Solicitud_Suscripcion>();
 		ArrayList<?> list;
 		Query query;
 		String order = orderBy > 0 ? "DESC" : "ASC";
 		try {
 			startConnection();
-			query = session.createSQLQuery("select s.id_solicitud_suscripcion,s.id_servicio_informacion,s.leido,s.fecha_creado," +						
-						" (select si.nombre from servicios_informacion as si where si.id_servicio_informacion = s.id_servicio_informacion and si.status=0) as servicio, "+
-						" (select e.siglas from entes as e where e.id_ente = s.id_ente_solicitante and e.status=0) as ente, "+
-						" s.sentencia"+
-						" from solicitudes_suscripciones as s"+
-						" where s.id_ente_proveedor = " + id_ente +
-						" AND s.status = 0" +						
-						" ORDER BY s.leido "+ order +
-						" , s.fecha_creado "+ order+
-						" , s.sentencia "+ order);
-			list = (ArrayList<?>) query.list();			
+			query = session
+					.createSQLQuery("select s.id_solicitud_suscripcion,s.id_servicio_informacion,s.leido,s.fecha_creado,"
+							+ " (select si.nombre from servicios_informacion as si where si.id_servicio_informacion = s.id_servicio_informacion and si.status=0) as servicio, "
+							+ " (select e.siglas from entes as e where e.id_ente = s.id_ente_solicitante and e.status=0) as ente, "
+							+ " s.sentencia"
+							+ " from solicitudes_suscripciones as s"
+							+ " where s.id_ente_proveedor = "
+							+ id_ente
+							+ " AND s.status = 0"
+							+ " ORDER BY s.leido "
+							+ order
+							+ " , s.fecha_creado "
+							+ order
+							+ " , s.sentencia " + order);
+			list = (ArrayList<?>) query.list();
 			Iterator<?> it = list.iterator();
 			while (it.hasNext()) {
 				Object[] st = (Object[]) it.next();
 				Solicitud_Suscripcion s = new Solicitud_Suscripcion();
 				s.setId_suscripcion((Long) Long.parseLong(st[0].toString()));
-				s.setId_servicio_informacion((Long) Long.parseLong(st[1].toString()));
+				s.setId_servicio_informacion((Long) Long.parseLong(st[1]
+						.toString()));
 				s.setLeido((Boolean) Boolean.parseBoolean(st[2].toString()));
-				s.setFecha_creado((Date)st[3]);				
-				s.setServicio((String)st[4].toString());
-				s.setEnte((String)st[5].toString());
+				s.setFecha_creado((Date) st[3]);
+				s.setServicio((String) st[4].toString());
+				s.setEnte((String) st[5].toString());
 				s.setSentencia((int) Integer.parseInt(st[6].toString()));
 				result.add(s);
 			}
@@ -1051,7 +1073,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		}
 		return (ArrayList<Solicitud_Suscripcion>) result;
 	}
-	
+
 	@Override
 	public long getNumeroSuscrionesAceptadasRechazadas(long id) {
 		long result;
@@ -1059,52 +1081,60 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 			startConnection();
 			result = session
 					.createQuery(
-							"FROM SolicitudSuscripcion WHERE " + " id_ente_solicitante = "
-									+ id + " AND status = " + ACTIVO
+							"FROM SolicitudSuscripcion WHERE "
+									+ " id_ente_solicitante = " + id
+									+ " AND status = " + ACTIVO
 									+ " AND leido = false"
-									+ " AND sentencia != " + PENDIENTE).list().size();
-		
+									+ " AND sentencia != " + PENDIENTE).list()
+					.size();
 
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;
 		} finally {
 			closeConnection();
-		}	
+		}
 		return result;
 	}
-	
+
 	@Override
 	public ArrayList<Solicitud_Respuesta> getlistaSolicitudesAceptadasRechazadas(
 			long id_ente, byte orderBy) {
-		List<Solicitud_Respuesta> result =  new ArrayList<Solicitud_Respuesta>();
+		List<Solicitud_Respuesta> result = new ArrayList<Solicitud_Respuesta>();
 		ArrayList<?> list;
 		Query query;
 		String order = orderBy > 0 ? "DESC" : "ASC";
 		try {
 			startConnection();
-			query = session.createSQLQuery("select s.id_solicitud_suscripcion,s.id_servicio_informacion,s.leido,s.fecha_creado," +						
-						" (select si.nombre from servicios_informacion as si where si.id_servicio_informacion = s.id_servicio_informacion and si.status=0) as servicio, "+
-						" (select e.siglas from entes as e where e.id_ente = s.id_ente_proveedor and e.status=0) as ente,"+
-						" s.sentencia "+
-						" from solicitudes_suscripciones as s"+
-						" where s.id_ente_solicitante = " + id_ente +
-						" AND s.status = 0" +
-						" AND s.sentencia != " + PENDIENTE +						
-						" ORDER BY s.leido "+ order +
-						" , s.fecha_creado "+ order+
-						" , s.sentencia "+ order);
-			list = (ArrayList<?>) query.list();			
+			query = session
+					.createSQLQuery("select s.id_solicitud_suscripcion,s.id_servicio_informacion,s.leido,s.fecha_creado,"
+							+ " (select si.nombre from servicios_informacion as si where si.id_servicio_informacion = s.id_servicio_informacion and si.status=0) as servicio, "
+							+ " (select e.siglas from entes as e where e.id_ente = s.id_ente_proveedor and e.status=0) as ente,"
+							+ " s.sentencia "
+							+ " from solicitudes_suscripciones as s"
+							+ " where s.id_ente_solicitante = "
+							+ id_ente
+							+ " AND s.status = 0"
+							+ " AND s.sentencia != "
+							+ PENDIENTE
+							+ " ORDER BY s.leido "
+							+ order
+							+ " , s.fecha_creado "
+							+ order
+							+ " , s.sentencia "
+							+ order);
+			list = (ArrayList<?>) query.list();
 			Iterator<?> it = list.iterator();
 			while (it.hasNext()) {
 				Object[] st = (Object[]) it.next();
 				Solicitud_Respuesta s = new Solicitud_Respuesta();
 				s.setId_suscripcion((Long) Long.parseLong(st[0].toString()));
-				s.setId_servicio_informacion((Long) Long.parseLong(st[1].toString()));
+				s.setId_servicio_informacion((Long) Long.parseLong(st[1]
+						.toString()));
 				s.setLeido((Boolean) Boolean.parseBoolean(st[2].toString()));
-				s.setFecha_creado((Date)st[3]);				
-				s.setServicio((String)st[4].toString());
-				s.setEnte((String)st[5].toString());	
+				s.setFecha_creado((Date) st[3]);
+				s.setServicio((String) st[4].toString());
+				s.setEnte((String) st[5].toString());
 				s.setSentencia((int) Integer.parseInt(st[6].toString()));
 				result.add(s);
 			}
@@ -1116,7 +1146,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		}
 		return (ArrayList<Solicitud_Respuesta>) result;
 	}
-	
+
 	@Override
 	public long getId_solicitud_sucripcion(long service, long provider,
 			long client) {
@@ -1128,8 +1158,8 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 								+ " WHERE id_servicio_informacion = " + service
 								+ " AND id_ente_proveedor = " + provider
 								+ " AND id_ente_solicitante = " + client
-								+ " AND status = " + ACTIVO)
-						.uniqueResult()).getId_solicitud_suscripcion();
+								+ " AND status = " + ACTIVO).uniqueResult())
+						.getId_solicitud_suscripcion();
 			} catch (Exception e) {
 				return 0;
 			}
@@ -1142,4 +1172,3 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		}
 	}
 }
-

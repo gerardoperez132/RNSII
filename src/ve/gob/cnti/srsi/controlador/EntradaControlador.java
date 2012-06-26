@@ -1,3 +1,18 @@
+/* This file is part of SRSI.
+ * 
+ * SRSI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * SRSI is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with SRSI. If not, see <http://www.gnu.org/licenses/>.
+ */
 package ve.gob.cnti.srsi.controlador;
 
 import java.util.ArrayList;
@@ -6,8 +21,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.validation.SkipValidation;
-
-import com.opensymphony.xwork2.ActionContext;
 
 import ve.gob.cnti.srsi.dao.Constants;
 import ve.gob.cnti.srsi.dao.Constants.Formulario;
@@ -20,6 +33,8 @@ import ve.gob.cnti.srsi.modelo.Funcionalidad;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.TipoDato;
 import ve.gob.cnti.srsi.modelo.Usuario;
+
+import com.opensymphony.xwork2.ActionContext;
 
 @SuppressWarnings("serial")
 public class EntradaControlador extends DAO implements TipoEntradaSalida,
@@ -154,17 +169,18 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 		tipoDatos = (List<TipoDato>) read(new TipoDato());
 		return SUCCESS;
 	}
-	
-	//TODO hay que borrar con le id del usuario, seria bueno que sea directamente del metodo del dao
+
+	// TODO hay que borrar con le id del usuario, seria bueno que sea
+	// directamente del metodo del dao
 	@SuppressWarnings("unchecked")
 	@SkipValidation
-	public String eliminarEntradaCompleja() {			
+	public String eliminarEntradaCompleja() {
 		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,
 				ENTRADA);
 		Iterator<EntradaSalida> iterator = entradas.iterator();
-		while(iterator.hasNext()){
+		while (iterator.hasNext()) {
 			entrada = iterator.next();
-			if (entrada.getId_padre() == id_entrada_salida){				
+			if (entrada.getId_padre() == id_entrada_salida) {
 				delete(entrada, entrada.getId_entrada_salida());
 			}
 		}

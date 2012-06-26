@@ -1,3 +1,18 @@
+/* This file is part of SRSI.
+ * 
+ * SRSI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * SRSI is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with SRSI. If not, see <http://www.gnu.org/licenses/>.
+ */
 package ve.gob.cnti.srsi.controlador;
 
 import java.util.ArrayList;
@@ -52,7 +67,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 
 	@SkipValidation
 	public String prepararSuscripcion() {
-		if(!sessionValidate())
+		if (!sessionValidate())
 			return INPUT;
 		if (!verificarLong(id_servicio))
 			return INPUT;
@@ -69,7 +84,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 						error.getProperties()
 								.getProperty("error.suscripcion.duplicated")
 								.replace("{0}", ente.getSiglas().toUpperCase()));
-				id_solicitud_suscripcion  = getId_solicitud_sucripcion(
+				id_solicitud_suscripcion = getId_solicitud_sucripcion(
 						solicitud.getId_servicio_informacion(),
 						solicitud.getId_ente_proveedor(),
 						solicitud.getId_ente_solicitante());
@@ -82,7 +97,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 	// TODO Mandar notificación por correo al ente proveedor. Un mensaje
 	// cualquier para ir probando...
 	public String solicitarSuscripcion() {
-		if(!sessionValidate())
+		if (!sessionValidate())
 			return INPUT;
 		prepareRequest();
 		solicitud.setTelefono(codigo + solicitud.getTelefono());
@@ -195,10 +210,10 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 			return false;
 		}
 	}
-	
+
 	@SkipValidation
 	public String listarSolicitudesAceptadasRechazadas() {
-		if(!sessionValidate())
+		if (!sessionValidate())
 			return INPUT;
 		// Lista solicitudes en base a las no leidas, pendientes,
 		session = ActionContext.getContext().getSession();
@@ -211,7 +226,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 
 	@SkipValidation
 	public String listaSuscripcionesPendientes() {
-		if(!sessionValidate())
+		if (!sessionValidate())
 			return INPUT;
 		// Lista solicitudes en base a las no leidas, pendientes,
 		session = ActionContext.getContext().getSession();
@@ -224,7 +239,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 
 	@SkipValidation
 	public String examinarSolicitud() {
-		if(!sessionValidate())
+		if (!sessionValidate())
 			return INPUT;
 		session = ActionContext.getContext().getSession();
 		Usuario user = (Usuario) session.get("usuario");
@@ -257,7 +272,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 
 	@SkipValidation
 	public String preparar_AprobarRechasarSuscripcion() {
-		if(!sessionValidate())
+		if (!sessionValidate())
 			return INPUT;
 		// Lee los detalles de la suscripción
 		session = ActionContext.getContext().getSession();
@@ -282,7 +297,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 	// exitoso para la vista
 	@SkipValidation
 	public String AprobarRechasarSuscripcion() {
-		if(!sessionValidate())
+		if (!sessionValidate())
 			return INPUT;
 		boolean err = false;
 		String motivo_proveedor;
@@ -341,18 +356,18 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 		aprobarRechasar = false;
 		return SUCCESS;
 	}
-	
+
 	// TODO Hay que listar los sectores y los servicios publicados
 	@SkipValidation
 	public String prepararSolicitarSuscripcion() {
-		if(!sessionValidate())
-			return INPUT;		
-		//variable para la vista.
+		if (!sessionValidate())
+			return INPUT;
+		// variable para la vista.
 		solicitarSuscripcion = true;
 		return SUCCESS;
 	}
-	
-	//Valida que la sesión este activa
+
+	// Valida que la sesión este activa
 	@SkipValidation
 	public boolean sessionValidate() {
 		session = ActionContext.getContext().getSession();
@@ -360,7 +375,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 		usuario = (Usuario) session.get("usuario");
 		if (usuario == null) {
 			return false;
-		}		
+		}
 		return true;
 	}
 

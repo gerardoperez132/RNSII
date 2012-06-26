@@ -1,3 +1,18 @@
+/* This file is part of SRSI.
+ * 
+ * SRSI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * SRSI is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with SRSI. If not, see <http://www.gnu.org/licenses/>.
+ */
 package ve.gob.cnti.srsi.controlador;
 
 import java.util.ArrayList;
@@ -6,8 +21,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.validation.SkipValidation;
-
-import com.opensymphony.xwork2.ActionContext;
 
 import ve.gob.cnti.srsi.dao.Constants;
 import ve.gob.cnti.srsi.dao.Constants.Formulario;
@@ -20,6 +33,8 @@ import ve.gob.cnti.srsi.modelo.Funcionalidad;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.TipoDato;
 import ve.gob.cnti.srsi.modelo.Usuario;
+
+import com.opensymphony.xwork2.ActionContext;
 
 @SuppressWarnings("serial")
 public class SalidaControlador extends DAO implements Formulario,
@@ -134,7 +149,7 @@ public class SalidaControlador extends DAO implements Formulario,
 
 	@SuppressWarnings("unchecked")
 	@SkipValidation
-	public String eliminarSalidaSimple() {		
+	public String eliminarSalidaSimple() {
 		delete(salida, id_entrada_salida);
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
@@ -147,15 +162,16 @@ public class SalidaControlador extends DAO implements Formulario,
 		return SUCCESS;
 	}
 
-	//TODO hay que borrar con le id del usuario, seria bueno que sea directamente del metodo del dao
+	// TODO hay que borrar con le id del usuario, seria bueno que sea
+	// directamente del metodo del dao
 	@SuppressWarnings("unchecked")
 	@SkipValidation
-	public String eliminarSalidaCompleja() {		
+	public String eliminarSalidaCompleja() {
 		salidas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad, SALIDA);
 		Iterator<EntradaSalida> iterator = salidas.iterator();
 		while (iterator.hasNext()) {
 			salida = iterator.next();
-			if (salida.getId_padre() == id_entrada_salida){				
+			if (salida.getId_padre() == id_entrada_salida) {
 				delete(salida, salida.getId_entrada_salida());
 			}
 		}

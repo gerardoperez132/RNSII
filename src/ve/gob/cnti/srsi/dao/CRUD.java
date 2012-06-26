@@ -1,3 +1,18 @@
+/* This file is part of SRSI.
+ * 
+ * SRSI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * SRSI is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with SRSI. If not, see <http://www.gnu.org/licenses/>.
+ */
 package ve.gob.cnti.srsi.dao;
 
 import java.lang.reflect.InvocationTargetException;
@@ -10,7 +25,6 @@ import ve.gob.cnti.modelo.temporales.Solicitud_Respuesta;
 import ve.gob.cnti.modelo.temporales.Solicitud_Suscripcion;
 import ve.gob.cnti.srsi.modelo.Correo;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
-import ve.gob.cnti.srsi.modelo.SolicitudSuscripcion;
 import ve.gob.cnti.srsi.modelo.Telefono;
 import ve.gob.cnti.srsi.modelo.Visita;
 
@@ -464,9 +478,9 @@ public interface CRUD {
 	 * 
 	 * @return Retorna una lista de servicios
 	 */
-	public ArrayList<ServicioInformacion> buscarServicio2(String cadena, byte orderBy,
-			long id_ente);
-	
+	public ArrayList<ServicioInformacion> buscarServicio2(String cadena,
+			byte orderBy, long id_ente);
+
 	/**
 	 * Permite saber el número solicitudes de suscripción no leidos que posee el
 	 * ente
@@ -477,10 +491,10 @@ public interface CRUD {
 	 * 
 	 */
 	public long peticionesSuscripcion(long id);
-	
+
 	/**
-	 * Permite saber el número solicitudes de suscripción pendientes que posee el
-	 * ente
+	 * Permite saber el número solicitudes de suscripción pendientes que posee
+	 * el ente
 	 * 
 	 * @param id
 	 *            id del ente a consultar
@@ -488,42 +502,46 @@ public interface CRUD {
 	 * 
 	 */
 	public long peticionesSuscripcionPendientes(long id);
-	
+
 	/**
-	 * Retorna una lista de las solicitudes de suscrición a los servicios
-	 * de información publicados por el ente
+	 * Retorna una lista de las solicitudes de suscrición a los servicios de
+	 * información publicados por el ente
 	 * 
 	 * @param id_ente
-	 *            Identificador del ente al cual pertenecen las solicitudes de 
+	 *            Identificador del ente al cual pertenecen las solicitudes de
 	 *            suscripción a los servicios de información publicados.
-	 * @return Lista de las solicitudes de suscrición a los servicios información.
+	 * @return Lista de las solicitudes de suscrición a los servicios
+	 *         información.
 	 */
 	public ArrayList<Solicitud_Suscripcion> getSolicitudesSuscripcionPendientes(
 			long id_ente, byte orderBy);
-	
+
 	/**
-	 * Permite saber el número solicitudes de suscripción Aceptadas-Rechazadas por leer
+	 * Permite saber el número solicitudes de suscripción Aceptadas-Rechazadas
+	 * por leer
 	 * 
 	 * @param id
 	 *            id del ente a consultar
-	 * @return retorna el número solicitudes de suscripción Aceptadas-Rechazadas por leer
+	 * @return retorna el número solicitudes de suscripción Aceptadas-Rechazadas
+	 *         por leer
 	 * 
 	 */
 	public long getNumeroSuscrionesAceptadasRechazadas(long id);
-	
+
 	/**
 	 * Retorna una lista de las solicitudes de suscrición Aceptadas - Rechazadas
-	 *  
+	 * 
 	 * @param id_ente
-	 *            Identificador del ente al cual pertenecen las solicitudes de 
+	 *            Identificador del ente al cual pertenecen las solicitudes de
 	 *            suscripción aceptadas - rechazadas a buscar.
 	 * @return Lista de las solicitudes de suscrición Aceptadas -Rechazadas.
 	 */
-	public ArrayList<Solicitud_Respuesta> getlistaSolicitudesAceptadasRechazadas(long id_ente, byte orderBy);
-	
-	
-	public long getId_solicitud_sucripcion(long service, long provider,	long client);
-	
+	public ArrayList<Solicitud_Respuesta> getlistaSolicitudesAceptadasRechazadas(
+			long id_ente, byte orderBy);
+
+	public long getId_solicitud_sucripcion(long service, long provider,
+			long client);
+
 	public boolean verifySuscriptionRequest(long service, long provider,
 			long client);
 }
