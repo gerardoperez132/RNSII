@@ -12,7 +12,9 @@
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
 <link rel="stylesheet" type="text/css" href="res/css/menu_vertical.css">
 <script type="text/javascript" src="res/js/jquery-1.7.1.js" charset="UTF-8"></script>
-<script src="res/js/validacion_datos.js"  type="text/javascript" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/jquery.validate.js" charset="UTF-8"></script>
+<script src="res/js/messages_es.js" type="text/javascript" charset="UTF-8"></script>
+<script src="res/js/registro/formulario_salida.js" type="text/javascript" charset="UTF-8"></script>
 <title><s:text name="registro.title"></s:text></title>
 	</head>
 	<body>
@@ -77,7 +79,7 @@
 						</s:else>
 						<!-- Formulario para registrar o modificar entrada -->
 						<form action="<s:property value="#action"></s:property>"
-							method="post" id="myForm">
+							method="post" name="formES" id="formES">
 							<div id="tab2" class="tab_content">
 								<h5 class="formulario">
 									<s:if test="modificar!=true">
@@ -95,23 +97,23 @@
 									</s:text>
 								</h6>
 								<hr>
-								<!-- Nombre de la entrada. -->
+								<!-- Nombre de la salida. -->
 								<h5 class="formulario">
 									<s:text name="nombre.title"></s:text>
 								</h5>
 								<s:fielderror>
 									<s:param>salida.nombre</s:param>
 								</s:fielderror>
-								<s:textfield name="salida.nombre" />
+								<s:textfield name="salida.nombre" id="salida.nombre" />
 								<br>
-								<!-- Descripción de la entrada. -->
+								<!-- Descripción de la salida. -->
 								<h5 class="formulario">
 									<s:text name="descripcion.title"></s:text>
 								</h5>
 								<s:fielderror>
 									<s:param>salida.descripcion</s:param>
 								</s:fielderror>
-								<s:textarea name="salida.descripcion" cols="30" rows="5" />
+								<s:textarea name="salida.descripcion" id="salida.descripcion" cols="30" rows="5" />
 								<br>
 								<h5 class="formulario">
 									<s:text name="dato.title"></s:text>
@@ -119,9 +121,9 @@
 								<s:fielderror>
 									<s:param>tipodato</s:param>
 								</s:fielderror>
-								<s:select name="salida.id_tipo_dato" list="tipoDatos"
+								<s:select name="salida.id_tipo_dato" id="salida.id_tipo_dato" list="tipoDatos"
 									listKey="id_tipo_dato" listValue="nombre" headerKey="-1"
-									headerValue="%{getText('dato.select')}" id="tipoDato"></s:select>
+									headerValue="%{getText('dato.select')}"></s:select>
 								<br> 
 								
 								
@@ -133,7 +135,7 @@
 									<s:fielderror>
 										<s:param>formato</s:param>
 									</s:fielderror>								
-									<select name="salida.id_formato" id="formato">
+									<select name="salida.id_formato" id="salida.id_formato">
 										<s:set var="idF" value="salida.id_formato"/>
 										<optgroup label="">
 											<option value="-1">
@@ -167,7 +169,7 @@
 									<s:fielderror>
 										<s:param>longitud</s:param>
 									</s:fielderror>
-									<s:textfield name="salida.longitud" maxlength="10" id="longitud"/>
+									<s:textfield name="salida.longitud" id="salida.longitud" maxlength="10"/>
 										<span id="longitud_msj"></span>
 								</div>
 								
