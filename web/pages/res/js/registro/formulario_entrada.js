@@ -53,11 +53,11 @@ $(document).ready(function(){
 	    	'entrada.longitud': {longitudValidate:true}
 	    },
 	    messages: {	    	
-	    	'entrada.nombre': {required:"Debe introducir un nombre 1",regexTitle:'Sólo puede introducir letras y espacios'},
-	    	'entrada.descripcion': {required:"Debe introducir una descripción 2 "+isFormato,regexDescription:'Sólo puede introducir letras, números y puntos'},	    	
+	    	'entrada.nombre': {required:"Debe introducir un nombre",regexTitle:'Sólo puede introducir letras y espacios'},
+	    	'entrada.descripcion': {required:"Debe introducir una descripción",regexDescription:'Sólo puede introducir letras, números y puntos'},	    	
 	    	'entrada.id_tipo_dato': "Debe seleccionar un tipo de dato",
-	    	'entrada.id_formato': "Debe seleccionar un tipo de formato que corresponda con el dato elegido "+isFormato,
-	    	'entrada.longitud': 'Debe indicar la cantidad de dígitos que acepta el dato '+isLongitud
+	    	'entrada.id_formato': "Debe seleccionar un tipo de formato que corresponda con el dato elegido",
+	    	'entrada.longitud': 'Debe indicar la cantidad de dígitos que acepta el dato'
 	    }
 	  });
 	
