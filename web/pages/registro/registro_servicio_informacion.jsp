@@ -185,6 +185,7 @@
 									<s:token name="token" />
 									<s:hidden name="tab" value="1" />
 									<s:hidden name="id_servicio_informacion" />
+									<s:hidden name="modificar"></s:hidden>
 									<input type="submit" value='<s:property value="#submit"/>' />
 								</form>
 							</div>
@@ -228,6 +229,7 @@
 									<s:else>
 										<s:hidden name="id_servicio_informacion" />
 									</s:else>
+									<s:hidden name="modificar"></s:hidden>
 									<input type="submit" value='<s:property value="#submit"/>' />
 								</form>
 								<br>
@@ -348,6 +350,7 @@
 									<s:token name="token" />
 									<s:hidden name="tab" value="3" />
 									<s:hidden name="id_servicio_informacion" />
+									<s:hidden name="modificar"></s:hidden>
 									<input type="submit" value='<s:property value="#submit"/>' />
 								</form>
 							</div>
@@ -395,6 +398,7 @@
 									<s:token name="token" />
 									<s:hidden name="tab" value="4" />
 									<s:hidden name="id_servicio_informacion" />
+									<s:hidden name="modificar"></s:hidden>
 									<input type="submit" value='<s:property value="#submit"/>' />
 								</form>
 							</div>

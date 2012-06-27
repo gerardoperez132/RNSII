@@ -443,21 +443,10 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			update(servicio);
 			create(phone);
 			create(email);
-		} else if (isModificar() && isComplete(servicio)) {
+		} else {
 			update(servicio, id_servicio_informacion);
 			update(phone, id_servicio_informacion);
 			update(email, id_servicio_informacion);
-		} else {
-			Telefono phone2 = getPhone(phone, id_servicio_informacion);
-			if (phone2 == null) {
-				update(servicio, id_servicio_informacion);
-				create(phone);
-				create(email);
-			} else {
-				update(servicio, id_servicio_informacion);
-				update(phone, id_servicio_informacion);
-				update(email, id_servicio_informacion);
-			}
 		}
 		return SUCCESS;
 	}
@@ -789,6 +778,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			phone = (Telefono) read(phone, id_servicio_informacion);
 			telefono = phone.getTelefono().substring(3, 10);
 			codigo = phone.getTelefono().substring(0, 3);
+			// TODO Imprimir qué pasa aquí.
 		} catch (Exception e) {
 		}
 		Correo email = new Correo();
