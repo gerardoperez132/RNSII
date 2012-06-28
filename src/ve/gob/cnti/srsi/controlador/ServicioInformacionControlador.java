@@ -172,7 +172,8 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			Telefono phone = new Telefono();
 			try {
 				phone = (Telefono) getPhone(servicio, id_servicio_informacion);
-				telefono = phone.getTelefono();
+				telefono = phone.getTelefono().substring(3, 10);
+				codigo = phone.getTelefono().substring(0, 3);
 			} catch (Exception e) {
 			}
 			Correo email = new Correo();
@@ -256,7 +257,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 				System.out.println("Error guardando las áreas");
 			}
 		}
-		setSessionStackGeneral();
+		setSessionStack();
 		return SUCCESS;
 	}
 
@@ -413,7 +414,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 					.getId_usuario());
 			createUnion(unionArquitecturaServicioInformacion);
 		}
-		setSessionStacktechnique();
+		setSessionStack();
 		return SUCCESS;
 	}
 
@@ -435,7 +436,6 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		Correo email = new Correo();
 		email.setId_servicio_informacion(id_servicio_informacion);
 		email.setCorreo(correo);
-
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		servicio.setResponsable(responsable);
 		if (!isModificar()) {
@@ -445,8 +445,14 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			create(email);
 		} else {
 			update(servicio, id_servicio_informacion);
-			update(phone, id_servicio_informacion);
-			update(email, id_servicio_informacion);
+			email = getEmail(servicio, id_servicio_informacion);
+			email.setId_servicio_informacion(id_servicio_informacion);
+			email.setCorreo(correo);
+			phone = getPhone(servicio, id_servicio_informacion);
+			phone.setId_servicio_informacion(id_servicio_informacion);
+			phone.setTelefono(codigo + telefono);
+			update(email, email.getId_correo());
+			update(phone, phone.getId_telefono());
 		}
 		return SUCCESS;
 	}
@@ -565,29 +571,6 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		session.put("telefono", telefono);
 		session.put("correo", correo);
 		session.put("nuevo", nuevo);
-		session.put("modificar", modificar);
-		session.put("id_servicio_informacion", id_servicio_informacion);
-	}
-
-	@SuppressWarnings("unchecked")
-	private void setSessionStackGeneral() {
-		session = ActionContext.getContext().getSession();
-		session.put("servicio", servicio);
-		session.put("sector", sector);
-		session.put("area", area);
-		session.put("estado", estado);
-		session.put("nuevo", nuevo);
-		session.put("modificar", modificar);
-		session.put("id_servicio_informacion", id_servicio_informacion);
-	}
-
-	@SuppressWarnings("unchecked")
-	private void setSessionStacktechnique() {
-		session = ActionContext.getContext().getSession();
-		session.put("servicio", servicio);
-		session.put("seguridad", seguridad);
-		session.put("arquitectura", arquitectura);
-		session.put("intercambio", intercambio);
 		session.put("modificar", modificar);
 		session.put("id_servicio_informacion", id_servicio_informacion);
 	}
@@ -773,14 +756,6 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		}
 		intercambio = servicio.getId_intercambio();
 		Telefono phone = new Telefono();
-		try {
-			telefono = phone.getTelefono();
-			phone = (Telefono) read(phone, id_servicio_informacion);
-			telefono = phone.getTelefono().substring(3, 10);
-			codigo = phone.getTelefono().substring(0, 3);
-			// TODO Imprimir qué pasa aquí.
-		} catch (Exception e) {
-		}
 		Correo email = new Correo();
 		try {
 			email = (Correo) getEmail(servicio, id_servicio_informacion);
