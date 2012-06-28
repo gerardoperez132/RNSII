@@ -997,7 +997,6 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 			} catch (Exception e) {
 				return true;
 			}
-
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;
@@ -1163,7 +1162,6 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 			} catch (Exception e) {
 				return 0;
 			}
-
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;
