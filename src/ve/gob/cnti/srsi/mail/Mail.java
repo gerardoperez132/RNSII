@@ -20,8 +20,8 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
- * Carga el archivo de propiedades de internacionalización con las propiedades
- * de conexión al servicio de correo electrónico en la aplicación.
+ * Carga el archivo de propiedades de internacionalización con los parámetros de
+ * conexión al servicio de correo electrónico en la aplicación.
  * 
  * @author Richard Ricciardelli
  * 
