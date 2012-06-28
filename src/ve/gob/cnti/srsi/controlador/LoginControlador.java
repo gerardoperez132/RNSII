@@ -29,8 +29,8 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
 import ve.gob.cnti.srsi.dao.DAO;
-import ve.gob.cnti.srsi.dao.EnviarCorreo;
-import ve.gob.cnti.srsi.dao.MD5Hashing;
+import ve.gob.cnti.srsi.mail.EnviarCorreo;
+import ve.gob.cnti.srsi.mail.Mail;
 import ve.gob.cnti.srsi.modelo.Correo;
 import ve.gob.cnti.srsi.modelo.Ente;
 import ve.gob.cnti.srsi.modelo.EntradaSalida;
@@ -39,6 +39,7 @@ import ve.gob.cnti.srsi.modelo.Funcionalidad;
 import ve.gob.cnti.srsi.modelo.RecuperarClave;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.Usuario;
+import ve.gob.cnti.srsi.util.MD5Hashing;
 
 import com.opensymphony.xwork2.ActionContext;
 
@@ -251,12 +252,13 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 		}
 		MD5Hashing mail = new MD5Hashing(user_correo.getCorreo());
 		MD5Hashing id = new MD5Hashing(getNextId(r_clave) + "");
+		Mail sendmail = new Mail();
 
 		String asunto = "SRSI - Restablecer Contraseña";
 		String mensaje = "\n\nEstimado "
 				+ usuario.getNombre()
 				+ " si se le ha olvidado su contraseña puede acceder al suguiente link para cambiarla por una nueva: \n\n"
-				+ error.getProperties().getProperty("dominio")
+				+ sendmail.getProperties().getProperty("dominio")
 				+ "pages/recuperarClave?cuenta="
 				+ mail.getPassword().toString() + id.getPassword().toString();
 		System.out.println(mensaje);
