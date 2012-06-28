@@ -21,8 +21,6 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
-import ve.gob.cnti.modelo.temporales.Solicitud_Respuesta;
-import ve.gob.cnti.modelo.temporales.Solicitud_Suscripcion;
 import ve.gob.cnti.srsi.dao.Constants;
 import ve.gob.cnti.srsi.dao.Constants.Modelos;
 import ve.gob.cnti.srsi.dao.Constants.Order;
@@ -33,6 +31,8 @@ import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.SolicitudSuscripcion;
 import ve.gob.cnti.srsi.modelo.Suscrito;
 import ve.gob.cnti.srsi.modelo.Usuario;
+import ve.gob.cnti.srsi.util.Solicitud_Respuesta;
+import ve.gob.cnti.srsi.util.Solicitud_Suscripcion;
 
 import com.opensymphony.xwork2.ActionContext;
 
