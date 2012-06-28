@@ -13,7 +13,7 @@
  * You should have received a copy of the GNU General Public License
  * along with SRSI. If not, see <http://www.gnu.org/licenses/>.
  */
-package ve.gob.cnti.srsi.dao;
+package ve.gob.cnti.srsi.util;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

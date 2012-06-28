@@ -13,7 +13,7 @@
  * You should have received a copy of the GNU General Public License
  * along with SRSI. If not, see <http://www.gnu.org/licenses/>.
  */
-package ve.gob.cnti.srsi.dao;
+package ve.gob.cnti.srsi.mail;
 
 import java.util.Properties;
 
@@ -23,6 +23,8 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import ve.gob.cnti.srsi.dao.DAO;
+
 /**
  * Clase para enviar correo electrónico.
  * 
@@ -31,21 +33,24 @@ import javax.mail.internet.MimeMessage;
 @SuppressWarnings("serial")
 public class EnviarCorreo extends DAO {
 
-	public EnviarCorreo() {
-	}
+	/**
+	 * Instanciamos un objeto de la clase <b>Mail</b> para utilizar sus métodos
+	 * y obtener los valores de configuración.
+	 */
+	private Mail mail = new Mail();
 
 	public boolean send(String email, String asunto, String mensaje) {
-		String mail_smtp_host = error.getProperties().getProperty(
+		String mail_smtp_host = mail.getProperties().getProperty(
 				"mail_smtp_host");
-		String mail_smtp_starttls_enable = error.getProperties().getProperty(
+		String mail_smtp_starttls_enable = mail.getProperties().getProperty(
 				"mail_smtp_starttls_enable");
-		String mail_smtp_port = error.getProperties().getProperty(
+		String mail_smtp_port = mail.getProperties().getProperty(
 				"mail_smtp_port");
-		String mail_smtp_user = error.getProperties().getProperty(
+		String mail_smtp_user = mail.getProperties().getProperty(
 				"mail_smtp_user");
-		String mail_smtp_auth = error.getProperties().getProperty(
+		String mail_smtp_auth = mail.getProperties().getProperty(
 				"mail_smtp_auth");
-		String pass = error.getProperties().getProperty("pass");
+		String pass = mail.getProperties().getProperty("pass");
 		try {
 			// Propiedades de la conexión
 			Properties props = new Properties();
@@ -56,7 +61,7 @@ public class EnviarCorreo extends DAO {
 			props.setProperty("mail.smtp.user", mail_smtp_user);
 			props.setProperty("mail.smtp.auth", mail_smtp_auth);
 
-			// Preparamos la sesion
+			// Preparamos la sesión
 			Session session = Session.getDefaultInstance(props);
 
 			// Construimos el mensaje
