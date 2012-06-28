@@ -332,42 +332,41 @@ public interface CRUD {
 			InvocationTargetException, NoSuchMethodException;
 
 	/**
-	 * Permite saber si existe un registro activo mediante la llave foranea con
+	 * Permite saber si existe un registro activo mediante la llave foránea con
 	 * las relaciones de las dos entidades, pasadas como argumentos.
 	 * 
 	 * @param models
 	 *            Son las dos entidades relacionadas, primero la entidad padre y
 	 *            luego la entidad hija
 	 * @param id
-	 *            clave foranea de la entidad hija
-	 * @return retorna un valor booleano encaso de que que exista o no, un
-	 *         registro activo
+	 *            Clave foránea de la entidad hija
+	 * @return Valor booleano en caso de que exista o no, un registro activo
 	 */
 	public boolean read(Object[] models, long id);
 
 	/**
-	 * Permite saber si existe un registro activo mediante la llave foranea con
+	 * Permite saber si existe un registro activo mediante la llave foránea con
 	 * las relaciones de las dos entidades, pasadas como argumentos.
 	 * 
 	 * @param models
 	 *            Son las dos entidades relacionadas, primero la entidad padre y
 	 *            luego la entidad hija
 	 * @param id
-	 *            clave foranea de la entidad hija
-	 * @return retorna un objeto con sus atributos establecidos.
+	 *            Clave foránea de la entidad hija
+	 * @return Objeto con sus atributos establecidos.
 	 * 
 	 */
 	public Object readf(Object[] models, long id);
 
 	/**
-	 * Permite saber si existe un registro activo mediante la llave foranea con
+	 * Permite saber si existe un registro activo mediante la llave foránea con
 	 * las relaciones de las dos entidades, pasadas como argumentos.
 	 * 
 	 * @param models
 	 *            Son las dos entidades relacionadas, primero la entidad padre y
 	 *            luego la entidad hija
 	 * @param id
-	 *            clave foranea de la entidad hija
+	 *            Clave foránea de la entidad hija
 	 * @return retorna un objeto con sus atributos establecidos.
 	 * 
 	 */
@@ -396,21 +395,23 @@ public interface CRUD {
 	public ArrayList<ServicioInformacion> buscarServicio(String cadena,
 			byte orderBy);
 
-	// /**
-	// * Permite obtener el número de visitas de un modelo determinado. Aplica a
-	// * servicios de información.
-	// *
-	// * @see ServicioInformacion
-	// * @param model
-	// * Modelo al cual se le desea conocer el número de visitas.
-	// * @param id
-	// * Identificador del modelo dado.
-	// * @return El número de visitas del modelo dado.
-	// */
-	// public long getNumeroVisitas(Object model, long id);
-
+	/**
+	 * Permite guardar una visita.
+	 * 
+	 * @param visita
+	 *            Visita a guardar.
+	 */
 	public void saveVisit(Visita visita);
 
+	/**
+	 * Permite obtener el número de visitas de un servicio de información de
+	 * acuerdo a su identificador.
+	 * 
+	 * @param id
+	 *            Identificador del servicio de información
+	 * @return Cantidad de visitas del servicio de información correspondiente
+	 *         al identificador.
+	 */
 	public long getVisits(long id);
 
 	/**
@@ -539,9 +540,35 @@ public interface CRUD {
 	public ArrayList<Solicitud_Respuesta> getlistaSolicitudesAceptadasRechazadas(
 			long id_ente, byte orderBy);
 
+	/**
+	 * Permite obtener las solicitudes de suscripción al servicio del proveedor
+	 * dado por parte de un cliente.
+	 * 
+	 * @param service
+	 *            Servicio de información solicitado
+	 * @param provider
+	 *            Proveedor del servicio de información solicitado
+	 * @param client
+	 *            Cliente que solicita el servicio de información
+	 * @return Un objeto {@link Solicitud_Suscripcion} ó 0 si no hay
+	 *         coincidencias.
+	 */
 	public long getId_solicitud_sucripcion(long service, long provider,
 			long client);
 
+	/**
+	 * Permite verificar si una solicitud de suscripción existe actualmente o
+	 * no.
+	 * 
+	 * @param service
+	 *            Servicio de información solicitado
+	 * @param providerProveedor
+	 *            del servicio de información solicitado
+	 * @param client
+	 *            Cliente que solicita el servicio de información
+	 * @return <code>true</code> si la solicitud ya existe, de lo contrario
+	 *         <code>false</code>
+	 */
 	public boolean verifySuscriptionRequest(long service, long provider,
 			long client);
 }
