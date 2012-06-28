@@ -29,10 +29,6 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import ve.gob.cnti.modelo.temporales.ListaSImasVisitados;
-import ve.gob.cnti.modelo.temporales.SectoresMasPublicados;
-import ve.gob.cnti.modelo.temporales.Solicitud_Respuesta;
-import ve.gob.cnti.modelo.temporales.Solicitud_Suscripcion;
 import ve.gob.cnti.srsi.dao.Constants.ClaseDato;
 import ve.gob.cnti.srsi.dao.Constants.Sentencias;
 import ve.gob.cnti.srsi.dao.Constants.Status;
@@ -46,6 +42,10 @@ import ve.gob.cnti.srsi.modelo.TipoDato;
 import ve.gob.cnti.srsi.modelo.UnionAreaServicioInformacion;
 import ve.gob.cnti.srsi.modelo.UnionArquitecturaServicioInformacion;
 import ve.gob.cnti.srsi.modelo.Visita;
+import ve.gob.cnti.srsi.util.ListaSImasVisitados;
+import ve.gob.cnti.srsi.util.SectoresMasPublicados;
+import ve.gob.cnti.srsi.util.Solicitud_Respuesta;
+import ve.gob.cnti.srsi.util.Solicitud_Suscripcion;
 
 import com.opensymphony.xwork2.ActionSupport;
 

@@ -25,8 +25,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
-import ve.gob.cnti.modelo.temporales.ListaSImasVisitados;
-import ve.gob.cnti.modelo.temporales.SectoresMasPublicados;
 import ve.gob.cnti.srsi.dao.Constants;
 import ve.gob.cnti.srsi.dao.Constants.Modelos;
 import ve.gob.cnti.srsi.dao.Constants.Order;
@@ -48,6 +46,8 @@ import ve.gob.cnti.srsi.modelo.UnionAreaServicioInformacion;
 import ve.gob.cnti.srsi.modelo.UnionArquitecturaServicioInformacion;
 import ve.gob.cnti.srsi.modelo.Usuario;
 import ve.gob.cnti.srsi.modelo.Visita;
+import ve.gob.cnti.srsi.util.ListaSImasVisitados;
+import ve.gob.cnti.srsi.util.SectoresMasPublicados;
 
 import com.opensymphony.xwork2.ActionContext;
 
