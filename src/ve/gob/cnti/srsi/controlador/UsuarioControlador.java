@@ -21,9 +21,9 @@ import java.util.Map;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
 import ve.gob.cnti.srsi.dao.DAO;
-import ve.gob.cnti.srsi.dao.MD5Hashing;
 import ve.gob.cnti.srsi.modelo.Ente;
 import ve.gob.cnti.srsi.modelo.Usuario;
+import ve.gob.cnti.srsi.util.MD5Hashing;
 
 import com.opensymphony.xwork2.ActionContext;
 
