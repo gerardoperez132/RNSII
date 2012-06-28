@@ -139,6 +139,10 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 			servicio.setPublicado(false);
 			update(servicio, id_servicio_informacion);
 		}
+		List<EntradaSalida> ios = (List<EntradaSalida>) read(ESF,
+				id_funcionalidad, -1);
+		for (EntradaSalida io : ios)
+			delete(io, io.getId_entrada_salida());
 		delete(funcionalidad, id_funcionalidad);
 		prepararFuncionalidades();
 		return SUCCESS;
