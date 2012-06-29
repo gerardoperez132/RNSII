@@ -55,7 +55,7 @@ import com.opensymphony.xwork2.ActionContext;
 public class ConsultasControlador extends DAO implements Constants, Order,
 		Modelos {
 
-	private Sector sector = new Sector();
+	private Sector sector = new Sector(); //Probando
 	private ServicioInformacion servicio = new ServicioInformacion();
 	private Funcionalidad funcionalidad;
 	private Ente ente = new Ente();
