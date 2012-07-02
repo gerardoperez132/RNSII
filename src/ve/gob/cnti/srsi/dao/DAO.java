@@ -35,6 +35,8 @@ import ve.gob.cnti.srsi.dao.Constants.Status;
 import ve.gob.cnti.srsi.dao.Constants.TipoEntradaSalida;
 import ve.gob.cnti.srsi.i18n.Errors;
 import ve.gob.cnti.srsi.modelo.Correo;
+import ve.gob.cnti.srsi.modelo.EntradaSalida;
+import ve.gob.cnti.srsi.modelo.Funcionalidad;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.SolicitudSuscripcion;
 import ve.gob.cnti.srsi.modelo.Telefono;
@@ -649,6 +651,34 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 			System.out.println("FALLÓ EN CORREO");
 			return false;
 		}
+		
+		Object[] models = { new Funcionalidad(),
+				new ServicioInformacion() };
+		List<Funcionalidad> funcionalidades = new ArrayList<Funcionalidad>();
+		funcionalidades = (List<Funcionalidad>) read(models,
+				servicio.getId_servicio_informacion(), -1);
+		if (funcionalidades.isEmpty()) {
+			System.out.println("FALLÓ EN FUNCIONALIDADES");
+			return false;
+		} else {
+			Iterator<Funcionalidad> fxIterado = funcionalidades
+					.iterator();
+			Funcionalidad fx = new Funcionalidad();
+			while (fxIterado.hasNext()) {
+				fx = fxIterado.next();
+				Object[] models2 = { new EntradaSalida(),
+						new Funcionalidad() };
+				List<EntradaSalida> salidas_tmp = new ArrayList<EntradaSalida>();
+				salidas_tmp = (List<EntradaSalida>) read(models2,
+						fx.getId_funcionalidad(), SALIDA);
+				if (salidas_tmp.isEmpty()) {
+					System.out.println("FALLÓ EN DATOS DE SALIDAS");
+					return false;
+				}
+			}
+		}
+		
+		
 		return true;
 	}
 
@@ -889,7 +919,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		ArrayList<ServicioInformacion> list;
 		String order = orderBy > 0 ? "DESC" : "ASC";
 		try {
-			startConnection();
+			startConnection();//isComplete(ServicioInformacion servicio) TODO
 			list = (ArrayList<ServicioInformacion>) session.createQuery(
 					" FROM ServicioInformacion s WHERE s.status = " + ACTIVO
 							+ " AND " + " s.publicado = TRUE " + " AND "

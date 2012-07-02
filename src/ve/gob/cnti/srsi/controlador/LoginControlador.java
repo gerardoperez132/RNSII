@@ -155,35 +155,11 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 					ListaServicios
 							.add(new ServiciosPublicables(false, servicio));
 				} else {
-					Object[] models = { new Funcionalidad(),
-							new ServicioInformacion() };
-					List<Funcionalidad> funcionalidades = new ArrayList<Funcionalidad>();
-					funcionalidades = (List<Funcionalidad>) read(models,
-							servicio.getId_servicio_informacion(), -1);
-					if (funcionalidades.isEmpty()) {
-						ListaServicios.add(new ServiciosPublicables(false,
-								servicio));
-					} else {
-						Iterator<Funcionalidad> fxIterado = funcionalidades
-								.iterator();
-						Funcionalidad fx = new Funcionalidad();
-						while (fxIterado.hasNext()) {
-							fx = fxIterado.next();
-							Object[] models2 = { new EntradaSalida(),
-									new Funcionalidad() };
-							List<EntradaSalida> salidas_tmp = new ArrayList<EntradaSalida>();
-							salidas_tmp = (List<EntradaSalida>) read(models2,
-									fx.getId_funcionalidad(), SALIDA);
-							if (salidas_tmp.isEmpty()) {
-								publicable = false;
-							}
-						}
 						ListaServicios.add(new ServiciosPublicables(publicable,
 								servicio));
-					}
 				}
 			}
-		}
+		}		
 		peticionesNoLeidas = peticionesSuscripcion(ente.getId_ente());
 		peticionesPendientes = peticionesSuscripcionPendientes(ente
 				.getId_ente());
