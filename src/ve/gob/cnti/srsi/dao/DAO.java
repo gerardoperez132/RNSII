@@ -862,13 +862,29 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 						+ "(select Servicios_informacion.id_estado where Servicios_informacion.id_sector = sectores.id_sector) = 2  "
 						+ "AND "
 						+ "(select Servicios_informacion.publicado where Servicios_informacion.id_sector = sectores.id_sector) = TRUE  "
+						+ "AND EXISTS (Select * from funcionalidades as f " 
+						+ "				where Servicios_informacion.id_servicio_informacion = f.id_servicio_informacion " 
+						+ "				AND f.status = 0 " 
+						+ "				AND EXISTS (Select * from entradas_salidas as io " 
+                        + "				WHERE io.id_funcionalidad = f.id_funcionalidad " 
+                        + "				AND io.status = 0 AND io.tipo = 1))" 
 						+ "GROUP BY sectores.nombre, sectores.id_sector ORDER BY count(Servicios_informacion.id_sector) limit "
 						+ n;
 			} else {
 				consulta = "select sectores.id_sector, sectores.nombre, "
-						+ "((select count(servicios_informacion.id_sector) from servicios_informacion where servicios_informacion.id_sector = sectores.id_sector AND Servicios_informacion.status = 0 AND Servicios_informacion.id_estado = 2 AND Servicios_informacion.publicado =TRUE)) as S "
-						+ "from  sectores,Servicios_informacion GROUP BY sectores.nombre, sectores.id_sector "
-						+ "ORDER BY s Desc";
+						+ "( select count(servicios_informacion.id_sector) from servicios_informacion " 
+						+ "  where servicios_informacion.id_sector = sectores.id_sector " 
+						+ "  AND Servicios_informacion.status = 0 AND Servicios_informacion.id_estado = 2 " 
+						+ "  AND Servicios_informacion.publicado =TRUE"
+						+ "  AND EXISTS (Select * from funcionalidades as f " 
+						+ "				where Servicios_informacion.id_servicio_informacion = f.id_servicio_informacion " 
+						+ "				AND f.status = 0 " 
+						+ "				AND EXISTS (Select * from entradas_salidas as io " 
+                        + "				WHERE io.id_funcionalidad = f.id_funcionalidad " 
+                        + "				AND io.status = 0 AND io.tipo = 1))"
+                        + ") as S "
+						+ "from  sectores,Servicios_informacion "
+						+ "GROUP BY sectores.nombre, sectores.id_sector ORDER BY s Desc";
 			}
 			Query query = session.createSQLQuery(consulta);
 			List list = query.list();
