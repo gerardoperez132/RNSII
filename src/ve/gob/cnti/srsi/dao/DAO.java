@@ -823,6 +823,14 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 							+ " (select Servicios_informacion.id_estado where Servicios_informacion.id_servicio_informacion = visitas.id_servicio_informacion) = 2 "
 							+ " AND "
 							+ " (select Servicios_informacion.publicado where Servicios_informacion.id_servicio_informacion = visitas.id_servicio_informacion) = TRUE "
+							+ " AND EXISTS " 
+							+ "   (Select * from funcionalidades as f " 
+							+ "	   where Servicios_informacion.id_servicio_informacion = f.id_servicio_informacion " 
+							+ "	   AND f.status = 0 " 
+							+ "	   AND EXISTS " 
+							+ "         (Select * from entradas_salidas as io " 
+	                        + "			WHERE io.id_funcionalidad = f.id_funcionalidad " 
+	                        + "			AND io.status = 0 AND io.tipo = 1))" 
 							+ " GROUP BY visitas.id_servicio_informacion, Servicios_informacion.nombre "
 							+ " ORDER BY count(visitas.id_servicio_informacion) desc "
 							+ " limit " + LIMITE_VISITADOS);
@@ -912,11 +920,19 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		ArrayList<ServicioInformacion> list;
 		String order = orderBy > 0 ? "DESC" : "ASC";
 		try {
-			startConnection();
+			startConnection();//isComplete(ServicioInformacion servicio) TODO
 			list = (ArrayList<ServicioInformacion>) session.createQuery(
 					" FROM ServicioInformacion s WHERE s.status = " + ACTIVO
 							+ " AND " + " s.publicado = TRUE " + " AND "
-							+ " s.id_estado = 2 "
+							+ " s.id_estado = 2 "							
+							+ " AND EXISTS " 
+							+ "   (FROM Funcionalidad as f " 
+							+ "	   where s.id_servicio_informacion = f.id_servicio_informacion " 
+							+ "	   AND f.status = 0 " 
+							+ "	   AND EXISTS " 
+							+ "         (FROM EntradaSalida as io " 
+	                        + "			WHERE io.id_funcionalidad = f.id_funcionalidad " 
+	                        + "			AND io.status = 0 AND io.tipo = 1))"
 							+ " ORDER BY s.id_servicio_informacion " + order)
 					.list();
 		} catch (HibernateException he) {
@@ -935,7 +951,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		ArrayList<ServicioInformacion> list;
 		String order = orderBy > 0 ? "DESC" : "ASC";
 		try {
-			startConnection();//isComplete(ServicioInformacion servicio) TODO
+			startConnection();
 			list = (ArrayList<ServicioInformacion>) session.createQuery(
 					" FROM ServicioInformacion s WHERE s.status = " + ACTIVO
 							+ " AND " + " s.publicado = TRUE " + " AND "
