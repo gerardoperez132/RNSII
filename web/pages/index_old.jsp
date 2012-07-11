@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <!-- CSS (required) -->
 <link rel="stylesheet" type="text/css"
-	href="/SRSI/pages/res/css/style2.css">
+	href="/SRSI/pages/res/css/styles.css">
 <link rel="stylesheet" type="text/css"
 	href="res/css/jquery.treeTable.css">
 <link rel="stylesheet" type="text/css" href="res/css/table_tree.css">
@@ -20,39 +20,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#tree").treeTable();
-		
-		$(".masPie").hide();
-	    
-	    $(".cerrarPie").toggle(
-	         function () {
-	            $(".masPie").slideDown();
-	            $(".cerrarPie").text("-");
-	     		return false;
-	         },
-	         function () {
-	            $(".masPie").slideUp();
-	            $(".cerrarPie").text("+");
-	     		return false;                    
-	         }
-	       );
 	});
-	function changeValues(page, campoId1, valor1, campoId2, valor2, form){
-	    var campo1 = document.getElementById(campoId1);
-	    campo1.value = valor1;
-	    var campo2 = document.getElementById(campoId2);
-	    campo2.value = valor2;                      
-	    submitForm(page, form);	   
-	}
-	function changeValue(page, campoId, valor, form){
-		var campo = document.getElementById(campoId);
-		campo.value = valor;			
-		submitForm(page, form);
-	}
-	function submitForm(page, form){
-	    var form = document.getElementById(form);
-	    form.action= "http://gobiernoenlinea.gob.ve/home/" + page;	    
-	    form.submit();
-	}	
 </script>
 
 <title><s:text name="inicio" />
@@ -60,8 +28,11 @@
 <!-- Donde dice inicio debería ir una var que identifique el lugar -->
 	</head>
 	<body>
-		<div class="container">
-				<%@include file="layout/header_ge.jsp"%>
+		<!-- Este es el div de la sombra del contenedor del maquetado de la página -->
+		<div id="sombra">
+			<!-- Este es el div contenedor del maquetado de la página -->
+			<div id="container">
+				<%@include file="layout/header.jsp"%>
 				<%@include file="layout/sidebar_user_final.jsp"%>
 				<!-- Este es el div de contenidos -->
 				<div id="content">
@@ -564,11 +535,9 @@
 						</s:fielderror>
 					</s:else>
 				</div>
-				</div>
-				<div style="clear: both"></div>
-				<div class="vacio"></div>
-				<%@include file="layout/footer_ge.jsp"%>
-				
+				<%@include file="layout/footer.jsp"%>
+			</div>
+		</div>
 	</body>
 </s:i18n>
 </html>
