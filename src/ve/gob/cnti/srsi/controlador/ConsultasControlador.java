@@ -16,6 +16,7 @@
 package ve.gob.cnti.srsi.controlador;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -48,6 +49,8 @@ import ve.gob.cnti.srsi.modelo.Usuario;
 import ve.gob.cnti.srsi.modelo.Visita;
 import ve.gob.cnti.srsi.util.ListaSImasVisitados;
 import ve.gob.cnti.srsi.util.SectoresMasPublicados;
+import ve.gob.cnti.srsi.util.Estados_Tiempo;
+import ve.gob.cnti.srsi.util.ReadXmlTime;
 
 import com.opensymphony.xwork2.ActionContext;
 
@@ -78,6 +81,8 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 	List<SectoresMasPublicados> listaSectores = new ArrayList<SectoresMasPublicados>();
 	List<SectoresMasPublicados> listaSectores2 = new ArrayList<SectoresMasPublicados>();
 	private List<ListaSImasVisitados> SI_masVisitados = new ArrayList<ListaSImasVisitados>();
+	private List<Estados_Tiempo> estadosTiempo = new ArrayList<Estados_Tiempo>();
+	private Date fecha;
 	@SuppressWarnings("rawtypes")
 	private Map session;
 	private String cadena;
@@ -97,6 +102,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 	private boolean buscarServicio;
 
 	public String inicio() {
+		getTiempoFecha();
 		listaSectores = sectoresMasPublicados(LIMITE_SECTORES);
 		SI_masVisitados = SImasVisitados();
 		return SUCCESS;
@@ -104,6 +110,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 
 	@SuppressWarnings("unchecked")
 	public String listarSector() {
+		getTiempoFecha();
 		listaSectores = sectoresMasPublicados(LIMITE_SECTORES);
 		SI_masVisitados = SImasVisitados();
 		if (!verificarLong(id_sector))
@@ -128,6 +135,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 
 	@SuppressWarnings("unchecked")
 	public String listarServicios() {
+		getTiempoFecha();
 		listaSectores = sectoresMasPublicados(LIMITE_SECTORES);
 		SI_masVisitados = SImasVisitados();
 		consulta_listarServicios = true;
@@ -138,6 +146,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 
 	@SuppressWarnings("unchecked")
 	public String buscar_servicio() {
+		getTiempoFecha();
 		listaSectores = sectoresMasPublicados(LIMITE_SECTORES);
 		SI_masVisitados = SImasVisitados();
 		buscarServicio = true;
@@ -160,6 +169,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 
 	@SuppressWarnings("unchecked")
 	public String buscar_servicio2() {
+		getTiempoFecha();
 		session = ActionContext.getContext().getSession();
 		if (session.isEmpty()) {
 			return INPUT;
@@ -183,6 +193,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String examinarServicioInformacion() {
+		getTiempoFecha();
 		if (!verificarLong(id_servicio))
 			return INPUT;
 		listaSectores = sectoresMasPublicados(LIMITE_VISITADOS);
@@ -265,6 +276,12 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 		} catch (Exception e) {
 			return false;
 		}
+	}
+	
+	public void getTiempoFecha(){
+		ReadXmlTime read = new ReadXmlTime();
+		fecha = read.getFechaTiempo();
+		estadosTiempo = read.getEstados_Tiempo();
 	}
 
 	public boolean isExaminarServicio() {
@@ -546,5 +563,21 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 
 	public void setListaSectores2(List<SectoresMasPublicados> listaSectores2) {
 		this.listaSectores2 = listaSectores2;
+	}
+
+	public List<Estados_Tiempo> getEstadosTiempo() {
+		return estadosTiempo;
+	}
+
+	public void setEstadosTiempo(List<Estados_Tiempo> estadosTiempo) {
+		this.estadosTiempo = estadosTiempo;
+	}
+
+	public Date getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
 }

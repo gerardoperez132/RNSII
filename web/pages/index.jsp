@@ -34,7 +34,7 @@
 	            $(".cerrarPie").text("+");
 	     		return false;                    
 	         }
-	       );
+	       );	    
 	});
 	function changeValues(page, campoId1, valor1, campoId2, valor2, form){
 	    var campo1 = document.getElementById(campoId1);
@@ -53,30 +53,42 @@
 	    form.action= "http://gobiernoenlinea.gob.ve/home/" + page;	    
 	    form.submit();
 	}	
+	function actualizarClima(cadena){
+		var T = cadena.split(",");
+	    $('#t_max').html(''+T[0]);
+	    $('#t_min').html(''+T[1]);
+	}
 </script>
 
 <title><s:text name="inicio" />
 </title>
-<!-- Donde dice inicio debería ir una var que identifique el lugar -->
 	</head>
 	<body>
 		<div class="container">
 				<%@include file="layout/header_ge.jsp"%>
-				<%@include file="layout/sidebar_user_final.jsp"%>
+				
 				<!-- Este es el div de contenidos -->
 				<div id="content">
-					<form action="buscar_servicio" method="post">
-						<table align="center">
-							<tr>
-								<td><s:textfield name="cadena" size="50" />
-								</td>
-								<td><input type="submit"
-									value="<s:text name="buscarServicio"/>">
-								</td>
-							</tr>
-						</table>
-					</form>
+					<!-- RUTA DE NAVEGACION-->
+					<div class="main">
+			        <div  class="RutaNavegacion">
+						<a href="SRSI.action"><s:text name="catalogo" /></a>
+					</div>
+					<br><br><br>
+					<div  class="busqueda">
+						<form method="post" action="buscar_servicio">
+							<label><s:text name="buscarServicio"/></label>
+							<s:textfield name="cadena" id="buscar" class="buscar" size="66" />
+							<input type="submit" class="submit" value="&nbsp;"/>
+						</form>
+					</div>
+	
+					<div class="Titulo" >
+				    		<h1><s:text name="titulo2" /></h1>
+		       		</div>
+		       		
 					<br>
+					
 					<s:if test="consulta_SIxSector == true">
 						<!-- Lista de servicios de información por sector -->
 						<table class="results">
@@ -141,8 +153,7 @@
 						</table>
 					</s:elseif>
 					<s:elseif test="examinarServicio == true">
-						<!-- Detalles de un servicio de información -->
-						<hr>
+						<!-- Detalles de un servicio de información -->						
 						<ul class="tabs">
 							<li><a href="#tab1"><s:text name="tab1.title"></s:text>
 							</a></li>
@@ -228,7 +239,7 @@
 										</td>
 									</tr>
 								</table>
-								<hr>
+								
 							</div>
 							<!-- Descripción Legal -->
 							<div id="tab2" class="tab_content">
@@ -565,6 +576,11 @@
 					</s:else>
 				</div>
 				</div>
+				
+				<%@include file="layout/sidebar_user_final.jsp"%>
+				
+				</div>
+				
 				<div style="clear: both"></div>
 				<div class="vacio"></div>
 				<%@include file="layout/footer_ge.jsp"%>

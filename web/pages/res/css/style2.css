@@ -1547,6 +1547,15 @@ margin:1px 0pt 0pt;
 width:171px;
 
 }
+.busqueda {
+border:1px solid #CCCCCC;
+float:left;
+font-family:sans-serif;
+height:25px;
+margin:1px 0pt 0pt;
+width:670px;
+position: relative;
+}
 
 .busqueda .submit {
 background:url(../images/tiempo_15.png);
@@ -1591,6 +1600,13 @@ margin:10px 0;
 }
 
 .main .Titulo h1 {
+color:#AA000C;
+font-size:24px;
+margin:0;
+padding:0;
+}
+
+.Titulo h1 {
 color:#AA000C;
 font-size:24px;
 margin:0;
@@ -2954,4 +2970,31 @@ p.noticias_fix {
 .ul_srsi{
 	width: 130px;
 	list-style: none;
+}
+
+a.estilo2:link { color:white; text-decoration: none}
+a.estilo2:visited  { color:white; text-decoration: none}
+a.estilo2:hover  { color:white; text-decoration: none}
+a.estilo2:active  { color:white; text-decoration: none}
+
+.ui-menu-content {
+list-style:none;
+margin-top:-12px;
+padding: 0 0 0 0;
+border-top: 0;
+position: relative;
+}
+li.li-menu-content {		
+border-bottom: 1px dotted #CCC;
+padding: 2px;	
+}
+h3.h3-ui-menu-content{
+	font-size:12px;
+	width:260px;
+	height:31px;	
+	padding-top:8px;
+	padding-left:8px;
+	padding-bottom:0px;
+	margin-bottom:0px;
+	background-image: url("../images/ui-menu-content.png");
 }
