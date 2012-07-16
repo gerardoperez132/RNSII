@@ -3,15 +3,18 @@
 	overflow: auto;
 	border: 1px solid #888;
 	border-collapse: collapse;
+	font: sans-serif;
+	font-size: 16px;
 }
 
 #tree thead {
 	background: url("images/bg-table-thead.png") repeat-x scroll left top
-		#AAAAAA
+		#AAAAAA;
 }
 
-#tree thead th {
-	font: 75% sans-serif;
+#tree thead th {	
+	font: 85% sans-serif;
+	font-weight:bolder;
 	padding-left: 1em;
 	text-align: left;
 }
