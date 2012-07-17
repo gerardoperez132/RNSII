@@ -78,7 +78,7 @@
 					<div  class="busqueda">
 						<form method="post" action="buscar_servicio">
 							<label><s:text name="buscarServicio"/></label>
-							<s:textfield name="cadena" id="buscar" class="buscar" size="66" />
+							<s:textfield name="cadena" id="buscar" class="buscar" size="64" />
 							<input type="submit" class="submit" value="&nbsp;"/>
 						</form>
 					</div>
