@@ -16,6 +16,8 @@
 package ve.gob.cnti.srsi.controlador;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -102,17 +104,17 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 	private boolean buscarServicio;
 
 	public String inicio() {
-		getTiempoFecha();
-		listaSectores = sectoresMasPublicados(LIMITE_SECTORES);
-		SI_masVisitados = SImasVisitados();
+		getTiempoFecha();	
+		listaSectores = listado_de_Sectores(LIMITE_SECTORES,false);
+		SI_masVisitados = listarServiciosVisitados(LIMITE_VISITADOS,false);
 		return SUCCESS;
 	}
-
+	//TODO VALIDAR QUE LOS SERVICIOS NO RETORNEN VALORES FALSOS
 	@SuppressWarnings("unchecked")
 	public String listarSector() {
 		getTiempoFecha();
-		listaSectores = sectoresMasPublicados(LIMITE_SECTORES);
-		SI_masVisitados = SImasVisitados();
+		listaSectores = listado_de_Sectores(LIMITE_SECTORES,false);
+		SI_masVisitados = listarServiciosVisitados(LIMITE_VISITADOS,false);
 		if (!verificarLong(id_sector))
 			return INPUT;
 		sector = (Sector) read(sector, id_sector);
@@ -126,29 +128,37 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 
 	public String listarSectores() {
 		consulta_listarSectores = true;
-		listaSectores = sectoresMasPublicados(LIMITE_SECTORES);
-		listaSectores2 = sectoresMasPublicados(0);
-		SI_masVisitados = SImasVisitados();
-		System.out.println("ls " + listaSectores2.size());
+		listaSectores = listado_de_Sectores(LIMITE_SECTORES,false);
+		listaSectores2 = listado_de_Sectores(-1,true);
+		SI_masVisitados = listarServiciosVisitados(LIMITE_VISITADOS,false);	
 		return SUCCESS;
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	public String listarServicios() {
 		getTiempoFecha();
-		listaSectores = sectoresMasPublicados(LIMITE_SECTORES);
-		SI_masVisitados = SImasVisitados();
-		consulta_listarServicios = true;
-		servicios = getSIList(ASC);
+		listaSectores = listado_de_Sectores(LIMITE_SECTORES,false);
+		SI_masVisitados = listarServiciosVisitados(LIMITE_VISITADOS,false);
+		consulta_listarServicios = true;		
 		entes = (List<Ente>) read(new Ente());
+		List<ServicioInformacion> sis = new ArrayList<ServicioInformacion>();
+		sis = getSIList(ASC);
+		Iterator<ServicioInformacion> ite = sis.iterator();
+		while(ite.hasNext()){
+			ServicioInformacion si = new ServicioInformacion();			
+			si = (ServicioInformacion) ite.next();
+			if(isComplete(si)){
+				servicios.add(si);
+			}
+		}
 		return SUCCESS;
 	}
 
 	@SuppressWarnings("unchecked")
 	public String buscar_servicio() {
 		getTiempoFecha();
-		listaSectores = sectoresMasPublicados(LIMITE_SECTORES);
-		SI_masVisitados = SImasVisitados();
+		listaSectores = listado_de_Sectores(LIMITE_SECTORES,false);
+		SI_masVisitados = listarServiciosVisitados(LIMITE_VISITADOS,false);
 		buscarServicio = true;
 		if (!cadena.toString().toUpperCase().matches(REGEX_TITLE)) {
 			addFieldError("error",
@@ -196,23 +206,13 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 		getTiempoFecha();
 		if (!verificarLong(id_servicio))
 			return INPUT;
-		listaSectores = sectoresMasPublicados(LIMITE_VISITADOS);
+		listaSectores = listado_de_Sectores(LIMITE_SECTORES,false);
 		examinarServicio = true;
 		servicio = (ServicioInformacion) read(servicio, id_servicio);
 		if (!servicio.isPublicado())
 			return INPUT;
 		if (!isComplete(servicio))
 			return INPUT;
-		try {
-			session = ActionContext.getContext().getSession();
-			Usuario usuario = (Usuario) session.get("usuario");
-			if (usuario != null) {
-				if (servicio.getId_ente() == usuario.getId_ente()) {
-					return INPUT;
-				}
-			}
-		} catch (Exception e) {
-		}
 		try {
 			unionareas = (List<UnionAreaServicioInformacion>) readUnion(
 					new UnionAreaServicioInformacion(), servicio, id_servicio);
@@ -266,7 +266,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 		if (verifyClientAccess(ipAddress, id_servicio))
 			saveVisit(visita);
 		nVisitas = getVisits(id_servicio);
-		SI_masVisitados = SImasVisitados();
+		SI_masVisitados = listarServiciosVisitados(LIMITE_VISITADOS,false);
 		return SUCCESS;
 	}
 
@@ -283,6 +283,84 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 		fecha = read.getFechaTiempo();
 		estadosTiempo = read.getEstados_Tiempo();
 	}
+	
+	//TODO listar sectores
+	//1 obtener la lista de sectores
+	//2 recorrer la lista sector por sector:
+	//  2.1 listar los servicios por cada sector
+	//      2.1.1  verificar que cada si este:
+	//				*implementado
+	//				*activo
+	//				*completo
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public List<SectoresMasPublicados> listado_de_Sectores(int limit, boolean listaCompleta){
+		List<Sector> sectores = new ArrayList<Sector>();
+		List<SectoresMasPublicados> listaSectores = new ArrayList<SectoresMasPublicados>();
+		sectores = (List<Sector>) read(new Sector());
+		Iterator<Sector> iterador = sectores.iterator(); 
+		while(iterador.hasNext()){
+			List<ServicioInformacion> servicios = new ArrayList<ServicioInformacion>();
+			Sector sector = new Sector();
+			sector = iterador.next();
+			servicios = (List<ServicioInformacion>) read(SISE, sector.getId_sector(), -1);
+			Iterator<ServicioInformacion> ite_si = servicios.iterator();
+			SectoresMasPublicados sec = new SectoresMasPublicados();
+			sec.setId_sector(sector.getId_sector());
+			sec.setNombre(sector.getNombre());
+			while(ite_si.hasNext()){				
+				ServicioInformacion si = new ServicioInformacion();
+				si = ite_si.next();
+				if(si.getId_estado() == 2 && si.isPublicado() == true && isComplete(si) == true){
+					sec.setN(sec.getN()+1);
+				}
+			}
+			if(sec.getN()>0 && limit>0 && !listaCompleta){
+				listaSectores.add(sec);
+				limit --;
+			}else if(limit<0 && listaCompleta){
+				listaSectores.add(sec);
+			}
+		}
+		Collections.sort(listaSectores, new Comparator() {  			  
+            public int compare(Object o1, Object o2) {  
+            	SectoresMasPublicados e1 = (SectoresMasPublicados) o1;  
+            	SectoresMasPublicados e2 = (SectoresMasPublicados) o2; 
+            	long codigo1 = e1.getN();  
+                long codigo2 = e2.getN();
+                if (codigo1 < codigo2) {  
+                    return 1;  
+                } else if (codigo1 > codigo2) {  
+                    return -1;  
+                } else {  
+                    return 0;  
+                }
+            }  
+        });
+		return listaSectores;
+	}
+	
+	
+		
+	public List<ListaSImasVisitados> listarServiciosVisitados(int limit, boolean listaCompleta){
+		List<ListaSImasVisitados> sisVisitados = new ArrayList<ListaSImasVisitados>();
+		List<ListaSImasVisitados> sisVisitados2 = new ArrayList<ListaSImasVisitados>();		
+		sisVisitados = SImasVisitados();
+		Iterator<ListaSImasVisitados> ite = sisVisitados.iterator();
+		while(ite.hasNext()){
+			ListaSImasVisitados siv = new ListaSImasVisitados();
+			ServicioInformacion si = new ServicioInformacion();
+			siv = ite.next();
+			si = (ServicioInformacion) read(si, siv.getId_servicio_informacion());
+			if(isComplete(si) && listaCompleta){
+				sisVisitados2.add(siv);
+			}else if(isComplete(si) && limit>0){
+				sisVisitados2.add(siv);
+				limit --;				
+			}
+		}		
+		return sisVisitados2;
+	}
+	
 
 	public boolean isExaminarServicio() {
 		return examinarServicio;
