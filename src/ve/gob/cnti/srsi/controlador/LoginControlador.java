@@ -70,19 +70,20 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 	@SuppressWarnings("unchecked")
 	public String autenticarUsuario() throws Exception {
 		session = ActionContext.getContext().getSession();
+		if (correo == null && password == null && captcha == null) {
+			return "404ERROR";
+		}
+		if (correo.isEmpty() || password.isEmpty() || captcha.isEmpty()) {
+			addFieldError("error",
+					error.getProperties().getProperty("error.login.fields"));
+			return INPUT;
+		}
 		if (!((String) session.get("captcha")).toUpperCase().equals(
 				captcha.toUpperCase())) {
 			addFieldError("error",
 					error.getProperties().getProperty("error.login.captcha"));
 			return INPUT;
-		}
-		if (correo == null && password == null) {
-			return "404ERROR";
-		} else if (correo.isEmpty() || password.isEmpty()) {
-			addFieldError("error",
-					error.getProperties().getProperty("error.login.fields"));
-			return INPUT;
-		}
+		}		
 		if (!correo.matches(REGEX_EMAIL)) {
 			addFieldError("error",
 					error.getProperties().getProperty("error.regex.email"));

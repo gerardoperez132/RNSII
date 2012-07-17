@@ -516,9 +516,9 @@
 			<result name="input">index.jsp</result>
 		</action>
 
-		<action name="error404" method="inicio"
+		<action name="error404" method="inicio404"
 			class="ve.gob.cnti.srsi.controlador.ConsultasControlador">
-			<result name="success">error404.jsp</result>
+			<result name="success">index.jsp</result>
 		</action>
 
 		<!-- ******* ******* ******* ******* ajax consultas ******* ******* ******* 

@@ -102,6 +102,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 	private boolean consulta_listarServicios;
 	private boolean examinarServicio;
 	private boolean buscarServicio;
+	private boolean error404;
 
 	public String inicio() {
 		getTiempoFecha();	
@@ -109,7 +110,16 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 		SI_masVisitados = listarServiciosVisitados(LIMITE_VISITADOS,false);
 		return SUCCESS;
 	}
-	//TODO VALIDAR QUE LOS SERVICIOS NO RETORNEN VALORES FALSOS
+	
+	public String inicio404() {
+		getTiempoFecha();	
+		listaSectores = listado_de_Sectores(LIMITE_SECTORES,false);
+		SI_masVisitados = listarServiciosVisitados(LIMITE_VISITADOS,false);
+		error404 = true;
+		System.out.println("error404");
+		return SUCCESS;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public String listarSector() {
 		getTiempoFecha();
@@ -658,5 +668,13 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
+	}
+
+	public boolean isError404() {
+		return error404;
+	}
+
+	public void setError404(boolean error404) {
+		this.error404 = error404;
 	}
 }

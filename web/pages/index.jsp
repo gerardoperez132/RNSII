@@ -569,6 +569,10 @@
 							</s:else>
 						</table>
 					</s:elseif>
+					<s:elseif test="error404 == true">
+						<h1 style="color:red"><s:text name="404"></s:text></h1>			
+						<h4><s:text name="pageNotFound"></s:text></h4>		
+					</s:elseif>
 					<s:else>
 						<s:fielderror>
 							<s:param>error</s:param>
