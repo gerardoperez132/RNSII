@@ -127,6 +127,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 	}
 
 	public String listarSectores() {
+		getTiempoFecha();
 		consulta_listarSectores = true;
 		listaSectores = listado_de_Sectores(LIMITE_SECTORES,false);
 		listaSectores2 = listado_de_Sectores(-1,true);
