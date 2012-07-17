@@ -676,9 +676,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 					return false;
 				}
 			}
-		}
-		
-		
+		}	
 		return true;
 	}
 
@@ -920,7 +918,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		ArrayList<ServicioInformacion> list;
 		String order = orderBy > 0 ? "DESC" : "ASC";
 		try {
-			startConnection();//isComplete(ServicioInformacion servicio) TODO
+			startConnection();
 			list = (ArrayList<ServicioInformacion>) session.createQuery(
 					" FROM ServicioInformacion s WHERE s.status = " + ACTIVO
 							+ " AND " + " s.publicado = TRUE " + " AND "
