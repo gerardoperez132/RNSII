@@ -2977,6 +2977,12 @@ a.estilo2:visited  { color:white; text-decoration: none}
 a.estilo2:hover  { color:white; text-decoration: none}
 a.estilo2:active  { color:white; text-decoration: none}
 
+a.e2 :link :visited :hover :active  {
+	text-decoration: none;
+	color: #666;
+	cursor: pointer;
+}
+
 .ui-menu-content {
 list-style:none;
 margin-top:-12px;
