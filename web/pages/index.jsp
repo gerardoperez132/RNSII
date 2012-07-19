@@ -155,13 +155,13 @@
 					<s:elseif test="examinarServicio == true">
 						<!-- Detalles de un servicio de información -->						
 						<ul class="tabs">
-							<li><a href="#tab1"><s:text name="tab1.title"></s:text>
+							<li><a style="font-size: 1em;" href="#tab1"><s:text name="tab1.title"></s:text>
 							</a></li>
-							<li><a href="#tab2"><s:text name="tab2.title"></s:text>
+							<li><a style="font-size: 1em;" href="#tab2"><s:text name="tab2.title"></s:text>
 							</a></li>
-							<li><a href="#tab3"><s:text name="tab3.title"></s:text>
+							<li><a style="font-size: 1em;" href="#tab3"><s:text name="tab3.title"></s:text>
 							</a></li>
-							<li><a href="#tab4"><s:text name="tab4.title"></s:text>
+							<li><a style="font-size: 1em;" href="#tab4"><s:text name="tab4.title"></s:text>
 							</a></li>
 						</ul>
 						<div class="tab_container">
