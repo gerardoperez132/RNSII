@@ -2,7 +2,7 @@
 		<div class="sidebar">					
 				<div class="secciones" style="clear: both;">						
 					<ul class="ui-menu-content">
-						<li class="li-menu-content"><h3 class="h3-ui-menu-content"><a><s:text name="si_mas_Visitados" /></a></h3></li>
+						<li class="li-menu-content"><h3 class="h3-ui-menu-content"><a style="font-size: 11px;"><s:text name="si_mas_Visitados" /></a></h3></li>
 						<s:if test='SI_masVisitados.size()>0'>
 						<s:iterator value="SI_masVisitados" status="index">	
 						<li class="li-menu-content">
@@ -22,7 +22,7 @@
 						</li>
 					</ul>
 					<ul class="ui-menu-content">
-						<li class="li-menu-content"><h3 class="h3-ui-menu-content"><a><s:text name="sectores" /></a></h3></li>
+						<li class="li-menu-content"><h3 class="h3-ui-menu-content"><a style="font-size: 11px;"><s:text name="sectores" /></a></h3></li>
 						<s:if test="listaSectores.size()>0">
 						<s:iterator value="listaSectores" status="index">
 						<li class="li-menu-content">
