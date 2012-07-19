@@ -104,7 +104,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 	private boolean buscarServicio;
 	private boolean error404;
 
-	public String inicio() {
+	public String inicio() {		
 		getTiempoFecha();	
 		listaSectores = listado_de_Sectores(LIMITE_SECTORES,false);
 		SI_masVisitados = listarServiciosVisitados(LIMITE_VISITADOS,false);
