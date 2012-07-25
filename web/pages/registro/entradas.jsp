@@ -104,8 +104,7 @@
 									<td>
 										<form action="prepararEntradaSimple" method="POST">
 											<s:hidden name="id_servicio_informacion"></s:hidden>
-											<s:hidden name="id_funcionalidad"></s:hidden>
-											<s:hidden name="modificar"></s:hidden>
+											<s:hidden name="id_funcionalidad"></s:hidden>											
 											<input type="submit"
 												value="<s:text name="entrada.simple.title"></s:text>" />
 										</form>
@@ -113,8 +112,7 @@
 									<td>
 										<form action="prepararEntradaCompleja" method="POST">
 											<s:hidden name="id_servicio_informacion"></s:hidden>
-											<s:hidden name="id_funcionalidad"></s:hidden>
-											<s:hidden name="modificar"></s:hidden>
+											<s:hidden name="id_funcionalidad"></s:hidden>											
 											<input type="submit"
 												value="<s:text name="entrada.complejo.title"></s:text>">
 										</form>
