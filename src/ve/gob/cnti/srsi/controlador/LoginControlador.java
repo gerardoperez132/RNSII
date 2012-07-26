@@ -22,25 +22,21 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.validation.SkipValidation;
-
 import ve.gob.cnti.srsi.dao.DAO;
 import ve.gob.cnti.srsi.mail.EnviarCorreo;
 import ve.gob.cnti.srsi.mail.Mail;
 import ve.gob.cnti.srsi.modelo.Correo;
 import ve.gob.cnti.srsi.modelo.Ente;
-import ve.gob.cnti.srsi.modelo.EntradaSalida;
 import ve.gob.cnti.srsi.modelo.Estado;
-import ve.gob.cnti.srsi.modelo.Funcionalidad;
 import ve.gob.cnti.srsi.modelo.RecuperarClave;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.Usuario;
 import ve.gob.cnti.srsi.util.MD5Hashing;
-
+import ve.gob.cnti.srsi.util.Estados_Tiempo;
+import ve.gob.cnti.srsi.util.ReadXmlTime;
 import com.opensymphony.xwork2.ActionContext;
 
 @SuppressWarnings("serial")
@@ -66,9 +62,12 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 	private long peticionesNoLeidas;
 	private long peticionesPendientes;
 	private long solicitudesAceptadasRechazadas;
+	private List<Estados_Tiempo> estadosTiempo = new ArrayList<Estados_Tiempo>();
+	private Date fecha;
 
 	@SuppressWarnings("unchecked")
 	public String autenticarUsuario() throws Exception {
+		getTiempoFecha();
 		session = ActionContext.getContext().getSession();
 		if (correo == null && password == null && captcha == null) {
 			return "404ERROR";
@@ -117,11 +116,13 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 
 	@SkipValidation
 	public String mostrarLogin() {
+		getTiempoFecha();
 		return SUCCESS;
 	}
 
 	@SkipValidation
 	public String inicio() {
+		getTiempoFecha();
 		return SUCCESS;
 	}
 
@@ -129,6 +130,7 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String home() {
+		getTiempoFecha();
 		session = ActionContext.getContext().getSession();
 		boolean publicable = true;
 		if (session.isEmpty()) {
@@ -171,6 +173,7 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 
 	@SkipValidation
 	public String desloguearUsuario() {
+		getTiempoFecha();
 		session = ActionContext.getContext().getSession();
 		session.clear();
 		return SUCCESS;
@@ -179,6 +182,7 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 	@SkipValidation
 	public String enviarDatos() throws NoSuchAlgorithmException,
 			UnknownHostException {
+		getTiempoFecha();
 		recoveryPass = true;
 		session = ActionContext.getContext().getSession();
 		if (!((String) session.get("captcha")).toUpperCase().equals(
@@ -259,6 +263,7 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 	// TODO
 	@SkipValidation
 	public String prepararRecuperarPass() {
+		getTiempoFecha();
 		RecuperarClave r_clave = new RecuperarClave();
 		datosEnviados = true;
 		if (cuenta == null) {
@@ -289,6 +294,7 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 
 	@SkipValidation
 	public String modificarClave() throws NoSuchAlgorithmException {
+		getTiempoFecha();
 		// TODO
 		// IMPLEMENTAR CAPTCHA A LOS TRES INTENTOS
 		RecuperarClave r_clave = new RecuperarClave();
@@ -321,6 +327,12 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 		// if the method * does not exist, we will return a "404ERROR" result
 		return "404ERROR";
 
+	}
+	
+	public void getTiempoFecha(){
+		ReadXmlTime read = new ReadXmlTime();
+		fecha = read.getFechaTiempo();
+		estadosTiempo = read.getEstados_Tiempo();
 	}
 
 	public String getPassword() {
@@ -447,6 +459,22 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 
 	public void setCaptcha(String captcha) {
 		this.captcha = captcha;
+	}
+
+	public List<Estados_Tiempo> getEstadosTiempo() {
+		return estadosTiempo;
+	}
+
+	public void setEstadosTiempo(List<Estados_Tiempo> estadosTiempo) {
+		this.estadosTiempo = estadosTiempo;
+	}
+
+	public Date getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
 }
 
