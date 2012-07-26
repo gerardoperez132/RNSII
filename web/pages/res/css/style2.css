@@ -118,7 +118,7 @@ float:right;
 height:25px;
 width:256px;
 margin:0 10px 0 0;
-padding:0 0 0 10px;
+padding:0 1px 0 10px;
 }
 
 .info_bar {
@@ -3052,4 +3052,11 @@ margin:10px 10px 0 10px;
 padding:5px;
 text-align:left;
 width:765px;
+}
+
+.inputBusqueda{
+	margin-top:2px;
+	border:2px solid #CECECE;
+	width: 510px;
+	height: 16px;
 }
