@@ -178,7 +178,7 @@
 									</s:if>
 									<s:else>
 										<tr>
-											<th colspan="3"><s:text name="files.empty" /></th>
+											<td colspan="3"><s:text name="files.empty" /></td>
 										</tr>
 									</s:else>
 								</table>
