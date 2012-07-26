@@ -11,8 +11,8 @@
 <!-- JS (required) -->
 <script type="text/javascript" src="/SRSI/pages/res/js/jquery-1.7.1.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/SRSI/pages/res/js/funciones_ge.js" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/jquery.treeTable.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/SRSI/pages/res/js/validate.js" charset="UTF-8"></script>
-<script type="text/javascript" src="res/js/jquery.treeTable.js"></script>
 <title><s:text name="inicio" /></title>
 </head>
 <body>
