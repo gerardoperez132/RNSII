@@ -3073,3 +3073,12 @@ a.tooltip:hover span{display:inline; position:absolute; border:1px solid #cccccc
 .sesion_inicio{
 	margin-left: 35%; margin-top: 5%; margin-bottom: 15%; width: 310px; padding: 15px; border: 3px solid #CECECE;
 }
+
+.sidebar_left{
+	height: 150px;
+}
+
+.sidebar_left {	
+	float: left;
+	width: 150px;
+}
