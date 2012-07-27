@@ -1,23 +1,157 @@
-#menuv {  font-size: 0.7em; margin-left: -40px;}
-#menuv ul { list-style-type: none;}
-#menuv ul li.nivel1 { width: 150px;}
-#menuv ul li { text-align: center;}
-#menuv ul li.primera { border-top: solid 1px #FFF;}
-
-#menuv ul li a {display: block;text-decoration: none;color: #777;display: block;background: url(../img/menu8.png);
-				border: solid 1px #fff;border-top: none;padding: 8px 8px 9px;position: relative;}
-#menuv ul li:hover {position: relative;color: #000;}
-#menuv ul li a:active {color: #fff;background: url(../img/menu8.png) 0 -64px;position: relative;}
-#menuv ul li a:hover, #menuv ul li:hover a.nivel1 {color: #000;position: relative; background: url(../img/menu8.png) 0 -32px;}
-#menuv ul li a.nivel1 {display: block!important;display: none;position: relative;}
-
-#menuv ul li ul {display: none;}
-#menuv ul li:hover > ul {display: block;position: absolute;left: 110px;top:-1px;}
-#menuv ul li ul li a {width: 134px;color: #777;position: relative;}
-#menuv ul li ul li a:hover {position: relative;color: #000; background: url(../img/menu8.png) 0 -32px;}
-#menuv ul li ul li a:active {width: 134px;color: #fff;background: url(../img/menu8.png) 0 -64px;position: relative;}/**/
-#menuv ul li a.nivel1ie {width: 134px;padding: 8px;}
-#menuv ul li a.subnivel {padding-bottom: 8px;}
-#menuv ul li a:hover ul.nivel2, #menuv ul.nivel2 li a:hover ul.nivel3, 
-#menuv ul.nivel3 li a:hover ul.nivel4 {display: block;position: absolute;left: 110px;top:-1px;background: url(../img/menu8.png) 0 -32px;}
-table.falsa {border-collapse:collapse;border:0px;float: left;}
+#pcm {
+display : none;
+}
+ul.pureCssMenu ul {
+display : none;
+}
+ul.pureCssMenu li:hover > ul {
+display : block;
+}
+ul.pureCssMenu ul {
+position : absolute;
+left : 98%;
+top : -1px;
+}
+ul.pureCssMenu ul ul {
+position : absolute;
+left : 98%;
+top : -2px;
+}
+ul.pureCssMenu, ul.pureCssMenu ul {
+margin : 0;
+list-style : none;
+padding : 0 1px 1px 0;
+background-color : #cecece;
+background-repeat : repeat;
+border-color : #eeeeee #777777 #666666 #c9c9c9;
+border-width : 2px;
+border-style : solid;
+}
+ul.pureCssMenu table {
+border-collapse : collapse;
+}
+ul.pureCssMenu {
+display : block;
+width : 142.8px;
+float : left;
+}
+ul.pureCssMenu ul {
+width : 152.25px;
+}
+ul.pureCssMenu li {
+display : block;
+margin : 1px 0 0 1px;
+font-size : 0;
+}
+ul.pureCssMenu a:active, ul.pureCssMenu a:focus {
+outline-style : none;
+}
+ul.pureCssMenu a, ul.pureCssMenu li.dis a:hover, ul.pureCssMenu li.sep a:hover {
+display : block;
+vertical-align : middle;
+background-color : #d9d9d9;
+border-width : 1px;
+border-color : #e4e1de;
+border-style : solid;
+text-align : left;
+text-decoration : none;
+padding : 4px;
+font : 11px Arial;
+color : #000000;
+text-decoration : none;
+cursor : default;
+}
+ul.pureCssMenu span {
+overflow : hidden;
+}
+ul.pureCssMenu ul li {
+float : none;
+}
+ul.pureCssMenu ul a {
+text-align : left;
+white-space : nowrap;
+}
+ul.pureCssMenu li.sep {
+text-align : left;
+padding : 0;
+line-height : 0;
+}
+ul.pureCssMenu li.sep span {
+float : none;
+padding-right : 0;
+width : 100%;
+height : 3px;
+display : inline-block;
+background-image : none;
+}
+ul.pureCssMenu li:hover {
+position : relative;
+}
+ul.pureCssMenu li:hover > a {
+background-color : #ffffff;
+border-color : #7d7d7d;
+border-style : solid;
+font : 11px Arial;
+color : #000000;
+text-decoration : none;
+}
+ul.pureCssMenu li a:hover {
+position : relative;
+background-color : #ffffff;
+border-color : #7d7d7d;
+border-style : solid;
+font : 11px Arial;
+color : #000000;
+text-decoration : none;
+}
+ul.pureCssMenu li.dis a {
+color : #aaaaaa !important ;
+}
+ul.pureCssMenu img {
+border : none;
+float : left;
+margin-right : 4px;
+width : 24px;
+height : 24px;
+}
+ul.pureCssMenu ul img {
+width : 30px;
+height : 15px;
+}
+ul.pureCssMenu img.over {
+display : none;
+}
+ul.pureCssMenu li.dis a:hover img.over {
+display : none !important ;
+}
+ul.pureCssMenu li.dis a:hover img.def {
+display : inline !important ;
+}
+ul.pureCssMenu li:hover > a img.def {
+display : none;
+}
+ul.pureCssMenu li:hover > a img.over {
+display : inline;
+}
+ul.pureCssMenu a:hover img.over, ul.pureCssMenu a:hover ul img.def, ul.pureCssMenu a:hover a:hover ul img.def, ul.pureCssMenu a:hover a:hover img.over, ul.pureCssMenu a:hover a:hover a:hover img.over {
+display : inline;
+}
+ul.pureCssMenu a:hover img.def, ul.pureCssMenu a:hover ul img.over, ul.pureCssMenu a:hover a:hover ul img.over, ul.pureCssMenu a:hover a:hover img.def, ul.pureCssMenu a:hover a:hover a:hover img.def {
+display : none;
+}
+ul.pureCssMenu a:hover ul, ul.pureCssMenu a:hover a:hover ul {
+display : block;
+}
+ul.pureCssMenu a:hover ul ul {
+display : none;
+}
+ul.pureCssMenu span {
+display : block;
+background-image : url(../images/arrow_sub1.gif);
+background-position : center right;
+background-repeat : no-repeat;
+padding-right : 12px;
+}
+ul.pureCssMenu ul span, ul.pureCssMenu a:hover table span {
+background-image : url(../images/arrow_sub1.gif);
+}
