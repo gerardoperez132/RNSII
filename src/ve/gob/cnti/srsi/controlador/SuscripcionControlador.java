@@ -16,6 +16,7 @@
 package ve.gob.cnti.srsi.controlador;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -33,6 +34,8 @@ import ve.gob.cnti.srsi.modelo.Suscrito;
 import ve.gob.cnti.srsi.modelo.Usuario;
 import ve.gob.cnti.srsi.util.Solicitud_Respuesta;
 import ve.gob.cnti.srsi.util.Solicitud_Suscripcion;
+import ve.gob.cnti.srsi.util.Estados_Tiempo;
+import ve.gob.cnti.srsi.util.ReadXmlTime;
 
 import com.opensymphony.xwork2.ActionContext;
 
@@ -64,9 +67,12 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 	private boolean ListarSuscricionesAceptadasRechazadas;
 	private boolean solicitarSuscripcion;
 	private String sentencia[] = { "Aceptado", "Rechazado" };
+	private List<Estados_Tiempo> estadosTiempo = new ArrayList<Estados_Tiempo>();
+	private Date fecha;
 
 	@SkipValidation
 	public String prepararSuscripcion() {
+		getTiempoFecha();
 		if (!sessionValidate())
 			return INPUT;
 		if (!verificarLong(id_servicio))
@@ -97,6 +103,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 	// TODO Mandar notificación por correo al ente proveedor. Un mensaje
 	// cualquier para ir probando...
 	public String solicitarSuscripcion() {
+		getTiempoFecha();
 		if (!sessionValidate())
 			return INPUT;
 		prepareRequest();
@@ -109,6 +116,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 	}
 
 	private void prepareRequest() {
+		getTiempoFecha();
 		session = ActionContext.getContext().getSession();
 		Usuario user = (Usuario) session.get("usuario");
 		ente = (Ente) session.get("ente");
@@ -122,6 +130,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 
 	@Override
 	public void validate() {
+		getTiempoFecha();
 		if (!isRequested()) {
 			if (solicitud.getSolicitante().trim().isEmpty()) {
 				addFieldError(
@@ -213,6 +222,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 
 	@SkipValidation
 	public String listarSolicitudesAceptadasRechazadas() {
+		getTiempoFecha();
 		if (!sessionValidate())
 			return INPUT;
 		// Lista solicitudes en base a las no leidas, pendientes,
@@ -226,6 +236,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 
 	@SkipValidation
 	public String listaSuscripcionesPendientes() {
+		getTiempoFecha();
 		if (!sessionValidate())
 			return INPUT;
 		// Lista solicitudes en base a las no leidas, pendientes,
@@ -239,6 +250,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 
 	@SkipValidation
 	public String examinarSolicitud() {
+		getTiempoFecha();
 		if (!sessionValidate())
 			return INPUT;
 		session = ActionContext.getContext().getSession();
@@ -272,6 +284,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 
 	@SkipValidation
 	public String preparar_AprobarRechasarSuscripcion() {
+		getTiempoFecha();
 		if (!sessionValidate())
 			return INPUT;
 		// Lee los detalles de la suscripción
@@ -297,6 +310,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 	// exitoso para la vista
 	@SkipValidation
 	public String AprobarRechasarSuscripcion() {
+		getTiempoFecha();
 		if (!sessionValidate())
 			return INPUT;
 		boolean err = false;
@@ -360,6 +374,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 	// TODO Hay que listar los sectores y los servicios publicados
 	@SkipValidation
 	public String prepararSolicitarSuscripcion() {
+		getTiempoFecha();
 		if (!sessionValidate())
 			return INPUT;
 		// variable para la vista.
@@ -377,6 +392,12 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 			return false;
 		}
 		return true;
+	}
+	
+	public void getTiempoFecha(){
+		ReadXmlTime read = new ReadXmlTime();
+		fecha = read.getFechaTiempo();
+		estadosTiempo = read.getEstados_Tiempo();
 	}
 
 	public ServicioInformacion getServicio() {
@@ -540,5 +561,21 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 
 	public void setSolicitarSuscripcion(boolean solicitarSuscripcion) {
 		this.solicitarSuscripcion = solicitarSuscripcion;
+	}
+
+	public List<Estados_Tiempo> getEstadosTiempo() {
+		return estadosTiempo;
+	}
+
+	public void setEstadosTiempo(List<Estados_Tiempo> estadosTiempo) {
+		this.estadosTiempo = estadosTiempo;
+	}
+
+	public Date getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
 }
