@@ -107,8 +107,11 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 								.getProperty("error.login.invalid"));
 				return INPUT;
 			} else {
+				Ente ente = new Ente();
+				ente  = (Ente) read(ente, usuario.getId_ente());
 				session.put("logueado", true);
 				session.put("usuario", usuario);
+				session.put("ente_sesion", ente);
 				return SUCCESS;
 			}
 		}
