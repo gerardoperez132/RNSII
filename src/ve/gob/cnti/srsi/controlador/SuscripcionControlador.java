@@ -390,7 +390,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 		usuario = (Usuario) session.get("usuario");
 		if (usuario == null) {
 			return false;
-		}
+		}		
 		return true;
 	}
 	
