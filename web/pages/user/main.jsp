@@ -10,10 +10,10 @@
 <!-- CSS (required) -->
 <link rel="stylesheet" type="text/css" href="/SRSI/pages/res/css/style2.css">
 <link rel="stylesheet" type="text/css" href="res/css/menu_vertical.css">
-<link rel="stylesheet" type="text/css" href="res/css/menu_vertical2.css">
 <link rel="stylesheet" type="text/css" href="res/css/jquery.alerts.css">
 <link rel="stylesheet" type="text/css" href="res/css/jquery.treeTable.css">
 <link rel="stylesheet" type="text/css" href="res/css/table2.css">
+<link rel="stylesheet" type="text/css" href="res/css/table_tree.css">
 <!-- JS (required) -->
 <script type="text/javascript" src="/SRSI/pages/res/js/jquery-1.7.1.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/SRSI/pages/res/js/funciones_ge.js" charset="UTF-8"></script>
@@ -31,7 +31,7 @@
 
 		<!-- Este es el div de contenidos -->
 		<div class="contenido">
-		<div class="Titulo" >
+		<div class="Titulo" style="width:800px;">
    			<h1><s:text name="titulo2" /></h1>
    		</div>
    			
@@ -57,7 +57,7 @@
 		<tr>
 			<td>
 				<h4 style="margin: 0;"><s:text name="ente" />
-				<s:property value="ente.nombre"/></h4>
+				<s:property value="%{#session.ente_sesion.nombre}"/></h4>
 			</td>										
 		</tr>								
 		</table>

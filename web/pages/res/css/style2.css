@@ -1604,12 +1604,14 @@ float: left;
 margin: 10px 0 10px 0;
 background: url(../images/tileh1.png) repeat-x;
 padding: 15px;
-width: 800px;
+width: 650px;
 }
 
 .main .Titulo h1 {
 color:#AA000C;
-font-size:24px;
+font-family: sans-serif;
+font-size:16.5px;
+
 margin:0;
 padding:0;
 }
@@ -1617,7 +1619,7 @@ padding:0;
 .Titulo h1 {
 color:#AA000C;
 font-family: sans-serif;
-font-size:18px;
+font-size:16.5px;
 margin:0;
 padding:0;
 }
