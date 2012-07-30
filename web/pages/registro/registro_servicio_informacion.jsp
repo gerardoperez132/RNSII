@@ -93,7 +93,7 @@
 		<div class="pasos">
 			<table><tr>
 				<td><small>
-					<strong><s:text name="paso1" />.<s:property value="tab"/>: </strong><s:text name="tab%{tab}.title" /> - <s:property value="tab"/>
+					<strong><s:text name="paso1" />.<s:property value="tab"/>: </strong><s:text name="tab%{tab}.title" />
 				</small></td>
 				<td><s:if test="modificar">					
 				<form action="prepararFuncionalidades" method="post">

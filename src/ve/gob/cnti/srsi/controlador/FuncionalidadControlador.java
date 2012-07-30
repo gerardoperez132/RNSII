@@ -16,6 +16,7 @@
 package ve.gob.cnti.srsi.controlador;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -30,6 +31,8 @@ import ve.gob.cnti.srsi.modelo.EntradaSalida;
 import ve.gob.cnti.srsi.modelo.Funcionalidad;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.Usuario;
+import ve.gob.cnti.srsi.util.Estados_Tiempo;
+import ve.gob.cnti.srsi.util.ReadXmlTime;
 
 import com.opensymphony.xwork2.ActionContext;
 
@@ -54,11 +57,15 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 	private boolean modificar;
 	private boolean modificarf;
 	private boolean resumen;
+	
+	private List<Estados_Tiempo> estadosTiempo = new ArrayList<Estados_Tiempo>();
+	private Date fecha;
 
 	@SuppressWarnings("unchecked")
 	@Override
 	@SkipValidation
 	public String prepararFormulario() {
+		getTiempoFecha();
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		if (id_funcionalidad > 0) {
 			funcionalidad = (Funcionalidad) read(funcionalidad,
@@ -70,6 +77,7 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 	}
 
 	public String registrarFuncionalidad() {
+		getTiempoFecha();
 		Usuario user = new Usuario();
 		session = ActionContext.getContext().getSession();
 		user = (Usuario) session.get("usuario");
@@ -82,6 +90,7 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 
 	@SkipValidation
 	public String prepararModificaciones() {
+		getTiempoFecha();
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		return SUCCESS;
 	}
@@ -89,6 +98,7 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararResumen() {
+		getTiempoFecha();
 		resumen = true;
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
@@ -105,6 +115,7 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararFuncionalidades() {
+		getTiempoFecha();
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		funcionalidades = (List<Funcionalidad>) read(FSI,
 				id_servicio_informacion, -1);
@@ -112,6 +123,7 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 	}
 
 	public String modificarFuncionalidad() {
+		getTiempoFecha();
 		Usuario user = new Usuario();
 		session = ActionContext.getContext().getSession();
 		user = (Usuario) session.get("usuario");
@@ -126,6 +138,7 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String eliminarFuncionalidad() {
+		getTiempoFecha();
 		Usuario user = new Usuario();
 		session = ActionContext.getContext().getSession();
 		user = (Usuario) session.get("usuario");
@@ -149,6 +162,7 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 	}
 
 	public void validate() {
+		getTiempoFecha();
 		if (funcionalidad.getNombre().trim().isEmpty())
 			addFieldError("funcionalidad.nombre", error.getProperties()
 					.getProperty("error.funcionalidad.nombre"));
@@ -162,6 +176,12 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 				.matches(REGEX_DESCRIPTION))
 			addFieldError("funcionalidad.descripcion", error.getProperties()
 					.getProperty("error.regex.description"));
+	}
+	
+	public void getTiempoFecha(){
+		ReadXmlTime read = new ReadXmlTime();
+		fecha = read.getFechaTiempo();
+		estadosTiempo = read.getEstados_Tiempo();
 	}
 
 	public List<EntradaSalida> getEntradas() {
@@ -258,6 +278,22 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 
 	public void setModificarf(boolean modificarf) {
 		this.modificarf = modificarf;
+	}
+
+	public List<Estados_Tiempo> getEstadosTiempo() {
+		return estadosTiempo;
+	}
+
+	public void setEstadosTiempo(List<Estados_Tiempo> estadosTiempo) {
+		this.estadosTiempo = estadosTiempo;
+	}
+
+	public Date getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
 
 }
