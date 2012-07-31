@@ -653,6 +653,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String examinarServicioInformacion() {
+		getTiempoFecha();
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		try {
 			unionareas = (List<UnionAreaServicioInformacion>) readUnion(
