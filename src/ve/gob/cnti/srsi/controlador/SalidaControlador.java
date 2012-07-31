@@ -16,6 +16,7 @@
 package ve.gob.cnti.srsi.controlador;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +34,8 @@ import ve.gob.cnti.srsi.modelo.Funcionalidad;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.TipoDato;
 import ve.gob.cnti.srsi.modelo.Usuario;
+import ve.gob.cnti.srsi.util.Estados_Tiempo;
+import ve.gob.cnti.srsi.util.ReadXmlTime;
 
 import com.opensymphony.xwork2.ActionContext;
 
@@ -55,11 +58,14 @@ public class SalidaControlador extends DAO implements Formulario,
 	private long id_funcionalidad;
 	private boolean complejo;
 	private boolean modificar;
+	private List<Estados_Tiempo> estadosTiempo = new ArrayList<Estados_Tiempo>();
+	private Date fecha;
 
 	@SuppressWarnings("unchecked")
 	@Override
 	@SkipValidation
 	public String prepararFormulario() {
+		getTiempoFecha();
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		salidas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad, SALIDA);
@@ -71,6 +77,7 @@ public class SalidaControlador extends DAO implements Formulario,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararFormularioSimple() {
+		getTiempoFecha();
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		salidas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad, SALIDA);
@@ -83,6 +90,7 @@ public class SalidaControlador extends DAO implements Formulario,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararFormularioComplejo() {
+		getTiempoFecha();
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		salidas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad, SALIDA);
@@ -94,6 +102,7 @@ public class SalidaControlador extends DAO implements Formulario,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararModificarSalidaSimple() {
+		getTiempoFecha();
 		salida = (EntradaSalida) read(salida, id_entrada_salida);
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
@@ -105,6 +114,7 @@ public class SalidaControlador extends DAO implements Formulario,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararModificarSalidaCompleja() {
+		getTiempoFecha();
 		salida = (EntradaSalida) read(salida, id_entrada_salida);
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
@@ -113,6 +123,7 @@ public class SalidaControlador extends DAO implements Formulario,
 	}
 
 	public String registrarSalida() {
+		getTiempoFecha();
 		Usuario user = new Usuario();
 		session = ActionContext.getContext().getSession();
 		user = (Usuario) session.get("usuario");
@@ -128,6 +139,7 @@ public class SalidaControlador extends DAO implements Formulario,
 
 	@SuppressWarnings("unchecked")
 	public String modificarSalida() {
+		getTiempoFecha();
 		Usuario user = new Usuario();
 		session = ActionContext.getContext().getSession();
 		user = (Usuario) session.get("usuario");
@@ -150,6 +162,7 @@ public class SalidaControlador extends DAO implements Formulario,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String eliminarSalidaSimple() {
+		getTiempoFecha();
 		delete(salida, id_entrada_salida);
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
@@ -167,6 +180,7 @@ public class SalidaControlador extends DAO implements Formulario,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String eliminarSalidaCompleja() {
+		getTiempoFecha();
 		salidas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad, SALIDA);
 		Iterator<EntradaSalida> iterator = salidas.iterator();
 		while (iterator.hasNext()) {
@@ -189,6 +203,7 @@ public class SalidaControlador extends DAO implements Formulario,
 
 	@Override
 	public void validate() {
+		getTiempoFecha();
 		if (salida.getNombre().trim().isEmpty())
 			addFieldError("salida.nombre",
 					error.getProperties().getProperty("error.salida.nombre"));
@@ -271,6 +286,12 @@ public class SalidaControlador extends DAO implements Formulario,
 		} else {
 			prepararFormularioSimple();
 		}
+	}
+	
+	public void getTiempoFecha(){
+		ReadXmlTime read = new ReadXmlTime();
+		fecha = read.getFechaTiempo();
+		estadosTiempo = read.getEstados_Tiempo();
 	}
 
 	public List<EntradaSalida> getSalidas() {
@@ -359,6 +380,22 @@ public class SalidaControlador extends DAO implements Formulario,
 
 	public void setFormatos(List<Formato> formatos) {
 		this.formatos = formatos;
+	}
+
+	public List<Estados_Tiempo> getEstadosTiempo() {
+		return estadosTiempo;
+	}
+
+	public void setEstadosTiempo(List<Estados_Tiempo> estadosTiempo) {
+		this.estadosTiempo = estadosTiempo;
+	}
+
+	public Date getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
 
 }
