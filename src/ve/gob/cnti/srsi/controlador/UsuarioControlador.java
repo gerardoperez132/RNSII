@@ -16,6 +16,9 @@
 package ve.gob.cnti.srsi.controlador;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.validation.SkipValidation;
@@ -23,7 +26,9 @@ import org.apache.struts2.interceptor.validation.SkipValidation;
 import ve.gob.cnti.srsi.dao.DAO;
 import ve.gob.cnti.srsi.modelo.Ente;
 import ve.gob.cnti.srsi.modelo.Usuario;
+import ve.gob.cnti.srsi.util.Estados_Tiempo;
 import ve.gob.cnti.srsi.util.MD5Hashing;
+import ve.gob.cnti.srsi.util.ReadXmlTime;
 
 import com.opensymphony.xwork2.ActionContext;
 
@@ -41,6 +46,8 @@ public class UsuarioControlador extends DAO {
 	@SuppressWarnings("rawtypes")
 	private Map session;
 	private Ente ente;
+	private List<Estados_Tiempo> estadosTiempo = new ArrayList<Estados_Tiempo>();
+	private Date fecha;
 
 	@SkipValidation
 	public String header() {
@@ -56,6 +63,7 @@ public class UsuarioControlador extends DAO {
 
 	@SuppressWarnings("unchecked")
 	public String modificarClave() throws NoSuchAlgorithmException {
+		getTiempoFecha();	
 		if (header().equals("errorSession") == true) {
 			return "errorSession";
 		} else {
@@ -112,6 +120,7 @@ public class UsuarioControlador extends DAO {
 
 	@SuppressWarnings("unchecked")
 	public String modificarDatos() {
+		getTiempoFecha();	
 		if (header().equals("errorSession") == true) {
 			return "errorSession";
 		} else {
@@ -132,11 +141,13 @@ public class UsuarioControlador extends DAO {
 
 	@SkipValidation
 	public String configuracion() {
+		getTiempoFecha();	
 		return header();
 	}
 
 	@SkipValidation
 	public String prepararFormulario() {
+		getTiempoFecha();	
 		header();
 		usuario = (Usuario) session.get("usuario");
 		if (modificarDatos = true) {
@@ -146,6 +157,7 @@ public class UsuarioControlador extends DAO {
 	}
 
 	public void validate() {
+		getTiempoFecha();	
 		if (modificarDatos) {
 			long ci;
 			if (usuario.getNombre().trim().isEmpty()
@@ -183,6 +195,12 @@ public class UsuarioControlador extends DAO {
 				}
 			}
 		}
+	}
+	
+	public void getTiempoFecha(){
+		ReadXmlTime read = new ReadXmlTime();
+		fecha = read.getFechaTiempo();
+		estadosTiempo = read.getEstados_Tiempo();
 	}
 
 	public Usuario getUsuario() {
@@ -247,5 +265,21 @@ public class UsuarioControlador extends DAO {
 
 	public void setClave_nueva_confirme(String clave_nueva_confirme) {
 		this.clave_nueva_confirme = clave_nueva_confirme;
+	}
+
+	public List<Estados_Tiempo> getEstadosTiempo() {
+		return estadosTiempo;
+	}
+
+	public void setEstadosTiempo(List<Estados_Tiempo> estadosTiempo) {
+		this.estadosTiempo = estadosTiempo;
+	}
+
+	public Date getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
 }

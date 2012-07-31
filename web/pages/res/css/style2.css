@@ -3155,3 +3155,18 @@ font-weight:lighter;
 padding-left: 10px; 
 text-align: left;
 }
+
+.pasos_lbl{
+	color: #666;
+float: left;
+font-family: sans-serif;
+font-size: 12px;
+font-weight: 700;
+padding-top: 2px;
+}
+
+.administracion_capa {
+margin-left: 25%;
+margin-top: 26%;
+margin-bottom: 10%;
+}
