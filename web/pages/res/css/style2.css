@@ -3126,3 +3126,32 @@ padding-top: 2px;
 	margin-bottom: 3px;
 	margin-left: 5px;
 }
+
+/*mensaje de fortaleza de contraseña*/
+.error_pass{color:red;font-size: small; margin-bottom: 0; margin-top: 0;}
+.ok_pass{color:green;font-size: small; margin-bottom: 0; margin-top: 0;}
+.alert_pass{color:orange;font-size: small; margin-bottom: 0; margin-top: 0;}
+.requerido{color:red;margin: 0px; margin-bottom: 0; margin-top: 0;}
+
+label { float: inherit; font-family: sans-serif; }
+br { clear: both; }
+.error {
+	color: red;
+	display:block;
+	font-size: 1em !important;
+    font-weight:lighter;    
+    padding-left: 10px;    
+}
+label.valid {	
+	display: block;
+	width: 16px;
+	height: 16px;
+}
+
+.errorMessage {
+color: red;
+font-size: 1em !important;
+font-weight:lighter;    
+padding-left: 10px; 
+text-align: left;
+}
