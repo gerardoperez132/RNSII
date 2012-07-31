@@ -1,21 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@taglib uri="/struts-tags" prefix="s"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <%@include file="../layout/cache.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <s:i18n name="ve/gob/cnti/srsi/i18n/I18">
-	<head>
+<head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <!-- CSS (required) -->
-<link rel="stylesheet" type="text/css" href="res/css/styles.css">
+<link rel="stylesheet" type="text/css" href="/SRSI/pages/res/css/style2.css">
 <link rel="stylesheet" type="text/css" href="res/css/menu_vertical.css">
-<link rel="stylesheet" type="text/css"
-	href="res/css/jquery.treeTable.css">
-<link rel="stylesheet" type="text/css" href="res/css/table_tree.css">
+<link rel="stylesheet" type="text/css" href="res/css/jquery.alerts.css">
+<link rel="stylesheet" type="text/css" href="res/css/jquery.treeTable.css">
 <link rel="stylesheet" type="text/css" href="res/css/table2.css">
+<link rel="stylesheet" type="text/css" href="res/css/table_tree.css">
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
-<script type="text/javascript" src="res/js/jquery-1.7.1.js"></script>
+<!-- JS (required) -->
+<script type="text/javascript" src="/SRSI/pages/res/js/jquery-1.7.1.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/SRSI/pages/res/js/funciones_ge.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/tabs.js"></script>
 <script type="text/javascript" src="res/js/jquery.treeTable.js"></script>
 <script type="text/javascript">
@@ -26,42 +28,47 @@
 <title><s:text name="inicio" />
 </title>
 	</head>
-	<body>
+<body>	
+	<div class="container">
+		<%@include file="../layout/header_ge.jsp"%>
+		
+		<!-- Esta es la barra lateral -->
+		<%@include file="../layout/sidebar.jsp"%>			
 
-		<!-- Este es el div de la sombra del contenedor del maquetado de la página -->
-		<div id="sombra">
-			<!-- Este es el div contenedor del maquetado de la página -->
-			<div id="container">
-
-				<%@include file="../layout/header.jsp"%>
-
-				<!-- Esta es la barra lateral -->
-				<%@include file="../layout/sidebar.jsp"%>
-				
-
-
-				<!-- Este es el div de contenidos -->
-				<div id="content">
-
-					<table class="main">
-						<tr>
-							<td style="width: 350px;">
-								<h4 style="margin: 0;">
-									<s:text name="catalogo" />
-								</h4></td>
-							<td style="width: 350px;">
-								<div style="text-align: right;">
-									<s:text name="bienvenido" />
-									<s:property value="#session.usuario.nombre" />
-								</div></td>
-						</tr>
-						<tr>
-							<td colspan="2"><s:text name="ente" /> <s:property
-									value="ente.nombre" />
-							</td>
-						</tr>
-					</table>
-					<hr>
+		<!-- Este es el div de contenidos -->
+		<div class="contenido">
+		<div class="Titulo" style="width:800px;">
+   			<h1><s:text name="titulo2" /></h1>
+   		</div>
+   			
+		<div class="busqueda" style="width:800px;">
+			<form method="post" action="Buscar_Servicio">
+				<label><s:text name="buscarServicio"/></label>
+				<s:textfield name="cadena" id="buscar" cssClass="inputBusqueda buscar" style="width:640px;"/>
+				<input type="submit" class="submit" value="&nbsp;"/>
+			</form>
+		</div>
+		
+		<table class="main_user">	
+		<tr>
+			<td>
+				<div>
+					<h4 style="margin: 0;">
+					<s:text name="bienvenido" /> 
+					<s:property value="%{#session.usuario.nombre}"/>
+					</h4>
+				</div>
+			</td>			
+		</tr>		
+		<tr>
+			<td>
+				<h4 style="margin: 0;"><s:text name="ente" />
+				<s:property value="%{#session.ente_sesion.nombre}"/></h4>
+			</td>										
+		</tr>								
+		</table>
+					
+					
 
 					<ul class="tabs">
 						<li><a href="#tab1"><s:text name="tab1.title"></s:text> </a>
@@ -402,10 +409,10 @@
 							</div>
 						</div>
 				</div>
-				<!-- Este es el pie de página -->
-				<div id="footer"></div>
 			</div>
-		</div>
+		<div style="clear: both"></div>
+	<div class="vacio"></div>
+	<%@include file="../layout/footer_ge.jsp"%>
 	</body>
 </s:i18n>
 </html>
