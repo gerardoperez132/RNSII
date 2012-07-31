@@ -95,7 +95,7 @@
 			</div>
 			<div style="padding-left: 75px; padding-top: 25px; width: 800px;">
 				<ul style="list-style: none;">
-					<li>Portal desarrollado y administrado por el Centro Nacional de Tecnologías de Información, adscrito al Ministerio del Poder Popular para Ciencia, Tecnología e Innovación</li>
+					<li><s:text name="ministerio"/></li>
 				</ul>
 			</div>
 		</div>
