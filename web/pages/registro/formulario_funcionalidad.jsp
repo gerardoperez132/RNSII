@@ -1,48 +1,84 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@taglib uri="/struts-tags" prefix="s"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <%@include file="../layout/cache.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <s:i18n name="ve/gob/cnti/srsi/i18n/I18">
-	<head>
+<head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <!-- CSS (required) -->
-<link rel="stylesheet" type="text/css" href="res/css/styles.css">
-<link rel="stylesheet" type="text/css" href="res/css/table2.css">
-<link rel="stylesheet" type="text/css" href="res/css/tabs.css">
+<link rel="stylesheet" type="text/css" href="/SRSI/pages/res/css/style2.css">
 <link rel="stylesheet" type="text/css" href="res/css/menu_vertical.css">
-<script type="text/javascript" src="res/js/jquery-1.7.1.js" charset="UTF-8"></script>
-<script type="text/javascript" src="res/js/jquery.validate.js" charset="UTF-8"></script>
-<script src="res/js/messages_es.js" type="text/javascript" charset="UTF-8"></script>
+<link rel="stylesheet" type="text/css" href="res/css/jquery.alerts.css">
+<link rel="stylesheet" type="text/css" href="res/css/jquery.treeTable.css">
+<link rel="stylesheet" type="text/css" href="res/css/table2.css">
+<link rel="stylesheet" type="text/css" href="res/css/table_tree.css">
+<link rel="stylesheet" type="text/css" href="res/css/tabs.css">
+<!-- JS (required) -->
+<script type="text/javascript" src="/SRSI/pages/res/js/jquery-1.7.1.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/SRSI/pages/res/js/funciones_ge.js" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/jquery.treeTable.js" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/jquery.alerts.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/registro/formulario_funcionalidad.js" charset="UTF-8"></script>
 <title><s:text name="registro.title"></s:text>
 </title>
 	</head>
-	<body>
-		<!-- Este es el div de la sombra del contenedor del maquetado de la página -->
-		<div id="sombra">
-			<!-- Este es el div contenedor del maquetado de la página -->
-			<div id="container">
-				<%@include file="../layout/header.jsp"%>
-				<!-- Esta es la barra lateral -->
-				<%@include file="../layout/sidebar.jsp"%>
-				<!-- Este es el div de contenidos -->
-				<div id="content">
-					<table>
-						<tr>
-							<td><small> <strong> <s:if test="resumen">
-											<s:text name="paso2.2" />
-										</s:if> <s:else>
-											<s:text name="paso2.1" />
-										</s:else> <s:text name="funcionalidades" /> - </strong> <s:if
-										test="resumen == true">
-										<s:text name="tab.resumen" />
-									</s:if> <s:else>
-										<s:text name="tab1.title" />
-									</s:else> </small></td>
-						</tr>
-					</table>
+<body>	
+	<div class="container">
+		<%@include file="../layout/header_ge.jsp"%>
+		
+		<!-- Esta es la barra lateral -->
+		<%@include file="../layout/sidebar.jsp"%>			
+
+		<!-- Este es el div de contenidos -->
+		<div class="contenido">
+		<div class="Titulo" style="width:800px;">
+   			<h1><s:text name="titulo2" /></h1>
+   		</div>
+   			
+		<div class="busqueda" style="width:800px;">
+			<form method="post" action="Buscar_Servicio">
+				<label><s:text name="buscarServicio"/></label>
+				<s:textfield name="cadena" id="buscar" cssClass="inputBusqueda buscar" style="width:640px;"/>
+				<input type="submit" class="submit" value="&nbsp;"/>
+			</form>
+		</div>
+		
+		<table class="main_user">	
+		<tr>
+			<td>
+				<div>
+					<h4 style="margin: 0;">
+					<s:text name="bienvenido" /> 
+					<s:property value="%{#session.usuario.nombre}"/>
+					</h4>
+				</div>
+			</td>			
+		</tr>		
+		<tr>
+			<td>
+				<h4 style="margin: 0;"><s:text name="ente" />
+				<s:property value="%{#session.ente_sesion.nombre}"/></h4>
+			</td>										
+		</tr>								
+		</table>
+		<div class="pasos">
+			<table>
+				<tr>
+					<td><small> <strong> <s:if test="resumen">
+									<s:text name="paso2.2" />
+								</s:if> <s:else>
+									<s:text name="paso2.1" />
+								</s:else> <s:text name="funcionalidades" /> - </strong> <s:if
+								test="resumen == true">
+								<s:text name="tab.resumen" />
+							</s:if> <s:else>
+								<s:text name="tab1.title" />
+							</s:else> </small></td>
+				</tr>
+			</table>
+		</div>
 					<h3>
 						<s:text name="funcionalidades.title" />
 					</h3>
@@ -266,10 +302,11 @@
 							</div>
 						</div>
 					</s:else>
-				</div>
-				<%@include file="../layout/footer.jsp"%>
+				</div>				
 			</div>
-		</div>
+		<div style="clear: both"></div>
+	<div class="vacio"></div>
+	<%@include file="../layout/footer_ge.jsp"%>
 	</body>
 </s:i18n>
 </html>
