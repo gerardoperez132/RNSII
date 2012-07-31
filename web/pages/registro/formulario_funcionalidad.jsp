@@ -123,7 +123,7 @@
 						</ul>
 						<div class="tab_container">
 							<div id="tab1" class="tab_content">
-								<table class="tb">
+								<table class="tb" style="width:750px;">
 									<tr>
 										<td class="tb_alt"><span class="txt_small"> <s:text
 													name="nombre.title" /> </span></td>
@@ -187,7 +187,7 @@
 								<s:fielderror>
 									<s:param>Salidas</s:param>
 								</s:fielderror>
-								<table class="tb">
+								<table class="tb" style="width:750px;">
 									<tr>
 										<td class="tb_alt"><span class="txt_small"> <s:text
 													name="nombre.title"></s:text> </span></td>
