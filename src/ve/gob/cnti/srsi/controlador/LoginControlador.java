@@ -22,9 +22,12 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.validation.SkipValidation;
+
 import ve.gob.cnti.srsi.dao.DAO;
 import ve.gob.cnti.srsi.mail.EnviarCorreo;
 import ve.gob.cnti.srsi.mail.Mail;
@@ -34,9 +37,10 @@ import ve.gob.cnti.srsi.modelo.Estado;
 import ve.gob.cnti.srsi.modelo.RecuperarClave;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.Usuario;
-import ve.gob.cnti.srsi.util.MD5Hashing;
 import ve.gob.cnti.srsi.util.Estados_Tiempo;
+import ve.gob.cnti.srsi.util.MD5Hashing;
 import ve.gob.cnti.srsi.util.ReadXmlTime;
+
 import com.opensymphony.xwork2.ActionContext;
 
 @SuppressWarnings("serial")
@@ -82,7 +86,7 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 			addFieldError("error",
 					error.getProperties().getProperty("error.login.captcha"));
 			return INPUT;
-		}		
+		}
 		if (!correo.matches(REGEX_EMAIL)) {
 			addFieldError("error",
 					error.getProperties().getProperty("error.regex.email"));
@@ -108,7 +112,7 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 				return INPUT;
 			} else {
 				Ente ente = new Ente();
-				ente  = (Ente) read(ente, usuario.getId_ente());
+				ente = (Ente) read(ente, usuario.getId_ente());
 				session.put("logueado", true);
 				session.put("usuario", usuario);
 				session.put("ente_sesion", ente);
@@ -161,11 +165,11 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 					ListaServicios
 							.add(new ServiciosPublicables(false, servicio));
 				} else {
-						ListaServicios.add(new ServiciosPublicables(publicable,
-								servicio));
+					ListaServicios.add(new ServiciosPublicables(publicable,
+							servicio));
 				}
 			}
-		}		
+		}
 		peticionesNoLeidas = peticionesSuscripcion(ente.getId_ente());
 		peticionesPendientes = peticionesSuscripcionPendientes(ente
 				.getId_ente());
@@ -331,8 +335,8 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 		return "404ERROR";
 
 	}
-	
-	public void getTiempoFecha(){
+
+	public void getTiempoFecha() {
 		ReadXmlTime read = new ReadXmlTime();
 		fecha = read.getFechaTiempo();
 		estadosTiempo = read.getEstados_Tiempo();
