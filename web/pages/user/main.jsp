@@ -65,10 +65,10 @@
 		<s:if test="peticionesNoLeidas > 0 || peticionesPendientes >0">
 		<!-- Peticiones de suscripción no leidas y pendientes   -->			
 			<s:if test="peticionesNoLeidas > 0">
-				<span style="color:blue;">Números de solicitudes de suscripción nueva no leidas: <s:property value="peticionesNoLeidas"/></span>	<br>				
+				<span style="color:blue;"><s:text name="solicitudes_no_leidas"><s:param><s:property value="peticionesNoLeidas"/></s:param></s:text></span>	<br>				
 			</s:if>
 			<s:if test="peticionesPendientes > 0">
-				<span style="color:blue;">Números de solicitudes de suscripción pendientes por setenciar: <s:property value="peticionesPendientes"/></span>					
+				<span style="color:blue;"><s:text name="solicitudes_pendientes"><s:param><s:property value="peticionesPendientes"/></s:param></s:text></span>					
 			</s:if>	
 			<form action="ListarSuscricionesPendientes" method="post">
 				<table align="center">

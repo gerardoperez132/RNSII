@@ -574,7 +574,7 @@ Lista de suscriciones pendientes -->
 						<tr>
 							<th><s:text name="servicio_solicitado" /></th>
 							<th><s:text name="solicitante" /></th>
-							<th><s:text name="fecha_creacion" /></th>
+							<th><s:text name="fecha_solicitud" /></th>
 							<th><s:text name="detalles" /></th>
 							<th><s:text name="dictamen" /></th>
 						</tr>
@@ -785,7 +785,7 @@ Lista con las respuestas a las solicitudes de suscripción a servicios de informa
 						<tr>
 							<th><s:text name="servicio_solicitado" /></th>
 							<th><s:text name="ente3" /></th>
-							<th><s:text name="fecha_creacion" /></th>
+							<th><s:text name="fecha_solicitud" /></th>
 							<th><s:text name="sentencia" /></th>									
 							<th><s:text name="detalles" /></th>
 						</tr>
@@ -874,7 +874,7 @@ Muestra los detalles de una respuesta a una solicitud de suscripción-->
 							<td class="alt2"><s:property value="solicitud.cargo" /></td>
 						</tr>
 						<tr>
-							<td class="alt"><s:text name="fecha_creacion"/></td>
+							<td class="alt"><s:text name="fecha_solicitud"/></td>
 							<td class="alt2"><s:date name="solicitud.fecha_creado" format="d'/'MM'/'yyyy" /></td>
 						</tr>
 						<tr>
