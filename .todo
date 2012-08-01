@@ -1,0 +1,498 @@
+<?xml version="1.0"?>
+<todo version="0.1.20">
+    <note priority="veryhigh" time="1331840305" done="1335469270">
+        Agregar documentos legales con la tablita
+        <comment>
+            Listo, pero le falta el diseño...
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1331840327" done="1333372436">
+        Crear sesiones de usuario
+        <comment>
+            Listo.
+        </comment>
+        <note priority="veryhigh" time="1331840553" done="0">
+            Crear la vista
+        </note>
+        <note priority="veryhigh" time="1331840581" done="0">
+            Crear la lógica
+        </note>
+    </note>
+    <note priority="veryhigh" time="1331840934" done="1335194151">
+        Agregar los campos de formato y longitud para las entradas y salidas
+        <comment>
+            Listo
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1333047705" done="1335475457">
+        Agregar los comentarios a los nuevos métodos (RR)
+        <comment>
+            Comentarios en la interfaz CRUD agregados.
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1333372713" done="1335476069">
+        Crear la vista del usuario final
+        <comment>
+            Listo
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1333373006" done="1335476285">
+        Publicar servicios si están en estado implementado y con toda la información requerida (JP)
+        <comment>
+            Listo
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1333373031" done="1336401059">
+        Validación de seguridad en los formularios para inserción de solamente caracteres válidos (RR)
+        <comment>
+            Supuestamente esto está validado en todos los formularios. Se debe verificar funcionalmente.
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1333373578" done="1335469356">
+        Implementar y probar lógica para evitar la duplicación de formularios
+        <comment>
+            Listo con el doble submit.
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1334080482" done="1334080497">
+        Cambiar pantalla de inicio, haciendo que este por defecto la de control de acceso
+        <comment>
+            Listo, a la pagina index se le coloco un rediricionamiento automático al control de acceso
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1334080713" done="1336578004">
+        Agregar funcionalidad de recuperar contraseña. (JP)
+        <comment>
+            Listo
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1335211825" done="1335540506">
+        Validar que se suba un archivo con un único nombre, tanto de archivo como de nombre (RR)
+        <comment>
+            Listo.
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1335469250" done="1335539135">
+        Agregar el botón para agregar nuevas funcionalidades cuando le da a detalles, modifica y continúa el registro (JP)
+        <comment>
+            Listo
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1335469474" done="1335471963">
+        Listar archivos en la vista detalles (JP)
+        <comment>
+            Listo, hay que mejorar el aspecto visual
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1335469491" done="1335473800">
+        Implementar formatos, longitud a los datos de salida (JP)
+        <comment>
+            Listo
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1335469506" done="1335476312">
+        Revisar la lógica del botón publicar, hacer que funcione (JP)
+        <comment>
+            Listo
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1335469529" done="1335539819">
+        Al botón eliminar servicios de información, hacer que borre también los archivos (RR)
+        <comment>
+            Por fin está listo.
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1335469596" done="1335488201">
+        Revisar validación de versión del servicio de información (RR)
+        <comment>
+            Validado incluso cuando el primer caracter es un punto, sobreentendiendo que el usuario colocó un 0
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1335469625" done="1335472236">
+        Revisar pestaña de detalles técnicos (JP)
+        <comment>
+            Listo
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1335474155" done="1335474163">
+        Arreglar el problema de descarga del archivo [URL]
+        <comment>
+            Resuelto.
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1335484214" done="1336067966">
+        Validar que la expresión regular del correo electrónico acepte solamente un arroba (RR)
+        <comment>
+            Supuestamente esto funciona.
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1335535975" done="1335540019">
+        Se pierde la internacionalización al crear un archivo de información nuevo y proceder a colocar las funcionalidades (JP)
+        <comment>
+            Listo
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1335808921" done="1336059222">
+        Cambiar el estado de números a palabras Implementado, Desarrollo(JP)
+        <comment>
+            Listo
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1335809201" done="1336062573">
+        Mostrar el nombre de los sectores en orden alfabético(RR)
+        <comment>
+            Listo, se creó un método para hacer la consulta con un order by.
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1335810305" done="1336060029">
+        Validar que un dato complejo no tenga formato ni longitud(JP)
+        <comment>
+            Listo
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1335810908" done="1336060687">
+        Cuando no hay documentos cargados, imprimir mensaje en la vista detalles.(JP)
+        <comment>
+            Listo
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1336068177" done="1340042288">
+        Validar del lado del cliente [usando JavaScript] que sólo pueda escribir letras, espacios y números
+        <comment>
+            Listo
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1336079234" done="1336148661">
+        Intentar nuevamente obtener la ruta real del servidor para buscar el archivo errors.properties
+        <comment>
+            Resuelto.
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1336167206" done="1337368782">
+        Agregar intentos fallidos a la variable de internacionalización (RR)
+        <comment>
+            Resuelto con una trampa extraña
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1336502817" done="1340031604">
+        Validar con un captcha en el login
+        <comment>
+            Listo
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1337106419" done="1340042332">
+        Agregar validación (expresión regular) al correo al momento de recuperar contraseña (RR)
+        <comment>
+            Ya.
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1337106496" done="1340042417">
+        Agregar un botón o enlace para poder regresar a la vista del usuario cuando se está en la vista para iniciar sesión
+        <comment>
+            No sé qué demonios era esto.
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1337106733" done="1337114545">
+        Revisar por qué no se pueden subir archivos PDF en el laboratorio
+        <comment>
+            Por alguna extraña razón, se arregló solo. :-/ WTF?!
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1337110599" done="1337693386">
+        Arreglar bucle del 404
+        <comment>
+            Listo
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1337110743" done="1337368854">
+        Agregar el doble submit cuando cuenta servicios de información visitados
+        <comment>
+            Ya esto no importa porque se está contando por visitas, ahora, si se contaran los clicks, sería otra cosa. Pudiera refrescar siempre para sumar 1 al número, podría delimitarse entonces una IP a clicks entre T.
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1337110768" done="1340042445">
+        Averiguar una forma de heredar el doble submit en todos los actions sin tener que escribirlo en uno por uno
+        <comment>
+            Creo que no se puede hacer por ahora...
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1337111653" done="1340042477">
+        Pueden alterar el número de servicios más visitados contratando a alguien que haga clicks encima del enlace repetidas veces durante mucho tiempo hasta que el servicio tenga la visibilidad deseada. Pueden hacer trampa
+        <comment>
+            Listo.
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1337116667" done="1340042561">
+        Validar que un troll no modifique un servicio información dejándolo incompleto cuando ya está publicado.
+        <comment>
+            Se despublica solo.
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1337116906" done="1340042505">
+        Cuando un servicio está publicado, hay que tratar de restringir los cambios futuros aunque esto debería ser responsabilidad de quien está subiendo la información, no del sistema
+        <comment>
+            El sistema no debería encargarse de esto... Por ahora...
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1337117699" done="1337368945">
+        Validar lo del formulario cuando se cuentan las visitas
+        <comment>
+            ¿Qué? Ya, listo
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1337117753" done="1337368802">
+        Capturar las direcciones IP del cliente cuando hace un click
+        <comment>
+            Completado, esperando por una definición más clara de la lógica de visitas
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1337370469" done="1342792813">
+        Arreglar el error cuando se realizan muchos refrescamientos de la página. (RR)
+        <comment>
+            Listo - Se arreglo incluyendo en el controlador un interceptor de excepciones globales
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1337373533" done="1337693466">
+        Colocar cada pestaña como un paso
+        <comment>
+            Listo
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1337970302" done="1340042665">
+        Cambiar todas las tablas de la aplicación para agregar el id del usuario que las modificó o inventar alguna manera de resolver este problema
+        <comment>
+            Listo.
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1338563535" done="1340042659">
+        Agregar validación a buscar servicio (RR) cuando ha iniciado sesión
+        <comment>
+            Volado.
+        </comment>
+    </note>
+    <note priority="high" time="1331840775" done="1333372465">
+        Cambiar la lógica del archivo de ServicioInformacion
+        <comment>
+            Cambios realizados. Trabajando sobre los archivos.
+        </comment>
+    </note>
+    <note priority="high" time="1332876738" done="1334092739">
+        Agregar encriptación md5 a las contraseñas de usuario
+        <comment>
+            Listo y funcionando.
+        </comment>
+    </note>
+    <note priority="high" time="1333047733" done="1333372592">
+        Cambiar el método de actualización en tablas uniones a algo más lógico y eficiente
+        <comment>
+            Listo.
+        </comment>
+    </note>
+    <note priority="high" time="1333372796" done="1334341775">
+        Agregar módulo para cambiar contraseña
+        <comment>
+            Listo!!!!!
+        </comment>
+    </note>
+    <note priority="high" time="1333372804" done="1334605877">
+        Agregar módulo para cambiar datos del usuario
+        <comment>
+            Listo
+        </comment>
+    </note>
+    <note priority="high" time="1333461310" done="1334092818">
+        Colocar base de datos local
+        <comment>
+            Listo, puerto liberado, PC 10.16.101.50
+        </comment>
+    </note>
+    <note priority="high" time="1334080791" done="1334088456">
+        Colocar en el footer un link llamado políticas de uso
+        <comment>
+            listo
+        </comment>
+    </note>
+    <note priority="high" time="1334080900" done="1334149839">
+        En el menu izquierdo cambiar el el texto servicios por servicios de información
+        <comment>
+            Listo
+        </comment>
+    </note>
+    <note priority="high" time="1334081134" done="1334089498">
+        Cambiar el texto Catalogo de Servicios por Catalogo de Servicios de Información
+        <comment>
+            listo
+        </comment>
+    </note>
+    <note priority="high" time="1334081211" done="1334089526">
+        Cambiar el texto ente por Usted ha iniciado sesión como:
+        <comment>
+            listo
+        </comment>
+    </note>
+    <note priority="high" time="1334081358" done="1334158253">
+        el botón públicar debe estar inhabilitado para los casos donde el registro este incompleto y/o en desarrollo
+        <comment>
+            Listo
+        </comment>
+    </note>
+    <note priority="high" time="1334246347" done="1334605891">
+        Agregar funcón dinámica que redireccione al index en el caso de que un usuario regrese a main.jsp luego de haber cerrado la session
+        <comment>
+            Listo
+        </comment>
+    </note>
+    <note priority="high" time="1335543765" done="1336062859">
+        Agregar boton de regresar la vista registro de dato JP
+        <comment>
+            Listo
+        </comment>
+    </note>
+    <note priority="high" time="1336402386" done="1342792920">
+        Manejar en la vista cuando no se puede conectar a la base de datos (Se podría crear un action que redireccione a una pagina del manejo del error y si el evento se disparo en una session activa, matarla)
+        <comment>
+            Listo - Se arreglo incluyendo en el controlador un interceptor de excepciones globales
+        </comment>
+    </note>
+    <note priority="high" time="1336403897" done="1342792946">
+        Manejar excepciones cuando no encuentra el archivo de errores, no se sabe cómo sería posible que no lo encontrara.
+        <comment>
+            Listo - Se arreglo incluyendo en el controlador un interceptor de excepciones globales
+        </comment>
+    </note>
+    <note priority="medium" time="1331840995" done="1333372631">
+        Agregar botón para ver funcionalidad
+        <comment>
+            Listo.
+        </comment>
+    </note>
+    <note priority="medium" time="1333082977" done="1336574421">
+        Agregar campo en la tabla de entes para las siglas.
+        <comment>
+            Listo, por defecto deberían estar en mayúsculas
+        </comment>
+    </note>
+    <note priority="medium" time="1335543638" done="1336069256">
+        Acomodar la presentación de la pestaña resumen de funcionalidades JP
+        <comment>
+            Listo
+        </comment>
+    </note>
+    <note priority="low" time="1333373113" done="1340721048">
+        Agregar lógica para suscripción y desuscripción de los SI
+        <comment>
+            Listo
+        </comment>
+    </note>
+    <note priority="veryhigh" time="1335809914">
+        Validar el teléfono repetido ????
+    </note>
+    <note priority="veryhigh" time="1335811004">
+        Agregar el cargo a un usuario
+    </note>
+    <note priority="veryhigh" time="1336150739">
+        Crear un archivo bootstrap con la información por defecto que debe tener la base de datos, como los sectores, tipos de arquitectura, intercambio, entre otros.
+    </note>
+    <note priority="veryhigh" time="1336502837">
+        Agregar una pregunta secreta para cuando se crea un usuario y se quiere recuperar la contraseña
+    </note>
+    <note priority="veryhigh" time="1336502852">
+        Agregar un correo de respaldo
+    </note>
+    <note priority="veryhigh" time="1337107963">
+        Agregar un nuevo respaldo de la base de datos con las entidades nuevas y la data que viene por defecto en la aplicación (bootstrap)
+    </note>
+    <note priority="veryhigh" time="1338565014">
+        Agregar validación de la sesión de usuario o algo parecido que sucede cuando se reinicia el servicio de la aplicación
+    </note>
+    <note priority="veryhigh" time="1340740596">
+        Agregar campo union_usuario_rol a todas la tablas
+    </note>
+    <note priority="veryhigh" time="1340826557">
+        Arreglar lo del teléfono que aparece con código de área al momento de actualizar
+    </note>
+    <note priority="veryhigh" time="1343835068">
+        Colocar las categorías (sectores) como el RNA con un dibujo en blanco.
+    </note>
+    <note priority="veryhigh" time="1343835120">
+        Cambiar el tamaño de alto de todas las pestañas. Capas de tabs.
+    </note>
+    <note priority="veryhigh" time="1343835175">
+        Decirle al usuario que le falta agregar funcionalidades
+    </note>
+    <note priority="veryhigh" time="1343835200">
+        Usar un solo formulario para el registro de datos simples y complejos
+    </note>
+    <note priority="high" time="1331840286">
+        Cargar instituciones
+    </note>
+    <note priority="high" time="1335469081">
+        Agregar un mensaje de confirmación cada vez que el usuario elimina algo del sistema.(JP)
+        <comment>
+            Listo
+        </comment>
+    </note>
+    <note priority="high" time="1335811022">
+        Validar que el correo no esté repetido entre instituciones.
+    </note>
+    <note priority="high" time="1336080083">
+        Tal vez se deba agregar una coma a la expresión regular para validar las descripciones. Verificar qué otros signos debe aceptar el campo de texto.
+    </note>
+    <note priority="medium" time="1332267289">
+        Arreglar el orden de los objetos en la interfaz y en la consulta
+    </note>
+    <note priority="medium" time="1333373506">
+        Agregar arreglos en un archivo o XML o Properties
+    </note>
+    <note priority="medium" time="1334149787">
+        Crear un archivo de internacionalización único que se llame I18, todas sus cadenas sean normadas con prefijo del nombre del archivo, seguido de un punto con un adjetivo descriptivo de la cadena que contiene
+    </note>
+    <note priority="medium" time="1334153645">
+        Mejorar la visualización de la tabla tree para que las filas las muestre con colores diferentes, esto con el objeto de que sea más agradable a la vista
+    </note>
+    <note priority="medium" time="1334585420">
+        Validar que JavaScript esté activado (JP)
+        <comment>
+            Listo
+        </comment>
+    </note>
+    <note priority="medium" time="1336166285">
+        Hay un mensaje en el controlador de usuarios que no está internacionalizado. Hay un TODO sobre eso al respecto
+    </note>
+    <note priority="medium" time="1337562747">
+        Creat etiquetas title únicas para cada página de la aplicación.
+    </note>
+    <note priority="medium" time="1337564438">
+        Creat metaetiquetas description únicas para cada página de la aplicación.
+    </note>
+    <note priority="low" time="1331840434">
+        Reutilizar los códigos de los formularios de entrada y salida. Tanto en la vista como en el controlador
+    </note>
+    <note priority="low" time="1334844213">
+        Agregar permisos de sólo lectura a la carpeta de archivos y sus subdirectorios
+    </note>
+    <note priority="low" time="1335468781">
+        Agregar una interfaz para ordenamiento de la tabla de catálogos de servicios
+    </note>
+    <note priority="verylow" time="1331840351">
+        Parámetros de calidad
+    </note>
+    <note priority="verylow" time="1331840356">
+        Parámetros de seguridad
+    </note>
+    <note priority="verylow" time="1331840372">
+        Plantilla para documento de arquitectura
+    </note>
+    <note priority="verylow" time="1331840380">
+        Plantilla para documento de requerimientos
+    </note>
+    <note priority="verylow" time="1331840389">
+        Plantilla para documento de manual de usuario
+    </note>
+    <note priority="verylow" time="1331840396">
+        Plantilla para documento de administración
+    </note>
+    <note priority="verylow" time="1337180119">
+        Averiguar cómo crear un pool de conexiones utilizando Hibernate para no tener que abrir y cerrar la conexión cada vez que se genera una transacción
+    </note>
+</todo>
