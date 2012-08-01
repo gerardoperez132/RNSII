@@ -20,7 +20,9 @@
 <script type="text/javascript" src="/SRSI/pages/res/js/funciones_ge.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/jquery.treeTable.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/jquery.alerts.js" charset="UTF-8"></script>
-<script type="text/javascript" src="res/js/actions.js" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/jquery.validate.js" charset="UTF-8"></script>
+<script src="res/js/messages_es.js" type="text/javascript" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/registro/registro_servicio_informacion.js" charset="UTF-8"></script>
 
 <s:if test="modificar">
 	<s:set name="submit" value="%{getText('actualizar')}" />
