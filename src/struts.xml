@@ -141,7 +141,7 @@
 		<action name="registrarDescripcionSoporte" method="registrarDescripcionSoporte"
 			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
 			<interceptor-ref name="doubleSubmit" />
-			<result name="success">registro/funcionalidades.jsp</result>
+			<result name="success" type="redirectAction">prepararFuncionalidades</result>
 			<result name="invalid.token">registro/registro_servicio_informacion.jsp
 			</result>
 			<result name="input">registro/registro_servicio_informacion.jsp

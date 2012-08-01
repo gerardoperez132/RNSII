@@ -57,7 +57,7 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 	private boolean modificar;
 	private boolean modificarf;
 	private boolean resumen;
-	
+
 	private List<Estados_Tiempo> estadosTiempo = new ArrayList<Estados_Tiempo>();
 	private Date fecha;
 
@@ -116,7 +116,9 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 	@SkipValidation
 	public String prepararFuncionalidades() {
 		getTiempoFecha();
-		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		session = ActionContext.getContext().getSession();
+		servicio = (ServicioInformacion) session.get("servicio");
+		id_servicio_informacion = servicio.getId_servicio_informacion();
 		funcionalidades = (List<Funcionalidad>) read(FSI,
 				id_servicio_informacion, -1);
 		return SUCCESS;
@@ -177,8 +179,8 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 			addFieldError("funcionalidad.descripcion", error.getProperties()
 					.getProperty("error.regex.description"));
 	}
-	
-	public void getTiempoFecha(){
+
+	public void getTiempoFecha() {
 		ReadXmlTime read = new ReadXmlTime();
 		fecha = read.getFechaTiempo();
 		estadosTiempo = read.getEstados_Tiempo();
