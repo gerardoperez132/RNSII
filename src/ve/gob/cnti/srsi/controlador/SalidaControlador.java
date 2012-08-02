@@ -76,6 +76,18 @@ public class SalidaControlador extends DAO implements Formulario,
 
 	@SuppressWarnings("unchecked")
 	@SkipValidation
+	public String prepararRegistroSalida() {
+		getTiempoFecha();
+		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		salidas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad, SALIDA);
+		tipoDatos = (List<TipoDato>) read(new TipoDato());
+		formatos = (ArrayList<Formato>) read(new Formato());
+		return SUCCESS;
+	}
+
+	@SuppressWarnings("unchecked")
+	@SkipValidation
 	public String prepararFormularioSimple() {
 		getTiempoFecha();
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
@@ -287,8 +299,8 @@ public class SalidaControlador extends DAO implements Formulario,
 			prepararFormularioSimple();
 		}
 	}
-	
-	public void getTiempoFecha(){
+
+	public void getTiempoFecha() {
 		ReadXmlTime read = new ReadXmlTime();
 		fecha = read.getFechaTiempo();
 		estadosTiempo = read.getEstados_Tiempo();

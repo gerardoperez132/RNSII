@@ -339,6 +339,12 @@
 			<result name="success">registro/salidas.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
+		
+		<action name="prepararRegistroSalida" method="prepararRegistroSalida"
+			class="ve.gob.cnti.srsi.controlador.SalidaControlador">
+			<result name="success">registro/formulario_salida.jsp</result>
+			<result name="error">error.jsp</result>
+		</action>
 
 		<action name="prepararSalidaSimple" method="prepararFormularioSimple"
 			class="ve.gob.cnti.srsi.controlador.SalidaControlador">

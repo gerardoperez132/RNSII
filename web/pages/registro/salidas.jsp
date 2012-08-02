@@ -126,26 +126,16 @@
 					<table>
 						<tr class="nohover">
 							<td>
-								<form action="prepararSalidaSimple" method="POST">
+								<form action="prepararRegistroSalida" method="POST">
 									<s:hidden name="id_servicio_informacion"></s:hidden>
 									<s:hidden name="id_funcionalidad"></s:hidden>
 									<input type="submit"
-										value="<s:text name="salida.simple.title"></s:text>" />
-								</form></td>
-							<td>
-								<form action="prepararSalidaCompleja" method="POST">
-									<s:hidden name="id_servicio_informacion"></s:hidden>
-									<s:hidden name="id_funcionalidad"></s:hidden>
-									<input type="submit"
-										value="<s:text name="salida.complejo.title"></s:text>">
+										value="<s:text name="salida.registro"></s:text>" />
 								</form></td>
 						</tr>
 					</table>
 					<!-- Tabla en árbol. -->
 					<table id="tree" class="results" style="width:750px;">
-						
-						
-						
 						<tbody>
 							<tr>
 								<th><s:text name="salida.nombre"></s:text>
