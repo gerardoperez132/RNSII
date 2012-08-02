@@ -176,9 +176,25 @@
 											</s:else>
 											</s:if>
 											<s:else>
+											<s:set name="action" value="%{'prepararModificarServicioInformacion'}"></s:set>
+											<s:if test="incompletos.size()==1">
+											<s:i18n name="ve/gob/cnti/srsi/i18n/errors">
+											<s:iterator value="incompletos">
+											<s:set name="error"><s:property/></s:set>
+											<s:set name="i18n_funcionalidades" value="%{getText('error.servicio.incomplete.funcionalidades')}"></s:set>
+											<s:set name="i18n_salidas" value="%{getText('error.servicio.incomplete.salidas')}"></s:set>
+											<s:if test="%{(#error == #i18n_salidas) || (#error == #i18n_funcionalidades)}">
+											<s:set name="action" value="%{'prepararFuncionalidades'}"></s:set>
+											</s:if>
+											</s:iterator>
+											</s:i18n>
+											</s:if>
+											<s:else>
+											<s:set name="action" value="%{'prepararModificarServicioInformacion'}"></s:set>
+											</s:else>
 											<table>
 											<tr>
-											<td><form action="prepararModificarServicioInformacion" method="POST">
+											<td><form action='<s:property value="#action" />' method="POST">
 													<s:hidden name="id_servicio_informacion" value="%{servicio.id_servicio_informacion}"></s:hidden>													
 													<input type="submit" value="<s:text name="continuar_registro" />"
 														style="font-size: 0.9em;" />
@@ -191,7 +207,7 @@
 											</s:iterator></ul></span>
 											</a></td>
 											</tr>
-											</table>												
+											</table>				
 											</s:else>
 										</td>
 									</tr>

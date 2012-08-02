@@ -116,9 +116,14 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 	@SkipValidation
 	public String prepararFuncionalidades() {
 		getTiempoFecha();
-		session = ActionContext.getContext().getSession();
-		servicio = (ServicioInformacion) session.get("servicio");
-		id_servicio_informacion = servicio.getId_servicio_informacion();
+		if (id_servicio_informacion == 0) {
+			session = ActionContext.getContext().getSession();
+			servicio = (ServicioInformacion) session.get("servicio");
+			id_servicio_informacion = servicio.getId_servicio_informacion();
+		} else {
+			servicio = (ServicioInformacion) read(new ServicioInformacion(),
+					id_servicio_informacion);
+		}
 		funcionalidades = (List<Funcionalidad>) read(FSI,
 				id_servicio_informacion, -1);
 		return SUCCESS;
