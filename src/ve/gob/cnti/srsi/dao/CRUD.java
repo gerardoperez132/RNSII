@@ -622,4 +622,28 @@ public interface CRUD {
 	 */
 	public boolean verifySuscriptionRequest(long service, long provider,
 			long client);
+
+	/**
+	 * Este método permite saber si un servicio de información está completo y
+	 * listo para ser publicado. Teniendo en cuenta que el servicio debe estar
+	 * en estado implementado, debe tener por lo menos una funcionalidad con por
+	 * lo menos una salida.
+	 * 
+	 * @param servicio
+	 *            Servicio de información a verificar.
+	 * @return <code>true</code> si está completo, <code>false</code> si no lo
+	 *         está.
+	 */
+	public boolean isComplete(ServicioInformacion servicio);
+
+	/**
+	 * Este métodoo permite saber si un servicio de información está completo y
+	 * listo para ser publicado, especificando mediante códigos de error en qué
+	 * parte de la lógica el servicio no está completo.
+	 * 
+	 * @param servicio
+	 *            Servicio de información a verificar.
+	 * @return El código de error.
+	 */
+	public List<String> getIncompleteFields(ServicioInformacion servicio);
 }

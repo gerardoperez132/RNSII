@@ -30,6 +30,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import ve.gob.cnti.srsi.dao.Constants.ClaseDato;
+import ve.gob.cnti.srsi.dao.Constants.ErrorServicio;
+import ve.gob.cnti.srsi.dao.Constants.Estados;
 import ve.gob.cnti.srsi.dao.Constants.Sentencias;
 import ve.gob.cnti.srsi.dao.Constants.Status;
 import ve.gob.cnti.srsi.dao.Constants.TipoEntradaSalida;
@@ -64,7 +66,7 @@ import com.opensymphony.xwork2.ActionSupport;
  */
 @SuppressWarnings("serial")
 public class DAO extends ActionSupport implements Constants, CRUD, Status,
-		ClaseDato, TipoEntradaSalida, Sentencias {
+		ClaseDato, TipoEntradaSalida, Sentencias, ErrorServicio, Estados {
 
 	public static Errors error = new Errors();
 	private static Session session;
@@ -603,6 +605,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		return complex;
 	}
 
+	@Override
 	@SuppressWarnings({ "unchecked" })
 	public boolean isComplete(ServicioInformacion servicio) {
 		List<UnionAreaServicioInformacion> unionareas;
@@ -618,7 +621,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 			System.out.println("FALLÓ EN UNIÓN ÁREAS");
 			return false;
 		}
-		if (servicio.getId_estado() == 0) {
+		if (servicio.getId_estado() == DESARROLLO) {
 			System.out.println("FALLÓ EN ESTADO");
 			return false;
 		}
@@ -651,9 +654,8 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 			System.out.println("FALLÓ EN CORREO");
 			return false;
 		}
-		
-		Object[] models = { new Funcionalidad(),
-				new ServicioInformacion() };
+
+		Object[] models = { new Funcionalidad(), new ServicioInformacion() };
 		List<Funcionalidad> funcionalidades = new ArrayList<Funcionalidad>();
 		funcionalidades = (List<Funcionalidad>) read(models,
 				servicio.getId_servicio_informacion(), -1);
@@ -661,13 +663,11 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 			System.out.println("FALLÓ EN FUNCIONALIDADES");
 			return false;
 		} else {
-			Iterator<Funcionalidad> fxIterado = funcionalidades
-					.iterator();
+			Iterator<Funcionalidad> fxIterado = funcionalidades.iterator();
 			Funcionalidad fx = new Funcionalidad();
 			while (fxIterado.hasNext()) {
 				fx = fxIterado.next();
-				Object[] models2 = { new EntradaSalida(),
-						new Funcionalidad() };
+				Object[] models2 = { new EntradaSalida(), new Funcionalidad() };
 				List<EntradaSalida> salidas_tmp = new ArrayList<EntradaSalida>();
 				salidas_tmp = (List<EntradaSalida>) read(models2,
 						fx.getId_funcionalidad(), SALIDA);
@@ -676,8 +676,96 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 					return false;
 				}
 			}
-		}	
+		}
 		return true;
+	}
+
+	@Override
+	@SuppressWarnings({ "unchecked" })
+	public List<String> getIncompleteFields(ServicioInformacion servicio) {
+		List<UnionAreaServicioInformacion> unionareas;
+		List<UnionArquitecturaServicioInformacion> unionarquitecturas;
+		List<String> incompletos = new ArrayList<String>();
+		if (servicio.getId_sector() == 0) {
+			System.out.println("FALLÓ EN SECTOR");
+			incompletos.add(error.getProperties().getProperty(
+					"error.servicio.incomplete.sector"));
+		}
+		unionareas = (List<UnionAreaServicioInformacion>) readUnion(
+				new UnionAreaServicioInformacion(), servicio,
+				servicio.getId_servicio_informacion());
+		if (unionareas.isEmpty()) {
+			System.out.println("FALLÓ EN UNIÓN ÁREAS");
+			incompletos.add(error.getProperties().getProperty(
+					"error.servicio.incomplete.area"));
+		}
+		System.out.println("EL OBJETO SERVICIO (ID ESTADO) => "
+				+ servicio.getId_estado());
+		if (servicio.getId_estado() == DESARROLLO) {
+			System.out.println("FALLÓ EN ESTADO");
+			incompletos.add(error.getProperties().getProperty(
+					"error.servicio.incomplete.estado"));
+		}
+		if (servicio.getId_seguridad() == 0) {
+			System.out.println("FALLÓ EN SEGURIDAD");
+			incompletos.add(error.getProperties().getProperty(
+					"error.servicio.incomplete.seguridad"));
+		}
+		unionarquitecturas = (List<UnionArquitecturaServicioInformacion>) readUnion(
+				new UnionArquitecturaServicioInformacion(), servicio,
+				servicio.getId_servicio_informacion());
+		if (unionarquitecturas.isEmpty()) {
+			System.out.println("FALLÓ EN UNIÓN ARQUITECTURAS");
+			incompletos.add(error.getProperties().getProperty(
+					"error.servicio.incomplete.arquitectura"));
+		}
+		if (servicio.getId_intercambio() == 0) {
+			System.out.println("FALLÓ EN INTERCAMBIO");
+			incompletos.add(error.getProperties().getProperty(
+					"error.servicio.incomplete.intercambio"));
+		}
+		Telefono phone = new Telefono();
+		phone = (Telefono) getPhone(servicio,
+				servicio.getId_servicio_informacion());
+		if (phone == null) {
+			System.out.println("FALLÓ EN TELÉFONO");
+			incompletos.add(error.getProperties().getProperty(
+					"error.servicio.incomplete.telefono"));
+		}
+		Correo email = new Correo();
+		email = (Correo) getEmail(servicio,
+				servicio.getId_servicio_informacion());
+		if (email == null) {
+			System.out.println("FALLÓ EN CORREO");
+			incompletos.add(error.getProperties().getProperty(
+					"error.servicio.incomplete.correo"));
+		}
+		Object[] models = { new Funcionalidad(), new ServicioInformacion() };
+		List<Funcionalidad> funcionalidades = new ArrayList<Funcionalidad>();
+		funcionalidades = (List<Funcionalidad>) read(models,
+				servicio.getId_servicio_informacion(), -1);
+		if (funcionalidades.isEmpty()) {
+			System.out.println("FALLÓ EN FUNCIONALIDADES");
+			incompletos.add(error.getProperties().getProperty(
+					"error.servicio.incomplete.funcionalidades"));
+		} else {
+			Iterator<Funcionalidad> fxIterado = funcionalidades.iterator();
+			Funcionalidad fx = new Funcionalidad();
+			while (fxIterado.hasNext()) {
+				fx = fxIterado.next();
+				Object[] models2 = { new EntradaSalida(), new Funcionalidad() };
+				List<EntradaSalida> salidas_tmp = new ArrayList<EntradaSalida>();
+				salidas_tmp = (List<EntradaSalida>) read(models2,
+						fx.getId_funcionalidad(), SALIDA);
+				if (salidas_tmp.isEmpty()) {
+					System.out.println("FALLÓ EN DATOS DE SALIDAS");
+					incompletos.add(error.getProperties().getProperty(
+							"error.servicio.incomplete.salidas"));
+					break;
+				}
+			}
+		}
+		return incompletos;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -821,14 +909,14 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 							+ " (select Servicios_informacion.id_estado where Servicios_informacion.id_servicio_informacion = visitas.id_servicio_informacion) = 2 "
 							+ " AND "
 							+ " (select Servicios_informacion.publicado where Servicios_informacion.id_servicio_informacion = visitas.id_servicio_informacion) = TRUE "
-							+ " AND EXISTS " 
-							+ "   (Select * from funcionalidades as f " 
-							+ "	   where Servicios_informacion.id_servicio_informacion = f.id_servicio_informacion " 
-							+ "	   AND f.status = 0 " 
-							+ "	   AND EXISTS " 
-							+ "         (Select * from entradas_salidas as io " 
-	                        + "			WHERE io.id_funcionalidad = f.id_funcionalidad " 
-	                        + "			AND io.status = 0 AND io.tipo = 1))" 
+							+ " AND EXISTS "
+							+ "   (Select * from funcionalidades as f "
+							+ "	   where Servicios_informacion.id_servicio_informacion = f.id_servicio_informacion "
+							+ "	   AND f.status = 0 "
+							+ "	   AND EXISTS "
+							+ "         (Select * from entradas_salidas as io "
+							+ "			WHERE io.id_funcionalidad = f.id_funcionalidad "
+							+ "			AND io.status = 0 AND io.tipo = 1))"
 							+ " GROUP BY visitas.id_servicio_informacion, Servicios_informacion.nombre "
 							+ " ORDER BY count(visitas.id_servicio_informacion) desc "
 							+ " limit " + LIMITE_VISITADOS);
@@ -868,27 +956,27 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 						+ "(select Servicios_informacion.id_estado where Servicios_informacion.id_sector = sectores.id_sector) = 2  "
 						+ "AND "
 						+ "(select Servicios_informacion.publicado where Servicios_informacion.id_sector = sectores.id_sector) = TRUE  "
-						+ "AND EXISTS (Select * from funcionalidades as f " 
-						+ "				where Servicios_informacion.id_servicio_informacion = f.id_servicio_informacion " 
-						+ "				AND f.status = 0 " 
-						+ "				AND EXISTS (Select * from entradas_salidas as io " 
-                        + "				WHERE io.id_funcionalidad = f.id_funcionalidad " 
-                        + "				AND io.status = 0 AND io.tipo = 1))" 
+						+ "AND EXISTS (Select * from funcionalidades as f "
+						+ "				where Servicios_informacion.id_servicio_informacion = f.id_servicio_informacion "
+						+ "				AND f.status = 0 "
+						+ "				AND EXISTS (Select * from entradas_salidas as io "
+						+ "				WHERE io.id_funcionalidad = f.id_funcionalidad "
+						+ "				AND io.status = 0 AND io.tipo = 1))"
 						+ "GROUP BY sectores.nombre, sectores.id_sector ORDER BY count(Servicios_informacion.id_sector) limit "
 						+ n;
 			} else {
 				consulta = "select sectores.id_sector, sectores.nombre, "
-						+ "( select count(servicios_informacion.id_sector) from servicios_informacion " 
-						+ "  where servicios_informacion.id_sector = sectores.id_sector " 
-						+ "  AND Servicios_informacion.status = 0 AND Servicios_informacion.id_estado = 2 " 
+						+ "( select count(servicios_informacion.id_sector) from servicios_informacion "
+						+ "  where servicios_informacion.id_sector = sectores.id_sector "
+						+ "  AND Servicios_informacion.status = 0 AND Servicios_informacion.id_estado = 2 "
 						+ "  AND Servicios_informacion.publicado =TRUE"
-						+ "  AND EXISTS (Select * from funcionalidades as f " 
-						+ "				where Servicios_informacion.id_servicio_informacion = f.id_servicio_informacion " 
-						+ "				AND f.status = 0 " 
-						+ "				AND EXISTS (Select * from entradas_salidas as io " 
-                        + "				WHERE io.id_funcionalidad = f.id_funcionalidad " 
-                        + "				AND io.status = 0 AND io.tipo = 1))"
-                        + ") as S "
+						+ "  AND EXISTS (Select * from funcionalidades as f "
+						+ "				where Servicios_informacion.id_servicio_informacion = f.id_servicio_informacion "
+						+ "				AND f.status = 0 "
+						+ "				AND EXISTS (Select * from entradas_salidas as io "
+						+ "				WHERE io.id_funcionalidad = f.id_funcionalidad "
+						+ "				AND io.status = 0 AND io.tipo = 1))"
+						+ ") as S "
 						+ "from  sectores,Servicios_informacion "
 						+ "GROUP BY sectores.nombre, sectores.id_sector ORDER BY s Desc";
 			}
@@ -919,20 +1007,24 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		String order = orderBy > 0 ? "DESC" : "ASC";
 		try {
 			startConnection();
-			list = (ArrayList<ServicioInformacion>) session.createQuery(
-					" FROM ServicioInformacion s WHERE s.status = " + ACTIVO
-							+ " AND " + " s.publicado = TRUE " + " AND "
-							+ " s.id_estado = 2 "							
-							+ " AND EXISTS " 
-							+ "   (FROM Funcionalidad as f " 
-							+ "	   where s.id_servicio_informacion = f.id_servicio_informacion " 
-							+ "	   AND f.status = 0 " 
-							+ "	   AND EXISTS " 
-							+ "         (FROM EntradaSalida as io " 
-	                        + "			WHERE io.id_funcionalidad = f.id_funcionalidad " 
-	                        + "			AND io.status = 0 AND io.tipo = 1))"
-							+ " ORDER BY s.id_servicio_informacion " + order)
-					.list();
+			list = (ArrayList<ServicioInformacion>) session
+					.createQuery(
+							" FROM ServicioInformacion s WHERE s.status = "
+									+ ACTIVO
+									+ " AND "
+									+ " s.publicado = TRUE "
+									+ " AND "
+									+ " s.id_estado = 2 "
+									+ " AND EXISTS "
+									+ "   (FROM Funcionalidad as f "
+									+ "	   where s.id_servicio_informacion = f.id_servicio_informacion "
+									+ "	   AND f.status = 0 "
+									+ "	   AND EXISTS "
+									+ "         (FROM EntradaSalida as io "
+									+ "			WHERE io.id_funcionalidad = f.id_funcionalidad "
+									+ "			AND io.status = 0 AND io.tipo = 1))"
+									+ " ORDER BY s.id_servicio_informacion "
+									+ order).list();
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;

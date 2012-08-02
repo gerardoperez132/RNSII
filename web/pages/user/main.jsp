@@ -176,11 +176,22 @@
 											</s:else>
 											</s:if>
 											<s:else>
-												<form action="prepararModificarServicioInformacion" method="POST">
+											<table>
+											<tr>
+											<td><form action="prepararModificarServicioInformacion" method="POST">
 													<s:hidden name="id_servicio_informacion" value="%{servicio.id_servicio_informacion}"></s:hidden>													
-													<input type="submit" value="Continuar registro"
+													<input type="submit" value="<s:text name="continuar_registro" />"
 														style="font-size: 0.9em;" />
 												</form>
+												</td>
+											<td><a href="#" class="tooltip" tabindex="-1">
+											<img src="res/img/ayuda.gif" alt="ayuda">
+											<span><ul><s:iterator value="incompletos">
+											<li><s:property/></li>
+											</s:iterator></ul></span>
+											</a></td>
+											</tr>
+											</table>												
 											</s:else>
 										</td>
 									</tr>

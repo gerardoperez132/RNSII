@@ -210,4 +210,28 @@ public interface Constants {
 		 */
 		public String prepararFormulario();
 	}
+
+	/**
+	 * Interfaz con los códigos de error.
+	 * 
+	 * @author Richard Ricciardelli
+	 * 
+	 */
+	public interface ErrorServicio {
+		public static final int SECTOR = 1;
+		public static final int AREA = 2;
+		public static final int ESTADO = 3;
+		public static final int SEGURIDAD = 4;
+		public static final int ARQUITECTURAS = 5;
+		public static final int INTERCAMBIO = 6;
+		public static final int TELEFONO = 7;
+		public static final int CORREO = 8;
+		public static final int FUNCIONALIDADES = 9;
+		public static final int SALIDAS = 10;
+	}
+
+	public interface Estados {
+		public static final int DESARROLLO = 1;
+		public static final int IMPLEMENTADO = 2;
+	}
 }

@@ -40,6 +40,7 @@ import ve.gob.cnti.srsi.modelo.Usuario;
 import ve.gob.cnti.srsi.util.Estados_Tiempo;
 import ve.gob.cnti.srsi.util.MD5Hashing;
 import ve.gob.cnti.srsi.util.ReadXmlTime;
+import ve.gob.cnti.srsi.util.ServiciosPublicables;
 
 import com.opensymphony.xwork2.ActionContext;
 
@@ -158,15 +159,12 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 			while (siIterado.hasNext()) {
 				publicable = true;
 				servicio = siIterado.next();
-				if (servicio.getId_estado() == 1) {
-					ListaServicios
-							.add(new ServiciosPublicables(false, servicio));
-				} else if (!isComplete(servicio)) {
-					ListaServicios
-							.add(new ServiciosPublicables(false, servicio));
+				if (!isComplete(servicio)) {
+					ListaServicios.add(new ServiciosPublicables(false,
+							servicio, getIncompleteFields(servicio)));
 				} else {
 					ListaServicios.add(new ServiciosPublicables(publicable,
-							servicio));
+							servicio, null));
 				}
 			}
 		}
@@ -483,31 +481,5 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
-}
 
-class ServiciosPublicables {
-	boolean publicable;
-	ServicioInformacion servicio = new ServicioInformacion();
-
-	public ServiciosPublicables(boolean publicable, ServicioInformacion servicio) {
-		super();
-		this.publicable = publicable;
-		this.servicio = servicio;
-	}
-
-	public boolean isPublicable() {
-		return publicable;
-	}
-
-	public void setPublicable(boolean publicable) {
-		this.publicable = publicable;
-	}
-
-	public ServicioInformacion getServicio() {
-		return servicio;
-	}
-
-	public void setServicio(ServicioInformacion servicio) {
-		this.servicio = servicio;
-	}
 }
