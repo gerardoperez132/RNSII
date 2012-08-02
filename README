@@ -1,2 +1,320 @@
-README
-======
+.
+|-- build
+|   `-- classes
+|       |-- hibernate.cfg.xml
+|       |-- struts.properties
+|       |-- struts.xml
+|       `-- ve
+|           `-- gob
+|               `-- cnti
+|                   `-- srsi
+|                       |-- controlador
+|                       |   |-- ConsultasControlador$1.class
+|                       |   |-- ConsultasControlador.class
+|                       |   |-- EntradaControlador.class
+|                       |   |-- FuncionalidadControlador.class
+|                       |   |-- LoginControlador.class
+|                       |   |-- SalidaControlador.class
+|                       |   |-- ServicioInformacionControlador.class
+|                       |   |-- ServiciosPublicables.class
+|                       |   |-- SuscripcionControlador.class
+|                       |   `-- UsuarioControlador.class
+|                       |-- dao
+|                       |   |-- Constants$ClaseDato.class
+|                       |   |-- Constants.class
+|                       |   |-- Constants$Formulario.class
+|                       |   |-- Constants$Modelos.class
+|                       |   |-- Constants$Order.class
+|                       |   |-- Constants$Sentencias.class
+|                       |   |-- Constants$Status.class
+|                       |   |-- Constants$Tabs.class
+|                       |   |-- Constants$TipoEntradaSalida.class
+|                       |   |-- CRUD.class
+|                       |   |-- DAO.class
+|                       |   `-- HibernateUtils.class
+|                       |-- i18n
+|                       |   |-- entradas.properties
+|                       |   |-- Errors.class
+|                       |   |-- errors.properties
+|                       |   |-- formulario_entrada.properties
+|                       |   |-- formulario_funcionalidad.properties
+|                       |   |-- formulario_salida.properties
+|                       |   |-- I18.properties
+|                       |   |-- layout.properties
+|                       |   |-- salidas.properties
+|                       |   `-- userlogin.properties
+|                       |-- mail
+|                       |   |-- EnviarCorreo.class
+|                       |   |-- Mail.class
+|                       |   `-- mail.properties
+|                       |-- modelo
+|                       |   |-- Area.class
+|                       |   |-- Arquitectura.class
+|                       |   |-- AspectoLegal.class
+|                       |   |-- Correo.class
+|                       |   |-- Ente.class
+|                       |   |-- EntradaSalida.class
+|                       |   |-- Estado.class
+|                       |   |-- Formato.class
+|                       |   |-- Funcionalidad.class
+|                       |   |-- Intercambio.class
+|                       |   |-- RecuperarClave.class
+|                       |   |-- Rol.class
+|                       |   |-- Sector.class
+|                       |   |-- Seguridad.class
+|                       |   |-- ServicioInformacion.class
+|                       |   |-- SolicitudSuscripcion.class
+|                       |   |-- Suscrito.class
+|                       |   |-- Telefono.class
+|                       |   |-- TipoDato.class
+|                       |   |-- UnionAreaServicioInformacion.class
+|                       |   |-- UnionArquitecturaServicioInformacion.class
+|                       |   |-- UnionSectorEnte.class
+|                       |   |-- UnionUsuarioRol.class
+|                       |   |-- Url.class
+|                       |   |-- Usuario.class
+|                       |   `-- Visita.class
+|                       `-- util
+|                           |-- Estados_Tiempo.class
+|                           |-- ListaSImasVisitados.class
+|                           |-- MD5Hashing.class
+|                           |-- ReadXmlTime.class
+|                           |-- SectoresMasPublicados.class
+|                           |-- Solicitud_Respuesta.class
+|                           `-- Solicitud_Suscripcion.class
+|-- COPYING
+|-- LICENSE
+|-- README
+|-- src
+|   |-- hibernate.cfg.xml
+|   |-- struts.properties
+|   |-- struts.xml
+|   `-- ve
+|       `-- gob
+|           `-- cnti
+|               `-- srsi
+|                   |-- controlador
+|                   |   |-- ConsultasControlador.java
+|                   |   |-- EntradaControlador.java
+|                   |   |-- FuncionalidadControlador.java
+|                   |   |-- LoginControlador.java
+|                   |   |-- SalidaControlador.java
+|                   |   |-- ServicioInformacionControlador.java
+|                   |   |-- SuscripcionControlador.java
+|                   |   `-- UsuarioControlador.java
+|                   |-- dao
+|                   |   |-- Constants.java
+|                   |   |-- CRUD.java
+|                   |   |-- DAO.java
+|                   |   `-- HibernateUtils.java
+|                   |-- i18n
+|                   |   |-- entradas.properties
+|                   |   |-- Errors.java
+|                   |   |-- errors.properties
+|                   |   |-- formulario_entrada.properties
+|                   |   |-- formulario_funcionalidad.properties
+|                   |   |-- formulario_salida.properties
+|                   |   |-- I18.properties
+|                   |   |-- layout.properties
+|                   |   |-- salidas.properties
+|                   |   `-- userlogin.properties
+|                   |-- mail
+|                   |   |-- EnviarCorreo.java
+|                   |   |-- Mail.java
+|                   |   `-- mail.properties
+|                   |-- modelo
+|                   |   |-- Area.java
+|                   |   |-- Arquitectura.java
+|                   |   |-- AspectoLegal.java
+|                   |   |-- Correo.java
+|                   |   |-- Ente.java
+|                   |   |-- EntradaSalida.java
+|                   |   |-- Estado.java
+|                   |   |-- Formato.java
+|                   |   |-- Funcionalidad.java
+|                   |   |-- Intercambio.java
+|                   |   |-- RecuperarClave.java
+|                   |   |-- Rol.java
+|                   |   |-- Sector.java
+|                   |   |-- Seguridad.java
+|                   |   |-- ServicioInformacion.java
+|                   |   |-- SolicitudSuscripcion.java
+|                   |   |-- Suscrito.java
+|                   |   |-- Telefono.java
+|                   |   |-- TipoDato.java
+|                   |   |-- UnionAreaServicioInformacion.java
+|                   |   |-- UnionArquitecturaServicioInformacion.java
+|                   |   |-- UnionSectorEnte.java
+|                   |   |-- UnionUsuarioRol.java
+|                   |   |-- Url.java
+|                   |   |-- Usuario.java
+|                   |   `-- Visita.java
+|                   `-- util
+|                       |-- Estados_Tiempo.java
+|                       |-- ListaSImasVisitados.java
+|                       |-- MD5Hashing.java
+|                       |-- ReadXmlTime.java
+|                       |-- SectoresMasPublicados.java
+|                       |-- Solicitud_Respuesta.java
+|                       `-- Solicitud_Suscripcion.java
+`-- web
+    |-- 404.jsp
+    |-- META-INF
+    |   `-- MANIFEST.MF
+    |-- pages
+    |   |-- ajax
+    |   |   |-- bool.jsp
+    |   |   `-- list_formats.jsp
+    |   |-- error404.jsp
+    |   |-- error.jsp
+    |   |-- index.jsp
+    |   |-- index_old.jsp
+    |   |-- inicio.jsp
+    |   |-- layout
+    |   |   |-- cache.jsp
+    |   |   |-- footer_ge.jsp
+    |   |   |-- footer.jsp
+    |   |   |-- header_ge_error.jsp
+    |   |   |-- header_ge.jsp
+    |   |   |-- header.jsp
+    |   |   |-- sidebar.jsp
+    |   |   `-- sidebar_user_final.jsp
+    |   |-- plantilla.jsp
+    |   |-- registro
+    |   |   |-- entradas.jsp
+    |   |   |-- formulario_entrada.jsp
+    |   |   |-- formulario_funcionalidad.jsp
+    |   |   |-- formulario_salida.jsp
+    |   |   |-- formulario_usuario.jsp
+    |   |   |-- funcionalidades.jsp
+    |   |   |-- registro_servicio_informacion.jsp
+    |   |   |-- salidas.jsp
+    |   |   `-- suscripcion.jsp
+    |   |-- res
+    |   |   |-- css
+    |   |   |   |-- jquery.alerts.css
+    |   |   |   |-- jquery.treeTable.css
+    |   |   |   |-- menu_vertical.css
+    |   |   |   |-- style2.css
+    |   |   |   |-- styles.css
+    |   |   |   |-- table2.css
+    |   |   |   |-- table.css
+    |   |   |   |-- table_tree.css
+    |   |   |   `-- tabs.css
+    |   |   |-- images
+    |   |   |   |-- arrow_sub1.gif
+    |   |   |   |-- bgbar.png
+    |   |   |   |-- flecha_clima.png
+    |   |   |   |-- flecha_derecha.png
+    |   |   |   |-- fnd_destacados.png
+    |   |   |   |-- ImgHeader1.png
+    |   |   |   |-- logo_derecha.png
+    |   |   |   |-- logoIzquierda.png
+    |   |   |   |-- logo_web_interno.png
+    |   |   |   |-- menu_interno_es.png
+    |   |   |   |-- pie1.png
+    |   |   |   |-- pie2.png
+    |   |   |   |-- tiempo_11.png
+    |   |   |   |-- tiempo_13.png
+    |   |   |   |-- tiempo_15.png
+    |   |   |   |-- tiempo_17.png
+    |   |   |   |-- tiempo_18.png
+    |   |   |   |-- tiempo_19.png
+    |   |   |   |-- tiempo_83.png
+    |   |   |   |-- tileh1.png
+    |   |   |   `-- ui-menu-content.png
+    |   |   |-- img
+    |   |   |   |-- ayuda.gif
+    |   |   |   |-- circuito1.png
+    |   |   |   |-- fondo_menu.png
+    |   |   |   |-- footer.png
+    |   |   |   |-- header.png
+    |   |   |   |-- help.gif
+    |   |   |   |-- important.gif
+    |   |   |   |-- info.gif
+    |   |   |   |-- Info.png
+    |   |   |   |-- menu8.png
+    |   |   |   |-- menu_selected.png
+    |   |   |   |-- menu_top_bg.gif
+    |   |   |   |-- mio.png
+    |   |   |   |-- selected.png
+    |   |   |   |-- table
+    |   |   |   |   |-- bbar.gif
+    |   |   |   |   |-- captop.jpg
+    |   |   |   |   |-- tbar.gif
+    |   |   |   |   `-- tbov.gif
+    |   |   |   |-- title.gif
+    |   |   |   `-- treeTable
+    |   |   |       |-- folder.png
+    |   |   |       |-- page_white_text.png
+    |   |   |       |-- rar.png
+    |   |   |       |-- toggle-collapse-dark.png
+    |   |   |       |-- toggle-collapse-light.png
+    |   |   |       |-- toggle-expand-dark.png
+    |   |   |       `-- toggle-expand-light.png
+    |   |   `-- js
+    |   |       |-- actions.js
+    |   |       |-- funciones_ge.js
+    |   |       |-- jquery-1.7.1.js
+    |   |       |-- jquery.alerts.js
+    |   |       |-- jquery.treeTable.js
+    |   |       |-- jquery.validate.js
+    |   |       |-- messages_es.js
+    |   |       |-- registro
+    |   |       |   |-- formulario_entrada.js
+    |   |       |   |-- formulario_funcionalidad.js
+    |   |       |   |-- formulario_salida.js
+    |   |       |   `-- registro_servicio_informacion.js
+    |   |       |-- suscripcion.js
+    |   |       |-- tabs.js
+    |   |       |-- usuarios.js
+    |   |       |-- validacion_datos.js
+    |   |       `-- validate.js
+    |   `-- user
+    |       |-- captcha.jsp
+    |       |-- examinarServicio.jsp
+    |       |-- login.jsp
+    |       `-- main.jsp
+    `-- WEB-INF
+        |-- classes
+        |   `-- template
+        |       `-- simple
+        |           |-- actionerror.ftl
+        |           |-- actionmessage.ftl
+        |           |-- fielderror.ftl
+        |           `-- hidden.ftl
+        |-- lib
+        |   |-- activation.jar
+        |   |-- antlr-2.7.6.jar
+        |   |-- commons-collections-3.1.jar
+        |   |-- commons-fileupload-1.2.1.jar
+        |   |-- commons-io-1.3.2.jar
+        |   |-- commons-lang-2.3.jar
+        |   |-- commons-logging-1.1.jar
+        |   |-- dom4j-1.6.1.jar
+        |   |-- ejb3-persistence.jar
+        |   |-- freemarker-2.3.13.jar
+        |   |-- hibernate3.jar
+        |   |-- hibernate-annotations.jar
+        |   |-- hibernate-commons-annotations.jar
+        |   |-- hibernate-validator.jar
+        |   |-- javassist-3.9.0.GA.jar
+        |   |-- jdom-2.0.2.jar
+        |   |-- jta-1.1.jar
+        |   |-- junit-3.8.1.jar
+        |   |-- log4j-1.2.15.jar
+        |   |-- mail.jar
+        |   |-- ognl-2.6.11.jar
+        |   |-- postgresql-8.3-603.jdbc3.jar
+        |   |-- servlet-api-2.5-6.1.4.jar
+        |   |-- slf4j-api-1.5.8.jar
+        |   |-- slf4j-log4j12-1.5.8.jar
+        |   |-- struts2-convention-plugin-2.1.6.jar
+        |   |-- struts2-core-2.1.6.jar
+        |   |-- struts2-fullhibernatecore-plugin-1.4-GA.jar
+        |   |-- struts2-jquery-plugin-3.1.1.jar
+        |   |-- xwork-2.1.2.jar
+        |   `-- xwork-core-2.2.1.jar
+        `-- web.xml
+
+43 directories, 274 files
