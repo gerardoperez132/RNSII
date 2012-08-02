@@ -273,6 +273,12 @@
 			<result name="success">registro/entradas.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
+		
+		<action name="prepararRegistroEntrada" method="prepararRegistroEntrada"
+			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
+			<result name="success">registro/formulario_entrada.jsp</result>
+			<result name="error">error.jsp</result>
+		</action>
 
 		<action name="prepararEntradaSimple" method="prepararFormularioSimple"
 			class="ve.gob.cnti.srsi.controlador.EntradaControlador">

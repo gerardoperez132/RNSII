@@ -80,6 +80,20 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 
 	@SuppressWarnings("unchecked")
 	@SkipValidation
+	public String prepararRegistroEntrada() {
+		getTiempoFecha();
+		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,
+				ENTRADA);
+		tipoDatos = (List<TipoDato>) read(new TipoDato());
+		formatos = (ArrayList<Formato>) read(new Formato());
+		complejo = false;
+		return SUCCESS;
+	}
+
+	@SuppressWarnings("unchecked")
+	@SkipValidation
 	public String prepararFormularioSimple() {
 		getTiempoFecha();
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
@@ -321,8 +335,8 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 		formatos = (List<Formato>) read(models, id_tipo_dato, -1);
 		return SUCCESS;
 	}
-	
-	public void getTiempoFecha(){
+
+	public void getTiempoFecha() {
 		ReadXmlTime read = new ReadXmlTime();
 		fecha = read.getFechaTiempo();
 		estadosTiempo = read.getEstados_Tiempo();
