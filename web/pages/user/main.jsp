@@ -14,12 +14,14 @@
 <link rel="stylesheet" type="text/css" href="res/css/jquery.treeTable.css">
 <link rel="stylesheet" type="text/css" href="res/css/table2.css">
 <link rel="stylesheet" type="text/css" href="res/css/table_tree.css">
+<link rel="stylesheet" type="text/css" href="res/js/plugins/sexy-tooltips/blue.css" media="all"/>
 <!-- JS (required) -->
 <script type="text/javascript" src="/SRSI/pages/res/js/jquery-1.7.1.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/SRSI/pages/res/js/funciones_ge.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/jquery.treeTable.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/jquery.alerts.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/actions.js" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/plugins/sexy-tooltips.v1.1.jquery.js" charset="UTF-8"></script>
 <title><s:text name="inicio" /></title>
 </head>
 <body>	
@@ -157,64 +159,65 @@
 												<input type="submit" value="<s:text name="eliminar" />"
 													style="font-size: 0.9em;"  onclick="eliminar_SI(<s:property value="#i"/>);" />
 											</form>
-										</td>
-										<td style="margin: 0; padding: 0;">
-											<s:if test="publicable==true">
-											<s:if test="servicio.publicado==false">
-												<form action="publicarServicioInformacion" method="POST">
-													<s:hidden name="id_servicio_informacion" value="%{servicio.id_servicio_informacion}"></s:hidden>													
-													<input type="submit" value="<s:text name="publicar" />"
-														style="font-size: 0.9em;"/>
-												</form>
-											</s:if>
-											<s:else>
-												<form action="despublicarServicioInformacion" method="POST">
-													<s:hidden name="id_servicio_informacion" value="%{servicio.id_servicio_informacion}"></s:hidden>													
-													<input type="submit" value="<s:text name="despublicar" />"
-														style="font-size: 0.9em;" />
-												</form>
-											</s:else>
-											</s:if>
-											<s:else>
+										</td>										
+										<s:if test="publicable==true">
+											<td style="margin: 0; padding: 0;">
+												<s:if test="servicio.publicado==false">
+													<form action="publicarServicioInformacion" method="POST">
+														<s:hidden name="id_servicio_informacion" value="%{servicio.id_servicio_informacion}"></s:hidden>													
+														<input type="submit" value="<s:text name="publicar" />"
+															style="font-size: 0.9em;"/>
+													</form>
+												</s:if>
+												<s:else>
+													<form action="despublicarServicioInformacion" method="POST">
+														<s:hidden name="id_servicio_informacion" value="%{servicio.id_servicio_informacion}"></s:hidden>													
+														<input type="submit" value="<s:text name="despublicar" />"
+															style="font-size: 0.9em;" />
+													</form>
+												</s:else>
+											</td>
+										</s:if>											
+										<s:else>										
 											<s:set name="action" value="%{'prepararModificarServicioInformacion'}"></s:set>
 											<s:if test="incompletos.size()==1">
 											<s:i18n name="ve/gob/cnti/srsi/i18n/errors">
 											<s:iterator value="incompletos">
-											<s:set name="error"><s:property/></s:set>
-											<s:set name="i18n_funcionalidades" value="%{getText('error.servicio.incomplete.funcionalidades')}"></s:set>
-											<s:set name="i18n_salidas" value="%{getText('error.servicio.incomplete.salidas')}"></s:set>
-											<s:if test="%{(#error == #i18n_salidas) || (#error == #i18n_funcionalidades)}">
-											<s:set name="action" value="%{'prepararFuncionalidades'}"></s:set>
-											</s:if>
+												<s:set name="error"><s:property/></s:set>
+												<s:set name="i18n_funcionalidades" value="%{getText('error.servicio.incomplete.funcionalidades')}"></s:set>
+												<s:set name="i18n_salidas" value="%{getText('error.servicio.incomplete.salidas')}"></s:set>
+												<s:if test="%{(#error == #i18n_salidas) || (#error == #i18n_funcionalidades)}">
+													<s:set name="action" value="%{'prepararFuncionalidades'}"></s:set>
+												</s:if>
 											</s:iterator>
 											</s:i18n>
 											</s:if>
 											<s:else>
-											<s:set name="action" value="%{'prepararModificarServicioInformacion'}"></s:set>
-											</s:else>
-											<table>
-											<tr>
-											<td><form action='<s:property value="#action" />' method="POST">
+												<s:set name="action" value="%{'prepararModificarServicioInformacion'}"></s:set>
+											</s:else>											
+											<td style="margin: 0; padding: 0;">
+												<form action='<s:property value="#action" />' method="POST">
 													<s:hidden name="id_servicio_informacion" value="%{servicio.id_servicio_informacion}"></s:hidden>													
 													<input type="submit" value="<s:text name="continuar_registro" />"
 														style="font-size: 0.9em;" />
 												</form>
-												</td>
-											<td><a href="#" class="tooltip" tabindex="-1">
-											<img src="res/img/ayuda.gif" alt="ayuda">
-											<span><ul><s:iterator value="incompletos">
-											<li><s:property/></li>
-											</s:iterator></ul></span>
-											</a></td>
-											</tr>
-											</table>				
-											</s:else>
-										</td>
+											</td>
+											<td style="margin: 0; padding: 0;">
+											<img  src="res/img/important.png" id="h<s:property value='#result_datos.index'/>" alt="ayuda" title="hoal asd asd as d  asd asd asd asd asd" 
+												onmouseover="tip(this);" name="h<s:property value='#result_datos.index'/>" height="25"  width="30"/>
+												<div class="h<s:property value='#result_datos.index'/>" style="visibility: hidden;display: none;" >												
+													<s:iterator value="incompletos">
+													<p><s:property/></p>
+													</s:iterator>												
+												</div>			
+											</td>																							
+									</s:else>										
 									</tr>
 								</table>
 							</td>
 						</tr>
 					</s:iterator>
+					<div class="n" style="visibility: hidden;display: none;" ><s:property value="ListaServicios.size()"/></div>
 				</s:if>
 				<s:else>
 					<tr>

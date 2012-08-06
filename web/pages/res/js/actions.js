@@ -13,8 +13,24 @@ $(document).ready(function(){
 				jAlert('Acción cancelada', 'Confirmación');
 			}		    
 		});
-	});		
+	});	
+	var n = $('div.n').html();
+	for(var i=0;i<=n;i++){
+		$("#h"+i).tooltip (""+$('div.h'+i).html(), {
+		      width: 300,
+		      style: 'alert',		      
+		      hook: 1
+	    });
+	}
 });
+
+function tip(elem){	
+	$("#"+elem.name).tooltip (""+$('div.'+elem.name).html(), {
+	      width: 300,
+	      style: 'alert',		      
+	      hook: 1
+    });
+}
 
 function eliminar_SI(i){
 	var action = 'id_'+i;	
