@@ -10,16 +10,17 @@
 <!-- CSS (required) -->
 <link rel="stylesheet" type="text/css" href="/SRSI/pages/res/css/style2.css">
 <link rel="stylesheet" type="text/css" href="res/css/menu_vertical.css">
-<link rel="stylesheet" type="text/css" href="res/css/jquery.alerts.css">
 <link rel="stylesheet" type="text/css" href="res/css/jquery.treeTable.css">
 <link rel="stylesheet" type="text/css" href="res/css/table2.css">
 <link rel="stylesheet" type="text/css" href="res/css/table_tree.css">
+<link rel="stylesheet" type="text/css" href="res/js/plugins/sexy-alert-box-1.2.2/sexyalertbox.css" media="all">
 <!-- JS (required) -->
 <script type="text/javascript" src="/SRSI/pages/res/js/jquery-1.7.1.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/SRSI/pages/res/js/funciones_ge.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/jquery.treeTable.js" charset="UTF-8"></script>
-<script type="text/javascript" src="res/js/jquery.alerts.js" charset="UTF-8"></script>
-<script type="text/javascript" src="res/js/actions.js" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/registro/funcionalidades.js" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/plugins/sexy-alert-box-1.2.2/jquery.easing.1.3.js" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/plugins/sexy-alert-box-1.2.2/sexyalertbox.v1.2.jquery.js" charset="UTF-8"></script>
 <title><s:text name="inicio" /></title>
 </head>
 <body>	
@@ -108,8 +109,9 @@
 						<input type="submit" value="<s:text name="funcionalidad.add"/>" />
 					</form>
 					</td><td>						
-						<form action="home" method="POST">						
-							<input type="submit" value="<s:text name="terminar"/>" />
+						<form action="home" method="POST" onsubmit="return false;" id="salir">						
+							<input type="submit" value="<s:text name="terminar"/>" 
+							onclick="salir('<s:property value="servicio.nombre" />');"/>
 						</form>						
 					</td></tr>
 					</table>					
@@ -142,12 +144,13 @@
 														</form>
 													</td>
 													<td style="margin: 0; padding: 0;">
-														<form action="eliminarFuncionalidad" method="POST">
+														<form action="eliminarFuncionalidad" method="POST" onsubmit="return false;"
+														      id="id_<s:property value="#result_Status.index" />">
 															<s:hidden name="id_funcionalidad"
 																value="%{id_funcionalidad}"></s:hidden>
 															<s:hidden name="id_servicio_informacion"></s:hidden>
-															<input type="submit" value="<s:text name="eliminar" />"
-																style="font-size: 0.9em;" />
+															<input type="submit" value="<s:text name="eliminar" />" style="font-size: 0.9em;" 
+																onclick="eliminar_Fun(<s:property value="#result_Status.index"/>,'<s:property value="nombre" />');"/>
 														</form>
 													</td>
 												</tr>
@@ -172,8 +175,7 @@
 			</div>
 		<div style="clear: both"></div>
 	<div class="vacio"></div>
-	<%@include file="../layout/footer_ge.jsp"%>
-		
+	<%@include file="../layout/footer_ge.jsp"%>		
 	</body>
 </s:i18n>
 </html>
