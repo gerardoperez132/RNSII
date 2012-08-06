@@ -14,7 +14,7 @@
 <link rel="stylesheet" type="text/css" href="res/css/jquery.treeTable.css">
 <link rel="stylesheet" type="text/css" href="res/css/table2.css">
 <link rel="stylesheet" type="text/css" href="res/css/table_tree.css">
-<link rel="stylesheet" type="text/css" href="res/js/plugins/sexy-tooltips/blue.css" media="all"/>
+<link rel="stylesheet" type="text/css" href="res/js/plugins/sexy-tooltips/blue.css" media="all">
 <!-- JS (required) -->
 <script type="text/javascript" src="/SRSI/pages/res/js/jquery-1.7.1.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/SRSI/pages/res/js/funciones_ge.js" charset="UTF-8"></script>
@@ -216,8 +216,7 @@
 								</table>
 							</td>
 						</tr>
-					</s:iterator>
-					<div class="n" style="visibility: hidden;display: none;" ><s:property value="ListaServicios.size()"/></div>
+					</s:iterator>					
 				</s:if>
 				<s:else>
 					<tr>
@@ -226,7 +225,8 @@
 				</s:else>
 			</tbody>
 		</table>
-		</div>	
+		</div>
+		<div class="n" style="visibility: hidden;display: none;"><s:property value="ListaServicios.size()"/></div>	
 	</div>	
 	<div style="clear: both"></div>
 	<div class="vacio"></div>
