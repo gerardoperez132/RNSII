@@ -270,7 +270,7 @@
 													</td>
 													<td><s:date name="fecha_creado" format="d'/'MM'/'yyyy" />
 													</td>
-													<td><s:text name="funcion" />
+													<td><s:text name="funcionalidad" />
 													</td>
 												</tr>
 												<s:set name="id_funcion" value="id_funcionalidad" />

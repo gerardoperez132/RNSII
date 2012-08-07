@@ -309,7 +309,7 @@
 											<td><s:property value="nombre" /></td>
 											<td><s:property value="descripcion" /></td>
 											<td><s:date name="fecha_creado" format="d'/'MM'/'yyyy" /></td>
-											<td><s:text name="funcion" /></td>
+											<td><s:text name="funcionalidad" /></td>
 										</tr>
 										<s:set name="id_funcion" value="id_funcionalidad" />
 										<s:if test="ios.size() > 0">
