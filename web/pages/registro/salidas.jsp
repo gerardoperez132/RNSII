@@ -10,17 +10,18 @@
 <!-- CSS (required) -->
 <link rel="stylesheet" type="text/css" href="/SRSI/pages/res/css/style2.css">
 <link rel="stylesheet" type="text/css" href="res/css/menu_vertical.css">
-<link rel="stylesheet" type="text/css" href="res/css/jquery.alerts.css">
 <link rel="stylesheet" type="text/css" href="res/css/jquery.treeTable.css">
 <link rel="stylesheet" type="text/css" href="res/css/table2.css">
 <link rel="stylesheet" type="text/css" href="res/css/table_tree.css">
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
+<link rel="stylesheet" type="text/css" href="res/js/plugins/sexy-alert-box-1.2.2/sexyalertbox.css" media="all">
 <!-- JS (required) -->
 <script type="text/javascript" src="/SRSI/pages/res/js/jquery-1.7.1.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/SRSI/pages/res/js/funciones_ge.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/jquery.treeTable.js" charset="UTF-8"></script>
-<script type="text/javascript" src="res/js/jquery.alerts.js" charset="UTF-8"></script>
-<script type="text/javascript" src="res/js/registro/formulario_funcionalidad.js" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/registro/salidas.js" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/plugins/sexy-alert-box-1.2.2/jquery.easing.1.3.js" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/plugins/sexy-alert-box-1.2.2/sexyalertbox.v1.2.jquery.js" charset="UTF-8"></script>
 <title><s:text name="salida.salidas"></s:text></title>
 	</head>
 <body>	
@@ -148,8 +149,7 @@
 								</th>
 							</tr>
 						<s:if test="salidas.size > 0">
-						<!-- Validación de lista vacía. -->
-							
+						<!-- Validación de lista vacía. -->							
 								<!-- Iterador con todas las salidas cargadas. -->
 								<s:iterator value="salidas" status="result_salidas">
 									<!-- Condición que asegura que sólo se impriman datos sin padres. -->
@@ -163,9 +163,11 @@
 											<!-- Impresión del tipo dato. -->
 											<td>
 												<!-- Creación de una variable con el id_entrada_salida para identificar a los datos complejos. -->
-												<s:set name="id" value="id_entrada_salida" /> <!-- Creación de una variable con el id_tipo_de_dato. -->
-												<s:set name="id_d" value="id_tipo_dato" /> <s:iterator
-													value="tipoDatos">
+												<s:set name="id" value="id_entrada_salida" /> 
+												<!-- Creación de una variable con el id_tipo_de_dato. -->
+												<s:set name="id_d" value="id_tipo_dato" />
+												<s:set name="salida.nombre" value="nombre" />  
+												<s:iterator	value="tipoDatos">
 													<!-- Impresión del tipo de dato de acuerdo a su id. -->
 													<s:if test="%{id_tipo_dato == #id_d}">
 														<s:property value="nombre" />
@@ -203,14 +205,15 @@
 																				style="font-size: 1em;" />
 																		</form></td>
 																	<td style="margin: 0; padding: 0;">
-																		<form action="eliminarSalidaCompleja" method="POST">
+																		<form action="eliminarSalidaCompleja" method="POST"
+																		id="id_elim_<s:property value="id_entrada_salida"/>" onsubmit="return false;">
 																			<s:hidden name="id_servicio_informacion"></s:hidden>
 																			<s:hidden name="id_funcionalidad"></s:hidden>
 																			<s:hidden name="id_entrada_salida" value="%{#id}"></s:hidden>
 																			<s:hidden name="modificar" value="%{true}"></s:hidden>
-																			<input type="submit"
-																				value="<s:text name="salida.eliminar"></s:text>"
-																				style="font-size: 1em;" />
+																			<input type="submit" value="<s:text name="salida.eliminar"/>"
+																			style="font-size: 1em;" onclick="eliminar_Salida(<s:property value="id_entrada_salida"/>
+																			,'<s:property value="salida.nombre" />');"/>
 																		</form>
 															</table>
 														</s:if>
@@ -229,13 +232,14 @@
 																				style="font-size: 1em;" />
 																		</form></td>
 																	<td style="margin: 0; padding: 0;">
-																		<form action="eliminarSalidaSimple" method="POST">
+																		<form action="eliminarSalidaSimple" method="POST"
+																		id="id_elim_<s:property value="id_entrada_salida"/>" onsubmit="return false;">
 																			<s:hidden name="id_servicio_informacion"></s:hidden>
 																			<s:hidden name="id_funcionalidad"></s:hidden>
 																			<s:hidden name="id_entrada_salida"></s:hidden>
-																			<input type="submit"
-																				value="<s:text name="salida.eliminar"></s:text>"
-																				style="font-size: 1em;" />
+																			<input type="submit" value="<s:text name="salida.eliminar"/>"
+																			style="font-size: 1em;" onclick="eliminar_Salida(<s:property value="id_entrada_salida"/>
+																			,'<s:property value="salida.nombre" />');"/>
 																		</form></td>
 																</tr>
 															</table>
@@ -279,13 +283,14 @@
 																			style="font-size: 1em;" />
 																	</form></td>
 																<td style="margin: 0; padding: 0;">
-																	<form action="eliminarSalidaSimple" method="POST">
+																	<form action="eliminarSalidaSimple" method="POST"
+																		id="id_elim_<s:property value="id_entrada_salida"/>" onsubmit="return false;">
 																		<s:hidden name="id_servicio_informacion"></s:hidden>
 																		<s:hidden name="id_funcionalidad"></s:hidden>
 																		<s:hidden name="id_entrada_salida"></s:hidden>
-																		<input type="submit"
-																			value="<s:text name="salida.eliminar"></s:text>"
-																			style="font-size: 1em;" />
+																		<input type="submit" value="<s:text name="salida.eliminar"/>"
+																			style="font-size: 1em;" onclick="eliminar_Salida(<s:property value="id_entrada_salida"/>
+																			,'<s:property value="nombre" />');"/>
 																	</form></td>
 															</tr>
 														</table></td>

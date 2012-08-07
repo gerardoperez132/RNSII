@@ -10,17 +10,18 @@
 <!-- CSS (required) -->
 <link rel="stylesheet" type="text/css" href="/SRSI/pages/res/css/style2.css">
 <link rel="stylesheet" type="text/css" href="res/css/menu_vertical.css">
-<link rel="stylesheet" type="text/css" href="res/css/jquery.alerts.css">
 <link rel="stylesheet" type="text/css" href="res/css/jquery.treeTable.css">
 <link rel="stylesheet" type="text/css" href="res/css/table2.css">
 <link rel="stylesheet" type="text/css" href="res/css/table_tree.css">
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
+<link rel="stylesheet" type="text/css" href="res/js/plugins/sexy-alert-box-1.2.2/sexyalertbox.css" media="all">
 <!-- JS (required) -->
 <script type="text/javascript" src="/SRSI/pages/res/js/jquery-1.7.1.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/SRSI/pages/res/js/funciones_ge.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/jquery.treeTable.js" charset="UTF-8"></script>
-<script type="text/javascript" src="res/js/jquery.alerts.js" charset="UTF-8"></script>
-<script type="text/javascript" src="res/js/registro/formulario_funcionalidad.js" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/registro/entradas.js" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/plugins/sexy-alert-box-1.2.2/jquery.easing.1.3.js" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/plugins/sexy-alert-box-1.2.2/sexyalertbox.v1.2.jquery.js" charset="UTF-8"></script>
 <title><s:text name="entrada.entradas"></s:text></title>
 	</head>
 <body>	
@@ -166,8 +167,9 @@
 										<td>
 											<!-- Creación de una variable con el id_entrada_salida para identificar a los datos complejos. -->
 											<s:set name="id" value="id_entrada_salida" /> <!-- Creación de una variable con el id_tipo_de_dato. -->
-											<s:set name="id_d" value="id_tipo_dato" /> <s:iterator
-												value="tipoDatos">
+											<s:set name="id_d" value="id_tipo_dato" />
+											<s:set name="entrada.nombre" value="nombre" /> 
+											<s:iterator	value="tipoDatos">
 												<!-- Impresión del tipo de dato de acuerdo a su id. -->
 												<s:if test="%{id_tipo_dato == #id_d}">
 													<s:property value="nombre" />
@@ -208,14 +210,15 @@
 																	</form>
 																</td>
 																<td style="margin: 0; padding: 0;">
-																	<form action="eliminarEntradaCompleja" method="POST">
+																	<form action="eliminarEntradaCompleja" method="POST"
+																	id="id_elim_<s:property value="id_entrada_salida"/>" onsubmit="return false;">
 																		<s:hidden name="id_servicio_informacion"></s:hidden>
 																		<s:hidden name="id_funcionalidad"></s:hidden>
 																		<s:hidden name="id_entrada_salida" value="%{#id}"></s:hidden>
 																		<s:hidden name="modificar" value="%{true}"></s:hidden>
-																		<input type="submit"
-																			value="<s:text name="entrada.eliminar"></s:text>"
-																			style="font-size: 1em;" />
+																		<input type="submit" value="<s:text name="entrada.eliminar"></s:text>"
+																		style="font-size: 1em;" style="font-size: 1em;" onclick="eliminar_Entrada(<s:property value="id_entrada_salida"/>
+																			,'<s:property value="entrada.nombre" />');"/>
 																	</form>
 														</table>
 													</s:if>
@@ -235,13 +238,14 @@
 																	</form>
 																</td>
 																<td style="margin: 0; padding: 0;">
-																	<form action="eliminarEntradaSimple" method="POST">
+																	<form action="eliminarEntradaSimple" method="POST"
+																	id="id_elim_<s:property value="id_entrada_salida"/>" onsubmit="return false;">
 																		<s:hidden name="id_servicio_informacion"></s:hidden>
 																		<s:hidden name="id_funcionalidad"></s:hidden>
 																		<s:hidden name="id_entrada_salida"></s:hidden>
-																		<input type="submit"
-																			value="<s:text name="entrada.eliminar"></s:text>"
-																			style="font-size: 1em;" />
+																		<input type="submit" value="<s:text name="entrada.eliminar"></s:text>"
+																		style="font-size: 1em;" style="font-size: 1em;" onclick="eliminar_Entrada(<s:property value="id_entrada_salida"/>
+																			,'<s:property value="entrada.nombre" />');"/>
 																	</form>
 																</td>
 															</tr>
@@ -264,7 +268,8 @@
 												class="child-of-node-<s:property value="#result_entradas.index" />">
 												<td><s:property value="nombre" /></td>
 												<td><s:property value="descripcion" /></td>
-												<td><s:set name="id_d2" value="id_tipo_dato"></s:set>
+												<td>												
+													<s:set name="id_d2" value="id_tipo_dato"></s:set>
 													<s:iterator value="tipoDatos">
 														<s:if test="%{id_tipo_dato == #id_d2}">
 															<s:property value="nombre" />
@@ -286,13 +291,14 @@
 																</form>
 															</td>
 															<td style="margin: 0; padding: 0;">
-																<form action="eliminarEntradaSimple" method="POST">
+																<form action="eliminarEntradaSimple" method="POST"
+																	id="id_elim_<s:property value="id_entrada_salida"/>" onsubmit="return false;">
 																	<s:hidden name="id_servicio_informacion"></s:hidden>
 																	<s:hidden name="id_funcionalidad"></s:hidden>
 																	<s:hidden name="id_entrada_salida"></s:hidden>
-																	<input type="submit"
-																		value="<s:text name="entrada.eliminar"></s:text>"
-																		style="font-size: 1em;" />
+																	<input type="submit" value="<s:text name="entrada.eliminar"></s:text>"
+																		style="font-size: 1em;" style="font-size: 1em;" onclick="eliminar_Entrada(<s:property value="id_entrada_salida"/>
+																			,'<s:property value="nombre" />');"/>
 																</form>
 															</td>
 														</tr>
