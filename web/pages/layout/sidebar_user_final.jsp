@@ -1,3 +1,4 @@
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <!-- Esta es la barra lateral -->
 		<div class="sidebar">					
 				<div class="secciones" style="clear: both;">						
@@ -22,7 +23,7 @@
 						</li>
 					</ul>
 					<ul class="ui-menu-content">
-						<li class="li-menu-content"><h3 class="h3-ui-menu-content"><a style="font-size: 10px;"><s:text name="sectores" /></a></h3></li>
+						<li class="li-menu-content"><h3 class="h3-ui-menu-content"><a style="font-size: 10px;"><s:text name="sectores_list" /></a></h3></li>
 						<s:if test="listaSectores.size()>0">
 						<s:iterator value="listaSectores" status="index">
 						<li class="li-menu-content">

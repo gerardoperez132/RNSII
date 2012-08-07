@@ -152,13 +152,14 @@
 							<tr>
 								<td class="alt"><s:text name="sector" />
 								</td>
-								<td class="alt2"><s:set var="sector"
-										value="servicio.id_sector"></s:set> <s:iterator
-										value="sectores">
+								<td class="alt2">
+									<s:set var="sector"	value="servicio.id_sector"></s:set> 
+									<s:iterator	value="sectores">
 										<s:if test="%{id_sector == #sector}">
 											<s:property value="nombre" />
 										</s:if>
-									</s:iterator></td>
+									</s:iterator>
+								</td>
 							</tr>
 							<tr>
 								<td class="alt"><s:text name="orientado" />
@@ -520,10 +521,43 @@
 				<h4><s:text name="pageNotFound"></s:text></h4>		
 			</s:elseif>
 			<s:else>
+			
 				<s:fielderror>
 					<s:param>error</s:param>
 				</s:fielderror>
+			
+				<div id="down">
+				<div class="tab01">
+				  <div class="tab02">
+				    <span class="tab03"><s:text name="sectores"/></span>
+				  </div>
+				</div>
+			
+				<div class="middleContent">
+				   <ul class='thematics'>
+				   <s:iterator value="listaSectores2" status="index">
+				   		<s:if test="#index.index<9">
+				   		<li>
+					         <a style="background:url(res/img/logo_sector.png);background-repeat: no-repeat;" 
+					            href="listarSector?id_sector=<s:property value="id_sector"/>">						
+									<s:property value="nombre" /> (<s:property value="n" />) 
+							 </a>	
+						</li>
+						</s:if>
+					</s:iterator>
+				   </ul>
+				   <div class="ver_sectores">
+				   <a href="listarSectores" class="ver_sectores">						
+						<s:text name="ver_sectores"></s:text>
+				   </a>	
+				   </div>		   
+				</div>
+				</div>
+				
 			</s:else>
+			
+			
+			
 		</div>
 		</div>
 		

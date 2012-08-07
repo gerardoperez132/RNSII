@@ -3170,3 +3170,85 @@ margin-left: 25%;
 margin-top: 26%;
 margin-bottom: 10%;
 }
+
+/*
+* Estilos para la capa de categorias. 
+*/
+
+div.tab01 {
+background: #E4E4E4 none repeat scroll 0 0;
+border: 1px solid #CCC;
+border-bottom:none;
+color: #666;
+height: 28px;
+width: 140px;
+margin-top: 14px;
+display: table;
+text-align: center;
+}
+
+div.tab02 {
+display: table-cell;
+vertical-align: middle;
+font-weight: bold;
+font-size: small;
+}
+
+div.tab03 {
+    font-weight:bold;
+}
+
+#down .thematics {
+  background: yellow;
+  padding-left: 0px;
+  width:720px;
+}
+
+#down .thematics li {
+  display: block;
+  float:left;
+  height:72px;
+  width:225px;
+  vertical-align:middle;
+  margin:3px;
+}
+
+#down .thematics li a, 
+#down .thematics li a:link,
+#down .thematics li a:visited{
+  position:relative;
+  color:#3333FF;
+  display: block;
+  /* font-size:120%; */
+  font-weight:bold;
+  padding-bottom:29px;
+  padding-left:80px;
+  padding-top:29px;
+
+}
+
+#down .thematics li a:hover{
+  color:white;
+}
+
+#down .thematics li:hover{
+  background:#4584E3;
+}
+
+#down .thematics img{
+  margin:0px;
+}
+
+div.middleContent {
+width: 690px;
+height: 270px;
+border: 1px solid;
+clear: left;
+border-color: #DDD;
+}
+
+div.ver_sectores{float: right;margin-top: 5px;margin-right: 10px;}
+a.ver_sectores:link { text-decoration: none}
+a.ver_sectores:visited  {  text-decoration: none}
+a.ver_sectores:hover  {  text-decoration: underline;}
+a.ver_sectores:active  {  text-decoration: none}
