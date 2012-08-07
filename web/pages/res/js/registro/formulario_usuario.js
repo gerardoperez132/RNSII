@@ -85,10 +85,22 @@ $(document).ready(function(){
         	$('#passequal').html('');
         }
         
-        if(error == false){        	 
-        	document.modificarClave.submit(); 
+        if(error == false){    
+        	Sexy.confirm('Está a punto cambiar su clave de acceso a la aplicación'+
+        			'<br>¿Desea Continuar?', {
+        	  onComplete:
+        	    function(returnvalue) {
+        	      if (returnvalue) {        	    	  
+        	    	  document.modificarClave.submit(); 
+        	      } else {
+        	    	  Sexy.alert('<br>Acción Cancelada');
+        	      }
+        	    }
+        	  });        	
         }
     });
+	
+	
 	/*******************************************************************
 	 * Validación de formulario de Modificar datos del usuario
 	 *******************************************************************/
@@ -143,49 +155,18 @@ $(document).ready(function(){
         }
         
         if(error == false){        	 
-        	document.modificarDatos.submit(); 
+        	Sexy.confirm('Está a punto cambiar su datos de su cuenta de usuario'+
+        			'<br>¿Desea Continuar?', {
+        	  onComplete:
+        	    function(returnvalue) {
+        	      if (returnvalue) {        	    	  
+        	    	  document.modificarClave.submit(); 
+        	      } else {
+        	    	  Sexy.alert('<br>Acción Cancelada');
+        	      }
+        	    }
+        	  });  
         }
 		
-	});
-	
-	
-	
-	/*******************************************************
-	 * 
-	 * Validación de formulario de cambiar clave
-	 * 
-	 ******************************************************/
-	$("#cambiar_clave").click(function (e){		  
-		var enoughRegex = new RegExp("(?=.{6,}).*", "g");
-		var error = false;
-		e.preventDefault();         
-        
-        if ($('#pass').val() == "") {  
-			 $('#passstrength').html('La nueva contraseña debe tener 6 caracteres como mínimo'); 
-			 $('#passstrength').attr('class', 'error_pass');
-			 error = true;			
-       }else if (false == enoughRegex.test($('#pass').val())) {  
-			 $('#passstrength').html('La nueva contraseña debe tener 6 caracteres como mínimo'); 
-			 $('#passstrength').attr('class', 'error_pass');
-			 error = true;			
-        }else{
-        	$('#passstrength').html('');
-        }
-        
-        if ($('#pass2').val() == "") {  
-			 $('#passequal').html('Debe llenar este campo!'); 
-			 $('#passequal').attr('class', 'error_pass');
-			 error = true;
-       }else if ($('#pass').val() != $('#pass2').val()) {  
-			 $('#passequal').html('Las contraseñas no coinciden!'); 
-			 $('#passequal').attr('class', 'error_pass');
-			 error = true;
-        }else{
-        	$('#passequal').html('');
-        }
-        
-        if(error == false){        	 
-        	document.modificarClave.submit(); 
-        }
-    });
+	});		
 });
