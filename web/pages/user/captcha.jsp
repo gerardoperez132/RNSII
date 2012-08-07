@@ -1,3 +1,4 @@
+<%@page import="org.objectweb.asm.xwork.tree.TryCatchBlockNode"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.io.*"%>
 <%@ page import="javax.servlet.*"%>
@@ -117,9 +118,9 @@
 			ImageWriter writer = (ImageWriter) iter.next();
 			ImageWriteParam iwp = writer.getDefaultWriteParam();
 			iwp.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
-			iwp.setCompressionQuality(imageQuality);
+			iwp.setCompressionQuality(imageQuality);			
 			writer.setOutput(ImageIO.createImageOutputStream(response
-					.getOutputStream()));
+						.getOutputStream()));
 			IIOImage imageIO = new IIOImage(bufferedImage, null, null);
 			writer.write(null, imageIO, iwp);
 		} else {

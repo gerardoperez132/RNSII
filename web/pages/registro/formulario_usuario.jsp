@@ -14,11 +14,14 @@
 <link rel="stylesheet" type="text/css" href="res/css/jquery.treeTable.css">
 <link rel="stylesheet" type="text/css" href="res/css/table2.css">
 <link rel="stylesheet" type="text/css" href="res/css/table_tree.css">
+<link rel="stylesheet" type="text/css" href="res/js/plugins/sexy-alert-box-1.2.2/sexyalertbox.css" media="all">
 <!-- JS (required) -->
 <script type="text/javascript" src="/SRSI/pages/res/js/jquery-1.7.1.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/SRSI/pages/res/js/funciones_ge.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/jquery.treeTable.js" charset="UTF-8"></script>
-<script src="res/js/validate.js"  type="text/javascript" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/registro/formulario_usuario.js" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/plugins/sexy-alert-box-1.2.2/jquery.easing.1.3.js" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/plugins/sexy-alert-box-1.2.2/sexyalertbox.v1.2.jquery.js" charset="UTF-8"></script>
 <title><s:text name="inicio" /></title>
 </head>
 <body>	
