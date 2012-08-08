@@ -16,12 +16,13 @@
 |                       |   |-- LoginControlador.class
 |                       |   |-- SalidaControlador.class
 |                       |   |-- ServicioInformacionControlador.class
-|                       |   |-- ServiciosPublicables.class
 |                       |   |-- SuscripcionControlador.class
 |                       |   `-- UsuarioControlador.class
 |                       |-- dao
 |                       |   |-- Constants$ClaseDato.class
 |                       |   |-- Constants.class
+|                       |   |-- Constants$ErrorServicio.class
+|                       |   |-- Constants$Estados.class
 |                       |   |-- Constants$Formulario.class
 |                       |   |-- Constants$Modelos.class
 |                       |   |-- Constants$Order.class
@@ -75,12 +76,13 @@
 |                       |   |-- Usuario.class
 |                       |   `-- Visita.class
 |                       `-- util
-|                           |-- Estados_Tiempo.class
+|                           |-- EstadosTiempo.class
 |                           |-- ListaSImasVisitados.class
 |                           |-- MD5Hashing.class
 |                           |-- ReadXmlTime.class
 |                           |-- SectoresMasPublicados.class
-|                           |-- Solicitud_Respuesta.class
+|                           |-- ServiciosPublicables.class
+|                           |-- SolicitudRespuesta.class
 |                           `-- Solicitud_Suscripcion.class
 |-- COPYING
 |-- LICENSE
@@ -150,12 +152,13 @@
 |                   |   |-- Usuario.java
 |                   |   `-- Visita.java
 |                   `-- util
-|                       |-- Estados_Tiempo.java
+|                       |-- EstadosTiempo.java
 |                       |-- ListaSImasVisitados.java
 |                       |-- MD5Hashing.java
 |                       |-- ReadXmlTime.java
 |                       |-- SectoresMasPublicados.java
-|                       |-- Solicitud_Respuesta.java
+|                       |-- ServiciosPublicables.java
+|                       |-- SolicitudRespuesta.java
 |                       `-- Solicitud_Suscripcion.java
 `-- web
     |-- 404.jsp
@@ -168,14 +171,11 @@
     |   |-- error404.jsp
     |   |-- error.jsp
     |   |-- index.jsp
-    |   |-- index_old.jsp
     |   |-- inicio.jsp
     |   |-- layout
     |   |   |-- cache.jsp
-    |   |   |-- footer_ge.jsp
     |   |   |-- footer.jsp
     |   |   |-- header_ge_error.jsp
-    |   |   |-- header_ge.jsp
     |   |   |-- header.jsp
     |   |   |-- sidebar.jsp
     |   |   `-- sidebar_user_final.jsp
@@ -225,19 +225,13 @@
     |   |   |   `-- ui-menu-content.png
     |   |   |-- img
     |   |   |   |-- ayuda.gif
-    |   |   |   |-- circuito1.png
-    |   |   |   |-- fondo_menu.png
-    |   |   |   |-- footer.png
-    |   |   |   |-- header.png
     |   |   |   |-- help.gif
     |   |   |   |-- important.gif
+    |   |   |   |-- important.png
     |   |   |   |-- info.gif
     |   |   |   |-- Info.png
-    |   |   |   |-- menu8.png
-    |   |   |   |-- menu_selected.png
+    |   |   |   |-- logo_sector.png
     |   |   |   |-- menu_top_bg.gif
-    |   |   |   |-- mio.png
-    |   |   |   |-- selected.png
     |   |   |   |-- table
     |   |   |   |   |-- bbar.gif
     |   |   |   |   |-- captop.jpg
@@ -253,23 +247,80 @@
     |   |   |       |-- toggle-expand-dark.png
     |   |   |       `-- toggle-expand-light.png
     |   |   `-- js
-    |   |       |-- actions.js
     |   |       |-- funciones_ge.js
     |   |       |-- jquery-1.7.1.js
     |   |       |-- jquery.alerts.js
     |   |       |-- jquery.treeTable.js
     |   |       |-- jquery.validate.js
+    |   |       |-- main.js
     |   |       |-- messages_es.js
+    |   |       |-- plugins
+    |   |       |   |-- sexy-alert-box-1.2.2
+    |   |       |   |   |-- images
+    |   |       |   |   |   |-- bg-box-body.gif
+    |   |       |   |   |   |-- bg-box-body.png
+    |   |       |   |   |   |-- bg-box-bottom.gif
+    |   |       |   |   |   |-- bg-box-bottom.png
+    |   |       |   |   |   |-- bg-box-top.gif
+    |   |       |   |   |   |-- bg-box-top.png
+    |   |       |   |   |   |-- dialog-error.png
+    |   |       |   |   |   |-- dialog-help.png
+    |   |       |   |   |   |-- dialog-information.png
+    |   |       |   |   |   `-- dialog-warning.png
+    |   |       |   |   |-- jquery.easing.1.3.js
+    |   |       |   |   |-- sexyalertbox.css
+    |   |       |   |   `-- sexyalertbox.v1.2.jquery.js
+    |   |       |   |-- sexy-tooltips
+    |   |       |   |   |-- blue
+    |   |       |   |   |   |-- bca.gif
+    |   |       |   |   |   |-- bca.png
+    |   |       |   |   |   |-- b.gif
+    |   |       |   |   |   |-- bla.gif
+    |   |       |   |   |   |-- bla.png
+    |   |       |   |   |   |-- bl.gif
+    |   |       |   |   |   |-- bl.png
+    |   |       |   |   |   |-- b.png
+    |   |       |   |   |   |-- bra.gif
+    |   |       |   |   |   |-- bra.png
+    |   |       |   |   |   |-- br.gif
+    |   |       |   |   |   |-- br.png
+    |   |       |   |   |   |-- close.gif
+    |   |       |   |   |   |-- close.png
+    |   |       |   |   |   |-- la.gif
+    |   |       |   |   |   |-- la.png
+    |   |       |   |   |   |-- l.gif
+    |   |       |   |   |   |-- l.png
+    |   |       |   |   |   |-- ra.gif
+    |   |       |   |   |   |-- ra.png
+    |   |       |   |   |   |-- r.gif
+    |   |       |   |   |   |-- r.png
+    |   |       |   |   |   |-- tca.gif
+    |   |       |   |   |   |-- tca.png
+    |   |       |   |   |   |-- t.gif
+    |   |       |   |   |   |-- tla.gif
+    |   |       |   |   |   |-- tla.png
+    |   |       |   |   |   |-- tl.gif
+    |   |       |   |   |   |-- tl.png
+    |   |       |   |   |   |-- t.png
+    |   |       |   |   |   |-- tra.gif
+    |   |       |   |   |   |-- tra.png
+    |   |       |   |   |   |-- tr.gif
+    |   |       |   |   |   `-- tr.png
+    |   |       |   |   `-- blue.css
+    |   |       |   `-- sexy-tooltips.v1.1.jquery.js
     |   |       |-- registro
+    |   |       |   |-- entradas.js
     |   |       |   |-- formulario_entrada.js
     |   |       |   |-- formulario_funcionalidad.js
     |   |       |   |-- formulario_salida.js
-    |   |       |   `-- registro_servicio_informacion.js
+    |   |       |   |-- formulario_usuario.js
+    |   |       |   |-- funcionalidades.js
+    |   |       |   |-- registro_servicio_informacion.js
+    |   |       |   `-- salidas.js
     |   |       |-- suscripcion.js
     |   |       |-- tabs.js
     |   |       |-- usuarios.js
-    |   |       |-- validacion_datos.js
-    |   |       `-- validate.js
+    |   |       `-- validacion_datos.js
     |   `-- user
     |       |-- captcha.jsp
     |       |-- examinarServicio.jsp
@@ -317,4 +368,4 @@
         |   `-- xwork-core-2.2.1.jar
         `-- web.xml
 
-43 directories, 274 files
+48 directories, 320 files
