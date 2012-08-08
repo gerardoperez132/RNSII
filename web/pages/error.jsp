@@ -94,7 +94,7 @@
 			</div>				
 			<div style="clear: both"></div>
 			<div class="vacio"></div>
-			<%@include file="layout/footer_ge.jsp"%>SW				
+			<%@include file="layout/footer.jsp"%>
 	</body>
 </s:i18n>
 </html>

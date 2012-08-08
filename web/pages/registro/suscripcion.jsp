@@ -31,7 +31,7 @@
 	<body>
 		<!-- Este es el div contenedor del maquetado de la página -->
 		<div class="container">
-			<%@include file="../layout/header_ge.jsp"%>
+			<%@include file="../layout/header.jsp"%>
 			<!-- Esta es la barra lateral -->
 			<%@include file="../layout/sidebar.jsp"%>
 
@@ -912,7 +912,7 @@ Muestra las opciones de busqueda para encontrar servicios de información-->
 			</div>
 			<div style="clear: both"></div>
 			<div class="vacio"></div>
-			<%@include file="../layout/footer_ge.jsp"%>	
+			<%@include file="../layout/footer.jsp"%>	
 	</body>
 </s:i18n>
 </html>
