@@ -51,7 +51,7 @@ import ve.gob.cnti.srsi.modelo.Telefono;
 import ve.gob.cnti.srsi.modelo.UnionAreaServicioInformacion;
 import ve.gob.cnti.srsi.modelo.UnionArquitecturaServicioInformacion;
 import ve.gob.cnti.srsi.modelo.Usuario;
-import ve.gob.cnti.srsi.util.Estados_Tiempo;
+import ve.gob.cnti.srsi.util.EstadosTiempo;
 import ve.gob.cnti.srsi.util.ReadXmlTime;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -107,8 +107,8 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	private long id_servicio_informacion;
 	private long id_aspecto_legal;
 	private long nVisitas;
-	
-	private List<Estados_Tiempo> estadosTiempo = new ArrayList<Estados_Tiempo>();
+
+	private List<EstadosTiempo> estadosTiempo = new ArrayList<EstadosTiempo>();
 	private Date fecha;
 
 	@SuppressWarnings("unchecked")
@@ -167,6 +167,15 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		if (isComplete(servicio))
 			setModificar(true);
 		tab = DESCRIPCION_TECNICA;
+		if (modificar) {
+			seguridad = servicio.getId_seguridad();
+			intercambio = servicio.getId_intercambio();
+			unionarquitecturas = (List<UnionArquitecturaServicioInformacion>) readUnion(
+					new UnionArquitecturaServicioInformacion(), servicio,
+					id_servicio_informacion);
+			for (UnionArquitecturaServicioInformacion union : unionarquitecturas)
+				arquitectura.add(union.getId_arquitectura());
+		}
 		niveles = (List<Seguridad>) read(new Seguridad());
 		arquitecturas = (List<Arquitectura>) read(new Arquitectura());
 		parents = (List<Intercambio>) getParents(new Intercambio());
@@ -809,8 +818,8 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		prepararDescripcionGeneral();
 		return SUCCESS;
 	}
-	
-	public void getTiempoFecha(){
+
+	public void getTiempoFecha() {
 		ReadXmlTime read = new ReadXmlTime();
 		fecha = read.getFechaTiempo();
 		estadosTiempo = read.getEstados_Tiempo();
@@ -1131,11 +1140,11 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		this.nVisitas = nVisitas;
 	}
 
-	public List<Estados_Tiempo> getEstadosTiempo() {
+	public List<EstadosTiempo> getEstadosTiempo() {
 		return estadosTiempo;
 	}
 
-	public void setEstadosTiempo(List<Estados_Tiempo> estadosTiempo) {
+	public void setEstadosTiempo(List<EstadosTiempo> estadosTiempo) {
 		this.estadosTiempo = estadosTiempo;
 	}
 
