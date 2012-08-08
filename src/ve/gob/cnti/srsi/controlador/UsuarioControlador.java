@@ -26,7 +26,7 @@ import org.apache.struts2.interceptor.validation.SkipValidation;
 import ve.gob.cnti.srsi.dao.DAO;
 import ve.gob.cnti.srsi.modelo.Ente;
 import ve.gob.cnti.srsi.modelo.Usuario;
-import ve.gob.cnti.srsi.util.Estados_Tiempo;
+import ve.gob.cnti.srsi.util.EstadosTiempo;
 import ve.gob.cnti.srsi.util.MD5Hashing;
 import ve.gob.cnti.srsi.util.ReadXmlTime;
 
@@ -46,7 +46,7 @@ public class UsuarioControlador extends DAO {
 	@SuppressWarnings("rawtypes")
 	private Map session;
 	private Ente ente;
-	private List<Estados_Tiempo> estadosTiempo = new ArrayList<Estados_Tiempo>();
+	private List<EstadosTiempo> estadosTiempo = new ArrayList<EstadosTiempo>();
 	private Date fecha;
 
 	@SkipValidation
@@ -267,11 +267,11 @@ public class UsuarioControlador extends DAO {
 		this.clave_nueva_confirme = clave_nueva_confirme;
 	}
 
-	public List<Estados_Tiempo> getEstadosTiempo() {
+	public List<EstadosTiempo> getEstadosTiempo() {
 		return estadosTiempo;
 	}
 
-	public void setEstadosTiempo(List<Estados_Tiempo> estadosTiempo) {
+	public void setEstadosTiempo(List<EstadosTiempo> estadosTiempo) {
 		this.estadosTiempo = estadosTiempo;
 	}
 

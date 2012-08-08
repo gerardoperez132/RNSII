@@ -1,6 +1,6 @@
 package ve.gob.cnti.srsi.util;
 
-public class Estados_Tiempo {
+public class EstadosTiempo {
 
 	private int codigo;
 	private String nombre;

@@ -25,7 +25,7 @@ import java.util.Date;
  * 
  * @author Joaquín Pereira
  */
-public class Solicitud_Respuesta {
+public class SolicitudRespuesta {
 
 	private long id_suscripcion;
 	private long id_servicio_informacion;

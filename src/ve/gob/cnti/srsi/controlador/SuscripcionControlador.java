@@ -32,9 +32,9 @@ import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.SolicitudSuscripcion;
 import ve.gob.cnti.srsi.modelo.Suscrito;
 import ve.gob.cnti.srsi.modelo.Usuario;
-import ve.gob.cnti.srsi.util.Solicitud_Respuesta;
+import ve.gob.cnti.srsi.util.SolicitudRespuesta;
 import ve.gob.cnti.srsi.util.Solicitud_Suscripcion;
-import ve.gob.cnti.srsi.util.Estados_Tiempo;
+import ve.gob.cnti.srsi.util.EstadosTiempo;
 import ve.gob.cnti.srsi.util.ReadXmlTime;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -44,7 +44,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 		Modelos, Sentencias {
 
 	private List<Solicitud_Suscripcion> solicitudes = new ArrayList<Solicitud_Suscripcion>();
-	private List<Solicitud_Respuesta> solicitudesRespondidas = new ArrayList<Solicitud_Respuesta>();
+	private List<SolicitudRespuesta> solicitudesRespondidas = new ArrayList<SolicitudRespuesta>();
 
 	private String codigo;
 	private String codigos[] = CODES;
@@ -67,7 +67,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 	private boolean ListarSuscricionesAceptadasRechazadas;
 	private boolean solicitarSuscripcion;
 	private String sentencia[] = { "Aceptado", "Rechazado" };
-	private List<Estados_Tiempo> estadosTiempo = new ArrayList<Estados_Tiempo>();
+	private List<EstadosTiempo> estadosTiempo = new ArrayList<EstadosTiempo>();
 	private Date fecha;
 
 	@SkipValidation
@@ -228,7 +228,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 		// Lista solicitudes en base a las no leidas, pendientes,
 		session = ActionContext.getContext().getSession();
 		Usuario user = (Usuario) session.get("usuario");
-		setSolicitudesRespondidas((List<Solicitud_Respuesta>) getlistaSolicitudesAceptadasRechazadas(
+		setSolicitudesRespondidas((List<SolicitudRespuesta>) getlistaSolicitudesAceptadasRechazadas(
 				user.getId_ente(), ASC));
 		ListarSuscricionesAceptadasRechazadas = true;
 		return SUCCESS;
@@ -538,12 +538,12 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 		ListarSuscricionesAceptadasRechazadas = listarSuscricionesAceptadasRechazadas;
 	}
 
-	public List<Solicitud_Respuesta> getSolicitudesRespondidas() {
+	public List<SolicitudRespuesta> getSolicitudesRespondidas() {
 		return solicitudesRespondidas;
 	}
 
 	public void setSolicitudesRespondidas(
-			List<Solicitud_Respuesta> solicitudesRespondidas) {
+			List<SolicitudRespuesta> solicitudesRespondidas) {
 		this.solicitudesRespondidas = solicitudesRespondidas;
 	}
 
@@ -563,11 +563,11 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 		this.solicitarSuscripcion = solicitarSuscripcion;
 	}
 
-	public List<Estados_Tiempo> getEstadosTiempo() {
+	public List<EstadosTiempo> getEstadosTiempo() {
 		return estadosTiempo;
 	}
 
-	public void setEstadosTiempo(List<Estados_Tiempo> estadosTiempo) {
+	public void setEstadosTiempo(List<EstadosTiempo> estadosTiempo) {
 		this.estadosTiempo = estadosTiempo;
 	}
 

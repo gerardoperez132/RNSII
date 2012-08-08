@@ -15,9 +15,9 @@ import org.jdom2.input.SAXBuilder;
 
 public class ReadXmlTime {
 	
-	public List<Estados_Tiempo> getEstados_Tiempo(){
+	public List<EstadosTiempo> getEstados_Tiempo(){
 		SAXBuilder builder = new SAXBuilder();		
-		List<Estados_Tiempo> estados = new ArrayList<Estados_Tiempo>();	
+		List<EstadosTiempo> estados = new ArrayList<EstadosTiempo>();	
 		try {
 			URL xml_doc = new URL("http://www.inameh.gob.ve/pronostico.php");
 			URLConnection xmlConnection = xml_doc.openConnection();					
@@ -27,7 +27,7 @@ public class ReadXmlTime {
 				@SuppressWarnings("rawtypes")
 				List list = rootNode.getChildren("zona");
 				for (int i = 0; i < list.size(); i++) {
-					Estados_Tiempo estado = new Estados_Tiempo();
+					EstadosTiempo estado = new EstadosTiempo();
 					Element node = (Element) list.get(i);
 					estado.setCodigo(Integer.parseInt(node.getChildText("codigo")));
 					estado.setNombre(node.getChildText("nombre"));

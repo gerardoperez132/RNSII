@@ -25,7 +25,7 @@ import ve.gob.cnti.srsi.modelo.Telefono;
 import ve.gob.cnti.srsi.modelo.Visita;
 import ve.gob.cnti.srsi.util.ListaSImasVisitados;
 import ve.gob.cnti.srsi.util.SectoresMasPublicados;
-import ve.gob.cnti.srsi.util.Solicitud_Respuesta;
+import ve.gob.cnti.srsi.util.SolicitudRespuesta;
 import ve.gob.cnti.srsi.util.Solicitud_Suscripcion;
 
 /**
@@ -586,7 +586,7 @@ public interface CRUD {
 	 *            suscripción aceptadas - rechazadas a buscar.
 	 * @return Lista de las solicitudes de suscrición Aceptadas -Rechazadas.
 	 */
-	public ArrayList<Solicitud_Respuesta> getlistaSolicitudesAceptadasRechazadas(
+	public ArrayList<SolicitudRespuesta> getlistaSolicitudesAceptadasRechazadas(
 			long id_ente, byte orderBy);
 
 	/**

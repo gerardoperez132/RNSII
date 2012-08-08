@@ -51,7 +51,7 @@ import ve.gob.cnti.srsi.modelo.Usuario;
 import ve.gob.cnti.srsi.modelo.Visita;
 import ve.gob.cnti.srsi.util.ListaSImasVisitados;
 import ve.gob.cnti.srsi.util.SectoresMasPublicados;
-import ve.gob.cnti.srsi.util.Estados_Tiempo;
+import ve.gob.cnti.srsi.util.EstadosTiempo;
 import ve.gob.cnti.srsi.util.ReadXmlTime;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -83,7 +83,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 	List<SectoresMasPublicados> listaSectores = new ArrayList<SectoresMasPublicados>();
 	List<SectoresMasPublicados> listaSectores2 = new ArrayList<SectoresMasPublicados>();
 	private List<ListaSImasVisitados> SI_masVisitados = new ArrayList<ListaSImasVisitados>();
-	private List<Estados_Tiempo> estadosTiempo = new ArrayList<Estados_Tiempo>();
+	private List<EstadosTiempo> estadosTiempo = new ArrayList<EstadosTiempo>();
 	private Date fecha;
 	@SuppressWarnings("rawtypes")
 	private Map session;
@@ -655,11 +655,11 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 		this.listaSectores2 = listaSectores2;
 	}
 
-	public List<Estados_Tiempo> getEstadosTiempo() {
+	public List<EstadosTiempo> getEstadosTiempo() {
 		return estadosTiempo;
 	}
 
-	public void setEstadosTiempo(List<Estados_Tiempo> estadosTiempo) {
+	public void setEstadosTiempo(List<EstadosTiempo> estadosTiempo) {
 		this.estadosTiempo = estadosTiempo;
 	}
 

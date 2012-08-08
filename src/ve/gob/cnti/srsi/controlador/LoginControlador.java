@@ -37,7 +37,7 @@ import ve.gob.cnti.srsi.modelo.Estado;
 import ve.gob.cnti.srsi.modelo.RecuperarClave;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.Usuario;
-import ve.gob.cnti.srsi.util.Estados_Tiempo;
+import ve.gob.cnti.srsi.util.EstadosTiempo;
 import ve.gob.cnti.srsi.util.MD5Hashing;
 import ve.gob.cnti.srsi.util.ReadXmlTime;
 import ve.gob.cnti.srsi.util.ServiciosPublicables;
@@ -67,7 +67,7 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 	private long peticionesNoLeidas;
 	private long peticionesPendientes;
 	private long solicitudesAceptadasRechazadas;
-	private List<Estados_Tiempo> estadosTiempo = new ArrayList<Estados_Tiempo>();
+	private List<EstadosTiempo> estadosTiempo = new ArrayList<EstadosTiempo>();
 	private Date fecha;
 
 	@SuppressWarnings("unchecked")
@@ -466,11 +466,11 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 		this.captcha = captcha;
 	}
 
-	public List<Estados_Tiempo> getEstadosTiempo() {
+	public List<EstadosTiempo> getEstadosTiempo() {
 		return estadosTiempo;
 	}
 
-	public void setEstadosTiempo(List<Estados_Tiempo> estadosTiempo) {
+	public void setEstadosTiempo(List<EstadosTiempo> estadosTiempo) {
 		this.estadosTiempo = estadosTiempo;
 	}
 

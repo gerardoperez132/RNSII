@@ -48,7 +48,7 @@ import ve.gob.cnti.srsi.modelo.UnionArquitecturaServicioInformacion;
 import ve.gob.cnti.srsi.modelo.Visita;
 import ve.gob.cnti.srsi.util.ListaSImasVisitados;
 import ve.gob.cnti.srsi.util.SectoresMasPublicados;
-import ve.gob.cnti.srsi.util.Solicitud_Respuesta;
+import ve.gob.cnti.srsi.util.SolicitudRespuesta;
 import ve.gob.cnti.srsi.util.Solicitud_Suscripcion;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -621,7 +621,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 			System.out.println("FALLÓ EN UNIÓN ÁREAS");
 			return false;
 		}
-		if (servicio.getId_estado() == DESARROLLO) {
+		if (servicio.getId_estado() == 0) {
 			System.out.println("FALLÓ EN ESTADO");
 			return false;
 		}
@@ -1249,9 +1249,9 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 	}
 
 	@Override
-	public ArrayList<Solicitud_Respuesta> getlistaSolicitudesAceptadasRechazadas(
+	public ArrayList<SolicitudRespuesta> getlistaSolicitudesAceptadasRechazadas(
 			long id_ente, byte orderBy) {
-		List<Solicitud_Respuesta> result = new ArrayList<Solicitud_Respuesta>();
+		List<SolicitudRespuesta> result = new ArrayList<SolicitudRespuesta>();
 		ArrayList<?> list;
 		Query query;
 		String order = orderBy > 0 ? "DESC" : "ASC";
@@ -1278,7 +1278,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 			Iterator<?> it = list.iterator();
 			while (it.hasNext()) {
 				Object[] st = (Object[]) it.next();
-				Solicitud_Respuesta s = new Solicitud_Respuesta();
+				SolicitudRespuesta s = new SolicitudRespuesta();
 				s.setId_suscripcion((Long) Long.parseLong(st[0].toString()));
 				s.setId_servicio_informacion((Long) Long.parseLong(st[1]
 						.toString()));
@@ -1295,7 +1295,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		} finally {
 			closeConnection();
 		}
-		return (ArrayList<Solicitud_Respuesta>) result;
+		return (ArrayList<SolicitudRespuesta>) result;
 	}
 
 	@Override
