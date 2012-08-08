@@ -161,10 +161,10 @@
 							</s:if>
 							<s:else>
 								<tr>
-									<th colspan="4"><s:text name="funcionalidades.error" /><br>Click aquí para crear una. <form action="prepararFuncionalidad" method="POST">
+									<th colspan="4"><s:text name="funcionalidades.error" /><br><form action="prepararFuncionalidad" method="POST">
 						<s:hidden name="id_servicio_informacion"></s:hidden>
 						<s:hidden name="modificar"></s:hidden>
-						<input type="submit" value="<s:text name="Click aquí"/>" />
+						<input type="submit" value="<s:text name="crear.funcionalidad"/>" />
 					</form></th>
 								</tr>
 							</s:else>
