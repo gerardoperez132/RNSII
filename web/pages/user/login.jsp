@@ -90,7 +90,7 @@
 						</tr>
 						<tr>
 							<td colspan="3" align="center"><s:a
-									href="autenticarUsuario">
+									href="autenticar">
 									<s:text name="home" />
 								</s:a></td>
 						</tr>

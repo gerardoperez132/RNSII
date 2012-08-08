@@ -399,7 +399,7 @@
 
 		<!-- ******* ******* ****** ******* Logins ******* ******* ****** ******* -->
 
-		<action name="autenticarUsuario" method="mostrarLogin"
+		<action name="autenticar" method="mostrarLogin"
 			class="ve.gob.cnti.srsi.controlador.LoginControlador">
 			<result name="success">user/login.jsp</result>
 			<result name="error">error.jsp</result>
@@ -422,14 +422,14 @@
 
 		<action name="inicio" method="inicio"
 			class="ve.gob.cnti.srsi.controlador.LoginControlador">
-			<result name="success" type="redirectAction">autenticarUsuario</result>
+			<result name="success" type="redirectAction">autenticar</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="home" method="home"
 			class="ve.gob.cnti.srsi.controlador.LoginControlador">
 			<result name="success">user/main.jsp</result>
-			<result name="input" type="redirectAction">autenticarUsuario</result>
+			<result name="input" type="redirectAction">autenticar</result>
 			<result name="error">error.jsp</result>
 		</action>
 

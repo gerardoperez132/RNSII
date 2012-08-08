@@ -8,5 +8,5 @@ response.setDateHeader("Expires", 0);
 Usuario u=(Usuario)request.getSession().getAttribute("usuario");
 if (u==null){
 %>
-<META HTTP-EQUIV="Refresh" CONTENT="0;URL=autenticarUsuario.action">
+<META HTTP-EQUIV="Refresh" CONTENT="0;URL=autenticar.action">
 <% } %>
