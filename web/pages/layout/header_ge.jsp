@@ -17,7 +17,9 @@
 
 <div class="header">
 	<div class="logo" onclick="window.location.href='http://gobiernoenlinea.gob.ve/home/homeG.dot'" style="cursor:pointer"></div>
+	<!-- Ocultando logo de corazón Venezolano 
 	<div class="anios"></div>
+	 -->
 </div>
 <div  class="headerInterna">
 	<a href="http://gobiernoenlinea.gob.ve/home/homeG.dot" style="cursor:pointer;" class="estilo2"><img  src="res/images/logo_web_interno.png" alt="Logo Gobierno en L&iacute;nea" title="Logo Gobierno en L&iacute;nea"  /></a>
