@@ -632,7 +632,7 @@
 	</package>
 
 	<package name="json" extends="json-default">
-		<action name="getJSONResult" class="ve.gob.cnti.srsi.util.JSON">
+		<action name="getJSONResult" class="ve.gob.cnti.srsi.util.JSON" method="obtenerError">
 			<result type="json" />
 		</action>
 	</package>

@@ -168,9 +168,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 
 	@SuppressWarnings("unchecked")
 	public String buscar_servicio() {
-		getTiempoFecha();
-		listaSectores = listado_de_Sectores(LIMITE_SECTORES,false);
-		SI_masVisitados = listarServiciosVisitados(LIMITE_VISITADOS,false);
+		inicio();
 		buscarServicio = true;
 		if (!cadena.toString().toUpperCase().matches(REGEX_TITLE)) {
 			addFieldError("error",
