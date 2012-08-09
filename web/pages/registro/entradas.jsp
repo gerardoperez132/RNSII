@@ -228,7 +228,7 @@
 																<td style="margin: 0; padding: 0;">
 																	<form action="prepararModificarEntradaSimple"
 																		method="POST">
-																		<s:hidden name="id_se0.7rvicio_informacion"></s:hidden>
+																		<s:hidden name="id_servicio_informacion"></s:hidden>
 																		<s:hidden name="id_funcionalidad"></s:hidden>
 																		<s:hidden name="id_entrada_salida"></s:hidden>
 																		<s:hidden name="modificar" value="%{true}"></s:hidden>

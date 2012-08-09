@@ -185,6 +185,7 @@ $(document).ready(function(){
 							    data: { id_tipo_dato: $("#salida\\.id_tipo_dato").val() },
 							    success: function(result3){ 
 							    	$("#salida\\.id_formato").append(result3);	
+							    	$('#opt_element_'+$("#salida\\.id_formato").attr('class')+'').attr('selected', 'selected');
 							    }
 							});														
 						}else{					

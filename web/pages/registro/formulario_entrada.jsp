@@ -169,8 +169,8 @@
 							<s:fielderror>
 								<s:param>formato</s:param>
 							</s:fielderror>								
-							<select name="entrada.id_formato" id="entrada.id_formato">
-								<s:set var="idF" value="entrada.id_formato"/>
+							<select name="entrada.id_formato" id="entrada.id_formato" class="<s:property value='entrada.id_formato'/>">
+								<s:set var="idF" value="entrada.id_formato" />
 								<optgroup label="">
 									<option value="-1">
 										<s:text name="form.entrada.formato.select"></s:text>

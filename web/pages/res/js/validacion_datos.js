@@ -128,7 +128,8 @@ $(document).ready(function(){
 							$.ajax({type: 'GET',url: 'list_format.action',cache: false,async: false,
 							    data: { id_tipo_dato: $("#entrada.id_tipo_dato").val() },
 							    success: function(result3){ 
-							    	$("#formato").append(result3);	
+							    	$("#formato").append(result3);
+							    	$('#opt_element_'+$(".formulario").attr('id')+'').attr('selected', 'selected');
 							    }
 							});														
 						}else{					

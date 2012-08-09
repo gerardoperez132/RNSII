@@ -170,7 +170,7 @@
 							<s:fielderror>
 								<s:param>formato</s:param>
 							</s:fielderror>								
-							<select name="salida.id_formato" id="salida.id_formato">
+							<select name="salida.id_formato" id="salida.id_formato" class="<s:property value='salida.id_formato'/>">
 								<s:set var="idF" value="salida.id_formato"/>
 								<optgroup label="">
 									<option value="-1">
