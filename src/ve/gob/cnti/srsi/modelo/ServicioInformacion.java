@@ -17,6 +17,7 @@ package ve.gob.cnti.srsi.modelo;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -46,6 +47,7 @@ public class ServicioInformacion {
 	private long id_ente;
 	private long id_usuario;
 	private String nombre;
+	@Column(length = 765)
 	private String descripcion;
 	private String version;
 	private String responsable;
