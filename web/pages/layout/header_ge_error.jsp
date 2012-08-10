@@ -14,7 +14,6 @@
 	<input type="hidden" name="ordenado" id="ordenadoHeader" value="$request.getParameter('ordenado')" />
 	<input type="hidden" name="indice" id="indiceHeader" value="$request.getParameter('indice')" />
 	<input type="hidden" name="ordenamientoForo" id="ordenamientoForoHeader" value="$request.getParameter('ordenamientoForo')" />
-
 <div class="header">
 	<div class="logo" onclick="window.location.href='http://gobiernoenlinea.gob.ve/home/homeG.dot'" style="cursor:pointer"></div>
 	<div class="anios"></div>
@@ -30,11 +29,9 @@
 		</ul>
 	</div>	
 </div>
-
 <div class="info_bar">
 	<a href="http://gobiernoenlinea.gob.ve/home/homeG.dot" class="inicio" title="Inicio">inicio</a>
 		<a href="http://gobiernoenlinea.gob.ve/home/ayuda.dot"  class="pregunta" title="Ayuda">inicio</a>
-
         <div id="fontResize">
                 <h2> <a href="#" class="fontSizePlus" title="Aumentar Fuente">A+</a></h2>
                 <h2> <a href="#" class="fontSizeMinus" title="Disminuir Fuente">A-</a></h2>
