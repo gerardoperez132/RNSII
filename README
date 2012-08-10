@@ -34,16 +34,10 @@
 |                       |   |-- DAO.class
 |                       |   `-- HibernateUtils.class
 |                       |-- i18n
-|                       |   |-- entradas.properties
 |                       |   |-- Errors.class
 |                       |   |-- errors.properties
-|                       |   |-- formulario_entrada.properties
-|                       |   |-- formulario_funcionalidad.properties
-|                       |   |-- formulario_salida.properties
-|                       |   |-- messages.properties
-|                       |   |-- layout.properties
-|                       |   |-- salidas.properties
-|                       |   `-- userlogin.properties
+|                       |   |-- Messages.class
+|                       |   `-- messages.properties
 |                       |-- mail
 |                       |   |-- EnviarCorreo.class
 |                       |   |-- Mail.class
@@ -77,6 +71,7 @@
 |                       |   `-- Visita.class
 |                       `-- util
 |                           |-- EstadosTiempo.class
+|                           |-- JSON.class
 |                           |-- ListaSImasVisitados.class
 |                           |-- MD5Hashing.class
 |                           |-- ReadXmlTime.class
@@ -110,16 +105,10 @@
 |                   |   |-- DAO.java
 |                   |   `-- HibernateUtils.java
 |                   |-- i18n
-|                   |   |-- entradas.properties
 |                   |   |-- Errors.java
 |                   |   |-- errors.properties
-|                   |   |-- formulario_entrada.properties
-|                   |   |-- formulario_funcionalidad.properties
-|                   |   |-- formulario_salida.properties
-|                   |   |-- messages.properties
-|                   |   |-- layout.properties
-|                   |   |-- salidas.properties
-|                   |   `-- userlogin.properties
+|                   |   |-- Messages.java
+|                   |   `-- messages.properties
 |                   |-- mail
 |                   |   |-- EnviarCorreo.java
 |                   |   |-- Mail.java
@@ -153,6 +142,7 @@
 |                   |   `-- Visita.java
 |                   `-- util
 |                       |-- EstadosTiempo.java
+|                       |-- JSON.java
 |                       |-- ListaSImasVisitados.java
 |                       |-- MD5Hashing.java
 |                       |-- ReadXmlTime.java
@@ -364,8 +354,9 @@
         |   |-- struts2-core-2.1.6.jar
         |   |-- struts2-fullhibernatecore-plugin-1.4-GA.jar
         |   |-- struts2-jquery-plugin-3.1.1.jar
+        |   |-- struts2-json-plugin-2.1.8.jar
         |   |-- xwork-2.1.2.jar
         |   `-- xwork-core-2.2.1.jar
         `-- web.xml
 
-48 directories, 320 files
+48 directories, 311 files
