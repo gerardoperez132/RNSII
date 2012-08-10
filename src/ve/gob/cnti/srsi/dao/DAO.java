@@ -48,8 +48,8 @@ import ve.gob.cnti.srsi.modelo.UnionArquitecturaServicioInformacion;
 import ve.gob.cnti.srsi.modelo.Visita;
 import ve.gob.cnti.srsi.util.ListaServiciosVisitados;
 import ve.gob.cnti.srsi.util.SectoresMasPublicados;
-import ve.gob.cnti.srsi.util.SolicitudRespuesta;
-import ve.gob.cnti.srsi.util.Solicitud_Suscripcion;
+import ve.gob.cnti.srsi.util.SubscriptionResponse;
+import ve.gob.cnti.srsi.util.SubscriptionRequest;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -1179,9 +1179,9 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 	}
 
 	@Override
-	public ArrayList<Solicitud_Suscripcion> getSolicitudesSuscripcionPendientes(
+	public ArrayList<SubscriptionRequest> getSolicitudesSuscripcionPendientes(
 			long id_ente, byte orderBy) {
-		List<Solicitud_Suscripcion> result = new ArrayList<Solicitud_Suscripcion>();
+		List<SubscriptionRequest> result = new ArrayList<SubscriptionRequest>();
 		ArrayList<?> list;
 		Query query;
 		String order = orderBy > 0 ? "DESC" : "ASC";
@@ -1205,7 +1205,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 			Iterator<?> it = list.iterator();
 			while (it.hasNext()) {
 				Object[] st = (Object[]) it.next();
-				Solicitud_Suscripcion s = new Solicitud_Suscripcion();
+				SubscriptionRequest s = new SubscriptionRequest();
 				s.setId_suscripcion((Long) Long.parseLong(st[0].toString()));
 				s.setId_servicio_informacion((Long) Long.parseLong(st[1]
 						.toString()));
@@ -1222,7 +1222,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		} finally {
 			closeConnection();
 		}
-		return (ArrayList<Solicitud_Suscripcion>) result;
+		return (ArrayList<SubscriptionRequest>) result;
 	}
 
 	@Override
@@ -1249,9 +1249,9 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 	}
 
 	@Override
-	public ArrayList<SolicitudRespuesta> getlistaSolicitudesAceptadasRechazadas(
+	public ArrayList<SubscriptionResponse> getlistaSolicitudesAceptadasRechazadas(
 			long id_ente, byte orderBy) {
-		List<SolicitudRespuesta> result = new ArrayList<SolicitudRespuesta>();
+		List<SubscriptionResponse> result = new ArrayList<SubscriptionResponse>();
 		ArrayList<?> list;
 		Query query;
 		String order = orderBy > 0 ? "DESC" : "ASC";
@@ -1278,7 +1278,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 			Iterator<?> it = list.iterator();
 			while (it.hasNext()) {
 				Object[] st = (Object[]) it.next();
-				SolicitudRespuesta s = new SolicitudRespuesta();
+				SubscriptionResponse s = new SubscriptionResponse();
 				s.setId_suscripcion((Long) Long.parseLong(st[0].toString()));
 				s.setId_servicio_informacion((Long) Long.parseLong(st[1]
 						.toString()));
@@ -1295,7 +1295,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		} finally {
 			closeConnection();
 		}
-		return (ArrayList<SolicitudRespuesta>) result;
+		return (ArrayList<SubscriptionResponse>) result;
 	}
 
 	@Override

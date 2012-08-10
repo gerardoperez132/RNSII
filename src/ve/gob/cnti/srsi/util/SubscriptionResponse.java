@@ -25,7 +25,11 @@ import java.util.Date;
  * 
  * @author Joaquín Pereira
  */
-public class SolicitudRespuesta {
+/**
+ * @author Richard Ricciardelli
+ * 
+ */
+public class SubscriptionResponse {
 
 	private long id_suscripcion;
 	private long id_servicio_informacion;
@@ -93,10 +97,11 @@ public class SolicitudRespuesta {
 
 	@Override
 	public String toString() {
-		return "SolicitudRespuesta [id_suscripcion=" + id_suscripcion
+		return "SuscripcionRespuesta [id_suscripcion=" + id_suscripcion
 				+ ", id_servicio_informacion=" + id_servicio_informacion
 				+ ", leido=" + leido + ", fecha_creado=" + fecha_creado
 				+ ", servicio=" + servicio + ", ente=" + ente + ", sentencia="
 				+ sentencia + "]";
 	}
+
 }

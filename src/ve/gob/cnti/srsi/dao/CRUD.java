@@ -25,8 +25,8 @@ import ve.gob.cnti.srsi.modelo.Telefono;
 import ve.gob.cnti.srsi.modelo.Visita;
 import ve.gob.cnti.srsi.util.ListaServiciosVisitados;
 import ve.gob.cnti.srsi.util.SectoresMasPublicados;
-import ve.gob.cnti.srsi.util.SolicitudRespuesta;
-import ve.gob.cnti.srsi.util.Solicitud_Suscripcion;
+import ve.gob.cnti.srsi.util.SubscriptionResponse;
+import ve.gob.cnti.srsi.util.SubscriptionRequest;
 
 /**
  * Definición de métodos para las operaciones en la base de datos.
@@ -561,7 +561,7 @@ public interface CRUD {
 	 * @return Lista de las solicitudes de suscrición a los servicios
 	 *         información.
 	 */
-	public ArrayList<Solicitud_Suscripcion> getSolicitudesSuscripcionPendientes(
+	public ArrayList<SubscriptionRequest> getSolicitudesSuscripcionPendientes(
 			long id_ente, byte orderBy);
 
 	/**
@@ -586,7 +586,7 @@ public interface CRUD {
 	 *            suscripción aceptadas - rechazadas a buscar.
 	 * @return Lista de las solicitudes de suscrición Aceptadas -Rechazadas.
 	 */
-	public ArrayList<SolicitudRespuesta> getlistaSolicitudesAceptadasRechazadas(
+	public ArrayList<SubscriptionResponse> getlistaSolicitudesAceptadasRechazadas(
 			long id_ente, byte orderBy);
 
 	/**
@@ -600,7 +600,7 @@ public interface CRUD {
 	 *            Proveedor del servicio de información solicitado
 	 * @param client
 	 *            Cliente que solicita el servicio de información
-	 * @return Un objeto {@link Solicitud_Suscripcion} ó 0 si no hay
+	 * @return Un objeto {@link SubscriptionRequest} ó 0 si no hay
 	 *         coincidencias.
 	 */
 	public long getId_solicitud_sucripcion(long service, long provider,

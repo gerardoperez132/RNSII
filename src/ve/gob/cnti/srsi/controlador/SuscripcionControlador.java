@@ -32,10 +32,10 @@ import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.SolicitudSuscripcion;
 import ve.gob.cnti.srsi.modelo.Suscrito;
 import ve.gob.cnti.srsi.modelo.Usuario;
-import ve.gob.cnti.srsi.util.SolicitudRespuesta;
-import ve.gob.cnti.srsi.util.Solicitud_Suscripcion;
 import ve.gob.cnti.srsi.util.EstadosTiempo;
 import ve.gob.cnti.srsi.util.ReadXmlTime;
+import ve.gob.cnti.srsi.util.SubscriptionRequest;
+import ve.gob.cnti.srsi.util.SubscriptionResponse;
 
 import com.opensymphony.xwork2.ActionContext;
 
@@ -43,8 +43,8 @@ import com.opensymphony.xwork2.ActionContext;
 public class SuscripcionControlador extends DAO implements Constants, Order,
 		Modelos, Sentencias {
 
-	private List<Solicitud_Suscripcion> solicitudes = new ArrayList<Solicitud_Suscripcion>();
-	private List<SolicitudRespuesta> solicitudesRespondidas = new ArrayList<SolicitudRespuesta>();
+	private List<SubscriptionRequest> solicitudes = new ArrayList<SubscriptionRequest>();
+	private List<SubscriptionResponse> solicitudesRespondidas = new ArrayList<SubscriptionResponse>();
 
 	private String codigo;
 	private String codigos[] = CODES;
@@ -228,7 +228,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 		// Lista solicitudes en base a las no leidas, pendientes,
 		session = ActionContext.getContext().getSession();
 		Usuario user = (Usuario) session.get("usuario");
-		setSolicitudesRespondidas((List<SolicitudRespuesta>) getlistaSolicitudesAceptadasRechazadas(
+		setSolicitudesRespondidas((List<SubscriptionResponse>) getlistaSolicitudesAceptadasRechazadas(
 				user.getId_ente(), ASC));
 		ListarSuscricionesAceptadasRechazadas = true;
 		return SUCCESS;
@@ -242,7 +242,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 		// Lista solicitudes en base a las no leidas, pendientes,
 		session = ActionContext.getContext().getSession();
 		Usuario user = (Usuario) session.get("usuario");
-		solicitudes = (List<Solicitud_Suscripcion>) getSolicitudesSuscripcionPendientes(
+		solicitudes = (List<SubscriptionRequest>) getSolicitudesSuscripcionPendientes(
 				user.getId_ente(), ASC);
 		ListarSuscricionesPendientes = true;
 		return SUCCESS;
@@ -390,11 +390,11 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 		usuario = (Usuario) session.get("usuario");
 		if (usuario == null) {
 			return false;
-		}		
+		}
 		return true;
 	}
-	
-	public void getTiempoFecha(){
+
+	public void getTiempoFecha() {
 		ReadXmlTime read = new ReadXmlTime();
 		fecha = read.getFechaTiempo();
 		estadosTiempo = read.getEstadosTiempo();
@@ -489,11 +489,11 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 		ListarSuscricionesPendientes = listarSuscricionesPendientes;
 	}
 
-	public List<Solicitud_Suscripcion> getSolicitudes() {
+	public List<SubscriptionRequest> getSolicitudes() {
 		return solicitudes;
 	}
 
-	public void setSolicitudes(List<Solicitud_Suscripcion> solicitudes) {
+	public void setSolicitudes(List<SubscriptionRequest> solicitudes) {
 		this.solicitudes = solicitudes;
 	}
 
@@ -538,12 +538,12 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 		ListarSuscricionesAceptadasRechazadas = listarSuscricionesAceptadasRechazadas;
 	}
 
-	public List<SolicitudRespuesta> getSolicitudesRespondidas() {
+	public List<SubscriptionResponse> getSolicitudesRespondidas() {
 		return solicitudesRespondidas;
 	}
 
 	public void setSolicitudesRespondidas(
-			List<SolicitudRespuesta> solicitudesRespondidas) {
+			List<SubscriptionResponse> solicitudesRespondidas) {
 		this.solicitudesRespondidas = solicitudesRespondidas;
 	}
 
