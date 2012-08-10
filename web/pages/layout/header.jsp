@@ -14,14 +14,13 @@
 	<input type="hidden" name="ordenado" id="ordenadoHeader" value="$request.getParameter('ordenado')" />
 	<input type="hidden" name="indice" id="indiceHeader" value="$request.getParameter('indice')" />
 	<input type="hidden" name="ordenamientoForo" id="ordenamientoForoHeader" value="$request.getParameter('ordenamientoForo')" />
-
 <div class="header">
 	<div class="logo" onclick="window.location.href='http://gobiernoenlinea.gob.ve/home/homeG.dot'" style="cursor:pointer"></div>
-	<!-- Ocultando logo de corazón Venezolano 
+	<!-- Ocultando logo de corazón venezolano 
 	<div class="anios"></div>
 	 -->
 </div>
-<div  class="headerInterna">
+<div class="headerInterna">
 	<a href="http://gobiernoenlinea.gob.ve/home/homeG.dot" style="cursor:pointer;" class="estilo2"><img  src="res/images/logo_web_interno.png" alt="Logo Gobierno en L&iacute;nea" title="Logo Gobierno en L&iacute;nea"  /></a>
 	<div class="ContenedorHeaderMenu" >
 		<ul>
@@ -32,17 +31,14 @@
 		</ul>
 	</div>	
 </div>
-
 <div class="info_bar">
 	<a href="http://gobiernoenlinea.gob.ve/home/homeG.dot" class="inicio" title="Inicio">inicio</a>
 		<a href="http://gobiernoenlinea.gob.ve/home/ayuda.dot"  class="pregunta" title="Ayuda">inicio</a>
-
         <div id="fontResize">
                 <h2> <a href="#" class="fontSizePlus" title="Aumentar Fuente">A+</a></h2>
                 <h2> <a href="#" class="fontSizeMinus" title="Disminuir Fuente">A-</a></h2>
         </div>
 		<s:set name="mes" name="mes"><s:date name="fecha" format="MM"/></s:set>
-		
         <span class="fecha">
         	<s:date name="fecha" format="dd" />
         	 de 
@@ -59,7 +55,6 @@
         	 <s:elseif test="%{#mes==11}">Noviembre,</s:elseif>        	 
         	 <s:else>Diciembre,</s:else>
         	 <s:date name="fecha" format="yyyy" /></span> <span class="hora">Hora: <em><s:date name="fecha" format="hh:mm a" /></em></span>
-
 			<select name="selectTiempo" id="selectTiempo" onchange="actualizarClima(this.value)">					
 					<s:iterator value="estadosTiempo">						
 						<option value="<s:property value="t_max"/>,<s:property value="t_min"/> "><s:property value="nombre"/></option>
@@ -69,7 +64,6 @@
 						</s:if>
 					</s:iterator>					
 			</select>
-        
 		<div id="tiempo_ciudad">
 			<span class="tiempo"><em>&nbsp;</em> T max: <a class="estilo2" id="t_max"><s:property value="%{tmax}"/></a>
 			&nbsp;&nbsp;&nbsp;

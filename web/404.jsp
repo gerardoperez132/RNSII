@@ -1,1 +1,1 @@
-<META HTTP-EQUIV="Refresh" CONTENT="0;URL=pages/error404.action">
+<meta http-equiv="refresh" content="0; URL=pages/error404.action">
