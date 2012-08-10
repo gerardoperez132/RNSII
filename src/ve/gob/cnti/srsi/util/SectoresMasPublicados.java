@@ -16,7 +16,7 @@
 package ve.gob.cnti.srsi.util;
 
 /**
- * Clase que sirve para encapsular los sectores que poseen mayor numero de
+ * Clase que sirve para encapsular los sectores que poseen mayor número de
  * servicios de información implementados.
  * 
  * @author Joaquín Pereira
