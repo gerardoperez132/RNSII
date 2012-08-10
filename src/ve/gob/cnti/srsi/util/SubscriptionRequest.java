@@ -93,11 +93,10 @@ public class SubscriptionRequest {
 
 	@Override
 	public String toString() {
-		return "Solicitud_Suscripcion [id_suscripcion=" + id_suscripcion
+		return "SubscriptionRequest [id_suscripcion=" + id_suscripcion
 				+ ", id_servicio_informacion=" + id_servicio_informacion
 				+ ", leido=" + leido + ", fecha_creado=" + fecha_creado
 				+ ", servicio=" + servicio + ", ente=" + ente + ", sentencia="
 				+ sentencia + "]";
 	}
-
 }

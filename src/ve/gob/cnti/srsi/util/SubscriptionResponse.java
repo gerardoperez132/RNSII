@@ -97,11 +97,10 @@ public class SubscriptionResponse {
 
 	@Override
 	public String toString() {
-		return "SuscripcionRespuesta [id_suscripcion=" + id_suscripcion
+		return "SubscriptionResponse [id_suscripcion=" + id_suscripcion
 				+ ", id_servicio_informacion=" + id_servicio_informacion
 				+ ", leido=" + leido + ", fecha_creado=" + fecha_creado
 				+ ", servicio=" + servicio + ", ente=" + ente + ", sentencia="
 				+ sentencia + "]";
 	}
-
 }
