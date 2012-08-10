@@ -193,7 +193,7 @@
 			<result name="error">error.jsp</result>
 		</action>
 
-		<action name="Buscar_Servicio" method="buscar_servicio2"
+		<action name="Buscar_Servicio" method="buscarServicio2"
 			class="ve.gob.cnti.srsi.controlador.ConsultasControlador">
 			<result name="success">registro/suscripcion.jsp</result>
 			<result name="input">registro/suscripcion.jsp</result>
@@ -605,7 +605,7 @@
 			<result name="error">error.jsp</result>
 		</action>
 
-		<action name="buscar_servicio" method="buscar_servicio"
+		<action name="buscar_servicio" method="buscarServicio"
 			class="ve.gob.cnti.srsi.controlador.ConsultasControlador">
 			<result name="success">index.jsp</result>
 			<result name="input">index.jsp</result>

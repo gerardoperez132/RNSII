@@ -171,7 +171,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 	}
 
 	@SuppressWarnings("unchecked")
-	public String buscar_servicio() {
+	public String buscarServicio() {
 		inicio();
 		buscarServicio = true;
 		if (!cadena.toString().toUpperCase().matches(REGEX_TITLE)) {
@@ -192,7 +192,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 	}
 
 	@SuppressWarnings("unchecked")
-	public String buscar_servicio2() {
+	public String buscarServicio2() {
 		getTiempoFecha();
 		session = ActionContext.getContext().getSession();
 		if (session.isEmpty()) {
