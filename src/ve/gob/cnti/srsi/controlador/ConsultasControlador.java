@@ -106,15 +106,15 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 
 	public String inicio() {
 		getTiempoFecha();
-		listaSectores = listado_de_Sectores(LIMITE_SECTORES, false);
-		listaSectores2 = listado_de_Sectores(-1, true);
+		listaSectores = listadoSectores(LIMITE_SECTORES, false);
+		listaSectores2 = listadoSectores(-1, true);
 		SI_masVisitados = listarServiciosVisitados(LIMITE_VISITADOS, false);
 		return SUCCESS;
 	}
 
 	public String inicio404() {
 		getTiempoFecha();
-		listaSectores = listado_de_Sectores(LIMITE_SECTORES, false);
+		listaSectores = listadoSectores(LIMITE_SECTORES, false);
 		SI_masVisitados = listarServiciosVisitados(LIMITE_VISITADOS, false);
 		error404 = true;
 		System.out.println("error404");
@@ -124,7 +124,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 	@SuppressWarnings("unchecked")
 	public String listarSector() {
 		getTiempoFecha();
-		listaSectores = listado_de_Sectores(LIMITE_SECTORES, false);
+		listaSectores = listadoSectores(LIMITE_SECTORES, false);
 		SI_masVisitados = listarServiciosVisitados(LIMITE_VISITADOS, false);
 		if (!verificarLong(id_sector))
 			return INPUT;
@@ -144,8 +144,8 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 	public String listarSectores() {
 		getTiempoFecha();
 		consulta_listarSectores = true;
-		listaSectores = listado_de_Sectores(LIMITE_SECTORES, false);
-		listaSectores2 = listado_de_Sectores(-1, true);
+		listaSectores = listadoSectores(LIMITE_SECTORES, false);
+		listaSectores2 = listadoSectores(-1, true);
 		SI_masVisitados = listarServiciosVisitados(LIMITE_VISITADOS, false);
 		return SUCCESS;
 	}
@@ -153,7 +153,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 	@SuppressWarnings("unchecked")
 	public String listarServicios() {
 		getTiempoFecha();
-		listaSectores = listado_de_Sectores(LIMITE_SECTORES, false);
+		listaSectores = listadoSectores(LIMITE_SECTORES, false);
 		SI_masVisitados = listarServiciosVisitados(LIMITE_VISITADOS, false);
 		consulta_listarServicios = true;
 		entes = (List<Ente>) read(new Ente());
@@ -220,7 +220,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 		getTiempoFecha();
 		if (!verificarLong(id_servicio))
 			return INPUT;
-		listaSectores = listado_de_Sectores(LIMITE_SECTORES, false);
+		listaSectores = listadoSectores(LIMITE_SECTORES, false);
 		examinarServicio = true;
 		servicio = (ServicioInformacion) read(servicio, id_servicio);
 		if (!servicio.isPublicado())
@@ -307,7 +307,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 	// *activo
 	// *completo
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public List<SectoresMasPublicados> listado_de_Sectores(int limit,
+	public List<SectoresMasPublicados> listadoSectores(int limit,
 			boolean listaCompleta) {
 		List<Sector> sectores = new ArrayList<Sector>();
 		List<SectoresMasPublicados> listaSectores = new ArrayList<SectoresMasPublicados>();

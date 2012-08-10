@@ -63,7 +63,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 	private boolean ListarSuscricionesPendientes;
 	private boolean detalles_solicitud;
 	private boolean detalles_respuesta;
-	private boolean aprobarRechasar;
+	private boolean aprobarRechazar;
 	private boolean ListarSuscricionesAceptadasRechazadas;
 	private boolean solicitarSuscripcion;
 	private String sentencia[] = { "Aceptado", "Rechazado" };
@@ -283,7 +283,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 	}
 
 	@SkipValidation
-	public String preparar_AprobarRechasarSuscripcion() {
+	public String prepararAprobarRechazarSuscripcion() {
 		getTiempoFecha();
 		if (!sessionValidate())
 			return INPUT;
@@ -302,14 +302,14 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 		servicio = (ServicioInformacion) read(servicio,
 				solicitud.getId_servicio_informacion());
 		// Variable necesaria para la vista.
-		aprobarRechasar = true;
+		aprobarRechazar = true;
 		return SUCCESS;
 	}
 
 	// TODO Enviar notificación por correo, falta colocar el mensaje registro
 	// exitoso para la vista
 	@SkipValidation
-	public String AprobarRechasarSuscripcion() {
+	public String aprobarRechazarSuscripcion() {
 		getTiempoFecha();
 		if (!sessionValidate())
 			return INPUT;
@@ -367,7 +367,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 		// Actualiza la solicitud de suscripción
 		update(solicitud, solicitud.getId_solicitud_suscripcion());
 		addActionMessage("EL VEREDICTO DE LA SOLICITUD DE SUSCRIPCIÓN HA SIDO PROCESADA CORRECTAMENTE");
-		aprobarRechasar = false;
+		aprobarRechazar = false;
 		return SUCCESS;
 	}
 
@@ -513,12 +513,12 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 		this.id_solicitud_suscripcion = id_solicitud_suscripcion;
 	}
 
-	public boolean isAprobarRechasar() {
-		return aprobarRechasar;
+	public boolean isAprobarRechazar() {
+		return aprobarRechazar;
 	}
 
-	public void setAprobarRechasar(boolean aprobarRechasar) {
-		this.aprobarRechasar = aprobarRechasar;
+	public void setAprobarRechazar(boolean aprobarRechazar) {
+		this.aprobarRechazar = aprobarRechazar;
 	}
 
 	public String[] getSentencia() {

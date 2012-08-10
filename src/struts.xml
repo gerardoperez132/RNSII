@@ -22,8 +22,7 @@
 <struts>
 	<package name="default" extends="struts-default">
 
-		<!-- ******* ******* ****** ******* interceptores para evitar el doubleSubmit 
-			******* ******* ****** ******* -->
+		<!-- Interceptores para evitar el doubleSubmit -->
 		<interceptors>
 			<interceptor-stack name="doubleSubmit">
 				<interceptor-ref name="fileUpload">
@@ -48,9 +47,7 @@
 				result="error" />
 		</global-exception-mappings>
 
-		<!-- ******* ******* ****** ******* Actions de servicios de información 
-			******* ******* ****** ******* -->
-
+		<!-- Actions de servicios de información -->
 		<action name="prepararRegistro" method="prepararRegistro"
 			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
 			<result name="success">
@@ -207,17 +204,13 @@
 			<result name="error">error.jsp</result>
 		</action>
 
-
-		<!--******* ******* ****** ******* Actions para Funcionalidades ******* 
-			******* ****** ******* -->
-
+		<!-- Actions para funcionalidades -->
 		<action name="prepararModificacionesServicioInformacion"
 			method="prepararModificaciones" class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
 			<result name="success">modificar/modificar_servicio_informacion.jsp
 			</result>
 			<result name="error">error.jsp</result>
 		</action>
-
 
 		<action name="prepararFuncionalidad" method="prepararFormulario"
 			class="ve.gob.cnti.srsi.controlador.FuncionalidadControlador">
@@ -268,9 +261,7 @@
 			<result name="error">error.jsp</result>
 		</action>
 
-		<!--******* ******* ****** ******* Actions para Entradas ******* ******* 
-			****** ******* -->
-
+		<!-- Actions para entradas -->
 		<action name="prepararEntradas" method="prepararFormulario"
 			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
 			<result name="success">registro/entradas.jsp</result>
@@ -335,8 +326,7 @@
 			<result name="error">error.jsp</result>
 		</action>
 
-		<!-- ******* ******* ****** ******* Actions para Salidas ******* ******* 
-			****** ******* -->
+		<!-- Actions para salidas -->
 		<action name="prepararSalidas" method="prepararFormulario"
 			class="ve.gob.cnti.srsi.controlador.SalidaControlador">
 			<result name="success">registro/salidas.jsp</result>
@@ -400,8 +390,7 @@
 			<result name="error">error.jsp</result>
 		</action>
 
-		<!-- ******* ******* ****** ******* Logins ******* ******* ****** ******* -->
-
+		<!-- Logins -->
 		<action name="autenticar" method="mostrarLogin"
 			class="ve.gob.cnti.srsi.controlador.LoginControlador">
 			<result name="success">user/login.jsp</result>
@@ -459,8 +448,7 @@
 			<result name="error">error.jsp</result>
 		</action>
 
-		<!-- ******* ******* ****** ******* Actions para Usuarios ******* ******* 
-			****** ******* -->
+		<!-- Actions para usuarios -->
 		<action name="configuracionUsuario" method="configuracion"
 			class="ve.gob.cnti.srsi.controlador.UsuarioControlador">
 			<result name="success">registro/formulario_usuario.jsp</result>
@@ -503,8 +491,7 @@
 			<result name="error">error.jsp</result>
 		</action>
 
-		<!-- ******* ******* ******* ******* Suscripciones ******* ******* ******* 
-			******* prepararSolicitarSuscripcion -->
+		<!-- Actions para suscripciones -->
 		<action name="prepararSolicitarSuscripcion" method="prepararSolicitarSuscripcion"
 			class="ve.gob.cnti.srsi.controlador.SuscripcionControlador">
 			<result name="success">registro/suscripcion.jsp</result>
@@ -519,14 +506,14 @@
 			<result name="error">error.jsp</result>
 		</action>
 
-		<action name="preparar_AprobarRechasarSuscripcion" method="preparar_AprobarRechasarSuscripcion"
+		<action name="prepararAprobarRechazarSuscripcion" method="prepararAprobarRechazarSuscripcion"
 			class="ve.gob.cnti.srsi.controlador.SuscripcionControlador">
 			<result name="success">registro/suscripcion.jsp</result>
 			<result name="input" type="redirectAction">home</result>
 			<result name="error">error.jsp</result>
 		</action>
 
-		<action name="AprobarRechasarSuscripcion" method="AprobarRechasarSuscripcion"
+		<action name="aprobarRechazarSuscripcion" method="aprobarRechazarSuscripcion"
 			class="ve.gob.cnti.srsi.controlador.SuscripcionControlador">
 			<interceptor-ref name="doubleSubmit" />
 			<result name="success">registro/suscripcion.jsp</result>
@@ -565,8 +552,7 @@
 			<result name="error">error.jsp</result>
 		</action>
 
-		<!-- ******* ******* ****** ******* Actions para el usuario final ******* 
-			******* ****** ******* -->
+		<!-- Actions para el usuario final -->
 		<action name="SRSI" method="inicio"
 			class="ve.gob.cnti.srsi.controlador.ConsultasControlador">
 			<result name="success">index.jsp</result>
@@ -618,8 +604,7 @@
 			<result name="error">error.jsp</result>
 		</action>
 
-		<!-- ******* ******* ******* ******* ajax consultas ******* ******* ******* 
-			******* -->
+		<!-- Consultas AJAX -->
 		<action name="dato_haslength" method="dato_haslength"
 			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
 			<result name="success">ajax/bool.jsp</result>
@@ -640,7 +625,8 @@
 	</package>
 
 	<package name="json" extends="json-default">
-		<action name="getJSONResult" class="ve.gob.cnti.srsi.util.JSON" method="obtenerError">
+		<action name="getJSONResult" class="ve.gob.cnti.srsi.util.JSON"
+			method="obtenerError">
 			<result type="json" />
 		</action>
 	</package>
