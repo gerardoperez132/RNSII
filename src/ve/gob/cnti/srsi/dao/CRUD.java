@@ -23,7 +23,7 @@ import ve.gob.cnti.srsi.modelo.Correo;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.Telefono;
 import ve.gob.cnti.srsi.modelo.Visita;
-import ve.gob.cnti.srsi.util.ListaSImasVisitados;
+import ve.gob.cnti.srsi.util.ListaServiciosVisitados;
 import ve.gob.cnti.srsi.util.SectoresMasPublicados;
 import ve.gob.cnti.srsi.util.SolicitudRespuesta;
 import ve.gob.cnti.srsi.util.Solicitud_Suscripcion;
@@ -470,7 +470,7 @@ public interface CRUD {
 	 * @author Joaquín Pereira
 	 * @return Retorna una lista con los servicios de información más visitados.
 	 */
-	public List<ListaSImasVisitados> SImasVisitados();
+	public List<ListaServiciosVisitados> SImasVisitados();
 
 	/**
 	 * Permite consultar una cantidad n de sectores con más servicios de

@@ -21,13 +21,13 @@ package ve.gob.cnti.srsi.util;
  * @author Joaquín Pereira
  * 
  */
-public class ListaSImasVisitados {
+public class ListaServiciosVisitados {
 
 	private long id_servicio_informacion;
 	private String nombre;
 	private long visitas;
 
-	public ListaSImasVisitados() {
+	public ListaServiciosVisitados() {
 	}
 
 	public long getId_servicio_informacion() {
@@ -56,7 +56,7 @@ public class ListaSImasVisitados {
 
 	@Override
 	public String toString() {
-		return "ListaSImasVisitados [id_servicio_informacion="
+		return "ListaServiciosVisitados [id_servicio_informacion="
 				+ id_servicio_informacion + ", nombre=" + nombre + ", visitas="
 				+ visitas + "]";
 	}

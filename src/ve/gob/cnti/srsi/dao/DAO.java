@@ -46,7 +46,7 @@ import ve.gob.cnti.srsi.modelo.TipoDato;
 import ve.gob.cnti.srsi.modelo.UnionAreaServicioInformacion;
 import ve.gob.cnti.srsi.modelo.UnionArquitecturaServicioInformacion;
 import ve.gob.cnti.srsi.modelo.Visita;
-import ve.gob.cnti.srsi.util.ListaSImasVisitados;
+import ve.gob.cnti.srsi.util.ListaServiciosVisitados;
 import ve.gob.cnti.srsi.util.SectoresMasPublicados;
 import ve.gob.cnti.srsi.util.SolicitudRespuesta;
 import ve.gob.cnti.srsi.util.Solicitud_Suscripcion;
@@ -897,8 +897,8 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 
 	@SuppressWarnings("rawtypes")
 	@Override
-	public List<ListaSImasVisitados> SImasVisitados() {
-		List<ListaSImasVisitados> result = new ArrayList<ListaSImasVisitados>();
+	public List<ListaServiciosVisitados> SImasVisitados() {
+		List<ListaServiciosVisitados> result = new ArrayList<ListaServiciosVisitados>();
 		try {
 			startConnection();
 			Query query = session
@@ -924,7 +924,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 			Iterator it = list.iterator();
 			while (it.hasNext()) {
 				Object[] st = (Object[]) it.next();
-				ListaSImasVisitados si = new ListaSImasVisitados();
+				ListaServiciosVisitados si = new ListaServiciosVisitados();
 				si.setId_servicio_informacion((Long) Long.parseLong(st[0]
 						.toString()));
 				si.setNombre((String) st[1]);

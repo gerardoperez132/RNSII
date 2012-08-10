@@ -50,7 +50,7 @@ import ve.gob.cnti.srsi.modelo.UnionArquitecturaServicioInformacion;
 import ve.gob.cnti.srsi.modelo.Usuario;
 import ve.gob.cnti.srsi.modelo.Visita;
 import ve.gob.cnti.srsi.util.EstadosTiempo;
-import ve.gob.cnti.srsi.util.ListaSImasVisitados;
+import ve.gob.cnti.srsi.util.ListaServiciosVisitados;
 import ve.gob.cnti.srsi.util.ReadXmlTime;
 import ve.gob.cnti.srsi.util.SectoresMasPublicados;
 
@@ -82,7 +82,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 	private List<ServicioInformacion> servicios = new ArrayList<ServicioInformacion>();
 	List<SectoresMasPublicados> listaSectores = new ArrayList<SectoresMasPublicados>();
 	List<SectoresMasPublicados> listaSectores2 = new ArrayList<SectoresMasPublicados>();
-	private List<ListaSImasVisitados> SI_masVisitados = new ArrayList<ListaSImasVisitados>();
+	private List<ListaServiciosVisitados> SI_masVisitados = new ArrayList<ListaServiciosVisitados>();
 	private List<EstadosTiempo> estadosTiempo = new ArrayList<EstadosTiempo>();
 	private Date fecha;
 	@SuppressWarnings("rawtypes")
@@ -356,14 +356,14 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 		return listaSectores;
 	}
 
-	public List<ListaSImasVisitados> listarServiciosVisitados(int limit,
+	public List<ListaServiciosVisitados> listarServiciosVisitados(int limit,
 			boolean listaCompleta) {
-		List<ListaSImasVisitados> sisVisitados = new ArrayList<ListaSImasVisitados>();
-		List<ListaSImasVisitados> sisVisitados2 = new ArrayList<ListaSImasVisitados>();
+		List<ListaServiciosVisitados> sisVisitados = new ArrayList<ListaServiciosVisitados>();
+		List<ListaServiciosVisitados> sisVisitados2 = new ArrayList<ListaServiciosVisitados>();
 		sisVisitados = SImasVisitados();
-		Iterator<ListaSImasVisitados> ite = sisVisitados.iterator();
+		Iterator<ListaServiciosVisitados> ite = sisVisitados.iterator();
 		while (ite.hasNext()) {
-			ListaSImasVisitados siv = new ListaSImasVisitados();
+			ListaServiciosVisitados siv = new ListaServiciosVisitados();
 			ServicioInformacion si = new ServicioInformacion();
 			siv = ite.next();
 			si = (ServicioInformacion) read(si,
@@ -635,11 +635,11 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 		this.visita = visita;
 	}
 
-	public List<ListaSImasVisitados> getSI_masVisitados() {
+	public List<ListaServiciosVisitados> getSI_masVisitados() {
 		return SI_masVisitados;
 	}
 
-	public void setSI_masVisitados(List<ListaSImasVisitados> sI_masVisitados) {
+	public void setSI_masVisitados(List<ListaServiciosVisitados> sI_masVisitados) {
 		SI_masVisitados = sI_masVisitados;
 	}
 
