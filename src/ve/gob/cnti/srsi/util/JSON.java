@@ -11,7 +11,8 @@ import com.opensymphony.xwork2.ActionSupport;
 
 /**
  * Esta clase genera información en formato JSON sobre los archivos de
- * propiedades de internacionalización.
+ * propiedades de internacionalización y las constantes con las expresiones
+ * regulares.
  * 
  * @author Richard Ricciardelli
  * @author Joaquín Pereira
