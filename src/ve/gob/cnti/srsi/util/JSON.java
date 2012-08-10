@@ -9,6 +9,14 @@ import ve.gob.cnti.srsi.i18n.Errors;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+/**
+ * Esta clase genera información en formato JSON sobre los archivos de
+ * propiedades de internacionalización.
+ * 
+ * @author Richard Ricciardelli
+ * @author Joaquín Pereira
+ * @see Errors
+ */
 @SuppressWarnings("serial")
 public class JSON extends ActionSupport {
 
