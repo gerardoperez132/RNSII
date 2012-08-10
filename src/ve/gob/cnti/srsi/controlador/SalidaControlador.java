@@ -303,7 +303,7 @@ public class SalidaControlador extends DAO implements Formulario,
 	public void getTiempoFecha() {
 		ReadXmlTime read = new ReadXmlTime();
 		fecha = read.getFechaTiempo();
-		estadosTiempo = read.getEstados_Tiempo();
+		estadosTiempo = read.getEstadosTiempo();
 	}
 
 	public List<EntradaSalida> getSalidas() {

@@ -200,7 +200,7 @@ public class UsuarioControlador extends DAO {
 	public void getTiempoFecha(){
 		ReadXmlTime read = new ReadXmlTime();
 		fecha = read.getFechaTiempo();
-		estadosTiempo = read.getEstados_Tiempo();
+		estadosTiempo = read.getEstadosTiempo();
 	}
 
 	public Usuario getUsuario() {

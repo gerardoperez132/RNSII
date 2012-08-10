@@ -14,32 +14,36 @@ import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 
 public class ReadXmlTime {
-	
-	public List<EstadosTiempo> getEstados_Tiempo(){
-		SAXBuilder builder = new SAXBuilder();		
-		List<EstadosTiempo> estados = new ArrayList<EstadosTiempo>();	
+
+	public List<EstadosTiempo> getEstadosTiempo() {
+		SAXBuilder builder = new SAXBuilder();
+		List<EstadosTiempo> estados = new ArrayList<EstadosTiempo>();
 		try {
 			URL xml_doc = new URL("http://www.inameh.gob.ve/pronostico.php");
-			URLConnection xmlConnection = xml_doc.openConnection();					
+			URLConnection xmlConnection = xml_doc.openConnection();
 			try {
-				Document document = (Document) builder.build(xmlConnection.getInputStream());
+				Document document = (Document) builder.build(xmlConnection
+						.getInputStream());
 				Element rootNode = document.getRootElement();
 				@SuppressWarnings("rawtypes")
 				List list = rootNode.getChildren("zona");
 				for (int i = 0; i < list.size(); i++) {
 					EstadosTiempo estado = new EstadosTiempo();
 					Element node = (Element) list.get(i);
-					estado.setCodigo(Integer.parseInt(node.getChildText("codigo")));
+					estado.setCodigo(Integer.parseInt(node
+							.getChildText("codigo")));
 					estado.setNombre(node.getChildText("nombre"));
-					estado.setT_max(Integer.parseInt(node.getChildText("temp_m")));
-					estado.setT_min(Integer.parseInt(node.getChildText("temp_mi")));
+					estado.setT_max(Integer.parseInt(node
+							.getChildText("temp_m")));
+					estado.setT_min(Integer.parseInt(node
+							.getChildText("temp_mi")));
 					estados.add(estado);
 				}
 			} catch (IOException io) {
 				System.out.println(io.getMessage());
 			} catch (JDOMException jdomex) {
 				System.out.println(jdomex.getMessage());
-			}			
+			}
 		} catch (MalformedURLException me) {
 			System.out.println("MalformedURLException: " + me);
 		} catch (IOException ioe) {
@@ -47,9 +51,8 @@ public class ReadXmlTime {
 		}
 		return estados;
 	}
-	
-	public Date getFechaTiempo(){
+
+	public Date getFechaTiempo() {
 		return new Date();
 	}
-	
 }

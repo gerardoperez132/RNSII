@@ -822,7 +822,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	public void getTiempoFecha() {
 		ReadXmlTime read = new ReadXmlTime();
 		fecha = read.getFechaTiempo();
-		estadosTiempo = read.getEstados_Tiempo();
+		estadosTiempo = read.getEstadosTiempo();
 	}
 
 	public List<Sector> getSectores() {

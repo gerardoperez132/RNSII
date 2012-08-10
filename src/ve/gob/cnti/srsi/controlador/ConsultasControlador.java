@@ -295,7 +295,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 	public void getTiempoFecha() {
 		ReadXmlTime read = new ReadXmlTime();
 		fecha = read.getFechaTiempo();
-		estadosTiempo = read.getEstados_Tiempo();
+		estadosTiempo = read.getEstadosTiempo();
 	}
 
 	// TODO listar sectores
