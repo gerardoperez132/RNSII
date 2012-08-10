@@ -93,7 +93,7 @@ public class SolicitudRespuesta {
 
 	@Override
 	public String toString() {
-		return "Solicitud_Respuesta [id_suscripcion=" + id_suscripcion
+		return "SolicitudRespuesta [id_suscripcion=" + id_suscripcion
 				+ ", id_servicio_informacion=" + id_servicio_informacion
 				+ ", leido=" + leido + ", fecha_creado=" + fecha_creado
 				+ ", servicio=" + servicio + ", ente=" + ente + ", sentencia="
