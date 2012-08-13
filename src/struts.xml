@@ -257,6 +257,7 @@
 
 		<action name="eliminarFuncionalidad" method="eliminarFuncionalidad"
 			class="ve.gob.cnti.srsi.controlador.FuncionalidadControlador">
+			<interceptor-stack name="doubleSubmit" />
 			<result name="success">registro/funcionalidades.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
