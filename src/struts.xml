@@ -254,12 +254,13 @@
 			<result name="error">error.jsp</result>
 		</action>
 
-		<action name="eliminarFuncionalidad" method="eliminarFuncionalidad" class="ve.gob.cnti.srsi.controlador.FuncionalidadControlador">
-			<interceptor-stack name="doubleSubmit"/>
+		<action name="eliminarFuncionalidad" method="eliminarFuncionalidad"
+			class="ve.gob.cnti.srsi.controlador.FuncionalidadControlador">
+			<interceptor-ref name="doubleSubmit" />
 			<result name="success">registro/funcionalidades.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
-		
+
 		<!-- Actions para entradas -->
 		<action name="prepararEntradas" method="prepararFormulario"
 			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
