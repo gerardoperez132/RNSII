@@ -17,11 +17,14 @@ package ve.gob.cnti.srsi.modelo;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import ve.gob.cnti.srsi.dao.Constants;
 
 /**
  * Clase modelo con los atributos de la tabla entes.
@@ -37,9 +40,12 @@ public class Ente {
 	private long id;
 	private long id_ente;
 	private long id_padre;
+	@Column(length = Constants.TITLE_LENGTH)
 	private String nombre;
+	@Column(length = Constants.TITLE_LENGTH)
 	private String siglas;
 	private String rif;
+	@Column(length = Constants.DESCRIPTION_LENGTH)
 	private String direccion;
 	private int status;
 	private Date fecha_creado;

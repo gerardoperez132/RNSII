@@ -17,11 +17,14 @@ package ve.gob.cnti.srsi.modelo;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import ve.gob.cnti.srsi.dao.Constants;
 
 /**
  * Tipo de dato que se está utilizando. Entre ellos están los datos tipo
@@ -40,7 +43,9 @@ public class TipoDato {
 	private long id_tipo_dato;
 	/** Simple (1) o compuesto (0). */
 	private int tipo;
+	@Column(length = Constants.TITLE_LENGTH)
 	private String nombre;
+	@Column(length = Constants.DESCRIPTION_LENGTH)
 	private String descripcion;
 	private boolean hasLength;
 	private boolean hasformatted;
@@ -135,6 +140,6 @@ public class TipoDato {
 				+ descripcion + ", hasLength=" + hasLength + ", hasformatted="
 				+ hasformatted + ", status=" + status + ", fecha_creado="
 				+ fecha_creado + ", fecha_modificado=" + fecha_modificado + "]";
-	}	
-	
+	}
+
 }

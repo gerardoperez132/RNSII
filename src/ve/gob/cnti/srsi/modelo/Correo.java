@@ -17,11 +17,14 @@ package ve.gob.cnti.srsi.modelo;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import ve.gob.cnti.srsi.dao.Constants;
 
 /**
  * Clase modelo con los atributos de la tabla correos.
@@ -40,6 +43,7 @@ public class Correo {
 	private long id_ente;
 	private long id_usuario;
 	private long id_servicio_informacion;
+	@Column(length = Constants.TITLE_LENGTH)
 	private String correo;
 	private int status;
 	private Date fecha_creado;

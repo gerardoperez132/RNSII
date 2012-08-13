@@ -17,11 +17,14 @@ package ve.gob.cnti.srsi.modelo;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import ve.gob.cnti.srsi.dao.Constants;
 
 /**
  * Especifica los niveles de seguridad de un servicio de información. Estos
@@ -38,6 +41,7 @@ public class Seguridad {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private long id_seguridad;
+	@Column(length = Constants.TITLE_LENGTH)
 	private String nombre;
 	private int status;
 	private Date fecha_creado;

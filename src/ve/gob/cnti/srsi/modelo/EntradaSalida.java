@@ -17,11 +17,14 @@ package ve.gob.cnti.srsi.modelo;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import ve.gob.cnti.srsi.dao.Constants;
 
 /**
  * Esta clase indica las diferentes entradas y salidas que tiene una
@@ -45,7 +48,9 @@ public class EntradaSalida {
 	private long id_usuario;
 	private long id_tipo_dato;
 	private long id_padre;
+	@Column(length = Constants.TITLE_LENGTH)
 	private String nombre;
+	@Column(length = Constants.DESCRIPTION_LENGTH)
 	private String descripcion;
 	private long id_formato;
 	private String longitud;
