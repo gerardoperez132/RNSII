@@ -14,11 +14,15 @@
 <link rel="stylesheet" type="text/css" href="res/css/table2.css">
 <link rel="stylesheet" type="text/css" href="res/css/table_tree.css">
 <link rel="stylesheet" type="text/css" href="res/js/plugins/sexy-alert-box-1.2.2/sexyalertbox.css" media="all">
+<link rel="stylesheet" type="text/css" href="res/js/plugins/sexy-tooltips/blue.css" media="all">
+<link rel="stylesheet" type="text/css" href="res/js/plugins/sexy-alert-box-1.2.2/sexyalertbox.css" media="all">
 <!-- JS (required) -->
 <script type="text/javascript" src="/SRSI/pages/res/js/jquery-1.7.1.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/SRSI/pages/res/js/funciones_ge.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/jquery.treeTable.js" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/main.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/registro/funcionalidades.js" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/plugins/sexy-tooltips.v1.1.jquery.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/plugins/sexy-alert-box-1.2.2/jquery.easing.1.3.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/plugins/sexy-alert-box-1.2.2/sexyalertbox.v1.2.jquery.js" charset="UTF-8"></script>
 <title><s:text name="inicio" /></title>
@@ -152,6 +156,17 @@
 																onclick="eliminar_Fun(<s:property value="#result_Status.index"/>,'<s:property value="nombre" />');"/>
 														</form>
 													</td>
+													<s:if test="condición para saber si tiene 1 salida aunque sea">
+														<s:i18n name="ve/gob/cnti/srsi/i18n/errors">
+														<td style="margin: 0; padding: 0;">
+															<img  src="res/img/important.png" id="h<s:property value='#result_datos.index'/>" alt="ayuda" 
+															onmouseover="tip(this);" name="h<s:property value='#result_datos.index'/>" height="25"  width="30"/>
+															<div class="h<s:property value='#result_datos.index'/>" style="visibility: hidden;display: none;" >
+																<p><s:text name="error.servicio.incomplete.salidas"/></p>
+															</div>			
+														</td>
+														</s:i18n>
+													</s:if>	
 												</tr>
 											</table>
 										</td>
