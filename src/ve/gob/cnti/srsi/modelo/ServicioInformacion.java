@@ -24,6 +24,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import ve.gob.cnti.srsi.dao.Constants;
+
 /**
  * Clase modelo con los atributos de los servicios de información del Estado
  * Venezolano.
@@ -46,9 +48,11 @@ public class ServicioInformacion {
 	private long id_servicio_informacion;
 	private long id_ente;
 	private long id_usuario;
+	@Column(length = Constants.TITLE_LENGTH)
 	private String nombre;
-	@Column(length = 765)
+	@Column(length = Constants.DESCRIPTION_LENGTH)
 	private String descripcion;
+	// TODO ¿Debería considerar el límite de caracteres?
 	private String version;
 	private String responsable;
 	private boolean publicado;
