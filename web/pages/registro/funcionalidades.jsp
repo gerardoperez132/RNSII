@@ -109,6 +109,7 @@
 					<form action="prepararFuncionalidad" method="POST">
 						<s:hidden name="id_servicio_informacion"></s:hidden>
 						<s:hidden name="modificar"></s:hidden>
+						<s:token name="token" />
 						<input type="submit" value="<s:text name="funcionalidad.add"/>" />
 					</form>
 					</td><td>						
@@ -128,20 +129,20 @@
 								<th><s:text name="fecha"></s:text></th>
 								<th><s:text name="acciones"></s:text></th>
 							</tr>
-							<s:if test="funcionalidades.size() > 0">
-								<s:iterator value="funcionalidades" status="result_Status">
+							<s:if test="funcionalidadesPublicables.size() > 0">
+								<s:iterator value="funcionalidadesPublicables" status="result_Status">
 									<tr id="node-<s:property value="#result_Status.index"/>">
-										<th><s:property value="id_funcionalidad" /></th>
-										<td><s:property value="nombre" /></td>
-										<td><s:date name="fecha_creado" format="d'/'MM'/'yyyy" /></td>
+										<th><s:property value="funcionalidad.id_funcionalidad" /></th>
+										<td><s:property value="funcionalidad.nombre" /></td>
+										<td><s:date name="funcionalidad.fecha_creado" format="d'/'MM'/'yyyy" /></td>
 										<td>
 											<table style="margin: 0; padding: 0;">
 												<tr style="margin: 0; padding: 0;">
 													<td style="margin: 0; padding: 0;">
 														<form action="prepararFuncionalidad" method="POST">
 															<s:hidden name="id_funcionalidad"
-																value="%{id_funcionalidad}"></s:hidden>
-															<s:hidden name="id_servicio_informacion"></s:hidden>															
+																value="%{funcionalidad.id_funcionalidad}"></s:hidden>
+															<s:hidden name="id_servicio_informacion"></s:hidden>
 															<input type="submit" value="<s:text name="modificar"/>"
 																style="font-size: 0.9em;" />
 														</form>
@@ -150,19 +151,24 @@
 														<form action="eliminarFuncionalidad" method="POST" onsubmit="return false;"
 														      id="id_<s:property value="#result_Status.index" />">
 															<s:hidden name="id_funcionalidad"
-																value="%{id_funcionalidad}"></s:hidden>
+																value="%{funcionalidad.id_funcionalidad}"></s:hidden>
 															<s:hidden name="id_servicio_informacion"></s:hidden>
+															<s:token name="token" />
 															<input type="submit" value="<s:text name="eliminar" />" style="font-size: 0.9em;" 
-																onclick="eliminar_Fun(<s:property value="#result_Status.index"/>,'<s:property value="nombre" />');"/>
+																onclick="eliminar_Fun(<s:property value="#result_Status.index"/>,'<s:property value="funcionalidad.nombre" />');"/>
 														</form>
 													</td>
-													<s:if test="condición para saber si tiene 1 salida aunque sea">
+													<s:if test="!salidas.size()>0">
 														<s:i18n name="ve/gob/cnti/srsi/i18n/errors">
 														<td style="margin: 0; padding: 0;">
 															<img  src="res/img/important.png" id="h<s:property value='#result_datos.index'/>" alt="ayuda" 
 															onmouseover="tip(this);" name="h<s:property value='#result_datos.index'/>" height="25"  width="30"/>
 															<div class="h<s:property value='#result_datos.index'/>" style="visibility: hidden;display: none;" >
 																<p><s:text name="error.servicio.incomplete.salidas"/></p>
+																ENTRADAS <s:property value="entradas.size()"/>
+																<s:if test="!entradas.size()>0">
+																<p><s:text name="error.servicio.incomplete.entradas"/></p>
+																</s:if>																
 															</div>			
 														</td>
 														</s:i18n>
@@ -178,6 +184,7 @@
 									<th colspan="4"><s:text name="funcionalidades.error" /><br><form action="prepararFuncionalidad" method="POST">
 						<s:hidden name="id_servicio_informacion"></s:hidden>
 						<s:hidden name="modificar"></s:hidden>
+						<s:token name="token" />
 						<input type="submit" value="<s:text name="crear.funcionalidad"/>" />
 					</form></th>
 								</tr>

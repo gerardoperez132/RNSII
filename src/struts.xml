@@ -259,6 +259,7 @@
 			<interceptor-ref name="doubleSubmit" />
 			<result name="success">registro/funcionalidades.jsp</result>
 			<result name="error">error.jsp</result>
+			<result name="invalid.token" type="redirectAction">prepararFuncionalidades</result>
 		</action>
 
 		<!-- Actions para entradas -->
