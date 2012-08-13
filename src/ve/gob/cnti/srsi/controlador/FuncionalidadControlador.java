@@ -309,5 +309,4 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
-
 }
