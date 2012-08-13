@@ -46,6 +46,21 @@ public interface Constants {
 	public static final String PATH = "/archivos/";
 
 	/**
+	 * Longitud del campo de descripción en la base de datos.
+	 */
+	public static final int DESCRIPTION_LENGTH = 0x2FD;
+
+	/**
+	 * Longitud del campo de título o nombre en la base de datos.
+	 */
+	public static final int TITLE_LENGTH = 0x54;
+
+	/**
+	 * Longitud del campo motivo en la base de datos.
+	 */
+	public static final int MOTIVE_LENGTH = 0x800;
+
+	/**
 	 * Número de servicios de información más visitados.
 	 */
 	public static final int LIMITE_VISITADOS = 5;
