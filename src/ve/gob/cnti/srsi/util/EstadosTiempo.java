@@ -15,6 +15,13 @@
  */
 package ve.gob.cnti.srsi.util;
 
+/**
+ * Esta clase sirve durante el <i>parser</i> del archivo XML con los datos de
+ * temperatura del INAMEH.
+ * 
+ * @author Joaquín Pereira
+ * 
+ */
 public class EstadosTiempo {
 
 	private int codigo;
