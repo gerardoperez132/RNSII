@@ -44,6 +44,13 @@ import ve.gob.cnti.srsi.util.ServiciosPublicables;
 
 import com.opensymphony.xwork2.ActionContext;
 
+/**
+ * Esta clase es el controlador del inicio de sesión del usuario.
+ * 
+ * @author Richard Ricciardelli
+ * @author Joaquín Pereira
+ * 
+ */
 @SuppressWarnings("serial")
 public class LoginControlador extends DAO implements ServletRequestAware {
 

@@ -36,6 +36,13 @@ import ve.gob.cnti.srsi.util.ReadXmlTime;
 
 import com.opensymphony.xwork2.ActionContext;
 
+/**
+ * Esta clase es el controlador de las funcionalidades.
+ * 
+ * @author Richard Ricciardelli
+ * @author Joaquín Pereira
+ * 
+ */
 @SuppressWarnings("serial")
 public class FuncionalidadControlador extends DAO implements Formulario,
 		TipoEntradaSalida, Modelos, Constants {

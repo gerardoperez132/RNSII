@@ -39,6 +39,13 @@ import ve.gob.cnti.srsi.util.ReadXmlTime;
 
 import com.opensymphony.xwork2.ActionContext;
 
+/**
+ * Esta clase es el controlador de las entradas.
+ * 
+ * @author Richard Ricciardelli
+ * @author Joaquín Pereira
+ * 
+ */
 @SuppressWarnings("serial")
 public class EntradaControlador extends DAO implements TipoEntradaSalida,
 		Modelos, Formulario, Constants {
