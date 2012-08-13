@@ -19,6 +19,12 @@ import java.util.List;
 
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 
+/**
+ * Esta clase contiene servicios de información que pueden ser publicados.
+ * 
+ * @author Joaquín Pereira
+ * 
+ */
 public class ServiciosPublicables {
 	private List<String> incompletos;
 	boolean publicable;
