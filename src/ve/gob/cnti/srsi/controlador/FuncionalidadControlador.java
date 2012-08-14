@@ -136,15 +136,34 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 				id_servicio_informacion, -1);
 		funcionalidadesPublicables = new ArrayList<FuncionalidadesPublicables>();
 		for (Funcionalidad funcionalidad : funcionalidades) {
+			// TODO MEJORAR ESTO CON UN MÉTODO.
+			boolean hijos = true;
+			short counter = 0;
 			entradas = (ArrayList<EntradaSalida>) read(ESF,
 					funcionalidad.getId_funcionalidad(), ENTRADA);
 			salidas = (ArrayList<EntradaSalida>) read(ESF,
 					funcionalidad.getId_funcionalidad(), SALIDA);
+			for (EntradaSalida entrada : entradas) {
+				counter++;
+				if (entrada.getId_tipo_dato() == 1)
+					if (!hasChildren(entrada)) {
+						hijos = false;
+						break;
+					}
+			}
+			if (counter == entradas.size()) {
+				counter = 0;
+				for (EntradaSalida salida : salidas) {
+					counter++;
+					if (salida.getId_tipo_dato() == 1)
+						if (!hasChildren(salida)) {
+							hijos = false;
+							break;
+						}
+				}
+			}
 			funcionalidadesPublicables.add(new FuncionalidadesPublicables(
-					entradas, salidas, true, funcionalidad));
-		}
-		for (FuncionalidadesPublicables f : funcionalidadesPublicables) {
-			System.out.println(f.toString());
+					entradas, salidas, true, hijos, funcionalidad));
 		}
 		return SUCCESS;
 	}
