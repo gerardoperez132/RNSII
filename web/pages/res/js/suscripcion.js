@@ -1,4 +1,23 @@
-$(document).ready(function(){	
+/*
+ * Variable con las claves de intercionalización del archivo json. 
+ */
+var data;
+
+$(document).ready(function() {	
+	
+	/*
+	 * Obteniendo los valores de intercionalización del archivo JSON
+	 */
+	$.ajax({
+		url: "getJSONResult.action",		
+		type: "GET",
+		dataType: "json",
+		async:false,		
+		success: function(source){	
+			data = source;			
+		}	
+	});
+	
 	/*******************************************************
 	 * 
 	 * Validación de formulario de suscripción
@@ -8,20 +27,20 @@ $(document).ready(function(){
 		
 		e.preventDefault();
 		
-		var enoughRegex = new RegExp("^[a-zA-Z áéíóúAÉÍÓÚÑñ]+$");
-		var enoughRegex2 = new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
-		var enoughRegex3 = new RegExp("^[a-zA-Z0-9 _.()áéíóúAÉÍÓÚÑñ]+$");
+		var enoughRegex = new RegExp(data['constants']['REGEX_TITLE']);
+		var enoughRegex2 = new RegExp(data['constants']['REGEX_EMAIL']);
+		var enoughRegex3 = new RegExp(data['constants']['REGEX_DESCRIPTION']);
 		
 		var error = false;
 		
 		if( $("#nombre").val() == "" ){
-			$('#m_nombre').attr('class','error_pass').html('Debe llenar este campo'); 
+			$('#m_nombre').attr('class','error_pass').html(data['errores']['error.required']); 
 			error = true;
         }else if($("#nombre").val().length < 4){
-        	$('#m_nombre').attr('class','error_pass').html('Su nombre debe poseer al menos 4 caracteres');
+        	$('#m_nombre').attr('class','error_pass').html(data['errores']['error.nombre.min']);
         	error = true;
-        }else if(!enoughRegex.test($('#nombre').val())){        	
-        	$('#m_nombre').html('Sólo puede introducir letras y espacios');
+        }else if(!enoughRegex.test($('#nombre').val().toUpperCase())){        	
+        	$('#m_nombre').html(data['errores']['error.regex.title']);
         	$('#m_nombre').attr('class','error_pass');
         	error = true;
         }else{        	
@@ -29,13 +48,13 @@ $(document).ready(function(){
         }
 		
 		if( $("#cargo").val() == "" ){
-			$('#m_cargo').attr('class','error_pass').html('Debe llenar este campo');  
+			$('#m_cargo').attr('class','error_pass').html(data['errores']['error.required']);  
 			error = true;
         }else if($("#cargo").val().length < 4){
-        	$('#m_cargo').attr('class','error_pass').html('Su cargo debe poseer al menos 4 caracteres');
+        	$('#m_cargo').attr('class','error_pass').html(data['errores']['error.cargo.min']);
         	error = true;
-        }else if(!enoughRegex.test($('#cargo').val())){        	
-        	$('#m_cargo').html('Sólo puede introducir letras y espacios');
+        }else if(!enoughRegex.test($('#cargo').val().toUpperCase())){        	
+        	$('#m_cargo').html(data['errores']['error.regex.title']);
         	$('#m_cargo').attr('class','error_pass');
         	error = true;
         }else{        	
@@ -43,13 +62,13 @@ $(document).ready(function(){
         }
 		
 		if( $("#telefono").val() == "" ){
-			$('#m_telefono').attr('class','error_pass').html('Debe llenar este campo');    
+			$('#m_telefono').attr('class','error_pass').html(data['errores']['error.required']);    
 			error = true;
         }else if($("#telefono").val().length < 7){
-        	$('#m_telefono').attr('class','error_pass').html('Debe introducir un número telefónico válido de 7 dígitos');
+        	$('#m_telefono').attr('class','error_pass').html(data['errores']['error.servicio.telefono.digit ']);
         	error = true;
         }else if(!$.isNumeric($('#telefono').val())){        	
-        	$('#m_telefono').html('Sólo puede introducir números');
+        	$('#m_telefono').html(data['errores']['error.num']);
         	$('#m_telefono').attr('class','error_pass');
         	error = true;
         }else{        	
@@ -57,10 +76,10 @@ $(document).ready(function(){
         }
 		
 		if( $("#correo").val() == "" ){
-			$('#m_correo').attr('class','error_pass').html('Debe llenar este campo');   
+			$('#m_correo').attr('class','error_pass').html(data['errores']['error.required']);   
 			error = true;
-        }else if(!enoughRegex2.test($('#correo').val())){        	
-        	$('#m_correo').html('Esta dirección de correo electrónico es inválida');
+        }else if(!enoughRegex2.test($('#correo').val().toUpperCase())){        	
+        	$('#m_correo').html(data['errores']['error.regex.email']);
         	$('#m_correo').attr('class','error_pass');
         	error = true;
         }else{        	
@@ -68,13 +87,13 @@ $(document).ready(function(){
         }
 		
 		if( $("#motivo").val() == "" ){
-			$('#m_motivo').attr('class','error_pass').html('Debe llenar este campo'); 
+			$('#m_motivo').attr('class','error_pass').html(data['errores']['error.required']); 
 			error = true;
         }else if($("#motivo").val().length < 20){
-        	$('#m_motivo').attr('class','error_pass').html('Su motivo debe poseer al menos 20 caracteres');
+        	$('#m_motivo').attr('class','error_pass').html(data['errores']['error.motivo.min']);
         	error = true;
-        }else if(!enoughRegex3.test($('#motivo').val())){        	
-        	$('#m_motivo').html('Sólo puede introducir letras, números y puntos');
+        }else if(!enoughRegex3.test($('#motivo').val().toUpperCase())){        	
+        	$('#m_motivo').html(data['errores']['error.regex.description']);
         	$('#m_motivo').attr('class','error_pass');
         	error = true;
         }else{        	
@@ -92,12 +111,12 @@ $(document).ready(function(){
 	 * 
 	 ******************************************************/	
 	$('#nombre').keyup(function(e) {		
-		var enoughRegex = new RegExp("^[a-zA-Z áéíóúAÉÍÓÚÑñ]+$");
+		var enoughRegex = new RegExp(data['constants']['REGEX_TITLE']);
 		
 		if($(this).val() == ''){       	
         	$('#m_nombre').attr('class','error_pass').html('*');        	
-        }else if(!enoughRegex.test($(this).val())){        	
-        	$('#m_nombre').html('Sólo puede introducir letras y espacios');
+        }else if(!enoughRegex.test($(this).val().toUpperCase())){        	
+        	$('#m_nombre').html(data['errores']['error.regex.title']);
         	$('#m_nombre').attr('class','error_pass');        	
         }else if($(this).val().length < 4){       	
         	$('#m_nombre').attr('class','alert_pass').html(''+(4 - $(this).val().length));        	
@@ -112,12 +131,12 @@ $(document).ready(function(){
 	 * 
 	 ******************************************************/	
 	$('#cargo').keyup(function(e) {		
-		var enoughRegex = new RegExp("^[a-zA-Z áéíóúAÉÍÓÚÑñ]+$");
+		var enoughRegex = new RegExp(data['constants']['REGEX_TITLE']);
 		
 		if($(this).val() == ''){       	
         	$('#m_cargo').attr('class','error_pass').html('*');        	
-        }else if(!enoughRegex.test($(this).val())){        	
-        	$('#m_cargo').html('Sólo puede introducir letras y espacios');
+        }else if(!enoughRegex.test($(this).val().toUpperCase())){        	
+        	$('#m_cargo').html(data['errores']['error.regex.title']);
         	$('#m_cargo').attr('class','error_pass');        	
         }else if($(this).val().length < 4){       	
         	$('#m_cargo').attr('class','alert_pass').html(''+(4 - $(this).val().length));        	
@@ -135,7 +154,7 @@ $(document).ready(function(){
 		if($(this).val() == ''){       	
         	$('#m_telefono').attr('class','error_pass').html('*');        	
         }else if(!$.isNumeric($(this).val())){        	
-        	$('#m_telefono').html('Sólo puede introducir números');
+        	$('#m_telefono').html(data['errores']['error.num']);
         	$('#m_telefono').attr('class','error_pass');       	
         }else if($(this).val().length < 7){       	
         	$('#m_telefono').attr('class','alert_pass').html(''+(7 - $(this).val().length));        	
@@ -150,11 +169,11 @@ $(document).ready(function(){
 	 * 
 	 ******************************************************/	
 	$('#correo').change(function(e) {		
-		var enoughRegex = new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");		
+		var enoughRegex = new RegExp(data['constants']['REGEX_EMAIL']);
 		if($(this).val() == ''){       	
         	$('#m_correo').attr('class','error_pass').html('*');        	
         }else if(!enoughRegex.test($(this).val())){        	
-        	$('#m_correo').html('Esta dirección de correo electrónico es inválida');
+        	$('#m_correo').html(data['errores']['error.regex.email']);
         	$('#m_correo').attr('class','error_pass');        	
         }else{        	
         	$('#m_correo').attr('class','ok_pass').html('OK');
@@ -167,12 +186,12 @@ $(document).ready(function(){
 	 * 
 	 ******************************************************/	
 	$('#motivo').keyup(function(e) {		
-		var enoughRegex = new RegExp("^[a-zA-Z0-9 _.()áéíóúAÉÍÓÚÑñ]+$");
+		var enoughRegex = new RegExp(data['constants']['REGEX_DESCRIPTION']);
 		
 		if($(this).val() == ''){       	
         	$('#m_motivo').attr('class','error_pass').html('*');        	
-        }else if(!enoughRegex.test($(this).val())){        	
-        	$('#m_motivo').html('Sólo puede introducir letras, números y puntos');
+        }else if(!enoughRegex.test($(this).val().toUpperCase())){        	
+        	$('#m_motivo').html(data['errores']['error.regex.description']);
         	$('#m_motivo').attr('class','error_pass');        	
         }else if($(this).val().length < 20){       	
         	$('#m_motivo').attr('class','alert_pass').html(''+(20 - $(this).val().length));        	
@@ -190,25 +209,25 @@ $(document).ready(function(){
 	$('#sentenciar').click(function (e){	
 		
 		e.preventDefault();		
-		var enoughRegex = new RegExp("^[a-zA-Z0-9 _.()áéíóúAÉÍÓÚÑñ]+$");
+		var enoughRegex = new RegExp(data['constants']['REGEX_DESCRIPTION']);
 		var error = false;
 		
 		//Validando el motivo de la decisión
 		if($('#motivo').val() == ''){       	
-        	$('#m_motivo').attr('class','error_pass').html('* Debe introducir el motivo del dictamen');  
+        	$('#m_motivo').attr('class','error_pass').html(data['errores']['error.required']);  
         	error = true;
-        }else if(!enoughRegex.test($('#motivo').val())){        	
-        	$('#m_motivo').html('Sólo puede introducir letras, números y puntos');
+        }else if(!enoughRegex.test($('#motivo').val().toUpperCase())){        	
+        	$('#m_motivo').html(data['errores']['error.regex.description']);
         	$('#m_motivo').attr('class','error_pass');     
         	error = true;
         }else if($('#motivo').val().length < 20){       	
-        	$('#m_motivo').attr('class','alert_pass').html('Su motivo debe poseer al menos 20 caracteres');
+        	$('#m_motivo').attr('class','alert_pass').html(data['errores']['error.motivo.min']);
         	error = true;
         }
 		
 		//validando que escoja una decisión
 		if($('#ops1').val() == '' && $('#ops2').val() == '' ){       	
-        	$('#m_sentencia').attr('class','error_pass').html('Debe elegir un dictamen de la solicitud de suscripción');
+        	$('#m_sentencia').attr('class','error_pass').html(data['errores']['error.required']);
         	error = true;
         }
 		

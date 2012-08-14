@@ -1,69 +1,80 @@
+/*
+ * Variable con las claves de intercionalización del archivo json. 
+ */
+var data;
+
 var isLongitud;
 var isFormato;
 
-/*
- * funciones para el correcto funcionamiento de links de la vista de gobierno en linea
- */
-function changeValues(page, campoId1, valor1, campoId2, valor2, form){
-    var campo1 = document.getElementById(campoId1);
-    campo1.value = valor1;
-    var campo2 = document.getElementById(campoId2);
-    campo2.value = valor2;                      
-    submitForm(page, form);	   
-}
-function changeValue(page, campoId, valor, form){
-	var campo = document.getElementById(campoId);
-	campo.value = valor;			
-	submitForm(page, form);
-}
-function submitForm(page, form){
-    var form = document.getElementById(form);
-    form.action= "http://gobiernoenlinea.gob.ve/home/" + page;	    
-    form.submit();
-}	
-function actualizarClima(cadena){
-	var T = cadena.split(",");
-    $('#t_max').html(''+T[0]);
-    $('#t_min').html(''+T[1]);
-}
-
-$.validator.addMethod('regexTitle', function (value) {
-	var soloTexto = new RegExp("^[a-zA-Z áéíóúAÉÍÓÚÑñ]+$");		    	
-	return soloTexto.test(value);
-}, 'Sólo puede introducir letras y espacios');
-
-$.validator.addMethod('regexDescription', function (value) {
-	var soloTexto = new RegExp("^[a-zA-Z0-9 _.()áéíóúAÉÍÓÚÑñ]+$");		    	
-	return soloTexto.test(value);
-}, 'Sólo puede introducir letras, números y puntos');
-
-$.validator.addMethod('formatoValidate', function (value) {	
-	if($('#capa_formato').data("formato")){		
-		if($("#entrada\\.id_formato").val()==-1){
-			return false;
-		}else{
-			return true;
-		}
-	}else{
-		return true;
-	}
-}, 'Debe seleccionar un tipo de formato que corresponda con el dato elegido');
-
-$.validator.addMethod('longitudValidate', function (value) {
-	if($('#capa_longitud').data("longitud")){
-		if($("#entrada\\.longitud").val().length < 1) {			
-			return false;
-		}else{
-			return true;
-		}
-	}else{
-		return true;
-	}
-}, 'Debe indicar la cantidad de dígitos que acepta el dato');
-
-$(document).ready(function(){
+$(document).ready(function() {	
 	
-	 /********************************************************************
+	/*
+	 * Obteniendo los valores de intercionalización del archivo JSON
+	 */
+	$.ajax({
+		url: "getJSONResult.action",		
+		type: "GET",
+		dataType: "json",
+		async:false,		
+		success: function(source){	
+			data = source;			
+		}	
+	});
+
+	/*
+	 * Creación de método para validar una expresión regular del tipo title,
+	 * usada por el plugin jquery validator
+	 */
+	$.validator.addMethod('regexTitle', function (value) {	
+		var valor = value;
+		var soloTexto = new RegExp(data['constants']['REGEX_TITLE']);		    	
+		return soloTexto.test(valor.toUpperCase());
+	});
+
+	/*
+	 * Creación de método para validar una expresión regular del tipo description,
+	 * usada por el plugin jquery validator
+	 */
+	$.validator.addMethod('regexDescription', function (value) {
+		var valor = value;
+		var soloTexto = new RegExp(data['constants']['REGEX_DESCRIPTION']);		
+		return soloTexto.test(valor.toUpperCase());
+	});
+
+	/*
+	 * Creación de método para validar si el usuario ha escogido un formato,
+	 * usada por el plugin jquery validator
+	 */
+	$.validator.addMethod('formatoValidate', function (value) {	
+		if($('#capa_formato').data("formato")){		
+			if($("#entrada\\.id_formato").val()==-1){
+				return false;
+			}else{
+				return true;
+			}
+		}else{
+			return true;
+		}
+	});
+
+	/*
+	 * Creación de método para validar si el usuario ha introduccido una longitud,
+	 * usada por el plugin jquery validator
+	 */
+	$.validator.addMethod('longitudValidate', function (value) {
+		if($('#capa_longitud').data("longitud")){
+			if($("#entrada\\.longitud").val().length < 1) {			
+				return false;
+			}else{
+				return true;
+			}
+		}else{
+			return true;
+		}
+	});
+
+	
+	 /*
 	 * Validaciones para el formulario creación/modificación de una 
 	 * Entrada/Salida.    
 	 */
@@ -79,11 +90,11 @@ $(document).ready(function(){
 	    	'entrada.longitud': {longitudValidate:true}
 	    },
 	    messages: {	    	
-	    	'entrada.nombre': {required:"Debe introducir un nombre",regexTitle:'Sólo puede introducir letras y espacios'},
-	    	'entrada.descripcion': {required:"Debe introducir una descripción",regexDescription:'Sólo puede introducir letras, números y puntos'},	    	
-	    	'entrada.id_tipo_dato': "Debe seleccionar un tipo de dato",
-	    	'entrada.id_formato': "Debe seleccionar un tipo de formato que corresponda con el dato elegido",
-	    	'entrada.longitud': 'Debe indicar la cantidad de dígitos que acepta el dato'
+	    	'entrada.nombre': {required:data['errores']['error.entrada.nombre'],regexTitle:data['errores']['error.regex.title']},
+	    	'entrada.descripcion': {required:data['errores']['error.entrada.descripcion'],regexDescription:data['errores']['error.regex.description']},	    	
+	    	'entrada.id_tipo_dato': data['errores']['error.entrada.tipodato'],
+	    	'entrada.id_formato': data['errores']['error.entrada.format'],
+	    	'entrada.longitud': data['errores']['error.entrada.longitud'],
 	    }
 	  });
 	
@@ -119,7 +130,7 @@ $(document).ready(function(){
 		if($("#entrada\\.id_tipo_dato").val()==4){//decimales
 			if($.isNumeric($("#entrada\\.longitud").val()) == false){			
 				this.value = this.value.substring(0,(this.value.length-1));
-				$('#longitud_msj').html('Debe escribir solo números. '); 
+				$('#longitud_msj').html(data['errores']['error.num']); 
 				$('#longitud_msj').attr('class', 'error_pass');
 			}else{
 				$('#longitud_msj').html('');			
@@ -127,7 +138,7 @@ $(document).ready(function(){
 		}else{	//Naturales	
 			if (!/^([0-9])*$/.test($("#entrada\\.longitud").val())){
 				this.value = this.value.substring(0,(this.value.length-1));
-				$('#longitud_msj').html('Debe escribir solo números. '); 
+				$('#longitud_msj').html(data['errores']['error.num']); 
 				$('#longitud_msj').attr('class', 'error_pass');
 			}else{				
 				$('#longitud_msj').html('');
@@ -213,7 +224,31 @@ $(document).ready(function(){
         $(".cerrarPie").text("+");
  		return false;                    
      }
-   );
-	
+   );	
 });
 
+/*
+ * funciones para el correcto funcionamiento de links de la vista de gobierno en linea
+ */
+function changeValues(page, campoId1, valor1, campoId2, valor2, form){
+    var campo1 = document.getElementById(campoId1);
+    campo1.value = valor1;
+    var campo2 = document.getElementById(campoId2);
+    campo2.value = valor2;                      
+    submitForm(page, form);	   
+}
+function changeValue(page, campoId, valor, form){
+	var campo = document.getElementById(campoId);
+	campo.value = valor;			
+	submitForm(page, form);
+}
+function submitForm(page, form){
+    var form = document.getElementById(form);
+    form.action= "http://gobiernoenlinea.gob.ve/home/" + page;	    
+    form.submit();
+}	
+function actualizarClima(cadena){
+	var T = cadena.split(",");
+    $('#t_max').html(''+T[0]);
+    $('#t_min').html(''+T[1]);
+}

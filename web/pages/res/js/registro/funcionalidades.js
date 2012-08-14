@@ -36,7 +36,8 @@ function eliminar_Fun(i,nombre){
 	  onComplete:
 	    function(returnvalue) {
 	      if (returnvalue) {
-	    	  Sexy.info('El Servicio: <br><h3>'+nombre+'</h3> <br>Ha sido Eliminado', {
+	    	  Sexy.info(data['mensajes']['el_servicio']+'<br><h3>'+nombre+'</h3> <br>'
+	    			  +data['mensajes']['ha_sido_eliminado'], {
 	    		  onComplete:
 	    			  function(returnvalue) {
 	    			  formulario.submit();

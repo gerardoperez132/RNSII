@@ -1,4 +1,23 @@
+/*
+ * Variable con las claves de intercionalización del archivo json. 
+ */
+var data;
+
 $(document).ready(function(){	
+	
+	/*
+	 * Obteniendo los valores de intercionalización del archivo JSON
+	 */
+	$.ajax({
+		url: "getJSONResult.action",		
+		type: "GET",
+		dataType: "json",
+		async:false,		
+		success: function(source){	
+			data = source;			
+		}	
+	});
+	
 	/*
 	 * LLenando variable que lee el número de servicios incompletos
 	 */
@@ -46,12 +65,13 @@ function tip(elem){
 function publicar_SI(i,nombre){
 	var action = 'id_pub_'+i;	
 	var formulario = document.getElementById(action);	
-	Sexy.confirm('Está a punto de publicar el servicio de información: <br>'+
-			'<br><h3>'+nombre+'</h3> <br>¿Desea Continuar?', {
+	Sexy.confirm(data['mensajes']['publicar_servicio']+'<br>'+
+			'<br><h3>'+nombre+'</h3> <br>'+data['mensajes']['desea_continuar'], {
 	  onComplete:
 	    function(returnvalue) {
 	      if (returnvalue) {
-	    	  Sexy.info('El Servicio: <h3>'+nombre+'</h3> ha sido publicado', {
+	    	  Sexy.info(data['mensajes']['el_servicio']+'<br><h3>'+nombre+'</h3> <br>'
+	    			  +data['mensajes']['ha_sido_publicado'], {
 	    		  onComplete:
 	    			  function(returnvalue) {
 	    			  formulario.submit();
@@ -59,7 +79,7 @@ function publicar_SI(i,nombre){
     		  });
 	    		  
 	      } else {
-	    	  Sexy.alert('Acción Cancelada');
+	    	  Sexy.alert(data['mensajes']['accion_cancelada']);
 	      }
 	    }
 	  });	
@@ -76,12 +96,13 @@ function publicar_SI(i,nombre){
 function despublicar_SI(i,nombre){
 	var action = 'id_despub_'+i;	
 	var formulario = document.getElementById(action);	
-	Sexy.confirm('Está a punto de despublicar el servicio de información: <br>'+
-			'<br><h3>'+nombre+'</h3> <br>¿Desea Continuar?', {
+	Sexy.confirm(data['mensajes']['despublicar_servicio']+'<br>'+
+			'<br><h3>'+nombre+'</h3> <br>'+data['mensajes']['desea_continuar'], {
 	  onComplete:
 	    function(returnvalue) {
 	      if (returnvalue) {
-	    	  Sexy.info('El Servicio: <br><h3>'+nombre+'</h3> <br>Ha sido despublicado', {
+	    	  Sexy.info(data['mensajes']['el_servicio']+'<br><h3>'+nombre+'</h3> <br>'
+	    			  +data['mensajes']['ha_sido_despublicado'], {
 	    		  onComplete:
 	    			  function(returnvalue) {
 	    			  formulario.submit();
@@ -89,7 +110,7 @@ function despublicar_SI(i,nombre){
     		  });
 	    		  
 	      } else {
-	    	  Sexy.alert('Acción Cancelada');
+	    	  Sexy.alert(data['mensajes']['accion_cancelada']);
 	      }
 	    }
 	  });		
@@ -106,12 +127,13 @@ function despublicar_SI(i,nombre){
 function eliminar_SI(i,nombre){
 	var action = 'id_'+i;	
 	var formulario = document.getElementById(action);	
-	Sexy.confirm('Está a punto de eliminar el servicio de información: <br>'+
-			'<br><h3>'+nombre+'</h3> <br>¿Desea Continuar?', {
+	Sexy.confirm(data['mensajes']['eliminar_servicio']+'<br>'+
+			'<br><h3>'+nombre+'</h3> <br>'+data['mensajes']['desea_continuar'], {
 	  onComplete:
 	    function(returnvalue) {
 	      if (returnvalue) {
-	    	  Sexy.info('El Servicio: <br><h3>'+nombre+'</h3> <br>Ha sido Eliminado', {
+	    	  Sexy.info(data['mensajes']['el_servicio']+'<br><h3>'+nombre+'</h3> <br>'
+	    			  +data['mensajes']['ha_sido_eliminado'], {
 	    		  onComplete:
 	    			  function(returnvalue) {
 	    			  formulario.submit();
@@ -119,8 +141,8 @@ function eliminar_SI(i,nombre){
     		  });
 	    		  
 	      } else {
-	    	  Sexy.alert('Acción Cancelada');
+	    	  Sexy.alert(data['mensajes']['accion_cancelada']);
 	      }
 	    }
-	  });			
+	  });				
 };

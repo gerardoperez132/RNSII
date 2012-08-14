@@ -1,4 +1,22 @@
-$(document).ready(function(){
+/*
+ * Variable con las claves de intercionalización del archivo json. 
+ */
+var data;
+
+$(document).ready(function() {	
+	
+	/*
+	 * Obteniendo los valores de intercionalización del archivo JSON
+	 */
+	$.ajax({
+		url: "getJSONResult.action",		
+		type: "GET",
+		dataType: "json",
+		async:false,		
+		success: function(source){	
+			data = source;			
+		}	
+	});
 	/***********************************************
 	 *  Comprueba la fortaleza de las contraseñas mediante los siguientes criterios:
 	 * 
@@ -9,22 +27,22 @@ $(document).ready(function(){
 	 *		  
 	 * */
 	$('#pass').keyup(function(e) {  
-	 var strongRegex = new RegExp("(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{8,})$", "g");  
-	 var mediumRegex = new RegExp("^(?=.{7,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");  
-	 var enoughRegex = new RegExp("(?=.{6,}).*", "g");  
+	 var strongRegex = new RegExp(data['constants']['REGEX_PASS_STRONG'],"g"); 
+	 var mediumRegex = new RegExp(data['constants']['REGEX_PASS_MEDIUM'],"g");  
+	 var enoughRegex = new RegExp(data['constants']['REGEX_PASS_ENOUGH'],"g");  
 	 
 	 if (false == enoughRegex.test($(this).val())) {  
-		 $('#passstrength').html('Introdusca más caracteres'); 
+		 $('#passstrength').html(data['mensajes']['introduzca_mas_caracteres']); 
 		 $('#passstrength').attr('class', 'error_pass');
 	 } else if (strongRegex.test($(this).val())) {  
 		 $('#passstrength').attr('class', 'ok_pass'); 
-		 $('#passstrength').html('Fortaleza de la Contraseña Fuerte!');  
+		 $('#passstrength').html(data['mensajes']['pass_Strong']);  
 	 } else if (mediumRegex.test($(this).val())) {  
 		 $('#passstrength').attr('class', 'alert_pass');
-		 $('#passstrength').html('Fortaleza de la Contraseña Media!');  
+		 $('#passstrength').html(data['mensajes']['pass_Medium']);  
 	 } else { 
 		 $('#passstrength').attr('class', 'error_pass');
-		 $('#passstrength').html('Fortaleza de la Contraseña debil!');  
+		 $('#passstrength').html(data['mensajes']['pass_Enough']);  
 	 }  
 	 if($('#pass2').val()!=""){
 		 $('#passequal').html('');		 
@@ -35,11 +53,11 @@ $(document).ready(function(){
 	
 	$('#pass2').keyup(function(e) {  	
 		 if ($(this).val() != $('#pass').val() ) {  
-			 $('#passequal').html('Las contraseñas no coinciden!'); 
+			 $('#passequal').html(data['errores']['error.login.password.match']); 
 			 $('#passequal').attr('class', 'error_pass');
 		 } else{ 
 			 $('#passequal').attr('class', 'ok_pass');
-			 $('#passequal').html('Contraseña iguales!');  
+			 $('#passequal').html(data['mensajes']['pass_Equals']);  
 		 }  
 		 return true;  
 	});
@@ -50,11 +68,11 @@ $(document).ready(function(){
 	 * 
 	 ******************************************************/
 	$("#modificar_clave").click(function (e){		  
-		var enoughRegex = new RegExp("(?=.{6,}).*", "g");
+		var enoughRegex = new RegExp(data['constants']['REGEX_PASS_ENOUGH'], "g");
 		var error = false;
 		e.preventDefault();
         if( $("#clave_actual").val() == "" ){
-        	$('#passrequired').html('Debe proporcionar la clave actual'); 
+        	$('#passrequired').html(data['errores']['error.required']); 
 			$('#passrequired').attr('class', 'error_pass');
             error = true;
         }else{
@@ -62,11 +80,11 @@ $(document).ready(function(){
         } 
         
         if ($('#pass').val() == "") {  
-			 $('#passstrength').html('La nueva contraseña debe tener 6 caracteres como mínimo'); 
+			 $('#passstrength').html(data['errores']['error.required']); 
 			 $('#passstrength').attr('class', 'error_pass');
 			 error = true;			
        }else if (false == enoughRegex.test($('#pass').val())) {  
-			 $('#passstrength').html('La nueva contraseña debe tener 6 caracteres como mínimo'); 
+			 $('#passstrength').html(data['errores']['error.login.password.length']); 
 			 $('#passstrength').attr('class', 'error_pass');
 			 error = true;			
         }else{
@@ -74,11 +92,11 @@ $(document).ready(function(){
         }
         
         if ($('#pass2').val() == "") {  
-			 $('#passequal').html('Debe llenar este campo!'); 
+			 $('#passequal').html(data['errores']['error.required']); 
 			 $('#passequal').attr('class', 'error_pass');
 			 error = true;
        }else if ($('#pass').val() != $('#pass2').val()) {  
-			 $('#passequal').html('Las contraseñas no coinciden!'); 
+			 $('#passequal').html(data['errores']['error.login.password.match']); 
 			 $('#passequal').attr('class', 'error_pass');
 			 error = true;
         }else{
@@ -86,14 +104,14 @@ $(document).ready(function(){
         }
         
         if(error == false){    
-        	Sexy.confirm('Está a punto cambiar su clave de acceso a la aplicación'+
-        			'<br>¿Desea Continuar?', {
+        	Sexy.confirm(data['mensajes']['cambiar_clave_acceso']+
+        			'<br>'+data['mensajes']['desea_continuar'], {
         	  onComplete:
         	    function(returnvalue) {
         	      if (returnvalue) {        	    	  
         	    	  document.modificarClave.submit(); 
         	      } else {
-        	    	  Sexy.alert('<br>Acción Cancelada');
+        	    	  Sexy.alert(data['mensajes']['accion_cancelada']);
         	      }
         	    }
         	  });        	
@@ -105,15 +123,20 @@ $(document).ready(function(){
 	 * Validación de formulario de Modificar datos del usuario
 	 *******************************************************************/
 	$("#modificar_datos").click(function (e){
+		var soloTexto = new RegExp(data['constants']['REGEX_TITLE']);	
 		var error = false;
 		e.preventDefault();
         
 		if( $("#nombre").val() == "" ){
-        	$('#nombre_required').html('Debe escribir su nombre completo'); 
+        	$('#nombre_required').html(data['errores']['error.required']); 
 			$('#nombre_required').attr('class', 'error_pass');
             error = true;
         }else if($("#nombre").val().length < 4){
-        	$('#nombre_required').html('Su nombre debe poseer al menos 4 caracteres'); 
+        	$('#nombre_required').html(data['errores']['error.nombre.min']);  
+			$('#nombre_required').attr('class', 'error_pass');
+            error = true;
+        }else if(!soloTexto.test($("#nombre").val().toUpperCase())){
+        	$('#nombre_required').html(data['errores']['error.regex.title']);  
 			$('#nombre_required').attr('class', 'error_pass');
             error = true;
         }else{
@@ -121,11 +144,15 @@ $(document).ready(function(){
         }
         
         if( $("#apellido").val() == "" ){
-        	$('#apellido_required').html('Debe escribir su apellido completo'); 
+        	$('#apellido_required').html(data['errores']['error.required']); 
 			$('#apellido_required').attr('class', 'error_pass');
             error = true;
         }else if($("#apellido").val().length < 4){
-        	$('#apellido_required').html('Su apellido debe poseer al menos 4 caracteres'); 
+        	$('#apellido_required').html(data['errores']['error.apellido.min']);  
+			$('#apellido_required').attr('class', 'error_pass');
+            error = true;
+        }else if(!soloTexto.test($("#apellido").val().toUpperCase())){
+        	$('#apellido_required').html(data['errores']['error.regex.title']);  
 			$('#apellido_required').attr('class', 'error_pass');
             error = true;
         }else{
@@ -133,39 +160,35 @@ $(document).ready(function(){
         }
         
         if( $("#cedula").val() == "" ){
-        	$('#cedula_required').html('Debe escribir su número de cédula.'); 
+        	$('#cedula_required').html(data['errores']['error.required']); 
 			$('#cedula_required').attr('class', 'error_pass');
             error = true;
         }else if($.isNumeric($("#cedula").val()) == false){
-        	$('#cedula_required').html('Su cédula debe poseer solo números'); 
+        	$('#cedula_required').html(data['errores']['error.num']); 
 			$('#cedula_required').attr('class', 'error_pass');
             error = true;
         }else if($.isNumeric($("#cedula").val()) == true){
-        	if($("#cedula").val() < 0){
-        		$('#cedula_required').html('Su número de cédula no es válido'); 
-    			$('#cedula_required').attr('class', 'error_pass');
-                error = true;
-        	}else if($("#cedula").val().length < 4 || $("#cedula").val().length > 9){
-        	$('#cedula_required').html('Su cédula debe poseer un mínimo 4 digitos y un máximo de 9 digitos'); 
-			$('#cedula_required').attr('class', 'error_pass');
-            error = true;
+        	if($("#cedula").val().length < 4 || $("#cedula").val().length > 9){
+	        	$('#cedula_required').html(data['errores']['error.cedula.range']); 
+				$('#cedula_required').attr('class', 'error_pass');
+	            error = true;
         	}
         } else{
         	$('#cedula_required').html('');
         }
         
         if(error == false){        	 
-        	Sexy.confirm('Está a punto cambiar su datos de su cuenta de usuario'+
-        			'<br>¿Desea Continuar?', {
+        	Sexy.confirm(data['mensajes']['cambiar_datos_usuario']+
+        			'<br>'+data['mensajes']['desea_continuar'], {
         	  onComplete:
         	    function(returnvalue) {
         	      if (returnvalue) {        	    	  
         	    	  document.modificarClave.submit(); 
         	      } else {
-        	    	  Sexy.alert('<br>Acción Cancelada');
+        	    	  Sexy.alert(data['mensajes']['accion_cancelada']);
         	      }
         	    }
-        	  });  
+        	  }); 
         }
 		
 	});		
