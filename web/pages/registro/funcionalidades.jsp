@@ -168,6 +168,9 @@
 																<s:if test="!entradas.size()>0">
 																	<p><s:text name="error.servicio.incomplete.entradas" /></p>
 																</s:if>
+																<s:if test="!hijos">
+																	<p><s:text name="error.servicio.incomplete.hijos" /></p>
+																</s:if>
 															</div></td>
 													</s:i18n>
 												</s:if>
