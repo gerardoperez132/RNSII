@@ -71,14 +71,15 @@
 |                       |   `-- Visita.class
 |                       `-- util
 |                           |-- EstadosTiempo.class
+|                           |-- FuncionalidadesPublicables.class
 |                           |-- JSON.class
-|                           |-- ListaSImasVisitados.class
+|                           |-- ListaServiciosVisitados.class
 |                           |-- MD5Hashing.class
 |                           |-- ReadXmlTime.class
 |                           |-- SectoresMasPublicados.class
 |                           |-- ServiciosPublicables.class
-|                           |-- SolicitudRespuesta.class
-|                           `-- Solicitud_Suscripcion.class
+|                           |-- SubscriptionRequest.class
+|                           `-- SubscriptionResponse.class
 |-- COPYING
 |-- LICENSE
 |-- README
@@ -142,14 +143,15 @@
 |                   |   `-- Visita.java
 |                   `-- util
 |                       |-- EstadosTiempo.java
+|                       |-- FuncionalidadesPublicables.java
 |                       |-- JSON.java
-|                       |-- ListaSImasVisitados.java
+|                       |-- ListaServiciosVisitados.java
 |                       |-- MD5Hashing.java
 |                       |-- ReadXmlTime.java
 |                       |-- SectoresMasPublicados.java
 |                       |-- ServiciosPublicables.java
-|                       |-- SolicitudRespuesta.java
-|                       `-- Solicitud_Suscripcion.java
+|                       |-- SubscriptionRequest.java
+|                       `-- SubscriptionResponse.java
 `-- web
     |-- 404.jsp
     |-- META-INF
@@ -359,4 +361,4 @@
         |   `-- xwork-core-2.2.1.jar
         `-- web.xml
 
-48 directories, 311 files
+48 directories, 313 files
