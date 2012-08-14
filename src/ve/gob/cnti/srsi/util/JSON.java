@@ -45,12 +45,12 @@ public class JSON extends ActionSupport {
 	private Messages mensaje = new Messages();
 
 	@SuppressWarnings("rawtypes")
-	public String obtenerError() {		
+	public String obtenerError() {
 		for (Enumeration enumeration = mensaje.getProperties().keys(); enumeration
 				.hasMoreElements();) {
 			Object object = enumeration.nextElement();
-			mensajes.put(object.toString(),
-					mensaje.getProperties().getProperty(object.toString()));
+			mensajes.put(object.toString(), mensaje.getProperties()
+					.getProperty(object.toString()));
 		}
 		for (Enumeration enumeration = error.getProperties().keys(); enumeration
 				.hasMoreElements();) {

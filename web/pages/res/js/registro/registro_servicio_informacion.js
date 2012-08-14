@@ -12,7 +12,7 @@ $(document).ready(function() {
 		url: "getJSONResult.action",		
 		type: "GET",
 		dataType: "json",
-		async:false,		
+		async:false,
 		success: function(source){	
 			data = source;			
 		}	
@@ -135,6 +135,4 @@ $(document).ready(function() {
 	    		email:data['errores']['error.regex.email']}
 	    }
 	});
-	
 });
-
