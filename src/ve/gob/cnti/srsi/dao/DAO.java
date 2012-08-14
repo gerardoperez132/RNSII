@@ -48,8 +48,8 @@ import ve.gob.cnti.srsi.modelo.UnionArquitecturaServicioInformacion;
 import ve.gob.cnti.srsi.modelo.Visita;
 import ve.gob.cnti.srsi.util.ListaServiciosVisitados;
 import ve.gob.cnti.srsi.util.SectoresMasPublicados;
-import ve.gob.cnti.srsi.util.SubscriptionResponse;
 import ve.gob.cnti.srsi.util.SubscriptionRequest;
+import ve.gob.cnti.srsi.util.SubscriptionResponse;
 
 import com.opensymphony.xwork2.ActionSupport;
 
