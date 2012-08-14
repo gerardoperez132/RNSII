@@ -1321,4 +1321,27 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 			closeConnection();
 		}
 	}
+
+	@Override
+	public boolean hasChildren(EntradaSalida es) {
+		try {
+			startConnection();
+			try {
+				return session
+						.createQuery(
+								"FROM " + EntradaSalida.class.getSimpleName()
+										+ " WHERE id_padre = "
+										+ es.getId_entrada_salida()
+										+ " AND status = " + ACTIVO).list()
+						.size() > 0;
+			} catch (Exception e) {
+				return false;
+			}
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+	}
 }

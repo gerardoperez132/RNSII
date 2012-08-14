@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ve.gob.cnti.srsi.modelo.Correo;
+import ve.gob.cnti.srsi.modelo.EntradaSalida;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.Telefono;
 import ve.gob.cnti.srsi.modelo.Visita;
@@ -635,6 +636,18 @@ public interface CRUD {
 	 *         está.
 	 */
 	public boolean isComplete(ServicioInformacion servicio);
+
+	/**
+	 * Este método permite saber si una entrada o salida de tipo lista de datos
+	 * simples tiene aunque sea un dato asociado. Es decir, si la entrada o
+	 * salida es padre con por lo menos un hijo.
+	 * 
+	 * @param es
+	 *            Entrada o Salida a evaluar.
+	 * @return <code>true</code> si tiene hijos asociados, <code>false</code> si
+	 *         no tiene.
+	 */
+	public boolean hasChildren(EntradaSalida es);
 
 	/**
 	 * Este método permite saber si un servicio de información está completo y
