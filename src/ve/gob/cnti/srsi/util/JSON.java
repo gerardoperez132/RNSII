@@ -61,6 +61,9 @@ public class JSON extends ActionSupport {
 		constants.put("REGEX_TITLE", Constants.REGEX_TITLE);
 		constants.put("REGEX_DESCRIPTION", Constants.REGEX_DESCRIPTION);
 		constants.put("REGEX_EMAIL", Constants.REGEX_EMAIL);
+		constants.put("REGEX_PASS_STRONG", Constants.REGEX_PASS_STRONG);
+		constants.put("REGEX_PASS_MEDIUM", Constants.REGEX_PASS_MEDIUM);
+		constants.put("REGEX_PASS_ENOUGH", Constants.REGEX_PASS_ENOUGH);
 		return SUCCESS;
 	}
 

@@ -17,9 +17,10 @@
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
 <!-- JS (required) -->
 <script type="text/javascript" src="/SRSI/pages/res/js/jquery-1.7.1.js" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/jquery.validate.js" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/messages_es.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/SRSI/pages/res/js/funciones_ge.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/jquery.treeTable.js" charset="UTF-8"></script>
-<script type="text/javascript" src="res/js/jquery.alerts.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/registro/formulario_funcionalidad.js" charset="UTF-8"></script>
 <title><s:text name="registro.title"></s:text>
 </title>
@@ -85,9 +86,9 @@
 					<h4>
 						<s:text name="servicio.title" />
 						<s:property value="servicio.nombre" />
-					</h4>
-					<hr>
+					</h4>					
 					<s:if test='id_funcionalidad > 0 && modificarf != true && resumen != true'>
+						<hr>
 						<ul class="tabs">
 							<li class="active"><a><s:text name="tab1.title"></s:text>
 							</a>
@@ -148,6 +149,7 @@
 						</div>
 					</s:if>
 					<s:elseif test="resumen">
+						<hr>
 						<ul class="tabs">
 							<li>
 								<form action="prepararFuncionalidad" method="POST">
@@ -225,6 +227,12 @@
 						</div>
 					</s:elseif>
 					<s:else>
+						<form action="prepararFuncionalidad" method="POST">
+							<s:hidden name="id_funcionalidad" value="%{funcionalidad.id_funcionalidad}"></s:hidden>
+							<s:hidden name="id_servicio_informacion"></s:hidden>
+							<input type="submit" value="<s:text name="regresar"></s:text>">
+						</form>
+						<hr>
 						<ul class="tabs">
 							<li class="active"><a><s:text name="tab1.title"></s:text>
 							</a>
