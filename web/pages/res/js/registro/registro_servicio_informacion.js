@@ -1,42 +1,75 @@
-$.validator.addMethod('regexTitle', function (value) {
-	var soloTexto = new RegExp("^[a-zA-Z áéíóúAÉÍÓÚÑñ]+$");		    	
-	return soloTexto.test(value);
-}, 'Sólo puede introducir letras y espacios');
+/*
+ * Variable con las claves de intercionalización del archivo json. 
+ */
+var data;
 
-$.validator.addMethod('regexDescription', function (value) {
-	var soloTexto = new RegExp("^[a-zA-Z0-9 _.()áéíóúAÉÍÓÚÑñ]+$");		    	
-	return soloTexto.test(value);
-}, 'Sólo puede introducir letras, números y puntos');
+$(document).ready(function() {	
+	
+	/*
+	 * Obteniendo los valores de intercionalización del archivo JSON
+	 */
+	$.ajax({
+		url: "getJSONResult.action",		
+		type: "GET",
+		dataType: "json",
+		async:false,		
+		success: function(source){	
+			data = source;			
+		}	
+	});
+	
+	/*
+	 * Creación de método para validar una expresión regular del tipo title,
+	 * usada por el plugin jquery validator
+	 */
+	$.validator.addMethod('regexTitle', function (value) {	
+		var valor = value;
+		var soloTexto = new RegExp(data['constants']['REGEX_TITLE']);		    	
+		return soloTexto.test(valor.toUpperCase());
+	});
 
-$.validator.addMethod('regexVersion', function (value) {		    	
-	return $.isNumeric(value);
-}, 'Sólo puede introducir letras, números y puntos');
+	/*
+	 * Creación de método para validar una expresión regular del tipo description,
+	 * usada por el plugin jquery validator
+	 */
+	$.validator.addMethod('regexDescription', function (value) {
+		var valor = value;
+		var soloTexto = new RegExp(data['constants']['REGEX_DESCRIPTION']);		
+		return soloTexto.test(valor.toUpperCase());
+	});
 
-$(document).ready(function() {
-	/********************************************************************
+	/*
+	 * Creación de método para validar números,
+	 * usada por el plugin jquery validator
+	 */
+	$.validator.addMethod('regexVersion', function (value) {		    	
+		return $.isNumeric(value);
+	});
+	
+	/*
 	 * Validaciones para el formulario del tab1
 	 */
-  $("#formSI").validate({
-	  errorPlacement: function (error, element) { 
-	        error.insertBefore(element);    
-	     },
-	     rules: {
-	    	'sector' : {min: 0 },
-	    	'servicio.nombre': {required: true, regexTitle: true},
-	    	'servicio.descripcion': {required: true, regexDescription: true},
-	    	'area': { required: true, minlength: 1 },
-	    	'estado':{min: 0 }
-	    },
-	    messages: {
-	    	'sector': "Debe seleccionar un sector",
-	    	'servicio.nombre': {required:"Debe introducir un nombre",regexTitle:'Sólo puede introducir letras y espacios'},
-	    	'servicio.descripcion': {required:"Debe introducir una descripción",regexDescription:'Sólo puede introducir letras, números y puntos'},
-	    	'area':"Debe seleccionar las áreas a las que está orientado el servicio de información",
-	    	'estado':"Debe seleccionar el estado actual del servicio"
-	    }
-  });
-  
-	/********************************************************************
+	$("#formSI").validate({
+		  errorPlacement: function (error, element) { 
+		        error.insertBefore(element);    
+		     },
+		     rules: {
+		    	'sector' : {min: 0 },
+		    	'servicio.nombre': {required: true, regexTitle: true},
+		    	'servicio.descripcion': {required: true, regexDescription: true},
+		    	'area': { required: true, minlength: 1 },
+		    	'estado':{min: 0 }
+		    },
+		    messages: {
+		    	'sector': data['errores']['error.servicio.sector'],
+		    	'servicio.nombre': {required:data['errores']['error.servicio.nombre'],regexTitle:data['errores']['error.regex.title']},
+		    	'servicio.descripcion': {required:data['errores']['error.servicio.descripcion'],regexDescription:data['errores']['error.regex.description']},
+		    	'area':data['errores']['error.servicio.area'],
+		    	'estado':data['errores']['error.servicio.estado']
+		    }
+	});
+
+	/*
 	 * Validaciones para el formulario del tab2
 	 */
 	$("#formSI_Tab2").validate({
@@ -48,12 +81,12 @@ $(document).ready(function() {
 	    	'file': {required: true, accept: "pdf"}	    	
 	    },
 	    messages: {	    	
-	    	'name': {required:"Debe introducir un nombre",regexTitle:'Sólo puede introducir letras y espacios'},
-	    	'file': {reqired:"Debe adjuntar un archivo",accept:'Sólo se permiten archivos en formato PDF'}	    	
+	    	'name': {required:data['errores']['error.servicio.file.name'],regexTitle:data['errores']['error.servicio.title']},
+	    	'file': {reqired:data['errores']['error.servicio.file'],accept:data['errores']['error.servicio.format']}	    	
 	    }
 	});
 	
-	/********************************************************************
+	/*
 	 * Validaciones para el formulario del tab3
 	 */
 	$("#formSI_Tab3").validate({
@@ -67,21 +100,20 @@ $(document).ready(function() {
 	    	 'intercambio': {min: 0 }	    	
 	    },
 	    messages: {	    	
-	    	'seguridad' : "Debe seleccionar un nivel de seguridad",
-	    	 'arquitectura': "Debe seleccionar un tipo de arquitectura",
+	    	'seguridad' : data['errores']['error.servicio.seguridad'],
+	    	 'arquitectura': data['errores']['error.servicio.arquitectura'],
 	    	 'servicio.version':{
-	    		 required: "Debe introducir la versión",
-	    		 regexVersion: "La versión sólo debe tener números en un formato XXX.XXX",
-	    		 min:"El número de versión está fuera del rango, el formato es XXX.XXX",
-	    		 max:"El número de versión está fuera del rango, el formato es XXX.XXX"},
-	    	 'intercambio': {min: "Debe seleccionar un tipo de intercambio"}	    	
+	    		 required: data['errores']['error.servicio.version'],
+	    		 regexVersion: data['errores']['error.servicio.version.format'],
+	    		 min:data['errores']['error.servicio.nombre.version.range'],
+	    		 max:data['errores']['error.servicio.version.range']},
+	    	 'intercambio': {min: data['errores']['error.servicio.intercambio']}	    	
 	    }
 	});
-	
-	/********************************************************************
+		
+	/*
 	 * Validaciones para el formulario del tab4
-	 * servicio.responsable telefono correo
-	 */ 
+	 */
 	$("#formSI_Tab4").validate({
 	  errorPlacement: function (error, element) { 
 	        error.insertBefore(element);    
@@ -93,14 +125,16 @@ $(document).ready(function() {
 	    },
 	    messages: {	    	
 	    	'servicio.responsable' : {
-	    		required:"Debe introducir el responsable del servicio de información",
-	    		regexTitle:'Sólo puede introducir letras y espacios'},
+	    		required:data['errores']['error.servicio.responsable'],
+	    		regexTitle:data['errores']['error.servicio.title']},
 	    	 'telefono': {
-	    		required:"Debe introducir un número de teléfono",
-	    		digits:'El teléfono sólo puede estar conformado por números.'},	    	 
+	    		required:data['errores']['error.servicio.telefono'],
+	    		digits:data['errores']['error.servicio.telefono.regex']},	    	 
 	    	 'correo': {
-	    		required:"Debe introducir una dirección de correo electrónico",
-	    		email:'Esta dirección de correo electrónico es inválida'}
+	    		required:data['errores']['error.servicio.correo'],
+	    		email:data['errores']['error.regex.email']}
 	    }
 	});
+	
 });
+
