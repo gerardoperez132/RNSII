@@ -17,9 +17,10 @@
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
 <!-- JS (required) -->
 <script type="text/javascript" src="/SRSI/pages/res/js/jquery-1.7.1.js" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/jquery.validate.js" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/messages_es.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/SRSI/pages/res/js/funciones_ge.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/jquery.treeTable.js" charset="UTF-8"></script>
-<script type="text/javascript" src="res/js/jquery.alerts.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/registro/formulario_funcionalidad.js" charset="UTF-8"></script>
 <title><s:text name="registro.title"></s:text>
 </title>
