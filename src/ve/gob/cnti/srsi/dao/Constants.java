@@ -88,21 +88,24 @@ public interface Constants {
 	 * La expresión regular para el correo electrónico válido.
 	 */
 	public static final String REGEX_EMAIL = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
-	
+
 	/**
-	 * La expresión regular para validar que una clave tenga minimo 8 caracteres,
-	 * posea al menos un número o caracter especial y este compuesto de minusculas y mayusculas
+	 * La expresión regular para validar que una contraseña tenga mínimo 8
+	 * caracteres, posea al menos un número o caracter especial y esté compuesta
+	 * de minúsculas y mayúsculas.
 	 */
 	public static final String REGEX_PASS_STRONG = "(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{8,})$";
-	
+
 	/**
-	 * La expresión regular para validar que una clave tenga minimo 7 caracteres,
-	 * posea al menos un número o caracter especial y este compuesto de minusculas y mayusculas
+	 * La expresión regular para validar que una contraseña tenga mínimo 7
+	 * caracteres, posea al menos un número o caracter especial y esté compuesta
+	 * de minúsculas y mayúsculas.
 	 */
 	public static final String REGEX_PASS_MEDIUM = "^(?=.{7,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$";
-	
+
 	/**
-	 * La expresión regular para validar que una clave tenga minimo 6 caracteres
+	 * La expresión regular para validar que una contraseña tenga mínimo 6
+	 * caracteres.
 	 */
 	public static final String REGEX_PASS_ENOUGH = "(?=.{6,}).*";
 
