@@ -158,12 +158,14 @@
 														<input type="submit" value="<s:text name="eliminar" />" style="font-size: 0.9em;" onclick="eliminar_Fun(<s:property value="#result_Status.index"/>,'<s:property value="funcionalidad.nombre" />');" />
 													</form>
 												</td>
-												<s:if test="!salidas.size()>0">
+												<s:if test="!salidas.size()>0 || !entradas.size()>0">
 													<s:set name="contador" value="%{#contador + 1}" />
 													<s:i18n name="ve/gob/cnti/srsi/i18n/errors">
 														<td style="margin: 0; padding: 0;"><img src="res/img/important.png"	id="h<s:property value='#contador'/>" alt="ayuda" onmouseover="tip(this);" name="h<s:property value='#contador'/>" height="25" width="30" />
 															<div class="h<s:property value='#contador'/>" style="visibility: hidden; display: none;">
-																<p><s:text name="error.servicio.incomplete.salidas" /></p>
+															    <s:if test="!salidas.size()>0">
+																	<p><s:text name="error.servicio.incomplete.salidas" /></p>
+																</s:if>
 																<s:if test="!entradas.size()>0">
 																	<p><s:text name="error.servicio.incomplete.entradas" /></p>
 																</s:if>
