@@ -56,6 +56,12 @@ import ve.gob.cnti.srsi.util.SectoresMasPublicados;
 
 import com.opensymphony.xwork2.ActionContext;
 
+/**
+ * Clase de consulta de los controladores.
+ * 
+ * @author Joaquín Pereira
+ * 
+ */
 @SuppressWarnings("serial")
 public class ConsultasControlador extends DAO implements Constants, Order,
 		Modelos {

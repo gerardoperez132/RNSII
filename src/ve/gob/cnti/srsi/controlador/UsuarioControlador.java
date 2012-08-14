@@ -32,6 +32,12 @@ import ve.gob.cnti.srsi.util.ReadXmlTime;
 
 import com.opensymphony.xwork2.ActionContext;
 
+/**
+ * Esta clase es el controlador del usuario.
+ * 
+ * @author Joaquín Pereira
+ * 
+ */
 @SuppressWarnings("serial")
 public class UsuarioControlador extends DAO {
 
@@ -63,7 +69,7 @@ public class UsuarioControlador extends DAO {
 
 	@SuppressWarnings("unchecked")
 	public String modificarClave() throws NoSuchAlgorithmException {
-		getTiempoFecha();	
+		getTiempoFecha();
 		if (header().equals("errorSession") == true) {
 			return "errorSession";
 		} else {
@@ -120,7 +126,7 @@ public class UsuarioControlador extends DAO {
 
 	@SuppressWarnings("unchecked")
 	public String modificarDatos() {
-		getTiempoFecha();	
+		getTiempoFecha();
 		if (header().equals("errorSession") == true) {
 			return "errorSession";
 		} else {
@@ -141,13 +147,13 @@ public class UsuarioControlador extends DAO {
 
 	@SkipValidation
 	public String configuracion() {
-		getTiempoFecha();	
+		getTiempoFecha();
 		return header();
 	}
 
 	@SkipValidation
 	public String prepararFormulario() {
-		getTiempoFecha();	
+		getTiempoFecha();
 		header();
 		usuario = (Usuario) session.get("usuario");
 		if (modificarDatos = true) {
@@ -157,7 +163,7 @@ public class UsuarioControlador extends DAO {
 	}
 
 	public void validate() {
-		getTiempoFecha();	
+		getTiempoFecha();
 		if (modificarDatos) {
 			long ci;
 			if (usuario.getNombre().trim().isEmpty()
@@ -196,8 +202,8 @@ public class UsuarioControlador extends DAO {
 			}
 		}
 	}
-	
-	public void getTiempoFecha(){
+
+	public void getTiempoFecha() {
 		ReadXmlTime read = new ReadXmlTime();
 		fecha = read.getFechaTiempo();
 		estadosTiempo = read.getEstadosTiempo();

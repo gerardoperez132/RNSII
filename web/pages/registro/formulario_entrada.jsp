@@ -97,18 +97,18 @@
 			</ul>
 			<div class="tab_container">			
 			
-				<s:if test="modificar!=true">
+				<s:if test="!modificar">
 					<s:set name="action" var="action">registrarEntrada</s:set>
 					<s:set name="modificar" value="%{false}" />
 					<s:set name="submit" var="submit">
-						<s:text name="form.entrada.guardar"></s:text>
+						<s:text name="form.entrada.guardar"/>
 					</s:set>
 				</s:if>
 				<s:else>
 					<s:set name="action" var="action">modificarEntrada</s:set>
 					<s:set name="modificar" value="%{true}" />
 					<s:set name="submit" var="submit">
-						<s:text name="form.entrada.modificar"></s:text>
+						<s:text name="form.entrada.modificar"/>
 					</s:set>
 				</s:else>
 				<!-- Formulario para registrar o modificar entrada -->
@@ -161,7 +161,7 @@
 						</s:select>
 						<br>								
 						 
-						<s:if test="complejo!=true"> 
+						<s:if test="!complejo"> 
 						<div id="capa_formato" style="visibility: visible; position:relative;">
 							<h5 class="formulario">
 								<s:text name="form.entrada.formato"/>
@@ -178,7 +178,7 @@
 								</optgroup>
 								<s:iterator value="tipoDatos" status="td_status">										
 									<s:set var="id_td" value="id_tipo_dato"/>
-									<s:if test="hasformatted == true">
+									<s:if test="hasformatted">
 									<optgroup label="<s:property value="nombre"/>" 
 									id="opt_group_<s:property value="id_tipo_dato"/>">
 										<s:iterator value="formatos">
@@ -189,7 +189,7 @@
 												<s:if test="%{#idF == id_formato}">selected="selected"</s:if>>
 													<s:property value="formato"/>
 												</option>
-											</s:if>										
+											</s:if>		
 										</s:iterator>											
 									</optgroup>
 									</s:if>										
@@ -203,19 +203,16 @@
 							<s:fielderror>
 								<s:param>longitud</s:param>
 							</s:fielderror>
-							
 								<s:textfield name="entrada.longitud" maxlength="10" id="entrada.longitud"/>
 								<span id="longitud_msj"></span>
 						</div>
-						
 						</s:if>
-						
 						<br>
-						<s:hidden name="id_servicio_informacion"></s:hidden>
-						<s:hidden name="id_funcionalidad"></s:hidden>
-						<s:hidden name="id_entrada_salida"></s:hidden>
-						<s:hidden name="modificar"></s:hidden>
-						<s:hidden name="complejo"></s:hidden>
+						<s:hidden name="id_servicio_informacion"/>
+						<s:hidden name="id_funcionalidad"/>
+						<s:hidden name="id_entrada_salida"/>
+						<s:hidden name="modificar"/>
+						<s:hidden name="complejo"/>
 						<input type="submit"
 							value="<s:property value="#submit"></s:property>" />
 					</div>								

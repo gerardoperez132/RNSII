@@ -17,11 +17,14 @@ package ve.gob.cnti.srsi.modelo;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import ve.gob.cnti.srsi.dao.Constants;
 
 /**
  * Aspectos legales del servicio de información.
@@ -41,6 +44,7 @@ public class AspectoLegal {
 	private long id_aspecto_legal;
 	private long id_servicio_informacion;
 	private long id_usuario;
+	@Column(length = Constants.TITLE_LENGTH)
 	private String nombre;
 	private String url;
 	private int status;

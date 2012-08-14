@@ -56,6 +56,13 @@ import ve.gob.cnti.srsi.util.ReadXmlTime;
 
 import com.opensymphony.xwork2.ActionContext;
 
+/**
+ * Esta clase es el controlador de los servicios de información.
+ * 
+ * @author Richard Ricciardelli
+ * @author Joaquín Pereira
+ * 
+ */
 @SuppressWarnings("serial")
 public class ServicioInformacionControlador extends DAO implements Constants,
 		ServletRequestAware, Tabs, Modelos, Order {

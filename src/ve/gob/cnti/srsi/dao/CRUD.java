@@ -25,8 +25,8 @@ import ve.gob.cnti.srsi.modelo.Telefono;
 import ve.gob.cnti.srsi.modelo.Visita;
 import ve.gob.cnti.srsi.util.ListaServiciosVisitados;
 import ve.gob.cnti.srsi.util.SectoresMasPublicados;
-import ve.gob.cnti.srsi.util.SubscriptionResponse;
 import ve.gob.cnti.srsi.util.SubscriptionRequest;
+import ve.gob.cnti.srsi.util.SubscriptionResponse;
 
 /**
  * Definición de métodos para las operaciones en la base de datos.
@@ -637,7 +637,7 @@ public interface CRUD {
 	public boolean isComplete(ServicioInformacion servicio);
 
 	/**
-	 * Este métodoo permite saber si un servicio de información está completo y
+	 * Este método permite saber si un servicio de información está completo y
 	 * listo para ser publicado, especificando mediante códigos de error en qué
 	 * parte de la lógica el servicio no está completo.
 	 * 

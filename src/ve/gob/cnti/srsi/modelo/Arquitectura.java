@@ -17,11 +17,14 @@ package ve.gob.cnti.srsi.modelo;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import ve.gob.cnti.srsi.dao.Constants;
 
 /**
  * El tipo de arquitectura del servicio. Puede ser Web Semántica, Servicio Web u
@@ -38,6 +41,7 @@ public class Arquitectura {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private long id_arquitectura;
+	@Column(length = Constants.TITLE_LENGTH)
 	private String nombre;
 	private int status;
 	private Date fecha_creado;

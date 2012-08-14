@@ -17,11 +17,14 @@ package ve.gob.cnti.srsi.modelo;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import ve.gob.cnti.srsi.dao.Constants;
 
 /**
  * Una funcionalidad es igual a una operación en un servicio web. Un servicio de
@@ -42,7 +45,9 @@ public class Funcionalidad {
 	private long id_funcionalidad;
 	private long id_servicio_informacion;
 	private long id_usuario;
+	@Column(length = Constants.TITLE_LENGTH)
 	private String nombre;
+	@Column(length = Constants.DESCRIPTION_LENGTH)
 	private String descripcion;
 	private int status;
 	private Date fecha_creado;

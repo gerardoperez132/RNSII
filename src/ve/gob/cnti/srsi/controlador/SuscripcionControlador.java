@@ -39,6 +39,13 @@ import ve.gob.cnti.srsi.util.SubscriptionResponse;
 
 import com.opensymphony.xwork2.ActionContext;
 
+/**
+ * Esta clase es el controlador de las suscripciones.
+ * 
+ * @author Richard Ricciardelli
+ * @author Joaquín Pereira
+ * 
+ */
 @SuppressWarnings("serial")
 public class SuscripcionControlador extends DAO implements Constants, Order,
 		Modelos, Sentencias {

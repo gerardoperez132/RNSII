@@ -32,10 +32,18 @@ import ve.gob.cnti.srsi.modelo.Funcionalidad;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.Usuario;
 import ve.gob.cnti.srsi.util.EstadosTiempo;
+import ve.gob.cnti.srsi.util.FuncionalidadesPublicables;
 import ve.gob.cnti.srsi.util.ReadXmlTime;
 
 import com.opensymphony.xwork2.ActionContext;
 
+/**
+ * Esta clase es el controlador de las funcionalidades.
+ * 
+ * @author Richard Ricciardelli
+ * @author Joaquín Pereira
+ * 
+ */
 @SuppressWarnings("serial")
 public class FuncionalidadControlador extends DAO implements Formulario,
 		TipoEntradaSalida, Modelos, Constants {
@@ -43,7 +51,7 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 	private List<EntradaSalida> entradas;
 	private List<EntradaSalida> salidas;
 	private List<Funcionalidad> funcionalidades;
-
+	private List<FuncionalidadesPublicables> funcionalidadesPublicables;
 	private ServicioInformacion servicio = new ServicioInformacion();
 	private Funcionalidad funcionalidad = new Funcionalidad();
 	private EntradaSalida entrada = new EntradaSalida();
@@ -126,6 +134,18 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 		}
 		funcionalidades = (List<Funcionalidad>) read(FSI,
 				id_servicio_informacion, -1);
+		funcionalidadesPublicables = new ArrayList<FuncionalidadesPublicables>();
+		for (Funcionalidad funcionalidad : funcionalidades) {
+			entradas = (ArrayList<EntradaSalida>) read(ESF,
+					funcionalidad.getId_funcionalidad(), ENTRADA);
+			salidas = (ArrayList<EntradaSalida>) read(ESF,
+					funcionalidad.getId_funcionalidad(), SALIDA);
+			funcionalidadesPublicables.add(new FuncionalidadesPublicables(
+					entradas, salidas, true, funcionalidad));
+		}
+		for (FuncionalidadesPublicables f : funcionalidadesPublicables) {
+			System.out.println(f.toString());
+		}
 		return SUCCESS;
 	}
 
@@ -303,4 +323,12 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 		this.fecha = fecha;
 	}
 
+	public List<FuncionalidadesPublicables> getFuncionalidadesPublicables() {
+		return funcionalidadesPublicables;
+	}
+
+	public void setFuncionalidadesPublicables(
+			List<FuncionalidadesPublicables> funcionalidadesPublicables) {
+		this.funcionalidadesPublicables = funcionalidadesPublicables;
+	}
 }

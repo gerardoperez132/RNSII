@@ -25,10 +25,6 @@ import java.util.Date;
  * 
  * @author Joaquín Pereira
  */
-/**
- * @author Richard Ricciardelli
- * 
- */
 public class SubscriptionResponse {
 
 	private long id_suscripcion;

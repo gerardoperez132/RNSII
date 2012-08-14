@@ -17,11 +17,14 @@ package ve.gob.cnti.srsi.modelo;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import ve.gob.cnti.srsi.dao.Constants;
 
 /**
  * Tabla que manejará los formatos de los distintos tipo de datos. {@link Date},
@@ -39,6 +42,7 @@ public class Formato {
 	private long id;
 	private long id_formato;
 	private long id_tipo_dato;
+	@Column(length = Constants.TITLE_LENGTH)
 	private String formato;
 	private int status;
 	private Date fecha_creado;

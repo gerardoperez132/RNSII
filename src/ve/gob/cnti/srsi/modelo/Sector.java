@@ -17,11 +17,14 @@ package ve.gob.cnti.srsi.modelo;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import ve.gob.cnti.srsi.dao.Constants;
 
 /**
  * Clase modelo con los atributos de la tabla sectores.
@@ -36,6 +39,7 @@ public class Sector {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private long id_sector;
+	@Column(length = Constants.TITLE_LENGTH)
 	private String nombre;
 	private int status;
 	private Date fecha_creado;
