@@ -9,15 +9,17 @@ public class FuncionalidadesPublicables {
 	private List<EntradaSalida> entradas;
 	private List<EntradaSalida> salidas;
 	private boolean publicable;
+	private boolean hijos;
 	Funcionalidad funcionalidad = new Funcionalidad();
 
 	public FuncionalidadesPublicables(List<EntradaSalida> entradas,
-			List<EntradaSalida> salidas, boolean publicable,
+			List<EntradaSalida> salidas, boolean publicable, boolean hijos,
 			Funcionalidad funcionalidad) {
 		super();
 		this.entradas = entradas;
 		this.salidas = salidas;
 		this.publicable = publicable;
+		this.hijos = hijos;
 		this.funcionalidad = funcionalidad;
 	}
 
@@ -53,10 +55,18 @@ public class FuncionalidadesPublicables {
 		this.funcionalidad = funcionalidad;
 	}
 
+	public boolean isHijos() {
+		return hijos;
+	}
+
+	public void setHijos(boolean hijos) {
+		this.hijos = hijos;
+	}
+
 	@Override
 	public String toString() {
 		return "FuncionalidadesPublicables [entradas=" + entradas
 				+ ", salidas=" + salidas + ", publicable=" + publicable
-				+ ", funcionalidad=" + funcionalidad + "]";
+				+ ", hijos=" + hijos + ", funcionalidad=" + funcionalidad + "]";
 	}
 }
