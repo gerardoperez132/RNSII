@@ -86,9 +86,9 @@
 					<h4>
 						<s:text name="servicio.title" />
 						<s:property value="servicio.nombre" />
-					</h4>
-					<hr>
+					</h4>					
 					<s:if test='id_funcionalidad > 0 && modificarf != true && resumen != true'>
+						<hr>
 						<ul class="tabs">
 							<li class="active"><a><s:text name="tab1.title"></s:text>
 							</a>
@@ -149,6 +149,7 @@
 						</div>
 					</s:if>
 					<s:elseif test="resumen">
+						<hr>
 						<ul class="tabs">
 							<li>
 								<form action="prepararFuncionalidad" method="POST">
@@ -226,6 +227,12 @@
 						</div>
 					</s:elseif>
 					<s:else>
+						<form action="prepararFuncionalidad" method="POST">
+							<s:hidden name="id_funcionalidad" value="%{funcionalidad.id_funcionalidad}"></s:hidden>
+							<s:hidden name="id_servicio_informacion"></s:hidden>
+							<input type="submit" value="<s:text name="regresar"></s:text>">
+						</form>
+						<hr>
 						<ul class="tabs">
 							<li class="active"><a><s:text name="tab1.title"></s:text>
 							</a>
