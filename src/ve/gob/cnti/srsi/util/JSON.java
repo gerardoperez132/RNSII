@@ -21,6 +21,7 @@ import java.util.Map;
 
 import ve.gob.cnti.srsi.dao.Constants;
 import ve.gob.cnti.srsi.i18n.Errors;
+import ve.gob.cnti.srsi.i18n.Messages;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -32,16 +33,25 @@ import com.opensymphony.xwork2.ActionSupport;
  * @author Richard Ricciardelli
  * @author Joaquín Pereira
  * @see Errors
+ * @see Messages
  */
 @SuppressWarnings("serial")
 public class JSON extends ActionSupport {
 
 	private Map<String, String> errores = new HashMap<String, String>();
+	private Map<String, String> mensajes = new HashMap<String, String>();
 	private Map<String, String> constants = new HashMap<String, String>();
 	private Errors error = new Errors();
+	private Messages mensaje = new Messages();
 
 	@SuppressWarnings("rawtypes")
-	public String obtenerError() {
+	public String obtenerError() {		
+		for (Enumeration enumeration = mensaje.getProperties().keys(); enumeration
+				.hasMoreElements();) {
+			Object object = enumeration.nextElement();
+			mensajes.put(object.toString(),
+					mensaje.getProperties().getProperty(object.toString()));
+		}
 		for (Enumeration enumeration = error.getProperties().keys(); enumeration
 				.hasMoreElements();) {
 			Object object = enumeration.nextElement();
@@ -68,5 +78,13 @@ public class JSON extends ActionSupport {
 
 	public void setConstants(Map<String, String> constants) {
 		this.constants = constants;
+	}
+
+	public Map<String, String> getMensajes() {
+		return mensajes;
+	}
+
+	public void setMensajes(Map<String, String> mensajes) {
+		this.mensajes = mensajes;
 	}
 }
