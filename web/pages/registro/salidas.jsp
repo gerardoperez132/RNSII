@@ -192,6 +192,7 @@
 																				<s:hidden name="id_funcionalidad"/>
 																				<s:hidden name="id_entrada_salida" value="%{#id}"/>
 																				<s:hidden name="modificar" value="%{true}"/>
+																				<s:hidden name="complejo" value="%{true}"/>
 																				<input type="submit" value="<s:text name="salida.modificar"/>" style="font-size: 1em;" />
 																			</form>
 																		</td>
