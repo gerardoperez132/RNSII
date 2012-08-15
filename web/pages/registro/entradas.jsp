@@ -183,6 +183,7 @@
 																				<s:hidden name="id_servicio_informacion"/>
 																				<s:hidden name="id_funcionalidad"/>
 																				<s:hidden name="id_entrada_salida"/>
+																				<s:hidden name="id_entrada_padre" value="%{id_entrada_salida}"/>
 																				<input type="submit" value="<s:text name="entrada.simple.add"/>" style="font-size: 1em;" />
 																			</form>
 																		</td>
@@ -231,7 +232,7 @@
 																<table style="margin: 0; padding: 0;">
 																	<tr style="margin: 0; padding: 0;">
 																		<td style="margin: 0; padding: 0;">
-																			<form action="prepararModificarEntradaSimple" method="POST">
+																			<form action="prepararModificarEntrada" method="POST">
 																				<s:hidden name="id_servicio_informacion"/>
 																				<s:hidden name="id_funcionalidad"/>
 																				<s:hidden name="id_entrada_salida"/>
@@ -279,6 +280,7 @@
 																			<s:hidden name="id_servicio_informacion"/>
 																			<s:hidden name="id_funcionalidad"/>
 																			<s:hidden name="id_entrada_salida"/>
+																			<s:hidden name="id_entrada_padre" value="%{id_entrada_salida}"/>
 																			<s:hidden name="modificar" value="%{true}"/>
 																			<input type="submit" value="<s:text name="entrada.modificar"/>" style="font-size: 1em;" />
 																		</form>

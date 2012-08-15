@@ -61,6 +61,7 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 	private Map session;
 
 	private long id_entrada_salida;
+	private long id_entrada_padre;
 	private long id_servicio_informacion;
 	private long id_funcionalidad;
 	private long id_tipo_dato;
@@ -125,6 +126,18 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 		complejo = true;
 		return SUCCESS;
 	}
+	
+	@SuppressWarnings("unchecked")
+	@SkipValidation
+	public String prepararModificarEntrada() {
+		getTiempoFecha();
+		entrada = (EntradaSalida) read(entrada, id_entrada_salida);
+		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		tipoDatos = (ArrayList<TipoDato>) read(new TipoDato());
+		formatos = (ArrayList<Formato>) read(new Formato());
+		return SUCCESS;
+	}
 
 	@SuppressWarnings("unchecked")
 	@SkipValidation
@@ -157,8 +170,8 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 		entrada.setId_funcionalidad(id_funcionalidad);
 		entrada.setId_usuario(user.getId_usuario());
 		entrada.setTipo(ENTRADA);
-		if (id_entrada_salida > 0) {
-			entrada.setId_padre(id_entrada_salida);
+		if (id_entrada_padre > 0) {
+			entrada.setId_padre(id_entrada_padre);
 		}
 		create(entrada);
 		return SUCCESS;
@@ -303,7 +316,7 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 						"error.length"));
 			}
 		}
-		if (read(ESF, id_funcionalidad, entrada.getNombre()) && !modificar) {
+		if (read(ESF, id_funcionalidad, entrada.getNombre())) {
 			addFieldError(
 					"entrada.nombre",
 					error.getProperties().getProperty(
@@ -311,7 +324,7 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 		}
 		if (complejo) {
 			prepararFormularioComplejo();
-		} else if (id_entrada_salida > 0) {
+		} else if (id_entrada_padre > 0) {
 			prepararFormularioSimple();
 		} else
 			prepararRegistroEntrada();
@@ -476,5 +489,13 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
+	}
+
+	public long getId_entrada_padre() {
+		return id_entrada_padre;
+	}
+
+	public void setId_entrada_padre(long id_entrada_padre) {
+		this.id_entrada_padre = id_entrada_padre;
 	}
 }

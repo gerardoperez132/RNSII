@@ -61,6 +61,7 @@ public class SalidaControlador extends DAO implements Formulario,
 	private Map session;
 
 	private long id_entrada_salida;
+	private long id_salida_padre;
 	private long id_servicio_informacion;
 	private long id_funcionalidad;
 	private boolean complejo;
@@ -118,6 +119,18 @@ public class SalidaControlador extends DAO implements Formulario,
 		complejo = true;
 		return SUCCESS;
 	}
+	
+	@SuppressWarnings("unchecked")
+	@SkipValidation
+	public String prepararModificarSalida() {
+		getTiempoFecha();
+		salida = (EntradaSalida) read(salida, id_entrada_salida);
+		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		tipoDatos = (List<TipoDato>) read(new TipoDato());
+		formatos = (ArrayList<Formato>) read(new Formato());
+		return SUCCESS;
+	}
 
 	@SuppressWarnings("unchecked")
 	@SkipValidation
@@ -150,8 +163,8 @@ public class SalidaControlador extends DAO implements Formulario,
 		salida.setId_funcionalidad(id_funcionalidad);
 		salida.setId_usuario(user.getId_usuario());
 		salida.setTipo(SALIDA);
-		if (id_entrada_salida > 0) {
-			salida.setId_padre(id_entrada_salida);
+		if (id_salida_padre > 0) {
+			salida.setId_padre(id_salida_padre);
 		}
 		create(salida);
 		return SUCCESS;
@@ -421,6 +434,14 @@ public class SalidaControlador extends DAO implements Formulario,
 
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
+	}
+
+	public long getId_salida_padre() {
+		return id_salida_padre;
+	}
+
+	public void setId_salida_padre(long id_salida_padre) {
+		this.id_salida_padre = id_salida_padre;
 	}
 
 }
