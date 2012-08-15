@@ -90,6 +90,7 @@ public class SalidaControlador extends DAO implements Formulario,
 		salidas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad, SALIDA);
 		tipoDatos = (List<TipoDato>) read(new TipoDato());
 		formatos = (ArrayList<Formato>) read(new Formato());
+		complejo = false;
 		return SUCCESS;
 	}
 
@@ -182,6 +183,10 @@ public class SalidaControlador extends DAO implements Formulario,
 	@SkipValidation
 	public String eliminarSalidaSimple() {
 		getTiempoFecha();
+		Usuario user = new Usuario();
+		session = ActionContext.getContext().getSession();
+		user = (Usuario) session.get("usuario");
+		salida.setId_usuario(user.getId_usuario());
 		delete(salida, id_entrada_salida);
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
@@ -295,16 +300,17 @@ public class SalidaControlador extends DAO implements Formulario,
 						"error.length"));
 			}
 		}
-		if (read(ESF, id_funcionalidad, salida.getNombre()) && !modificar) {
+		if (read(ESF, id_funcionalidad, salida.getNombre())) {
 			addFieldError("salida.nombre",
 					error.getProperties()
 							.getProperty("error.salida.duplicated"));
 		}
 		if (complejo) {
 			prepararFormularioComplejo();
-		} else {
+		} else if (id_entrada_salida > 0) {
 			prepararFormularioSimple();
-		}
+		} else
+			prepararRegistroSalida();
 	}
 
 	public void getTiempoFecha() {

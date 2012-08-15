@@ -311,9 +311,10 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 		}
 		if (complejo) {
 			prepararFormularioComplejo();
-		} else {
+		} else if (id_entrada_salida > 0) {
 			prepararFormularioSimple();
-		}
+		} else
+			prepararRegistroEntrada();
 	}
 
 	@SkipValidation
