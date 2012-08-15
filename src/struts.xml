@@ -295,6 +295,12 @@
 			<result name="success">registro/formulario_entrada.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
+		
+		<action name="prepararModificarEntrada" method="prepararModificarEntrada"
+			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
+			<result name="success">registro/formulario_entrada.jsp</result>
+			<result name="error">error.jsp</result>
+		</action>
 
 		<action name="prepararModificarEntradaSimple" method="prepararModificarEntradaSimple"
 			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
@@ -356,6 +362,12 @@
 		</action>
 
 		<action name="prepararSalidaCompleja" method="prepararFormularioComplejo"
+			class="ve.gob.cnti.srsi.controlador.SalidaControlador">
+			<result name="success">registro/formulario_salida.jsp</result>
+			<result name="error">error.jsp</result>
+		</action>
+		
+		<action name="prepararModificarSalida" method="prepararModificarSalida"
 			class="ve.gob.cnti.srsi.controlador.SalidaControlador">
 			<result name="success">registro/formulario_salida.jsp</result>
 			<result name="error">error.jsp</result>
