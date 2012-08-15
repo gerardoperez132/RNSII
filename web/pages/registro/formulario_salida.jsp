@@ -214,6 +214,7 @@
 						<s:hidden name="id_servicio_informacion"></s:hidden>
 						<s:hidden name="id_funcionalidad"></s:hidden>
 						<s:hidden name="id_entrada_salida"></s:hidden>
+						<s:hidden name="id_salida_padre"></s:hidden>
 						<s:hidden name="modificar"></s:hidden>
 						<s:hidden name="complejo"></s:hidden>
 						<input type="submit"
