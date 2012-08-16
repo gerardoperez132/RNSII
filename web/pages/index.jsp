@@ -29,15 +29,8 @@
 	        <div  class="RutaNavegacion">
 				<a href="SRSI.action"><s:text name="catalogo" /></a>
 			</div>
-			<br><br><br>
-			<div class="busqueda">
-				<form method="post" action="buscar_servicio">
-					<label><s:text name="buscarServicio"/></label>
-					<s:textfield name="cadena" id="buscar" cssClass="inputBusqueda" class="buscar"/>
-					<input type="submit" class="submit" value="&nbsp;"/>
-				</form>
-			</div>
-
+			<br>
+			
 			<div class="Titulo" >
 		    		<h1><s:text name="titulo2" /></h1>
        		</div>

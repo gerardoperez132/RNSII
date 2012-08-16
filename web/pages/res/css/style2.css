@@ -1559,7 +1559,6 @@ float: right;
 font-family: sans-serif;
 height: 25px;
 margin: 1px 0pt 0pt;
-width: 268px;
 }
 
 .busqueda .submit {
@@ -1578,7 +1577,6 @@ border-style:dotted solid;
 border-width:1px;
 float:left;
 font-size:12px;
-margin:10px 0 0;
 padding:6px 0 5px 5px;
 width:675px;
 }
@@ -3066,10 +3064,10 @@ width:765px;
 }
 
 .inputBusqueda{
-	margin-top:2px;
-	border:2px solid #CECECE;
-	width: 173px;
-	height: 16px;
+	margin-top:1px;
+	border:1px solid #CECECE;
+	width: 171px;
+	height: 19px;
 }
 
 /*icono de ayuda*/

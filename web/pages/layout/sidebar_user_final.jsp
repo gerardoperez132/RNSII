@@ -1,7 +1,15 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!-- Esta es la barra lateral -->
 <div class="sidebar">
+	<div class="busqueda">
+			<form method="post" action="buscar_servicio">
+				<label><s:text name="buscarServicio"/></label>
+				<s:textfield name="cadena" id="buscar" cssClass="inputBusqueda" class="buscar"/>
+				<input type="submit" class="submit" value="&nbsp;"/>
+			</form>
+		</div>
 	<div class="secciones" style="clear: both;">
+		
 		<ul class="ui-menu-content">
 			<li class="li-menu-content">
 				<h3 class="h3-ui-menu-content">
