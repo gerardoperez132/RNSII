@@ -30,7 +30,7 @@
 				<a href="SRSI.action"><s:text name="catalogo" /></a>
 			</div>
 			<br><br><br>
-			<div  class="busqueda">
+			<div class="busqueda">
 				<form method="post" action="buscar_servicio">
 					<label><s:text name="buscarServicio"/></label>
 					<s:textfield name="cadena" id="buscar" cssClass="inputBusqueda" class="buscar"/>

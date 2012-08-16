@@ -1555,11 +1555,11 @@ width:171px;
 }
 .busqueda {
 border: 1px solid #CCC;
-float: left;
+float: right;
 font-family: sans-serif;
 height: 25px;
 margin: 1px 0pt 0pt;
-width: 670px;
+width: 268px;
 }
 
 .busqueda .submit {
@@ -3068,7 +3068,7 @@ width:765px;
 .inputBusqueda{
 	margin-top:2px;
 	border:2px solid #CECECE;
-	width: 490px;
+	width: 173px;
 	height: 16px;
 }
 
