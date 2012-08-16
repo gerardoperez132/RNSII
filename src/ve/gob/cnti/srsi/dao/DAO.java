@@ -621,7 +621,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 			System.out.println("FALLÓ EN UNIÓN ÁREAS");
 			return false;
 		}
-		if (servicio.getId_estado() == 0) {
+		if (servicio.getId_estado() == DESARROLLO) {
 			System.out.println("FALLÓ EN ESTADO");
 			return false;
 		}
