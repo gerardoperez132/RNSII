@@ -29,6 +29,7 @@ import ve.gob.cnti.srsi.modelo.Visita;
  * 
  */
 public interface Constants {
+	
 	/**
 	 * Códigos de área de un número telefónico en Venezuela.
 	 */
