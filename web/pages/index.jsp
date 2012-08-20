@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@taglib uri="/struts-tags" prefix="s"%>
+<%@taglib uri="http://displaytag.sf.net" prefix="display" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <s:i18n name="ve/gob/cnti/srsi/i18n/messages">
@@ -525,7 +526,6 @@
 				    <span class="tab03"><s:text name="sectores"/></span>
 				  </div>
 				</div>
-			
 				<div class="middleContent">
 				   <ul class='thematics'>
 				   <s:iterator value="listaSectores2" status="index">
@@ -538,7 +538,20 @@
 							 </a>
 						</li>
 						</s:if>
+						<s:elseif test="#index.index>9 && #index.index<9*#page">
+						</s:elseif>
 					</s:iterator>
+				   </ul>
+				   <ul id="pagination-flickr">
+				     <li class="previous-off">«Previous</li>
+				 	 <li class="active">1</li>
+				 	 <li><a href="?page=2">2</a></li>
+					 <li><a href="?page=3">3</a></li>
+				 	 <li><a href="?page=4">4</a></li>
+					 <li><a href="?page=5">5</a></li>
+					 <li><a href="?page=6">6</a></li>
+					 <li><a href="?page=7">7</a></li>
+					 <li class="next"><a href="?page=2">Next »</a></li>
 				   </ul>
 				   <div class="ver_sectores">
 				   <a href="listarSectores" class="ver_sectores">						
