@@ -1,7 +1,7 @@
 REMOTES=$(git remote)
 for i in $REMOTES;
 do
-  echo "Updloading changes to $i please wait..."
+  echo "Updloading changes to $i please wait...\n"
   git push $i permisos
-  echo "\n\n"
+  echo "\n"
 done
