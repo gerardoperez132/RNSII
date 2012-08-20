@@ -535,7 +535,7 @@
 					         <a style="background:url(<s:property value="#url"/>);background-repeat: no-repeat;" 
 					            href="listarSector?id_sector=<s:property value="id_sector"/>">						
 									<s:property value="nombre" /> (<s:property value="n" />) 
-							 </a>	
+							 </a>
 						</li>
 						</s:if>
 					</s:iterator>
