@@ -531,7 +531,8 @@
 				   <s:iterator value="listaSectores2" status="index">
 				   		<s:if test="#index.index<9">
 				   		<li>
-					         <a style="background:url(res/img/logo_sector.png);background-repeat: no-repeat;" 
+				   		<s:set name="url" value="%{'res/img/sector/logo_sector'+id_sector+'.png'}"/>
+					         <a style="background:url(<s:property value="#url"/>);background-repeat: no-repeat;" 
 					            href="listarSector?id_sector=<s:property value="id_sector"/>">						
 									<s:property value="nombre" /> (<s:property value="n" />) 
 							 </a>	
