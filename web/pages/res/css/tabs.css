@@ -113,3 +113,8 @@ ul {
 #pagination-flickr a:hover {
 	border: solid 1px #666666;
 }
+
+.pagination {
+	float: left;
+	width: 692px;
+}
