@@ -126,6 +126,8 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 		List<SectoresMasPublicados> lista = listadoSectores(-1, true);
 		if (lista.size() > 0) {
 			totalPages = (int) Math.round(lista.size() / (double) mLimit);
+			if (page <= 0 || page > totalPages)
+				page = 1;
 			for (int i = ((page - 1) * mLimit); i < page * mLimit; i++) {
 				if (i >= lista.size())
 					break;
@@ -144,6 +146,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 			for (int j = 0; j < totalPages; j++)
 				pagination.add(j + 1);
 		}
+
 		return SUCCESS;
 	}
 
