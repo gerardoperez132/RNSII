@@ -564,7 +564,7 @@
 			<result name="input" type="redirectAction">home</result>
 			<result name="error">error.jsp</result>
 		</action>
-
+		
 		<!-- Actions para el usuario final -->
 		<action name="SRSI" method="inicio"
 			class="ve.gob.cnti.srsi.controlador.ConsultasControlador">
