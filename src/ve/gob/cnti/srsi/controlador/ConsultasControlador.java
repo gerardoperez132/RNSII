@@ -128,6 +128,8 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 			totalPages = (int) Math.round(lista.size() / (double) mLimit);
 			if (page <= 0 || page > totalPages)
 				page = 1;
+			if (totalPages < 1)
+				totalPages = 1;
 			for (int i = ((page - 1) * mLimit); i < page * mLimit; i++) {
 				if (i >= lista.size())
 					break;
