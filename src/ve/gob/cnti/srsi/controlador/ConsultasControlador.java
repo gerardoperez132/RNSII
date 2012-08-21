@@ -125,7 +125,9 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 		SI_masVisitados = listarServiciosVisitados(LIMITE_VISITADOS, false);
 		List<SectoresMasPublicados> lista = listadoSectores(-1, true);
 		if (lista.size() > 0) {
-			totalPages = (int) Math.round(lista.size() / (double) mLimit);
+			double expression = lista.size() / (double) mLimit;
+			totalPages = (int) (expression % 1 != 0 ? expression + 1
+					: expression);
 			if (page <= 0 || page > totalPages)
 				page = 1;
 			if (totalPages < 1)
