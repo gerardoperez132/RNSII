@@ -448,20 +448,16 @@
 							</div>
 							<div class="middleContent">
 								<ul class='thematics'>
-									<s:iterator value="listaSectores2" status="index">
-										<s:if test="#index.index<9">
-											<li><s:set name="url"
-													value="%{'res/img/sector/logo_sector'+id_sector+'.png'}" />
-												<a
-												style="background:url(<s:property value="#url"/>);background-repeat: no-repeat;"
-												href="listarSector?id_sector=<s:property value="id_sector"/>">
-													<s:property value="nombre" /> (<s:property value="n" />)
-											</a></li>
-										</s:if>
+									<s:iterator value="listaSectores2">
+										<li><s:set name="url" value="%{'res/img/sector/logo_sector'+id_sector+'.png'}" />
+											<a style="background:url(<s:property value="#url"/>);background-repeat: no-repeat;" href="listarSector?id_sector=<s:property value="id_sector"/>">
+												<s:property value="nombre" /> (<s:property value="n" />)
+											</a>
+										</li>
 									</s:iterator>
 								</ul>
 								<%@include file="pagination.jsp" %>
-								<div class="ver_sectores">
+								<div class="ver_sectores" style="bottom: 12px; position: absolute;">
 									<a href="listarSectores" class="ver_sectores"><s:text name="ver_sectores"/></a>
 								</div>
 							</div>
