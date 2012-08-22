@@ -94,7 +94,9 @@
 		</table>
 		<div class="pasos">
 			<table><tr><td>
-				<span style="font-weight: bolder;"><s:text name="title"/></span></td>
+				<span style="font-weight: bolder;">
+					<s:text name="registro.title"/>							
+				</span></td>
 			<td></tr></table>				
 		</div>
 				
@@ -162,7 +164,7 @@
 				</li>
 			</s:else>						
 		</ul>
-			<div class="tab_container">
+			<div class="tab_container" style="height: 450px;">
 				<s:if test="%{tab==1}">
 					<div id="tab1" class="tab_content">
 						<form action="<s:property value="#action"/>" id="formSI" name="formSI" method="post" enctype="multipart/form-data">

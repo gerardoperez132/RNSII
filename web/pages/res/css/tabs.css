@@ -7,7 +7,7 @@
 	width: 98%;
 	background: #fff;
 	margin-bottom: 20px;
-	height: 290px;
+	height: 310px;
 	overflow-y: auto;
 }
 
@@ -52,6 +52,17 @@ ul.tabs li a {
 
 ul.tabs li a:hover {
 	background: #ccc;
+	text-decoration: underline;
+}
+
+ul.tabs li input:hover {
+	background: #ccc;
+	text-decoration: underline;
+}
+
+ul.tabs li:hover {
+	background: #ccc;
+	text-decoration: underline;
 }
 
 html ul.tabs li.active,html ul.tabs li.active a:hover {
@@ -60,3 +71,4 @@ html ul.tabs li.active,html ul.tabs li.active a:hover {
 	border-bottom: 1px solid #fff;
 	/*--Esto hace que la tab activa esté conectada con respecto a su contenido--*/
 }
+

@@ -66,253 +66,271 @@
 					</tr>
 				</table>
 				<div class="pasos">
-					<table>
-						<tr>
-							<td><small> <strong> <s:text name="paso2.1.1" /> <s:text name="funcionalidades" /> - </strong> <s:text name="entrada.tab2.title" />
-							</small></td>
-						</tr>
-					</table>
-				</div>
-				<h3>
-					<s:text name="entrada.registro.title"></s:text>
-				</h3>
-				<h4>
-					<s:text name="entrada.servicio.title">
-						<s:param>
-							<s:property value="servicio.nombre" />
-						</s:param>
-					</s:text>
-				</h4>
-				<hr>
-				<ul class="tabs">
+					<table><tr><td>
+						<span style="font-weight: bolder;">
+							<s:text name="registro.title"/>							
+						</span></td>
+					<td></tr></table>				
+				</div>				
+				
+				<ul class="tabs">					
 					<li>
-						<form action="prepararFuncionalidad" method="POST">
-							<s:hidden name="id_servicio_informacion"/>
-							<s:hidden name="id_funcionalidad"/>
-							<s:hidden name="modificar"/>
-							<input type="submit" value="<s:text name="entrada.tab1.title"/>"
-								style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
-						</form>
-					</li>
-					<li class="active"><a><s:text name="entrada.tab2.title"/></a></li>
-					<li>
-						<form action="prepararSalidas" method="POST">
-							<s:hidden name="id_servicio_informacion"/>
-							<s:hidden name="id_funcionalidad"/>
-							<s:hidden name="modificar"/>
-							<input type="submit" value="<s:text name="entrada.tab3.title"/>" style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
-						</form>
+						<a href="prepararDescripcionGeneral"><s:text name="tab1.title"></s:text></a>
 					</li>
 					<li>
-						<form action="prepararResumen" method="POST">
-							<s:hidden name="id_servicio_informacion"/>
-							<s:hidden name="id_funcionalidad"/>
-							<s:hidden name="modificar"/>
-							<input type="submit" value="<s:text name="entrada.tab4.title" />" style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
-						</form>
+						<a href="prepararAspectosLegales"><s:text name="tab2.title"></s:text></a>
 					</li>
+					<li>
+						<a href="prepararDescripcionTecnica"><s:text name="tab3.title"></s:text></a>
+					</li>
+					<li>
+						<a href="prepararDescripcionSoporte"><s:text name="tab4.title"></s:text></a>
+					</li>
+					<li class="active">
+						<a href="prepararFuncionalidades"><s:text name="funcionalidades"></s:text></a>
+					</li>										
 				</ul>
-				<div class="tab_container">
-					<div id="tab2" class="tab_content">
-						<h4>
-							<s:text name="entrada.entradas.title">
-								<s:param>
-									<s:property value="funcionalidad.nombre" />
-								</s:param>
-							</s:text>
-						</h4>
-						<hr>
-						<table>
-							<tr class="nohover">
-								<td>
-									<form action="prepararRegistroEntrada" method="POST">
-										<s:hidden name="id_servicio_informacion"/>
-										<s:hidden name="id_funcionalidad"/>
-										<input type="submit" value="<s:text name="entrada.registro"/>" />
-									</form>
-								</td>
-							</tr>
-						</table>
-						<!-- Tabla en árbol. -->
-						<table id="tree" class="results" style="width: 750px;">
-							<!-- Validación de lista vacía. -->
-							<tbody>
-								<tr>
-									<th><s:text name="entrada.nombre" /></th>
-									<th><s:text name="entrada.descripcion" /></th>
-									<th><s:text name="entrada.tipo" /></th>
-									<th><s:text name="entrada.acciones" /></th>
+		
+				<div class="tab_container" style="height: 450px;">					
+					<div class="tab_content">
+					
+					<h3 class="formulario">
+						<s:text name="funcionalidad.registro" />
+					</h3>
+					<small><s:text name="funcionalidad.registro.description"></s:text></small>
+					<hr>
+				
+					<ul class="tabs">
+						<li>
+							<form action="prepararFuncionalidad" method="POST">
+								<s:hidden name="id_servicio_informacion"/>
+								<s:hidden name="id_funcionalidad"/>
+								<s:hidden name="modificar"/>
+								<input type="submit" value="<s:text name="entrada.tab1.title"/>"
+									style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
+							</form>
+						</li>
+						<li class="active"><a><s:text name="entrada.tab2.title"/></a></li>
+						<li>
+							<form action="prepararSalidas" method="POST">
+								<s:hidden name="id_servicio_informacion"/>
+								<s:hidden name="id_funcionalidad"/>
+								<s:hidden name="modificar"/>
+								<input type="submit" value="<s:text name="entrada.tab3.title"/>" style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
+							</form>
+						</li>
+						<li>
+							<form action="prepararResumen" method="POST">
+								<s:hidden name="id_servicio_informacion"/>
+								<s:hidden name="id_funcionalidad"/>
+								<s:hidden name="modificar"/>
+								<input type="submit" value="<s:text name="entrada.tab4.title" />" style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
+							</form>
+						</li>
+					</ul>
+					<div class="tab_container">
+						<div id="tab2" class="tab_content">
+							<h5 class="formulario">
+								<s:text name="entrada.entradas.title">
+									<s:param>
+										<s:property value="funcionalidad.nombre" />
+									</s:param>
+								</s:text>
+							</h5>
+							<hr>
+							<table>
+								<tr class="nohover">
+									<td>
+										<form action="prepararRegistroEntrada" method="POST">
+											<s:hidden name="id_servicio_informacion"/>
+											<s:hidden name="id_funcionalidad"/>
+											<input type="submit" value="<s:text name="entrada.registro"/>" />
+										</form>
+									</td>
 								</tr>
-								<s:if test="entradas.size > 0">
-									<s:set name="contador" value="%{0}"/>
-									<!-- Iterador con todas las entradas cargadas. -->
-									<s:iterator value="entradas" status="result_entradas">
-										<!-- Condición que asegura que sólo se impriman datos sin padres. -->
-										<s:if test="id_padre == 0">
-											<!-- Creación de fila con su nodo sacado del index del iterador. -->
-											<tr id="node-<s:property value="#result_entradas.index"/>">
-												<td><s:property value="nombre" /></td>
-												<td><s:property value="descripcion" /></td>
-												<!-- Impresión del tipo dato. -->
-												<td>
-													<!-- Creación de una variable con el id_entrada_salida para identificar a los datos complejos. -->
-													<s:set name="id" value="id_entrada_salida" /> <!-- Creación de una variable con el id_tipo_de_dato. -->
-													<s:set name="id_d" value="id_tipo_dato" />
-													<s:set name="entrada.nombre" value="nombre" />
-													<s:iterator value="tipoDatos">
-														<!-- Impresión del tipo de dato de acuerdo a su id. -->
-														<s:if test="%{id_tipo_dato == #id_d}">
-															<s:property value="nombre" />
-														</s:if>
-													</s:iterator>
-												</td>
-												<td>
-												<s:set name="contador_hijos" value="%{0}" />
-													<!-- Bloque que muestra un botón si el dato es una lista. -->
-													<s:iterator value="tipoDatos">
-														<s:if test="%{id_tipo_dato == #id_d}">
-															<s:if test="%{tipo == 0}">
-																<s:set name="padre" value="#id"/>
-																<s:append var="hijos">
-																	<s:param value="%{entradas}" />
-																</s:append>
+							</table>
+							<!-- Tabla en árbol. -->
+							<table id="tree" class="results" style="width: 700px;">
+								<!-- Validación de lista vacía. -->
+								<tbody>
+									<tr>
+										<th><s:text name="entrada.nombre" /></th>
+										<th><s:text name="entrada.descripcion" /></th>
+										<th><s:text name="entrada.tipo" /></th>
+										<th><s:text name="entrada.acciones" /></th>
+									</tr>
+									<s:if test="entradas.size > 0">
+										<s:set name="contador" value="%{0}"/>
+										<!-- Iterador con todas las entradas cargadas. -->
+										<s:iterator value="entradas" status="result_entradas">
+											<!-- Condición que asegura que sólo se impriman datos sin padres. -->
+											<s:if test="id_padre == 0">
+												<!-- Creación de fila con su nodo sacado del index del iterador. -->
+												<tr id="node-<s:property value="#result_entradas.index"/>">
+													<td><s:property value="nombre" /></td>
+													<td><s:property value="descripcion" /></td>
+													<!-- Impresión del tipo dato. -->
+													<td>
+														<!-- Creación de una variable con el id_entrada_salida para identificar a los datos complejos. -->
+														<s:set name="id" value="id_entrada_salida" /> <!-- Creación de una variable con el id_tipo_de_dato. -->
+														<s:set name="id_d" value="id_tipo_dato" />
+														<s:set name="entrada.nombre" value="nombre" />
+														<s:iterator value="tipoDatos">
+															<!-- Impresión del tipo de dato de acuerdo a su id. -->
+															<s:if test="%{id_tipo_dato == #id_d}">
+																<s:property value="nombre" />
+															</s:if>
+														</s:iterator>
+													</td>
+													<td>
+													<s:set name="contador_hijos" value="%{0}" />
+														<!-- Bloque que muestra un botón si el dato es una lista. -->
+														<s:iterator value="tipoDatos">
+															<s:if test="%{id_tipo_dato == #id_d}">
+																<s:if test="%{tipo == 0}">
+																	<s:set name="padre" value="#id"/>
+																	<s:append var="hijos">
+																		<s:param value="%{entradas}" />
+																	</s:append>
+																	<table style="margin: 0; padding: 0;">
+																		<tr style="margin: 0; padding: 0;">
+																			<td style="margin: 0; padding: 0;">
+																				<form action="prepararEntradaSimple" method="POST">
+																					<s:hidden name="id_servicio_informacion"/>
+																					<s:hidden name="id_funcionalidad"/>
+																					<s:hidden name="id_entrada_salida"/>
+																					<s:hidden name="id_entrada_padre" value="%{id_entrada_salida}"/>
+																					<input type="submit" value="<s:text name="entrada.simple.add"/>" style="font-size: 1em;" />
+																				</form>
+																			</td>
+																			<td style="margin: 0; padding: 0;">
+																				<form action="prepararModificarEntradaCompleja" method="POST">
+																					<s:hidden name="id_servicio_informacion"/>
+																					<s:hidden name="id_funcionalidad"/>
+																					<s:hidden name="id_entrada_salida" value="%{#id}"/>
+																					<s:hidden name="modificar" value="%{true}"/>
+																					<s:hidden name="complejo" value="%{true}"/>
+																					<input type="submit" value="<s:text name="entrada.modificar"/>" style="font-size: 1em;" />
+																				</form>
+																			</td>
+																			<td style="margin: 0; padding: 0;">
+																				<form action="eliminarEntradaCompleja" method="POST"
+																					id="id_elim_<s:property value="id_entrada_salida"/>" onsubmit="return false;">
+																					<s:hidden name="id_servicio_informacion"/>
+																					<s:hidden name="id_funcionalidad"/>
+																					<s:hidden name="id_entrada_salida" value="%{#id}"/>
+																					<s:hidden name="modificar" value="%{true}"/>
+																					<input type="submit" value="<s:text name="entrada.eliminar"/>" style="font-size: 1em;" style="font-size: 1em;" onclick="eliminar_Entrada(<s:property value="id_entrada_salida"/>,'<s:property value="entrada.nombre" />');" />
+																				</form>
+																				<s:iterator value="hijos" status="status">
+																					<s:if test="%{id_padre == #padre}">
+																						<s:set name="contador_hijos" value="%{#contador_hijos + 1}"/>
+																					</s:if>
+																				</s:iterator>
+																				<s:append var="hijos">
+																					<s:param value="%{entradas}" />
+																				</s:append>
+																				<s:if test="%{#contador_hijos==0}">
+																					<s:set name="contador" value="%{#contador +1}"/>
+																					<s:i18n name="ve/gob/cnti/srsi/i18n/errors">
+																						<td style="margin: 0; padding: 0;"><img src="res/img/important.png" id="h<s:property value='#contador'/>" alt="ayuda" onmouseover="tip(this);" name="h<s:property value='#contador'/>" height="25" width="30" />
+																							<div class="h<s:property value='#contador'/>" style="visibility: hidden; display: none;">
+																								<p>
+																									<s:text name="error.servicio.incomplete.hijos" />
+																								</p>
+																							</div>
+																						</td>
+																					</s:i18n>
+																				</s:if>
+																	</table>
+																</s:if>
+																<s:else>
+																	<table style="margin: 0; padding: 0;">
+																		<tr style="margin: 0; padding: 0;">
+																			<td style="margin: 0; padding: 0;">
+																				<form action="prepararModificarEntrada" method="POST">
+																					<s:hidden name="id_servicio_informacion"/>
+																					<s:hidden name="id_funcionalidad"/>
+																					<s:hidden name="id_entrada_salida"/>
+																					<s:hidden name="modificar" value="%{true}"/>
+																					<input type="submit" value="<s:text name="entrada.modificar"/>" style="font-size: 1em;" />
+																				</form>
+																			</td>
+																			<td style="margin: 0; padding: 0;">
+																				<form action="eliminarEntradaSimple" method="POST" id="id_elim_<s:property value="id_entrada_salida"/>" onsubmit="return false;">
+																					<s:hidden name="id_servicio_informacion"/>
+																					<s:hidden name="id_funcionalidad"/>
+																					<s:hidden name="id_entrada_salida"/>
+																					<input type="submit" value="<s:text name="entrada.eliminar"/>" style="font-size: 1em;" style="font-size: 1em;" onclick="eliminar_Entrada(<s:property value="id_entrada_salida"/>,'<s:property value="entrada.nombre" />');" />
+																				</form>
+																			</td>
+																		</tr>
+																	</table>
+																</s:else>
+															</s:if>
+														</s:iterator>
+													</td>
+												</tr>
+											</s:if>
+											<s:else>
+												<s:set name="padre">0</s:set>
+											</s:else>
+											<!-- Impresión de datos hijos. -->
+											<s:if test="%{#padre > 0}">
+												<s:iterator value="hijos" status="status_hijos">
+													<s:if test="%{id_padre == #padre}">
+														<tr id="node-<s:property value="%{( (100) * (#result_entradas.index) )+ #status_hijos.index}" />" class="child-of-node-<s:property value="#result_entradas.index" />">
+															<td><s:property value="nombre" /></td>
+															<td><s:property value="descripcion" /></td>
+															<td><s:set name="id_d2" value="id_tipo_dato"></s:set>
+																<s:iterator value="tipoDatos">
+																	<s:if test="%{id_tipo_dato == #id_d2}">
+																		<s:property value="nombre" />
+																	</s:if>
+																</s:iterator></td>
+															<td>
 																<table style="margin: 0; padding: 0;">
 																	<tr style="margin: 0; padding: 0;">
 																		<td style="margin: 0; padding: 0;">
-																			<form action="prepararEntradaSimple" method="POST">
+																			<form action="prepararModificarEntradaSimple" method="POST">
 																				<s:hidden name="id_servicio_informacion"/>
 																				<s:hidden name="id_funcionalidad"/>
 																				<s:hidden name="id_entrada_salida"/>
 																				<s:hidden name="id_entrada_padre" value="%{id_entrada_salida}"/>
-																				<input type="submit" value="<s:text name="entrada.simple.add"/>" style="font-size: 1em;" />
-																			</form>
-																		</td>
-																		<td style="margin: 0; padding: 0;">
-																			<form action="prepararModificarEntradaCompleja" method="POST">
-																				<s:hidden name="id_servicio_informacion"/>
-																				<s:hidden name="id_funcionalidad"/>
-																				<s:hidden name="id_entrada_salida" value="%{#id}"/>
-																				<s:hidden name="modificar" value="%{true}"/>
-																				<s:hidden name="complejo" value="%{true}"/>
-																				<input type="submit" value="<s:text name="entrada.modificar"/>" style="font-size: 1em;" />
-																			</form>
-																		</td>
-																		<td style="margin: 0; padding: 0;">
-																			<form action="eliminarEntradaCompleja" method="POST"
-																				id="id_elim_<s:property value="id_entrada_salida"/>" onsubmit="return false;">
-																				<s:hidden name="id_servicio_informacion"/>
-																				<s:hidden name="id_funcionalidad"/>
-																				<s:hidden name="id_entrada_salida" value="%{#id}"/>
-																				<s:hidden name="modificar" value="%{true}"/>
-																				<input type="submit" value="<s:text name="entrada.eliminar"/>" style="font-size: 1em;" style="font-size: 1em;" onclick="eliminar_Entrada(<s:property value="id_entrada_salida"/>,'<s:property value="entrada.nombre" />');" />
-																			</form>
-																			<s:iterator value="hijos" status="status">
-																				<s:if test="%{id_padre == #padre}">
-																					<s:set name="contador_hijos" value="%{#contador_hijos + 1}"/>
-																				</s:if>
-																			</s:iterator>
-																			<s:append var="hijos">
-																				<s:param value="%{entradas}" />
-																			</s:append>
-																			<s:if test="%{#contador_hijos==0}">
-																				<s:set name="contador" value="%{#contador +1}"/>
-																				<s:i18n name="ve/gob/cnti/srsi/i18n/errors">
-																					<td style="margin: 0; padding: 0;"><img src="res/img/important.png" id="h<s:property value='#contador'/>" alt="ayuda" onmouseover="tip(this);" name="h<s:property value='#contador'/>" height="25" width="30" />
-																						<div class="h<s:property value='#contador'/>" style="visibility: hidden; display: none;">
-																							<p>
-																								<s:text name="error.servicio.incomplete.hijos" />
-																							</p>
-																						</div>
-																					</td>
-																				</s:i18n>
-																			</s:if>
-																</table>
-															</s:if>
-															<s:else>
-																<table style="margin: 0; padding: 0;">
-																	<tr style="margin: 0; padding: 0;">
-																		<td style="margin: 0; padding: 0;">
-																			<form action="prepararModificarEntrada" method="POST">
-																				<s:hidden name="id_servicio_informacion"/>
-																				<s:hidden name="id_funcionalidad"/>
-																				<s:hidden name="id_entrada_salida"/>
 																				<s:hidden name="modificar" value="%{true}"/>
 																				<input type="submit" value="<s:text name="entrada.modificar"/>" style="font-size: 1em;" />
 																			</form>
 																		</td>
 																		<td style="margin: 0; padding: 0;">
-																			<form action="eliminarEntradaSimple" method="POST" id="id_elim_<s:property value="id_entrada_salida"/>" onsubmit="return false;">
+																			<form action="eliminarEntradaSimple" method="POST" id="id_elim_<s:property value="id_entrada_salida"/>"	onsubmit="return false;">
 																				<s:hidden name="id_servicio_informacion"/>
 																				<s:hidden name="id_funcionalidad"/>
 																				<s:hidden name="id_entrada_salida"/>
-																				<input type="submit" value="<s:text name="entrada.eliminar"/>" style="font-size: 1em;" style="font-size: 1em;" onclick="eliminar_Entrada(<s:property value="id_entrada_salida"/>,'<s:property value="entrada.nombre" />');" />
+																				<input type="submit" value="<s:text name="entrada.eliminar"/>" style="font-size: 1em;" style="font-size: 1em;" onclick="eliminar_Entrada(<s:property value="id_entrada_salida"/>,'<s:property value="nombre" />');" />
 																			</form>
 																		</td>
 																	</tr>
 																</table>
-															</s:else>
-														</s:if>
-													</s:iterator>
-												</td>
-											</tr>
-										</s:if>
-										<s:else>
-											<s:set name="padre">0</s:set>
-										</s:else>
-										<!-- Impresión de datos hijos. -->
-										<s:if test="%{#padre > 0}">
-											<s:iterator value="hijos" status="status_hijos">
-												<s:if test="%{id_padre == #padre}">
-													<tr id="node-<s:property value="%{( (100) * (#result_entradas.index) )+ #status_hijos.index}" />" class="child-of-node-<s:property value="#result_entradas.index" />">
-														<td><s:property value="nombre" /></td>
-														<td><s:property value="descripcion" /></td>
-														<td><s:set name="id_d2" value="id_tipo_dato"></s:set>
-															<s:iterator value="tipoDatos">
-																<s:if test="%{id_tipo_dato == #id_d2}">
-																	<s:property value="nombre" />
-																</s:if>
-															</s:iterator></td>
-														<td>
-															<table style="margin: 0; padding: 0;">
-																<tr style="margin: 0; padding: 0;">
-																	<td style="margin: 0; padding: 0;">
-																		<form action="prepararModificarEntradaSimple" method="POST">
-																			<s:hidden name="id_servicio_informacion"/>
-																			<s:hidden name="id_funcionalidad"/>
-																			<s:hidden name="id_entrada_salida"/>
-																			<s:hidden name="id_entrada_padre" value="%{id_entrada_salida}"/>
-																			<s:hidden name="modificar" value="%{true}"/>
-																			<input type="submit" value="<s:text name="entrada.modificar"/>" style="font-size: 1em;" />
-																		</form>
-																	</td>
-																	<td style="margin: 0; padding: 0;">
-																		<form action="eliminarEntradaSimple" method="POST" id="id_elim_<s:property value="id_entrada_salida"/>"	onsubmit="return false;">
-																			<s:hidden name="id_servicio_informacion"/>
-																			<s:hidden name="id_funcionalidad"/>
-																			<s:hidden name="id_entrada_salida"/>
-																			<input type="submit" value="<s:text name="entrada.eliminar"/>" style="font-size: 1em;" style="font-size: 1em;" onclick="eliminar_Entrada(<s:property value="id_entrada_salida"/>,'<s:property value="nombre" />');" />
-																		</form>
-																	</td>
-																</tr>
-															</table>
-														</td>
-													</tr>
-												</s:if>
-											</s:iterator>
-										</s:if>
-									</s:iterator>
-								</s:if>
-							</tbody>
-							<s:else>
-								<tbody>
-									<tr>
-										<td colspan="4"><s:text name="entrada.entradas.error"></s:text></td>
-									</tr>
+															</td>
+														</tr>
+													</s:if>
+												</s:iterator>
+											</s:if>
+										</s:iterator>
+									</s:if>
 								</tbody>
-							</s:else>
-						</table>
+								<s:else>
+									<tbody>
+										<tr>
+											<td colspan="4"><s:text name="entrada.entradas.error"></s:text></td>
+										</tr>
+									</tbody>
+								</s:else>
+							</table>
+						</div>
 					</div>
 				</div>
+			</div>
 			</div>
 		</div>
 		<div class="n" style="visibility: hidden; display: none;">

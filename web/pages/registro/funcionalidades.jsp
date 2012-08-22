@@ -25,12 +25,6 @@
 <script type="text/javascript" src="res/js/plugins/sexy-tooltips.v1.1.jquery.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/plugins/sexy-alert-box-1.2.2/jquery.easing.1.3.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/plugins/sexy-alert-box-1.2.2/sexyalertbox.v1.2.jquery.js" charset="UTF-8"></script>
-<s:if test="modificar">	
-	<s:set name="title" value="%{getText('actualizar.title')}" />
-</s:if>
-<s:else>	
-	<s:set name="title" value="%{getText('registro.title')}" />
-</s:else>
 <title><s:text name="inicio" /></title>
 	</head>
 	<body>
@@ -75,7 +69,9 @@
 				</table>
 				<div class="pasos">
 					<table><tr><td>
-						<span style="font-weight: bolder;"><s:text name="title"/></span></td>
+						<span style="font-weight: bolder;">
+							<s:text name="registro.title"/>							
+						</span></td>
 					<td></tr></table>				
 				</div>
 				<ul class="tabs">					
@@ -96,7 +92,7 @@
 					</li>										
 				</ul>
 				
-				<div class="tab_container">					
+				<div class="tab_container" style="height: 450px;">					
 					<div class="tab_content">
 					
 					<h3 class="formulario">

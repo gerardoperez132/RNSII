@@ -65,254 +65,319 @@
 		</tr>								
 		</table>
 		<div class="pasos">
-			<table>
-				<tr>
-					<td><small> <strong> <s:if test="resumen">
-									<s:text name="paso2.2" />
-								</s:if> <s:else>
-									<s:text name="paso2.1" />
-								</s:else> <s:text name="funcionalidades" /> - </strong> <s:if
-								test="resumen == true">
-								<s:text name="tab.resumen" />
-							</s:if> <s:else>
-								<s:text name="tab1.title" />
-							</s:else> </small></td>
-				</tr>
-			</table>
+			<table><tr><td>
+				<span style="font-weight: bolder;">
+					<s:text name="registro.title"/>							
+				</span></td>
+			<td></tr></table>				
 		</div>
-					<h3>
-						<s:text name="funcionalidades.title" />
+										
+		<s:if test='id_funcionalidad > 0 && modificarf != true && resumen != true'>		
+						
+			<ul class="tabs">					
+				<li>
+					<a href="prepararDescripcionGeneral"><s:text name="tab1.title"></s:text></a>
+				</li>
+				<li>
+					<a href="prepararAspectosLegales"><s:text name="tab2.title"></s:text></a>
+				</li>
+				<li>
+					<a href="prepararDescripcionTecnica"><s:text name="tab3.title"></s:text></a>
+				</li>
+				<li>
+					<a href="prepararDescripcionSoporte"><s:text name="tab4.title"></s:text></a>
+				</li>
+				<li class="active">
+					<a href="prepararFuncionalidades"><s:text name="funcionalidades"></s:text></a>
+				</li>										
+			</ul>
+	
+			<div class="tab_container" style="height: 450px;">					
+				<div class="tab_content">
+										
+					<h3 class="formulario">
+						<s:text name="funcionalidad.registro" />
 					</h3>
-					<h4>
-						<s:text name="servicio.title" />
-						<s:property value="servicio.nombre" />
-					</h4>					
-					<s:if test='id_funcionalidad > 0 && modificarf != true && resumen != true'>
-						<hr>
-						<ul class="tabs">
-							<li class="active"><a><s:text name="tab1.title"></s:text>
-							</a>
-							</li>
-							<li>
-								<form action="prepararEntradas" method="POST">
-									<s:hidden name="id_servicio_informacion"></s:hidden>
-									<s:hidden name="id_funcionalidad"></s:hidden>
-									<s:hidden name="modificar"></s:hidden>
-									<input type="submit"
-										value='<s:text name="tab.entrada"></s:text>'
-										style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
-								</form>
-							</li>
-							<li>
-								<form action="prepararSalidas" method="POST">
-									<s:hidden name="id_servicio_informacion"></s:hidden>
-									<s:hidden name="id_funcionalidad"></s:hidden>
-									<s:hidden name="modificar"></s:hidden>
-									<input type="submit"
-										value='<s:text name="tab.salida"></s:text>'
-										style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
-								</form>
-							</li>
-							<li>
-								<form action="prepararResumen" method="POST">
-									<s:hidden name="id_servicio_informacion"></s:hidden>
-									<s:hidden name="id_funcionalidad"></s:hidden>
-									<s:hidden name="modificar"></s:hidden>
-									<input type="submit" value="<s:text name="tab.resumen" />"
-										style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
-								</form></li>
-						</ul>
-						<div class="tab_container">
-							<div id="tab1" class="tab_content">
-								<table class="tb" style="width:750px;">
-									<tr>
-										<td class="tb_alt"><span class="txt_small"> <s:text
-													name="nombre.title" /> </span></td>
-										<td class="tb_td"><span class="txt_small"> <s:property
-													value="funcionalidad.nombre" /> </span></td>
-									</tr>
-									<tr>
-										<td class="tb_alt"><span class="txt_small"> <s:text
-													name="descripcion.title" /> </span></td>
-										<td class="tb_td"><span class="txt_small"> <s:property
-													value="funcionalidad.descripcion" /> </span></td>
-									</tr>
-								</table>
-								<form action="prepararFuncionalidad" method="POST">
-									<s:hidden name="id_servicio_informacion"></s:hidden>
-									<s:hidden name="id_funcionalidad"></s:hidden>
-									<s:hidden name="modificar"></s:hidden>
-									<s:hidden name="modificarf" value="%{true}"></s:hidden>
-									<input type="submit" value='<s:text name="modificar"></s:text>'>
-								</form>
-							</div>
+					<small><s:text name="funcionalidad.registro.description"></s:text></small>
+					<hr>
+					
+					<ul class="tabs">
+						<li class="active"><a><s:text name="tab1.title"></s:text>
+						</a>
+						</li>
+						<li>
+							<form action="prepararEntradas" method="POST">
+								<s:hidden name="id_servicio_informacion"></s:hidden>
+								<s:hidden name="id_funcionalidad"></s:hidden>
+								<s:hidden name="modificar"></s:hidden>
+								<input type="submit"
+									value='<s:text name="tab.entrada"></s:text>'
+									style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
+							</form>
+						</li>
+						<li>
+							<form action="prepararSalidas" method="POST">
+								<s:hidden name="id_servicio_informacion"></s:hidden>
+								<s:hidden name="id_funcionalidad"></s:hidden>
+								<s:hidden name="modificar"></s:hidden>
+								<input type="submit"
+									value='<s:text name="tab.salida"></s:text>'
+									style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
+							</form>
+						</li>
+						<li>
+							<form action="prepararResumen" method="POST">
+								<s:hidden name="id_servicio_informacion"></s:hidden>
+								<s:hidden name="id_funcionalidad"></s:hidden>
+								<s:hidden name="modificar"></s:hidden>
+								<input type="submit" value="<s:text name="tab.resumen" />"
+									style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
+							</form></li>
+					</ul>
+					<div class="tab_container">
+						<div id="tab1" class="tab_content">
+							<table class="tb" style="width:700px;">
+								<tr>
+									<td class="tb_alt"><span class="txt_small"> <s:text
+												name="nombre.title" /> </span></td>
+									<td class="tb_td"><span class="txt_small"> <s:property
+												value="funcionalidad.nombre" /> </span></td>
+								</tr>
+								<tr>
+									<td class="tb_alt"><span class="txt_small"> <s:text
+												name="descripcion.title" /> </span></td>
+									<td class="tb_td"><span class="txt_small"> <s:property
+												value="funcionalidad.descripcion" /> </span></td>
+								</tr>
+							</table>
+							<form action="prepararFuncionalidad" method="POST">
+								<s:hidden name="id_servicio_informacion"></s:hidden>
+								<s:hidden name="id_funcionalidad"></s:hidden>
+								<s:hidden name="modificar"></s:hidden>
+								<s:hidden name="modificarf" value="%{true}"></s:hidden>
+								<input type="submit" value='<s:text name="modificar"></s:text>'>
+							</form>
 						</div>
-					</s:if>
-					<s:elseif test="resumen">
-						<hr>
-						<ul class="tabs">
-							<li>
-								<form action="prepararFuncionalidad" method="POST">
-									<s:hidden name="id_servicio_informacion"></s:hidden>
-									<s:hidden name="id_funcionalidad"></s:hidden>
-									<s:hidden name="modificar"></s:hidden>
-									<input type="submit"
-										value="<s:text name="tab1.title"></s:text>"
-										style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
-								</form></li>
-							<li>
-								<form action="prepararEntradas" method="POST">
-									<s:hidden name="id_servicio_informacion"></s:hidden>
-									<s:hidden name="id_funcionalidad"></s:hidden>
-									<s:hidden name="modificar"></s:hidden>
-									<input type="submit"
-										value='<s:text name="tab.entrada"></s:text>'
-										style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
-								</form>
-							</li>
-							<li>
-								<form action="prepararSalidas" method="POST">
-									<s:hidden name="id_servicio_informacion"></s:hidden>
-									<s:hidden name="id_funcionalidad"></s:hidden>
-									<s:hidden name="modificar"></s:hidden>
-									<input type="submit"
-										value='<s:text name="tab.salida"></s:text>'
-										style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
-								</form>
-							</li>
-							<li class="active"><a><s:text name="tab.resumen"></s:text>
-							</a>
-							</li>
-						</ul>
-						<div class="tab_container">
-							<div id="tab1" class="tab_content">
-								<s:fielderror>
-									<s:param>Salidas</s:param>
-								</s:fielderror>
-								<table class="tb" style="width:750px;">
-									<tr>
-										<td class="tb_alt"><span class="txt_small"> <s:text
-													name="nombre.title"></s:text> </span></td>
-										<td class="tb_td"><span class="txt_small"> <s:property
-													value="funcionalidad.nombre" /> </span></td>
-									</tr>
-									<tr>
-										<td class="tb_alt"><span class="txt_small"> <s:text
-													name="descripcion.title"></s:text> </span></td>
-										<td class="tb_td"><span class="txt_small"> <s:property
-													value="funcionalidad.descripcion" /> </span></td>
-									</tr>
-									<tr>
-										<td class="tb_alt"><span class="txt_small"> <s:text
-													name="salidas.cargadas"></s:text> </span></td>
-										<td class="tb_td"><span class="txt_small"> <s:property
-													value="salidas.size" /> </span></td>
-									</tr>
-									<tr>
-										<td class="tb_alt"><span class="txt_small"> <s:text
-													name="entradas.cargadas"></s:text> </span></td>
-										<td class="tb_td"><span class="txt_small"> <s:property
-													value="entradas.size" /> </span></td>
-									</tr>
-								</table>
-								<s:if test="salidas.size>0">
-									<form action="prepararFuncionalidades" method="POST">
-										<s:hidden name="id_servicio_informacion"></s:hidden>
-										<s:hidden name="id_funcionalidad"></s:hidden>
-										<s:hidden name="modificar"></s:hidden>
-										<input type="submit" value='<s:text name="guardar"></s:text>'>
-									</form>
-								</s:if>
-							</div>
-						</div>
-					</s:elseif>
-					<s:else>
-						<form action="prepararFuncionalidad" method="POST">
-							<s:hidden name="id_funcionalidad" value="%{funcionalidad.id_funcionalidad}"></s:hidden>
-							<s:hidden name="id_servicio_informacion"></s:hidden>
-							<input type="submit" value="<s:text name="regresar"></s:text>">
-						</form>
-						<hr>
-						<ul class="tabs">
-							<li class="active"><a><s:text name="tab1.title"></s:text>
-							</a>
-							</li>
-							<li><a><s:text name="tab.entrada"></s:text> </a>
-							</li>
-							<li><a><s:text name="tab.salida"></s:text> </a>
-							</li>
-							<li><a><s:text name="tab.resumen"></s:text> </a>
-							</li>
-						</ul>
-						<div class="tab_container">
-							<div id="tab1" class="tab_content">
-								<s:if test="modificarf == true">
-									<form action="modificarFuncionalidad" method="POST" id="formFunc" name="formFunc">
-										<p>
-											<s:text name="tab1.title"></s:text>
-										</p>
-										<hr>
-										<!-- Nombre de la funcionalidad u operación del servicio. -->
-										<h5 class="formulario">
-											<s:text name="nombre.title"></s:text>
-										</h5>
-										<s:fielderror>
-											<s:param>funcionalidad.nombre</s:param>
-										</s:fielderror>
-										<s:textfield name="funcionalidad.nombre" id="funcionalidad.nombre"/>
-										<br>
-										<!-- Descripción de la funcionalidad u operación del servicio. -->
-										<h5 class="formulario">
-											<s:text name="descripcion.title"></s:text>
-										</h5>
-										<s:fielderror>
-											<s:param>funcionalidad.descripcion</s:param>
-										</s:fielderror>
-										<s:textarea name="funcionalidad.descripcion" cols="30"
-											rows="5" id="funcionalidad.descripcion"/>
-										<br>
-										<s:hidden name="id_servicio_informacion"></s:hidden>
-										<s:hidden name="id_funcionalidad"></s:hidden>
-										<s:hidden name="modificar"></s:hidden>
-										<s:hidden name="modificarf" value="%{false}"></s:hidden>
-										<input type="submit" value=<s:text name="guardar"></s:text> />
-									</form>
-								</s:if>
-								<s:else>
-									<form action="registrarFuncionalidad" method="POST" id="formFunc" name="formFunc">
-										<p>
-											<s:text name="tab1.title"></s:text>
-										</p>
-										<!-- Nombre de la funcionalidad u operación del servicio. -->
-										<h5 class="formulario">
-											<s:text name="nombre.title"></s:text>
-										</h5>
-										<s:fielderror>
-											<s:param>funcionalidad.nombre</s:param>
-										</s:fielderror>
-										<s:textfield labelposition="top" name="funcionalidad.nombre" id="funcionalidad.nombre"/>
-										<br>
-										<!-- Descripción de la funcionalidad u operación del servicio. -->
-										<h5 class="formulario">
-											<s:text name="descripcion.title"></s:text>
-										</h5>
-										<s:fielderror>
-											<s:param>funcionalidad.descripcion</s:param>
-										</s:fielderror>
-										<s:textarea name="funcionalidad.descripcion" cols="30"
-											rows="5" id="funcionalidad.descripcion"/>
-										<br>
-										<s:hidden name="id_servicio_informacion"></s:hidden>
-										<s:hidden name="modificar"></s:hidden>
-										<input type="submit" value='<s:text name="guardar"></s:text>' />
-									</form>
-								</s:else>
-							</div>
-						</div>
-					</s:else>
-				</div>				
+					</div>
+			
+				</div>
 			</div>
-		<div style="clear: both"></div>
+		</s:if>
+		<s:elseif test="resumen">
+		<ul class="tabs">					
+			<li>
+				<a href="prepararDescripcionGeneral"><s:text name="tab1.title"></s:text></a>
+			</li>
+			<li>
+				<a href="prepararAspectosLegales"><s:text name="tab2.title"></s:text></a>
+			</li>
+			<li>
+				<a href="prepararDescripcionTecnica"><s:text name="tab3.title"></s:text></a>
+			</li>
+			<li>
+				<a href="prepararDescripcionSoporte"><s:text name="tab4.title"></s:text></a>
+			</li>
+			<li class="active">
+				<a href="prepararFuncionalidades"><s:text name="funcionalidades"></s:text></a>
+			</li>										
+		</ul>
+	
+		<div class="tab_container" style="height: 450px;">					
+			<div class="tab_content">
+									
+				<h3 class="formulario">
+					<s:text name="funcionalidad.registro" />
+				</h3>
+				<small><s:text name="funcionalidad.registro.description"></s:text></small>
+				<hr>
+				<ul class="tabs">
+					<li>
+						<form action="prepararFuncionalidad" method="POST">
+							<s:hidden name="id_servicio_informacion"></s:hidden>
+							<s:hidden name="id_funcionalidad"></s:hidden>
+							<s:hidden name="modificar"></s:hidden>
+							<input type="submit"
+								value="<s:text name="tab1.title"></s:text>"
+								style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
+						</form></li>
+					<li>
+						<form action="prepararEntradas" method="POST">
+							<s:hidden name="id_servicio_informacion"></s:hidden>
+							<s:hidden name="id_funcionalidad"></s:hidden>
+							<s:hidden name="modificar"></s:hidden>
+							<input type="submit"
+								value='<s:text name="tab.entrada"></s:text>'
+								style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
+						</form>
+					</li>
+					<li>
+						<form action="prepararSalidas" method="POST">
+							<s:hidden name="id_servicio_informacion"></s:hidden>
+							<s:hidden name="id_funcionalidad"></s:hidden>
+							<s:hidden name="modificar"></s:hidden>
+							<input type="submit"
+								value='<s:text name="tab.salida"></s:text>'
+								style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
+						</form>
+					</li>
+					<li class="active"><a><s:text name="tab.resumen"></s:text>
+					</a>
+					</li>
+				</ul>
+				<div class="tab_container">
+					<div id="tab1" class="tab_content">
+						<s:fielderror>
+							<s:param>Salidas</s:param>
+						</s:fielderror>
+						<table class="tb" style="width:700px;">
+							<tr>
+								<td class="tb_alt"><span class="txt_small"> <s:text
+											name="nombre.title"></s:text> </span></td>
+								<td class="tb_td"><span class="txt_small"> <s:property
+											value="funcionalidad.nombre" /> </span></td>
+							</tr>
+							<tr>
+								<td class="tb_alt"><span class="txt_small"> <s:text
+											name="descripcion.title"></s:text> </span></td>
+								<td class="tb_td"><span class="txt_small"> <s:property
+											value="funcionalidad.descripcion" /> </span></td>
+							</tr>
+							<tr>
+								<td class="tb_alt"><span class="txt_small"> <s:text
+											name="salidas.cargadas"></s:text> </span></td>
+								<td class="tb_td"><span class="txt_small"> <s:property
+											value="salidas.size" /> </span></td>
+							</tr>
+							<tr>
+								<td class="tb_alt"><span class="txt_small"> <s:text
+											name="entradas.cargadas"></s:text> </span></td>
+								<td class="tb_td"><span class="txt_small"> <s:property
+											value="entradas.size" /> </span></td>
+							</tr>
+						</table>
+						<s:if test="salidas.size>0">
+							<form action="prepararFuncionalidades" method="POST">
+								<s:hidden name="id_servicio_informacion"></s:hidden>
+								<s:hidden name="id_funcionalidad"></s:hidden>
+								<s:hidden name="modificar"></s:hidden>
+								<input type="submit" value='<s:text name="guardar"></s:text>'>
+							</form>
+						</s:if>
+					</div>
+				</div>
+			</div>
+		</div>
+		</s:elseif>
+		<s:else>
+		<ul class="tabs">					
+			<li>
+				<a href="prepararDescripcionGeneral"><s:text name="tab1.title"></s:text></a>
+			</li>
+			<li>
+				<a href="prepararAspectosLegales"><s:text name="tab2.title"></s:text></a>
+			</li>
+			<li>
+				<a href="prepararDescripcionTecnica"><s:text name="tab3.title"></s:text></a>
+			</li>
+			<li>
+				<a href="prepararDescripcionSoporte"><s:text name="tab4.title"></s:text></a>
+			</li>
+			<li class="active">
+				<a href="prepararFuncionalidades"><s:text name="funcionalidades"></s:text></a>
+			</li>										
+		</ul>
+	
+		<div class="tab_container" style="height: 450px;">					
+			<div class="tab_content">
+									
+				<h3 class="formulario">
+					<s:text name="funcionalidad.registro" />
+				</h3>
+				<small><s:text name="funcionalidad.registro.description"></s:text></small>
+				<hr>		
+						
+				<ul class="tabs">
+					<li class="active"><a><s:text name="tab1.title"></s:text>
+					</a>
+					</li>
+					<li><a><s:text name="tab.entrada"></s:text> </a>
+					</li>
+					<li><a><s:text name="tab.salida"></s:text> </a>
+					</li>
+					<li><a><s:text name="tab.resumen"></s:text> </a>
+					</li>
+				</ul>
+				<div class="tab_container">
+					<div id="tab1" class="tab_content">
+						<s:if test="modificarf == true">
+							<form action="modificarFuncionalidad" method="POST" id="formFunc" name="formFunc">
+								<p>
+									<s:text name="tab1.title"></s:text>
+								</p>
+								<hr>
+								<!-- Nombre de la funcionalidad u operación del servicio. -->
+								<h5 class="formulario">
+									<s:text name="nombre.title"></s:text>
+								</h5>
+								<s:fielderror>
+									<s:param>funcionalidad.nombre</s:param>
+								</s:fielderror>
+								<s:textfield name="funcionalidad.nombre" id="funcionalidad.nombre"/>
+								<br>
+								<!-- Descripción de la funcionalidad u operación del servicio. -->
+								<h5 class="formulario">
+									<s:text name="descripcion.title"></s:text>
+								</h5>
+								<s:fielderror>
+									<s:param>funcionalidad.descripcion</s:param>
+								</s:fielderror>
+								<s:textarea name="funcionalidad.descripcion" cols="30"
+									rows="5" id="funcionalidad.descripcion"/>
+								<br>
+								<s:hidden name="id_servicio_informacion"></s:hidden>
+								<s:hidden name="id_funcionalidad"></s:hidden>
+								<s:hidden name="modificar"></s:hidden>
+								<s:hidden name="modificarf" value="%{false}"></s:hidden>
+								<input type="submit" value=<s:text name="guardar"></s:text> />
+							</form>
+						</s:if>
+						<s:else>
+							<form action="registrarFuncionalidad" method="POST" id="formFunc" name="formFunc">
+								<p>
+									<s:text name="tab1.title"></s:text>
+								</p>
+								<!-- Nombre de la funcionalidad u operación del servicio. -->
+								<h5 class="formulario">
+									<s:text name="nombre.title"></s:text>
+								</h5>
+								<s:fielderror>
+									<s:param>funcionalidad.nombre</s:param>
+								</s:fielderror>
+								<s:textfield labelposition="top" name="funcionalidad.nombre" id="funcionalidad.nombre"/>
+								<br>
+								<!-- Descripción de la funcionalidad u operación del servicio. -->
+								<h5 class="formulario">
+									<s:text name="descripcion.title"></s:text>
+								</h5>
+								<s:fielderror>
+									<s:param>funcionalidad.descripcion</s:param>
+								</s:fielderror>
+								<s:textarea name="funcionalidad.descripcion" cols="30"
+									rows="5" id="funcionalidad.descripcion"/>
+								<br>
+								<s:hidden name="id_servicio_informacion"></s:hidden>
+								<s:hidden name="modificar"></s:hidden>
+								<input type="submit" value='<s:text name="guardar"></s:text>' />
+							</form>		
+						</s:else>
+					</div>
+				</div>
+			</div>
+		</div>
+		</s:else>
+		</div>				
+		</div>
+	<div style="clear: both"></div>
 	<div class="vacio"></div>
 	<%@include file="../layout/footer.jsp"%>
 	</body>
