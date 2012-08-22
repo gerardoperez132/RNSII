@@ -83,7 +83,41 @@
 								<th><s:text name="nombre" /></th>
 								<th><s:text name="numero_si" /></th>
 							</tr>
+<<<<<<< HEAD
+							<tr>
+								<td class="alt">
+									<s:text name="version" />
+								</td>
+								<td class="alt2">
+									<s:property value="servicio.version" />
+								</td>
+							</tr>
+							<tr>
+								<td class="alt">
+									<s:text name="intercambio" />
+								</td>
+								<td class="alt2">
+									<s:set var="intercambio" value="servicio.id_intercambio"></s:set> 
+									<s:iterator	value="children">
+										<s:if test="%{id_intercambio == #intercambio}">
+											<s:property value="nombre" />
+										</s:if>
+									</s:iterator>
+								</td>
+							</tr>
+						</table>
+						<hr>
+						<!-- Tabla en árbol. -->
+						<table id="tree" class="treeTable results">
+							<thead>
+								<tr>
+									<th colspan="4" style="text-align: center;">
+										<s:text	name="funcionalidades_&_datos" />
+									</th>
+								</tr>
+=======
 							<s:iterator value="listaSectores2" status="index">
+>>>>>>> f9b02eacb094df56530fe48940a14ba532d21e0d
 								<tr>
 									<td><a
 										href="listarSector?id_sector=<s:property value="id_sector"/>">

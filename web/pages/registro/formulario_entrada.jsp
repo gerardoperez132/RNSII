@@ -62,29 +62,40 @@
 		</tr>								
 		</table>
 		<div class="pasos">
-			<table>
-				<tr>
-					<td>						
-						<small>									
-							<strong>
-								<s:text name="paso2.1.1" />									
-								<s:text name="funcionalidades" /> -										
-							</strong>
-							<s:text name="entrada.tab2.title"/>
-						</small>
-					</td>							
-				</tr>
-			</table>
-		</div>
-			<h3>
-				<s:text name="form.entrada.registro.funcionalidades.title"></s:text>
+			<table><tr><td>
+				<span style="font-weight: bolder;">
+					<s:text name="registro.title"/>							
+				</span></td>
+			<td></tr></table>				
+		</div>			
+				
+		<ul class="tabs">					
+			<li>
+				<a href="prepararDescripcionGeneral"><s:text name="tab1.title"></s:text></a>
+			</li>
+			<li>
+				<a href="prepararAspectosLegales"><s:text name="tab2.title"></s:text></a>
+			</li>
+			<li>
+				<a href="prepararDescripcionTecnica"><s:text name="tab3.title"></s:text></a>
+			</li>
+			<li>
+				<a href="prepararDescripcionSoporte"><s:text name="tab4.title"></s:text></a>
+			</li>
+			<li class="active">
+				<a href="prepararFuncionalidades"><s:text name="funcionalidades"></s:text></a>
+			</li>										
+		</ul>
+
+		<div class="tab_container" style="height: 450px;">					
+			<div class="tab_content">			
+			
+			<h3 class="formulario">
+				<s:text name="funcionalidad.registro" />
 			</h3>
-			<form action="prepararEntradas" method="POST">
-				<s:hidden name="id_servicio_informacion"></s:hidden>
-				<s:hidden name="id_funcionalidad"></s:hidden>
-				<input type="submit" value="<s:text name="regresar"></s:text>">
-			</form>
+			<small><s:text name="funcionalidad.registro.description"></s:text></small>
 			<hr>
+				
 			<ul class="tabs">
 				<li><a href="#tab1"><s:text name="tab1.title"></s:text> </a>
 				</li>
@@ -112,9 +123,10 @@
 					</s:set>
 				</s:else>
 				<!-- Formulario para registrar o modificar entrada -->
-				<form action="<s:property value="#action"></s:property>"
-					method="post" name="formES" id="formES">
-					<div id="tab2" class="tab_content">
+				<div id="tab2" class="tab_content">				
+				<table>
+					<tr>
+						<td>
 						<h5 class="formulario">
 							<s:if test="modificar!=true">
 								<s:text name="form.entrada.registro.title"></s:text>
@@ -123,14 +135,32 @@
 								<s:text name="form.entrada.modificar.title"></s:text>
 							</s:else>
 						</h5>
-						<h6>
+						</td>						
+						<td align="right">
+						<form action="prepararEntradas" method="POST">
+							<s:hidden name="id_servicio_informacion"></s:hidden>
+							<s:hidden name="id_funcionalidad"></s:hidden>
+							<input type="submit" value="<s:text name="regresar"></s:text>">
+						</form>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+						<h6 class="formulario">
 							<s:text name="form.entrada.funcionalidad.title">
 								<s:param>
 									<s:property value="funcionalidad.nombre" />
 								</s:param>
 							</s:text>
 						</h6>
-						<hr>
+						</td>
+					</tr>			
+				</table>
+				
+				<hr>
+				<form action="<s:property value="#action"></s:property>"
+					method="post" name="formES" id="formES">						
+											
 						<!-- Nombre de la entrada. -->
 						<h5 class="formulario">
 							<s:text name="form.entrada.nombre.title"></s:text>
@@ -216,9 +246,12 @@
 						<s:hidden name="complejo"/>
 						<input type="submit"
 							value="<s:property value="#submit"></s:property>" />
-					</div>								
+													
 				</form>
+				</div>
 			</div>
+		</div>
+		</div>
 		</div>		
 	</div>	
 	<div style="clear: both"></div>

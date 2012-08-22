@@ -64,26 +64,41 @@
 							</h4>
 						</td>
 					</tr>
-				</table>
+				</table>				
 				<div class="pasos">
-					<table>
-						<tr>
-							<td><small> <strong> <s:text name="paso2.1.1" /> <s:text name="funcionalidades" /> - </strong> <s:text name="salida.tab2.title" />
-							</small></td>
-						</tr>
-					</table>
-				</div>
-				<h3>
-					<s:text name="salida.registro.title"></s:text>
-				</h3>
-				<h4>
-					<s:text name="salida.servicio.title">
-						<s:param>
-							<s:property value="servicio.nombre" />
-						</s:param>
-					</s:text>
-				</h4>
-				<hr>
+					<table><tr><td>
+						<span style="font-weight: bolder;">
+							<s:text name="registro.title"/>							
+						</span></td>
+					<td></tr></table>				
+				</div>	
+				
+				<ul class="tabs">					
+					<li>
+						<a href="prepararDescripcionGeneral"><s:text name="tab1.title"></s:text></a>
+					</li>
+					<li>
+						<a href="prepararAspectosLegales"><s:text name="tab2.title"></s:text></a>
+					</li>
+					<li>
+						<a href="prepararDescripcionTecnica"><s:text name="tab3.title"></s:text></a>
+					</li>
+					<li>
+						<a href="prepararDescripcionSoporte"><s:text name="tab4.title"></s:text></a>
+					</li>
+					<li class="active">
+						<a href="prepararFuncionalidades"><s:text name="funcionalidades"></s:text></a>
+					</li>										
+				</ul>
+		
+				<div class="tab_container" style="height: 450px;">					
+					<div class="tab_content">
+					<h3 class="formulario">
+						<s:text name="funcionalidad.registro" />
+					</h3>
+					<small><s:text name="funcionalidad.registro.description"></s:text></small>
+					<hr>
+				
 				<ul class="tabs">
 					<li>
 						<form action="prepararFuncionalidad" method="POST">
@@ -114,13 +129,13 @@
 				</ul>
 				<div class="tab_container">
 					<div id="tab2" class="tab_content">
-						<h4>
+						<h5 class="formulario">
 							<s:text name="salida.salidas.title">
 								<s:param>
 									<s:property value="funcionalidad.nombre" />
 								</s:param>
 							</s:text>
-						</h4>
+						</h5>
 						<hr>
 						<table>
 							<tr class="nohover">
@@ -134,7 +149,7 @@
 							</tr>
 						</table>
 						<!-- Tabla en árbol. -->
-						<table id="tree" class="results" style="width: 750px;">
+						<table id="tree" class="results" style="width: 700px;">
 							<!-- Validación de lista vacía. -->
 							<tbody>
 								<tr>
@@ -313,6 +328,8 @@
 						</table>
 					</div>
 				</div>
+			</div>
+			</div>
 			</div>
 		</div>
 		<div class="n" style="visibility: hidden; display: none;">
