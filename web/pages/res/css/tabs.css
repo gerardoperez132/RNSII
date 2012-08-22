@@ -117,4 +117,6 @@ ul {
 .pagination {
 	float: left;
 	width: 692px;
+	bottom: 12px;
+	position: absolute;
 }
