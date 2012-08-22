@@ -51,6 +51,7 @@ import ve.gob.cnti.srsi.modelo.Usuario;
 import ve.gob.cnti.srsi.modelo.Visita;
 import ve.gob.cnti.srsi.util.EstadosTiempo;
 import ve.gob.cnti.srsi.util.ListaServiciosVisitados;
+import ve.gob.cnti.srsi.util.Pagination;
 import ve.gob.cnti.srsi.util.ReadXmlTime;
 import ve.gob.cnti.srsi.util.SectoresMasPublicados;
 
@@ -115,42 +116,23 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 	private int totalPages = 1;
 	private boolean hasPrevious;
 	private boolean hasNext;
-	private int mLimit = 9;
 	private List<Integer> pagination = new ArrayList<Integer>();
+	private int mLimit = 9;
 
+	@SuppressWarnings("unchecked")
 	public String inicio() {
 		getTiempoFecha();
 		listaSectores = listadoSectores(LIMITE_SECTORES, false);
 		// listaSectores2 = listadoSectores(-1, true);
 		SI_masVisitados = listarServiciosVisitados(LIMITE_VISITADOS, false);
 		List<SectoresMasPublicados> lista = listadoSectores(-1, true);
-		if (lista.size() > 0) {
-			double expression = lista.size() / (double) mLimit;
-			totalPages = (int) (expression % 1 != 0 ? expression + 1
-					: expression);
-			if (page <= 0 || page > totalPages)
-				page = 1;
-			if (totalPages < 1)
-				totalPages = 1;
-			for (int i = ((page - 1) * mLimit); i < page * mLimit; i++) {
-				if (i >= lista.size())
-					break;
-				listaSectores2.add(lista.get(i));
-			}
-			if (page > 1 && page < totalPages) {
-				hasPrevious = true;
-				hasNext = true;
-			} else if (page == totalPages) {
-				hasPrevious = true;
-				hasNext = false;
-			} else {
-				hasPrevious = false;
-				hasNext = true;
-			}
-			for (int j = 0; j < totalPages; j++)
-				pagination.add(j + 1);
-		}
-
+		Pagination paginate = new Pagination(lista, mLimit, page);
+		page = paginate.getPage();
+		totalPages = paginate.getTotalPages();
+		hasPrevious = paginate.isHasPrevious();
+		hasNext = paginate.isHasNext();
+		pagination = paginate.getPagination();
+		listaSectores2 = (List<SectoresMasPublicados>) paginate.getContent();
 		return SUCCESS;
 	}
 
