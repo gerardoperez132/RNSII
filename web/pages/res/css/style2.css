@@ -3378,8 +3378,9 @@ div.middleContent {
 
 div.ver_sectores {
 	float: right;
-	margin-top: 5px;
-	margin-right: 10px;
+	margin-top: 242px;
+	margin-left: 590px;
+	position: absolute;
 }
 
 a.ver_sectores:link {
