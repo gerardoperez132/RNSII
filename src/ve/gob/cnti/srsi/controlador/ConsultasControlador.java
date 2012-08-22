@@ -51,6 +51,7 @@ import ve.gob.cnti.srsi.modelo.Usuario;
 import ve.gob.cnti.srsi.modelo.Visita;
 import ve.gob.cnti.srsi.util.EstadosTiempo;
 import ve.gob.cnti.srsi.util.ListaServiciosVisitados;
+import ve.gob.cnti.srsi.util.Pagination;
 import ve.gob.cnti.srsi.util.ReadXmlTime;
 import ve.gob.cnti.srsi.util.SectoresMasPublicados;
 
@@ -110,11 +111,28 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 	private boolean buscarServicio;
 	private boolean error404;
 
+	/* Control de paginación. */
+	private int page = 1;
+	private int totalPages = 1;
+	private boolean hasPrevious;
+	private boolean hasNext;
+	private List<Integer> pagination = new ArrayList<Integer>();
+	private int mLimit = 9;
+
+	@SuppressWarnings("unchecked")
 	public String inicio() {
 		getTiempoFecha();
 		listaSectores = listadoSectores(LIMITE_SECTORES, false);
-		listaSectores2 = listadoSectores(-1, true);
+		// listaSectores2 = listadoSectores(-1, true);
 		SI_masVisitados = listarServiciosVisitados(LIMITE_VISITADOS, false);
+		List<SectoresMasPublicados> lista = listadoSectores(-1, true);
+		Pagination paginate = new Pagination(lista, mLimit, page);
+		page = paginate.getPage();
+		totalPages = paginate.getTotalPages();
+		hasPrevious = paginate.isHasPrevious();
+		hasNext = paginate.isHasNext();
+		pagination = paginate.getPagination();
+		listaSectores2 = (List<SectoresMasPublicados>) paginate.getContent();
 		return SUCCESS;
 	}
 
@@ -688,4 +706,53 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 	public void setError404(boolean error404) {
 		this.error404 = error404;
 	}
+
+	public int getPage() {
+		return page;
+	}
+
+	public void setPage(int page) {
+		this.page = page;
+	}
+
+	public int getTotalPages() {
+		return totalPages;
+	}
+
+	public void setTotalPages(int totalPages) {
+		this.totalPages = totalPages;
+	}
+
+	public boolean isHasPrevious() {
+		return hasPrevious;
+	}
+
+	public void setHasPrevious(boolean hasPrevious) {
+		this.hasPrevious = hasPrevious;
+	}
+
+	public boolean isHasNext() {
+		return hasNext;
+	}
+
+	public void setHasNext(boolean hasNext) {
+		this.hasNext = hasNext;
+	}
+
+	public int getmLimit() {
+		return mLimit;
+	}
+
+	public void setmLimit(int mLimit) {
+		this.mLimit = mLimit;
+	}
+
+	public List<Integer> getPagination() {
+		return pagination;
+	}
+
+	public void setPagination(List<Integer> pagination) {
+		this.pagination = pagination;
+	}
+
 }
