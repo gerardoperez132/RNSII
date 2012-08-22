@@ -240,7 +240,7 @@
 								</table>
 								<hr>
 								<!-- Tabla en árbol. -->
-								<table id="tree" class="treeTable">
+								<table id="tree" class="treeTable results">
 									<thead>
 										<tr>
 											<th colspan="4" style="text-align: center;"><s:text
