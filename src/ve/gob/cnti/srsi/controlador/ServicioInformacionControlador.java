@@ -812,11 +812,8 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		unionarquitecturas = (List<UnionArquitecturaServicioInformacion>) readUnion(
 				new UnionArquitecturaServicioInformacion(), servicio,
 				id_servicio_informacion);
-		Iterator<UnionArquitecturaServicioInformacion> iterador2 = unionarquitecturas
-				.iterator();
-		while (iterador2.hasNext()) {
-			arquitectura.add(iterador2.next().getId_arquitectura());
-		}
+		for (UnionArquitecturaServicioInformacion a : unionarquitecturas)
+			arquitectura.add(a.getId_arquitectura());
 		intercambio = servicio.getId_intercambio();
 		Url url = new Url();
 		try {
