@@ -124,8 +124,7 @@
 			</result>
 			<result name="invalid.token">registro/registro_servicio_informacion.jsp
 			</result>
-			<result name="input">registro/registro_servicio_informacion.jsp
-			</result>
+			<result name="input">registro/registro_servicio_informacion.jsp</result>
 			<result name="errorSession" type="redirectAction">home</result>
 			<result name="error">error.jsp</result>
 		</action>
@@ -234,9 +233,7 @@
 
 		<action name="modificarFuncionalidad" method="modificarFuncionalidad"
 			class="ve.gob.cnti.srsi.controlador.FuncionalidadControlador">
-			<result name="success" type="chain">
-				<param name="actionName">prepararFuncionalidad</param>
-			</result>
+			<result name="success" type="redirectAction">prepararFuncionalidad</result>
 			<result name="input">registro/formulario_funcionalidad.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
