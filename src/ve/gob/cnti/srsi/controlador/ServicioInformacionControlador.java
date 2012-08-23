@@ -130,8 +130,6 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		estados = (List<Estado>) read(new Estado());
 		areas = (List<Area>) read(new Area());
 		id_servicio_informacion = getNextId(servicio);
-		System.out.println("ID en prepararRegistro => "
-				+ id_servicio_informacion);
 		setNuevo(true);
 		cleanSessionStack();
 		setSessionStack();
@@ -176,21 +174,6 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		if (isComplete(servicio))
 			setModificar(true);
 		tab = DESCRIPCION_TECNICA;
-		if (modificar) {
-			seguridad = servicio.getId_seguridad();
-			intercambio = servicio.getId_intercambio();
-			unionarquitecturas = (List<UnionArquitecturaServicioInformacion>) readUnion(
-					new UnionArquitecturaServicioInformacion(), servicio,
-					id_servicio_informacion);
-			for (UnionArquitecturaServicioInformacion union : unionarquitecturas)
-				arquitectura.add(union.getId_arquitectura());
-		}
-		Url url = new Url();
-		try {
-			url = getUrl(servicio, id_servicio_informacion);
-			wsdl = url.getUrl();
-		} catch (Exception e) {
-		}
 		niveles = (List<Seguridad>) read(new Seguridad());
 		arquitecturas = (List<Arquitectura>) read(new Arquitectura());
 		parents = (List<Intercambio>) getParents(new Intercambio());
@@ -202,21 +185,6 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	public String prepararDescripcionSoporte() {
 		getTiempoFecha();
 		getSessionStack(isValidate);
-		if (modificar) {
-			Telefono phone = new Telefono();
-			try {
-				phone = getPhone(servicio, id_servicio_informacion);
-				telefono = phone.getTelefono().substring(3, 10);
-				codigo = phone.getTelefono().substring(0, 3);
-			} catch (Exception e) {
-			}
-			Correo email = new Correo();
-			try {
-				email = getEmail(servicio, id_servicio_informacion);
-				correo = email.getCorreo();
-			} catch (Exception e) {
-			}
-		}
 		if (isComplete(servicio)) {
 			setModificar(true);
 		}
@@ -381,7 +349,6 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		if (id_servicio_informacion == documento.getId_servicio_informacion()) {
 			String path = servletRequest.getSession().getServletContext()
 					.getRealPath(documento.getUrl());
-			System.out.println("PATH ON DELETE => " + path);
 			File file = new File(path);
 			file.delete();
 			delete(documento, documento.getId_aspecto_legal());
@@ -650,6 +617,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		session.put("arquitectura", arquitectura);
 		session.put("intercambio", intercambio);
 		session.put("wsdl", wsdl);
+		session.put("codigo", codigo);
 		session.put("telefono", telefono);
 		session.put("correo", correo);
 		session.put("nuevo", nuevo);
@@ -669,6 +637,10 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 				seguridad = (Long) session.get("seguridad");
 				arquitectura = (List<Long>) session.get("arquitectura");
 				intercambio = (Long) session.get("intercambio");
+				wsdl = (String) session.get("wsdl");
+				codigo = (String) session.get("codigo");
+				telefono = (String) session.get("telefono");
+				correo = (String) session.get("correo");
 			} catch (Exception e) {
 			}
 		}
@@ -694,6 +666,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			session.remove("intercambio");
 			session.remove("wsdl");
 			session.remove("telefono");
+			session.remove("codigo");
 			session.remove("correo");
 			session.remove("nuevo");
 			session.remove("modificar");
@@ -722,7 +695,8 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		Telefono phone = new Telefono();
 		phone = getPhone(servicio, id_servicio_informacion);
 		try {
-			telefono = phone.getTelefono();
+			telefono = phone.getTelefono().substring(0, 3) + "-"
+					+ phone.getTelefono().substring(3, 10);
 		} catch (Exception e) {
 		}
 		Correo email = new Correo();
@@ -751,8 +725,6 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 				// No tiene entradas ni salidas.
 			}
 		}
-		System.out.println("id ente " + servicio.getId_ente());
-		;
 		ente = (Ente) read(ente, servicio.getId_ente());
 		// sectores = (List<Sector>) read(new Sector());
 		sectores = (List<Sector>) getSortedList(new Sector(), ASC);
@@ -852,9 +824,13 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			wsdl = url.getUrl();
 		} catch (Exception e) {
 		}
-		// TODO WTF? ¿Por qué esto está aquí?
-		@SuppressWarnings("unused")
 		Telefono phone = new Telefono();
+		try {
+			phone = getPhone(servicio, id_servicio_informacion);
+			codigo = phone.getTelefono().substring(0, 3);
+			telefono = phone.getTelefono().substring(3, 10);
+		} catch (Exception e) {
+		}
 		Correo email = new Correo();
 		try {
 			email = getEmail(servicio, id_servicio_informacion);
