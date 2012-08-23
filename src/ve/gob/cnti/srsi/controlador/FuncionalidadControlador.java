@@ -74,6 +74,8 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 	@SkipValidation
 	public String prepararFormulario() {
 		getTiempoFecha();
+		System.out.println("EN PREPARAR FORMULARIO");
+		System.out.println("NOMBRE FUN => " + funcionalidad.getNombre());
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		if (id_funcionalidad > 0) {
 			funcionalidad = (Funcionalidad) read(funcionalidad,
@@ -170,6 +172,8 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 
 	public String modificarFuncionalidad() {
 		getTiempoFecha();
+		System.out.println("ESTOY EN MODIFICAR FUNCIONALIDAD");
+		System.out.println("NOMBRE FUN => " + funcionalidad.getNombre());
 		Usuario user = new Usuario();
 		session = ActionContext.getContext().getSession();
 		user = (Usuario) session.get("usuario");
@@ -209,6 +213,8 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 
 	public void validate() {
 		getTiempoFecha();
+		System.out.println("WTF? ESTOY EN VALIDATE");
+		System.out.println("NOMBRE FUN => " + funcionalidad.getNombre());
 		if (funcionalidad.getNombre().trim().isEmpty())
 			addFieldError("funcionalidad.nombre", error.getProperties()
 					.getProperty("error.funcionalidad.nombre"));
