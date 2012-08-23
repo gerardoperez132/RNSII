@@ -590,11 +590,14 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 						"intercambio",
 						error.getProperties().getProperty(
 								"error.servicio.intercambio"));
-			if (wsdl.isEmpty())
+			// TODO FIX THIS!
+			long estado = ((ServicioInformacion) read(servicio,
+					id_servicio_informacion)).getId_estado();
+			if (wsdl.trim().isEmpty() && estado == IMPLEMENTADO)
 				addFieldError("wsdl",
 						error.getProperties()
 								.getProperty("error.servicio.wsdl"));
-			if (!wsdl.matches(REGEX_URL))
+			else if (!wsdl.matches(REGEX_URL) && !wsdl.trim().isEmpty())
 				addFieldError("wsdl",
 						error.getProperties().getProperty("error.regex.url"));
 			prepararDescripcionTecnica();
