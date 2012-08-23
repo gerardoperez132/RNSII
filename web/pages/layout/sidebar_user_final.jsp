@@ -1,6 +1,6 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!-- Esta es la barra lateral -->
-<div class="sidebar">
+<div class="sidebar_user_final">
 	<div class="busqueda">
 			<form method="post" action="buscar_servicio">
 				<label><s:text name="buscarServicio"/></label>

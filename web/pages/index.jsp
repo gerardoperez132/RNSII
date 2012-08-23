@@ -83,7 +83,6 @@
 								<th><s:text name="nombre" /></th>
 								<th><s:text name="numero_si" /></th>
 							</tr>
-<<<<<<< HEAD
 							<tr>
 								<td class="alt">
 									<s:text name="version" />
@@ -115,9 +114,8 @@
 										<s:text	name="funcionalidades_&_datos" />
 									</th>
 								</tr>
-=======
+
 							<s:iterator value="listaSectores2" status="index">
->>>>>>> f9b02eacb094df56530fe48940a14ba532d21e0d
 								<tr>
 									<td><a
 										href="listarSector?id_sector=<s:property value="id_sector"/>">
@@ -260,7 +258,7 @@
 								</table>
 								<hr>
 								<!-- Tabla en árbol. -->
-								<table id="tree" class="treeTable">
+								<table id="tree" class="treeTable results">
 									<thead>
 										<tr>
 											<th colspan="4" style="text-align: center;">

@@ -53,7 +53,7 @@ td.tb_alt {
 
 /*tabla de resultados*/
 .results{
-	width: 650px;
+	width: 620px;
 	padding: 0;
 	margin: 0;
 	border: 1px solid #e0e0e0;
@@ -113,4 +113,20 @@ td.tb_alt {
 	font-size: small;
 	font-weight:bold;
 	color:blue;
+}
+
+.results_width_user{
+	width:790px;
+}
+
+.results_width_user_datos{
+	width:690px;
+}
+
+.results_width_user_detalles{
+	width:730px;
+}
+
+.results_width_user_fx{
+	width:750px;
 }

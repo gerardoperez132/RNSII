@@ -131,3 +131,7 @@ ul {
 	bottom: 12px;
 	position: absolute;
 }
+
+.tab_container_height {
+	height: 450px;
+}

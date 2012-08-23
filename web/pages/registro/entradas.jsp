@@ -34,37 +34,7 @@
 			<%@include file="../layout/sidebar.jsp"%>
 			<!-- Este es el div de contenidos -->
 			<div class="contenido">
-				<div class="Titulo" style="width: 800px;">
-					<h1><s:text name="titulo2" /></h1>
-				</div>
-				<div class="busqueda" style="width: 800px;">
-					<form method="post" action="Buscar_Servicio">
-						<label><s:text name="buscarServicio" /></label>
-						<s:textfield name="cadena" id="buscar"
-							cssClass="inputBusqueda buscar" style="width:640px;" />
-						<input type="submit" class="submit" value="&nbsp;" />
-					</form>
-				</div>
-				<table class="main_user">
-					<tr>
-						<td>
-							<div>
-								<h4 style="margin: 0;">
-									<s:text name="bienvenido" />
-									<s:property value="%{#session.usuario.nombre}" />
-								</h4>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<h4 style="margin: 0;">
-								<s:text name="ente" />
-								<s:property value="%{#session.ente_sesion.nombre}" />
-							</h4>
-						</td>
-					</tr>
-				</table>
+				<%@include file="../layout/bienvenido.jsp"%>
 				<div class="pasos">
 					<table><tr><td>
 						<span style="font-weight: bolder;">
@@ -91,7 +61,7 @@
 					</li>										
 				</ul>
 		
-				<div class="tab_container" style="height: 450px;">					
+				<div class="tab_container_height tab_container">					
 					<div class="tab_content">
 					
 					<h3 class="formulario">
@@ -150,7 +120,7 @@
 								</tr>
 							</table>
 							<!-- Tabla en árbol. -->
-							<table id="tree" class="results" style="width: 700px;">
+							<table id="tree" class="results_width_user_datos results">
 								<!-- Validación de lista vacía. -->
 								<tbody>
 									<tr>

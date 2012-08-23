@@ -706,7 +706,16 @@ div.paginado li a:hover {
 .sidebar {
 	border-left: 1px solid #CCCCCC;
 	display: block;
-	float: left;
+	float: right;
+	margin: 0 0 -30000px 0px;
+	padding: 0 0 30000px 5px;
+	width: 180px;
+}
+
+.sidebar_user_final {
+	border-left: 1px solid #CCCCCC;
+	display: block;
+	float: right;
 	margin: 0 0 -30000px 0px;
 	padding: 0 0 30000px 5px;
 	width: 270px;
@@ -1571,7 +1580,7 @@ ul.newsticker li {
 
 .busqueda {
 	border: 1px solid #CCC;
-	float: right;
+	float: left;
 	font-family: sans-serif;
 	height: 25px;
 	margin: 1px 0pt 0pt;
@@ -1615,10 +1624,10 @@ ul.newsticker li {
 .Titulo {
 	display: block;
 	float: left;
-	margin: 10px 0 10px 0;
+	margin: 4px 0 10px 0;
 	background: url(../images/tileh1.png) repeat-x;
 	padding: 15px;
-	width: 650px;
+	width: 652px;
 }
 
 .main .Titulo h1 {
@@ -3066,9 +3075,8 @@ a.e2 :link :visited :hover :active {
 }
 
 .ui-menu-content {
-	list-style: none;
-	margin-top: -12px;
-	padding: 0 0 0 0;
+	list-style: none;	
+	padding: 0;
 	border-top: 0;
 	position: relative;
 }
@@ -3185,9 +3193,10 @@ a.tooltip:hover span {
 	margin: 10px 10px;
 }
 
-.contenido {
-	float: right;
-	width: 820px;
+.contenido {	
+	float: left;
+	width: 800px;
+	padding-left: 3px;
 }
 
 .busqueda2 {
@@ -3206,7 +3215,7 @@ a.tooltip:hover span {
 	font-family: sans-serif;
 	height: 20px;
 	margin: 1px 0pt 0pt;
-	width: 800px;
+	width: 775px;
 	margin-bottom: 10px;
 	padding-left: 10px;
 	padding-top: 2px;
@@ -3397,4 +3406,16 @@ a.ver_sectores:hover {
 
 a.ver_sectores:active {
 	text-decoration: none
+}
+
+.secciones{
+	margin-top: 10px;
+}
+
+.Titulo_width_user{
+	width:760px;
+}
+
+.busqueda_width_user{
+	width:775px;
 }
