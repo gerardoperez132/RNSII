@@ -350,10 +350,17 @@
 									</optgroup>
 								</s:iterator>
 							</select>
+							<h5 class="formulario">
+								<s:text name="wsdl.title"/>
+							</h5>
+							<s:fielderror>
+								<s:param>wsdl</s:param>
+							</s:fielderror>
+							<s:textfield name="wsdl" id="wsdl"/>
 							<s:token name="token" />
 							<s:hidden name="tab" value="3" />
 							<s:hidden name="id_servicio_informacion" />
-							<s:hidden name="modificar"></s:hidden>
+							<s:hidden name="modificar"/>
 							<input type="submit" value='<s:property value="#submit"/>' />
 						</form>
 					</div>
@@ -392,7 +399,7 @@
 								</tr>
 							</table>
 							<h5 class="formulario">
-								<s:text name="correo.title"></s:text>
+								<s:text name="correo.title"/>
 							</h5>
 							<s:fielderror>
 								<s:param>correo</s:param>

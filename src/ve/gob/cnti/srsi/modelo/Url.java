@@ -38,6 +38,7 @@ public class Url {
 	private long id;
 	private long id_url;
 	private long id_ente;
+	private long id_servicio_informacion;
 	private String url;
 	private int status;
 	private Date fecha_creado;
@@ -68,6 +69,14 @@ public class Url {
 
 	public void setId_ente(long id_ente) {
 		this.id_ente = id_ente;
+	}
+
+	public long getId_servicio_informacion() {
+		return id_servicio_informacion;
+	}
+
+	public void setId_servicio_informacion(long id_servicio_informacion) {
+		this.id_servicio_informacion = id_servicio_informacion;
 	}
 
 	public String getUrl() {
@@ -104,9 +113,9 @@ public class Url {
 
 	@Override
 	public String toString() {
-		return "URL [id=" + id + ", id_url=" + id_url + ", id_ente=" + id_ente
+		return "Url [id=" + id + ", id_url=" + id_url + ", id_ente=" + id_ente
+				+ ", id_servicio_informacion=" + id_servicio_informacion
 				+ ", url=" + url + ", status=" + status + ", fecha_creado="
 				+ fecha_creado + ", fecha_modificado=" + fecha_modificado + "]";
 	}
-
 }

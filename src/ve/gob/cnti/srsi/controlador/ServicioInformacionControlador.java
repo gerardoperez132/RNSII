@@ -50,6 +50,7 @@ import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.Telefono;
 import ve.gob.cnti.srsi.modelo.UnionAreaServicioInformacion;
 import ve.gob.cnti.srsi.modelo.UnionArquitecturaServicioInformacion;
+import ve.gob.cnti.srsi.modelo.Url;
 import ve.gob.cnti.srsi.modelo.Usuario;
 import ve.gob.cnti.srsi.util.EstadosTiempo;
 import ve.gob.cnti.srsi.util.ReadXmlTime;
@@ -91,6 +92,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	private long seguridad;
 	private List<Long> arquitectura = new ArrayList<Long>();
 	private long intercambio;
+	private String wsdl = "http://";
 	private String telefono;
 	private String correo;
 	private String codigo;
@@ -183,6 +185,12 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			for (UnionArquitecturaServicioInformacion union : unionarquitecturas)
 				arquitectura.add(union.getId_arquitectura());
 		}
+		Url url = new Url();
+		try {
+			url = getUrl(servicio, id_servicio_informacion);
+			wsdl = url.getUrl();
+		} catch (Exception e) {
+		}
 		niveles = (List<Seguridad>) read(new Seguridad());
 		arquitecturas = (List<Arquitectura>) read(new Arquitectura());
 		parents = (List<Intercambio>) getParents(new Intercambio());
@@ -197,14 +205,14 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		if (modificar) {
 			Telefono phone = new Telefono();
 			try {
-				phone = (Telefono) getPhone(servicio, id_servicio_informacion);
+				phone = getPhone(servicio, id_servicio_informacion);
 				telefono = phone.getTelefono().substring(3, 10);
 				codigo = phone.getTelefono().substring(0, 3);
 			} catch (Exception e) {
 			}
 			Correo email = new Correo();
 			try {
-				email = (Correo) getEmail(servicio, id_servicio_informacion);
+				email = getEmail(servicio, id_servicio_informacion);
 				correo = email.getCorreo();
 			} catch (Exception e) {
 			}
@@ -401,6 +409,9 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		} catch (Exception e) {
 			// Exception.
 		}
+		Url url = new Url();
+		url.setId_servicio_informacion(id_servicio_informacion);
+		url.setUrl(wsdl);
 		String version = servicio.getVersion();
 		List<Long> arq = new ArrayList<Long>();
 		long seguridad_tmp = seguridad;
@@ -413,6 +424,19 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		arquitectura = arq;
 		seguridad = seguridad_tmp;
 		intercambio = intercambio_tmp;
+		if (isModificar()) {
+			url = getUrl(servicio, id_servicio_informacion);
+			if (url != null) {
+				url.setId_servicio_informacion(id_servicio_informacion);
+				url.setUrl(wsdl);
+				update(url, url.getId_url());
+			} else {
+				url = new Url();
+				url.setId_servicio_informacion(id_servicio_informacion);
+				url.setUrl(wsdl);
+				create(url);
+			}
+		}
 		if (isModificar() && isComplete(servicio)) {
 			update(servicio, id_servicio_informacion);
 			Usuario user = (Usuario) session.get("usuario");
@@ -566,6 +590,16 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 						"intercambio",
 						error.getProperties().getProperty(
 								"error.servicio.intercambio"));
+			// TODO FIX THIS!
+			long estado = ((ServicioInformacion) read(servicio,
+					id_servicio_informacion)).getId_estado();
+			if (wsdl.trim().isEmpty() && estado == IMPLEMENTADO)
+				addFieldError("wsdl",
+						error.getProperties()
+								.getProperty("error.servicio.wsdl"));
+			else if (!wsdl.matches(REGEX_URL) && !wsdl.trim().isEmpty())
+				addFieldError("wsdl",
+						error.getProperties().getProperty("error.regex.url"));
 			prepararDescripcionTecnica();
 			break;
 		case DESCRIPCION_SOPORTE:
@@ -615,6 +649,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		session.put("seguridad", seguridad);
 		session.put("arquitectura", arquitectura);
 		session.put("intercambio", intercambio);
+		session.put("wsdl", wsdl);
 		session.put("telefono", telefono);
 		session.put("correo", correo);
 		session.put("nuevo", nuevo);
@@ -657,6 +692,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			session.remove("seguridad");
 			session.remove("arquitectura");
 			session.remove("intercambio");
+			session.remove("wsdl");
 			session.remove("telefono");
 			session.remove("correo");
 			session.remove("nuevo");
@@ -684,15 +720,22 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		} catch (Exception e) {
 		}
 		Telefono phone = new Telefono();
-		phone = (Telefono) getPhone(servicio, id_servicio_informacion);
+		phone = getPhone(servicio, id_servicio_informacion);
 		try {
 			telefono = phone.getTelefono();
 		} catch (Exception e) {
 		}
 		Correo email = new Correo();
-		email = (Correo) getEmail(servicio, id_servicio_informacion);
+		email = getEmail(servicio, id_servicio_informacion);
 		try {
 			correo = email.getCorreo();
+		} catch (Exception e) {
+		}
+		// TODO Tal vez aquí no deba ir...
+		Url url = new Url();
+		url = getUrl(servicio, id_servicio_informacion);
+		try {
+			wsdl = url.getUrl();
 		} catch (Exception e) {
 		}
 		funcionalidades = (List<Funcionalidad>) read(FSI,
@@ -803,11 +846,18 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			arquitectura.add(iterador2.next().getId_arquitectura());
 		}
 		intercambio = servicio.getId_intercambio();
+		Url url = new Url();
+		try {
+			url = getUrl(servicio, id_servicio_informacion);
+			wsdl = url.getUrl();
+		} catch (Exception e) {
+		}
+		// TODO WTF? ¿Por qué esto está aquí?
 		@SuppressWarnings("unused")
 		Telefono phone = new Telefono();
 		Correo email = new Correo();
 		try {
-			email = (Correo) getEmail(servicio, id_servicio_informacion);
+			email = getEmail(servicio, id_servicio_informacion);
 			correo = email.getCorreo();
 		} catch (Exception e) {
 		}
@@ -1161,5 +1211,13 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
+	}
+
+	public String getWsdl() {
+		return wsdl;
+	}
+
+	public void setWsdl(String wsdl) {
+		this.wsdl = wsdl;
 	}
 }

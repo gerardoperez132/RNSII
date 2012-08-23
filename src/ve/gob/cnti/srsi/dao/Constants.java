@@ -29,7 +29,7 @@ import ve.gob.cnti.srsi.modelo.Visita;
  * 
  */
 public interface Constants {
-	
+
 	/**
 	 * Códigos de área de un número telefónico en Venezuela.
 	 */
@@ -89,6 +89,11 @@ public interface Constants {
 	 * La expresión regular para el correo electrónico válido.
 	 */
 	public static final String REGEX_EMAIL = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
+
+	/**
+	 * La expresión regular para las direcciones URL.
+	 */
+	public static final String REGEX_URL = "((https?|ftp|gopher|telnet|file|notes|ms-help):((//)|(\\\\\\\\))+[\\w\\d:#@%/;$()~_?\\+-=\\\\\\.&]*)";
 
 	/**
 	 * La expresión regular para validar que una contraseña tenga mínimo 8

@@ -23,6 +23,7 @@ import ve.gob.cnti.srsi.modelo.Correo;
 import ve.gob.cnti.srsi.modelo.EntradaSalida;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
 import ve.gob.cnti.srsi.modelo.Telefono;
+import ve.gob.cnti.srsi.modelo.Url;
 import ve.gob.cnti.srsi.modelo.Visita;
 import ve.gob.cnti.srsi.util.ListaServiciosVisitados;
 import ve.gob.cnti.srsi.util.SectoresMasPublicados;
@@ -332,10 +333,23 @@ public interface CRUD {
 	 *            Es la clase, modelo o tabla en la cual se realizará la
 	 *            consulta.
 	 * @param id
-	 *            Es el id del correo a consultar.
+	 *            Es el id del teléfono a consultar.
 	 * @return {@code telefono}
 	 */
 	public Telefono getPhone(Object model, long id);
+
+	/**
+	 * Permite obtener la URL de una clase dada.
+	 * 
+	 * @author Richard Ricciardelli
+	 * @param model
+	 *            Es la clase, modelo o tabla en la cual se realizará la
+	 *            consulta.
+	 * @param id
+	 *            Es el id del modelo a consultar.
+	 * @return {@code url}
+	 */
+	public Url getUrl(Object model, long id);
 
 	/**
 	 * Permite actualizar una misma tupla sobre los datos faltantes. No genera

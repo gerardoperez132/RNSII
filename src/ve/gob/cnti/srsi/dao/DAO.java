@@ -45,6 +45,7 @@ import ve.gob.cnti.srsi.modelo.Telefono;
 import ve.gob.cnti.srsi.modelo.TipoDato;
 import ve.gob.cnti.srsi.modelo.UnionAreaServicioInformacion;
 import ve.gob.cnti.srsi.modelo.UnionArquitecturaServicioInformacion;
+import ve.gob.cnti.srsi.modelo.Url;
 import ve.gob.cnti.srsi.modelo.Visita;
 import ve.gob.cnti.srsi.util.ListaServiciosVisitados;
 import ve.gob.cnti.srsi.util.SectoresMasPublicados;
@@ -333,6 +334,24 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 			startConnection();
 			result = (Telefono) session.createQuery(
 					"FROM " + new Telefono().getClass().getSimpleName()
+							+ " WHERE status = " + ACTIVO + " AND "
+							+ getField(model) + " = " + id).uniqueResult();
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+		return result;
+	}
+
+	@Override
+	public Url getUrl(Object model, long id) {
+		Url result;
+		try {
+			startConnection();
+			result = (Url) session.createQuery(
+					"FROM " + new Url().getClass().getSimpleName()
 							+ " WHERE status = " + ACTIVO + " AND "
 							+ getField(model) + " = " + id).uniqueResult();
 		} catch (HibernateException he) {
