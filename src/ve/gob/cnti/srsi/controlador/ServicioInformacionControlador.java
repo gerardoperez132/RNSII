@@ -211,6 +211,9 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		}
 		String nombre = servicio.getNombre();
 		String descripcion = servicio.getDescripcion();
+		List<Long> area_tmp = area;
+		getSessionStack(false);
+		area = area_tmp;
 		servicio.setId_ente(ente.getId_ente());
 		servicio.setId_estado(estado);
 		servicio.setId_sector(sector);
@@ -267,7 +270,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	@SuppressWarnings("unchecked")
 	public String registrarAspectosLegales() throws IOException {
 		getTiempoFecha();
-		getSessionStack(isValidate);
+		getSessionStack(false);
 		if (name.trim().isEmpty() && file != null) {
 			addFieldError(
 					"name",
@@ -384,7 +387,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		long seguridad_tmp = seguridad;
 		long intercambio_tmp = intercambio;
 		arq = arquitectura;
-		getSessionStack(isValidate);
+		getSessionStack(false);
 		servicio.setId_seguridad(seguridad);
 		servicio.setId_intercambio(intercambio);
 		servicio.setVersion(String.valueOf(Float.parseFloat(version)));
@@ -642,6 +645,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 				telefono = (String) session.get("telefono");
 				correo = (String) session.get("correo");
 			} catch (Exception e) {
+				// TODO Exception?
 			}
 		}
 		try {
