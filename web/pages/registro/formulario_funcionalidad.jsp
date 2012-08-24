@@ -235,7 +235,7 @@
 											<s:hidden name="id_servicio_informacion"/>
 											<s:hidden name="id_funcionalidad"/>
 											<s:hidden name="modificar"/>
-											<s:hidden name="modificarf" value="%{false}"/>
+											<s:hidden name="modificarf"/>
 											<input type="submit" value="<s:text name="guardar"/>" />
 										</form>
 									</s:if>

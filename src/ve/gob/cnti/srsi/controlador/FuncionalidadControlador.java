@@ -180,6 +180,7 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 		funcionalidad.setId_servicio_informacion(id_servicio_informacion);
 		funcionalidad.setId_usuario(user.getId_usuario());
 		update(funcionalidad, id_funcionalidad);
+		modificarf = false;
 		return SUCCESS;
 	}
 
