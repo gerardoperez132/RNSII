@@ -13,9 +13,9 @@
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
 <!-- JS (required) -->
 <script type="text/javascript" src="res/js/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="res/js/funciones_ge.js"></script>
 <script type="text/javascript" src="res/js/tabs.js"></script>
 <script type="text/javascript" src="res/js/jquery.treeTable.js"></script>
-<script type="text/javascript" src="res/js/funciones_ge.js"></script>
 <title><s:text name="inicio" /></title>
 	</head>
 	<body>

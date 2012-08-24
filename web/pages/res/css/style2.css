@@ -3379,7 +3379,7 @@ div.tab03 {
 
 div.middleContent {
 	width: 690px;
-	height: 260px;
+	height: 270px;
 	border: 1px solid;
 	clear: left;
 	border-color: #DDD;
@@ -3387,7 +3387,7 @@ div.middleContent {
 
 div.ver_sectores {
 	float: right;
-	margin-top: 242px;
+	margin-top: 250px;
 	right: 300px;
 	position: absolute;
 }

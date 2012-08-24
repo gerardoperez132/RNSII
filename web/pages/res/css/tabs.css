@@ -73,7 +73,7 @@ html ul.tabs li.active,html ul.tabs li.active a:hover {
 }
 
 /* A partir de aquí están los estilos de la paginación. */
-ul {
+ul#pagination-flickr {
 	border: 0;
 	margin: 0;
 	padding: 0;
