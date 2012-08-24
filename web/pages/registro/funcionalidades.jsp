@@ -115,6 +115,7 @@
 														<form action="prepararFuncionalidad" method="POST">
 															<s:hidden name="id_funcionalidad" value="%{funcionalidad.id_funcionalidad}"></s:hidden>
 															<s:hidden name="id_servicio_informacion"></s:hidden>
+															<s:hidden name="mostrarTabla" value="%{true}"/>
 															<input type="submit" value="<s:text name="modificar"/>" style="font-size: 0.9em;" />
 														</form>
 													</td>

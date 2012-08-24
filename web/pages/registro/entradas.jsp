@@ -76,6 +76,7 @@
 								<s:hidden name="id_servicio_informacion"/>
 								<s:hidden name="id_funcionalidad"/>
 								<s:hidden name="modificar"/>
+								<s:hidden name="mostrarTabla" value="%{true}"/>
 								<input type="submit" value="<s:text name="entrada.tab1.title"/>"
 									style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
 							</form>

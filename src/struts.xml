@@ -233,7 +233,7 @@
 
 		<action name="modificarFuncionalidad" method="modificarFuncionalidad"
 			class="ve.gob.cnti.srsi.controlador.FuncionalidadControlador">
-			<result name="success" type="redirectAction">prepararFuncionalidad</result>
+			<result name="success">registro/formulario_funcionalidad.jsp</result>
 			<result name="input">registro/formulario_funcionalidad.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>

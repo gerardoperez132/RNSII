@@ -65,6 +65,7 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 	private boolean modificar;
 	private boolean modificarf;
 	private boolean resumen;
+	private boolean mostrarTabla;
 
 	private List<EstadosTiempo> estadosTiempo = new ArrayList<EstadosTiempo>();
 	private Date fecha;
@@ -181,6 +182,7 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 		funcionalidad.setId_usuario(user.getId_usuario());
 		update(funcionalidad, id_funcionalidad);
 		modificarf = false;
+		mostrarTabla = true;
 		return SUCCESS;
 	}
 
@@ -356,5 +358,13 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 	public void setFuncionalidadesPublicables(
 			List<FuncionalidadesPublicables> funcionalidadesPublicables) {
 		this.funcionalidadesPublicables = funcionalidadesPublicables;
+	}
+
+	public boolean isMostrarTabla() {
+		return mostrarTabla;
+	}
+
+	public void setMostrarTabla(boolean mostrarTabla) {
+		this.mostrarTabla = mostrarTabla;
 	}
 }
