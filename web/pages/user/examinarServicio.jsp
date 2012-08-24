@@ -71,17 +71,17 @@
 							<tr>
 								<td class="alt"><s:text name="orientado" /></td>
 								<td class="alt2"><s:set var="id_si" value="servicio.id_servicio_informacion"/>
-									<s:iterator	value="unionareas">
+									<s:iterator	value="unionareas" status="status">
 										<s:if test="%{id_servicio_informacion == #id_si}">
 											<s:set var="area" value="id_area"/>
-											<s:iterator value="areas" status="status">
+											<s:iterator value="areas">
 												<s:if test="%{id_area == #area}">
-													<s:if test="(#status.index + 1) == areas.size">
+													<s:if test="(#status.index + 1) == unionareas.size">
 														<s:property value="nombre" />
 													</s:if>
 													<s:else>
 														<s:property value="nombre" /> - 
-												</s:else>
+													</s:else>
 												</s:if>
 											</s:iterator>
 										</s:if>
