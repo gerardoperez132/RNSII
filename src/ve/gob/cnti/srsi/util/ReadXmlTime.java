@@ -23,9 +23,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.struts2.interceptor.ServletRequestAware;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
@@ -38,8 +35,7 @@ import org.jdom2.input.SAXBuilder;
  * @author Joaquín Pereira
  * 
  */
-public class ReadXmlTime implements ServletRequestAware {
-	private HttpServletRequest servletRequest;
+public class ReadXmlTime {
 
 	public List<EstadosTiempo> getEstadosTiempo() {
 		List<EstadosTiempo> estados = new ArrayList<EstadosTiempo>();
@@ -51,21 +47,35 @@ public class ReadXmlTime implements ServletRequestAware {
 			estados = connect(xmlConnection);
 		} catch (MalformedURLException me) {
 			System.out.println("MalformedURLException: " + me);
-		} catch (IOException ioe) {
-			System.out.println("IOException: " + ioe);
+		} catch (IOException io) {
+			System.out.println("IOException: " + io);
 		}
 		return estados;
 	}
 
+	/**
+	 * Este método realiza la conexión al archivo XML. Además maneja la
+	 * excepción para cuando el servicio del INAMEH no esté disponible en el
+	 * tiempo de respuesta usual, para realizar una llamada recursiva utilizando
+	 * otros parámetros de conexión.
+	 * 
+	 * @author Richard Ricciardelli
+	 * @author Joaquín Pereira
+	 * @param urlConnection
+	 *            Objeto con los parámetros de conexión.
+	 * @return Lista de los estados del tiempo según el archivo XML.
+	 * @throws IOException
+	 *             Excepción suscitada durante la formación del objeto URL
+	 *             alternativo.
+	 */
 	private List<EstadosTiempo> connect(URLConnection urlConnection)
 			throws IOException {
 		SAXBuilder builder = new SAXBuilder();
 		List<EstadosTiempo> estados = new ArrayList<EstadosTiempo>();
+		// TODO What the hell is going on here?
 		// String path = servletRequest.getSession().getServletContext()
 		// .getRealPath("/");
-		String path = servletRequest.getSession().getServletContext()
-				.getContextPath();
-		System.out.println("path => " + path);
+		String path = "http://localhost:8080/SRSI/pages/res/tiempo.xml";
 		URL xml_doc = new URL(path);
 		URLConnection xmlConnection = xml_doc.openConnection();
 		xmlConnection.setConnectTimeout(1000);
@@ -74,11 +84,9 @@ public class ReadXmlTime implements ServletRequestAware {
 			Document document = (Document) builder.build(urlConnection
 					.getInputStream());
 			Element rootNode = document.getRootElement();
-			@SuppressWarnings("rawtypes")
-			List list = rootNode.getChildren("zona");
-			for (int i = 0; i < list.size(); i++) {
+			List<Element> list = rootNode.getChildren("zona");
+			for (Element node : list) {
 				EstadosTiempo estado = new EstadosTiempo();
-				Element node = (Element) list.get(i);
 				estado.setCodigo(Integer.parseInt(node.getChildText("codigo")));
 				estado.setNombre(node.getChildText("nombre"));
 				estado.setT_max(Integer.parseInt(node.getChildText("temp_m")));
@@ -86,23 +94,16 @@ public class ReadXmlTime implements ServletRequestAware {
 				estados.add(estado);
 			}
 		} catch (IOException io) {
-			System.out.println("EL PRIMERO " + io.getMessage());
+			System.out.println("Recuperando del archivo de respaldo XML ["
+					+ io.getMessage() + "]");
 			estados = connect(xmlConnection);
 		} catch (JDOMException jdomex) {
-			System.out.println("EL SEGUNDO" + jdomex.getMessage());
+			System.out.println("Manejando excepción: " + jdomex.getMessage());
 		}
 		return estados;
 	}
 
 	public Date getFechaTiempo() {
 		return new Date();
-	}
-
-	public HttpServletRequest getServletRequest() {
-		return servletRequest;
-	}
-
-	public void setServletRequest(HttpServletRequest servletRequest) {
-		this.servletRequest = servletRequest;
 	}
 }
