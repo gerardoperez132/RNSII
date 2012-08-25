@@ -32,6 +32,16 @@ public class Pagination {
 	private List<?> content = new ArrayList<Object>();
 	private List<Integer> pagination = new ArrayList<Integer>();
 
+	/**
+	 * Constructor del objeto de paginación.
+	 * 
+	 * @param list
+	 *            Lista completa de los contenidos a ser paginados.
+	 * @param limit
+	 *            Límite de contenidos mostrados por página.
+	 * @param page
+	 *            Página actual.
+	 */
 	public Pagination(List<?> list, int limit, int page) {
 		super();
 		this.page = page;
