@@ -36,14 +36,15 @@ import org.jdom2.input.SAXBuilder;
  * 
  */
 public class ReadXmlTime {
+	private static int mTimeout = 1000;
 
 	public List<EstadosTiempo> getEstadosTiempo() {
 		List<EstadosTiempo> estados = new ArrayList<EstadosTiempo>();
 		try {
 			URL xml_doc = new URL("http://www.inameh.gob.ve/pronostico.php");
 			URLConnection xmlConnection = xml_doc.openConnection();
-			xmlConnection.setConnectTimeout(1000);
-			xmlConnection.setReadTimeout(1000);
+			xmlConnection.setConnectTimeout(mTimeout);
+			xmlConnection.setReadTimeout(mTimeout);
 			estados = connect(xmlConnection);
 		} catch (MalformedURLException me) {
 			System.out.println("MalformedURLException: " + me);
@@ -78,8 +79,8 @@ public class ReadXmlTime {
 		String path = "http://localhost:8080/SRSI/pages/res/tiempo.xml";
 		URL xml_doc = new URL(path);
 		URLConnection xmlConnection = xml_doc.openConnection();
-		xmlConnection.setConnectTimeout(1000);
-		xmlConnection.setReadTimeout(1000);
+		xmlConnection.setConnectTimeout(mTimeout);
+		xmlConnection.setReadTimeout(mTimeout);
 		try {
 			Document document = (Document) builder.build(urlConnection
 					.getInputStream());
