@@ -211,8 +211,14 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		}
 		String nombre = servicio.getNombre();
 		String descripcion = servicio.getDescripcion();
+		long estado_tmp = estado;
+		long sector_tmp = sector;
 		List<Long> area_tmp = area;
+		System.out.println("ESTADO ANTES => " + estado_tmp);
 		getSessionStack(false);
+		estado = estado_tmp;
+		sector = sector_tmp;
+		System.out.println("ESTADO después => " + estado_tmp);
 		area = area_tmp;
 		servicio.setId_ente(ente.getId_ente());
 		servicio.setId_estado(estado);
@@ -230,7 +236,10 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 				System.out.println("Error guardando las áreas");
 			}
 		}
+		System.out.println("NUEVO ES => " + isNuevo());
 		if (isNuevo()) {
+			servicio.setNombre(nombre);
+			servicio.setDescripcion(descripcion);
 			create(servicio);
 			UnionAreaServicioInformacion unionAreaServicioInformacion = new UnionAreaServicioInformacion();
 			for (int i = 0; i < area.size(); i++) {
@@ -386,6 +395,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		List<Long> arq = new ArrayList<Long>();
 		long seguridad_tmp = seguridad;
 		long intercambio_tmp = intercambio;
+		String wsdl_tmp = wsdl;
 		arq = arquitectura;
 		getSessionStack(false);
 		servicio.setId_seguridad(seguridad);
@@ -394,6 +404,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		arquitectura = arq;
 		seguridad = seguridad_tmp;
 		intercambio = intercambio_tmp;
+		wsdl = wsdl_tmp;
 		if (isModificar()) {
 			url = getUrl(servicio, id_servicio_informacion);
 			if (url != null) {
@@ -406,6 +417,11 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 				url.setUrl(wsdl);
 				create(url);
 			}
+		} else {
+			url = new Url();
+			url.setId_servicio_informacion(id_servicio_informacion);
+			url.setUrl(wsdl);
+			create(url);
 		}
 		if (isModificar() && isComplete(servicio)) {
 			update(servicio, id_servicio_informacion);
@@ -459,14 +475,17 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		Telefono phone = new Telefono();
 		phone.setId_servicio_informacion(id_servicio_informacion);
 		phone.setTelefono(codigo + telefono);
+		String telefono_tmp = telefono;
+		String email_tmp = correo;
 		Correo email = new Correo();
 		email.setId_servicio_informacion(id_servicio_informacion);
 		email.setCorreo(correo);
-		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		getSessionStack(false);
 		servicio.setResponsable(responsable);
+		telefono = telefono_tmp;
+		correo = email_tmp;
 		if (!isModificar()) {
-			servicio.setResponsable(responsable);
-			update(servicio);
+			update(servicio, id_servicio_informacion);
 			create(phone);
 			create(email);
 		} else {
@@ -494,6 +513,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			}
 			update(servicio, id_servicio_informacion);
 		}
+		setSessionStack();
 		return SUCCESS;
 	}
 

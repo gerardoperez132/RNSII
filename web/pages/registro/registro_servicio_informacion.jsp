@@ -124,7 +124,7 @@
 					<s:a href="%{prepararFormulario}"><s:text name="tab4.title"></s:text></s:a>
 				</li>
 			</s:else>
-			<s:if test="!modificar">
+			<s:if test="nuevo">
 				<li>
 					<s:a href="#"><s:text name="funcionalidades"></s:text></s:a>
 				</li>
