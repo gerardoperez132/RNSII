@@ -12,9 +12,10 @@
 			<li class="li-menu-content">				
 				<a style="padding-left: 10px;" href="<s:url action="prepararRegistro"/>"><s:text name="registro" /></a>				
 			</li>
+			<!-- 
 			<li class="li-menu-content">				
 				<a style="padding-left: 10px;" href="#"><s:text name="suscripciones" /></a>		
-			</li>
+			</li>			
 			<li class="li-menu-content">				
 				<a style="padding-left: 25px;" href="<s:url action="prepararSolicitarSuscripcion"/>"><s:text name="solicitud3" /></a>			
 			</li>
@@ -24,6 +25,7 @@
 			<li class="li-menu-content">				
 				<a style="padding-left: 25px;" href="<s:url action="listarSolicitudesAceptadasRechazadas"/>"><s:text name="solicitudeRealizadas" /></a>				
 			</li>
+			 -->
 			<li class="li-menu-content">				
 				<a href="<s:url action="configuracionUsuario"/>"><s:text name="configuración" /></a>				
 			</li>
