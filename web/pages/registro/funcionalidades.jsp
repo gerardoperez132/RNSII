@@ -81,12 +81,7 @@
 									<s:token name="token" />
 									<input type="submit" value="<s:text name="funcionalidad.add"/>" />
 								</form>
-							</td>
-							<td>
-								<form action="home" method="POST" onsubmit="return false;" id="salir">
-									<input type="submit" value="<s:text name="terminar"/>" onclick="salir('<s:property value="servicio.nombre" />');" />
-								</form>
-							</td>
+							</td>							
 						</tr>
 					</table>
 					<table class="results_width_user_fx results">
