@@ -174,15 +174,7 @@
 											<td class="tb_alt"><span class="txt_small"> <s:text	name="entradas.cargadas"/></span></td>								
 											<td class="tb_td"><span class="txt_small"> <s:property value="entradas.size" /></span></td>
 										</tr>
-									</table>
-									<s:if test="salidas.size > 0">
-										<form action="prepararFuncionalidades" method="POST">
-											<s:hidden name="id_servicio_informacion"/>
-											<s:hidden name="id_funcionalidad"/>
-											<s:hidden name="modificar"/>
-											<input type="submit" value='<s:text name="guardar"/>'>
-										</form>
-									</s:if>
+									</table>									
 								</div>
 							</div>
 						</div>
