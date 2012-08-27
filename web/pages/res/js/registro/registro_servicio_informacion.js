@@ -97,7 +97,8 @@ $(document).ready(function() {
 	    	 'seguridad' : {min: 0 },
 	    	 'arquitectura': { required: true, minlength: 1 },
 	    	 'servicio.version':{required: true,regexVersion: true,min: 0 ,max: 1000 },
-	    	 'intercambio': {min: 0 }	    	
+	    	 'intercambio': {min: 0 },
+	    	 'wsdl':{url:true}
 	    },
 	    messages: {	    	
 	    	'seguridad' : data['errores']['error.servicio.seguridad'],
@@ -107,7 +108,8 @@ $(document).ready(function() {
 	    		 regexVersion: data['errores']['error.servicio.version.format'],
 	    		 min:data['errores']['error.servicio.nombre.version.range'],
 	    		 max:data['errores']['error.servicio.version.range']},
-	    	 'intercambio': {min: data['errores']['error.servicio.intercambio']}	    	
+	    	 'intercambio': {min: data['errores']['error.servicio.intercambio']},
+	    	 'wsdl': data['errores']['error.regex.url']
 	    }
 	});
 		
