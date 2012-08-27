@@ -28,6 +28,8 @@ import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 
+import ve.gob.cnti.srsi.i18n.Messages;
+
 /**
  * Esta clase permite obtener los estados del tiempo leyendo el archivo XML
  * dispuesto por el INAMEH.
@@ -76,8 +78,8 @@ public class ReadXmlTime {
 		// TODO What the hell is going on here?
 		// String path = servletRequest.getSession().getServletContext()
 		// .getRealPath("/");
-		String path = "http://localhost:8080/SRSI/pages/res/tiempo.xml";
-		URL xml_doc = new URL(path);
+		URL xml_doc = new URL(new Messages().getProperties().getProperty(
+				"localhost.tiempo"));
 		URLConnection xmlConnection = xml_doc.openConnection();
 		xmlConnection.setConnectTimeout(mTimeout);
 		xmlConnection.setReadTimeout(mTimeout);
