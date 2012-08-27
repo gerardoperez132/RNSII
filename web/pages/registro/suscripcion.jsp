@@ -43,18 +43,20 @@
 Lista de servicios encontrados -->
 				<table class="results" style="width:800px;">
 					<tr>
-						<th colspan="4"><s:text name="listaServiciosEncontrados" />
+						<th colspan="3"><s:text name="listaServiciosEncontrados" />
 						</th>
 					</tr>
 					<tr>
 						<th><s:text name="argumentoConsultado" /></th>
-						<td colspan="3"><s:property value="cadena" /></td>
+						<td colspan="2"><s:property value="cadena" /></td>
 					</tr>
 					<tr>
 						<th><s:text name="nombre" /></th>
 						<th><s:text name="ente1" /></th>
 						<th><s:text name="fecha_creacion" /></th>
+						<!-- 
 						<th><s:text name="suscripcion" /></th>
+						 -->
 					</tr>
 					<s:if test="servicios.size()>0">
 						<s:iterator value="servicios">
@@ -73,18 +75,20 @@ Lista de servicios encontrados -->
 								<td align="center">
 									<s:date name="fecha_creado" format="d'/'MM'/'yyyy" />
 								</td>
+								<!-- 
 								<td align="center">
 									<form action="prepararSuscripcion">
 										<s:hidden name="id_servicio" value="%{id_servicio_informacion}" />
 										<input type="submit" value="<s:text name="solicitar"/>" />
 									</form>
 								</td>
+								 -->
 							</tr>
 						</s:iterator>
 					</s:if>
 					<s:else>
 						<tr>
-							<td colspan="4"><span class="ok_pass"><s:text
+							<td colspan="3"><span class="ok_pass"><s:text
 										name="sis_null2" /> </span></td>
 						</tr>
 					</s:else>
@@ -93,11 +97,13 @@ Lista de servicios encontrados -->
 			<s:elseif test="examinarServicio == true">
 <!--  02)
 Detalles de un servicio de información -->
+				<!--  
 				<form action="prepararSuscripcion">
 					<s:hidden name="id_servicio"
 						value="%{servicio.id_servicio_informacion}" />
 					<input type="submit" value="<s:text name="solicitud2"/>" />
 				</form>
+				-->
 				<hr>
 				<ul class="tabs">
 					<li><a href="#tab1"><s:text name="tab1.title"></s:text>
