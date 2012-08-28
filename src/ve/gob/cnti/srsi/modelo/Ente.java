@@ -50,6 +50,7 @@ public class Ente {
 	private int status;
 	private Date fecha_creado;
 	private Date fecha_modificado;
+	private long mod_user;
 
 	public Ente() {
 	}
@@ -134,12 +135,22 @@ public class Ente {
 		this.fecha_modificado = fecha_modificado;
 	}
 
+	public long getMod_user() {
+		return mod_user;
+	}
+
+	public void setMod_user(long mod_user) {
+		this.mod_user = mod_user;
+	}
+
 	@Override
 	public String toString() {
 		return "Ente [id=" + id + ", id_ente=" + id_ente + ", id_padre="
 				+ id_padre + ", nombre=" + nombre + ", siglas=" + siglas
 				+ ", rif=" + rif + ", direccion=" + direccion + ", status="
 				+ status + ", fecha_creado=" + fecha_creado
-				+ ", fecha_modificado=" + fecha_modificado + "]";
+				+ ", fecha_modificado=" + fecha_modificado + ", mod_user="
+				+ mod_user + "]";
 	}
+
 }

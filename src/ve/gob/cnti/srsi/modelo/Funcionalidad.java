@@ -52,6 +52,7 @@ public class Funcionalidad {
 	private int status;
 	private Date fecha_creado;
 	private Date fecha_modificado;
+	private long mod_user;
 
 	public Funcionalidad() {
 	}
@@ -128,6 +129,14 @@ public class Funcionalidad {
 		this.fecha_modificado = fecha_modificado;
 	}
 
+	public long getMod_user() {
+		return mod_user;
+	}
+
+	public void setMod_user(long mod_user) {
+		this.mod_user = mod_user;
+	}
+
 	@Override
 	public String toString() {
 		return "Funcionalidad [id=" + id + ", id_funcionalidad="
@@ -135,6 +144,8 @@ public class Funcionalidad {
 				+ id_servicio_informacion + ", id_usuario=" + id_usuario
 				+ ", nombre=" + nombre + ", descripcion=" + descripcion
 				+ ", status=" + status + ", fecha_creado=" + fecha_creado
-				+ ", fecha_modificado=" + fecha_modificado + "]";
+				+ ", fecha_modificado=" + fecha_modificado + ", mod_user="
+				+ mod_user + "]";
 	}
+
 }

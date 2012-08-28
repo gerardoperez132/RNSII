@@ -46,6 +46,7 @@ public class UnionAreaServicioInformacion {
 	private int status;
 	private Date fecha_creado;
 	private Date fecha_modificado;
+	private long mod_user;
 
 	public UnionAreaServicioInformacion() {
 	}
@@ -106,12 +107,22 @@ public class UnionAreaServicioInformacion {
 		this.fecha_modificado = fecha_modificado;
 	}
 
+	public long getMod_user() {
+		return mod_user;
+	}
+
+	public void setMod_user(long mod_user) {
+		this.mod_user = mod_user;
+	}
+
 	@Override
 	public String toString() {
 		return "UnionAreaServicioInformacion [id=" + id
 				+ ", id_servicio_informacion=" + id_servicio_informacion
 				+ ", id_usuario=" + id_usuario + ", id_area=" + id_area
 				+ ", status=" + status + ", fecha_creado=" + fecha_creado
-				+ ", fecha_modificado=" + fecha_modificado + "]";
+				+ ", fecha_modificado=" + fecha_modificado + ", mod_user="
+				+ mod_user + "]";
 	}
+
 }

@@ -45,6 +45,10 @@ public class SolicitudSuscripcion {
 	private String motivo_solicitante;
 	@Column(length = Constants.MOTIVE_LENGTH)
 	private String motivo_proveedor;
+	private long mod_user;
+
+	public SolicitudSuscripcion() {
+	}
 
 	public long getId() {
 		return id;
@@ -182,6 +186,14 @@ public class SolicitudSuscripcion {
 		this.motivo_proveedor = motivo_proveedor;
 	}
 
+	public long getMod_user() {
+		return mod_user;
+	}
+
+	public void setMod_user(long mod_user) {
+		this.mod_user = mod_user;
+	}
+
 	@Override
 	public String toString() {
 		return "SolicitudSuscripcion [id=" + id + ", id_solicitud_suscripcion="
@@ -195,6 +207,7 @@ public class SolicitudSuscripcion {
 				+ solicitante + ", cargo=" + cargo + ", telefono=" + telefono
 				+ ", correo=" + correo + ", motivo_solicitante="
 				+ motivo_solicitante + ", motivo_proveedor=" + motivo_proveedor
-				+ "]";
+				+ ", mod_user=" + mod_user + "]";
 	}
+
 }

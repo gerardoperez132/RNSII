@@ -63,6 +63,7 @@ public class ServicioInformacion {
 	private int status;
 	private Date fecha_creado;
 	private Date fecha_modificado;
+	private long mod_user;
 
 	public ServicioInformacion() {
 	}
@@ -71,128 +72,136 @@ public class ServicioInformacion {
 		return id;
 	}
 
-	public long getId_servicio_informacion() {
-		return id_servicio_informacion;
-	}
-
-	public long getId_ente() {
-		return id_ente;
-	}
-
-	public long getId_usuario() {
-		return id_usuario;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	public String getVersion() {
-		return version;
-	}
-
-	public String getResponsable() {
-		return responsable;
-	}
-
-	public boolean isPublicado() {
-		return publicado;
-	}
-
-	public long getId_sector() {
-		return id_sector;
-	}
-
-	public long getId_estado() {
-		return id_estado;
-	}
-
-	public long getId_seguridad() {
-		return id_seguridad;
-	}
-
-	public long getId_intercambio() {
-		return id_intercambio;
-	}
-
-	public int getStatus() {
-		return status;
-	}
-
-	public Date getFecha_creado() {
-		return fecha_creado;
-	}
-
-	public Date getFecha_modificado() {
-		return fecha_modificado;
-	}
-
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public long getId_servicio_informacion() {
+		return id_servicio_informacion;
 	}
 
 	public void setId_servicio_informacion(long id_servicio_informacion) {
 		this.id_servicio_informacion = id_servicio_informacion;
 	}
 
+	public long getId_ente() {
+		return id_ente;
+	}
+
 	public void setId_ente(long id_ente) {
 		this.id_ente = id_ente;
+	}
+
+	public long getId_usuario() {
+		return id_usuario;
 	}
 
 	public void setId_usuario(long id_usuario) {
 		this.id_usuario = id_usuario;
 	}
 
+	public String getNombre() {
+		return nombre;
+	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
 	}
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
 
+	public String getVersion() {
+		return version;
+	}
+
 	public void setVersion(String version) {
 		this.version = version;
+	}
+
+	public String getResponsable() {
+		return responsable;
 	}
 
 	public void setResponsable(String responsable) {
 		this.responsable = responsable;
 	}
 
+	public boolean isPublicado() {
+		return publicado;
+	}
+
 	public void setPublicado(boolean publicado) {
 		this.publicado = publicado;
+	}
+
+	public long getId_sector() {
+		return id_sector;
 	}
 
 	public void setId_sector(long id_sector) {
 		this.id_sector = id_sector;
 	}
 
+	public long getId_estado() {
+		return id_estado;
+	}
+
 	public void setId_estado(long id_estado) {
 		this.id_estado = id_estado;
+	}
+
+	public long getId_seguridad() {
+		return id_seguridad;
 	}
 
 	public void setId_seguridad(long id_seguridad) {
 		this.id_seguridad = id_seguridad;
 	}
 
+	public long getId_intercambio() {
+		return id_intercambio;
+	}
+
 	public void setId_intercambio(long id_intercambio) {
 		this.id_intercambio = id_intercambio;
+	}
+
+	public int getStatus() {
+		return status;
 	}
 
 	public void setStatus(int status) {
 		this.status = status;
 	}
 
+	public Date getFecha_creado() {
+		return fecha_creado;
+	}
+
 	public void setFecha_creado(Date fecha_creado) {
 		this.fecha_creado = fecha_creado;
 	}
 
+	public Date getFecha_modificado() {
+		return fecha_modificado;
+	}
+
 	public void setFecha_modificado(Date fecha_modificado) {
 		this.fecha_modificado = fecha_modificado;
+	}
+
+	public long getMod_user() {
+		return mod_user;
+	}
+
+	public void setMod_user(long mod_user) {
+		this.mod_user = mod_user;
 	}
 
 	@Override
@@ -205,6 +214,8 @@ public class ServicioInformacion {
 				+ ", id_sector=" + id_sector + ", id_estado=" + id_estado
 				+ ", id_seguridad=" + id_seguridad + ", id_intercambio="
 				+ id_intercambio + ", status=" + status + ", fecha_creado="
-				+ fecha_creado + ", fecha_modificado=" + fecha_modificado + "]";
+				+ fecha_creado + ", fecha_modificado=" + fecha_modificado
+				+ ", mod_user=" + mod_user + "]";
 	}
+
 }

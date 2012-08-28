@@ -45,6 +45,7 @@ public class RecuperarClave {
 	private int status;
 	private Date fecha_creado;
 	private Date fecha_modificado;
+	private long mod_user;
 
 	public RecuperarClave() {
 	}
@@ -105,12 +106,21 @@ public class RecuperarClave {
 		this.fecha_modificado = fecha_modificado;
 	}
 
+	public long getMod_user() {
+		return mod_user;
+	}
+
+	public void setMod_user(long mod_user) {
+		this.mod_user = mod_user;
+	}
+
 	@Override
 	public String toString() {
 		return "RecuperarClave [id=" + id + ", id_recuperar_clave="
 				+ id_recuperar_clave + ", id_usuario=" + id_usuario + ", url="
 				+ url + ", status=" + status + ", fecha_creado=" + fecha_creado
-				+ ", fecha_modificado=" + fecha_modificado + "]";
+				+ ", fecha_modificado=" + fecha_modificado + ", mod_user="
+				+ mod_user + "]";
 	}
 
 }

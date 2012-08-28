@@ -45,6 +45,7 @@ public class Estado {
 	private int status;
 	private Date fecha_creado;
 	private Date fecha_modificado;
+	private long mod_user;
 
 	public Estado() {
 	}
@@ -97,10 +98,20 @@ public class Estado {
 		this.fecha_modificado = fecha_modificado;
 	}
 
+	public long getMod_user() {
+		return mod_user;
+	}
+
+	public void setMod_user(long mod_user) {
+		this.mod_user = mod_user;
+	}
+
 	@Override
 	public String toString() {
 		return "Estado [id=" + id + ", id_estado=" + id_estado + ", nombre="
 				+ nombre + ", status=" + status + ", fecha_creado="
-				+ fecha_creado + ", fecha_modificado=" + fecha_modificado + "]";
+				+ fecha_creado + ", fecha_modificado=" + fecha_modificado
+				+ ", mod_user=" + mod_user + "]";
 	}
+
 }

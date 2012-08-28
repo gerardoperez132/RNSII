@@ -51,6 +51,7 @@ public class Usuario {
 	private int status;
 	private Date fecha_creado;
 	private Date fecha_modificado;
+	private long mod_user;
 
 	public Usuario() {
 	}
@@ -143,6 +144,14 @@ public class Usuario {
 		this.fecha_modificado = fecha_modificado;
 	}
 
+	public long getMod_user() {
+		return mod_user;
+	}
+
+	public void setMod_user(long mod_user) {
+		this.mod_user = mod_user;
+	}
+
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", id_usuario=" + id_usuario
@@ -150,6 +159,7 @@ public class Usuario {
 				+ ", nombre=" + nombre + ", apellido=" + apellido + ", cedula="
 				+ cedula + ", clave=" + clave + ", status=" + status
 				+ ", fecha_creado=" + fecha_creado + ", fecha_modificado="
-				+ fecha_modificado + "]";
+				+ fecha_modificado + ", mod_user=" + mod_user + "]";
 	}
+
 }

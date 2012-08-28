@@ -50,6 +50,7 @@ public class AspectoLegal {
 	private int status;
 	private Date fecha_creado;
 	private Date fecha_modificado;
+	private long mod_user;
 
 	public AspectoLegal() {
 	}
@@ -126,6 +127,14 @@ public class AspectoLegal {
 		this.fecha_modificado = fecha_modificado;
 	}
 
+	public long getMod_user() {
+		return mod_user;
+	}
+
+	public void setMod_user(long mod_user) {
+		this.mod_user = mod_user;
+	}
+
 	@Override
 	public String toString() {
 		return "AspectoLegal [id=" + id + ", id_aspecto_legal="
@@ -133,7 +142,7 @@ public class AspectoLegal {
 				+ id_servicio_informacion + ", id_usuario=" + id_usuario
 				+ ", nombre=" + nombre + ", url=" + url + ", status=" + status
 				+ ", fecha_creado=" + fecha_creado + ", fecha_modificado="
-				+ fecha_modificado + "]";
+				+ fecha_modificado + ", mod_user=" + mod_user + "]";
 	}
 
 }

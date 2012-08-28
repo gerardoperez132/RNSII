@@ -47,6 +47,7 @@ public class Formato {
 	private int status;
 	private Date fecha_creado;
 	private Date fecha_modificado;
+	private long mod_user;
 
 	public long getId() {
 		return id;
@@ -104,11 +105,21 @@ public class Formato {
 		this.fecha_modificado = fecha_modificado;
 	}
 
+	public long getMod_user() {
+		return mod_user;
+	}
+
+	public void setMod_user(long mod_user) {
+		this.mod_user = mod_user;
+	}
+
 	@Override
 	public String toString() {
 		return "Formato [id=" + id + ", id_formato=" + id_formato
 				+ ", id_tipo_dato=" + id_tipo_dato + ", formato=" + formato
 				+ ", status=" + status + ", fecha_creado=" + fecha_creado
-				+ ", fecha_modificado=" + fecha_modificado + "]";
+				+ ", fecha_modificado=" + fecha_modificado + ", mod_user="
+				+ mod_user + "]";
 	}
+
 }

@@ -46,6 +46,7 @@ public class Seguridad {
 	private int status;
 	private Date fecha_creado;
 	private Date fecha_modificado;
+	private long mod_user;
 
 	public Seguridad() {
 	}
@@ -98,11 +99,20 @@ public class Seguridad {
 		this.fecha_modificado = fecha_modificado;
 	}
 
+	public long getMod_user() {
+		return mod_user;
+	}
+
+	public void setMod_user(long mod_user) {
+		this.mod_user = mod_user;
+	}
+
 	@Override
 	public String toString() {
 		return "Seguridad [id=" + id + ", id_seguridad=" + id_seguridad
 				+ ", nombre=" + nombre + ", status=" + status
 				+ ", fecha_creado=" + fecha_creado + ", fecha_modificado="
-				+ fecha_modificado + "]";
+				+ fecha_modificado + ", mod_user=" + mod_user + "]";
 	}
+
 }

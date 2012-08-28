@@ -40,6 +40,7 @@ public class Visita {
 	private long id_servicio_informacion;
 	private String ip;
 	private Date fecha;
+	private long mod_user;
 
 	public Visita() {
 	}
@@ -76,10 +77,19 @@ public class Visita {
 		this.fecha = fecha;
 	}
 
+	public long getMod_user() {
+		return mod_user;
+	}
+
+	public void setMod_user(long mod_user) {
+		this.mod_user = mod_user;
+	}
+
 	@Override
 	public String toString() {
 		return "Visita [id_visita=" + id_visita + ", id_servicio_informacion="
 				+ id_servicio_informacion + ", ip=" + ip + ", fecha=" + fecha
-				+ "]";
+				+ ", mod_user=" + mod_user + "]";
 	}
+
 }

@@ -43,6 +43,7 @@ public class Url {
 	private int status;
 	private Date fecha_creado;
 	private Date fecha_modificado;
+	private long mod_user;
 
 	public Url() {
 	}
@@ -111,11 +112,20 @@ public class Url {
 		this.fecha_modificado = fecha_modificado;
 	}
 
+	public long getMod_user() {
+		return mod_user;
+	}
+
+	public void setMod_user(long mod_user) {
+		this.mod_user = mod_user;
+	}
+
 	@Override
 	public String toString() {
 		return "Url [id=" + id + ", id_url=" + id_url + ", id_ente=" + id_ente
 				+ ", id_servicio_informacion=" + id_servicio_informacion
 				+ ", url=" + url + ", status=" + status + ", fecha_creado="
-				+ fecha_creado + ", fecha_modificado=" + fecha_modificado + "]";
+				+ fecha_creado + ", fecha_modificado=" + fecha_modificado
+				+ ", mod_user=" + mod_user + "]";
 	}
 }

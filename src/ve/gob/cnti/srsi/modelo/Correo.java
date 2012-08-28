@@ -48,6 +48,7 @@ public class Correo {
 	private int status;
 	private Date fecha_creado;
 	private Date fecha_modificado;
+	private long mod_user;
 
 	public Correo() {
 	}
@@ -66,6 +67,30 @@ public class Correo {
 
 	public void setId_correo(long id_correo) {
 		this.id_correo = id_correo;
+	}
+
+	public long getId_ente() {
+		return id_ente;
+	}
+
+	public void setId_ente(long id_ente) {
+		this.id_ente = id_ente;
+	}
+
+	public long getId_usuario() {
+		return id_usuario;
+	}
+
+	public void setId_usuario(long id_usuario) {
+		this.id_usuario = id_usuario;
+	}
+
+	public long getId_servicio_informacion() {
+		return id_servicio_informacion;
+	}
+
+	public void setId_servicio_informacion(long id_servicio_informacion) {
+		this.id_servicio_informacion = id_servicio_informacion;
 	}
 
 	public String getCorreo() {
@@ -100,28 +125,12 @@ public class Correo {
 		this.fecha_modificado = fecha_modificado;
 	}
 
-	public long getId_ente() {
-		return id_ente;
+	public long getMod_user() {
+		return mod_user;
 	}
 
-	public void setId_ente(long id_ente) {
-		this.id_ente = id_ente;
-	}
-
-	public long getId_usuario() {
-		return id_usuario;
-	}
-
-	public void setId_usuario(long id_usuario) {
-		this.id_usuario = id_usuario;
-	}
-
-	public long getId_servicio_informacion() {
-		return id_servicio_informacion;
-	}
-
-	public void setId_servicio_informacion(long id_servicio_informacion) {
-		this.id_servicio_informacion = id_servicio_informacion;
+	public void setMod_user(long mod_user) {
+		this.mod_user = mod_user;
 	}
 
 	@Override
@@ -131,7 +140,7 @@ public class Correo {
 				+ ", id_servicio_informacion=" + id_servicio_informacion
 				+ ", correo=" + correo + ", status=" + status
 				+ ", fecha_creado=" + fecha_creado + ", fecha_modificado="
-				+ fecha_modificado + "]";
+				+ fecha_modificado + ", mod_user=" + mod_user + "]";
 	}
 
 }

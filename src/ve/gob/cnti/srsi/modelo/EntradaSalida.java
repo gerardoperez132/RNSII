@@ -59,6 +59,7 @@ public class EntradaSalida {
 	private int status;
 	private Date fecha_creado;
 	private Date fecha_modificado;
+	private long mod_user;
 
 	public EntradaSalida() {
 	}
@@ -175,6 +176,14 @@ public class EntradaSalida {
 		this.fecha_modificado = fecha_modificado;
 	}
 
+	public long getMod_user() {
+		return mod_user;
+	}
+
+	public void setMod_user(long mod_user) {
+		this.mod_user = mod_user;
+	}
+
 	@Override
 	public String toString() {
 		return "EntradaSalida [id=" + id + ", id_entrada_salida="
@@ -184,6 +193,8 @@ public class EntradaSalida {
 				+ nombre + ", descripcion=" + descripcion + ", id_formato="
 				+ id_formato + ", longitud=" + longitud + ", tipo=" + tipo
 				+ ", status=" + status + ", fecha_creado=" + fecha_creado
-				+ ", fecha_modificado=" + fecha_modificado + "]";
+				+ ", fecha_modificado=" + fecha_modificado + ", mod_user="
+				+ mod_user + "]";
 	}
+
 }

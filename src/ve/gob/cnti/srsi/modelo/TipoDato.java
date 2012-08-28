@@ -52,6 +52,10 @@ public class TipoDato {
 	private int status;
 	private Date fecha_creado;
 	private Date fecha_modificado;
+	private long mod_user;
+
+	public TipoDato() {
+	}
 
 	public long getId() {
 		return id;
@@ -93,6 +97,22 @@ public class TipoDato {
 		this.descripcion = descripcion;
 	}
 
+	public boolean isHasLength() {
+		return hasLength;
+	}
+
+	public void setHasLength(boolean hasLength) {
+		this.hasLength = hasLength;
+	}
+
+	public boolean isHasformatted() {
+		return hasformatted;
+	}
+
+	public void setHasformatted(boolean hasformatted) {
+		this.hasformatted = hasformatted;
+	}
+
 	public int getStatus() {
 		return status;
 	}
@@ -117,20 +137,12 @@ public class TipoDato {
 		this.fecha_modificado = fecha_modificado;
 	}
 
-	public boolean isHasLength() {
-		return hasLength;
+	public long getMod_user() {
+		return mod_user;
 	}
 
-	public void setHasLength(boolean hasLength) {
-		this.hasLength = hasLength;
-	}
-
-	public boolean isHasformatted() {
-		return hasformatted;
-	}
-
-	public void setHasformatted(boolean hasformatted) {
-		this.hasformatted = hasformatted;
+	public void setMod_user(long mod_user) {
+		this.mod_user = mod_user;
 	}
 
 	@Override
@@ -139,7 +151,8 @@ public class TipoDato {
 				+ ", tipo=" + tipo + ", nombre=" + nombre + ", descripcion="
 				+ descripcion + ", hasLength=" + hasLength + ", hasformatted="
 				+ hasformatted + ", status=" + status + ", fecha_creado="
-				+ fecha_creado + ", fecha_modificado=" + fecha_modificado + "]";
+				+ fecha_creado + ", fecha_modificado=" + fecha_modificado
+				+ ", mod_user=" + mod_user + "]";
 	}
 
 }
