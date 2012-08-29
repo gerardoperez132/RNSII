@@ -46,12 +46,14 @@ import ve.gob.cnti.srsi.modelo.TipoDato;
 import ve.gob.cnti.srsi.modelo.UnionAreaServicioInformacion;
 import ve.gob.cnti.srsi.modelo.UnionArquitecturaServicioInformacion;
 import ve.gob.cnti.srsi.modelo.Url;
+import ve.gob.cnti.srsi.modelo.Usuario;
 import ve.gob.cnti.srsi.modelo.Visita;
 import ve.gob.cnti.srsi.util.ListaServiciosVisitados;
 import ve.gob.cnti.srsi.util.SectoresMasPublicados;
 import ve.gob.cnti.srsi.util.SubscriptionRequest;
 import ve.gob.cnti.srsi.util.SubscriptionResponse;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
@@ -72,6 +74,12 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 	public static Errors error = new Errors();
 	private static Session session;
 	private static Transaction transaction;
+
+	private long blame() {
+		Usuario usuario = (Usuario) ActionContext.getContext().getSession()
+				.get("usuario");
+		return usuario != null ? usuario.getId_usuario() : 0;
+	}
 
 	/** Inicia la conexión a la base de datos. */
 	public void startConnection() {
@@ -105,8 +113,8 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 							+ getField(model) + " = " + id
 							+ ", fecha_creado = '" + date
 							+ "', fecha_modificado = '" + date + "', status = "
-							+ ACTIVO + " WHERE " + getField(model) + " = 0")
-					.executeUpdate();
+							+ ACTIVO + ", mod_user = " + blame() + " WHERE "
+							+ getField(model) + " = 0").executeUpdate();
 			transaction.commit();
 		} catch (HibernateException he) {
 			handleException(he);
@@ -125,8 +133,8 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 					"UPDATE " + model.getClass().getSimpleName()
 							+ " SET fecha_creado = '" + date
 							+ "', fecha_modificado = '" + date + "', status = "
-							+ ACTIVO + " WHERE fecha_creado IS NULL")
-					.executeUpdate();
+							+ ACTIVO + ", mod_user = " + blame()
+							+ " WHERE fecha_creado IS NULL").executeUpdate();
 			transaction.commit();
 		} catch (HibernateException he) {
 			handleException(he);
@@ -143,8 +151,9 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 					"UPDATE " + models[0].getClass().getSimpleName()
 							+ " SET status = " + ELIMINADO
 							+ ", fecha_modificado = '" + new Date()
-							+ "' WHERE " + getField(models[1]) + " = " + id
-							+ " AND " + getField(models[2]) + " = " + id_u
+							+ "', mod_user = " + blame() + " WHERE "
+							+ getField(models[1]) + " = " + id + " AND "
+							+ getField(models[2]) + " = " + id_u
 							+ " AND status = " + ACTIVO).executeUpdate();
 			transaction.commit();
 		} catch (HibernateException he) {
@@ -371,8 +380,9 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 					"UPDATE " + model.getClass().getSimpleName()
 							+ " SET status = " + MODIFICADO
 							+ ", fecha_modificado = '" + new Date()
-							+ "' WHERE " + getField(model) + " = " + id
-							+ " AND status = " + ACTIVO).executeUpdate();
+							+ "', mod_user = " + blame() + " WHERE "
+							+ getField(model) + " = " + id + " AND status = "
+							+ ACTIVO).executeUpdate();
 			session.save(model);
 			session.createSQLQuery(
 					"UPDATE "
@@ -388,9 +398,9 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 							+ id
 							+ ", fecha_creado = (SELECT fecha_creado FROM "
 							+ model.getClass().getAnnotation(Table.class)
-									.name().toLowerCase() + " WHERE "
-							+ getField(model) + " = " + id + " AND status = "
-							+ MODIFICADO
+									.name().toLowerCase() + ", mod_user = "
+							+ blame() + " WHERE " + getField(model) + " = "
+							+ id + " AND status = " + MODIFICADO
 							+ " ORDER BY fecha_modificado DESC LIMIT 1) WHERE "
 							+ getField(model) + " = 0").executeUpdate();
 			transaction.commit();
@@ -410,8 +420,11 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		try {
 			startConnection();
 			Class date[] = { Date.class };
+			Class user[] = { Long.class };
 			model.getClass().getMethod("setFecha_modificado", date)
 					.invoke(model, new Date());
+			model.getClass().getMethod("setMod_user", user)
+					.invoke(model, blame());
 			session.update(model);
 			transaction.commit();
 		} catch (HibernateException he) {
@@ -435,9 +448,9 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 					"UPDATE " + unionModel.getClass().getSimpleName()
 							+ " SET status = " + MODIFICADO
 							+ ", fecha_modificado = '" + new Date()
-							+ "' WHERE " + getField(modelParent) + " = "
-							+ idParent + " AND status = " + ACTIVO)
-					.executeUpdate();
+							+ "', mod_user = " + blame() + " WHERE "
+							+ getField(modelParent) + " = " + idParent
+							+ " AND status = " + ACTIVO).executeUpdate();
 			transaction.commit();
 			closeConnection();
 			for (Object child : children) {
@@ -461,8 +474,8 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 										.getMethod("getFecha_creado", null)
 										.invoke(parents.get(0), null)
 								+ "', fecha_modificado = '" + new Date()
-								+ "', status = " + ACTIVO
-								+ " WHERE fecha_creado IS NULL")
+								+ "', status = " + ACTIVO + ", mod_user = "
+								+ blame() + " WHERE fecha_creado IS NULL")
 						.executeUpdate();
 				transaction.commit();
 			}
@@ -482,8 +495,9 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 					"UPDATE " + model.getClass().getSimpleName()
 							+ " SET status = " + ELIMINADO
 							+ ", fecha_modificado = '" + new Date()
-							+ "' WHERE status = " + ACTIVO + " AND "
-							+ getField(model) + " = " + id).executeUpdate();
+							+ "', mod_user = " + blame() + " WHERE status = "
+							+ ACTIVO + " AND " + getField(model) + " = " + id)
+					.executeUpdate();
 			transaction.commit();
 		} catch (HibernateException he) {
 			handleException(he);
@@ -1081,6 +1095,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 	public void saveVisit(Visita visita) {
 		visita.setId_visita(getNextId(visita));
 		visita.setFecha(new Date());
+		visita.setMod_user(blame());
 		try {
 			startConnection();
 			session.save(visita);
