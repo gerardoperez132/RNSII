@@ -398,11 +398,16 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 							+ id
 							+ ", fecha_creado = (SELECT fecha_creado FROM "
 							+ model.getClass().getAnnotation(Table.class)
-									.name().toLowerCase() + ", mod_user = "
-							+ blame() + " WHERE " + getField(model) + " = "
-							+ id + " AND status = " + MODIFICADO
-							+ " ORDER BY fecha_modificado DESC LIMIT 1) WHERE "
-							+ getField(model) + " = 0").executeUpdate();
+									.name().toLowerCase()
+							+ " WHERE "
+							+ getField(model)
+							+ " = "
+							+ id
+							+ " AND status = "
+							+ MODIFICADO
+							+ " ORDER BY fecha_modificado DESC LIMIT 1), mod_user = "
+							+ blame() + " WHERE " + getField(model) + " = 0")
+					.executeUpdate();
 			transaction.commit();
 		} catch (HibernateException he) {
 			handleException(he);
@@ -420,7 +425,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		try {
 			startConnection();
 			Class date[] = { Date.class };
-			Class user[] = { Long.class };
+			Class user[] = { long.class };
 			model.getClass().getMethod("setFecha_modificado", date)
 					.invoke(model, new Date());
 			model.getClass().getMethod("setMod_user", user)
