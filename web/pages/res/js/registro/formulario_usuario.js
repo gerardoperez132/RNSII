@@ -183,7 +183,7 @@ $(document).ready(function() {
         	  onComplete:
         	    function(returnvalue) {
         	      if (returnvalue) {        	    	  
-        	    	  document.modificarClave.submit(); 
+        	    	  document.modificarDatos.submit(); 
         	      } else {
         	    	  Sexy.alert(data['mensajes']['accion_cancelada']);
         	      }

@@ -124,7 +124,7 @@
 				</tr>
 				<tr>
 					<td><s:text name="usuario.modificar.cedula"/></td>
-					<td><s:textfield name="usuario.cedula" id="cedula" /></td>
+					<td><s:textfield name="usuario.cedula" id="cedula" maxlength="9"/></td>
 					<td><h5 class="requerido">*</h5></td>
 					<td>
 						<span id="cedula_required"></span>
