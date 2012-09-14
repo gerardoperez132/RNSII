@@ -457,9 +457,6 @@
 									</s:iterator>
 								</ul>
 								<%@include file="pagination.jsp" %>
-								<div class="ver_sectores">
-									<a href="listarSectores" class="ver_sectores"><s:text name="ver_sectores"/></a>
-								</div>
 							</div>
 						</div>
 					</s:else>
