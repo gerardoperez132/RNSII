@@ -29,7 +29,7 @@
 				<li class="li-menu-content"><s:text name="sis_null3" /></li>
 			</s:else>
 			<li class="li-menu-content">
-				<a href="listarServicios"><s:text name="ver_servicios" /></a>
+				<a href="listarServicios" style="font-weight:bold;"><s:text name="ver_servicios" /></a>
 			</li>
 		</ul>
 		<ul class="ui-menu-content">
@@ -49,7 +49,7 @@
 				<li class="li-menu-content"><s:text name="sis_null3" /></li>
 			</s:else>
 			<li class="li-menu-content">
-				<a href="listarSectores"><s:text name="ver_sectores" /></a>
+				<a href="listarSectores" style="font-weight:bold;"><s:text name="ver_sectores" /></a>
 			</li>
 		</ul>
 	</div>
