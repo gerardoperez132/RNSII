@@ -870,23 +870,23 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		String order = orderBy > 0 ? "DESC" : "ASC";
 		try {
 			startConnection();
+			//TODO Arreglar la búsqueda
 			list = (ArrayList<ServicioInformacion>) session
-					.createQuery(
-							" FROM ServicioInformacion s WHERE s.status = "
+					.createSQLQuery(
+							"SELECT * FROM servicios_informacion s INNER JOIN entes e ON s.id_ente = e.id_ente WHERE s.status = "
 									+ ACTIVO
-									+ " AND "
-									+ " s.publicado = TRUE"
-									+ " AND "
-									+ " s.id_estado = 2 "
-									+ " AND "
-									+ " (UPPER(translate(s. nombre, 'áéíóúÁÉÍÓÚ', 'aeiouAEIOU')) "
-									+ " LIKE UPPER(translate('%"
+									+ " AND s.publicado = TRUE AND s.id_estado = "
+									+ IMPLEMENTADO
+									+ " AND (LOWER(REPLACE(s.nombre, 'áéíóúÁÉÍÓÚ', 'aeiouAEIOU')) LIKE LOWER(REPLACE('%"
 									+ cadena
-									+ "%', 'áéíóúÁÉÍÓÚ', 'aeiouAEIOU')) "
-									+ " or UPPER(translate(s. descripcion, 'áéíóúÁÉÍÓÚ', 'aeiouAEIOU')) "
-									+ " LIKE UPPER(translate('%" + cadena
-									+ "%', 'áéíóúÁÉÍÓÚ', 'aeiouAEIOU'))) "
-									+ " ORDER BY nombre " + order).list();
+									+ "%', 'áéíóúÁÉÍÓÚ', 'aeiouAEIOU')) OR LOWER(REPLACE(s.descripcion, 'áéíóúÁÉÍÓÚ', 'aeiouAEIOU')) LIKE LOWER(REPLACE('%"
+									+ cadena
+									+ "%', 'áéíóúÁÉÍÓÚ', 'aeiouAEIOU')) OR LOWER(REPLACE(e.siglas, 'áéíóúÁÉÍÓÚ', 'aeiouAEIOU')) LIKE LOWER(REPLACE('%"
+									+ cadena
+									+ "%', 'áéíóúÁÉÍÓÚ', 'aeiouAEIOU')) OR LOWER(REPLACE(e.nombre, 'áéíóúÁÉÍÓÚ', 'aeiouAEIOU')) LIKE LOWER(REPLACE('%"
+									+ cadena
+									+ "%', 'áéíóúÁÉÍÓÚ', 'aeiouAEIOU'))) ORDER BY s.nombre "
+									+ order).list();
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;
