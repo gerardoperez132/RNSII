@@ -9,7 +9,6 @@ a.tb_a {
 	border: 1px solid #e0e0e0;
 }
 
-
 th.tb_th {
 	font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
 	color: #4f6b72;
@@ -22,7 +21,6 @@ th.tb_th {
 	padding: 6px 6px 6px 12px;
 	background: #e0e0e0;
 }
-
 
 td.tb_td {
 	border-right: 1px solid #e0e0e0;
@@ -41,18 +39,18 @@ td.tb_alt {
 	border-bottom: 1px solid #e0e0e0;
 	background: #e0e0e0;
 	text-align: right;
-	width: 200px;	
+	width: 200px;
 }
 
-.txt_small{	
+.txt_small {
 	font-family: sans-serif;
 	font-size: 8pt;
 	font-style: italic;
-	font-weight: bold;	
+	font-weight: bold;
 }
 
 /*tabla de resultados*/
-.results{
+.results {
 	width: 100%;
 	padding: 0;
 	margin: 0;
@@ -60,7 +58,7 @@ td.tb_alt {
 	font-size: 13px;
 }
 
-.results th{
+.results th {
 	font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
 	color: #4f6b72;
 	border-right: 1px solid #e0e0e0;
@@ -74,59 +72,59 @@ td.tb_alt {
 	text-align: center;
 }
 
-.results td{
+.results td {
 	border-right: 1px solid #e0e0e0;
 	border-bottom: 1px solid #e0e0e0;
 	padding: 6px 6px 6px 12px;
 	color: #4f6b72;
 }
 
-.results tr{
+.results tr {
 	background: #F5FAFA;
 	color: #797268;
 }
 
-.results tr:HOVER{
-	background: #c5e1e8;	
+.results tr:HOVER {
+	background: #c5e1e8;
 }
 
-.results a{
+.results a {
 	text-decoration: none;
-	padding:0;
-	display:block;
+	padding: 0;
+	display: block;
 }
 
-.results a:HOVER {	
+.results a:HOVER {
 	text-decoration: underline;
 }
 
-
-.alt{
+.alt {
 	background: #e0e0e0;
 	text-align: right;
 	width: 200px;
 	font-size: small;
+	font-weight: bold;
 }
-.alt2{
+
+.alt2 {
 	background: #f5f5ee;
-	text-align: left;	
+	text-align: left;
 	font-size: small;
-	font-weight:bold;
-	color:blue;
+	color: blue;
 }
 
-.results_width_user{
-	width:790px;
+.results_width_user {
+	width: 790px;
 }
 
-.results_width_user_datos{
-	width:690px;
+.results_width_user_datos {
+	width: 690px;
 }
 
-.results_width_user_detalles{
-	width:730px;
+.results_width_user_detalles {
+	width: 730px;
 }
 
-.results_width_user_fx{
-	width:750px;
+.results_width_user_fx {
+	width: 750px;
 }
