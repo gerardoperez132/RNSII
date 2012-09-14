@@ -29,7 +29,7 @@
 						<div class="RutaNavegacion">
 							<a href="SRSI.action"><s:text name="catalogo" /></a>
 							<a href="SRSI.action"><s:text name="sectores" /></a>
-							<a href="SRSI.action"><s:property value="sector.nombre"/></a>
+							<a href="#"><s:property value="sector.nombre"/></a>
 						</div>
 					</s:if>
 					<s:else>
