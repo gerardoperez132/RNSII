@@ -410,7 +410,7 @@
 							<tr>
 								<th><s:text name="nombre" /></th>
 								<th><s:text name="ente1" /></th>
-								<th><s:text name="fecha_creado" /></th>
+								<th><s:text name="fecha_creacion" /></th>
 							</tr>
 							<s:if test="servicios.size()>0">
 								<s:iterator value="servicios">
