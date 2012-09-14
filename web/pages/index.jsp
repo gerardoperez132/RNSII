@@ -31,22 +31,17 @@
 							<a href="SRSI.action"><s:text name="sectores" /></a>
 							<a href="SRSI.action"><s:property value="sector.nombre"/></a>
 						</div>
-						<br>
-						<div class="Titulo">
-							<h1><s:text name="titulo2" /></h1>
-						</div>
-						<br>
 					</s:if>
 					<s:else>
 						<div class="RutaNavegacion">
 							<a href="SRSI.action"><s:text name="catalogo" /></a>
 						</div>
-						<br>
-						<div class="Titulo">
-							<h1><s:text name="titulo2" /></h1>
-						</div>
-						<br>
 					</s:else>
+					<br>
+					<div class="Titulo">
+						<h1><s:text name="titulo2" /></h1>
+					</div>
+					<br>
 					<s:if test="consulta_SIxSector">
 						<!-- Lista de servicios de información por sector -->
 						<table class="results">
