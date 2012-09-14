@@ -1603,7 +1603,7 @@ ul.newsticker li {
 	float: left;
 	font-size: 12px;
 	padding: 6px 0 5px 5px;
-	width: 685px;
+	width: 682px;
 }
 
 .RutaNavegacion a {
@@ -1627,7 +1627,7 @@ ul.newsticker li {
 	margin: 4px 0 10px 0;
 	background: url(../images/tileh1.png) repeat-x;
 	padding: 15px;
-	width: 662px;
+	width: 659px;
 }
 
 .main .Titulo h1 {
@@ -3348,7 +3348,7 @@ div.tab03 {
 	display: block;
 	float: left;
 	height: 72px;
-	width: 225px;
+	width: 224px;
 	vertical-align: middle;
 	margin: 3px;
 }
@@ -3378,7 +3378,7 @@ div.tab03 {
 }
 
 div.middleContent {
-	width: 690px;
+	width: 687px;
 	height: 270px;
 	border: 1px solid;
 	clear: left;
