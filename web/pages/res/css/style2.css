@@ -709,7 +709,7 @@ div.paginado li a:hover {
 	float: right;
 	margin: 0 0 -30000px 0px;
 	padding: 0 0 30000px 5px;
-	width: 180px;
+	width: 230px;
 }
 
 .sidebar_user_final {
@@ -1575,7 +1575,7 @@ ul.newsticker li {
 	font-family: sans-serif;
 	height: 19px;
 	margin: 1px 0pt 0pt;
-	width: 171px;
+	width: 125px;
 }
 
 .busqueda {
@@ -3137,7 +3137,7 @@ h3.h3-ui-menu-content {
 .inputBusqueda {
 	margin-top: 1px;
 	border: 1px solid #CECECE;
-	width: 171px;
+	width: 130px;
 	height: 19px;
 }
 
@@ -3195,7 +3195,7 @@ a.tooltip:hover span {
 
 .contenido {
 	float: left;
-	width: 800px;
+	width: 750px;
 	padding-left: 3px;
 }
 
@@ -3215,7 +3215,7 @@ a.tooltip:hover span {
 	font-family: sans-serif;
 	height: 20px;
 	margin: 1px 0pt 0pt;
-	width: 775px;
+	width: 734px;
 	margin-bottom: 10px;
 	padding-left: 10px;
 	padding-top: 2px;
@@ -3390,23 +3390,25 @@ div.middleContent {
 }
 
 .Titulo_width_user {
-	width: 760px;
+	width: 716px;
 }
 
 .busqueda_width_user {
-	width: 775px;
+	width: 212px;
+	margin-top: 4px;
 }
 
 /* Estilos para el menú de usuario */
 .m_a {
 	font-family: sans-serif;
+	margin-top: 2px;
 }
 
 .m_a ul {
 	list-style: none;
 	margin: 0;
 	padding: 0;
-	width: 180px;
+	width: 224px;
 }
 
 .m_a ul li {
