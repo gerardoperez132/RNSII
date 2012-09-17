@@ -41,7 +41,7 @@
 				<s:if test="buscarServicio==true">
 <!--	01) 
 Lista de servicios encontrados -->
-				<table class="results" style="width:800px;">
+				<table class="results">
 					<tr>
 						<th colspan="3"><s:text name="listaServiciosEncontrados" />
 						</th>

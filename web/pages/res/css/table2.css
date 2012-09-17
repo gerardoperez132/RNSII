@@ -54,8 +54,7 @@ td.tb_alt {
 	width: 100%;
 	padding: 0;
 	margin: 0;
-	border: 1px solid #e0e0e0;
-	font-size: 13px;
+	border: 1px solid #e0e0e0;	
 }
 
 .results th {
@@ -114,17 +113,17 @@ td.tb_alt {
 }
 
 .results_width_user {
-	width: 790px;
+	width: 745px;
 }
 
 .results_width_user_datos {
-	width: 690px;
+	width: 640px;
 }
 
 .results_width_user_detalles {
-	width: 730px;
+	width: 680px;
 }
 
 .results_width_user_fx {
-	width: 750px;
+	width: 695px;
 }

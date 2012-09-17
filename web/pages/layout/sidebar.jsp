@@ -1,5 +1,13 @@
 <%@taglib uri="/struts-tags" prefix="s"%>
 <div class="sidebar">	
+	<div class="busqueda_width_user busqueda">
+		<form method="post" action="Buscar_Servicio">
+			<label><s:text name="buscarServicio"/></label>
+			<s:textfield name="cadena" id="buscar" cssClass="inputBusqueda buscar"/>
+			<input type="submit" class="submit" value="&nbsp;"/>
+		</form>
+	</div>
+	<br>
 	<div class="m_a">
     <ul>
         <li class="m_a_fondo">
@@ -32,13 +40,4 @@
         </li>
     </ul>       
     </div>
-    <!-- 
-							
-			<ahref="<s:url action="prepararSolicitarSuscripcion"/>"><s:text name="solicitud3" /></a>			
-			<a style="padding-left: 25px;" href="<s:url action="ListarSuscricionesPendientes"/>"><s:text name="peticiones_otros_entes" /></a>				
-			</li>			
-			<li class="li-menu-content">				
-				<a style="padding-left: 25px;" href="<s:url action="listarSolicitudesAceptadasRechazadas"/>"><s:text name="solicitudeRealizadas" /></a>				
-			</li>
-			 -->
 </div>

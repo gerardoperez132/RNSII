@@ -61,7 +61,7 @@
 					</li>										
 				</ul>
 		
-				<div class="tab_container" style="height: 450px;">					
+				<div class="tab_container_height  tab_container">					
 					<div class="tab_content">
 					<h3 class="formulario">
 						<s:text name="funcionalidad.registro" />
@@ -98,7 +98,7 @@
 						</form>
 					</li>
 				</ul>
-				<div class="tab_container_height tab_container">
+				<div class="tab_container">
 					<div id="tab2" class="tab_content">
 						<h5 class="formulario">
 							<s:text name="salida.salidas.title">

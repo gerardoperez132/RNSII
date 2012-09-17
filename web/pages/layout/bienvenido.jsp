@@ -2,14 +2,6 @@
 <div class="Titulo_width_user Titulo">
 	<h1><s:text name="titulo2" /></h1>
 </div>
- 			
-<div class="busqueda_width_user busqueda">
-	<form method="post" action="Buscar_Servicio">
-		<label><s:text name="buscarServicio"/></label>
-		<s:textfield name="cadena" id="buscar" cssClass="inputBusqueda buscar" style="width:640px;"/>
-		<input type="submit" class="submit" value="&nbsp;"/>
-	</form>
-</div>
 
 <table class="main_user">	
 <tr>
