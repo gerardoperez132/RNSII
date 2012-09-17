@@ -17,6 +17,9 @@ package ve.gob.cnti.srsi.dao;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -866,14 +869,15 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 	@Override
 	public ArrayList<ServicioInformacion> buscarServicio(String cadena,
 			byte orderBy) {
-		ArrayList<ServicioInformacion> list;
+		ArrayList<ServicioInformacion> list = new ArrayList<ServicioInformacion>();
 		String order = orderBy > 0 ? "DESC" : "ASC";
 		try {
 			startConnection();
-			//TODO Arreglar la búsqueda
-			list = (ArrayList<ServicioInformacion>) session
+			// TODO Arreglar la búsqueda
+			List result = session
 					.createSQLQuery(
-							"SELECT * FROM servicios_informacion s INNER JOIN entes e ON s.id_ente = e.id_ente WHERE s.status = "
+							"SELECT s.id, s.nombre, s.descripcion, s.id_servicio_informacion, s.id_ente, s.id_estado, s.id_intercambio, s.id_sector, s.id_seguridad, s.id_usuario, s.publicado, s.responsable, s.version, s.fecha_creado, s.fecha_modificado, s.mod_user, s.status"
+									+ " FROM servicios_informacion s INNER JOIN entes e ON s.id_ente = e.id_ente WHERE s.status = "
 									+ ACTIVO
 									+ " AND s.publicado = TRUE AND s.id_estado = "
 									+ IMPLEMENTADO
@@ -887,6 +891,31 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 									+ cadena
 									+ "%', 'áéíóúÁÉÍÓÚ', 'aeiouAEIOU'))) ORDER BY s.nombre "
 									+ order).list();
+			Iterator iterator = result.iterator();
+			while (iterator.hasNext()) {
+				Object[] set = (Object[]) iterator.next();
+				ServicioInformacion si = new ServicioInformacion();
+				si.setId(Long.parseLong(set[0].toString()));
+				si.setNombre((String) set[1]);
+				si.setDescripcion((String) set[2]);
+				si.setId_servicio_informacion(Long.parseLong(set[3].toString()));
+				si.setId_ente(Long.parseLong(set[4].toString()));
+				si.setId_estado(Long.parseLong(set[5].toString()));
+				si.setId_intercambio(Long.parseLong(set[6].toString()));
+				si.setId_sector(Long.parseLong(set[7].toString()));
+				si.setId_seguridad(Long.parseLong(set[8].toString()));
+				si.setId_usuario(Long.parseLong(set[9].toString()));
+				si.setPublicado(Boolean.parseBoolean(set[10].toString()));
+				si.setResponsable((String) set[11]);
+				si.setVersion((String) set[12]);
+				si.setFecha_creado(parseDate(set[13].toString()));
+				si.setFecha_modificado(parseDate(set[14].toString()));
+				// si.setFecha_creado(new Date());
+				// si.setFecha_modificado(new Date());
+				si.setMod_user(Integer.parseInt(set[15].toString()));
+				si.setStatus(Integer.parseInt(set[16].toString()));
+				list.add(si);
+			}
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;
@@ -894,6 +923,19 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 			closeConnection();
 		}
 		return list;
+	}
+
+	private Date parseDate(String dateString) {
+		Date date = new Date();
+		DateFormat formatter;
+		formatter = new SimpleDateFormat("yyyy-dd-MM HH:mm:ss");
+		try {
+			date = (Date) formatter.parse(dateString);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return date;
 	}
 
 	@SuppressWarnings("unchecked")
