@@ -28,10 +28,36 @@
 					<s:if test="consulta_SIxSector">
 						<div class="RutaNavegacion">
 							<a href="SRSI.action"><s:text name="catalogo" /></a>
-							<a href="SRSI.action"><s:text name="sectores" /></a>
+							<a href="listarSectores"><s:text name="sectores" /></a>
 							<a href="#"><s:property value="sector.nombre"/></a>
 						</div>
 					</s:if>
+					<s:elseif test="consulta_listarSectores">
+						<div class="RutaNavegacion">
+							<a href="SRSI.action"><s:text name="catalogo" /></a>
+							<a href="listarSectores"><s:text name="sectores" /></a>
+						</div>
+					</s:elseif>
+					<s:elseif test="consulta_listarServicios">
+						<div class="RutaNavegacion">
+							<a href="SRSI.action"><s:text name="catalogo" /></a>
+							<a href="#"><s:text name="listaServicios" /></a>
+						</div>
+					</s:elseif>
+					<s:elseif test="buscarServicio">
+						<div class="RutaNavegacion">
+							<a href="SRSI.action"><s:text name="catalogo" /></a>
+							<a href="#"><s:text name="listaServiciosEncontrados" /></a>
+						</div>
+					</s:elseif>
+					<s:elseif test="examinarServicio">
+						<div class="RutaNavegacion">
+							<a href="SRSI.action"><s:text name="catalogo" /></a>
+							<a href="listarSectores"><s:text name="sectores" /></a>
+							<a href="listarSector?id_sector=<s:property value='servicio.id_sector'/>"><s:property value="sector.nombre"/></a>
+							<a href="#"><s:property value="servicio.nombre"/></a>
+						</div>
+					</s:elseif>
 					<s:else>
 						<div class="RutaNavegacion">
 							<a href="SRSI.action"><s:text name="catalogo" /></a>

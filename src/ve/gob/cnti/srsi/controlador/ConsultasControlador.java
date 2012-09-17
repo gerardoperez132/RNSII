@@ -247,6 +247,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 		listaSectores = listadoSectores(LIMITE_SECTORES, false);
 		examinarServicio = true;
 		servicio = (ServicioInformacion) read(servicio, id_servicio);
+		sector = (Sector) read(new Sector(), servicio.getId_sector());
 		if (!servicio.isPublicado())
 			return INPUT;
 		if (!isComplete(servicio))
