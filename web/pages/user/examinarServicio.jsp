@@ -103,23 +103,6 @@
 								<td class="alt2"><s:property value="nVisitas" /></td>
 							</tr>
 						</table>
-						<hr>
-						<table>
-							<tr>
-								<td>
-									<form action="prepararModificarServicioInformacion" method="POST">
-										<s:hidden name="id_servicio_informacion" value="%{servicio.id_servicio_informacion}"/>
-										<input type="submit" value="<s:text name="modificar"/>" />
-									</form>
-								</td>
-								<td>
-									<form action="prepararFuncionalidad" method="POST">
-										<s:hidden name="id_servicio_informacion"/>
-										<input type="submit" value="<s:text name="funcionalidad.add"/>" />
-									</form>
-								</td>
-							</tr>
-						</table>
 					</div>
 					<!-- Descripción Legal -->
 					<div id="tab2" class="tab_content">
