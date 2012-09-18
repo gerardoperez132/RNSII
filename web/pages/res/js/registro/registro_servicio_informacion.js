@@ -128,7 +128,7 @@ $(document).ready(function() {
 	    messages: {	    	
 	    	'servicio.responsable' : {
 	    		required:data['errores']['error.servicio.responsable'],
-	    		regexTitle:data['errores']['error.servicio.title']},
+	    		regexTitle:data['errores']['error.regex.title']},
 	    	 'telefono': {
 	    		required:data['errores']['error.servicio.telefono'],
 	    		digits:data['errores']['error.servicio.telefono.regex']},	    	 
