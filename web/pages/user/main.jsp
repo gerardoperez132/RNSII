@@ -137,7 +137,7 @@
 													<form action="publicarServicioInformacion" method="POST" 
 													    id="id_pub_<s:property value="#result_datos.index"/>" onsubmit="return false;" >
 														<s:hidden name="id_servicio_informacion" value="%{servicio.id_servicio_informacion}"></s:hidden>													
-														<input type="submit" style="font-size: 0.9 em;" value="<s:text name="publicar"/>"
+														<input type="submit" style="font-size: 0.9em;" value="<s:text name="publicar"/>"
 															     onclick="publicar_SI(<s:property value="#i"/>,'<s:property value="servicio.nombre" />');"/>
 													</form>
 												</s:if>
