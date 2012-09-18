@@ -189,6 +189,7 @@
 							<s:hidden name="tab" value="1" />
 							<s:hidden name="id_servicio_informacion" />
 							<s:hidden name="modificar"></s:hidden>
+							<br>
 							<input type="submit" value='<s:property value="#submit"/>' />
 						</form>
 					</div>
@@ -233,6 +234,7 @@
 								<s:hidden name="id_servicio_informacion" />
 							</s:else>
 							<s:hidden name="modificar"></s:hidden>
+							<br>
 							<input type="submit" value='<s:property value="#submit"/>' />
 						</form>
 						<br>
@@ -361,6 +363,7 @@
 							<s:hidden name="tab" value="3" />
 							<s:hidden name="id_servicio_informacion" />
 							<s:hidden name="modificar"/>
+							<br>
 							<input type="submit" value='<s:property value="#submit"/>' />
 						</form>
 					</div>
@@ -409,6 +412,7 @@
 							<s:hidden name="tab" value="4" />
 							<s:hidden name="id_servicio_informacion" />
 							<s:hidden name="modificar"></s:hidden>
+							<br>
 							<input type="submit" value='<s:property value="#submit"/>' />
 						</form>
 					</div>
