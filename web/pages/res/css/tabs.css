@@ -11,6 +11,27 @@
 	overflow-y: auto;
 }
 
+.tab_description {
+	border: 1px solid #999;
+	border-top: none;		
+	clear: both;
+	float: left;
+	width: 98%;
+	background: #fff;	
+}
+
+.tab_description_left {
+	float: left;
+	width: 78%;	
+	padding-bottom: 10px;
+	padding-left: 10px;
+}
+
+.tab_description_right {	
+	float: right;
+	width: 20%;		
+}
+
 .tab_content {
 	padding: 20px;
 	font-size: 1.2em;
@@ -134,4 +155,9 @@ ul#pagination-flickr {
 
 .tab_container_height {
 	height: 450px;
+}
+
+.tab_submit{
+	margin-top: 11%;
+	margin-left: 21%;
 }

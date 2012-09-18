@@ -3234,7 +3234,7 @@ a.tooltip:hover span {
 .formulario {
 	margin-top: 15px;
 	margin-bottom: 3px;
-	margin-left: 5px;
+	margin-left: 10px;
 }
 
 /*mensaje de fortaleza de contraseña*/
@@ -3473,4 +3473,9 @@ div.middleContent {
 
 .m_a ul li ul {
 	display: none;
+}
+
+.form_small{
+	font-size: 11px;
+	padding-left: 10px;
 }

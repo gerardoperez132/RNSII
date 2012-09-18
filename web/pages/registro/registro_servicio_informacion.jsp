@@ -74,7 +74,7 @@
 		<ul class="tabs">
 			<s:if test="%{tab==1}">
 				<li class="active">
-					<a href="#tab1"><s:text	name="tab1.title"></s:text></a>
+					<a><s:text	name="tab1.title"></s:text></a>
 				</li>
 			</s:if>
 			<s:else>
@@ -87,7 +87,7 @@
 			</s:else>
 			<s:if test="%{tab==2}">
 				<li class="active">
-					<a href="#tab2"><s:text	name="tab2.title"></s:text> </a>
+					<a><s:text	name="tab2.title"></s:text> </a>
 				</li>
 			</s:if>
 			<s:else>
@@ -100,7 +100,7 @@
 			</s:else>
 			<s:if test="%{tab==3}">
 				<li class="active">
-					<a href="#tab3"><s:text	name="tab3.title"></s:text> </a>
+					<a><s:text	name="tab3.title"></s:text> </a>
 				</li>
 			</s:if>
 			<s:else>
@@ -113,7 +113,7 @@
 			</s:else>
 			<s:if test="%{tab==4}">
 				<li class="active">
-					<a href="#tab4"><s:text name="tab4.title"></s:text> </a>
+					<a><s:text name="tab4.title"></s:text> </a>
 				</li>
 			</s:if>
 			<s:else>
@@ -134,16 +134,22 @@
 					<s:a href="prepararFuncionalidades"><s:text name="funcionalidades"></s:text></s:a>
 				</li>
 			</s:else>						
-		</ul>
-			<div class="tab_container_height tab_container">
-				<s:if test="%{tab==1}">
-					<div id="tab1" class="tab_content">
-						<form action="<s:property value="#action"/>" id="formSI" name="formSI" method="post" enctype="multipart/form-data">
-							<h3 class="formulario">
-								<s:text name="tab1.subtitle" />
-							</h3>
-							<small><s:text name="tab1.description"></s:text> </small>
-							<hr>
+		</ul>			
+			<s:if test="%{tab==1}">
+				<form action="<s:property value="#action"/>" id="formSI" name="formSI" method="post" enctype="multipart/form-data">
+				<div class="tab_description">
+					<div class="tab_description_left">
+					<h3 class="formulario">
+						<s:text name="tab1.subtitle" />
+					</h3>
+					<small class="form_small"><s:text name="tab1.description"></s:text> </small>
+					</div>
+					<div class="tab_description_right">
+					<input type="submit" class="tab_submit" value='<s:property value="#submit"/>' />
+					</div>					
+				</div>
+				<div class="tab_container_height tab_container">
+					<div id="tab1" class="tab_content">	
 							<h5 class="formulario">
 								<label for="sector">
 								<s:text name="sector.title" />
@@ -188,23 +194,31 @@
 							<s:token name="token" />
 							<s:hidden name="tab" value="1" />
 							<s:hidden name="id_servicio_informacion" />
-							<s:hidden name="modificar"></s:hidden>
-							<input type="submit" value='<s:property value="#submit"/>' />
-						</form>
+							<s:hidden name="modificar"></s:hidden>													
 					</div>
+					</div>
+					</form>
 				</s:if>						
 				<s:if test="%{tab==2}">
 				<!-- START TAB 2 -->
+				
+				<div class="tab_description">
+					<div class="tab_description_left">
+					<h3 class="formulario">
+						<s:text name="tab2.subtitle" />
+					</h3>
+					<small class="form_small"><s:text name="tab2.description"></s:text> </small>
+					</div>
+					<div class="tab_description_right">
+					<form action="prepararDescripcionTecnica">
+						<input type="submit" class="tab_submit" value='<s:property value="#submit"/>' />
+					</form>					
+					</div>					
+				</div>
+				<div class="tab_container_height tab_container">
 					<div id="tab2" class="tab_content">
 						<form action="<s:property value="#action"/>" method="post"
-							enctype="multipart/form-data" id="formSI_Tab2" name="formSI_Tab2">
-							<h3 class="formulario">
-								<s:text name="tab2.subtitle" />
-							</h3>
-							<small><s:text name="tab2.description">
-									<s:param>2</s:param>
-								</s:text> </small>
-							<hr>
+							enctype="multipart/form-data" id="formSI_Tab2" name="formSI_Tab2">							
 							<h5 class="formulario">
 								<s:text name="documento.name" />
 							</h5>
@@ -233,7 +247,7 @@
 								<s:hidden name="id_servicio_informacion" />
 							</s:else>
 							<s:hidden name="modificar"></s:hidden>
-							<input type="submit" value='<s:property value="#submit"/>' />
+							<input type="submit" value="<s:text name="upload"/>" />
 						</form>
 						<br>
 						<s:if test="files.size() > 0">
@@ -281,18 +295,26 @@
 							</s:bean>
 						</s:if>
 					</div>
+					</div>
 				<!-- END TAB 2 -->
 				</s:if>
 				<s:if test="%{tab==3}">
 				<!-- START TAB 3 -->
-					<div id="tab3" class="tab_content">
-						<form action="<s:property value="#action"/>" method="post"
+				<form action="<s:property value="#action"/>" method="post"
 							enctype="multipart/form-data" id="formSI_Tab3" name="formSI_Tab3">
-							<h3 class="formulario">
-								<s:text name="tab3.subtitle" />
-							</h3>
-							<small><s:text name="tab3.description"></s:text> </small>
-							<hr>
+				<div class="tab_description">
+					<div class="tab_description_left">
+					<h3 class="formulario">
+						<s:text name="tab3.subtitle" />
+					</h3>
+					<small class="form_small"><s:text name="tab3.description"></s:text> </small>
+					</div>
+					<div class="tab_description_right">
+					<input type="submit" class="tab_submit" value='<s:property value="#submit"/>' />
+					</div>					
+				</div>	
+				<div class="tab_container_height tab_container">			
+					<div id="tab3" class="tab_content">
 							<h5 class="formulario">
 								<s:text name="seguridad.title"></s:text>
 							</h5>
@@ -361,21 +383,28 @@
 							<s:hidden name="tab" value="3" />
 							<s:hidden name="id_servicio_informacion" />
 							<s:hidden name="modificar"/>
-							<input type="submit" value='<s:property value="#submit"/>' />
-						</form>
 					</div>
+					</div>
+					</form>
 				<!-- END TAB 3 -->
 				</s:if>						
 				<s:if test="%{tab==4}">
+				<form action="<s:property value="#action"/>" method="post"
+							enctype="multipart/form-data" id="formSI_Tab4" name="formSI_Tab4">
+				<div class="tab_description">
+					<div class="tab_description_left">
+					<h3 class="formulario">
+						<s:text name="tab4.subtitle" />
+					</h3>
+					<small class="form_small"><s:text name="tab4.description"></s:text> </small>
+					</div>
+					<div class="tab_description_right">
+					<input type="submit" class="tab_submit" value='<s:property value="#submit"/>' />
+					</div>					
+				</div>	
+				<div class="tab_container_height tab_container">	
 				<!-- START TAB 4 -->
 					<div id="tab4" class="tab_content">
-						<form action="<s:property value="#action"/>" method="post"
-							enctype="multipart/form-data" id="formSI_Tab4" name="formSI_Tab4">
-							<h3 class="formulario">
-								<s:text name="tab4.subtitle" />
-							</h3>
-							<small><s:text name="tab4.description"></s:text> </small>
-							<hr>
 							<h5 class="formulario">
 								<s:text name="responsable.title"></s:text>
 							</h5>
@@ -408,16 +437,13 @@
 							<s:token name="token" />
 							<s:hidden name="tab" value="4" />
 							<s:hidden name="id_servicio_informacion" />
-							<s:hidden name="modificar"></s:hidden>
-							<input type="submit" value='<s:property value="#submit"/>' />
-						</form>
-					</div>
+							<s:hidden name="modificar"></s:hidden>													
+					</div></div>
+					</form>
 				</s:if>
 				<!-- END TAB 4 -->
 			</div>
 			</div>
-			
-		</div>
 		<div style="clear: both"></div>
 	<div class="vacio"></div>
 	<%@include file="../layout/footer.jsp"%>
