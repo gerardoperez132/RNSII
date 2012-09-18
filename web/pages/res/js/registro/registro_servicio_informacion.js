@@ -81,7 +81,7 @@ $(document).ready(function() {
 	    	'file': {required: true, accept: "pdf"}	    	
 	    },
 	    messages: {	    	
-	    	'name': {required:data['errores']['error.servicio.file.name'],regexTitle:data['errores']['error.servicio.title']},
+	    	'name': {required:data['errores']['error.servicio.file.name'],regexTitle:data['errores']['error.regex.title']},
 	    	'file': {reqired:data['errores']['error.servicio.file'],accept:data['errores']['error.servicio.format']}	    	
 	    }
 	});
