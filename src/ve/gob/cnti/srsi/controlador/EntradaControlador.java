@@ -126,7 +126,7 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 		complejo = true;
 		return SUCCESS;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararModificarEntrada() {
@@ -316,7 +316,8 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 						"error.length"));
 			}
 		}
-		if (read(ESF, id_funcionalidad, entrada.getNombre())) {
+		if (entradaSalidaDuplicada(id_funcionalidad, id_entrada_salida,
+				ENTRADA, entrada.getNombre())) {
 			addFieldError(
 					"entrada.nombre",
 					error.getProperties().getProperty(

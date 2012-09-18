@@ -35,6 +35,7 @@ import org.hibernate.Transaction;
 import ve.gob.cnti.srsi.dao.Constants.ClaseDato;
 import ve.gob.cnti.srsi.dao.Constants.ErrorServicio;
 import ve.gob.cnti.srsi.dao.Constants.Estados;
+import ve.gob.cnti.srsi.dao.Constants.Modelos;
 import ve.gob.cnti.srsi.dao.Constants.Sentencias;
 import ve.gob.cnti.srsi.dao.Constants.Status;
 import ve.gob.cnti.srsi.dao.Constants.TipoEntradaSalida;
@@ -72,7 +73,8 @@ import com.opensymphony.xwork2.ActionSupport;
  */
 @SuppressWarnings("serial")
 public class DAO extends ActionSupport implements Constants, CRUD, Status,
-		ClaseDato, TipoEntradaSalida, Sentencias, ErrorServicio, Estados {
+		ClaseDato, TipoEntradaSalida, Sentencias, ErrorServicio, Estados,
+		Modelos {
 
 	public static Errors error = new Errors();
 	private static Session session;
@@ -263,6 +265,30 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		} finally {
 			closeConnection();
 		}
+		return result;
+	}
+
+	@Override
+	public boolean entradaSalidaDuplicada(long idParent, long idChild,
+			int type, String name) {
+		boolean result = false;
+		Object[] models = ESF;
+		try {
+			startConnection();
+			if (session.createQuery(
+					"FROM " + models[0].getClass().getSimpleName() + " WHERE "
+							+ getField(models[1]) + " = " + idParent + " AND "
+							+ getField(models[0]) + " != " + idChild
+							+ " AND nombre = '" + name + "' AND status = "
+							+ ACTIVO).uniqueResult() != null)
+				result = true;
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+		System.out.println("RESULT => " + result);
 		return result;
 	}
 
