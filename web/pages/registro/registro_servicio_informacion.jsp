@@ -70,11 +70,10 @@
 				</span></td>
 			<td></tr></table>				
 		</div>
-				
 		<ul class="tabs">
 			<s:if test="%{tab==1}">
 				<li class="active">
-					<a href="#tab1"><s:text	name="tab1.title"></s:text></a>
+					<a><s:text	name="tab1.title"></s:text></a>
 				</li>
 			</s:if>
 			<s:else>
@@ -87,7 +86,7 @@
 			</s:else>
 			<s:if test="%{tab==2}">
 				<li class="active">
-					<a href="#tab2"><s:text	name="tab2.title"></s:text> </a>
+					<a><s:text name="tab2.title"></s:text></a>
 				</li>
 			</s:if>
 			<s:else>
@@ -100,7 +99,7 @@
 			</s:else>
 			<s:if test="%{tab==3}">
 				<li class="active">
-					<a href="#tab3"><s:text	name="tab3.title"></s:text> </a>
+					<a><s:text	name="tab3.title"></s:text> </a>
 				</li>
 			</s:if>
 			<s:else>
@@ -113,7 +112,7 @@
 			</s:else>
 			<s:if test="%{tab==4}">
 				<li class="active">
-					<a href="#tab4"><s:text name="tab4.title"></s:text> </a>
+					<a><s:text name="tab4.title"></s:text> </a>
 				</li>
 			</s:if>
 			<s:else>
@@ -135,10 +134,11 @@
 				</li>
 			</s:else>						
 		</ul>
-			<div class="tab_container_height tab_container">
 				<s:if test="%{tab==1}">
+				<form action="<s:property value="#action"/>" id="formSI" name="formSI" method="post" enctype="multipart/form-data">
+				<div class="tab-description"></div>
+				<div class="tab_container_height tab_container">
 					<div id="tab1" class="tab_content">
-						<form action="<s:property value="#action"/>" id="formSI" name="formSI" method="post" enctype="multipart/form-data">
 							<h3 class="formulario">
 								<s:text name="tab1.subtitle" />
 							</h3>
@@ -191,11 +191,13 @@
 							<s:hidden name="modificar"></s:hidden>
 							<br>
 							<input type="submit" value='<s:property value="#submit"/>' />
-						</form>
 					</div>
+					</div>
+					</form>
 				</s:if>						
 				<s:if test="%{tab==2}">
 				<!-- START TAB 2 -->
+				<div class="tab-description"></div>
 					<div id="tab2" class="tab_content">
 						<form action="<s:property value="#action"/>" method="post"
 							enctype="multipart/form-data" id="formSI_Tab2" name="formSI_Tab2">
@@ -420,8 +422,6 @@
 				<!-- END TAB 4 -->
 			</div>
 			</div>
-			
-		</div>
 		<div style="clear: both"></div>
 	<div class="vacio"></div>
 	<%@include file="../layout/footer.jsp"%>
