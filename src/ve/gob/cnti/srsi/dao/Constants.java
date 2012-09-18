@@ -93,7 +93,7 @@ public interface Constants {
 	/**
 	 * La expresión regular para las direcciones URL.
 	 */
-	public static final String REGEX_URL = "((https?|ftp|gopher|telnet|file|notes|ms-help):((//)|(\\\\\\\\))+[\\w\\d:#@%/;$()~_?\\+-=\\\\\\.&]*)";
+	public static final String REGEX_URL = "((https?|ftp|gopher|telnet|file|notes|ms-help):((//)|(\\\\\\\\))+[\\w\\d:#%/;$()~_?\\+-=\\\\\\.&]*)";
 
 	/**
 	 * La expresión regular para validar que una contraseña tenga mínimo 8

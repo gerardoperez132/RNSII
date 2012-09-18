@@ -673,4 +673,22 @@ public interface CRUD {
 	 * @return El código de error.
 	 */
 	public List<String> getIncompleteFields(ServicioInformacion servicio);
+
+	/**
+	 * Este método permite verificar si una entrada o una salida tiene el nombre
+	 * duplicado en la base de datos.
+	 * 
+	 * @param idParent
+	 *            El identificador de la funcionalidad a la que pertenecen.
+	 * @param idChild
+	 *            El identificador de la entrada o salida.
+	 * @param type
+	 *            Tipo <code>ENTRADA</code o <code>SALIDA</code>
+	 * @param name
+	 *            Nombre a evaluar que supuestamente estaría duplicado.
+	 * @return <code>true</code> si el nombre está duplicado, <code>false</code>
+	 *         si no está duplicado.
+	 */
+	public boolean entradaSalidaDuplicada(long idParent, long idChild,
+			int type, String name);
 }

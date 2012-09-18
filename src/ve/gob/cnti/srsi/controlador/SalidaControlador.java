@@ -119,7 +119,7 @@ public class SalidaControlador extends DAO implements Formulario,
 		complejo = true;
 		return SUCCESS;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararModificarSalida() {
@@ -313,7 +313,8 @@ public class SalidaControlador extends DAO implements Formulario,
 						"error.length"));
 			}
 		}
-		if (read(ESF, id_funcionalidad, salida.getNombre())) {
+		if (entradaSalidaDuplicada(id_funcionalidad, id_entrada_salida, SALIDA,
+				salida.getNombre())) {
 			addFieldError("salida.nombre",
 					error.getProperties()
 							.getProperty("error.salida.duplicated"));

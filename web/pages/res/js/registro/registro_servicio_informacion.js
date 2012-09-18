@@ -81,7 +81,7 @@ $(document).ready(function() {
 	    	'file': {required: true, accept: "pdf"}	    	
 	    },
 	    messages: {	    	
-	    	'name': {required:data['errores']['error.servicio.file.name'],regexTitle:data['errores']['error.servicio.title']},
+	    	'name': {required:data['errores']['error.servicio.file.name'],regexTitle:data['errores']['error.regex.title']},
 	    	'file': {reqired:data['errores']['error.servicio.file'],accept:data['errores']['error.servicio.format']}	    	
 	    }
 	});
@@ -128,7 +128,7 @@ $(document).ready(function() {
 	    messages: {	    	
 	    	'servicio.responsable' : {
 	    		required:data['errores']['error.servicio.responsable'],
-	    		regexTitle:data['errores']['error.servicio.title']},
+	    		regexTitle:data['errores']['error.regex.title']},
 	    	 'telefono': {
 	    		required:data['errores']['error.servicio.telefono'],
 	    		digits:data['errores']['error.servicio.telefono.regex']},	    	 
