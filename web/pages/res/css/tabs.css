@@ -149,8 +149,7 @@ ul#pagination-flickr {
 .pagination {
 	float: left;
 	width: 300px;
-	bottom: 12px;
-	position: absolute;
+	bottom: 12px;	
 }
 
 .tab_container_height {
