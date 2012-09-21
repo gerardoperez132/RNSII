@@ -76,6 +76,8 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 	private long solicitudesAceptadasRechazadas;
 	private List<EstadosTiempo> estadosTiempo = new ArrayList<EstadosTiempo>();
 	private Date fecha;
+	private String msj_error;
+	private String msj_actionInfo;
 
 	@SuppressWarnings("unchecked")
 	public String autenticarUsuario() throws Exception {
@@ -84,39 +86,31 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 		if (correo == null && password == null && captcha == null) {
 			return "404ERROR";
 		}
-		if (correo.isEmpty() || password.isEmpty() || captcha.isEmpty()) {
-			addFieldError("error",
-					error.getProperties().getProperty("error.login.fields"));
+		if (correo.isEmpty() || password.isEmpty() || captcha.isEmpty()) {			
+			msj_error = error.getProperties().getProperty("error.login.fields");
 			return INPUT;
 		}
 		if (!((String) session.get("captcha")).toUpperCase().equals(
 				captcha.toUpperCase())) {
-			addFieldError("error",
-					error.getProperties().getProperty("error.login.captcha"));
+			msj_error = error.getProperties().getProperty("error.login.captcha");
 			return INPUT;
 		}
 		if (!correo.matches(REGEX_EMAIL)) {
-			addFieldError("error",
-					error.getProperties().getProperty("error.regex.email"));
+			msj_error = error.getProperties().getProperty("error.regex.email");
 			return INPUT;
 		}
 		user_correo = (Correo) getUserEmail(correo);
 		if (user_correo == null) {
-			addFieldError("correo",
-					error.getProperties().getProperty("error.login.invalid"));
+			msj_error = error.getProperties().getProperty("error.login.invalid");
 			return INPUT;
 		} else {
 			usuario = (Usuario) read(usuario, user_correo.getId_usuario());
 			if (usuario == null) {
-				addFieldError("error",
-						error.getProperties()
-								.getProperty("error.login.invalid"));
+				msj_error = error.getProperties().getProperty("error.login.invalid");
 				return INPUT;
 			} else if (!usuario.getClave().equals(
 					new MD5Hashing(password).getPassword().toString())) {
-				addFieldError("password",
-						error.getProperties()
-								.getProperty("error.login.invalid"));
+				msj_error = error.getProperties().getProperty("error.login.invalid");
 				return INPUT;
 			} else {
 				Ente ente = new Ente();
@@ -197,27 +191,27 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 		getTiempoFecha();
 		recoveryPass = true;
 		session = ActionContext.getContext().getSession();
-		if (!((String) session.get("captcha")).toUpperCase().equals(
-				captcha.toUpperCase())) {
-			addFieldError("error",
-					error.getProperties().getProperty("error.login.captcha"));
+		if (correo.isEmpty() || captcha.isEmpty()) {			
+			msj_error = error.getProperties().getProperty("error.login.fields");
 			return INPUT;
 		}
 		if (!correo.matches(REGEX_EMAIL)) {
-			addFieldError("correo",
-					error.getProperties().getProperty("error.regex.email"));
+			msj_error = error.getProperties().getProperty("error.regex.email");
 			return INPUT;
 		}
+		if (!((String) session.get("captcha")).toUpperCase().equals(
+				captcha.toUpperCase())) {
+			msj_error = error.getProperties().getProperty("error.login.captcha");
+			return INPUT;
+		}		
 		user_correo = (Correo) getUserEmail(correo);
 		if (user_correo == null) {
-			addFieldError("correo",
-					error.getProperties().getProperty("error.email.invalid"));
+			msj_error = error.getProperties().getProperty("error.email.invalid");
 			return INPUT;
 		} else {
 			usuario = (Usuario) read(usuario, user_correo.getId_usuario());
 			if (usuario == null) {
-				addFieldError("error",
-						error.getProperties().getProperty("error.user.invalid"));
+				msj_error = error.getProperties().getProperty("error.user.invalid");
 				return INPUT;
 			}
 		}
@@ -230,10 +224,7 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 					delete(r_clave, r_clave.getId_recuperar_clave());
 					r_clave = new RecuperarClave();
 				} else {
-					addFieldError(
-							"error",
-							error.getProperties().getProperty(
-									"error.request.isProccess"));
+					msj_error = error.getProperties().getProperty("error.request.isProccess");
 					// String ruta =
 					// LoginControlador.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 					// System.out.println("ruta: "+ruta);
@@ -253,8 +244,7 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 				+ " si se le ha olvidado su contraseña puede acceder al suguiente link para cambiarla por una nueva: \n\n"
 				+ sendmail.getProperties().getProperty("dominio")
 				+ "pages/recuperarClave?cuenta="
-				+ mail.getPassword().toString() + id.getPassword().toString();
-		System.out.println(mensaje);
+				+ mail.getPassword().toString() + id.getPassword().toString();		
 		r_clave.setId_usuario(usuario.getId_usuario());
 		r_clave.setUrl(mail.getPassword().toString()
 				+ id.getPassword().toString());
@@ -262,17 +252,15 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 		recoveryPass = false;
 		EnviarCorreo enviarMail = new EnviarCorreo();
 		if (!enviarMail.send(user_correo.getCorreo(), asunto, mensaje)) {
-			addFieldError("error",
-					error.getProperties().getProperty("error.email.fail"));
+			msj_error = error.getProperties().getProperty("error.email.fail");
 		} else {
 			create(r_clave);
-			System.out.println("m " + mensaje);
-			addActionMessage("Su petición de recuperar la contraseña ya ha sido procesada, por favor revise su bandeja de correo para que proceda al cambio de su clave de ingreso");
+			//TODO 
+			msj_actionInfo="Su petición de recuperar la contraseña ya ha sido procesada, por favor revise su bandeja de correo para que proceda al cambio de su clave de ingreso";
 		}
 		return SUCCESS;
 	}
-
-	// TODO
+	
 	@SkipValidation
 	public String prepararRecuperarPass() {
 		getTiempoFecha();
@@ -289,8 +277,7 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 			if ((new Date().getTime() - r_clave.getFecha_creado().getTime()) > 172800000) {
 				delete(r_clave, r_clave.getId_recuperar_clave());
 				r_clave = new RecuperarClave();
-				addFieldError("error",
-						error.getProperties().getProperty("error.recovery.old"));
+				msj_error = error.getProperties().getProperty("error.recovery.old");
 				return INPUT;
 			} else {
 				recoveryPassForm = true;
@@ -298,27 +285,23 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 				return SUCCESS;
 			}
 		} else {
-			addFieldError("error",
-					error.getProperties().getProperty("error.recovery.invalid"));
+			msj_error = error.getProperties().getProperty("error.recovery.invalid");
 			return INPUT;
 		}
 	}
 
 	@SkipValidation
 	public String modificarClave() throws NoSuchAlgorithmException {
-		getTiempoFecha();
-		// TODO
-		// IMPLEMENTAR CAPTCHA A LOS TRES INTENTOS
+		getTiempoFecha();		
 		RecuperarClave r_clave = new RecuperarClave();
 		r_clave = (RecuperarClave) getUrlRecoveryPass(new RecuperarClave(),
 				cuenta);
 		datosEnviados = true;
 		if (!clave_nueva.equals(clave_nueva_confirme)) {
-			addFieldError("password", "Las contraseñas no coinciden");
+			msj_error = "Las contraseñas no coinciden";
 			return INPUT;
 		} else if (clave_nueva.length() < 6) {
-			addFieldError("password",
-					"La nueva contraseña debe tener al menos 6 caracteres");
+			msj_error = "La nueva contraseña debe tener al menos 6 caracteres";
 			return INPUT;
 		} else {
 			MD5Hashing pass = new MD5Hashing(clave_nueva);
@@ -326,7 +309,7 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 			usuario.setClave(pass.getPassword());
 			delete(r_clave, r_clave.getId_recuperar_clave());
 			update(usuario, usuario.getId_usuario());
-			addActionMessage("Clave modificada satifactoriamente");
+			msj_actionInfo="Clave modificada satifactoriamente";
 			return SUCCESS;
 		}
 	}
@@ -487,6 +470,22 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
+	}
+
+	public String getMsj_error() {
+		return msj_error;
+	}
+
+	public void setMsj_error(String msj_error) {
+		this.msj_error = msj_error;
+	}
+
+	public String getMsj_actionInfo() {
+		return msj_actionInfo;
+	}
+
+	public void setMsj_actionInfo(String msj_actionInfo) {
+		this.msj_actionInfo = msj_actionInfo;
 	}
 
 }
