@@ -41,6 +41,7 @@ import ve.gob.cnti.srsi.modelo.EntradaSalida;
 import ve.gob.cnti.srsi.modelo.Estado;
 import ve.gob.cnti.srsi.modelo.Funcionalidad;
 import ve.gob.cnti.srsi.modelo.Intercambio;
+import ve.gob.cnti.srsi.modelo.RecuperarClave;
 import ve.gob.cnti.srsi.modelo.Sector;
 import ve.gob.cnti.srsi.modelo.Seguridad;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
@@ -118,9 +119,18 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 	private boolean hasNext;
 	private List<Integer> pagination = new ArrayList<Integer>();
 	private int mLimit = 9;
+	
+	/*Variables para los mensajes de error o información del controlador login */
+	private boolean msj;
+	private boolean recoveryPass;
+	private boolean datosEnviados;
+	private boolean recoveryPassForm;
+	private String msj_error;
+	private String msj_actionInfo;
+	private String cuenta;
 
 	@SuppressWarnings("unchecked")
-	public String inicio() {
+	public String inicio() {		
 		getTiempoFecha();
 		listaSectores = listadoSectores(LIMITE_SECTORES, false);
 		// listaSectores2 = listadoSectores(-1, true);
@@ -133,7 +143,10 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 		hasNext = paginate.isHasNext();
 		pagination = paginate.getPagination();
 		listaSectores2 = (List<SectoresMasPublicados>) paginate.getContent();
-		return SUCCESS;
+		if(cuenta != null){
+			recoveryPassForm = true;
+		}
+		return SUCCESS;		
 	}
 
 	public String inicio404() {
@@ -401,6 +414,13 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 			}
 		}
 		return sisVisitados2;
+	}
+	
+	@SkipValidation
+	public String prepararRecuperarPass() {		
+		recoveryPass = true;
+		inicio();
+		return SUCCESS;
 	}
 
 	public boolean isExaminarServicio() {
@@ -754,6 +774,62 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 
 	public void setPagination(List<Integer> pagination) {
 		this.pagination = pagination;
+	}
+
+	public boolean isMsj() {
+		return msj;
+	}
+
+	public void setMsj(boolean msj) {
+		this.msj = msj;
+	}
+
+	public String getMsj_error() {
+		return msj_error;
+	}
+
+	public void setMsj_error(String msj_error) {
+		this.msj_error = msj_error;
+	}
+
+	public boolean isDatosEnviados() {
+		return datosEnviados;
+	}
+
+	public void setDatosEnviados(boolean datosEnviados) {
+		this.datosEnviados = datosEnviados;
+	}
+
+	public String getMsj_actionInfo() {
+		return msj_actionInfo;
+	}
+
+	public void setMsj_actionInfo(String msj_actionInfo) {
+		this.msj_actionInfo = msj_actionInfo;
+	}
+
+	public boolean isRecoveryPass() {
+		return recoveryPass;
+	}
+
+	public void setRecoveryPass(boolean recoveryPass) {
+		this.recoveryPass = recoveryPass;
+	}
+
+	public String getCuenta() {
+		return cuenta;
+	}
+
+	public void setCuenta(String cuenta) {
+		this.cuenta = cuenta;
+	}
+
+	public boolean isRecoveryPassForm() {
+		return recoveryPassForm;
+	}
+
+	public void setRecoveryPassForm(boolean recoveryPassForm) {
+		this.recoveryPassForm = recoveryPassForm;
 	}
 
 }
