@@ -70,7 +70,7 @@
 			<#list eKeys as eKey><#t/>
 				<#assign eValue = fieldErrors[eKey]><#t/>
 				<#list eValue as eEachValue><#t/>
-					<span>${eEachValue}</span><br>
+					<span>${eEachValue}</span>
 				</#list><#t/>
 			</#list><#t/>
 		</span>
