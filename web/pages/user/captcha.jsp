@@ -20,7 +20,7 @@
 		Font textFont = new Font("Arial", Font.PLAIN, 24);
 		int charsToPrint = 6;
 		int width = request.getParameter("width") != null ? Integer
-				.parseInt(request.getParameter("width")) : 150;
+				.parseInt(request.getParameter("width")) : 165;
 		int height = request.getParameter("height") != null ? Integer
 				.parseInt(request.getParameter("height")) : 35;
 		int circlesToDraw = 4;
