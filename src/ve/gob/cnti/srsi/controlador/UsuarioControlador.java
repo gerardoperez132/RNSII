@@ -94,8 +94,8 @@ public class UsuarioControlador extends DAO {
 					usuario.setClave(pass.getPassword());
 					update(usuario, usuario.getId_usuario());
 					modificarClave = false;
-					// TODO Esto no es un error. ¿Qué se hace con esto?
-					addActionMessage("Clave modificada satifactoriamente");
+					addActionMessage(message.getProperties().getProperty(
+							"usuario.update.password.success"));
 					return SUCCESS;
 				}
 			} else {
@@ -139,8 +139,8 @@ public class UsuarioControlador extends DAO {
 			usuario = (Usuario) read(usuario, user.getId_usuario());
 			session.put("usuario", usuario);
 			modificarDatos = false;
-			// TODO Otro mensaje.
-			addActionMessage("Datos modificados satisfactoriamente");
+			addActionMessage(message.getProperties().getProperty(
+					"usuario.update.info.success"));
 		}
 		return SUCCESS;
 	}
