@@ -40,6 +40,7 @@ import ve.gob.cnti.srsi.dao.Constants.Sentencias;
 import ve.gob.cnti.srsi.dao.Constants.Status;
 import ve.gob.cnti.srsi.dao.Constants.TipoEntradaSalida;
 import ve.gob.cnti.srsi.i18n.Errors;
+import ve.gob.cnti.srsi.i18n.Messages;
 import ve.gob.cnti.srsi.modelo.Correo;
 import ve.gob.cnti.srsi.modelo.EntradaSalida;
 import ve.gob.cnti.srsi.modelo.Funcionalidad;
@@ -76,6 +77,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		ClaseDato, TipoEntradaSalida, Sentencias, ErrorServicio, Estados,
 		Modelos {
 
+	public static Messages message = new Messages();
 	public static Errors error = new Errors();
 	private static Session session;
 	private static Transaction transaction;
