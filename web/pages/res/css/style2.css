@@ -328,7 +328,7 @@ padding:3px 10px 0 20px;*/
 
 .main_user {
 	float: left;
-	width: 800px;
+	width: 270px;
 	margin: 0 0 10px 0;
 }
 
@@ -760,6 +760,7 @@ div.paginado li a:hover {
 	height: 210px;
 	position: relative;	
 	width: 269px;
+	margin-top: 10px;
 }
 
 .ingresar form {
@@ -1584,7 +1585,7 @@ ul.newsticker li {
 	font-family: sans-serif;
 	height: 19px;
 	margin: 1px 0pt 0pt;
-	width: 125px;
+	width: 160px;
 }
 
 .busqueda {
@@ -3146,7 +3147,7 @@ h3.h3-ui-menu-content {
 .inputBusqueda {
 	margin-top: 1px;
 	border: 1px solid #CECECE;
-	width: 130px;
+	width: 160px;
 	height: 19px;
 }
 
@@ -3205,8 +3206,8 @@ a.tooltip:hover span {
 
 .contenido {
 	float: left;
-	width: 750px;
-	padding-left: 3px;
+	width: 690px;
+	padding-left: 10px;
 }
 
 .busqueda2 {
@@ -3225,7 +3226,7 @@ a.tooltip:hover span {
 	font-family: sans-serif;
 	height: 20px;
 	margin: 1px 0pt 0pt;
-	width: 734px;
+	width: 678px;
 	margin-bottom: 10px;
 	padding-left: 10px;
 	padding-top: 2px;
@@ -3400,7 +3401,7 @@ div.middleContent {
 }
 
 .Titulo_width_user {
-	width: 716px;
+	width: 668px;
 }
 
 .busqueda_width_user {
@@ -3418,7 +3419,7 @@ div.middleContent {
 	list-style: none;
 	margin: 0;
 	padding: 0;
-	width: 224px;
+	width: 268px;
 }
 
 .m_a ul li {
@@ -3488,4 +3489,23 @@ div.middleContent {
 .form_small{
 	font-size: 11px;
 	padding-left: 10px;
+}
+
+.enlace_home {	
+	float: left;
+	font-size: 12px;
+	padding: 6px 0 5px 5px;	
+}
+
+.enlace_home a {	
+	color: #1A5398;
+	float: left;
+	font-weight: 700;
+	margin: 0 6px 0 0;
+	padding: 0 15px 0 0;
+}
+
+.enlace_home a:hover {
+	color: #0E2B7C;
+	text-decoration: underline;
 }

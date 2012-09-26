@@ -1,12 +1,37 @@
-<%@taglib uri="/struts-tags" prefix="s"%>	
-<div class="ingresar" style="position: relative">
+<%@taglib uri="/struts-tags" prefix="s"%>
+<s:if test="#session.usuario.nombre.length()>0">
+<div class="ingresar" style="height: 120px;">
+<h1>
+	<s:text name="bienvenido" /> 
+	<s:property value="%{#session.usuario.nombre}"/>
+</h1>
+<table class="main_user">			
+<tr>
+	<td>
+		<h4 style="margin: 0;"><s:text name="ente" />
+		<s:property value="%{#session.ente_sesion.nombre}"/></h4>
+	</td>										
+</tr>
+<s:if test="%{#sistema!=true}">
+<tr>
+	<td>
+	<div class="enlace_home">
+	<a href="home"><s:text name="" />Regresar al Sistema de Registro</a>
+	</div>
+	</td>
+</tr>			
+</s:if>					
+</table>
+</div>
+</s:if>
+<s:else>
+<div class="ingresar">	
 <div class="BarraEnviar">
-	<ul>
-		<li><a href="recuperar_clave"><s:text name="accessSystem" /></a></li>				 
-       </ul>	
-   </div>		
-
-<h1>Ingresar</h1>
+<ul>
+	<li><a href="recuperar_clave"><s:text name="accessSystem" /></a></li>				 
+</ul>	
+</div>
+<h1>Ingresar</h1>	
 <s:if test="recoveryPass">	
 	<form action="enviarDatos" method="post">
 		<table>			
@@ -103,9 +128,6 @@
 				     </div>
 				</td>
 			</tr>
-			
-			
-			
 			<tr>
 				<td><s:text name="pass" /></td>
 				<td><input type="password" name="password" /></td>
@@ -130,3 +152,4 @@
 	</form>		
 </s:else>
 </div>
+</s:else>

@@ -29,13 +29,7 @@
 			<!-- Esta es la barra lateral -->
 			<%@include file="../layout/sidebar.jsp"%>
 			<!-- Este es el div de contenidos -->
-			<div class="contenido">
-				<!-- Ruta de navegación -->
-				<div class="main">
-					<div class="RutaNavegacion">
-						<a href="SRSI"><s:text name="catalogo" /></a>
-					</div>
-				</div>
+			<div class="contenido">				
 				<%@include file="../layout/bienvenido.jsp"%>
 				<s:if test="peticionesNoLeidas > 0 || peticionesPendientes > 0">
 					<!-- Peticiones de suscripción no leídas y pendientes   -->

@@ -45,7 +45,7 @@
 				<div class="tab_container">
 					<!-- Descripción general -->
 					<div id="tab1" class="tab_content">
-						<table class="results_width_user_detalles results">
+						<table class="results">
 							<tr>
 								<td class="alt"><s:text name="n_servicio" /></td>
 								<td class="alt2"><s:property value="servicio.id_servicio_informacion" /></td>
@@ -106,7 +106,7 @@
 					</div>
 					<!-- Descripción Legal -->
 					<div id="tab2" class="tab_content">
-						<table class="results_width_user_detalles tb">
+						<table class="tb">
 							<tr>
 								<th class="tb_th"><s:text name="nombre" /></th>
 								<th class="tb_th"><s:text name="fecha" /></th>
@@ -130,7 +130,7 @@
 					</div>
 					<!-- Descripción Técnica -->
 					<div id="tab3" class="tab_content">
-						<table class="results_width_user_detalles results">
+						<table class="results">
 							<tr>
 								<td class="alt"><s:text name="seguridad" /></td>
 								<td class="alt2"><s:set var="seguridad" value="servicio.id_seguridad"/>
@@ -173,7 +173,7 @@
 						</table>
 						<hr>
 						<!-- Tabla en árbol. -->
-						<table id="tree" class="results_width_user_detalles results">
+						<table id="tree" class="results">
 							<thead>
 								<tr>
 									<th colspan="4" style="text-align: center;"><s:text	name="funcionalidades_&_datos" /></th>
@@ -279,7 +279,7 @@
 						</table>
 					</div>
 					<div id="tab4" class="tab_content">
-						<table class="results_width_user_detalles results">
+						<table class="results">
 							<tr>
 								<td class="alt"><s:text name="responsable" /></td>
 								<td class="alt2"><s:property value="servicio.responsable" /></td>

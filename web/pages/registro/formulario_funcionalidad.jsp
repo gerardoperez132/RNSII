@@ -84,7 +84,7 @@
 							</ul>
 							<div class="tab_container">
 								<div id="tab1" class="tab_content">
-									<table class="tb">
+									<table class="results_width_user_datos tb">
 										<tr>
 											<td class="tb_alt"><span class="txt_small"> <s:text name="nombre.title" /></span></td>
 											<td class="tb_td"><span class="txt_small"> <s:property value="funcionalidad.nombre" /></span></td>
@@ -157,7 +157,7 @@
 									<s:fielderror>
 										<s:param>Salidas</s:param>
 									</s:fielderror>
-									<table class="tb">
+									<table class="results_width_user_datos tb">
 										<tr>
 											<td class="tb_alt"><span class="txt_small"> <s:text name="nombre.title"/></span></td>
 											<td class="tb_td"><span class="txt_small"> <s:property value="funcionalidad.nombre" /></span></td>

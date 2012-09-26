@@ -84,7 +84,7 @@
 							</td>							
 						</tr>
 					</table>
-					<table class="results_width_user_fx results">
+					<table class="results">
 						<tbody>
 							<tr>
 								<th colspan="4"><s:text name="funcionalidades.title" /></th>
