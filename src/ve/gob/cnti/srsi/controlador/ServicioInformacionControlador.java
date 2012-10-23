@@ -614,6 +614,15 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 						"telefono",
 						error.getProperties().getProperty(
 								"error.servicio.telefono.regex"));
+			if (codigo==null)
+				addFieldError("telefono",
+						error.getProperties().getProperty("error.servicio.codigo"));
+			if (codigo.length() > 0 && codigo.length() < 7)
+				addFieldError("telefono",
+						error.getProperties().getProperty("error.servicio.codigo.digit"));
+			if (!codigo.matches("\\d.*") && !codigo.trim().isEmpty())
+				addFieldError("telefono",
+						error.getProperties().getProperty("error.servicio.codigo.digit"));			
 			if (correo.trim().isEmpty())
 				addFieldError(
 						"correo",
@@ -621,7 +630,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 								"error.servicio.correo"));
 			if (!correo.matches(REGEX_EMAIL))
 				addFieldError("correo",
-						error.getProperties().getProperty("error.regex.email"));
+						error.getProperties().getProperty("error.regex.email"));			
 			prepararDescripcionSoporte();
 			break;
 		default:
