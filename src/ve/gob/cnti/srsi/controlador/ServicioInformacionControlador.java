@@ -462,28 +462,61 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	public String registrarDescripcionSoporte()
 			throws IllegalArgumentException, SecurityException,
 			IllegalAccessException, InvocationTargetException,
-			NoSuchMethodException {
+			NoSuchMethodException {		
 		getTiempoFecha();
+		
+		/*	Recuperando de la sesión la variables modificar yid_servicio_informacion 
+		 * 	necesarias para el registro
+		 */
 		try {
 			setModificar((Boolean) session.get("modificar"));
 			setId_servicio_informacion((Long) session
 					.get("id_servicio_informacion"));
-		} catch (Exception e) {
-			// Exception.
-		}
-		String responsable = servicio.getResponsable();
+		} catch (Exception e) {}
+		
+		//Creando objetos temporales para el registro de una petición de creación ó modificación. 
 		Telefono phone = new Telefono();
-		phone.setId_servicio_informacion(id_servicio_informacion);
-		phone.setTelefono(codigo + telefono);
+		Correo email = new Correo();
+		
+		/*	Creando variables temporales para utilizarlas en el caso de que el registro sea una
+		 *	modificación y tener respaldo de los valores que lleggan del formulario y se pierden
+		 *	al utilizar el getSessionStack(false); 
+		 */
+		String responsable = servicio.getResponsable();
 		String telefono_tmp = telefono;
 		String email_tmp = correo;
-		Correo email = new Correo();
+		String codigo_tmp = codigo;
+		
+		/*	Asignando los valores del teléfono, usados en la creación de un registro 
+		 * 	teléfono.
+		 */
+		phone.setId_servicio_informacion(id_servicio_informacion);
+		phone.setTelefono(codigo + telefono);
+		
+		/*	Asignando los valores del correo, usados en la creación de un registro 
+		 * 	correo.
+		 */
 		email.setId_servicio_informacion(id_servicio_informacion);
 		email.setCorreo(correo);
+		
+		//recuperando los valores de la sesion
 		getSessionStack(false);
+		
+		/*	Asignando los valores de las variables del formulario descripción técnica, 
+		 * 	los cuales son usados si el registro es de modificación.
+		 */
 		servicio.setResponsable(responsable);
 		telefono = telefono_tmp;
-		correo = email_tmp;
+		codigo = codigo_tmp;
+		correo = email_tmp;	
+		
+		/*	Bifurcaciones en el que se evalua:
+		 * 	1 - si el registro de es creación se realizan las tareas a cabo.
+		 * 	2 - si el registro es de modificación se intentan recuperar el 
+		 * 		el teléfono y correo del servicio y se evalua:
+		 * 		2.1 - Si el correo y/o el teléfono distintos de null, se actulizan los dato.
+		 * 		2.2 - Si el correo y/o el teléfono son iguales a null, se crean los dato. 
+		 */
 		if (!isModificar()) {
 			update(servicio, id_servicio_informacion);
 			create(phone);
@@ -513,6 +546,9 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			}
 			update(servicio, id_servicio_informacion);
 		}
+		/*	Colocando los valores del formulario recien creado ó modificado
+		 * 	para que esten disponibles para el resto de las pestañas
+		 */
 		setSessionStack();
 		return SUCCESS;
 	}
@@ -617,7 +653,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			if (codigo==null)
 				addFieldError("telefono",
 						error.getProperties().getProperty("error.servicio.codigo"));
-			if (codigo.length() > 0 && codigo.length() < 7)
+			if (codigo.length() != 3)
 				addFieldError("telefono",
 						error.getProperties().getProperty("error.servicio.codigo.digit"));
 			if (!codigo.matches("\\d.*") && !codigo.trim().isEmpty())
