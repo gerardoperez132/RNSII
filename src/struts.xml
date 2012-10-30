@@ -672,15 +672,26 @@
 			<result name="success">ajax/list_formats.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
+				
+		<action name="get_captcha" class="ve.gob.cnti.srsi.util.Captcha">
+	    	<result name="success" type="stream">
+	            <param name="contentType">image/png</param>		            
+	            <param name="inputName">imageStream</param>
+	            <param name="bufferSize">1024</param>
+	        </result>
+	        <interceptor-ref name="defaultStack"/>
+		</action>
+		
 	</package>
 
 	<package name="json" extends="json-default">
 		<action name="getJSONResult" class="ve.gob.cnti.srsi.util.JSON"
 			method="obtenerError">
 			<result type="json" />
-		</action>
+		</action>		
 	</package>
 
+	
 	<constant name="struts.devMode" value="true" />
 	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
 </struts>
