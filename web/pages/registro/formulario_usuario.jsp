@@ -129,28 +129,7 @@
 							</table>
 						</form>
 					</div>
-				</s:elseif>
-				<s:else>
-					<div class="administracion_capa">
-						<span class="ok_pass"><s:actionmessage /></span>
-						<table>
-							<tr>
-								<td>
-									<form action="prepararFormulario" method="POST">
-										<s:hidden name="modificarClave" value="%{true}"/>
-										<input type="submit" value="<s:text name="usuario.modificar.clave"/>">
-									</form>
-								</td>
-								<td>
-									<form action="prepararFormulario" method="POST">
-										<s:hidden name="modificarDatos" value="%{true}"/>
-										<input type="submit" value="<s:text name="usuario.modificar.datos"/>">
-									</form>
-								</td>
-							</tr>
-						</table>
-					</div>
-				</s:else>
+				</s:elseif>				
 			</div>
 		</div>
 		<div style="clear: both"></div>
