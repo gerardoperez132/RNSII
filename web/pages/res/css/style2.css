@@ -3509,3 +3509,17 @@ div.middleContent {
 	color: #0E2B7C;
 	text-decoration: underline;
 }
+
+
+.btn_menu{
+	background: transparent;
+	color: #999 !important;
+	font-size: 11px;
+	height: 34px;
+	font-family: sans-serif;
+	font-weight: normal;	
+	border: 0;
+	border-bottom: 1px dotted #CCC;
+	padding-left: 15px;
+	cursor: pointer;
+}
