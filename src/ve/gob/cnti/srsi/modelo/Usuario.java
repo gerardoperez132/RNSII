@@ -52,6 +52,8 @@ public class Usuario {
 	private Date fecha_creado;
 	private Date fecha_modificado;
 	private long mod_user;
+	@Column(length = 1)
+	private String nacionalidad;
 
 	public Usuario() {
 	}
@@ -160,6 +162,14 @@ public class Usuario {
 				+ cedula + ", clave=" + clave + ", status=" + status
 				+ ", fecha_creado=" + fecha_creado + ", fecha_modificado="
 				+ fecha_modificado + ", mod_user=" + mod_user + "]";
+	}
+
+	public String getNacionalidad() {
+		return nacionalidad;
+	}
+
+	public void setNacionalidad(String nacionalidad) {
+		this.nacionalidad = nacionalidad;
 	}
 
 }
