@@ -25,6 +25,7 @@ import org.apache.struts2.interceptor.validation.SkipValidation;
 
 import ve.gob.cnti.srsi.dao.DAO;
 import ve.gob.cnti.srsi.modelo.Ente;
+import ve.gob.cnti.srsi.modelo.Nacionalidad;
 import ve.gob.cnti.srsi.modelo.Usuario;
 import ve.gob.cnti.srsi.util.EstadosTiempo;
 import ve.gob.cnti.srsi.util.MD5Hashing;
@@ -48,6 +49,7 @@ public class UsuarioControlador extends DAO {
 	private boolean modificarDatos;
 	private boolean modificarClave;
 	private int intentos_fallidos;
+	private List<Nacionalidad> nacionalidad = new ArrayList<Nacionalidad>();
 
 	@SuppressWarnings("rawtypes")
 	private Map session;
@@ -133,7 +135,7 @@ public class UsuarioControlador extends DAO {
 			Usuario user = (Usuario) session.get("usuario");
 			usuario.setClave(user.getClave());
 			usuario.setId_correo(user.getId_correo());
-			usuario.setId_ente(user.getId_ente());
+			usuario.setId_ente(user.getId_ente());			
 			update(usuario, user.getId_usuario());
 			session.remove("usuario");
 			usuario = (Usuario) read(usuario, user.getId_usuario());
@@ -151,17 +153,22 @@ public class UsuarioControlador extends DAO {
 		return header();
 	}
 
+	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararFormulario() {
 		getTiempoFecha();
-		header();
+		if (header().equals("errorSession") == true) {
+			return "errorSession";
+		}		
 		usuario = (Usuario) session.get("usuario");
 		if (modificarDatos = true) {
-			usuario = (Usuario) read(usuario, usuario.getId_usuario());
+			usuario = (Usuario) read(usuario, usuario.getId_usuario());			
+			nacionalidad = (List<Nacionalidad>) read(new Nacionalidad());			
 		}
 		return SUCCESS;
 	}
 
+	@SuppressWarnings("unchecked")
 	public void validate() {
 		getTiempoFecha();
 		if (modificarDatos) {
@@ -181,25 +188,21 @@ public class UsuarioControlador extends DAO {
 						"apellidos",
 						error.getProperties().getProperty(
 								"error.login.apellido"));
-			}
-			if (!(usuario.getCedula().length() >= 4 && usuario.getCedula()
-					.length() <= 9)) {
-				addFieldError("cedula",
-						error.getProperties().getProperty("error.login.cedula"));
-			} else {
-				try {
-					ci = Integer.parseInt(usuario.getCedula());
-					if (ci < 0) {
-						addFieldError("cedula", error.getProperties()
-								.getProperty("error.login.cedula.invalid"));
-					}
-				} catch (Exception e) {
-					addFieldError(
-							"cedula",
-							error.getProperties().getProperty(
-									"error.login.cedula.regex"));
-				}
-			}
+			}			
+			try {
+				ci = Integer.parseInt(usuario.getCedula());
+				//Verifica que la cedula sea entero positivo y mayor o igual a 1
+				if (ci < 1 || !usuario.getCedula().equals(""+ci)) {
+					addFieldError("cedula", error.getProperties()
+							.getProperty("error.login.cedula.invalid"));	
+				}				
+			} catch (Exception e) {
+				addFieldError(
+						"cedula",
+						error.getProperties().getProperty(
+								"error.login.cedula.regex"));					
+			}		
+			nacionalidad = (List<Nacionalidad>) read(new Nacionalidad());	
 		}
 	}
 
@@ -288,4 +291,13 @@ public class UsuarioControlador extends DAO {
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
+
+	public List<Nacionalidad> getNacionalidad() {
+		return nacionalidad;
+	}
+
+	public void setNacionalidad(List<Nacionalidad> nacionalidad) {
+		this.nacionalidad = nacionalidad;
+	}
+	
 }
