@@ -114,7 +114,11 @@
 								</tr>
 								<tr>
 									<td><s:text name="usuario.modificar.cedula" /></td>
-									<td><s:textfield name="usuario.cedula" id="cedula" maxlength="9" /></td>
+									<td>																				
+										<s:select list="nacionalidad" listKey="id_nacionalidad"
+										   listValue="nombre" name="usuario.nacionalidad"></s:select>
+										<s:textfield name="usuario.cedula" id="cedula" maxlength="9" style="width: 130px;"/>										
+									</td>
 									<td><h5 class="requerido">*</h5></td>
 									<td><span id="cedula_required"></span> <s:fielderror>
 											<s:param>cedula</s:param>
@@ -129,7 +133,12 @@
 							</table>
 						</form>
 					</div>
-				</s:elseif>				
+				</s:elseif>
+				<s:else>
+					<div class="administracion_capa">
+						<span class="ok_pass"><s:actionmessage /></span>						
+					</div>
+				</s:else>				
 			</div>
 		</div>
 		<div style="clear: both"></div>
