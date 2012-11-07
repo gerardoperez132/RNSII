@@ -115,8 +115,9 @@
 								<tr>
 									<td><s:text name="usuario.modificar.cedula" /></td>
 									<td>																				
-										<s:select list="nacionalidad" listKey="id_nacionalidad"
-										   listValue="nombre" name="usuario.nacionalidad"></s:select>
+										<s:select name="usuario.nacionalidad" id="usuario.nacionalidad"
+										   list="nacionalidad" listKey="id_nacionalidad"
+										   listValue="nombre" ></s:select>
 										<s:textfield name="usuario.cedula" id="cedula" maxlength="9" style="width: 130px;"/>										
 									</td>
 									<td><h5 class="requerido">*</h5></td>
