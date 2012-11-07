@@ -59,14 +59,44 @@
 		</ul>
 
 		<div class="tab_container" style="height: 450px;">					
-			<div class="tab_content">			
+			<div class="tab_content">	
+			<s:if test="!modificar">
+				<s:set name="action" var="action">registrarEntrada</s:set>
+				<s:set name="modificar" value="%{false}" />
+				<s:set name="submit" var="submit">
+					<s:text name="form.entrada.guardar"/>
+				</s:set>
+			</s:if>
+			<s:else>
+				<s:set name="action" var="action">modificarEntrada</s:set>
+				<s:set name="modificar" value="%{true}" />
+				<s:set name="submit" var="submit">
+					<s:text name="form.entrada.modificar"/>
+				</s:set>
+			</s:else>		
 			
-			<h3 class="formulario">
-				<s:text name="funcionalidad.registro" />
-			</h3>
-			<small><s:text name="funcionalidad.registro.description"></s:text></small>
-			<hr>
-				
+			<div class="tab_description_io">
+				<div class="tab_description_left">
+				<h3 class="formulario">
+					<s:text name="funcionalidad.registro" />
+				</h3>
+				<small><s:text name="funcionalidad.registro.description"></s:text></small>
+				</div>
+				<div class="tab_description_right">
+					<table>
+						<tr>
+							<td>
+								<input type="button" id="sub_regresar" value="<s:text name="regresar"></s:text>" class="btn_oculto">
+							</td>
+							<td>
+								<input type="button" id="sub_guardar_entrada" value="<s:property value="#submit"></s:property>" class="btn_oculto">
+							</td>
+						</tr>
+					</table>				
+				</div>					
+			</div>
+			
+							
 			<ul class="tabs">
 				<li><a href="#tab1"><s:text name="tab1.title"></s:text> </a>
 				</li>
@@ -77,22 +107,8 @@
 				<li><a href="#tab4"><s:text name="tab.resumen"></s:text> </a>
 				</li>
 			</ul>
-			<div class="tab_container">			
-			
-				<s:if test="!modificar">
-					<s:set name="action" var="action">registrarEntrada</s:set>
-					<s:set name="modificar" value="%{false}" />
-					<s:set name="submit" var="submit">
-						<s:text name="form.entrada.guardar"/>
-					</s:set>
-				</s:if>
-				<s:else>
-					<s:set name="action" var="action">modificarEntrada</s:set>
-					<s:set name="modificar" value="%{true}" />
-					<s:set name="submit" var="submit">
-						<s:text name="form.entrada.modificar"/>
-					</s:set>
-				</s:else>
+			<div class="tab_container">					
+				
 				<!-- Formulario para registrar o modificar entrada -->
 				<div id="tab2" class="tab_content">				
 				<table>
@@ -108,10 +124,10 @@
 						</h5>
 						</td>						
 						<td align="right">
-						<form action="prepararEntradas" method="POST">
+						<form action="prepararEntradas" method="POST" name="f_regresar">
 							<s:hidden name="id_servicio_informacion"></s:hidden>
 							<s:hidden name="id_funcionalidad"></s:hidden>
-							<input type="submit" value="<s:text name="regresar"></s:text>">
+							<input type="submit" value="<s:text name="regresar"></s:text>" id="btn_regresar"/>
 						</form>
 						</td>
 					</tr>
@@ -216,7 +232,7 @@
 						<s:hidden name="modificar"/>
 						<s:hidden name="complejo"/>
 						<input type="submit"
-							value="<s:property value="#submit"></s:property>" />
+							value="<s:property value="#submit"></s:property>" id="btn_guardar_entrada"/>
 													
 				</form>
 				</div>
