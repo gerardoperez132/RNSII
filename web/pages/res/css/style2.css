@@ -3523,3 +3523,7 @@ div.middleContent {
 	padding-left: 15px;
 	cursor: pointer;
 }
+
+.btn_oculto{	
+	display: none;
+}

@@ -160,3 +160,11 @@ ul#pagination-flickr {
 	margin-top: 11%;
 	margin-left: 21%;
 }
+
+.tab_description_io {	
+	border-top: none;		
+	clear: both;
+	float: left;
+	width: 98%;
+	background: #fff;	
+}
