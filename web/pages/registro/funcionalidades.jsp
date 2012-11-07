@@ -79,7 +79,7 @@
 									<s:hidden name="id_servicio_informacion"></s:hidden>
 									<s:hidden name="modificar"></s:hidden>
 									<s:token name="token" />
-									<input type="submit" value="<s:text name="funcionalidad.add"/>" />
+									<input type="submit" value="<s:text name="funcionalidad.add"/>" <s:if test="funcionalidades.size == 0">disabled="disabled"</s:if>/>
 								</form>
 							</td>							
 						</tr>
@@ -154,7 +154,7 @@
 											<s:hidden name="id_servicio_informacion"/>
 											<s:hidden name="modificar"/>
 											<s:token name="token" />
-											<input type="submit" value="<s:text name="crear.funcionalidad"/>" />
+											<input type="submit" value="<s:text name="crear.funcionalidad"/>" <s:if test="funcionalidades.size > 0">disabled="disabled"</s:if> />
 										</form>
 									</th>
 								</tr>
