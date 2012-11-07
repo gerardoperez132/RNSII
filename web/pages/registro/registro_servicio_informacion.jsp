@@ -210,15 +210,16 @@
 					<small class="form_small"><s:text name="tab2.description"></s:text> </small>
 					</div>
 					<div class="tab_description_right">
-					<form action="prepararDescripcionTecnica">
-						<input type="submit" class="tab_submit" value='<s:property value="#submit"/>' />
-					</form>					
-					</div>					
+					<!-- No available -->
+					</div>
 				</div>
 				<div class="tab_container_height tab_container">
 					<div id="tab2" class="tab_content">
 						<form action="<s:property value="#action"/>" method="post"
-							enctype="multipart/form-data" id="formSI_Tab2" name="formSI_Tab2">							
+							enctype="multipart/form-data" id="formSI_Tab2" name="formSI_Tab2">
+							<h5 class="formulario">
+								<s:text name="tab2.info"/>
+							</h5>							
 							<h5 class="formulario">
 								<s:text name="documento.name" />
 							</h5>
