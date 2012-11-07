@@ -498,13 +498,7 @@
 		</action>
 
 		<!-- Actions para usuarios -->
-		<action name="configuracionUsuario" method="configuracion"
-			class="ve.gob.cnti.srsi.controlador.UsuarioControlador">
-			<result name="success">registro/formulario_usuario.jsp</result>
-			<result name="errorSession" type="redirectAction">home</result>
-			<result name="error">error.jsp</result>
-		</action>
-
+		
 		<action name="modificarClave" method="modificarClave"
 			class="ve.gob.cnti.srsi.controlador.UsuarioControlador">
 			<result name="success">registro/formulario_usuario.jsp</result>

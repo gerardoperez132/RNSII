@@ -114,7 +114,12 @@
 								</tr>
 								<tr>
 									<td><s:text name="usuario.modificar.cedula" /></td>
-									<td><s:textfield name="usuario.cedula" id="cedula" maxlength="9" /></td>
+									<td>																				
+										<s:select name="usuario.nacionalidad" id="usuario.nacionalidad"
+										   list="nacionalidad" listKey="id_nacionalidad"
+										   listValue="nombre" ></s:select>
+										<s:textfield name="usuario.cedula" id="cedula" maxlength="9" style="width: 130px;"/>										
+									</td>
 									<td><h5 class="requerido">*</h5></td>
 									<td><span id="cedula_required"></span> <s:fielderror>
 											<s:param>cedula</s:param>
@@ -132,25 +137,9 @@
 				</s:elseif>
 				<s:else>
 					<div class="administracion_capa">
-						<span class="ok_pass"><s:actionmessage /></span>
-						<table>
-							<tr>
-								<td>
-									<form action="prepararFormulario" method="POST">
-										<s:hidden name="modificarClave" value="%{true}"/>
-										<input type="submit" value="<s:text name="usuario.modificar.clave"/>">
-									</form>
-								</td>
-								<td>
-									<form action="prepararFormulario" method="POST">
-										<s:hidden name="modificarDatos" value="%{true}"/>
-										<input type="submit" value="<s:text name="usuario.modificar.datos"/>">
-									</form>
-								</td>
-							</tr>
-						</table>
+						<span class="ok_pass"><s:actionmessage /></span>						
 					</div>
-				</s:else>
+				</s:else>				
 			</div>
 		</div>
 		<div style="clear: both"></div>

@@ -168,8 +168,8 @@ $(document).ready(function() {
 			$('#cedula_required').attr('class', 'error_pass');
             error = true;
         }else if($.isNumeric($("#cedula").val()) == true){
-        	if($("#cedula").val().length < 4 || $("#cedula").val().length > 9){
-	        	$('#cedula_required').html(data['errores']['error.cedula.range']); 
+        	if(!$("#cedula").val() > 0){
+	        	$('#cedula_required').html(data['errores']['error.cedula.invalid']); 
 				$('#cedula_required').attr('class', 'error_pass');
 	            error = true;
         	}
