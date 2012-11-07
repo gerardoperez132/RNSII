@@ -6,6 +6,21 @@ var data;
 $(document).ready(function() {	
 	
 	/*
+	 * Desabilitando el boton de enviar formulario
+	 */
+	$("#btn_submit").attr('disabled',true);
+	
+	/*
+	 * habilitando el boton submit si alguno de los campos es presionado
+	 */
+	$("#sector").change(function(){ $("#btn_submit").attr('disabled',false);});
+	$("#servicio\\.nombre").keypress(function(){ $("#btn_submit").attr('disabled',false);});
+	$("#servicio\\.descripcion").keypress(function(){ $("#btn_submit").attr('disabled',false);});
+	$("#area").change(function(){ $("#btn_submit").attr('disabled',false);});
+	$("#estado").change(function(){ $("#btn_submit").attr('disabled',false);});
+
+	
+	/*
 	 * Obteniendo los valores de intercionalización del archivo JSON
 	 */
 	$.ajax({
@@ -137,4 +152,7 @@ $(document).ready(function() {
 	    		email:data['errores']['error.regex.email']}
 	    }
 	});
+	
+	
+	
 });

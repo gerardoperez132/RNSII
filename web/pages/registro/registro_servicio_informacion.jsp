@@ -145,7 +145,7 @@
 					<small class="form_small"><s:text name="tab1.description"></s:text> </small>
 					</div>
 					<div class="tab_description_right">
-					<input type="submit" class="tab_submit" value='<s:property value="#submit"/>' />
+					<input type="submit" class="tab_submit" value='<s:property value="#submit"/>' id="btn_submit"/>
 					</div>					
 				</div>
 				<div class="tab_container_height tab_container">
@@ -167,7 +167,9 @@
 							<s:fielderror>
 								<s:param>servicio.nombre</s:param>
 							</s:fielderror>
+							
 							<s:textfield name="servicio.nombre" id='servicio.nombre'/>
+							
 							<h5 class="formulario">
 								<s:text name="descripcion.title"></s:text>
 							</h5>
