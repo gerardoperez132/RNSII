@@ -9,6 +9,21 @@ var isFormato;
 $(document).ready(function() {	
 	
 	/*
+	 * Ocultando botones submit del formulario y mostrando
+	 * los botones que están en la descripción
+	 */
+	 $("#btn_guardar_entrada").hide();
+	 $("#btn_regresar").hide();
+	 $("#sub_regresar").show();
+	 $("#sub_guardar_entrada").show();
+	 
+	 /*
+	  * Botones que envian los formularios
+	  */
+	 $("#sub_regresar").click(function(){document.f_regresar.submit() ;});
+	 $("#sub_guardar_entrada").click(function(){document.formES.submit() ;});
+	
+	/*
 	 * Obteniendo los valores de intercionalización del archivo JSON
 	 */
 	$.ajax({
