@@ -131,10 +131,10 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		areas = (List<Area>) read(new Area());
 		id_servicio_informacion = getNextId(servicio);
 		setNuevo(true);
-		if(cleanSessionStack().equals("error"))
-			return "errorSession";	
-		if(setSessionStack().equals("error"))
-			return "errorSession";			
+		if (cleanSessionStack().equals("error"))
+			return "errorSession";
+		if (setSessionStack().equals("error"))
+			return "errorSession";
 		return SUCCESS;
 	}
 
@@ -142,8 +142,8 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	@SkipValidation
 	public String prepararDescripcionGeneral() {
 		getTiempoFecha();
-		if(getSessionStack(isValidate).equals("error"))
-			return "errorSession";		
+		if (getSessionStack(isValidate).equals("error"))
+			return "errorSession";
 		if (isComplete(servicio))
 			setModificar(true);
 		tab = DESCRIPCION_GENERAL;
@@ -158,8 +158,8 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	@SkipValidation
 	public String prepararAspectosLegales() {
 		getTiempoFecha();
-		if(getSessionStack(isValidate).equals("error"))
-			return "errorSession";	
+		if (getSessionStack(isValidate).equals("error"))
+			return "errorSession";
 		try {
 			files = (List<AspectoLegal>) read(ALSI, id_servicio_informacion, -1);
 			if (isComplete(servicio))
@@ -175,7 +175,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	@SkipValidation
 	public String prepararDescripcionTecnica() {
 		getTiempoFecha();
-		if(getSessionStack(isValidate).equals("error"))
+		if (getSessionStack(isValidate).equals("error"))
 			return "errorSession";
 		if (isComplete(servicio))
 			setModificar(true);
@@ -190,7 +190,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	@SkipValidation
 	public String prepararDescripcionSoporte() {
 		getTiempoFecha();
-		if(getSessionStack(isValidate).equals("error"))
+		if (getSessionStack(isValidate).equals("error"))
 			return "errorSession";
 		if (isComplete(servicio)) {
 			setModificar(true);
@@ -279,7 +279,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 				System.out.println("Error guardando las áreas");
 			}
 		}
-		if(setSessionStack().equals("error"))
+		if (setSessionStack().equals("error"))
 			return "errorSession";
 		return SUCCESS;
 	}
@@ -363,7 +363,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 
 	public String deleteFile() {
 		getTiempoFecha();
-		if(getSessionStack(isValidate).equals("error"))
+		if (getSessionStack(isValidate).equals("error"))
 			return "errorSession";
 		AspectoLegal documento = (AspectoLegal) read(new AspectoLegal(),
 				id_aspecto_legal);
@@ -464,7 +464,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 					.getId_usuario());
 			createUnion(unionArquitecturaServicioInformacion);
 		}
-		if(setSessionStack().equals("error"))
+		if (setSessionStack().equals("error"))
 			return "errorSession";
 		return SUCCESS;
 	}
@@ -472,60 +472,69 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	public String registrarDescripcionSoporte()
 			throws IllegalArgumentException, SecurityException,
 			IllegalAccessException, InvocationTargetException,
-			NoSuchMethodException {		
+			NoSuchMethodException {
 		getTiempoFecha();
-		
-		/*	Recuperando de la sesión la variables modificar yid_servicio_informacion 
-		 * 	necesarias para el registro
+
+		/*
+		 * Recuperando de la sesión la variables modificar
+		 * yid_servicio_informacion necesarias para el registro
 		 */
 		try {
 			setModificar((Boolean) session.get("modificar"));
 			setId_servicio_informacion((Long) session
 					.get("id_servicio_informacion"));
-		} catch (Exception e) {}
-		
-		//Creando objetos temporales para el registro de una petición de creación ó modificación. 
+		} catch (Exception e) {
+		}
+
+		// Creando objetos temporales para el registro de una petición de
+		// creación ó modificación.
 		Telefono phone = new Telefono();
 		Correo email = new Correo();
-		
-		/*	Creando variables temporales para utilizarlas en el caso de que el registro sea una
-		 *	modificación y tener respaldo de los valores que lleggan del formulario y se pierden
-		 *	al utilizar el getSessionStack(false); 
+
+		/*
+		 * Creando variables temporales para utilizarlas en el caso de que el
+		 * registro sea una modificación y tener respaldo de los valores que
+		 * lleggan del formulario y se pierden al utilizar el
+		 * getSessionStack(false);
 		 */
 		String responsable = servicio.getResponsable();
 		String telefono_tmp = telefono;
 		String email_tmp = correo;
 		String codigo_tmp = codigo;
-		
-		/*	Asignando los valores del teléfono, usados en la creación de un registro 
-		 * 	teléfono.
+
+		/*
+		 * Asignando los valores del teléfono, usados en la creación de un
+		 * registro teléfono.
 		 */
 		phone.setId_servicio_informacion(id_servicio_informacion);
 		phone.setTelefono(codigo + telefono);
-		
-		/*	Asignando los valores del correo, usados en la creación de un registro 
-		 * 	correo.
+
+		/*
+		 * Asignando los valores del correo, usados en la creación de un
+		 * registro correo.
 		 */
 		email.setId_servicio_informacion(id_servicio_informacion);
 		email.setCorreo(correo);
-		
-		//recuperando los valores de la sesion
+
+		// recuperando los valores de la sesion
 		getSessionStack(false);
-		
-		/*	Asignando los valores de las variables del formulario descripción técnica, 
-		 * 	los cuales son usados si el registro es de modificación.
+
+		/*
+		 * Asignando los valores de las variables del formulario descripción
+		 * técnica, los cuales son usados si el registro es de modificación.
 		 */
 		servicio.setResponsable(responsable);
 		telefono = telefono_tmp;
 		codigo = codigo_tmp;
-		correo = email_tmp;	
-		
-		/*	Bifurcaciones en el que se evalua:
-		 * 	1 - si el registro de es creación se realizan las tareas a cabo.
-		 * 	2 - si el registro es de modificación se intentan recuperar el 
-		 * 		el teléfono y correo del servicio y se evalua:
-		 * 		2.1 - Si el correo y/o el teléfono distintos de null, se actulizan los dato.
-		 * 		2.2 - Si el correo y/o el teléfono son iguales a null, se crean los dato. 
+		correo = email_tmp;
+
+		/*
+		 * Bifurcaciones en el que se evalua: 1 - si el registro de es creación
+		 * se realizan las tareas a cabo. 2 - si el registro es de modificación
+		 * se intentan recuperar el el teléfono y correo del servicio y se
+		 * evalua: 2.1 - Si el correo y/o el teléfono distintos de null, se
+		 * actulizan los dato. 2.2 - Si el correo y/o el teléfono son iguales a
+		 * null, se crean los dato.
 		 */
 		if (!isModificar()) {
 			update(servicio, id_servicio_informacion);
@@ -535,20 +544,26 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			email = getEmail(servicio, id_servicio_informacion);
 			phone = getPhone(servicio, id_servicio_informacion);
 			if (email != null) {
+				System.out.println("Hay un correo ya registrado.");
 				email.setId_servicio_informacion(id_servicio_informacion);
 				email.setCorreo(correo);
 				update(email, email.getId_correo());
 			} else {
+				System.out
+						.println("No hay un correo registrado, creo uno nuevo.");
 				email = new Correo();
 				email.setId_servicio_informacion(id_servicio_informacion);
 				email.setCorreo(correo);
 				create(email);
 			}
 			if (phone != null) {
+				System.out.println("Hay un teléfono ya registrado.");
 				phone.setId_servicio_informacion(id_servicio_informacion);
 				phone.setTelefono(codigo + telefono);
 				update(phone, phone.getId_telefono());
 			} else {
+				System.out
+						.println("No hay un teléfono registrado, creo uno nuevo.");
 				phone = new Telefono();
 				phone.setId_servicio_informacion(id_servicio_informacion);
 				phone.setTelefono(codigo + telefono);
@@ -556,10 +571,11 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			}
 			update(servicio, id_servicio_informacion);
 		}
-		/*	Colocando los valores del formulario recien creado ó modificado
-		 * 	para que esten disponibles para el resto de las pestañas
+		/*
+		 * Colocando los valores del formulario recien creado ó modificado para
+		 * que esten disponibles para el resto de las pestañas
 		 */
-		if(setSessionStack().equals("error"))
+		if (setSessionStack().equals("error"))
 			return "errorSession";
 		return SUCCESS;
 	}
@@ -661,15 +677,21 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 						"telefono",
 						error.getProperties().getProperty(
 								"error.servicio.telefono.regex"));
-			if (codigo==null)
-				addFieldError("telefono",
-						error.getProperties().getProperty("error.servicio.codigo"));
+			if (codigo == null)
+				addFieldError(
+						"telefono",
+						error.getProperties().getProperty(
+								"error.servicio.codigo"));
 			if (codigo.length() != 3)
-				addFieldError("telefono",
-						error.getProperties().getProperty("error.servicio.codigo.digit"));
+				addFieldError(
+						"telefono",
+						error.getProperties().getProperty(
+								"error.servicio.codigo.digit"));
 			if (!codigo.matches("\\d.*") && !codigo.trim().isEmpty())
-				addFieldError("telefono",
-						error.getProperties().getProperty("error.servicio.codigo.digit"));			
+				addFieldError(
+						"telefono",
+						error.getProperties().getProperty(
+								"error.servicio.codigo.digit"));
 			if (correo.trim().isEmpty())
 				addFieldError(
 						"correo",
@@ -677,7 +699,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 								"error.servicio.correo"));
 			if (!correo.matches(REGEX_EMAIL))
 				addFieldError("correo",
-						error.getProperties().getProperty("error.regex.email"));			
+						error.getProperties().getProperty("error.regex.email"));
 			prepararDescripcionSoporte();
 			break;
 		default:
@@ -705,13 +727,13 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			session.put("id_servicio_informacion", id_servicio_informacion);
 		} catch (Exception e) {
 			return "error";
-		}	
+		}
 		return "";
 	}
 
 	@SuppressWarnings("unchecked")
 	private String getSessionStack(boolean isValidate) {
-		session = ActionContext.getContext().getSession();		
+		session = ActionContext.getContext().getSession();
 		if (!isValidate) {
 			try {
 				servicio = (ServicioInformacion) session.get("servicio");
@@ -740,7 +762,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		return "";
 	}
 
-	private String cleanSessionStack() {		
+	private String cleanSessionStack() {
 		try {
 			session = ActionContext.getContext().getSession();
 			session.remove("servicio");
@@ -932,7 +954,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		children = (List<Intercambio>) getChildren(new Intercambio());
 		setModificar(true);
 		files = (List<AspectoLegal>) read(ALSI, id_servicio_informacion, -1);
-		if(setSessionStack().equals("error"))
+		if (setSessionStack().equals("error"))
 			return "errorSession";
 		prepararDescripcionGeneral();
 		return SUCCESS;
