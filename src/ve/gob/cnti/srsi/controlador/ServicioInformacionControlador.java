@@ -759,7 +759,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		} catch (Exception e) {
 			return "error";
 		}
-		return "error";
+		return "";
 	}
 
 	// Examinar
