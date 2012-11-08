@@ -540,9 +540,14 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			update(servicio, id_servicio_informacion);
 			create(phone);
 			create(email);
+			setModificar(true);
+			setNuevo(false);
 		} else {
+			System.out.println("SERVICIO OBJETO => " + servicio.toString());
 			email = getEmail(servicio, id_servicio_informacion);
+			System.out.println("EMAIL NO FALLÓ => " + email.getCorreo());
 			phone = getPhone(servicio, id_servicio_informacion);
+			System.out.println("PHONE NO FALLÓ => " + phone.getTelefono());
 			if (email != null) {
 				System.out.println("Hay un correo ya registrado.");
 				email.setId_servicio_informacion(id_servicio_informacion);
