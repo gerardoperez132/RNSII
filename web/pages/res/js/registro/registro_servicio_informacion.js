@@ -13,12 +13,22 @@ $(document).ready(function() {
 	/*
 	 * habilitando el boton submit si alguno de los campos es presionado
 	 */
+	//tab1
 	$("#sector").change(function(){ $("#btn_submit").attr('disabled',false);});
 	$("#servicio\\.nombre").keypress(function(){ $("#btn_submit").attr('disabled',false);});
 	$("#servicio\\.descripcion").keypress(function(){ $("#btn_submit").attr('disabled',false);});
-	$("#area").change(function(){ $("#btn_submit").attr('disabled',false);});
+	$('[name="area"]').click(function(){$("#btn_submit").attr('disabled',false);});
 	$("#estado").change(function(){ $("#btn_submit").attr('disabled',false);});
-
+	//tab3 
+	$("#seguridad").change(function(){ $("#btn_submit").attr('disabled',false);});
+	$('[name="arquitectura"]').click(function(){$("#btn_submit").attr('disabled',false);});
+	$("#servicio\\.version").keypress(function(){ $("#btn_submit").attr('disabled',false);});
+	$("#intercambio").change(function(){ $("#btn_submit").attr('disabled',false);});
+	$("#wsdl").keypress(function(){ $("#btn_submit").attr('disabled',false);});
+	//tab4
+	$("#servicio\\.responsable").keypress(function(){ $("#btn_submit").attr('disabled',false);});
+	$("#telefono").keypress(function(){ $("#btn_submit").attr('disabled',false);});
+	$("#correo").keypress(function(){ $("#btn_submit").attr('disabled',false);});
 	
 	/*
 	 * Obteniendo los valores de intercionalización del archivo JSON
