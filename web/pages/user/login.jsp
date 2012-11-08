@@ -82,7 +82,7 @@
 					</tr>
 					<tr>
 						<td></td>
-						<td><img src="user/captcha.jsp" id="captcha"></td>
+						<td><img src="get_captcha.action" id="captcha"></td>
 						<td></td>
 					</tr>
 					<tr>
