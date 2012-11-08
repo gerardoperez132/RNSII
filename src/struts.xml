@@ -52,6 +52,7 @@
 			<result name="success">
 				registro/registro_servicio_informacion.jsp
 			</result>
+			<result name="errorSession">error_sesion.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
@@ -60,6 +61,7 @@
 			<result name="success">
 				registro/registro_servicio_informacion.jsp
 			</result>
+			<result name="errorSession">error_sesion.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
@@ -71,7 +73,7 @@
 			</result>
 			<result name="input">registro/registro_servicio_informacion.jsp
 			</result>
-			<result name="errorSession" type="redirectAction">home</result>
+			<result name="errorSession">error_sesion.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
@@ -79,6 +81,7 @@
 			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
 			<result name="success">registro/registro_servicio_informacion.jsp
 			</result>
+			<result name="errorSession">error_sesion.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
@@ -91,7 +94,7 @@
 			</result>
 			<result name="input">registro/registro_servicio_informacion.jsp
 			</result>
-			<result name="errorSession" type="redirectAction">home</result>
+			<result name="errorSession">error_sesion.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
@@ -107,6 +110,7 @@
 			<result name="invalid.token" type="redirectAction">
 				prepararAspectosLegales
 			</result>
+			<result name="errorSession">error_sesion.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
@@ -114,6 +118,7 @@
 			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
 			<result name="success">registro/registro_servicio_informacion.jsp
 			</result>
+			<result name="errorSession">error_sesion.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
@@ -125,7 +130,7 @@
 			<result name="invalid.token">registro/registro_servicio_informacion.jsp
 			</result>
 			<result name="input">registro/registro_servicio_informacion.jsp</result>
-			<result name="errorSession" type="redirectAction">home</result>
+			<result name="errorSession">error_sesion.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
@@ -133,6 +138,7 @@
 			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
 			<result name="success">registro/registro_servicio_informacion.jsp
 			</result>
+			<result name="errorSession">error_sesion.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
@@ -144,31 +150,35 @@
 			</result>
 			<result name="input">registro/registro_servicio_informacion.jsp
 			</result>
-			<result name="errorSession" type="redirectAction">home</result>
+			<result name="errorSession">error_sesion.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="eliminarServicioInformacion" method="eliminarServicioInformacion"
 			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
 			<result name="success" type="redirectAction">home</result>
+			<result name="errorSession">error_sesion.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="publicarServicioInformacion" method="publicarServicioInformacion"
 			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
 			<result name="success" type="redirectAction">home</result>
+			<result name="errorSession">error_sesion.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="despublicarServicioInformacion" method="despublicarServicioInformacion"
 			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
 			<result name="success" type="redirectAction">home</result>
+			<result name="errorSession">error_sesion.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="examinarServicioInformacion" method="examinarServicioInformacion"
 			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
 			<result name="success">user/examinarServicio.jsp</result>
+			<result name="errorSession">error_sesion.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
@@ -176,6 +186,7 @@
 			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
 			<result name="success">registro/registro_servicio_informacion.jsp
 			</result>
+			<result name="errorSession">error_sesion.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
@@ -184,7 +195,7 @@
 			<result name="success">registro/funcionalidades.jsp</result>
 			<result name="input">registro/registro_servicio_informacion.jsp
 			</result>
-			<result name="errorSession" type="redirectAction">home</result>
+			<result name="errorSession">error_sesion.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
@@ -192,13 +203,14 @@
 			class="ve.gob.cnti.srsi.controlador.ConsultasControlador">
 			<result name="success">registro/suscripcion.jsp</result>
 			<result name="input">registro/suscripcion.jsp</result>
+			<result name="errorSession">error_sesion.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="Servicio" method="examinarServicioInformacion"
 			class="ve.gob.cnti.srsi.controlador.ConsultasControlador">
 			<result name="success">registro/suscripcion.jsp</result>
-			<result name="input" type="redirectAction">home</result>
+			<result name="errorSession">error_sesion.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
