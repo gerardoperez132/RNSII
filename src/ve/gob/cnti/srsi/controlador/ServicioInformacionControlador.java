@@ -542,24 +542,24 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			create(email);
 			setModificar(true);
 			setNuevo(false);
-		} else {			
-			email = getEmail(new ServicioInformacion(), id_servicio_informacion);			
-			phone = getPhone(new ServicioInformacion(), id_servicio_informacion);			
-			if (email != null) {				
+		} else {
+			email = getEmail(new ServicioInformacion(), id_servicio_informacion);
+			phone = getPhone(new ServicioInformacion(), id_servicio_informacion);
+			if (email != null) {
 				email.setId_servicio_informacion(id_servicio_informacion);
 				email.setCorreo(correo);
 				update(email, email.getId_correo());
-			} else {				
+			} else {
 				email = new Correo();
 				email.setId_servicio_informacion(id_servicio_informacion);
 				email.setCorreo(correo);
 				create(email);
 			}
-			if (phone != null) {				
+			if (phone != null) {
 				phone.setId_servicio_informacion(id_servicio_informacion);
 				phone.setTelefono(codigo + telefono);
 				update(phone, phone.getId_telefono());
-			} else {				
+			} else {
 				phone = new Telefono();
 				phone.setId_servicio_informacion(id_servicio_informacion);
 				phone.setTelefono(codigo + telefono);
