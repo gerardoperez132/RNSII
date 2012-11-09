@@ -12,23 +12,27 @@ $(document).ready(function() {
 	
 	/*
 	 * habilitando el boton submit si alguno de los campos es presionado
+	 * y todos los demas campos estan completos.
 	 */
 	//tab1
-	$("#sector").change(function(){ $("#btn_submit").attr('disabled',false);});
-	$("#servicio\\.nombre").keypress(function(){ $("#btn_submit").attr('disabled',false);});
-	$("#servicio\\.descripcion").keypress(function(){ $("#btn_submit").attr('disabled',false);});
-	$('[name="area"]').click(function(){$("#btn_submit").attr('disabled',false);});
-	$("#estado").change(function(){ $("#btn_submit").attr('disabled',false);});
+	$("#sector").change(function(){tab1_validate();});
+	$("#servicio\\.nombre").keypress(function(){tab1_validate();});
+	$("#servicio\\.descripcion").keypress(function(){tab1_validate();});
+	$('[name="area"]').click(function(){tab1_validate();});
+	$("#estado").change(function(){tab1_validate();});
 	//tab3 
-	$("#seguridad").change(function(){ $("#btn_submit").attr('disabled',false);});
-	$('[name="arquitectura"]').click(function(){$("#btn_submit").attr('disabled',false);});
-	$("#servicio\\.version").keypress(function(){ $("#btn_submit").attr('disabled',false);});
-	$("#intercambio").change(function(){ $("#btn_submit").attr('disabled',false);});
-	$("#wsdl").keypress(function(){ $("#btn_submit").attr('disabled',false);});
+	$("#seguridad").change(function(){tab3_validate();});
+	$('[name="arquitectura"]').click(function(){tab3_validate();});
+	$("#servicio\\.version").keypress(function(){tab3_validate();});
+	$("#intercambio").change(function(){tab3_validate();});	
 	//tab4
-	$("#servicio\\.responsable").keypress(function(){ $("#btn_submit").attr('disabled',false);});
-	$("#telefono").keypress(function(){ $("#btn_submit").attr('disabled',false);});
-	$("#correo").keypress(function(){ $("#btn_submit").attr('disabled',false);});
+	$("#servicio\\.responsable").keyup(function(){tab4_validate();});
+	$("#telefono").keyup(function(){
+		var no_digito = /\D/g; 
+		this.value = this.value.replace(no_digito , ''); 
+		tab4_validate();
+	});
+	$("#correo").keyup(function(){tab4_validate();});
 	
 	/*
 	 * Obteniendo los valores de intercionalización del archivo JSON
@@ -163,6 +167,86 @@ $(document).ready(function() {
 	    }
 	});
 	
+	//Valida que todos los campos del tab1 esten completos antes de activar el boton submit.
+	function tab1_validate(){
+		var iscomplete = true;
+		if($("#sector").val()==-1){
+			iscomplete =  false;
+		}		
+		if($("#servicio\\.nombre").val()==""){
+			iscomplete =  false;
+		}
+		if($("#servicio\\.descripcion").val()==""){
+			iscomplete =  false;
+		}
+		if(!input_checkbox_validate($('[name="area"]'))){
+			iscomplete =  false;
+		}
+		if($("#estado").val()==-1){
+			iscomplete =  false;
+		}		
+		if(iscomplete){
+			$("#btn_submit").attr('disabled',false);
+		}else{
+			$("#btn_submit").attr('disabled',true);
+		}
+	}
 	
+	//Valida que todos los campos del tab3 esten completos antes de activar el boton submit.
+	function tab3_validate(){		
+		var iscomplete = true;
+		if($("#seguridad").val()==-1){
+			iscomplete =  false;
+		}		
+		if($("#servicio\\.version").val()==""){
+			iscomplete =  false;
+		}		
+		if(!input_checkbox_validate($('[name="arquitectura"]'))){
+			iscomplete =  false;
+		}
+		if($("#intercambio").val()==-1){
+			iscomplete =  false;
+		}		
+		if(iscomplete){
+			$("#btn_submit").attr('disabled',false);
+		}else{
+			$("#btn_submit").attr('disabled',true);
+		}
+	}
+	
+	//Valida que todos los campos del tab4 esten completos antes de activar el boton submit.
+	function tab4_validate(){		
+		var iscomplete = true;			
+		if($("#servicio\\.responsable").val()==""){
+			iscomplete =  false;
+		}
+		if($("#telefono").val()==""){
+			iscomplete =  false;
+		}
+		if($("#correo").val()==""){
+			iscomplete =  false;
+		}
+		if(iscomplete){
+			$("#btn_submit").attr('disabled',false);
+		}else{
+			$("#btn_submit").attr('disabled',true);
+		}
+	}
+	
+	//Función que valida de que almenos un elemento de un grupo de checkbox este
+	//selecionado.
+	function input_checkbox_validate(checkbox_s) {
+		//Con esta variable se accede a cada elemento del grupo del checkbox
+		//al ir recorriendo el grupo 
+		var lcheck;
+	    for (var i = 0; lcheck = checkbox_s[i]; i++) {
+	    	//Se examina el elemento con el método checked y si esta este retorna
+	    	//true, se termina la busqueda. 
+	        if (lcheck.checked) {
+	            return true;
+	        }
+	    }
+	    return false;
+	}
 	
 });
