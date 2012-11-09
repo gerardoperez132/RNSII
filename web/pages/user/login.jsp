@@ -18,8 +18,7 @@
 				<tr>
 					<td>
 						<div class="enlace_home">
-							<a href="home">
-								<s:text name="back.registration" />
+							<a href="home"> <s:text name="back.registration" />
 							</a>
 						</div>
 					</td>
@@ -29,8 +28,7 @@
 				<tr>
 					<td>
 						<div class="enlace_home">
-							<a href="SRSI">
-								<s:text name="back.home" />
+							<a href="SRSI"> <s:text name="back.home" />
 							</a>
 						</div>
 					</td>
@@ -39,8 +37,7 @@
 			<tr>
 				<td>
 					<div class="enlace_home">
-						<a href="<s:url action="salir"/>">
-							<s:text name="salir" />
+						<a href="<s:url action="salir"/>"> <s:text name="salir" />
 						</a>
 					</div>
 				</td>
@@ -159,10 +156,19 @@
 					</tr>
 					<tr>
 						<td></td>
-						<td><img src="get_captcha.action" id="captcha"></td>
+						<td><a onclick="reloadIt()">Refresh</a></td>
+						<td><img src="get_captcha.action" id="captcha" alt="Captcha"></td>
 						<td></td>
-
 					</tr>
+					<script type="text/javascript">
+						function reloadIt() {
+							if (document.getElementById("captcha")) {
+								document.getElementById("captcha").src = document
+										.getElementById("captcha").src;
+							}
+						}
+						window.onload = reloadIt();
+					</script>
 					<tr>
 						<td colspan="3" align="right" style="padding-right: 28px;"><input
 							type="submit" class="submit" value="<s:text name="entrar" />" />
