@@ -80,7 +80,7 @@
 						<td><input type="text" name="captcha" maxlength="6" /></td>
 						<td></td>
 					</tr>
-					<tr>
+					<tr>					
 						<td></td>
 						<td><img src="get_captcha.action" id="captcha"></td>
 						<td></td>

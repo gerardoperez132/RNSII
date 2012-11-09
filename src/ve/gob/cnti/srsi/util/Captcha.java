@@ -64,7 +64,7 @@ public class Captcha extends ActionSupport implements SessionAware {
             d.drawString(tmp + "", x, random.nextInt(image.getHeight() - (font.getSize())) + (font.getSize()));
         }              
         d.setColor(Color.white);
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 10; i++) {
             d.drawLine(random.nextInt(image.getWidth()), random.nextInt(image.getHeight()), random.nextInt(image.getWidth()),
                     random.nextInt(image.getHeight()));
         }
