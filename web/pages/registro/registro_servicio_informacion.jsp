@@ -425,8 +425,7 @@
 								<tr>
 									<td><s:select name="codigo" list="codigos" /></td>
 									<td><s:textfield name="telefono" labelposition="top"
-											maxlength="7" id="telefono"
-											onkeyup="var no_digito = /\D/g; this.value = this.value.replace(no_digito , '');" />
+											maxlength="7" id="telefono"	/>
 									</td>
 								</tr>
 							</table>
