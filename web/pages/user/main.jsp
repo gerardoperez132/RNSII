@@ -138,16 +138,16 @@
 												<s:if test="publicable">
 													<td style="margin: 0; padding: 0;">
 														<s:if test="!servicio.publicado">
-															<form action="publicarServicioInformacion" method="POST" id="id_pub_<s:property value="#result_datos.index"/>" onsubmit="return false;">
+															<!-- <form action="publicarServicioInformacion" method="POST" id="id_pub_<s:property value="#result_datos.index"/>" onsubmit="return false;">
 																<s:hidden name="id_servicio_informacion" value="%{servicio.id_servicio_informacion}"/>
 																<input type="submit" style="font-size: 0.9em;" value="<s:text name="publicar"/>" onclick="publicar_SI(<s:property value="#i"/>,'<s:property value="servicio.nombre" />');" />
-															</form>
+															</form>-->
 														</s:if>
 														<s:else>
-															<form action="despublicarServicioInformacion" method="POST" id="id_despub_<s:property value="#result_datos.index"/>" onsubmit="return false;">
+															<!-- <form action="despublicarServicioInformacion" method="POST" id="id_despub_<s:property value="#result_datos.index"/>" onsubmit="return false;">
 																<s:hidden name="id_servicio_informacion" value="%{servicio.id_servicio_informacion}"/>
 																<input type="submit" value="<s:text name="despublicar" />" style="font-size: 0.9em;" onclick="despublicar_SI(<s:property value="#i"/>,'<s:property value="servicio.nombre" />');" />
-															</form>
+															</form>-->
 														</s:else>
 													</td>
 												</s:if>
