@@ -49,13 +49,8 @@ public class Captcha extends ActionSupport implements SessionAware {
         Font font = new Font("Arial", Font.BOLD, 24);
         int distance = distance_charc;
         Graphics d = image.getGraphics();
-        d.setColor(Color.LIGHT_GRAY);
+        d.setColor(Color.LIGHT_GRAY); 
         d.fillRect(0, 0, image.getWidth(), image.getHeight());
-        d.setColor(Color.white);
-        for (int i = 0; i < 10; i++) {
-            d.drawLine(random.nextInt(image.getWidth()), random.nextInt(image.getHeight()), random.nextInt(image.getWidth()),
-                    random.nextInt(image.getHeight()));
-        }
         d.setColor(Color.BLACK);
         d.setFont(font);
         String checkCode = "";
@@ -67,6 +62,11 @@ public class Captcha extends ActionSupport implements SessionAware {
             x = x + distance;
             d.setColor(new Color(random.nextInt(100) + 50, random.nextInt(100) + 50, random.nextInt(100) + 50));
             d.drawString(tmp + "", x, random.nextInt(image.getHeight() - (font.getSize())) + (font.getSize()));
+        }              
+        d.setColor(Color.white);
+        for (int i = 0; i < 20; i++) {
+            d.drawLine(random.nextInt(image.getWidth()), random.nextInt(image.getHeight()), random.nextInt(image.getWidth()),
+                    random.nextInt(image.getHeight()));
         }
         d.dispose();
         try {
