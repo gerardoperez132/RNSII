@@ -271,6 +271,12 @@ public interface Constants {
 		public static final int SALIDAS = 10;
 	}
 
+	/**
+	 * Interfaz con los códigos de los estados de un servicio de información.
+	 * 
+	 * @author Richard Ricciardelli
+	 * 
+	 */
 	public interface Estados {
 		public static final int DESARROLLO = 1;
 		public static final int IMPLEMENTADO = 2;
