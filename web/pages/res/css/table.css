@@ -1,27 +1,32 @@
-table.result { 
+table.result {
 	font: 65% Verdana, Arial, Helvetica, sans-serif;
 	color: #000;
 	text-align: left;
-	border-collapse:  collapse;	
+	border-collapse: collapse;
 	border-top: 2px solid #616161;
 	width: 600px;
 	border-left: 2px solid #616161;
 	border-right: 2px solid #616161;
-	border-bottom: 2px solid #616161;	
+	border-bottom: 2px solid #616161;
 }
+
 tr.odd {
 	background-color: #ebf3ff;
 }
+
 tr a {
 	color: #000000;
 }
+
 tr.hv:hover a {
 	color: #ffffff;
 }
-tr.hv:hover, tr.odd:hover {
+
+tr.hv:hover,tr.odd:hover {
 	background-color: #3d80df;
 	color: #ffffff;
 }
+
 caption {
 	height: 45px;
 	line-height: 44px;
@@ -30,52 +35,56 @@ caption {
 	text-align: center;
 	width: 500px;
 	margin: 0;
-	padding: 0;	
-	background: #ffffff url(../img/table/bbar.gif) repeat-x;			
+	padding: 0;
+	background: #ffffff url(../img/table/bbar.gif) repeat-x;
 }
+
 thead th {
 	font-size: 105%;
 	color: #000;
 	background: #ffffff url(../img/table/tbar.gif) repeat-x;
 	height: 33px;
 }
+
 thead th:hover {
-	background: #ffffff url(../img/table/tbov.gif) repeat-x;	
+	background: #ffffff url(../img/table/tbov.gif) repeat-x;
 }
+
 tr {
 	vertical-align: top;
 }
+
 tr,th,td {
 	padding: .75em;
 }
+
 td {
 	border-left: 1px solid #dadada;
 }
+
 tfoot tr {
 	font-size: 90%;
 	color: #000;
-	background: #ffffff url(../img/table/bbar.gif) repeat-x;	
+	background: #ffffff url(../img/table/bbar.gif) repeat-x;
 }
-tfoot td, tfoot th{
+
+tfoot td,tfoot th {
 	color: #000;
 	border: 0px;
 }
 
-.nohover:HOVER{
+.nohover:HOVER {
 	color: none;
 }
 
-
-table.resultHijos { 
+table.resultHijos {
 	font: 65% Verdana, Arial, Helvetica, sans-serif;
 	color: #000;
 	text-align: left;
-	border-collapse:  collapse;	
+	border-collapse: collapse;
 	border-top: 2px solid #616161;
 	width: 500px;
 	border-left: 2px solid #616161;
 	border-right: 2px solid #616161;
-	border-bottom: 2px solid #616161;	
+	border-bottom: 2px solid #616161;
 }
-
-

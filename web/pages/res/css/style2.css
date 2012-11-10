@@ -758,7 +758,7 @@ div.paginado li a:hover {
 
 .ingresar {
 	height: 210px;
-	position: relative;	
+	position: relative;
 	width: 269px;
 	margin-top: 10px;
 }
@@ -2628,13 +2628,13 @@ background:-moz-linear-gradient(center top , #FFFFFF, #EEEEEE 2px, #FFFFFF 25px)
 }
 
 .BarraEnviar {
-	display: block;	
+	display: block;
 	font-weight: bold;
-	height: auto;	
+	height: auto;
 	margin-right: 10px;
-	padding: 0;	
+	padding: 0;
 	width: 180px;
-	position: absolute;	
+	position: absolute;
 }
 
 .BarraEnviar ul {
@@ -3172,7 +3172,7 @@ a.tooltip:hover {
 	text-decoration: none;
 } /*BG color is a must for IE6*/
 a.tooltip span {
-	display: none;	
+	display: none;
 	width: 180px;
 	padding: 2px 3px;
 	font-size: small;
@@ -3185,7 +3185,7 @@ a.tooltip:hover span {
 	position: absolute;
 	border: 1px solid #cccccc;
 	background: #ffffff;
-	color: #6c6c6c;	
+	color: #6c6c6c;
 }
 
 /*caja de inicio de sesión*/
@@ -3486,18 +3486,18 @@ div.middleContent {
 	display: none;
 }
 
-.form_small{
+.form_small {
 	font-size: 11px;
 	padding-left: 10px;
 }
 
-.enlace_home {	
+.enlace_home {
 	float: left;
 	font-size: 12px;
-	padding: 6px 0 5px 5px;	
+	padding: 6px 0 5px 5px;
 }
 
-.enlace_home a {	
+.enlace_home a {
 	color: #1A5398;
 	float: left;
 	font-weight: 700;
@@ -3510,20 +3510,19 @@ div.middleContent {
 	text-decoration: underline;
 }
 
-
-.btn_menu{
+.btn_menu {
 	background: transparent;
 	color: #999 !important;
 	font-size: 11px;
 	height: 34px;
 	font-family: sans-serif;
-	font-weight: normal;	
+	font-weight: normal;
 	border: 0;
 	border-bottom: 1px dotted #CCC;
 	padding-left: 15px;
 	cursor: pointer;
 }
 
-.btn_oculto{	
+.btn_oculto {
 	display: none;
 }
