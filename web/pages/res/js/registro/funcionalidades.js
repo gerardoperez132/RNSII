@@ -1,5 +1,5 @@
 /**
- * Variable con las claves de internacionalización del arhcivo JSON.
+ * Variable con las claves de internacionalización del archivo JSON.
  */
 var data;
 
