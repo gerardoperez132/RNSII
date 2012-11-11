@@ -41,7 +41,6 @@ import ve.gob.cnti.srsi.modelo.EntradaSalida;
 import ve.gob.cnti.srsi.modelo.Estado;
 import ve.gob.cnti.srsi.modelo.Funcionalidad;
 import ve.gob.cnti.srsi.modelo.Intercambio;
-import ve.gob.cnti.srsi.modelo.RecuperarClave;
 import ve.gob.cnti.srsi.modelo.Sector;
 import ve.gob.cnti.srsi.modelo.Seguridad;
 import ve.gob.cnti.srsi.modelo.ServicioInformacion;
@@ -119,8 +118,8 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 	private boolean hasNext;
 	private List<Integer> pagination = new ArrayList<Integer>();
 	private int mLimit = 9;
-	
-	/*Variables para los mensajes de error o información del controlador login */
+
+	/* Variables para los mensajes de error o información del controlador login */
 	private boolean msj;
 	private boolean recoveryPass;
 	private boolean datosEnviados;
@@ -130,7 +129,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 	private String cuenta;
 
 	@SuppressWarnings("unchecked")
-	public String inicio() {		
+	public String inicio() {
 		getTiempoFecha();
 		listaSectores = listadoSectores(LIMITE_SECTORES, false);
 		// listaSectores2 = listadoSectores(-1, true);
@@ -143,10 +142,10 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 		hasNext = paginate.isHasNext();
 		pagination = paginate.getPagination();
 		listaSectores2 = (List<SectoresMasPublicados>) paginate.getContent();
-		if(cuenta != null){
+		if (cuenta != null) {
 			recoveryPassForm = true;
 		}
-		return SUCCESS;		
+		return SUCCESS;
 	}
 
 	public String inicio404() {
@@ -415,9 +414,9 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 		}
 		return sisVisitados2;
 	}
-	
+
 	@SkipValidation
-	public String prepararRecuperarPass() {		
+	public String prepararRecuperarPass() {
 		recoveryPass = true;
 		inicio();
 		return SUCCESS;
