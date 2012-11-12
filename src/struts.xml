@@ -1,20 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
- * This file is part of SRSI.
- * 
- * SRSI is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- * 
- * SRSI is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with SRSI. If not, see <http://www.gnu.org/licenses/>.
--->
+<!-- * This file is part of SRSI. * * SRSI is free software: you can redistribute 
+	it and/or modify * it under the terms of the GNU General Public License as 
+	published by * the Free Software Foundation, either version 3 of the License, 
+	or * (at your option) any later version. * * SRSI is distributed in the hope 
+	that it will be useful, * but WITHOUT ANY WARRANTY; without even the implied 
+	warranty of * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
+	* GNU General Public License for more details. * * You should have received 
+	a copy of the GNU General Public License * along with SRSI. If not, see <http://www.gnu.org/licenses/>. -->
 <!DOCTYPE struts PUBLIC
 "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
 "http://struts.apache.org/dtds/struts-2.0.dtd">
@@ -304,7 +296,7 @@
 			<result name="success">registro/formulario_entrada.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
-		
+
 		<action name="prepararModificarEntrada" method="prepararModificarEntrada"
 			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
 			<result name="success">registro/formulario_entrada.jsp</result>
@@ -375,7 +367,7 @@
 			<result name="success">registro/formulario_salida.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
-		
+
 		<action name="prepararModificarSalida" method="prepararModificarSalida"
 			class="ve.gob.cnti.srsi.controlador.SalidaControlador">
 			<result name="success">registro/formulario_salida.jsp</result>
@@ -423,9 +415,9 @@
 			class="ve.gob.cnti.srsi.controlador.LoginControlador">
 			<result name="404ERROR" type="redirectAction">error404</result>
 			<result name="input" type="redirectAction">
-			    <param name="actionName">SRSI</param>
-			    <param name="msj">true</param>
-			    <param name="msj_error">${msj_error}</param>
+				<param name="actionName">SRSI</param>
+				<param name="msj">true</param>
+				<param name="msj_error">${msj_error}</param>
 			</result>
 			<result name="success" type="redirectAction">home</result>
 			<result name="accesoInvalido" type="redirectAction">index</result>
@@ -455,18 +447,18 @@
 			class="ve.gob.cnti.srsi.controlador.LoginControlador">
 			<interceptor-ref name="doubleSubmit" />
 			<result name="success" type="redirectAction">
-			    <param name="actionName">SRSI</param>			    
-			    <param name="msj">true</param>
-			    <param name="msj_actionInfo">%{msj_actionInfo}</param>			    
+				<param name="actionName">SRSI</param>
+				<param name="msj">true</param>
+				<param name="msj_actionInfo">%{msj_actionInfo}</param>
 			</result>
 			<result name="invalid.token" type="redirectAction">
-			    <param name="actionName">SRSI</param>
+				<param name="actionName">SRSI</param>
 			</result>
 			<result name="input" type="redirectAction">
-			    <param name="actionName">SRSI</param>			    
-			    <param name="recoveryPassForm">true</param>
-			    <param name="cuenta">%{cuenta}</param>
-			    <param name="msj_error">%{msj_error}</param>			    
+				<param name="actionName">SRSI</param>
+				<param name="recoveryPassForm">true</param>
+				<param name="cuenta">%{cuenta}</param>
+				<param name="msj_error">%{msj_error}</param>
 			</result>
 			<result name="error">error.jsp</result>
 		</action>
@@ -474,43 +466,43 @@
 		<action name="recuperarClave" method="prepararRecuperarPass"
 			class="ve.gob.cnti.srsi.controlador.LoginControlador">
 			<result name="success" type="redirectAction">
-			    <param name="actionName">SRSI</param>	
-			    <param name="cuenta">%{cuenta}</param>
+				<param name="actionName">SRSI</param>
+				<param name="cuenta">%{cuenta}</param>
 			</result>
 			<result name="input" type="redirectAction">
-			    <param name="actionName">SRSI</param>			    
-			    <param name="msj">true</param>
-			    <param name="msj_error">%{msj_error}</param>			    
+				<param name="actionName">SRSI</param>
+				<param name="msj">true</param>
+				<param name="msj_error">%{msj_error}</param>
 			</result>
 			<result name="error">error.jsp</result>
 		</action>
-		
+
 		<action name="recuperar_clave" method="prepararRecuperarPass"
 			class="ve.gob.cnti.srsi.controlador.ConsultasControlador">
-			<result name="success">index.jsp</result>			
+			<result name="success">index.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="enviarDatos" method="enviarDatos"
 			class="ve.gob.cnti.srsi.controlador.LoginControlador">
 			<result name="success" type="redirectAction">
-			    <param name="actionName">SRSI</param>			    
-			    <param name="msj">true</param>
-			    <param name="msj_error">%{msj_error}</param>
-			    <param name="msj_actionInfo">${msj_actionInfo}</param>
+				<param name="actionName">SRSI</param>
+				<param name="msj">true</param>
+				<param name="msj_error">%{msj_error}</param>
+				<param name="msj_actionInfo">${msj_actionInfo}</param>
 			</result>
 			<result name="input" type="redirectAction">
-			    <param name="actionName">SRSI</param>			    
-			    <param name="msj">true</param>
-			    <param name="msj_error">%{msj_error}</param>
-			    <param name="msj_actionInfo">${msj_actionInfo}</param>			    
-			    <param name="recoveryPass">${recoveryPass}</param>
+				<param name="actionName">SRSI</param>
+				<param name="msj">true</param>
+				<param name="msj_error">%{msj_error}</param>
+				<param name="msj_actionInfo">${msj_actionInfo}</param>
+				<param name="recoveryPass">${recoveryPass}</param>
 			</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<!-- Actions para usuarios -->
-		
+
 		<action name="modificarClave" method="modificarClave"
 			class="ve.gob.cnti.srsi.controlador.UsuarioControlador">
 			<result name="success">registro/formulario_usuario.jsp</result>
@@ -606,7 +598,7 @@
 			<result name="input" type="redirectAction">home</result>
 			<result name="error">error.jsp</result>
 		</action>
-		
+
 		<!-- Actions para el usuario final -->
 		<action name="SRSI" method="inicio"
 			class="ve.gob.cnti.srsi.controlador.ConsultasControlador">
@@ -678,26 +670,37 @@
 			<result name="success">ajax/list_formats.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
-				
-		<action name="get_captcha" class="ve.gob.cnti.srsi.util.Captcha">
-	    	<result name="success" type="stream">
-	            <param name="contentType">image/png</param>		            
-	            <param name="inputName">imageStream</param>
-	            <param name="bufferSize">1024</param>
-	        </result>
-	        <interceptor-ref name="defaultStack"/>
+
+		<action name="getCaptcha" class="ve.gob.cnti.srsi.util.Captcha">
+			<result name="success" type="stream">
+				<param name="contentType">image/png</param>
+				<param name="inputName">imageStream</param>
+				<param name="bufferSize">1024</param>
+			</result>
+			<interceptor-ref name="defaultStack" />
 		</action>
-		
+
+		<action name="contact" class="ve.gob.cnti.srsi.util.Contact"
+			method="sendEmail">
+			<result name="success" type="redirectAction">
+				<param name="actionName">servicio</param>
+				<param name="id_servicio">${id_servicio_informacion}</param>
+			</result>
+			<result name="input" type="redirectAction">
+				<param name="actionName">servicio</param>
+				<param name="id_servicio">${id_servicio_informacion}</param>
+			</result>
+		</action>
+
 	</package>
 
 	<package name="json" extends="json-default">
 		<action name="getJSONResult" class="ve.gob.cnti.srsi.util.JSON"
 			method="obtenerError">
 			<result type="json" />
-		</action>		
+		</action>
 	</package>
 
-	
 	<constant name="struts.devMode" value="true" />
 	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
 </struts>
