@@ -281,4 +281,14 @@ public interface Constants {
 		public static final int DESARROLLO = 1;
 		public static final int IMPLEMENTADO = 2;
 	}
+
+	/**
+	 * Interfaz con las constantes para formato de fechas en la aplicación.
+	 * 
+	 * @author Richard Ricciardelli
+	 * 
+	 */
+	public interface DateFormatting {
+		public static final String VET_FORMAT = "dd/MM/yyyy HH:mm:ss";
+	}
 }
