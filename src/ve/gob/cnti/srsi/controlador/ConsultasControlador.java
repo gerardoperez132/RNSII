@@ -253,6 +253,19 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String examinarServicioInformacion() {
+		session = ActionContext.getContext().getSession();
+		try {
+			int id_error = (Integer) session.get("id_error");
+			if (id_error != id_servicio) {
+				session.remove("name");
+				session.remove("email");
+				session.remove("subject");
+				session.remove("message");
+				session.remove("errors");
+				session.remove("id_error");
+			}
+		} catch (Exception e) {
+		}
 		getTiempoFecha();
 		if (!verificarLong(id_servicio))
 			return INPUT;
