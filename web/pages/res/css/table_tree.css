@@ -1,6 +1,6 @@
-#tree {	
+#tree {
 	overflow: auto;
-	border: 1px solid #888;	
+	border: 1px solid #888;
 	font: sans-serif;
 	font-size: 16px;
 }
@@ -10,9 +10,9 @@
 		#AAAAAA;
 }
 
-#tree thead th {	
+#tree thead th {
 	font: 85% sans-serif;
-	font-weight:bolder;
+	font-weight: bolder;
 	padding-left: 1em;
 	text-align: left;
 }

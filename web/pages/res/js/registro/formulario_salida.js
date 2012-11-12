@@ -359,7 +359,7 @@ function actualizarClima(cadena){
                 currentlink.parent().find('span.active').html("-");              
             }
         });
-    }
+    };
     // esto es lo que deciamos al principio , ejecutamos la funcion por eso los
     // parentesis y le pasamos por parametro la libreria jQuery.
 })(jQuery);
