@@ -79,8 +79,8 @@
 					</tr>
 					<tr>					
 						<td></td>
-						<td><img src="get_captcha.action" id="captcha"></td>
-						<td></td>
+						<td id="captcha_pos" style="height: 35px;"><img src="get_captcha.action" id="captcha"></td>
+						<td><a href="SRSI.action" id="a_refresh"><img src="res/images/refresh.png" alt="Refrescar" id="refrescar"></a></td>
 					</tr>
 					<tr>
 						<td></td>
@@ -154,22 +154,12 @@
 						<td><input type="text" name="captcha" maxlength="6" /></td>
 						<td></td>
 					</tr>
-					<tr>
+					<tr>						
 						<td></td>
-						<td><a onclick="reloadIt()">Refresh</a></td>
-						<td><img src="get_captcha.action" id="captcha" alt="Captcha"></td>
-						<td></td>
-					</tr>
-					<script type="text/javascript">
-						function reloadIt() {
-							if (document.getElementById("captcha")) {
-								document.getElementById("captcha").src = document
-										.getElementById("captcha").src;
-							}
-						}
-						window.onload = reloadIt();
-					</script>
-					<tr>
+						<td id="captcha_pos" style="height: 35px;"><img src="get_captcha.action" id="captcha" alt="Captcha"></td>
+						<td><a href="SRSI.action" id="a_refresh"><img src="res/images/refresh.png" alt="Refrescar" id="refrescar"></a></td>
+					</tr>	
+					<tr>												
 						<td colspan="3" align="right" style="padding-right: 28px;"><input
 							type="submit" class="submit" value="<s:text name="entrar" />" />
 						</td>

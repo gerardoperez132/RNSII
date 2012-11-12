@@ -37,10 +37,24 @@ $(document).ready(function() {
 	          hook: 1
 	    }); 
 	}
-    
-    
-    
+        
     mensajeError();
+    
+    /*
+     * Permite recargar el captcha
+     */
+    $("#captcha").fadeIn("slow");
+	$('#a_refresh').click(function(){
+		$("#captcha").fadeOut("slow",function(){
+			function reloadIt() {
+				if (document.getElementById("captcha")) {
+					document.getElementById("captcha").src = document
+							.getElementById("captcha").src;
+				}
+			}
+			window.onload = reloadIt();
+		});
+	});
 });
 
 function changeValues(page, campoId1, valor1, campoId2, valor2, form){
