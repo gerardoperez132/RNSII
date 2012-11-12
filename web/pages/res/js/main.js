@@ -141,4 +141,5 @@ function eliminar_SI(i, nombre) {
 			}
 		}
 	});
+		
 };
