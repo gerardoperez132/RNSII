@@ -79,7 +79,7 @@
 					</tr>
 					<tr>					
 						<td></td>
-						<td><img src="get_captcha.action" id="captcha"></td>
+						<td><img src="getCaptcha" id="captcha"></td>
 						<td></td>
 					</tr>
 					<tr>
@@ -157,7 +157,7 @@
 					<tr>
 						<td></td>
 						<td><a onclick="reloadIt()">Refresh</a></td>
-						<td><img src="get_captcha.action" id="captcha" alt="Captcha"></td>
+						<td><img src="getCaptcha" id="captcha" alt="Captcha"></td>
 						<td></td>
 					</tr>
 					<script type="text/javascript">
