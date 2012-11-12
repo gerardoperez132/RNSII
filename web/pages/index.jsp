@@ -1,3 +1,6 @@
+<%@page import="ognl.Ognl"%>
+<%@page import="org.aspectj.weaver.Iterators.Getter"%>
+<%@page import="ve.gob.cnti.srsi.util.MD5Hashing"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@taglib uri="/struts-tags" prefix="s"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -371,21 +374,49 @@
 									</tbody>
 								</table>
 							</div>
+							<!-- Descripción de soporte -->
 							<div id="tab4" class="tab_content">
-								<table class="results">
-									<tr>
-										<td class="alt"><s:text name="responsable" /></td>
-										<td class="alt2"><s:property value="servicio.responsable" /></td>
-									</tr>
-									<tr>
-										<td class="alt"><s:text name="telefono" /></td>
-										<td class="alt2"><s:property value="telefono" /></td>
-									</tr>
-									<tr>
-										<td class="alt"><s:text name="correo" /></td>
-										<td class="alt2"><s:property value="correo" /></td>
-									</tr>
-								</table>
+								<form action="contact" method="POST">
+									<h5 class="formulario">
+										Name:
+									</h5>
+									
+									<div class="error">
+									<s:property value="#session.errors.get(0)"/>
+									</div>
+									<s:textfield name="name" value="%{#session.name}"/>
+									<h5 class="formulario">
+										Email:
+									</h5>
+									<div class="error">
+									<s:property value="#session.errors.get(1)"/>
+									</div>
+									<s:textfield name="email" value="%{#session.email}"/>
+									<h5 class="formulario">
+										Subject:
+									</h5>
+									<div class="error">
+									<s:property value="#session.errors.get(2)"/>
+									</div>
+									<s:textfield name="subject" value="%{#session.subject}"/>
+									<h5 class="formulario">
+										Message:
+									</h5>
+									<div class="error">
+									<s:property value="#session.errors.get(3)"/>
+									</div>
+									<s:textfield name="message" value="%{#session.message}"/>
+									<h5 class="formulario">
+										Captcha:
+									</h5>
+									<div class="error">
+									<s:property value="#session.errors.get(4)"/>
+									</div>
+									<input type="text" name="captcha">
+									<img src="getCaptcha" id="captcha">
+									<s:hidden name="id_servicio_informacion" value="%{servicio.id_servicio_informacion}"/>
+									<input type="submit">
+								</form>
 							</div>
 						</div>
 					</s:elseif>
