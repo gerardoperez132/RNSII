@@ -36,8 +36,7 @@ public class Contact extends DAO implements Constants.DateFormatting {
 	private Map session;
 	private List<String> errors;
 
-	@SuppressWarnings("unchecked")
-	public boolean validacion() {
+	public boolean validation() {
 		boolean e = false;
 		session = ActionContext.getContext().getSession();
 		errors = new ArrayList<String>();
@@ -92,27 +91,33 @@ public class Contact extends DAO implements Constants.DateFormatting {
 			e = true;
 		} else
 			errors.add("");
+		remove();
+		put();
+		return e;
+	}
 
+	private void remove() {
 		session.remove("name");
 		session.remove("email");
 		session.remove("subject");
 		session.remove("message");
 		session.remove("errors");
 		session.remove("id_error");
+	}
 
+	@SuppressWarnings("unchecked")
+	private void put() {
 		session.put("name", name);
 		session.put("email", email);
 		session.put("subject", subject);
 		session.put("message", message);
 		session.put("errors", errors);
 		session.put("id_error", id_servicio_informacion);
-		return e;
 	}
 
 	public String sendEmail() {
-		if (validacion()) {
+		if (validation())
 			return INPUT;
-		}
 		Correo recipient = new Correo();
 		try {
 			recipient = getEmail(new ServicioInformacion(),
@@ -127,16 +132,10 @@ public class Contact extends DAO implements Constants.DateFormatting {
 		String footer = "\n\nEnviado desde la Plataforma para el Registro de Servicios de Información Interoperables.";
 		EnviarCorreo enviarCorreo = new EnviarCorreo();
 		if (enviarCorreo.send("ricciardelli2021@gmail.com", subject, header
-				+ message + footer)){
+				+ message + footer)) {
 			// if (enviarCorreo.send(recipient.getCorreo(), subject, message))
-			session.remove("name");
-			session.remove("email");
-			session.remove("subject");
-			session.remove("message");
-			session.remove("errors");
-			session.remove("id_error");
-		}
-		else
+			remove();
+		} else
 			System.out.print("Error enviando mensaje");
 		return SUCCESS;
 	}
