@@ -32,6 +32,7 @@ public class Contact extends DAO implements Constants.DateFormatting {
 	private String message;
 	private String captcha;
 	private int id_servicio_informacion;
+	@SuppressWarnings("rawtypes")
 	private Map session;
 	private List<String> errors;
 
