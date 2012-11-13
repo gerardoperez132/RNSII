@@ -380,7 +380,6 @@
 									<h5 class="formulario">
 										Name:
 									</h5>
-									
 									<div class="error">
 									<s:property value="#session.errors.get(0)"/>
 									</div>
@@ -405,7 +404,7 @@
 									<div class="error">
 									<s:property value="#session.errors.get(3)"/>
 									</div>
-									<s:textfield name="message" value="%{#session.message}"/>
+									<s:textarea name="message" value="%{#session.message}"/>
 									<h5 class="formulario">
 										Captcha:
 									</h5>
