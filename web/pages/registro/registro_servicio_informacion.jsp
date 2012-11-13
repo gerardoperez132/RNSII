@@ -212,6 +212,21 @@
 					</div>
 					</div>
 					</form>
+					<div class="t1" style="visibility: hidden; display: none;">
+						<s:text name="tooltip.registro.sector"/>
+					</div>
+					<div class="t2" style="visibility: hidden; display: none;">
+						<s:text name="tooltip.registro.nombre"/>
+					</div>
+					<div class="t3" style="visibility: hidden; display: none;">
+						<s:text name="tooltip.registro.descripcion"/>
+					</div>
+					<div class="t4" style="visibility: hidden; display: none;">
+						<s:text name="tooltip.registro.area"/>
+					</div>
+					<div class="t5" style="visibility: hidden; display: none;">
+						<s:text name="tooltip.registro.estado"/>
+					</div>
 				</s:if>						
 				<s:if test="%{tab==2}">
 				<!-- START TAB 2 -->
@@ -245,7 +260,7 @@
 								<s:param>name</s:param>
 							</s:fielderror>
 							<s:textfield name="name" id="name"/>
-							<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t6" id="t6" onmouseover="tip(this);" title="">
+							<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t1" id="t1" onmouseover="tip(this);" title="">
 							<h5 class="formulario">
 								<s:text name="documento.file"></s:text>
 							</h5>
@@ -253,7 +268,7 @@
 								<s:param>file</s:param>
 							</s:fielderror>
 							<s:file name="file" id="file"/>
-							<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t7" id="t7" onmouseover="tip(this);" title="">
+							<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t2" id="t2" onmouseover="tip(this);" title="">
 							<s:token name="token" />
 							<s:hidden name="tab" value="2" />
 							<s:if test="#id_servicio > 0">
@@ -313,6 +328,12 @@
 						</s:if>
 					</div>
 					</div>
+				<div class="t1" style="visibility: hidden; display: none;">
+					<s:text name="tooltip.registro.documento.nombre"/>
+				</div>
+				<div class="t2" style="visibility: hidden; display: none;">
+					<s:text name="tooltip.registro.documento.file"/>
+				</div>
 				<!-- END TAB 2 -->
 				</s:if>
 				<s:if test="%{tab==3}">
@@ -342,7 +363,7 @@
 								listValue="nombre" headerKey="-1"
 								headerValue="%{getText('seguridad.select')}" name="seguridad"
 								id="seguridad"/>
-							<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t8" id="t8" onmouseover="tip(this);" title="">
+							<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t1" id="t1" onmouseover="tip(this);" title="">
 							<h5 class="formulario">
 								<s:text name="arquitectura.title"></s:text>
 							</h5>
@@ -351,7 +372,7 @@
 							</s:fielderror>
 							<s:checkboxlist list="arquitecturas" listValue="nombre"
 								name="arquitectura" id="arquitectura" listKey="id_arquitectura" />
-								<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t9" id="t9" onmouseover="tip(this);" title="">
+								<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t2" id="t2" onmouseover="tip(this);" title="">
 							<br>
 							<h5 class="formulario">
 								<s:text name="version.title"></s:text>
@@ -363,7 +384,7 @@
 								onkeyup="var pattern = /[^0-9\.]/g;
 						this.value = this.value.replace(pattern, '');"
 								maxlength="7" />
-							<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t10" id="t10" onmouseover="tip(this);" title="">									
+							<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t3" id="t3" onmouseover="tip(this);" title="">									
 							<br>
 							<h5 class="formulario">
 								<s:text name="intercambio.title"></s:text>
@@ -392,7 +413,7 @@
 									</optgroup>
 								</s:iterator>
 							</select>
-							<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t11" id="t11" onmouseover="tip(this);" title="">
+							<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t4" id="t4" onmouseover="tip(this);" title="">
 							<h5 class="formulario">
 								<s:text name="wsdl.title"/>
 							</h5>
@@ -400,7 +421,7 @@
 								<s:param>wsdl</s:param>
 							</s:fielderror>
 							<s:textfield name="wsdl" id="wsdl"/>
-							<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t12" id="t12" onmouseover="tip(this);" title="">
+							<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t5" id="t5" onmouseover="tip(this);" title="">
 							<s:token name="token" />
 							<s:hidden name="tab" value="3" />
 							<s:hidden name="id_servicio_informacion" />
@@ -408,6 +429,21 @@
 					</div>
 					</div>
 					</form>
+					<div class="t1" style="visibility: hidden; display: none;">
+						<s:text name="tooltip.registro.seguridad"/>
+					</div>
+					<div class="t2" style="visibility: hidden; display: none;">
+						<s:text name="tooltip.registro.arquitectura"/>
+					</div>
+					<div class="t3" style="visibility: hidden; display: none;">
+						<s:text name="tooltip.registro.version"/>
+					</div>
+					<div class="t4" style="visibility: hidden; display: none;">
+						<s:text name="tooltip.registro.intercambio"/>
+					</div>
+					<div class="t5" style="visibility: hidden; display: none;">
+						<s:text name="tooltip.registro.wsdl"/>
+					</div>
 				<!-- END TAB 3 -->
 				</s:if>						
 				<s:if test="%{tab==4}">
@@ -434,7 +470,7 @@
 								<s:param>servicio.responsable</s:param>
 							</s:fielderror>
 							<s:textfield name="servicio.responsable" id="servicio.responsable" labelposition="top" />
-							<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t13" id="t13" onmouseover="tip(this);" title="">
+							<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t1" id="t1" onmouseover="tip(this);" title="">
 							<h5 class="formulario">
 								<s:text name="telefono.title"></s:text>
 							</h5>
@@ -445,7 +481,7 @@
 								<tr>
 									<td><s:select name="codigo" list="codigos" /></td>
 									<td><s:textfield name="telefono" labelposition="top"
-											maxlength="7" id="telefono"	/><img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t14" id="t14" onmouseover="tip(this);" title="">
+											maxlength="7" id="telefono"	/><img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t2" id="t2" onmouseover="tip(this);" title="">
 									</td>
 								</tr>
 							</table>
@@ -456,65 +492,32 @@
 								<s:param>correo</s:param>
 							</s:fielderror>
 							<s:textfield name="correo" id="correo"/>
-							<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t15" id="t15" onmouseover="tip(this);" title="">
+							<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t3" id="t3" onmouseover="tip(this);" title="">
 							<s:token name="token" />
 							<s:hidden name="tab" value="4" />
 							<s:hidden name="id_servicio_informacion" />
 							<s:hidden name="modificar"></s:hidden>													
 					</div></div>
 					</form>
+					<div class="t1" style="visibility: hidden; display: none;">
+						<s:text name="tooltip.registro.responsable"/>
+					</div>
+					<div class="t2" style="visibility: hidden; display: none;">
+						<s:text name="tooltip.registro.telefono"/>
+					</div>
+					<div class="t3" style="visibility: hidden; display: none;">
+						<s:text name="tooltip.registro.correo"/>
+					</div>
 				</s:if>
 				<!-- END TAB 4 -->
 			</div>
 			</div>
 		<div style="clear: both"></div>
 	<div class="vacio"></div>
-	<%@include file="../layout/footer.jsp"%>
-	<div class="t1" style="visibility: hidden; display: none;">
-		<s:text name="tooltip.registro.sector"/>
-	</div>
-	<div class="t2" style="visibility: hidden; display: none;">
-		<s:text name="tooltip.registro.nombre"/>
-	</div>
-	<div class="t3" style="visibility: hidden; display: none;">
-		<s:text name="tooltip.registro.descripcion"/>
-	</div>
-	<div class="t4" style="visibility: hidden; display: none;">
-		<s:text name="tooltip.registro.area"/>
-	</div>
-	<div class="t5" style="visibility: hidden; display: none;">
-		<s:text name="tooltip.registro.estado"/>
-	</div>
-	<div class="t6" style="visibility: hidden; display: none;">
-		<s:text name="tooltip.registro.documento.nombre"/>
-	</div>
-	<div class="t7" style="visibility: hidden; display: none;">
-		<s:text name="tooltip.registro.documento.file"/>
-	</div>
-	<div class="t8" style="visibility: hidden; display: none;">
-		<s:text name="tooltip.registro.seguridad"/>
-	</div>
-	<div class="t9" style="visibility: hidden; display: none;">
-		<s:text name="tooltip.registro.arquitectura"/>
-	</div>
-	<div class="t10" style="visibility: hidden; display: none;">
-		<s:text name="tooltip.registro.version"/>
-	</div>
-	<div class="t11" style="visibility: hidden; display: none;">
-		<s:text name="tooltip.registro.intercambio"/>
-	</div>
-	<div class="t12" style="visibility: hidden; display: none;">
-		<s:text name="tooltip.registro.wsdl"/>
-	</div>
-	<div class="t13" style="visibility: hidden; display: none;">
-		<s:text name="tooltip.registro.responsable"/>
-	</div>
-	<div class="t14" style="visibility: hidden; display: none;">
-		<s:text name="tooltip.registro.telefono"/>
-	</div>
-	<div class="t15" style="visibility: hidden; display: none;">
-		<s:text name="tooltip.registro.correo"/>
-	</div>
+	<%@include file="../layout/footer.jsp"%>	
+	
+	
+	
 	</body>
 </s:i18n>
 </html>
