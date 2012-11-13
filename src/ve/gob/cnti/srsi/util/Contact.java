@@ -42,8 +42,7 @@ public class Contact extends DAO implements Constants.DateFormatting {
 		session = ActionContext.getContext().getSession();
 		errors = new ArrayList<String>();
 		if (name.trim().isEmpty()) {
-			errors.add(error.getProperties().getProperty(
-					"error.servicio.sector"));
+			errors.add(error.getProperties().getProperty("error.contact.name"));
 			e = true;
 		} else if (!name.toUpperCase().matches(REGEX_TITLE)) {
 			errors.add(error.getProperties().getProperty("error.regex.title"));
@@ -52,8 +51,7 @@ public class Contact extends DAO implements Constants.DateFormatting {
 			errors.add("");
 
 		if (email.trim().isEmpty()) {
-			errors.add(error.getProperties().getProperty(
-					"error.servicio.correo"));
+			errors.add(error.getProperties().getProperty("error.contact.email"));
 			e = true;
 		} else if (!email.matches(REGEX_EMAIL)) {
 			errors.add(error.getProperties().getProperty("error.regex.email"));
@@ -63,7 +61,7 @@ public class Contact extends DAO implements Constants.DateFormatting {
 
 		if (subject.trim().isEmpty()) {
 			errors.add(error.getProperties().getProperty(
-					"error.servicio.sector"));
+					"error.contact.subject"));
 			e = true;
 		} else if (!subject.toUpperCase().matches(REGEX_TITLE)) {
 			errors.add(error.getProperties().getProperty("error.regex.title"));
@@ -73,7 +71,7 @@ public class Contact extends DAO implements Constants.DateFormatting {
 
 		if (message.trim().isEmpty()) {
 			errors.add(error.getProperties().getProperty(
-					"error.servicio.sector"));
+					"error.contact.message"));
 			e = true;
 		} else if (!message.toUpperCase().matches(REGEX_DESCRIPTION)) {
 			errors.add(error.getProperties().getProperty(
