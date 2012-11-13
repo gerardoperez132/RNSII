@@ -378,35 +378,35 @@
 							<div id="tab4" class="tab_content">
 								<form action="contact" method="POST">
 									<h5 class="formulario">
-										Name:
+										<s:text name="nombre"/>
 									</h5>
 									<div class="error">
 									<s:property value="#session.errors.get(0)"/>
 									</div>
 									<s:textfield name="name" value="%{#session.name}"/>
 									<h5 class="formulario">
-										Email:
+										<s:text name="contact.email"/>
 									</h5>
 									<div class="error">
 									<s:property value="#session.errors.get(1)"/>
 									</div>
 									<s:textfield name="email" value="%{#session.email}"/>
 									<h5 class="formulario">
-										Subject:
+										<s:text name="contact.subject"/>
 									</h5>
 									<div class="error">
 									<s:property value="#session.errors.get(2)"/>
 									</div>
 									<s:textfield name="subject" value="%{#session.subject}"/>
 									<h5 class="formulario">
-										Message:
+										<s:text name="contact.message"/>
 									</h5>
 									<div class="error">
 									<s:property value="#session.errors.get(3)"/>
 									</div>
 									<s:textarea name="message" value="%{#session.message}"/>
 									<h5 class="formulario">
-										Captcha:
+										<s:text name="captcha"/>
 									</h5>
 									<div class="error">
 									<s:property value="#session.errors.get(4)"/>
