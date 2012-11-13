@@ -52,6 +52,18 @@ $(document).ready(function() {
 			window.onload = reloadIt();
 		});
 	});
+	
+	/*form_tab4_errors
+	 * Si hay errores en el formulario de contacto activa la pestaña
+	 */
+	if($("#form_tab4_errors").html()>0){
+		$("ul.tabs li").removeClass("active"); // Elimina las clases activas
+		$('#t4').addClass("active"); // Agrega la clase activa a la tab4
+		$('[href="#tab4"]').addClass("active"); // Agrega la clase activa a la tab4 
+		$(".tab_content").hide(); // Esconde todo el contenido de la tab		
+		$("#tab4").css("display", "block").fadeIn();  // Agrega efecto de transición (fade) en el
+		// contenido activo
+	}
 });
 
 function changeValues(page, campoId1, valor1, campoId2, valor2, form) {

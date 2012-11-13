@@ -3526,3 +3526,8 @@ div.middleContent {
 .btn_oculto {
 	display: none;
 }
+
+.width_230{
+	width: 230px;
+	height: 60px;
+}

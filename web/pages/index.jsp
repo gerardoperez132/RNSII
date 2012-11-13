@@ -143,7 +143,7 @@
 							<li><a style="font-size: 1em;" href="#tab1"><s:text name="tab1.title"/></a></li>
 							<li><a style="font-size: 1em;" href="#tab2"><s:text name="tab2.title"/></a></li>
 							<li><a style="font-size: 1em;" href="#tab3"><s:text name="tab3.title"/></a></li>
-							<li><a style="font-size: 1em;" href="#tab4"><s:text name="tab4.title"/></a></li>
+							<li id="t4"><a style="font-size: 1em;" href="#tab4"><s:text name="tab4.title"/></a></li>
 						</ul>
 						<div class="tab_container">
 							<!-- Descripción general -->
@@ -374,47 +374,71 @@
 									</tbody>
 								</table>
 							</div>
-							<!-- Descripción de soporte -->
+							<!-- FORMULARIO DE CONTACTO -->
 							<div id="tab4" class="tab_content">
+								<div style="display: none;" id="form_tab4_errors"><s:property value="%{#session.errors.size()}"/></div>
 								<form action="contact" method="POST">
-									<h5 class="formulario">
-										<s:text name="nombre"/>
-									</h5>
-									<div class="error">
-									<s:property value="#session.errors.get(0)"/>
-									</div>
-									<s:textfield name="name" value="%{#session.name}"/>
-									<h5 class="formulario">
-										<s:text name="contact.email"/>
-									</h5>
-									<div class="error">
-									<s:property value="#session.errors.get(1)"/>
-									</div>
-									<s:textfield name="email" value="%{#session.email}"/>
-									<h5 class="formulario">
-										<s:text name="contact.subject"/>
-									</h5>
-									<div class="error">
-									<s:property value="#session.errors.get(2)"/>
-									</div>
-									<s:textfield name="subject" value="%{#session.subject}"/>
-									<h5 class="formulario">
-										<s:text name="contact.message"/>
-									</h5>
-									<div class="error">
-									<s:property value="#session.errors.get(3)"/>
-									</div>
-									<s:textarea name="message" value="%{#session.message}"/>
-									<h5 class="formulario">
-										<s:text name="captcha"/>
-									</h5>
-									<div class="error">
-									<s:property value="#session.errors.get(4)"/>
-									</div>
-									<input type="text" name="captcha">
-									<img src="getCaptcha" id="captcha">
-									<s:hidden name="id_servicio_informacion" value="%{servicio.id_servicio_informacion}"/>
-									<input type="submit">
+								<table>
+									<tr>
+										<td class="width_230">
+											<h5 class="formulario">
+												<s:text name="nombre"/>
+											</h5>
+											<div class="error">
+												<s:property value="#session.errors.get(0)"/>
+											</div>
+											<s:textfield name="name" value="%{#session.name}"/>
+										</td>
+										<td class="width_230">
+											<h5 class="formulario">
+												<s:text name="contact.email"/>
+											</h5>
+											<div class="error">
+												<s:property value="#session.errors.get(1)"/>
+											</div>
+											<s:textfield name="email" value="%{#session.email}"/>										
+										</td>
+									</tr>
+									<tr>
+										<td class="width_230">
+											<h5 class="formulario">
+												<s:text name="contact.subject"/>
+											</h5>
+											<div class="error">
+												<s:property value="#session.errors.get(2)"/>
+											</div>
+											<s:textfield name="subject" value="%{#session.subject}"/></td>
+										<td class="width_230" rowspan="2">
+											<h5 class="formulario">
+												<s:text name="contact.message"/>
+											</h5>
+											<div class="error">
+												<s:property value="#session.errors.get(3)"/>
+											</div>
+											<s:textarea name="message" value="%{#session.message}" cols="30" rows="5"/>
+										</td>
+									</tr>
+									<tr>
+										<td class="width_230">
+											<h5 class="formulario">
+												<s:text name="captcha"/>
+											</h5>
+											<div class="error">
+											<s:property value="#session.errors.get(4)"/>
+											</div>
+											<input type="text" name="captcha">
+										</td>																				
+									</tr>
+									<tr>
+										<td class="width_230">
+											<img src="getCaptcha" id="captcha">											
+										</td>
+										<td class="width_230">
+											<s:hidden name="id_servicio_informacion" value="%{servicio.id_servicio_informacion}"/>
+											<input type="submit">
+										</td>
+									</tr>									
+								</table>
 								</form>
 							</div>
 						</div>
