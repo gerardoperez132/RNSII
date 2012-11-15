@@ -21,6 +21,15 @@
 <script type="text/javascript" src="/SRSI/pages/res/js/funciones_ge.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/jquery.treeTable.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/registro/formulario_funcionalidad.js" charset="UTF-8"></script>
+
+<!-- Added... -->
+<link rel="stylesheet" type="text/css" href="res/js/plugins/sexy-tooltips/blue.css" media="all">
+<link rel="stylesheet" type="text/css" href="res/js/plugins/sexy-alert-box-1.2.2/sexyalertbox.css" media="all">
+<!-- JS (required) -->
+<script type="text/javascript" src="res/js/plugins/sexy-tooltips.v1.1.jquery.js" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/plugins/sexy-alert-box-1.2.2/jquery.easing.1.3.js" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/plugins/sexy-alert-box-1.2.2/sexyalertbox.v1.2.jquery.js" charset="UTF-8"></script>
+
 <title><s:text name="registro.title"/></title>
 	</head>
 	<body>
@@ -215,6 +224,7 @@
 												<s:param>funcionalidad.nombre</s:param>
 											</s:fielderror>
 											<s:textfield name="funcionalidad.nombre" id="funcionalidad.nombre" />
+											<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t1" id="t1" onmouseover="tip(this);" title="">
 											<br>
 											<!-- Descripción de la funcionalidad u operación del servicio. -->
 											<h5 class="formulario">
@@ -224,13 +234,14 @@
 												<s:param>funcionalidad.descripcion</s:param>
 											</s:fielderror>
 											<s:textarea name="funcionalidad.descripcion" cols="30" rows="5" id="funcionalidad.descripcion" />
+											<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t2" id="t2" onmouseover="tip(this);" title="">
 											<br>
 											<s:hidden name="id_servicio_informacion"/>
 											<s:hidden name="id_funcionalidad"/>
 											<s:hidden name="modificar"/>
 											<s:hidden name="modificarf"/>
 											<input type="submit" value="<s:text name="guardar"/>" />
-										</form>
+										</form>											
 									</s:if>
 									<s:else>
 										<form action="registrarFuncionalidad" method="POST"
@@ -246,6 +257,7 @@
 												<s:param>funcionalidad.nombre</s:param>
 											</s:fielderror>
 											<s:textfield labelposition="top" name="funcionalidad.nombre" id="funcionalidad.nombre" />
+											<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t1" id="t1" onmouseover="tip(this);" title="">
 											<br>
 											<!-- Descripción de la funcionalidad u operación del servicio. -->
 											<h5 class="formulario">
@@ -255,6 +267,7 @@
 												<s:param>funcionalidad.descripcion</s:param>
 											</s:fielderror>
 											<s:textarea name="funcionalidad.descripcion" cols="30" rows="5" id="funcionalidad.descripcion" />
+											<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t2" id="t2" onmouseover="tip(this);" title="">
 											<br>
 											<s:hidden name="id_servicio_informacion"/>
 											<s:hidden name="modificar"/>
@@ -270,6 +283,12 @@
 		</div>
 		<div style="clear: both"></div>
 		<div class="vacio"></div>
+		<div class="t1" style="visibility: hidden; display: none;">
+			<s:text name="tooltip.funcionalidad.nombre"/>
+		</div>
+		<div class="t2" style="visibility: hidden; display: none;">
+			<s:text name="tooltip.funcionalidad.descripcion"/>
+		</div>
 		<%@include file="../layout/footer.jsp"%>
 	</body>
 </s:i18n>
