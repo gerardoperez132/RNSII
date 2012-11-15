@@ -8,7 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <!-- CSS (required) -->
-<link rel="stylesheet" type="text/css" href="/SRSI/pages/res/css/style2.css">
+<link rel="stylesheet" type="text/css" href="res/css/style2.css">
 <link rel="stylesheet" type="text/css" href="res/css/menu_vertical.css">
 <link rel="stylesheet" type="text/css" href="res/css/jquery.alerts.css">
 <link rel="stylesheet" type="text/css" href="res/css/jquery.treeTable.css">

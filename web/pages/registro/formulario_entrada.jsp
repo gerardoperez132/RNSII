@@ -8,7 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <!-- CSS (required) -->
-<link rel="stylesheet" type="text/css" href="/SRSI/pages/res/css/style2.css">
+<link rel="stylesheet" type="text/css" href="res/css/style2.css">
 <link rel="stylesheet" type="text/css" href="res/css/menu_vertical.css">
 <link rel="stylesheet" type="text/css" href="res/css/jquery.alerts.css">
 <link rel="stylesheet" type="text/css" href="res/css/jquery.treeTable.css">
@@ -16,10 +16,17 @@
 <link rel="stylesheet" type="text/css" href="res/css/table_tree.css">
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
 <!-- JS (required) -->
-<script type="text/javascript" src="/SRSI/pages/res/js/jquery-1.7.1.js" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/jquery-1.7.1.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/jquery.validate.js" charset="UTF-8"></script>
 <script src="res/js/messages_es.js" type="text/javascript" charset="UTF-8"></script>
 <script src="res/js/registro/formulario_entrada.js" type="text/javascript" charset="UTF-8"></script>
+<!-- Added... -->
+<link rel="stylesheet" type="text/css" href="res/js/plugins/sexy-tooltips/blue.css" media="all">
+<link rel="stylesheet" type="text/css" href="res/js/plugins/sexy-alert-box-1.2.2/sexyalertbox.css" media="all">
+<!-- JS (required) -->
+<script type="text/javascript" src="res/js/plugins/sexy-tooltips.v1.1.jquery.js" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/plugins/sexy-alert-box-1.2.2/jquery.easing.1.3.js" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/plugins/sexy-alert-box-1.2.2/sexyalertbox.v1.2.jquery.js" charset="UTF-8"></script>
 <title><s:text name="form.entrada.registro.title"></s:text></title>
 </head>
 <body>	
@@ -156,6 +163,7 @@
 							<s:param>entrada.nombre</s:param>
 						</s:fielderror>
 						<s:textfield name="entrada.nombre" id="entrada.nombre"/>
+						<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t1" id="t1" onmouseover="tip(this);" title="">
 						<br>
 						<!-- Descripción de la entrada. -->
 						<h5 class="formulario">
@@ -165,6 +173,7 @@
 							<s:param>entrada.descripcion</s:param>
 						</s:fielderror>
 						<s:textarea name="entrada.descripcion" id="entrada.descripcion" cols="30" rows="5" />
+						<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t2" id="t2" onmouseover="tip(this);" title="">
 						<br>
 						<h5 class="formulario">
 							<s:text name="form.entrada.dato.title"></s:text>
@@ -176,6 +185,7 @@
 							listKey="id_tipo_dato" listValue="nombre" headerKey="-1"
 							headerValue="%{getText('form.entrada.dato.select')}" >
 						</s:select>
+						<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t3" id="t3" onmouseover="tip(this);" title="">
 						<br>								
 						 
 						<s:if test="!complejo"> 
@@ -212,6 +222,7 @@
 									</s:if>										
 								</s:iterator>
 							</select>
+							<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t4" id="t4" onmouseover="tip(this);" title="">
 						</div>
 						<div id="capa_longitud" style="visibility: visible; position:relative;">
 							<h5 class="formulario">
@@ -221,6 +232,7 @@
 								<s:param>longitud</s:param>
 							</s:fielderror>
 								<s:textfield name="entrada.longitud" maxlength="10" id="entrada.longitud"/>
+								<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t5" id="t5" onmouseover="tip(this);" title="">
 								<span id="longitud_msj"></span>
 						</div>
 						</s:if>
@@ -243,6 +255,21 @@
 	</div>	
 	<div style="clear: both"></div>
 	<div class="vacio"></div>
+	<div class="t1" style="visibility: hidden; display: none;">
+		<s:text name="tooltip.funcionalidad.entrada.nombre"/>
+	</div>
+	<div class="t2" style="visibility: hidden; display: none;">
+		<s:text name="tooltip.funcionalidad.entrada.descripcion"/>
+	</div>
+	<div class="t3" style="visibility: hidden; display: none;">
+		<s:text name="tooltip.funcionalidad.entrada.dato"/>
+	</div>
+	<div class="t4" style="visibility: hidden; display: none;">
+		<s:text name="tooltip.funcionalidad.entrada.formato"/>
+	</div>
+	<div class="t5" style="visibility: hidden; display: none;">
+		<s:text name="tooltip.funcionalidad.entrada.longitud"/>
+	</div>	
 	<%@include file="../layout/footer.jsp"%>	
 	</body>
 </s:i18n>

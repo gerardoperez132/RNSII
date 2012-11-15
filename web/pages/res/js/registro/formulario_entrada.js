@@ -6,341 +6,396 @@ var data;
 var isLongitud;
 var isFormato;
 
-$(document)
-		.ready(
-				function() {
+$(document).ready(function() {
 
-					/*
-					 * Ocultando botones submit del formulario y mostrando los
-					 * botones que están en la descripción
-					 */
-					$("#btn_guardar_entrada").hide();
-					$("#btn_regresar").hide();
-					$("#sub_regresar").show();
-					$("#sub_guardar_entrada").show();
+	/*
+	 * Ocultando botones submit del formulario y mostrando los
+	 * botones que están en la descripción
+	 */
+	$("#btn_guardar_entrada").hide();
+	$("#btn_regresar").hide();
+	$("#sub_regresar").show();
+	$("#sub_guardar_entrada").show();
 
-					/*
-					 * Botones que envian los formularios
-					 */
-					$("#sub_regresar").click(function() {
-						document.f_regresar.submit();
-					});
-					$("#sub_guardar_entrada").click(function() {
-						document.formES.submit();
-					});
+	/*
+	 * Botones que envian los formularios
+	 */
+	$("#sub_regresar").click(function() {
+		document.f_regresar.submit();
+	});
+	$("#sub_guardar_entrada").click(function() {
+		document.formES.submit();
+	});
 
-					/*
-					 * Obteniendo los valores de intercionalización del archivo
-					 * JSON
-					 */
-					$.ajax({
-						url : "getJSONResult.action",
-						type : "GET",
-						dataType : "json",
+	/*
+	 * Obteniendo los valores de intercionalización del archivo
+	 * JSON
+	 */
+	$.ajax({
+		url : "getJSONResult.action",
+		type : "GET",
+		dataType : "json",
+		async : false,
+		success : function(source) {
+			data = source;
+		}
+	});
+
+	/*
+	 * Creación de método para validar una expresión regular del
+	 * tipo title, usada por el plugin jquery validator
+	 */
+	$.validator.addMethod('regexTitle', function(value) {
+		var valor = value;
+		var soloTexto = new RegExp(
+				data['constants']['REGEX_TITLE']);
+		return soloTexto.test(valor.toUpperCase());
+	});
+
+	/*
+	 * Creación de método para validar una expresión regular del
+	 * tipo description, usada por el plugin jquery validator
+	 */
+	$.validator.addMethod('regexDescription', function(value) {
+		var valor = value;
+		var soloTexto = new RegExp(
+				data['constants']['REGEX_DESCRIPTION']);
+		return soloTexto.test(valor.toUpperCase());
+	});
+
+	/*
+	 * Creación de método para validar si el usuario ha escogido
+	 * un formato, usada por el plugin jquery validator
+	 */
+	$.validator.addMethod('formatoValidate', function(value) {
+		if ($('#capa_formato').data("formato")) {
+			if ($("#entrada\\.id_formato").val() == -1) {
+				return false;
+			} else {
+				return true;
+			}
+		} else {
+			return true;
+		}
+	});
+
+	/*
+	 * Creación de método para validar si el usuario ha
+	 * introduccido una longitud, usada por el plugin jquery
+	 * validator
+	 */
+	$.validator.addMethod('longitudValidate', function(value) {
+		if ($('#capa_longitud').data("longitud")) {
+			if ($("#entrada\\.longitud").val().length < 1) {
+				return false;
+			} else {
+				return true;
+			}
+		} else {
+			return true;
+		}
+	});
+
+	/*
+	 * Validaciones para el formulario creación/modificación de
+	 * una Entrada/Salida.
+	 */
+	$("#formES").validate(
+		{
+		errorPlacement : function(error,
+				element) {
+			error.insertBefore(element);
+		},
+		rules : {
+			'entrada.nombre' : {
+				required : true,
+				regexTitle : true
+			},
+			'entrada.descripcion' : {
+				required : true,
+				regexDescription : true
+			},
+			'entrada.id_tipo_dato' : {
+				min : 0
+			},
+			'entrada.id_formato' : {
+				formatoValidate : true
+			},
+			'entrada.longitud' : {
+				longitudValidate : true
+			}
+		},
+		messages : {
+			'entrada.nombre' : {
+				required : data['errores']['error.entrada.nombre'],
+				regexTitle : data['errores']['error.regex.title']
+			},
+			'entrada.descripcion' : {
+				required : data['errores']['error.entrada.descripcion'],
+				regexDescription : data['errores']['error.regex.description']
+			},
+			'entrada.id_tipo_dato' : data['errores']['error.entrada.tipodato'],
+			'entrada.id_formato' : data['errores']['error.entrada.format'],
+			'entrada.longitud' : data['errores']['error.entrada.longitud'],
+		}
+	});
+
+	var select = $("#entrada.id_formato").val();
+	var i;
+	for (i = 2; i <= 7; i++) {
+		$('#opt_group_' + i).remove();
+	}
+
+	/*
+	 * Oculta las capas formato y longitud al cargar el DOM para
+	 * esperar la elección del tipo de dato y mostrarle que
+	 * introdusca el formato y/o la longitud dependiendo de la
+	 * naturaleza del dato primitivo.
+	 */
+	limpiar_options();
+	fomato_longitud_visible();
+
+	if (select > 0) {
+		$('#opt_element_' + select).attr("selected", true);
+	}
+	select = -1;
+
+	$("#entrada\\.id_tipo_dato").change(function(e) {
+		limpiar_longitud_formato();
+		fomato_longitud_visible();
+	});
+
+	/*
+	 * Valida que solo metan números.
+	 */
+	$('#entrada\\.longitud').keyup(
+			function(e) {
+				if ($("#entrada\\.id_tipo_dato").val() == 4) {// decimales
+					if ($.isNumeric($("#entrada\\.longitud")
+							.val()) == false) {
+						this.value = this.value.substring(0,
+								(this.value.length - 1));
+						$('#longitud_msj').html(
+								data['errores']['error.num']);
+						$('#longitud_msj').attr('class',
+								'error_pass');
+					} else {
+						$('#longitud_msj').html('');
+					}
+				} else { // Naturales
+					if (!/^([0-9])*$/.test($(
+							"#entrada\\.longitud").val())) {
+						this.value = this.value.substring(0,
+								(this.value.length - 1));
+						$('#longitud_msj').html(
+								data['errores']['error.num']);
+						$('#longitud_msj').attr('class',
+								'error_pass');
+					} else {
+						$('#longitud_msj').html('');
+					}
+				}
+			});
+
+	function limpiar_options() {
+		i = 1;
+		for (i = 1; i <= 13; i++) {
+			$('#opt_element_' + i).remove();
+		}
+	}
+
+	function limpiar_longitud_formato() {
+		$("#entrada\\.longitud").val('');
+		$("#entrada\\.id_formato").val('-1');
+		limpiar_options();
+	}
+
+	function fomato_longitud_visible() {
+
+		/*
+		 * Oculta las capas formato y longitud si el usuario no
+		 * selecciona ningún tipo de dato.
+		 */
+		if ($("#entrada\\.id_tipo_dato").val() == -1) {
+			$('#capa_formato').attr('style',
+					'visibility: hidden; position:fixed;');
+			$('#capa_longitud').attr('style',
+					'visibility: hidden; position:fixed;');
+		} else {
+			// Muestra la capa longitud si el dato posse esta
+			// caracteristica
+			$
+					.ajax({
+						type : 'GET',
+						url : 'dato_haslength.action',
+						cache : false,
 						async : false,
-						success : function(source) {
-							data = source;
-						}
-					});
-
-					/*
-					 * Creación de método para validar una expresión regular del
-					 * tipo title, usada por el plugin jquery validator
-					 */
-					$.validator.addMethod('regexTitle', function(value) {
-						var valor = value;
-						var soloTexto = new RegExp(
-								data['constants']['REGEX_TITLE']);
-						return soloTexto.test(valor.toUpperCase());
-					});
-
-					/*
-					 * Creación de método para validar una expresión regular del
-					 * tipo description, usada por el plugin jquery validator
-					 */
-					$.validator.addMethod('regexDescription', function(value) {
-						var valor = value;
-						var soloTexto = new RegExp(
-								data['constants']['REGEX_DESCRIPTION']);
-						return soloTexto.test(valor.toUpperCase());
-					});
-
-					/*
-					 * Creación de método para validar si el usuario ha escogido
-					 * un formato, usada por el plugin jquery validator
-					 */
-					$.validator.addMethod('formatoValidate', function(value) {
-						if ($('#capa_formato').data("formato")) {
-							if ($("#entrada\\.id_formato").val() == -1) {
-								return false;
+						data : {
+							id_tipo_dato : $(
+									"#entrada\\.id_tipo_dato")
+									.val()
+						},
+						success : function(result) {
+							var boleano = new String(''
+									+ result);
+							if (boleano.toLowerCase().indexOf(
+									'l=true') != -1) {
+								$('#capa_longitud')
+										.attr('style',
+												'visibility: visible; position:relative;')
+										.data("longitud", true);
 							} else {
-								return true;
+								$('#capa_longitud')
+										.attr('style',
+												'visibility: hidden; position:fixed;')
+										.data("longitud", false);
 							}
-						} else {
-							return true;
 						}
 					});
-
-					/*
-					 * Creación de método para validar si el usuario ha
-					 * introduccido una longitud, usada por el plugin jquery
-					 * validator
-					 */
-					$.validator.addMethod('longitudValidate', function(value) {
-						if ($('#capa_longitud').data("longitud")) {
-							if ($("#entrada\\.longitud").val().length < 1) {
-								return false;
-							} else {
-								return true;
-							}
-						} else {
-							return true;
-						}
-					});
-
-					/*
-					 * Validaciones para el formulario creación/modificación de
-					 * una Entrada/Salida.
-					 */
-					$("#formES")
-							.validate(
-									{
-										errorPlacement : function(error,
-												element) {
-											error.insertBefore(element);
-										},
-										rules : {
-											'entrada.nombre' : {
-												required : true,
-												regexTitle : true
+			// Muestra la capa formato si el dato posse esta
+			// caracteristica
+			$
+					.ajax({
+						type : 'GET',
+						url : 'dato_hasformatted.action',
+						cache : false,
+						async : false,
+						data : {
+							id_tipo_dato : $(
+									"#entrada\\.id_tipo_dato")
+									.val()
+						},
+						success : function(result2) {
+							var boleano = new String(''
+									+ result2);
+							if (boleano.toLowerCase().indexOf(
+									'f=true') != -1) {
+								$('#capa_formato')
+										.attr('style',
+												'visibility: visible; position:relative;')
+										.data("formato", true);
+								// Crea las opciones del select
+								// formato
+								$
+										.ajax({
+											type : 'GET',
+											url : 'list_format.action',
+											cache : false,
+											async : false,
+											data : {
+												id_tipo_dato : $(
+														"#entrada\\.id_tipo_dato")
+														.val()
 											},
-											'entrada.descripcion' : {
-												required : true,
-												regexDescription : true
-											},
-											'entrada.id_tipo_dato' : {
-												min : 0
-											},
-											'entrada.id_formato' : {
-												formatoValidate : true
-											},
-											'entrada.longitud' : {
-												longitudValidate : true
-											}
-										},
-										messages : {
-											'entrada.nombre' : {
-												required : data['errores']['error.entrada.nombre'],
-												regexTitle : data['errores']['error.regex.title']
-											},
-											'entrada.descripcion' : {
-												required : data['errores']['error.entrada.descripcion'],
-												regexDescription : data['errores']['error.regex.description']
-											},
-											'entrada.id_tipo_dato' : data['errores']['error.entrada.tipodato'],
-											'entrada.id_formato' : data['errores']['error.entrada.format'],
-											'entrada.longitud' : data['errores']['error.entrada.longitud'],
-										}
-									});
-
-					var select = $("#entrada.id_formato").val();
-					var i;
-					for (i = 2; i <= 7; i++) {
-						$('#opt_group_' + i).remove();
-					}
-
-					/*
-					 * Oculta las capas formato y longitud al cargar el DOM para
-					 * esperar la elección del tipo de dato y mostrarle que
-					 * introdusca el formato y/o la longitud dependiendo de la
-					 * naturaleza del dato primitivo.
-					 */
-					limpiar_options();
-					fomato_longitud_visible();
-
-					if (select > 0) {
-						$('#opt_element_' + select).attr("selected", true);
-					}
-					select = -1;
-
-					$("#entrada\\.id_tipo_dato").change(function(e) {
-						limpiar_longitud_formato();
-						fomato_longitud_visible();
-					});
-
-					/*
-					 * Valida que solo metan números.
-					 */
-					$('#entrada\\.longitud').keyup(
-							function(e) {
-								if ($("#entrada\\.id_tipo_dato").val() == 4) {// decimales
-									if ($.isNumeric($("#entrada\\.longitud")
-											.val()) == false) {
-										this.value = this.value.substring(0,
-												(this.value.length - 1));
-										$('#longitud_msj').html(
-												data['errores']['error.num']);
-										$('#longitud_msj').attr('class',
-												'error_pass');
-									} else {
-										$('#longitud_msj').html('');
-									}
-								} else { // Naturales
-									if (!/^([0-9])*$/.test($(
-											"#entrada\\.longitud").val())) {
-										this.value = this.value.substring(0,
-												(this.value.length - 1));
-										$('#longitud_msj').html(
-												data['errores']['error.num']);
-										$('#longitud_msj').attr('class',
-												'error_pass');
-									} else {
-										$('#longitud_msj').html('');
-									}
-								}
-							});
-
-					function limpiar_options() {
-						i = 1;
-						for (i = 1; i <= 13; i++) {
-							$('#opt_element_' + i).remove();
-						}
-					}
-
-					function limpiar_longitud_formato() {
-						$("#entrada\\.longitud").val('');
-						$("#entrada\\.id_formato").val('-1');
-						limpiar_options();
-					}
-
-					function fomato_longitud_visible() {
-
-						/*
-						 * Oculta las capas formato y longitud si el usuario no
-						 * selecciona ningún tipo de dato.
-						 */
-						if ($("#entrada\\.id_tipo_dato").val() == -1) {
-							$('#capa_formato').attr('style',
-									'visibility: hidden; position:fixed;');
-							$('#capa_longitud').attr('style',
-									'visibility: hidden; position:fixed;');
-						} else {
-							// Muestra la capa longitud si el dato posse esta
-							// caracteristica
-							$
-									.ajax({
-										type : 'GET',
-										url : 'dato_haslength.action',
-										cache : false,
-										async : false,
-										data : {
-											id_tipo_dato : $(
-													"#entrada\\.id_tipo_dato")
-													.val()
-										},
-										success : function(result) {
-											var boleano = new String(''
-													+ result);
-											if (boleano.toLowerCase().indexOf(
-													'l=true') != -1) {
-												$('#capa_longitud')
-														.attr('style',
-																'visibility: visible; position:relative;')
-														.data("longitud", true);
-											} else {
-												$('#capa_longitud')
-														.attr('style',
-																'visibility: hidden; position:fixed;')
-														.data("longitud", false);
-											}
-										}
-									});
-							// Muestra la capa formato si el dato posse esta
-							// caracteristica
-							$
-									.ajax({
-										type : 'GET',
-										url : 'dato_hasformatted.action',
-										cache : false,
-										async : false,
-										data : {
-											id_tipo_dato : $(
-													"#entrada\\.id_tipo_dato")
-													.val()
-										},
-										success : function(result2) {
-											var boleano = new String(''
-													+ result2);
-											if (boleano.toLowerCase().indexOf(
-													'f=true') != -1) {
-												$('#capa_formato')
-														.attr('style',
-																'visibility: visible; position:relative;')
-														.data("formato", true);
-												// Crea las opciones del select
-												// formato
-												$
-														.ajax({
-															type : 'GET',
-															url : 'list_format.action',
-															cache : false,
-															async : false,
-															data : {
-																id_tipo_dato : $(
-																		"#entrada\\.id_tipo_dato")
-																		.val()
-															},
-															success : function(
-																	result3) {
-																$(
+											success : function(
+													result3) {
+												$(
+														"#entrada\\.id_formato")
+														.append(
+																result3);
+												$(
+														'#opt_element_'
+																+ $(
 																		"#entrada\\.id_formato")
-																		.append(
-																				result3);
-																$(
-																		'#opt_element_'
-																				+ $(
-																						"#entrada\\.id_formato")
-																						.attr(
-																								'class')
-																				+ '')
 																		.attr(
-																				'selected',
-																				'selected');
-															}
-														});
-											} else {
-												$('#capa_formato')
-														.attr('style',
-																'visibility: hidden; position:fixed;')
-														.data("formato", false);
+																				'class')
+																+ '')
+														.attr(
+																'selected',
+																'selected');
 											}
-										}
-									});
+										});
+							} else {
+								$('#capa_formato')
+										.attr('style',
+												'visibility: hidden; position:fixed;')
+										.data("formato", false);
+							}
 						}
-
-					}
-
-					/*
-					 * funciones para el correcto funcionamiento de links de la
-					 * vista de gobierno en linea
-					 */
-					$(".masPie").hide();
-
-					$(".cerrarPie").toggle(function() {
-						$(".masPie").slideDown();
-						$(".cerrarPie").text("-");
-						return false;
-					}, function() {
-						$(".masPie").slideUp();
-						$(".cerrarPie").text("+");
-						return false;
 					});
+		}
 
-					$('.m_a').lksMenu();
+	}
 
-					$(".m_a ul li ul").attr("style", "display: none");
-					$(".m_a ul li ul li ul").attr("style", "display: none");
-				});
+	/*
+	 * funciones para el correcto funcionamiento de links de la
+	 * vista de gobierno en linea
+	 */
+	$(".masPie").hide();
+
+	$(".cerrarPie").toggle(function() {
+		$(".masPie").slideDown();
+		$(".cerrarPie").text("-");
+		return false;
+	}, function() {
+		$(".masPie").slideUp();
+		$(".cerrarPie").text("+");
+		return false;
+	});
+
+	$('.m_a').lksMenu();
+
+	$(".m_a ul li ul").attr("style", "display: none");
+	$(".m_a ul li ul li ul").attr("style", "display: none");
+	
+
+    /*
+	 * LLenando variable que lee el número de tool tip
+	 */
+	var n = $(".m_tip");
+
+	/*
+	 * Creación del número de capas necesarias para la visualización de los
+	 * sexys tool tips
+	 */
+	for ( var i = 1; i <= n.length; i++) {
+		$("#t" + i).tooltip("" + $('div.t' + i).html(), {
+			width : 120,
+			style : 'alert',
+			hook : 1
+		});
+	}
+	
+	/*
+	 * Ejecución de los sexys tool tips, en el que se lee la capa oculta en el html
+	 * donde se encuentrán los items incompletos del servicio de información.
+	 * 
+	 * elem = objeto html img para uso del tool tip
+	 * 
+	 * $('div.'+elem.name).html() = Lee una capa oculta con los detalles del
+	 * servicio incompleto
+	 * 
+	 * $("#"+elem.name).tooltip = es el identificado de la imagen la cual mostrarará
+	 * los detalles del servicio incompleto.
+	 */
+	function tip(elem) {
+		$("#" + elem.name).tooltip("" + $('.' + elem.name).html(), {
+			width : 120,
+			style : 'alert',
+			hook : 1
+		});
+	}
+	
+	/*
+	 * Ejecución de los sexys tool tips, en el que se lee la capa oculta en el html
+	 * donde se encuentrán los items incompletos del servicio de información.
+	 * 
+	 * elem = objeto html img para uso del tool tip
+	 * 
+	 * $('div.'+elem.name).html() = Lee una capa oculta con los detalles del
+	 * servicio incompleto
+	 * 
+	 * $("#"+elem.name).tooltip = es el identificado de la imagen la cual mostrarará
+	 * los detalles del servicio incompleto.
+	 */
+	function tip(elem) {
+		$("#" + elem.name).tooltip("" + $('.' + elem.name).html(), {
+			width : 120,
+			style : 'alert',
+			hook : 1
+		});
+	}
+});
 
 /*
  * funciones para el correcto funcionamiento de links de la vista de gobierno en
