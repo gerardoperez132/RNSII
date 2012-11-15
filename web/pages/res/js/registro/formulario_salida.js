@@ -245,6 +245,64 @@ $(document).ready(function() {
     
     $(".m_a ul li ul").attr("style", "display: none");
     $(".m_a ul li ul li ul").attr("style", "display: none");
+    
+    
+    /*
+	 * LLenando variable que lee el número de tool tip
+	 */
+	var n = $(".m_tip");
+
+	/*
+	 * Creación del número de capas necesarias para la visualización de los
+	 * sexys tool tips
+	 */
+	for ( var i = 1; i <= n.length; i++) {
+		$("#t" + i).tooltip("" + $('div.t' + i).html(), {
+			width : 120,
+			style : 'alert',
+			hook : 1
+		});
+	}
+	
+	/*
+	 * Ejecución de los sexys tool tips, en el que se lee la capa oculta en el html
+	 * donde se encuentrán los items incompletos del servicio de información.
+	 * 
+	 * elem = objeto html img para uso del tool tip
+	 * 
+	 * $('div.'+elem.name).html() = Lee una capa oculta con los detalles del
+	 * servicio incompleto
+	 * 
+	 * $("#"+elem.name).tooltip = es el identificado de la imagen la cual mostrarará
+	 * los detalles del servicio incompleto.
+	 */
+	function tip(elem) {
+		$("#" + elem.name).tooltip("" + $('.' + elem.name).html(), {
+			width : 120,
+			style : 'alert',
+			hook : 1
+		});
+	}
+	
+	/*
+	 * Ejecución de los sexys tool tips, en el que se lee la capa oculta en el html
+	 * donde se encuentrán los items incompletos del servicio de información.
+	 * 
+	 * elem = objeto html img para uso del tool tip
+	 * 
+	 * $('div.'+elem.name).html() = Lee una capa oculta con los detalles del
+	 * servicio incompleto
+	 * 
+	 * $("#"+elem.name).tooltip = es el identificado de la imagen la cual mostrarará
+	 * los detalles del servicio incompleto.
+	 */
+	function tip(elem) {
+		$("#" + elem.name).tooltip("" + $('.' + elem.name).html(), {
+			width : 120,
+			style : 'alert',
+			hook : 1
+		});
+	}
 });
 
 /*

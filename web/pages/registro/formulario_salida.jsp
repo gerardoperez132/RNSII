@@ -20,6 +20,13 @@
 <script type="text/javascript" src="res/js/jquery.validate.js" charset="UTF-8"></script>
 <script src="res/js/messages_es.js" type="text/javascript" charset="UTF-8"></script>
 <script src="res/js/registro/formulario_salida.js" type="text/javascript" charset="UTF-8"></script>
+<!-- Added... -->
+<link rel="stylesheet" type="text/css" href="res/js/plugins/sexy-tooltips/blue.css" media="all">
+<link rel="stylesheet" type="text/css" href="res/js/plugins/sexy-alert-box-1.2.2/sexyalertbox.css" media="all">
+<!-- JS (required) -->
+<script type="text/javascript" src="res/js/plugins/sexy-tooltips.v1.1.jquery.js" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/plugins/sexy-alert-box-1.2.2/jquery.easing.1.3.js" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/plugins/sexy-alert-box-1.2.2/sexyalertbox.v1.2.jquery.js" charset="UTF-8"></script>
 <title><s:text name="registro.title"></s:text></title>
 </head>
 <body>	
@@ -155,6 +162,7 @@
 							<s:param>salida.nombre</s:param>
 						</s:fielderror>
 						<s:textfield name="salida.nombre" id="salida.nombre" />
+						<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t1" id="t1" onmouseover="tip(this);" title="">
 						<br>
 						<!-- Descripción de la salida. -->
 						<h5 class="formulario">
@@ -164,6 +172,7 @@
 							<s:param>salida.descripcion</s:param>
 						</s:fielderror>
 						<s:textarea name="salida.descripcion" id="salida.descripcion" cols="30" rows="5" />
+						<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t2" id="t2" onmouseover="tip(this);" title="">
 						<br>
 						<h5 class="formulario">
 							<s:text name="dato.title"></s:text>
@@ -174,6 +183,7 @@
 						<s:select name="salida.id_tipo_dato" id="salida.id_tipo_dato" list="tipoDatos"
 							listKey="id_tipo_dato" listValue="nombre" headerKey="-1"
 							headerValue="%{getText('dato.select')}"></s:select>
+						<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t3" id="t3" onmouseover="tip(this);" title="">
 						<br> 
 						
 						
@@ -211,6 +221,7 @@
 									</s:if>										
 								</s:iterator>
 							</select>
+							<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t4" id="t4" onmouseover="tip(this);" title="">
 						</div>
 						<div id="capa_longitud" style="visibility: visible; position:relative;">
 							<h5 class="formulario">
@@ -220,6 +231,7 @@
 								<s:param>longitud</s:param>
 							</s:fielderror>
 							<s:textfield name="salida.longitud" id="salida.longitud" maxlength="10"/>
+							<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t5" id="t5" onmouseover="tip(this);" title="">
 								<span id="longitud_msj"></span>
 						</div>
 						
@@ -243,6 +255,21 @@
 	</div>	
 	<div style="clear: both"></div>
 	<div class="vacio"></div>
+	<div class="t1" style="visibility: hidden; display: none;">
+		<s:text name="tooltip.funcionalidad.salida.nombre"/>
+	</div>
+	<div class="t2" style="visibility: hidden; display: none;">
+		<s:text name="tooltip.funcionalidad.salida.descripcion"/>
+	</div>
+	<div class="t3" style="visibility: hidden; display: none;">
+		<s:text name="tooltip.funcionalidad.salida.dato"/>
+	</div>
+	<div class="t4" style="visibility: hidden; display: none;">
+		<s:text name="tooltip.funcionalidad.salida.formato"/>
+	</div>
+	<div class="t5" style="visibility: hidden; display: none;">
+		<s:text name="tooltip.funcionalidad.salida.longitud"/>
+	</div>	
 	<%@include file="../layout/footer.jsp"%>		
 	</body>
 </s:i18n>
