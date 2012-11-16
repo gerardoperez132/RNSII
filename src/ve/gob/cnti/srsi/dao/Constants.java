@@ -83,7 +83,7 @@ public interface Constants {
 	 * permiten introducir un área de texto más amplia. Considerando que la
 	 * cadena con la que se compara está en mayúsculas.
 	 */
-	public static final String REGEX_DESCRIPTION = "^[A-Z0-9 _.,()ÁÉÍÓÚÑ]*$";
+	public static final String REGEX_DESCRIPTION = "^[A-Z0-9 _.,()ÁÉÍÓÚÑ\\n]*$";
 
 	/**
 	 * La expresión regular para el correo electrónico válido.
