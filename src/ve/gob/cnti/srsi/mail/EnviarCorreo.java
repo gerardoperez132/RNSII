@@ -50,7 +50,7 @@ public class EnviarCorreo extends DAO {
 				"mail_smtp_user");
 		String mail_smtp_auth = mail.getProperties().getProperty(
 				"mail_smtp_auth");
-		String pass = mail.getProperties().getProperty("pass");
+		String pass = mail.getProperties().getProperty("mail_smtp_password");
 		try {
 			// Propiedades de la conexión
 			Properties props = new Properties();
