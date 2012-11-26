@@ -131,11 +131,12 @@ public class Contact extends DAO implements Constants.DateFormatting {
 				+ new SimpleDateFormat(VET_FORMAT).format(new Date()) + "\n\n";
 		String footer = "\n\nEnviado desde la Plataforma para el Registro de Servicios de Información Interoperables.";
 		EnviarCorreo enviarCorreo = new EnviarCorreo();
-		if (enviarCorreo.send("ricciardelli2021@gmail.com", subject, header
-				+ message + footer)) {
-			// if (enviarCorreo.send(recipient.getCorreo(), subject, message))
+		// if (enviarCorreo.send("ricciardelli2021@gmail.com", subject, header
+		// + message + footer)) {
+		if (enviarCorreo.send(recipient.getCorreo(), subject, header + message
+				+ footer))
 			remove();
-		} else
+		else
 			System.out.print("Error enviando mensaje");
 		return SUCCESS;
 	}
