@@ -59,11 +59,11 @@
 </s:if>
 <title><s:text name="title" /></title>
 	</head>
-	<body>
+	<body class="bg clearfix">
 		<!-- Este es el div de la sombra del contenedor del maquetado de la página -->
 		
 		<div class="container">
-			<%@include file="../layout/header.jsp"%>
+			
 		
 		<!-- Esta es la barra lateral -->
 		<%@include file="../layout/sidebar.jsp"%>			
@@ -512,9 +512,6 @@
 				<!-- END TAB 4 -->
 			</div>
 			</div>
-		<div style="clear: both"></div>
-	<div class="vacio"></div>
-	<%@include file="../layout/footer.jsp"%>
 	</body>
 </s:i18n>
 </html>

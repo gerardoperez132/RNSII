@@ -9,7 +9,13 @@
 	<head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <!-- CSS (required) -->
-<link rel="stylesheet" type="text/css" href="/SRSI/pages/res/css/style2.css">
+<link rel="stylesheet" type="text/css" href="res/css/style2.css">
+<link rel="stylesheet" href="res/css/templates_joomla/template.css" type="text/css">
+<link rel="stylesheet" href="res/css/templates_joomla/menu.css" type="text/css">
+<link rel="stylesheet" href="res/css/templates_joomla/style1.css" type="text/css">
+<link rel="stylesheet" href="res/css/templates_joomla/joomla.css" type="text/css">
+<link rel="stylesheet" href="res/css/templates_joomla/typography.css" type="text/css">
+
 <link rel="stylesheet" type="text/css" href="res/css/jquery.treeTable.css">
 <link rel="stylesheet" type="text/css" href="res/css/table_tree.css">
 <link rel="stylesheet" type="text/css" href="res/css/table2.css">
@@ -17,18 +23,59 @@
 <link rel="stylesheet" type="text/css" href="res/js/plugins/sexy-tooltips/blue.css" media="all">
 <link rel="stylesheet" type="text/css" href="res/js/plugins/sexy-alert-box-1.2.2/sexyalertbox.css" media="all">
 <!-- JS (required) -->
-<script type="text/javascript" src="/SRSI/pages/res/js/jquery-1.7.1.js" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/jquery-1.7.1.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/tabs.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/jquery.treeTable.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/plugins/sexy-tooltips.v1.1.jquery.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/plugins/sexy-alert-box-1.2.2/jquery.easing.1.3.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/plugins/sexy-alert-box-1.2.2/sexyalertbox.v1.2.jquery.js" charset="UTF-8"></script>
-<script type="text/javascript" src="/SRSI/pages/res/js/funciones_ge.js" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/funciones_ge.js" charset="UTF-8"></script>
+
+<script type="text/javascript" src="res/js/mootools-core.js" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/mootools-more.js" charset="UTF-8"></script>
+
+
+<script type="text/javascript" src="res/js/js_joomla/demo.js" charset="UTF-8"></script>
+
 <title><s:text name="inicio" /></title>
 	</head>
-	<body>
-		<div class="container">
-			<%@include file="layout/header.jsp"%>
+	<body class="bg clearfix">
+		<div class="bg1">
+		<div class="sp-wrap main-bg clearfix">			
+		<div class="container">			
+		<div class="cintillo"></div>
+		<div id="header" class="clearfix"></div>		
+		<div class="clr"></div>
+		<div id="hornav" class="clearfix">
+			<!-- menu joomla -->
+			
+			<ul class="sp-menu level-0">
+				<li class="menu-item first"><a href="http://10.8.6.62/interoperabilidad/" class="menu-item active first"><span class="menu"><span class="menu-title">Inicio</span></span></a></li>
+				<li class="menu-item parent" id="mn1"><a href="#" class="menu-item parent"><span class="menu"><span class="menu-title">Interoperabilidad</span></span></a>
+					<div class="submenu" id="submenu_mn1" style="display: none; "><div class="submenu-wrap"><div class="menu-tl"><div class="menu-tr"><div class="menu-tm"></div></div></div><div class="menu-l"><div class="menu-r"><div class="submenu-inner clearfix" style="width: 200px;"><div class="megacol col1 first" style="width: 200px;">
+						<ul class="sp-menu level-1">
+							<li class="menu-item first group"><div class="group"><div class="group-title"><a href="#" class="menu-item first group"><span class="menu"><span class="menu-title">Sobre La Interoperabilidad</span></span></a></div><div class="group-content">
+								<ul class="sp-menu level-1">
+									<li class="menu-item first"><a href="/interoperabilidad/index.php/conceptos/interoperabilidad/definicion" class="menu-item first"><span class="menu"><span class="menu-title">Definición</span></span></a></li>
+									<li class="menu-item"><a href="/interoperabilidad/index.php/conceptos/interoperabilidad/dimensiones" class="menu-item"><span class="menu"><span class="menu-title">Dimensiones</span></span></a></li>
+									<li class="menu-item"><a href="/interoperabilidad/index.php/conceptos/interoperabilidad/politicas" class="menu-item"><span class="menu"><span class="menu-title">Políticas de Implementación</span></span></a></li>
+									<li class="menu-item"><a href="/interoperabilidad/index.php/conceptos/interoperabilidad/error-page" class="menu-item"><span class="menu"><span class="menu-title">Estándares</span></span></a></li>
+									<li class="menu-item last"><a href="/interoperabilidad/index.php/conceptos/interoperabilidad/recomendaciones" class="menu-item last"><span class="menu"><span class="menu-title">Recomendaciones</span></span></a></li>
+								</ul></div></div>
+							</li>
+						</ul></div></div></div></div><div class="menu-bl"><div class="menu-br"><div class="menu-bm"></div></div></div></div>
+					</div>
+				</li>
+				<li class="menu-item active "><a href="http://10.0.207.63:8080/SRSI/pages/SRSI.action" target="_blank" class="menu-item"><span class="menu"><span class="menu-title">Catálogo de Servicios</span></span></a></li>
+				<li class="menu-item"><a href="/interoperabilidad/index.php/de-interes" class="menu-item"><span class="menu"><span class="menu-title">De Interés</span></span></a></li>
+				<li class="menu-item"><a href="/interoperabilidad/index.php/comites" class="menu-item"><span class="menu"><span class="menu-title">Marco Jurídico</span></span></a></li>
+				<li class="menu-item"><a href="/interoperabilidad/index.php/rtl-demos" class="menu-item"><span class="menu"><span class="menu-title">Noticias</span></span></a></li>
+				<li class="menu-item last"><a href="/interoperabilidad/index.php/contactenos" class="menu-item last"><span class="menu"><span class="menu-title">Contáctenos</span></span></a></li>
+			</ul>
+			
+			<!-- menu joomla -->
+		</div>
+		
 			<!-- Este es el div de contenidos -->
 			<div id="content">
 				<!-- Ruta de navegación -->
@@ -554,10 +601,9 @@
 				</div>
 			</div>
 			<%@include file="layout/sidebar_user_final.jsp"%>
+		</div>	
 		</div>
-		<div style="clear: both"></div>
-		<div class="vacio"></div>
-		<%@include file="layout/footer.jsp"%>
+		</div>	
 	</body>
 </s:i18n>
 </html>

@@ -26,19 +26,17 @@
 <title><s:text name="inicio" /></title>
 <!-- Donde dice inicio debería ir una var que identifique el lugar -->
 </head>
-<body>
+<body class="bg clearfix">
 	<!-- Este es el div de la sombra del contenedor del maquetado de la página -->
 	<div id="sombra">
 		<!-- Este es el div contenedor del maquetado de la página -->
-		<div id="container">
-			<%@include file="layout/header.jsp"%>
+		<div id="container">			
 			<%@include file="layout/sidebar_user_final.jsp"%>
 			<!-- Este es el div de contenidos -->			
 			<div id="content">			
 			<h1 style="color:red"><s:text name="404"></s:text></h1>			
 			<h4><s:text name="pageNotFound"></s:text></h4>						
-			</div>
-			<%@include file="layout/footer.jsp"%>
+			</div>			
 		</div>		
 	</div>
 </body>

@@ -29,9 +29,9 @@
 <script type="text/javascript" src="res/js/plugins/sexy-alert-box-1.2.2/sexyalertbox.v1.2.jquery.js" charset="UTF-8"></script>
 <title><s:text name="form.entrada.registro.title"></s:text></title>
 </head>
-<body>	
+<body class="bg clearfix">	
 	<div class="container">
-		<%@include file="../layout/header.jsp"%>
+		
 		
 		<!-- Esta es la barra lateral -->
 		<%@include file="../layout/sidebar.jsp"%>			
@@ -269,8 +269,7 @@
 	</div>
 	<div class="t5" style="visibility: hidden; display: none;">
 		<s:text name="tooltip.funcionalidad.entrada.longitud"/>
-	</div>	
-	<%@include file="../layout/footer.jsp"%>	
+	</div>		
 	</body>
 </s:i18n>
 </html>

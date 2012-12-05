@@ -23,9 +23,9 @@
 <script type="text/javascript" src="res/js/plugins/sexy-alert-box-1.2.2/sexyalertbox.v1.2.jquery.js" charset="UTF-8"></script>
 <title><s:text name="inicio" /></title>
 	</head>
-	<body>
+	<body class="bg clearfix">
 		<div class="container">
-			<%@include file="../layout/header.jsp"%>
+			
 			<!-- Esta es la barra lateral -->
 			<%@include file="../layout/sidebar.jsp"%>
 			<!-- Este es el div de contenidos -->
@@ -142,9 +142,8 @@
 				</s:else>				
 			</div>
 		</div>
-		<div style="clear: both"></div>
-		<div class="vacio"></div>
-		<%@include file="../layout/footer.jsp"%>
+		
+		
 	</body>
 </s:i18n>
 </html>

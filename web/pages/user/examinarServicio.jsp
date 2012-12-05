@@ -27,9 +27,9 @@
 </script>
 <title><s:text name="inicio" /></title>
 	</head>
-	<body>
+	<body class="bg clearfix">
 		<div class="container">
-			<%@include file="../layout/header.jsp"%>
+			
 			<!-- Esta es la barra lateral -->
 			<%@include file="../layout/sidebar.jsp"%>
 			<!-- Este es el div de contenidos -->
@@ -296,10 +296,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		<div style="clear: both"></div>
-		<div class="vacio"></div>
-		<%@include file="../layout/footer.jsp"%>
+		</div>		
 	</body>
 </s:i18n>
 </html>

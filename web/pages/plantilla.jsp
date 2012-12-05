@@ -10,7 +10,7 @@
 <title>SRSI - Inicio</title>
 <!-- Donde dice inicio debería ir una var que identifique el lugar -->
 </head>
-<body>
+<body class="bg clearfix">
 
 	<!-- Este es el div de la sombra del contenedor del maquetado de la página -->
 	<div id="sombra">

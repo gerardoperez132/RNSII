@@ -32,9 +32,9 @@
 
 <title><s:text name="registro.title"/></title>
 	</head>
-	<body>
+	<body class="bg clearfix">
 		<div class="container">
-			<%@include file="../layout/header.jsp"%>
+			
 			<!-- Esta es la barra lateral -->
 			<%@include file="../layout/sidebar.jsp"%>
 			<!-- Este es el div de contenidos -->
@@ -288,8 +288,7 @@
 		</div>
 		<div class="t2" style="visibility: hidden; display: none;">
 			<s:text name="tooltip.funcionalidad.descripcion"/>
-		</div>
-		<%@include file="../layout/footer.jsp"%>
+		</div>		
 	</body>
 </s:i18n>
 </html>

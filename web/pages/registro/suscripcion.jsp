@@ -28,10 +28,10 @@
 </script>
 <title><s:text name="suscripciones"></s:text></title>
 	</head>
-	<body>
+	<body class="bg clearfix">
 		<!-- Este es el div contenedor del maquetado de la página -->
 		<div class="container">
-			<%@include file="../layout/header.jsp"%>
+			
 			<!-- Esta es la barra lateral -->
 			<%@include file="../layout/sidebar.jsp"%>
 
@@ -885,10 +885,7 @@ Muestra las opciones de busqueda para encontrar servicios de información-->
 					</span>
 				</s:else>
 			</div>
-			</div>
-			<div style="clear: both"></div>
-			<div class="vacio"></div>
-			<%@include file="../layout/footer.jsp"%>	
+			</div>	
 	</body>
 </s:i18n>
 </html>
