@@ -28,8 +28,8 @@ a:hover,a:active,a:focus{color:#333}
 #hornav ul.level-0 > li.menu-item span.menu-desc,
 #sublevel ul.level-1 > li.menu-item span.menu-desc{color:#888}
 
-#hornav ul.level-0 > li.menu-item:hover,#hornav ul.level-0 > li.menu-item.active{background: url(../../images/styles/style1/nav-active-l.png) no-repeat 0 100%}
-#hornav ul.level-0 > li.menu-item:hover > a,#hornav ul.level-0 > li.menu-item.active > a{background: url(../../images/styles/style1/nav-active-r.png) no-repeat 100% 100%;color: #fff;}
+#hornav ul.level-0 > li.menu-item:hover,#hornav ul.level-0 > li.menu-item.active{background: url(../../images/nav-active-l.png) no-repeat 0 100%}
+#hornav ul.level-0 > li.menu-item:hover > a,#hornav ul.level-0 > li.menu-item.active > a{background: url(../../images/nav-active-r.png) no-repeat 100% 100%;color: #fff;}
 
 #hornav ul.level-0 > li.menu-item:hover span.menu-desc,#hornav ul.level-0 > li.menu-item.active span.menu-desc,
 #sublevel ul.level-1 > li.menu-item:hover span.menu-desc,#sublevel ul.level-1 > li.menu-item.active span.menu-desc{color:#fff}
@@ -42,7 +42,7 @@ a:hover,a:active,a:focus{color:#333}
 #hornav ul li .submenu-inner,#sublevel ul li .submenu-inner {background:#12768e;color:#fff}
 
 #hornav li.menu-item li.menu-item,
-#sublevel li.menu-item li.menu-item {background: url(../../images/styles/style1/nav-border.png) repeat-x 0 0!important}
+#sublevel li.menu-item li.menu-item {background: url(../../images/nav-border.png) repeat-x 0 0!important}
 
 #hornav li.menu-item li:hover,#hornav li.menu-item li.active > a,
 #sublevel li.menu-item li:hover,#sublevel li.menu-item li.active > a{background: #0e5d70!important}

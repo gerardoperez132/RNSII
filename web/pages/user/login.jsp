@@ -52,7 +52,10 @@
 				<li><a href="recuperar_clave"><s:text name="accessSystem" /></a></li>
 			</ul>
 		</div>
-		<h1>Ingresar</h1>
+		
+		
+		
+		
 		<s:if test="recoveryPass">
 			<form action="enviarDatos" method="post">
 				<table>
@@ -133,6 +136,75 @@
 			</form>
 		</s:elseif>
 		<s:else>
+		
+		<div class="mod-wrapper clearfix">		
+			<h3 class="header"><s:text name="login" /></h3>
+			<div class="mod-content clearfix">	
+			<div class="mod-inner clearfix">
+				<form action="/joomla25/simplicity_ii/index.php" method="post" id="login-form">
+					<fieldset class="userdata">
+					<table>
+						<tr>
+							<td>
+							<p id="form-login-username">
+								<label for="modlgn-username"><s:text name="user" /></label>
+								<input id="modlgn-username" type="text" name="correo" size="18">						
+							</p>
+							</td>
+							<td>
+								<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t1" id="t1" onmouseover="tip(this);"/>
+								<div class="t1" style="visibility: hidden; display: none;">
+									<s:text name="mailHelp" />
+								</div>		
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p id="form-login-password">
+									<label for="modlgn-passwd"><s:text name="pass" /></label>
+									<input id="modlgn-passwd" type="password" name="password" size="18">
+								</p>	
+							</td>
+							<td>
+								
+							</td>
+						</tr>
+					</table>
+					
+					<p>
+											
+					</p>
+					
+					<p>
+									<img src="getCaptcha" id="captcha" alt="Captcha">
+									<a href="SRSI" id="a_refresh"><img src="res/images/refresh.png" alt="Refrescar" id="refrescar"></a>					
+								</p>
+					
+					
+						
+					<input type="submit" name="Submit" value="<s:text name="entrar" />">
+					</fieldset>
+				</form>
+			<ul class="userlinks">
+				<li>
+					<a href="/joomla25/simplicity_ii/index.php/joomla/users-component/password-reset">
+					Forgot your password?</a>
+				</li>
+				<li>
+					<a href="/joomla25/simplicity_ii/index.php/joomla/users-component/username-reminder">
+					Forgot your username?</a>
+				</li>
+					<li>
+				<a href="/joomla25/simplicity_ii/index.php/joomla/users-component/registration-form">
+					Create an account</a>
+				</li>
+			</ul>
+			
+				</div>
+			</div>
+		</div>
+		
+		
 			<form action="index" method="post">
 				<table>
 					<tr>

@@ -1,13 +1,14 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!-- Esta es la barra lateral -->
-<div class="sidebar sidebar_user_final">
+<div class="sidebar">
 	<div class="busqueda">
-		<form method="post" action="buscar_servicio">
-			<label><s:text name="buscarServicio" /></label>
-			<s:textfield name="cadena" id="buscar" cssClass="inputBusqueda" class="buscar" />
-			<input type="submit" class="submit" value="&nbsp;" />
-		</form>
+	<form method="post" action="buscar_servicio">
+	<div class="finder">
+		<input type="text" name="cadena" id="mod-finder-searchword" class="inputbox" size="25" value="">			
 	</div>
+	</form>
+	</div>
+	
 	<div class="error_msj" style="visibility: visible;">
 		<s:if test="msj_error.length()>0">
 			<span class="errorMessage"><s:property value="msj_error" /></span>

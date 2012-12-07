@@ -1,18 +1,6 @@
 $(document).ready(function() {
 	$("#tree").treeTable();
-
-	$(".masPie").hide();
-
-	$(".cerrarPie").toggle(function() {
-		$(".masPie").slideDown();
-		$(".cerrarPie").text("-");
-		return false;
-	}, function() {
-		$(".masPie").slideUp();
-		$(".cerrarPie").text("+");
-		return false;
-	});
-
+	
 	$('.m_a').lksMenu();
 
 	$(".m_a ul li ul").attr("style", "display: none");
@@ -64,30 +52,31 @@ $(document).ready(function() {
 		$("#tab4").css("display", "block").fadeIn();  // Agrega efecto de transición (fade) en el
 		// contenido activo
 	}
-});
+	
+	var value;
 
-function changeValues(page, campoId1, valor1, campoId2, valor2, form) {
-	var campo1 = document.getElementById(campoId1);
-	campo1.value = valor1;
-	var campo2 = document.getElementById(campoId2);
-	campo2.value = valor2;
-	submitForm(page, form);
-}
-function changeValue(page, campoId, valor, form) {
-	var campo = document.getElementById(campoId);
-	campo.value = valor;
-	submitForm(page, form);
-}
-function submitForm(page, form) {
-	var form = document.getElementById(form);
-	form.action = "http://gobiernoenlinea.gob.ve/home/" + page;
-	form.submit();
-}
-function actualizarClima(cadena) {
-	var T = cadena.split(",");
-	$('#t_max').html('' + T[0]);
-	$('#t_min').html('' + T[1]);
-}
+	// Set the input value if not already set.
+	if (!document.id('mod-finder-searchword').getProperty('value')) {
+		document.id('mod-finder-searchword').setProperty('value', 'Buscar...');
+	}
+
+	// Get the current value.
+	value = document.id('mod-finder-searchword').getProperty('value');
+
+	// If the current value equals the default value, clear it.
+	document.id('mod-finder-searchword').addEvent('focus', function() {
+		if (this.getProperty('value') == 'Buscar...') {
+			this.setProperty('value', '');
+		}
+	});
+
+	// If the current value is empty, set the previous value.
+	document.id('mod-finder-searchword').addEvent('blur', function() {
+		if (!this.getProperty('value')) {
+			this.setProperty('value', value);
+		}
+	});
+});
 
 (function($) {
 	// fn es un shortcut al prototipo (prototypo) de la libreria jquery
@@ -259,3 +248,4 @@ function tip(elem) {
 		hook : 1
 	});
 }
+

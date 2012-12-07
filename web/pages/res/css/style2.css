@@ -15,11 +15,6 @@
 	position: relative;
 }
 
-.header {
-	height: 75px;
-	border-bottom: 5px solid #CC0001;
-}
-
 .logo {
 	background: url("../images/logoIzquierda.png") no-repeat scroll 0 0
 		transparent;
@@ -29,10 +24,8 @@
 	margin: 10px 0 0 10px;
 }
 
-.busqueda {
-	background-color: #E4E4E4;
-	border: 1px solid #CCC;
-	float: right;
+.busqueda {	
+	float: left;
 	height: 25px;
 	width: 256px;
 	margin: 0 10px 0 0;
@@ -136,15 +129,9 @@ div.paginado li a:hover {
 	background: url("../images/bullet_flecha_gris.png") left 15px no-repeat;
 }
 
-
-
-.sidebar {
-	border-left: 1px solid #CCCCCC;
-	display: block;
-	float: right;
-	margin: 0 0 -30000px 0px;
-	padding: 0 0 30000px 5px;
-	width: 230px;
+.sidebar {	
+	float: right;	
+	width: 250px;
 }
 
 .sidebar_user_final {
@@ -303,44 +290,6 @@ div.paginado li a:hover {
 	text-transform: uppercase;
 }
 
-
-.busqueda label {
-	color: #666;
-	float: left;
-	font-family: sans-serif;
-	font-size: 12px;
-	font-weight: 700;
-	margin: 2px 4px 2px 0;
-	padding: 4px 0 2px;
-}
-
-.busqueda .buscar {
-	border: 1px solid #CCCCCC;
-	float: left;
-	font-family: sans-serif;
-	height: 19px;
-	margin: 1px 0pt 0pt;
-	width: 160px;
-}
-
-.busqueda {
-	border: 1px solid #CCC;
-	float: left;
-	font-family: sans-serif;
-	height: 25px;
-	margin: 1px 0pt 0pt;
-}
-
-.busqueda .submit {
-	background: url(../images/tiempo_15.png);
-	border: none;
-	width: 21px;
-	height: 23px;
-	float: right;
-	cursor: pointer;
-	margin: 1px 0 0;
-}
-
 .RutaNavegacion {
 	border-color: #CCCCCC;
 	border-style: dotted solid;
@@ -492,13 +441,6 @@ h3.h3-ui-menu-content {
 	padding: 5px;
 	text-align: left;
 	width: 765px;
-}
-
-.inputBusqueda {
-	margin-top: 1px;
-	border: 1px solid #CECECE;
-	width: 160px;
-	height: 19px;
 }
 
 /*icono de ayuda*/
@@ -709,7 +651,7 @@ div.tab03 {
 	display: block;
 	float: left;
 	height: 72px;
-	width: 224px;
+	width: 212px;
 	vertical-align: middle;
 	margin: 3px;
 }
