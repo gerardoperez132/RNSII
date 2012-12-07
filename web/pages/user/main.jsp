@@ -5,6 +5,7 @@
 <html>
 <s:i18n name="ve/gob/cnti/srsi/i18n/messages"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<%@include file="../layout/header_joomla.jsp" %>
 <!-- CSS (required) -->
 <link rel="stylesheet" type="text/css" href="/SRSI/pages/res/css/style2.css">
 <link rel="stylesheet" type="text/css" href="res/css/menu_vertical.css">
@@ -24,6 +25,8 @@
 <title><s:text name="inicio" /></title>
 	</head>
 	<body class="bg clearfix">
+	<div class="bg1">
+		<div class="sp-wrap main-bg clearfix" style="width: 960px;">
 		<div class="container">
 			
 			<!-- Esta es la barra lateral -->
@@ -205,7 +208,14 @@
 			<div class="n" style="visibility: hidden; display: none;">
 				<s:property value="ListaServicios.size()" />
 			</div>
+		</div>
+		<div class="clr"></div>
+		<%@include file="../layout/navegacion.jsp"%>	
+		<%@include file="../layout/links_over_footer.jsp"%>	
 		</div>		
+		</div>		
+		<!-- Footer -->	
+		<%@include file="../layout/footer.jsp"%>
 	</body>
 </s:i18n>
 </html>
