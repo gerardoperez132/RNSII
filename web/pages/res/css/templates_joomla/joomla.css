@@ -161,7 +161,6 @@ div.mod-inner fieldset {padding:0!important}
 .login .inputbox,.login input.required,.registration dl dd input.required,.remind dl dd input.required,.reset dl dd input.required,
 .profile-edit .inputbox,.profile-edit input.required,.profile-edit input,.profile-edit select{margin-left:10px;width:180px}
 .login .button,.login button,.profile-edit button,.remind button,.reset button,.registration button{margin-left:160px}
-ul.userlinks {margin-top:15px!important;padding: 0!important;}
 ul.userlinks li{background:none!important;line-height:normal;padding:0 0 5px;margin:0;border:0}
 ul.userlinks li li:hover {background:none!important}
 ul.userlinks a {font-size: 11px;}

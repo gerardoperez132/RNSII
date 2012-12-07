@@ -47,14 +47,6 @@
 </s:if>
 <s:else>
 	<div class="ingresar">
-		<div class="BarraEnviar">
-			<ul>
-				<li><a href="recuperar_clave"><s:text name="accessSystem" /></a></li>
-			</ul>
-		</div>
-		
-		
-		
 		
 		<s:if test="recoveryPass">
 			<form action="enviarDatos" method="post">
@@ -141,9 +133,9 @@
 			<h3 class="header"><s:text name="login" /></h3>
 			<div class="mod-content clearfix">	
 			<div class="mod-inner clearfix">
-				<form action="/joomla25/simplicity_ii/index.php" method="post" id="login-form">
+				<form action="index" method="post">
 					<fieldset class="userdata">
-					<table>
+					<table style="width: 200px;">
 						<tr>
 							<td>
 							<p id="form-login-username">
@@ -162,82 +154,46 @@
 							<td>
 								<p id="form-login-password">
 									<label for="modlgn-passwd"><s:text name="pass" /></label>
-									<input id="modlgn-passwd" type="password" name="password" size="18">
+									<input type="password" name="password" maxlength="6" />
 								</p>	
 							</td>
 							<td>
 								
 							</td>
 						</tr>
-					</table>
+						<tr>
+							<td>
+								<p id="form-login-password">
+									<label for="modlgn-passwd"><s:text name="captcha" /></label>
+									<input id="modlgn-passwd" type="text" name="captcha" maxlength="6" />
+								</p>	
+							</td>
+							<td>								
+							</td>
+						</tr>
+						<tr>
+							<td style="padding-top: 16px;">								
+								<img src="getCaptcha" id="captcha" alt="Captcha">									
+							</td>
+							<td style="padding-top: 16px;">
+								<a href="SRSI" id="a_refresh"><img src="res/images/refresh.png" alt="Refrescar" id="refrescar"></a>								
+							</td>
+						</tr>
+						<tr>
+							<td style="padding-top: 16px;" colspan="2">								
+								<input type="submit" name="Submit" value="<s:text name="entrar" />">																			
+							</td>
+						</tr>
+					</table>	
 					
-					<p>
-											
-					</p>
-					
-					<p>
-									<img src="getCaptcha" id="captcha" alt="Captcha">
-									<a href="SRSI" id="a_refresh"><img src="res/images/refresh.png" alt="Refrescar" id="refrescar"></a>					
-								</p>
-					
-					
-						
-					<input type="submit" name="Submit" value="<s:text name="entrar" />">
 					</fieldset>
 				</form>
-			<ul class="userlinks">
-				<li>
-					<a href="/joomla25/simplicity_ii/index.php/joomla/users-component/password-reset">
-					Forgot your password?</a>
-				</li>
-				<li>
-					<a href="/joomla25/simplicity_ii/index.php/joomla/users-component/username-reminder">
-					Forgot your username?</a>
-				</li>
-					<li>
-				<a href="/joomla25/simplicity_ii/index.php/joomla/users-component/registration-form">
-					Create an account</a>
-				</li>
-			</ul>
-			
+				<ul class="userlinks">					
+					<li><a href="recuperar_clave"><s:text name="accessSystem" /></a></li>
+				</ul>				
 				</div>
 			</div>
-		</div>
-		
-		
-			<form action="index" method="post">
-				<table>
-					<tr>
-						<td><s:text name="user" /></td>
-						<td><input type="text" name="correo" /></td>
-						<td><img src="res/img/ayuda.gif" alt="ayuda" class="m_tip"
-							name="t1" id="t1" onmouseover="tip(this);">
-							<div class="t1" style="visibility: hidden; display: none;">
-								<s:text name="mailHelp" />
-							</div></td>
-					</tr>
-					<tr>
-						<td><s:text name="pass" /></td>
-						<td><input type="password" name="password" /></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td><s:text name="captcha" /></td>
-						<td><input type="text" name="captcha" maxlength="6" /></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td></td>
-						<td id="captcha_pos" style="height: 35px;"><img src="getCaptcha" id="captcha" alt="Captcha"></td>
-						<td><a href="SRSI" id="a_refresh"><img src="res/images/refresh.png" alt="Refrescar" id="refrescar"></a></td>
-					</tr>	
-					<tr>												
-						<td colspan="3" align="right" style="padding-right: 28px;"><input
-							type="submit" class="submit" value="<s:text name="entrar" />" />
-						</td>
-					</tr>
-				</table>
-			</form>
+		</div>	
 		</s:else>
 	</div>
 </s:else>
