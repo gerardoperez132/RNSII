@@ -23,45 +23,90 @@
 	<div style="clear: both"></div>
 	<%@include file="../user/login.jsp"%>
 	<div style="clear: both"></div>
-	<div class="secciones">
-		<ul class="ui-menu-content">
-			<li class="li-menu-content">
-				<h3 class="h3-ui-menu-content">
-					<a style="font-size: 11px;"><s:text name="si_mas_Visitados" /></a>
-				</h3>
-			</li>
-			<s:if test='SI_masVisitados.size()>0'>
-				<s:iterator value="SI_masVisitados" status="index">
-					<li class="li-menu-content"><a
-						href="servicio?id_servicio=<s:property value="id_servicio_informacion"/>">
-							<s:property value="nombre" /> - (<s:property value="visitas" />)
-					</a></li>
-				</s:iterator>
-			</s:if>
-			<s:else>
-				<li class="li-menu-content"><s:text name="sis_null3" /></li>
-			</s:else>
-			<li class="li-menu-content"><a href="listarServicios" style="font-weight: bold;"><s:text name="ver_servicios" /></a></li>
-		</ul>
-		<ul class="ui-menu-content">
-			<li class="li-menu-content">
-				<h3 class="h3-ui-menu-content">
-					<a style="font-size: 10px;"><s:text name="sectores_list" /></a>
-				</h3>
-			</li>
-			<s:if test="listaSectores.size()>0">
-				<s:iterator value="listaSectores" status="index">
-					<li class="li-menu-content">
-						<a href="listarSector?id_sector=<s:property value="id_sector"/>">
-							<s:property value="nombre" /> - (<s:property value="n" />)
-						</a>
-					</li>
-				</s:iterator>
-			</s:if>
-			<s:else>
-				<li class="li-menu-content"><s:text name="sis_null3" /></li>
-			</s:else>
-			<li class="li-menu-content"><a href="listarSectores" style="font-weight: bold;"><s:text name="ver_sectores" /></a></li>
-		</ul>
-	</div>
+	<div id="adminForm">
+	<table class="category">
+		<thead>
+			<tr>
+			<th class="list-title" id="tableOrdering1" colspan="2">
+				<s:text name="si_mas_Visitados" />
+			</th>
+			</tr>
+			<tr>
+				<th class="list-title" id="tableOrdering">
+					Servicio
+				</th>
+				<th class="list-hits" id="tableOrdering4">
+					Visto	
+				</th>							
+			</tr>
+		</thead>		
+		<tbody>		
+		<s:if test='SI_masVisitados.size()>0'>	
+			<s:iterator value="SI_masVisitados" status="index">
+			<tr class="cat-list-row0">		
+			<td class="list-title">
+				<a href="servicio?id_servicio=<s:property value="id_servicio_informacion"/>">
+					<s:property value="nombre" />
+				</a>
+			</td>
+			<td class="list-hits">
+				<s:property value="visitas" />
+			</td>
+			</tr>
+			</s:iterator>							
+		</s:if>
+		<s:else>
+			<tr class="cat-list-row0">							
+				<td class="list-title" colspan="2">
+					<s:text name="sis_null3" />
+				</td>				
+			</tr>
+		</s:else>
+			
+			
+		</tbody>
+	</table>
+	<table class="category">
+		<thead>
+			<tr>
+			<th class="list-title" id="tableOrdering1" colspan="2">
+				<s:text name="sectores_list" />
+			</th>
+			</tr>
+			<tr>
+				<th class="list-title" id="tableOrdering">
+					Sector
+				</th>
+				<th class="list-hits" id="tableOrdering4">
+					Visto	
+				</th>							
+			</tr>
+		</thead>		
+		<tbody>	
+		<s:if test="listaSectores.size()>0">
+		<s:iterator value="listaSectores" status="index">
+			
+			<tr class="cat-list-row0">							
+				<td class="list-title">
+					<a href="listarSector?id_sector=<s:property value="id_sector"/>">
+					<s:property value="nombre" />
+					</a>
+				</td>
+				<td class="list-hits">
+					<s:property value="n" />
+				</td>
+			</tr>
+		</s:iterator>
+		</s:if>
+		<s:else>
+			<tr class="cat-list-row0">							
+				<td class="list-title" colspan="2">
+					<s:text name="sis_null3" />
+				</td>				
+			</tr>
+		</s:else>
+			
+		</tbody>
+	</table>
+	</div>	
 </div>
