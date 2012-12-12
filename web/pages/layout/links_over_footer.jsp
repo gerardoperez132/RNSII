@@ -10,24 +10,24 @@
 		<h3 class="header"> <span>Lo</span> último</h3>
 		
 		<ul class="latestnews">			
-			<li><a href="/interoperabilidad/">Inicio</a></li>
+			<li><a href="http://10.8.6.62/interoperabilidad/">Inicio</a></li>
 			<li>
-				<a href="/interoperabilidad/index.php/rtl-demos/94-gobierno-presenta-avances-de-la-implementacion-de-la-interoperabilidad-en-el-pais">
+				<a href="http://10.8.6.62/interoperabilidad/index.php/rtl-demos/94-gobierno-presenta-avances-de-la-implementacion-de-la-interoperabilidad-en-el-pais">
 				Gobierno presenta avances de la implementación de la Interoperabilidad en el país
 				</a>
 			</li>
 			<li>
-				<a href="/interoperabilidad/index.php/rtl-demos/93-instituciones-venezolanas-muestran-avances-en-materia-de-interoperabilidad">
+				<a href="http://10.8.6.62/interoperabilidad/index.php/rtl-demos/93-instituciones-venezolanas-muestran-avances-en-materia-de-interoperabilidad">
 				Instituciones venezolanas muestran avances en materia de Interoperabilidad
 				</a>
 			</li>
 			<li>
-				<a href="/interoperabilidad/index.php/rtl-demos/92-jose-sosa-sin-interoperabilidad-no-existe-gobierno-electronico">
+				<a href="http://10.8.6.62/interoperabilidad/index.php/rtl-demos/92-jose-sosa-sin-interoperabilidad-no-existe-gobierno-electronico">
 					José Sosa: "Sin Interoperabilidad no existe Gobierno Electrónico"
 				</a>
 			</li>
 			<li>
-				<a href="/interoperabilidad/index.php/rtl-demos/91-servidoras-y-servidores-se-especializan-en-el-estandar-rdf-para-aplicar-la-interoperabilidad">
+				<a href="http://10.8.6.62/interoperabilidad/index.php/rtl-demos/91-servidoras-y-servidores-se-especializan-en-el-estandar-rdf-para-aplicar-la-interoperabilidad">
 					Servidoras y Servidores se especializan en el estándar RDF para aplicar la Interoperabilidad
 				</a>
 			</li>

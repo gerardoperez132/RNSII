@@ -12,11 +12,11 @@
 				<ul class="sp-menu level-1">
 					<li class="menu-item first group"><div class="group"><div class="group-title"><a href="#" class="menu-item first group"><span class="menu"><span class="menu-title">Sobre La Interoperabilidad</span></span></a></div><div class="group-content">
 						<ul class="sp-menu level-1">
-							<li class="menu-item first"><a href="http://10.8.6.62/interoperabilidad/index.php/conceptoshttp://10.8.6.62/interoperabilidad/definicion" class="menu-item first"><span class="menu"><span class="menu-title">Definición</span></span></a></li>
-							<li class="menu-item"><a href="http://10.8.6.62/interoperabilidad/index.php/conceptoshttp://10.8.6.62/interoperabilidad/dimensiones" class="menu-item"><span class="menu"><span class="menu-title">Dimensiones</span></span></a></li>
-							<li class="menu-item"><a href="http://10.8.6.62/interoperabilidad/index.php/conceptoshttp://10.8.6.62/interoperabilidad/politicas" class="menu-item"><span class="menu"><span class="menu-title">Políticas de Implementación</span></span></a></li>
-							<li class="menu-item"><a href="http://10.8.6.62/interoperabilidad/index.php/conceptoshttp://10.8.6.62/interoperabilidad/error-page" class="menu-item"><span class="menu"><span class="menu-title">Estándares</span></span></a></li>
-							<li class="menu-item last"><a href="http://10.8.6.62/interoperabilidad/index.php/conceptoshttp://10.8.6.62/interoperabilidad/recomendaciones" class="menu-item last"><span class="menu"><span class="menu-title">Recomendaciones</span></span></a></li>
+							<li class="menu-item first"><a href="http://10.8.6.62/interoperabilidad/index.php/conceptos/interoperabilidad/definicion" class="menu-item first"><span class="menu"><span class="menu-title">Definición</span></span></a></li>
+							<li class="menu-item"><a href="http://10.8.6.62/interoperabilidad/index.php/conceptos/interoperabilidad/dimensiones" class="menu-item"><span class="menu"><span class="menu-title">Dimensiones</span></span></a></li>
+							<li class="menu-item"><a href="http://10.8.6.62/interoperabilidad/index.php/conceptos/interoperabilidad/politicas" class="menu-item"><span class="menu"><span class="menu-title">Políticas de Implementación</span></span></a></li>
+							<li class="menu-item"><a href="http://10.8.6.62/interoperabilidad/index.php/conceptos/interoperabilidad/error-page" class="menu-item"><span class="menu"><span class="menu-title">Estándares</span></span></a></li>
+							<li class="menu-item last"><a href="http://10.8.6.62/interoperabilidad/index.php/conceptos/interoperabilidad/recomendaciones" class="menu-item last"><span class="menu"><span class="menu-title">Recomendaciones</span></span></a></li>
 						</ul></div></div>
 					</li>
 				</ul></div></div></div></div><div class="menu-bl"><div class="menu-br"><div class="menu-bm"></div></div></div></div>
