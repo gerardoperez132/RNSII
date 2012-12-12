@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <!-- CSS (required) -->
 <link rel="stylesheet" type="text/css" href="res/css/style2.css">
-<%@include file="layout/header_joomla.jsp"%>
+
 
 <link rel="stylesheet" type="text/css" href="res/css/jquery.treeTable.css">
 <link rel="stylesheet" type="text/css" href="res/css/table_tree.css">
@@ -24,7 +24,7 @@
 <script type="text/javascript" src="res/js/plugins/sexy-alert-box-1.2.2/sexyalertbox.v1.2.jquery.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/funciones_ge.js" charset="UTF-8"></script>
 
-
+<%@include file="layout/header_joomla.jsp"%>
 
 <title><s:text name="inicio" /></title>
 	</head>
