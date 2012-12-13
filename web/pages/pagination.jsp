@@ -1,4 +1,4 @@
-<div class="pagination">
+<div class="pagination" style="border-top:none; margin-top:10px;">
 	<s:if test="totalPages > 1">
 		<ul>
 			<s:if test="hasPrevious">
