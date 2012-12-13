@@ -610,7 +610,7 @@ div.tab03 {
 #down .thematics li a,#down .thematics li a:link,#down .thematics li a:visited
 	{
 	position: relative;
-	color: #3333FF;
+	color: #12768E;
 	display: block;
 	/* font-size:120%; */
 	font-weight: bold;
@@ -624,7 +624,7 @@ div.tab03 {
 }
 
 #down .thematics li:hover {
-	background: #4584E3;
+	background: #12768E;
 }
 
 #down .thematics img {
