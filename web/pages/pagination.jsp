@@ -1,6 +1,6 @@
 <div class="pagination">
 	<s:if test="totalPages > 1">
-		<ul id="pagination-flickr">
+		<ul>
 			<s:if test="hasPrevious">
 				<li class="previous"><a href="?page=<s:property value="%{page-1}"/>">« <s:text name="previous"/></a></li>
 			</s:if>
