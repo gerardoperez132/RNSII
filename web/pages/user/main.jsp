@@ -210,7 +210,7 @@
 			</div>
 		</div>
 		<div class="clr"></div>
-		<%@include file="../layout/navegacion.jsp"%>	
+		<%@include file="../layout/breadcrumbs.jsp"%>	
 		<%@include file="../layout/links_over_footer.jsp"%>	
 		</div>		
 		</div>		

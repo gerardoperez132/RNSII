@@ -32,49 +32,10 @@
 		<div class="bg1">
 		<div class="sp-wrap main-bg clearfix" style="width: 960px;">
 		<%@include file="layout/menus.jsp"%>		
-		
-			<!-- Este es el div de contenidos -->
-			<div id="content">
-				<!-- Ruta de navegación -->
-				<div class="main">
-					<s:if test="consulta_SIxSector">
-						<div class="RutaNavegacion">
-							<a href="SRSI.action"><s:text name="catalogo" /></a>
-							<a href="listarSectores"><s:text name="sectores" /></a>
-							<a href="#"><s:property value="sector.nombre"/></a>
-						</div>
-					</s:if>
-					<s:elseif test="consulta_listarSectores">
-						<div class="RutaNavegacion">
-							<a href="SRSI.action"><s:text name="catalogo" /></a>
-							<a href="listarSectores"><s:text name="sectores" /></a>
-						</div>
-					</s:elseif>
-					<s:elseif test="consulta_listarServicios">
-						<div class="RutaNavegacion">
-							<a href="SRSI.action"><s:text name="catalogo" /></a>
-							<a href="#"><s:text name="listaServicios" /></a>
-						</div>
-					</s:elseif>
-					<s:elseif test="buscarServicio">
-						<div class="RutaNavegacion">
-							<a href="SRSI.action"><s:text name="catalogo" /></a>
-							<a href="#"><s:text name="listaServiciosEncontrados" /></a>
-						</div>
-					</s:elseif>
-					<s:elseif test="examinarServicio">
-						<div class="RutaNavegacion">
-							<a href="SRSI.action"><s:text name="catalogo" /></a>
-							<a href="listarSectores"><s:text name="sectores" /></a>
-							<a href="listarSector?id_sector=<s:property value='servicio.id_sector'/>"><s:property value="sector.nombre"/></a>
-							<a href="#"><s:property value="servicio.nombre"/></a>
-						</div>
-					</s:elseif>
-					<s:else>
-						<div class="RutaNavegacion">
-							<a href="SRSI.action"><s:text name="catalogo" /></a>
-						</div>
-					</s:else>
+		<!-- Este es el div de contenidos -->
+		<div id="content">
+			<div class="main">
+				<%@include file="layout/breadcrumbs.jsp" %>
 					<br>
 					<h1><a><s:text name="titulo2" /></a></h1>					
 					<br>
@@ -557,7 +518,7 @@
 			</div>
 		<%@include file="layout/sidebar_user_final.jsp"%>		
 		<div class="clr"></div>
-		<%@include file="layout/navegacion.jsp"%>	
+		<%@include file="layout/breadcrumbs.jsp"%>	
 		<%@include file="layout/links_over_footer.jsp"%>	
 		</div>		
 		</div>		
