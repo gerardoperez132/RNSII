@@ -76,9 +76,7 @@
 						</div>
 					</s:else>
 					<br>
-					<div class="Titulo">
-						<h1><s:text name="titulo2" /></h1>
-					</div>
+					<h1><a><s:text name="titulo2" /></a></h1>					
 					<br>
 					<s:if test="consulta_SIxSector">
 						<!-- Lista de servicios de información por sector -->

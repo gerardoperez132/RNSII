@@ -4,6 +4,5 @@
 	<a href="SRSI"><s:text name="catalogo" /></a>
 </div>
 
-<div class="Titulo">
-	<h1><s:text name="titulo2" /></h1>
-</div>
+<h1><a><s:text name="titulo2" /></a></h1>
+

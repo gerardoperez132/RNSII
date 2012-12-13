@@ -92,19 +92,6 @@ div.paginado li a:hover {
 }
 
 
-.main h1 {
-	color: #B2202D;
-	font-size: 18px;
-	font-weight: 700;
-	margin: 0 0 17px;
-	padding: 20px 0 0 10px;
-}
-
-.main h1 span {
-	float: left;
-	width: 251px;
-}
-
 .temas_de_interes,.paso_a_paso {
 	width: 339px;
 	height: 210px;
@@ -278,17 +265,6 @@ div.paginado li a:hover {
 }
 
 
-.main h1 a {
-	color: #777777;
-	float: right;
-	font-size: 9px;
-	font-style: italic;
-	height: 40px;
-	margin: 7px 10px 0pt 0px;
-	text-decoration: none;
-	text-transform: uppercase;
-}
-
 .RutaNavegacion {
 	border-color: #CCCCCC;
 	border-style: dotted solid;
@@ -314,30 +290,6 @@ div.paginado li a:hover {
 	text-decoration: underline;
 }
 
-.Titulo {
-	display: block;
-	float: left;
-	margin: 10px 0 10px 0;
-	background: url(../images/tileh1.png) repeat-x;
-	padding: 15px;
-	width: 659px;
-}
-
-.main .Titulo h1 {
-	color: #AA000C;
-	font-family: sans-serif;
-	font-size: 16.5px;
-	margin: 0;
-	padding: 0;
-}
-
-.Titulo h1 {
-	color: #AA000C;
-	font-family: sans-serif;
-	font-size: 16.5px;
-	margin: 0;
-	padding: 0;
-}
 
 .Submenu {
 	border: 1px solid #CCC;
