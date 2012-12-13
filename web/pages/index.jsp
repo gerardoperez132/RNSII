@@ -35,7 +35,6 @@
 		<!-- Este es el div de contenidos -->
 		<div id="content">
 			<div class="main">
-				<%@include file="layout/breadcrumbs.jsp" %>
 					<br>
 					<h1><a><s:text name="titulo2" /></a></h1>					
 					<br>
