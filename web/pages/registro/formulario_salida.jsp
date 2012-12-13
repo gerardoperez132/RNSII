@@ -27,10 +27,15 @@
 <script type="text/javascript" src="res/js/plugins/sexy-tooltips.v1.1.jquery.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/plugins/sexy-alert-box-1.2.2/jquery.easing.1.3.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/plugins/sexy-alert-box-1.2.2/sexyalertbox.v1.2.jquery.js" charset="UTF-8"></script>
+<%@include file="../layout/header_joomla.jsp" %>
+
 <title><s:text name="registro.title"></s:text></title>
 </head>
-<body class="bg clearfix">	
-	<div class="container">
+<body class="bg clearfix">
+	<div class="bg1">
+		<div class="sp-wrap main-bg clearfix" style="width: 960px;">
+		<%@include file="../layout/menus.jsp"%>
+		<div class="content">	
 		
 		
 		<!-- Esta es la barra lateral -->
@@ -38,7 +43,7 @@
 
 		<!-- Este es el div de contenidos -->
 		<div class="contenido">
-		<%@include file="../layout/bienvenido.jsp"%>
+		<h1><a><s:text name="titulo2" /></a></h1>
 		<div class="pasos">
 			<table><tr><td>
 				<span style="font-weight: bolder;">
@@ -271,6 +276,13 @@
 		<s:text name="tooltip.funcionalidad.salida.longitud"/>
 	</div>	
 			
+	<div class="clr"></div>
+		<%@include file="../layout/breadcrumbs.jsp"%>	
+		<%@include file="../layout/links_over_footer.jsp"%>	
+		</div>		
+		</div>		
+		<!-- Footer -->	
+		<%@include file="../layout/footer.jsp"%>
 	</body>
 </s:i18n>
 </html>

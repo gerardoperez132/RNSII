@@ -26,18 +26,22 @@
 		$("#tree").treeTable();
 	});
 </script>
+
+<%@include file="../layout/header_joomla.jsp" %>
 <title><s:text name="suscripciones"></s:text></title>
 	</head>
 	<body class="bg clearfix">
-		<!-- Este es el div contenedor del maquetado de la página -->
-		<div class="container">
+	<div class="bg1">
+		<div class="sp-wrap main-bg clearfix" style="width: 960px;">
+		<%@include file="../layout/menus.jsp"%>
+		<div class="content">
 			
 			<!-- Esta es la barra lateral -->
 			<%@include file="../layout/sidebar.jsp"%>
 
 			<!-- Este es el div de contenidos -->
 			<div class="contenido">
-				<%@include file="../layout/bienvenido.jsp"%>	
+				<h1><a><s:text name="titulo2" /></a></h1>	
 				<s:if test="buscarServicio==true">
 <!--	01) 
 Lista de servicios encontrados -->
@@ -886,6 +890,13 @@ Muestra las opciones de busqueda para encontrar servicios de información-->
 				</s:else>
 			</div>
 			</div>	
+		<div class="clr"></div>
+		<%@include file="../layout/breadcrumbs.jsp"%>	
+		<%@include file="../layout/links_over_footer.jsp"%>	
+		</div>		
+		</div>		
+		<!-- Footer -->	
+		<%@include file="../layout/footer.jsp"%>
 	</body>
 </s:i18n>
 </html>

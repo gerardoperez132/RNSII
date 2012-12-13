@@ -1,14 +1,15 @@
 <%@taglib uri="/struts-tags" prefix="s"%>
 <s:set var="sistema" scope="action" value="true"></s:set>
-<div class="sidebar sidebar_user_final">
+<div class="sidebar">
+	
 	<div class="busqueda">
 		<form method="post" action="Buscar_Servicio">
-			<label><s:text name="buscarServicio" /></label>
-			<s:textfield name="cadena" id="buscar"
-				cssClass="inputBusqueda buscar" />
-			<input type="submit" class="submit" value="&nbsp;" />
+			<div class="finder">
+				<input type="text" name="cadena" id="mod-finder-searchword" class="inputbox" size="25" value="">			
+			</div>
 		</form>
 	</div>
+	
 	<br>
 	<div style="clear: both"></div>
 	<%@include file="../user/login.jsp"%>
@@ -32,13 +33,13 @@
 					<li>
 						<form action="prepararFormulario" method="POST">
 							<s:hidden name="modificarClave" value="%{true}" />
-							<input class="btn_menu" type="submit" value="<s:text name="usuario.modificar.clave"/>">
+							<input style="text-transform: none; border: none;padding-left: 20px;border-bottom: 1px dotted #CCC;" class="btn_menu" type="submit" value="<s:text name="usuario.modificar.clave"/>">
 						</form>
 					</li>
 					<li>
 						<form action="prepararFormulario" method="POST">
 							<s:hidden name="modificarDatos" value="%{true}" />
-							<input class="btn_menu" type="submit" value="<s:text name="usuario.modificar.datos"/>">
+							<input style="text-transform: none; border: none;padding-left: 20px;border-bottom: 1px dotted #CCC;" class="btn_menu" type="submit" value="<s:text name="usuario.modificar.datos"/>">
 						</form>
 					</li>
 				</ul>

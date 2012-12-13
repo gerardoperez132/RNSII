@@ -38,7 +38,7 @@
 
 
 .content {
-	width: 990px;
+	width: 965px;
 }
 
 .main { /*border-right:1px solid #ccc;*/
@@ -121,15 +121,6 @@ div.paginado li a:hover {
 	width: 250px;
 }
 
-.sidebar_user_final {
-	border-left: 1px solid #CCCCCC;
-	display: block;
-	float: right;
-	margin: 0 0 -30000px 0px;
-	padding: 0 0 30000px 5px;
-	width: 274px;
-}
-
 .sidebar h1 {
 	color: #1A5398;
 	font-size: 16px;
@@ -167,7 +158,7 @@ div.paginado li a:hover {
 
 .ingresar {	
 	position: relative;
-	width: 269px;
+	width: 250px;
 	margin-top: 10px;
 }
 
@@ -662,7 +653,7 @@ div.middleContent {
 	list-style: none;
 	margin: 0;
 	padding: 0;
-	width: 268px;
+	width: 245px;
 }
 
 .m_a ul li {

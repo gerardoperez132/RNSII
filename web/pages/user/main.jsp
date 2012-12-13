@@ -5,7 +5,6 @@
 <html>
 <s:i18n name="ve/gob/cnti/srsi/i18n/messages"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<%@include file="../layout/header_joomla.jsp" %>
 <!-- CSS (required) -->
 <link rel="stylesheet" type="text/css" href="/SRSI/pages/res/css/style2.css">
 <link rel="stylesheet" type="text/css" href="res/css/menu_vertical.css">
@@ -22,18 +21,21 @@
 <script type="text/javascript" src="res/js/plugins/sexy-tooltips.v1.1.jquery.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/plugins/sexy-alert-box-1.2.2/jquery.easing.1.3.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/plugins/sexy-alert-box-1.2.2/sexyalertbox.v1.2.jquery.js" charset="UTF-8"></script>
+<%@include file="../layout/header_joomla.jsp" %>
+
 <title><s:text name="inicio" /></title>
 	</head>
 	<body class="bg clearfix">
 	<div class="bg1">
 		<div class="sp-wrap main-bg clearfix" style="width: 960px;">
-		<div class="container">
+		<%@include file="../layout/menus.jsp"%>
+		<div class="content">
 			
 			<!-- Esta es la barra lateral -->
 			<%@include file="../layout/sidebar.jsp"%>
 			<!-- Este es el div de contenidos -->
 			<div class="contenido">				
-				<%@include file="../layout/bienvenido.jsp"%>
+				<h1><a><s:text name="titulo2" /></a></h1>
 				<s:if test="peticionesNoLeidas > 0 || peticionesPendientes > 0">
 					<!-- Peticiones de suscripción no leídas y pendientes   -->
 					<s:if test="peticionesNoLeidas > 0">
