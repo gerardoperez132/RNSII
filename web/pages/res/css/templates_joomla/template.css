@@ -73,7 +73,7 @@ div.font-sizer a.btn_fs_small:hover{background-position:-30px -16px}
 #breadcrumbs span.showhome {font-weight:bold;margin-right:5px}
 #breadcrumbs .padding{padding:5px 8px}
 #breadcrumbs a,#breadcrumbs span,#breadcrumbs strong{display:block;float:left}
-#breadcrumbs a,#breadcrumbs span.separator{margin-right:10px;padding-right:15px;background:url(font-resizer.png../images/breadcrumbs.png) 100% 50% no-repeat}
+#breadcrumbs a,#breadcrumbs span.separator{margin-right:10px;padding-right:15px;background:url(../../images/breadcrumbs.png) 100% 50% no-repeat}
 #breadcrumbs span.current{color:#666}
 a#topofpage{float:right!important;background:none!important;margin:0!important;padding:0!important}
 
