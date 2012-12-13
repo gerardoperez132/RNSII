@@ -59,11 +59,16 @@
 			<tr class="cat-list-row0">							
 				<td class="list-title" colspan="2">
 					<s:text name="sis_null3" />
-				</td>				
+				</td>
 			</tr>
-		</s:else>
-			
-			
+		</s:else>			
+		<tr class="cat-list-row0">
+			<td class="list-title">
+				<a href="listarServicios" style="font-weight:bold;"><s:text name="ver_servicios"/></a>
+				<td class="list-hits">
+				</td>
+			</td>
+		</tr>
 		</tbody>
 	</table>
 	<table class="category">
@@ -105,7 +110,13 @@
 				</td>				
 			</tr>
 		</s:else>
-			
+		<tr class="cat-list-row0">
+			<td class="list-title">
+				<a href="listarSectores" style="font-weight:bold;"><s:text name="ver_sectores"/></a>
+				<td class="list-hits">
+				</td>
+			</td>
+		</tr>
 		</tbody>
 	</table>
 	</div>	
