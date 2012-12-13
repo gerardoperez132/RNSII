@@ -35,9 +35,7 @@
 		<!-- Este es el div de contenidos -->
 		<div id="content">
 			<div class="main">
-					<br>
-					<h1><a><s:text name="titulo2" /></a></h1>					
-					<br>
+					<h1><a><s:text name="titulo2" /></a></h1>
 					<s:if test="consulta_SIxSector">
 						<!-- Lista de servicios de información por sector -->
 						<table class="results">
