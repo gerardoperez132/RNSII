@@ -93,7 +93,7 @@
 				</s:if>
 				<!-- Tabla en árbol. -->
 				<div id="adminForm">
-				<table class="category">
+				<table class="category" style="width: 690px;">
 					<tbody>
 						<thead>
 							<tr>
@@ -131,19 +131,19 @@
 													<s:set var="i" value="#result_datos.index"/>
 													<form action="examinarServicioInformacion" method="POST">
 														<s:hidden name="id_servicio_informacion" value="%{servicio.id_servicio_informacion}"/>
-														<input type="submit" value="<s:text name="detalles"/>" style="font-size: 0.9em;" />
+														<input type="submit" value="<s:text name="detalles"/>" style="font-size: 0.9em;text-transform: none;" />
 													</form>
 												</td>
 												<td style="margin: 0; padding: 0;">
 													<form action="prepararModificarServicioInformacion" method="POST">
 														<s:hidden name="id_servicio_informacion" value="%{servicio.id_servicio_informacion}"/>
-														<input type="submit" value="<s:text name="modificar"/>" style="font-size: 0.9em;" />
+														<input type="submit" value="<s:text name="modificar"/>" style="font-size: 0.9em;text-transform: none;" />
 													</form>
 												</td>
 												<td style="margin: 0; padding: 0;">
 													<form action="eliminarServicioInformacion" method="POST" id="id_<s:property value="#result_datos.index" />" onsubmit="return false;">
 														<s:hidden name="id_servicio_informacion" value="%{servicio.id_servicio_informacion}"/>
-														<input type="submit" value="<s:text name="eliminar" />" style="font-size: 0.9em;" onclick="eliminar_SI(<s:property value="#i"/>,'<s:property value="servicio.nombre" />');" />
+														<input type="submit" value="<s:text name="eliminar" />" style="font-size: 0.9em;text-transform: none;" onclick="eliminar_SI(<s:property value="#i"/>,'<s:property value="servicio.nombre" />');" />
 													</form>
 												</td>
 												<s:if test="publicable">
@@ -184,7 +184,7 @@
 													<td style="margin: 0; padding: 0;">
 														<form action='<s:property value="#action" />' method="POST">
 															<s:hidden name="id_servicio_informacion" value="%{servicio.id_servicio_informacion}"/>
-															<input type="submit" value="<s:text name="continuar_registro" />" style="font-size: 0.9em;" />
+															<input type="submit" value="<s:text name="continuar_registro" />" style="font-size: 0.9em; text-transform: none;" />
 														</form>
 													</td>
 													<td style="margin: 0; padding: 0;">
