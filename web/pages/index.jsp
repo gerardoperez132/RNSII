@@ -36,25 +36,29 @@
 					<h1><a><s:text name="titulo2" /></a></h1>
 					<s:if test="consulta_SIxSector">
 						<!-- Lista de servicios de información por sector -->
-						<table class="results">
-							<tr>
-								<th colspan="3"><s:text name="listarSector" />
-									<span style="color: blue;">"<s:property value="sector.nombre" />"</span>
-								</th>
-							</tr>
-							<tr>
-								<th><s:text name="nombre" /></th>
-								<th><s:text name="ente1" /></th>
-								<th><s:text name="fecha_creacion" /></th>
-							</tr>
+						<div id="adminForm">
+						<table class="category">
+							<thead>
+								<tr>
+									<th class="list-title" colspan="3" id="tableOrdering1"><s:text name="listarSector" />
+										<span style="color: #A1C7D0;">"<s:property value="sector.nombre" />"</span>
+									</th>
+								</tr>
+								<tr>
+									<th class="list-title" id="tableOrdering"><s:text name="nombre" /></th>
+									<th class="list-title" id="tableOrdering"><s:text name="ente1" /></th>
+									<th class="list-title" id="tableOrdering"><s:text name="fecha" /></th>
+								</tr>
+							</thead>
 							<s:if test="servicios.size() > 0">
 								<s:iterator value="servicios">
-									<tr>
-										<td>
+								<tbody>
+									<tr class="cat-list-row0">
+										<td class="list-title">
 											<a href="servicio?id_servicio=<s:property value="id_servicio_informacion"/>">
 												<s:property value="nombre" /></a>
 										</td>
-										<td>
+										<td class="list-title">
 											<s:set name="id_e" value="id_ente" />
 											<s:iterator value="entes">
 												<s:if test="id_ente == #id_e">
@@ -62,9 +66,11 @@
 												</s:if>
 											</s:iterator>
 										</td>
-										<td><s:date name="fecha_creado" format="d'/'MM'/'yyyy" />
+										<td class="list-title">
+											<s:date name="fecha_creado" format="d'/'MM'/'yyyy" />
 										</td>
 									</tr>
+								</tbody>
 								</s:iterator>
 							</s:if>
 							<s:else>
@@ -73,27 +79,34 @@
 								</tr>
 							</s:else>
 						</table>
+						</div>
 					</s:if>
 					<s:elseif test="consulta_listarSectores">
 						<!-- Lista de sectores con la cantidad servicios publicados -->
-						<table class="results">
-							<tr>
-								<th colspan="2"><s:text name="listarSectores" /></th>
-							</tr>
-							<tr>
-								<th><s:text name="nombre" /></th>
-								<th><s:text name="numero_si" /></th>
-							</tr>
-							<s:iterator value="listaSectores2" status="index">
+						<div id="adminForm">
+						<table class="category">
+							<thead>
 								<tr>
-									<td><a
-										href="listarSector?id_sector=<s:property value="id_sector"/>">
-											<s:property value="nombre" />
-									</a></td>
-									<td align="center"><s:property value="n" /></td>
+									<th colspan="2" class="list-title" id="tableOrdering1"><s:text name="listarSectores" /></th>
 								</tr>
+								<tr>
+									<th class="list-title" id="tableOrdering"><s:text name="nombre" /></th>
+									<th class="list-title" id="tableOrdering4"><s:text name="numero_si" /></th>
+								</tr>
+							</thead>
+							<s:iterator value="listaSectores2" status="index">
+								<tbody>
+									<tr class="cat-list-row0">
+										<td class="list-title"><a
+											href="listarSector?id_sector=<s:property value="id_sector"/>">
+												<s:property value="nombre" />
+										</a></td>
+										<td class="list-title"><s:property value="n" /></td>
+									</tr>
+								</tbody>
 							</s:iterator>
 						</table>
+						</div>
 					</s:elseif>
 					<s:elseif test="examinarServicio">
 						<!-- Detalles de un servicio de información -->
@@ -402,27 +415,31 @@
 						</div>
 					</s:elseif>
 					<s:elseif test="consulta_listarServicios">
-						<!-- Lista completa de todos los servicios públicados -->
-						<table class="results">
+						<!-- Lista completa de todos los servicios publicados -->
+						<div id="adminForm">
+						<table class="category">
+							<thead>
 							<tr>
-								<th colspan="4"><s:text name="listaServicios" /></th>
+								<th colspan="4" class="list-title" id="tableOrdering1"><s:text name="listaServicios" /></th>
 							</tr>
 							<tr>
-								<th><s:text name="n_servicio" /></th>
-								<th><s:text name="nombre" /></th>
-								<th><s:text name="ente1" /></th>
-								<th><s:text name="fecha_creacion" /></th>
+								<th class="list-title" id="tableOrdering"><s:text name="n_servicio" /></th>
+								<th class="list-title" id="tableOrdering"><s:text name="nombre" /></th>
+								<th class="list-title" id="tableOrdering"><s:text name="ente1" /></th>
+								<th class="list-title" id="tableOrdering"><s:text name="fecha" /></th>
 							</tr>
+							</thead>
 							<s:if test="servicios.size()>0">
 								<s:iterator value="servicios">
-									<tr>
-										<td align="center">
+								<tbody>
+									<tr class="cat-list-row0">
+										<td align="center" class="list-title">
 											<a href="servicio?id_servicio=<s:property value="id_servicio_informacion"/>"><s:property value="id_servicio_informacion" /></a>
 										</td>
-										<td>
+										<td class="list-title">
 											<a href="servicio?id_servicio=<s:property value="id_servicio_informacion"/>"><s:property value="nombre" /></a>
 										</td>
-										<td><s:set name="id_e" value="id_ente" />
+										<td class="list-hits"><s:set name="id_e" value="id_ente" />
 										<s:iterator value="entes">
 											<s:if test="id_ente == #id_e">
 												<s:property value="nombre" />
@@ -431,6 +448,7 @@
 										<td><s:date name="fecha_creado" format="d'/'MM'/'yyyy" />
 										</td>
 									</tr>
+								</tbody>
 								</s:iterator>
 							</s:if>
 							<s:else>
@@ -439,6 +457,7 @@
 								</tr>
 							</s:else>
 						</table>
+						</div>
 					</s:elseif>
 					<s:elseif test="buscarServicio">
 						<!-- Lista de servicios encontrados -->
