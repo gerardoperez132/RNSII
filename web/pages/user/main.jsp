@@ -92,33 +92,39 @@
 					<hr>
 				</s:if>
 				<!-- Tabla en árbol. -->
-				<table class="results_width_user results">
+				<div id="adminForm">
+				<table class="category">
 					<tbody>
-						<tr>
-						<!-- ADVERTENCIA => CONTENIDO NO INTERNACIONALIZADO -->
-							<th colspan="5" style="text-align: center;">Servicios de Información</th>
-						</tr>
-						<tr>
-							<th><s:text name="id"/></th>
-							<th><s:text name="nombre"/></th>
-							<th><s:text name="estado"/></th>
-							<th><s:text name="fecha"/></th>
-							<th><s:text name="acciones"/></th>
-						</tr>
+						<thead>
+							<tr>
+							<!-- ADVERTENCIA => CONTENIDO NO INTERNACIONALIZADO -->
+								<th class="list-title" colspan="5" style="text-align: center;">Servicios de Información</th>
+							</tr>
+							<tr>
+								<th class="list-title" style="vertical-align: middle;text-align: center;"><s:text name="id"/></th>
+								<th class="list-title" style="vertical-align: middle;text-align: center;"><s:text name="nombre"/></th>
+								<th class="list-title" style="vertical-align: middle;text-align: center;"><s:text name="estado"/></th>
+								<th class="list-title" style="vertical-align: middle;text-align: center;"><s:text name="fecha"/></th>
+								<th class="list-title" style="vertical-align: middle;text-align: center;"><s:text name="acciones"/></th>
+							</tr>
+						</thead>
+						
 						<s:if test="ListaServicios.size() > 0">
 							<s:iterator value="ListaServicios" status="result_datos">
-								<tr id="node-<s:property value="#result_datos.index"/>">
-									<th><s:property value="servicio.id_servicio_informacion" /></th>
-									<td><s:property value="servicio.nombre" /></td>
-									<td><s:set name="estado" value="servicio.id_estado"/>
+								<tr class="cat-list-<s:if test="#result_datos.odd == true ">row0</s:if><s:else>row1</s:else>"
+									style="vertical-align: middle;text-align: center;"
+									 id="node-<s:property value="#result_datos.index"/>">
+									<td style="vertical-align: middle;text-align: center;"><s:property value="servicio.id_servicio_informacion" /></td>
+									<td style="vertical-align: middle;text-align: center;"><s:property value="servicio.nombre" /></td>
+									<td style="vertical-align: middle;text-align: center;"><s:set name="estado" value="servicio.id_estado"/>
 										<s:iterator value="estados">
 											<s:if test="#estado == id_estado">
 												<s:property value="nombre" />
 											</s:if>
 										</s:iterator>
 									</td>
-									<td><s:date name="servicio.fecha_creado" format="d'/'MM'/'yyyy" /></td>
-									<td>
+									<td style="vertical-align: middle;text-align: center;"><s:date name="servicio.fecha_creado" format="d'/'MM'/'yyyy" /></td>
+									<td style="vertical-align: middle;text-align: center;">
 										<table style="margin: 0; padding: 0;">
 											<tr style="margin: 0; padding: 0;">
 												<td style="margin: 0; padding: 0;">
@@ -206,6 +212,7 @@
 						</s:else>
 					</tbody>
 				</table>
+				</div>
 			</div>
 			<div class="n" style="visibility: hidden; display: none;">
 				<s:property value="ListaServicios.size()" />
