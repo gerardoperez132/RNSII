@@ -53,7 +53,7 @@
 				<s:property value="visitas" />
 			</td>
 			</tr>
-			</s:iterator>							
+			</s:iterator>
 		</s:if>
 		<s:else>
 			<tr class="cat-list-row0">							
