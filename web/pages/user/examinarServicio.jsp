@@ -284,10 +284,16 @@
 						</table>
 					</div>
 					<div id="tab4" class="tab_content">
+						
+						<s:if test="#session.ente_sesion.id_ente">
+						
+						</s:if>
 						<table class="results">
 							<tr>
 								<td class="alt"><s:text name="responsable" /></td>
-								<td class="alt2"><s:property value="servicio.responsable" /></td>
+								<td class="alt2"><s:property value="servicio.responsable" />
+								nlsss:<s:property value="#session.ente_sesion.id_ente"/>
+								</td>
 							</tr>
 							<tr>
 								<td class="alt"><s:text name="telefono" /></td>
