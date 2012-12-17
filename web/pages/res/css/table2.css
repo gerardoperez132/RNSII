@@ -10,16 +10,16 @@ a.tb_a {
 }
 
 th.tb_th {
-	font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
-	color: #4f6b72;
-	border-right: 1px solid #e0e0e0;
-	border-bottom: 1px solid #e0e0e0;
-	border-top: 1px solid #e0e0e0;
+	font-size: 11px;
+	color: white;
+	border-right: 1px solid #E0E0E0;
+	border-bottom: 1px solid #E0E0E0;
+	border-top: 1px solid #E0E0E0;
 	letter-spacing: 2px;
 	text-transform: uppercase;
 	text-align: left;
 	padding: 6px 6px 6px 12px;
-	background: #e0e0e0;
+	background: #12768E;
 }
 
 td.tb_td {
@@ -72,10 +72,9 @@ td.tb_alt {
 }
 
 .results td {
-	border-right: 1px solid #e0e0e0;
-	border-bottom: 1px solid #e0e0e0;
+	border-bottom: 1px solid #E0E0E0;
 	padding: 6px 6px 6px 12px;
-	color: #4f6b72;
+	/* color: #4f6b72; */
 }
 
 .results tr {
@@ -98,18 +97,20 @@ td.tb_alt {
 }
 
 .alt {
-	background: #e0e0e0;
+	background: #12768E;
 	text-align: right;
 	width: 200px;
 	font-size: small;
 	font-weight: bold;
+	color: white;	
+	vertical-align: middle;
 }
 
 .alt2 {
 	background: #f5f5ee;
 	text-align: left;
 	font-size: small;
-	color: blue;
+	color: #12768E;
 }
 
 .results_width_user {
