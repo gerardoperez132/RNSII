@@ -1,20 +1,22 @@
 #tree {
-	overflow: auto;
-	border: 1px solid #888;
-	font: sans-serif;
+	overflow: auto;	
 	font-size: 16px;
 }
 
 #tree thead {
-	background: url("images/bg-table-thead.png") repeat-x scroll left top
+	background: url("../images/bg-table-thead.png") repeat-x scroll left top
 		#AAAAAA;
 }
 
-#tree thead th {
-	font: 85% sans-serif;
+#tree thead th {	
 	font-weight: bolder;
 	padding-left: 1em;
 	text-align: left;
+	background-color: #12768E;
+	color:white;
+	text-align: center;
+	font-family: sans-serif;
+	font-size: 11px;
 }
 
 #tree tbody td {
