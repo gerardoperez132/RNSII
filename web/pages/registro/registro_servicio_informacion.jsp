@@ -619,36 +619,71 @@
 				<div class="tab_container_height tab_container">	
 				<!-- START TAB 4 -->
 					<div id="tab4" class="tab_content">
+						<h5 class="requerido">
+							<s:text name="usuario.modificar.requerido" />
+						</h5>
+						<table>
+							<tr>
+							<!-- 1° col -->
+							<td>
+								<h5 class="formulario">
+									<span style="color:red;">*</span>
+									<s:text name="responsable.title"></s:text>
+									<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" 
+									name="t1" id="t1" onmouseover="tip(this);" title="">
+								</h5>
+								<s:fielderror>
+									<s:param>servicio.responsable</s:param>
+								</s:fielderror>	
+							</td>							
+							<td style="width:60px;">
+								<!-- td vacio -->
+							</td>
+							<td>
+								<h5 class="formulario">
+									<span style="color:red;">*</span>
+									<s:text name="telefono.title"></s:text>
+									<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" 
+													name="t2" id="t2" onmouseover="tip(this);" title="">
+								</h5>
+								<s:fielderror>
+									<s:param>telefono</s:param>
+								</s:fielderror>															
+							</td>							
+							</tr>
+							<tr>
+							<!-- 2° col -->
+							<td>
+								<s:textfield name="servicio.responsable" id="servicio.responsable" 
+									labelposition="top" />
+							</td>								
+							<td style="width:60px;">
+								<!-- td vacio -->
+							</td>						
+							<td>
+								<table>
+									<tr>
+										<td><s:select name="codigo" list="codigos" /></td>
+										<td><s:textfield name="telefono" labelposition="top"
+												maxlength="7" id="telefono"	/>												
+										</td>
+									</tr>
+								</table>						
+							</td>							
+							</tr>
+						</table>							
+							
 							<h5 class="formulario">
-								<s:text name="responsable.title"></s:text>
-							</h5>
-							<s:fielderror>
-								<s:param>servicio.responsable</s:param>
-							</s:fielderror>
-							<s:textfield name="servicio.responsable" id="servicio.responsable" labelposition="top" />
-							<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t1" id="t1" onmouseover="tip(this);" title="">
-							<h5 class="formulario">
-								<s:text name="telefono.title"></s:text>
-							</h5>
-							<s:fielderror>
-								<s:param>telefono</s:param>
-							</s:fielderror>
-							<table>
-								<tr>
-									<td><s:select name="codigo" list="codigos" /></td>
-									<td><s:textfield name="telefono" labelposition="top"
-											maxlength="7" id="telefono"	/><img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t2" id="t2" onmouseover="tip(this);" title="">
-									</td>
-								</tr>
-							</table>
-							<h5 class="formulario">
+								<span style="color:red;">*</span>
 								<s:text name="correo.title"/>
+								<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" 
+								name="t3" id="t3" onmouseover="tip(this);" title="">
 							</h5>
 							<s:fielderror>
 								<s:param>correo</s:param>
 							</s:fielderror>
 							<s:textfield name="correo" id="correo"/>
-							<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t3" id="t3" onmouseover="tip(this);" title="">
+							
 							<s:token name="token" />
 							<s:hidden name="tab" value="4" />
 							<s:hidden name="id_servicio_informacion" />
