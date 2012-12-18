@@ -765,3 +765,12 @@ div.middleContent {
 	width: 230px;
 	height: 60px;
 }
+
+.button_h{
+	border: 2px solid #006;
+}
+
+.button_h:hover{
+	border: 1px solid #999;
+	text-decoration: underline;
+}

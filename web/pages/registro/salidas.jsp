@@ -65,14 +65,19 @@
 						<a href="prepararFuncionalidades"><s:text name="funcionalidades"></s:text></a>
 					</li>										
 				</ul>
+				
+				<div class="tab_description">
+					<div class="tab_description_left">
+						<h3 class="formulario">
+							<s:text name="funcionalidad.registro" />
+						</h3>
+						<small><s:text name="funcionalidad.registro.description"></s:text></small>
+					</div>															
+				</div>
 		
 				<div class="tab_container_height  tab_container">					
 					<div class="tab_content">
-					<h3 class="formulario">
-						<s:text name="funcionalidad.registro" />
-					</h3>
-					<small><s:text name="funcionalidad.registro.description"></s:text></small>
-					<hr>
+					
 				
 				<ul class="tabs">
 					<li>
@@ -81,8 +86,10 @@
 							<s:hidden name="id_funcionalidad"/>
 							<s:hidden name="modificar"/>
 							<s:hidden name="mostrarTabla" value="%{true}"/>
-							<input type="submit" value="<s:text name="salida.tab1.title"/>"
-								style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
+							<input type="submit" value="<s:text name="salida.tab1.title"/>"								
+									style="background: none; border: none; font-size: 12px; padding: 0 20px; 
+									height: 31px; text-transform: none; font-family: sans-serif; color:black;
+									font-weight: normal;">
 						</form>
 					</li>
 					<li>
@@ -90,7 +97,10 @@
 							<s:hidden name="id_servicio_informacion"/>
 							<s:hidden name="id_funcionalidad"/>
 							<s:hidden name="modificar"/>
-							<input type="submit" value="<s:text name="entrada.tab2.title"/>" style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
+							<input type="submit" value="<s:text name="entrada.tab2.title"/>" 
+									style="background: none; border: none; font-size: 12px; padding: 0 20px; 
+									height: 31px; text-transform: none; font-family: sans-serif; color:black;
+									font-weight: normal;">
 						</form>
 					</li>
 					<li class="active"><a><s:text name="salida.tab3.title"/></a></li>
@@ -99,10 +109,15 @@
 							<s:hidden name="id_servicio_informacion"/>
 							<s:hidden name="id_funcionalidad"/>
 							<s:hidden name="modificar"/>
-							<input type="submit" value="<s:text name="salida.tab4.title" />" style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
+							<input type="submit" value="<s:text name="salida.tab4.title" />" 
+									style="background: none; border: none; font-size: 12px; padding: 0 20px; 
+									height: 31px; text-transform: none; font-family: sans-serif; color:black;
+									font-weight: normal;">
 						</form>
 					</li>
 				</ul>
+				
+							
 				<div class="tab_container">
 					<div id="tab2" class="tab_content">
 						<h5 class="formulario">
@@ -119,21 +134,23 @@
 									<form action="prepararRegistroSalida" method="POST">
 										<s:hidden name="id_servicio_informacion"/>
 										<s:hidden name="id_funcionalidad"/>
-										<input type="submit" value="<s:text name="salida.registro"/>" />
+										<input type="submit" class="button_h"  value="<s:text name="salida.registro"/>" />
 									</form>
 								</td>
 							</tr>
 						</table>
 						<!-- Tabla en árbol. -->
-						<table id="tree" class="results_width_user_datos results">
-							<!-- Validación de lista vacía. -->
-							<tbody>
+						<div id="adminForm">
+						<table id="tree" class="results_width_user_datos results category">							
+							<thead>
 								<tr>
 									<th><s:text name="salida.nombre" /></th>
 									<th><s:text name="salida.descripcion" /></th>
 									<th><s:text name="salida.tipo" /></th>
 									<th><s:text name="salida.acciones" /></th>
 								</tr>
+							</thead>
+							<tbody>								
 								<s:if test="salidas.size > 0">
 									<s:set name="contador" value="%{0}"/>
 									<!-- Iterador con todas las salidas cargadas. -->
@@ -175,7 +192,7 @@
 																				<s:hidden name="id_funcionalidad"/>
 																				<s:hidden name="id_entrada_salida"/>
 																				<s:hidden name="id_salida_padre" value="%{id_entrada_salida}"/>
-																				<input type="submit" value="<s:text name="salida.simple.add"/>" style="font-size: 1em;" />
+																				<input type="submit" class="button_h"  value="<s:text name="salida.simple.add"/>" style="font-size: 1em;text-transform: none;" />
 																			</form>
 																		</td>
 																		<td style="margin: 0; padding: 0;">
@@ -185,7 +202,7 @@
 																				<s:hidden name="id_entrada_salida" value="%{#id}"/>
 																				<s:hidden name="modificar" value="%{true}"/>
 																				<s:hidden name="complejo" value="%{true}"/>
-																				<input type="submit" value="<s:text name="salida.modificar"/>" style="font-size: 1em;" />
+																				<input type="submit" class="button_h"  value="<s:text name="salida.modificar"/>" style="font-size: 1em;text-transform: none;" />
 																			</form>
 																		</td>
 																		<td style="margin: 0; padding: 0;">
@@ -195,7 +212,7 @@
 																				<s:hidden name="id_funcionalidad"/>
 																				<s:hidden name="id_entrada_salida" value="%{#id}"/>
 																				<s:hidden name="modificar" value="%{true}"/>
-																				<input type="submit" value="<s:text name="salida.eliminar"/>" style="font-size: 1em;" style="font-size: 1em;" onclick="eliminar_Salida(<s:property value="id_entrada_salida"/>,'<s:property value="salida.nombre" />');" />
+																				<input type="submit" class="button_h"  value="<s:text name="salida.eliminar"/>" style="font-size: 1em;text-transform: none;" onclick="eliminar_Salida(<s:property value="id_entrada_salida"/>,'<s:property value="salida.nombre" />');" />
 																			</form>
 																			<s:iterator value="hijos" status="status">
 																				<s:if test="%{id_padre == #padre}">
@@ -228,7 +245,7 @@
 																				<s:hidden name="id_funcionalidad"/>								
 																				<s:hidden name="id_entrada_salida"/>	
 																				<s:hidden name="modificar" value="%{true}"/>
-																				<input type="submit" value="<s:text name="salida.modificar"/>" style="font-size: 1em;" />
+																				<input type="submit" class="button_h"  value="<s:text name="salida.modificar"/>" style="font-size: 1em; text-transform: none;" />
 																			</form>
 																		</td>
 																		<td style="margin: 0; padding: 0;">
@@ -236,7 +253,7 @@
 																				<s:hidden name="id_servicio_informacion"/>
 																				<s:hidden name="id_funcionalidad"/>
 																				<s:hidden name="id_entrada_salida"/>
-																				<input type="submit" value="<s:text name="salida.eliminar"/>" style="font-size: 1em;" style="font-size: 1em;" onclick="eliminar_Salida(<s:property value="id_entrada_salida"/>,'<s:property value="salida.nombre" />');" />
+																				<input type="submit" class="button_h"  value="<s:text name="salida.eliminar"/>" style="font-size: 1em; text-transform: none;" onclick="eliminar_Salida(<s:property value="id_entrada_salida"/>,'<s:property value="salida.nombre" />');" />
 																			</form>
 																		</td>
 																	</tr>
@@ -273,7 +290,7 @@
 																			<s:hidden name="id_entrada_salida"/>
 																			<s:hidden name="id_salida_padre" value="%{id_entrada_salida}"/>
 																			<s:hidden name="modificar" value="%{true}"/>
-																			<input type="submit" value="<s:text name="salida.modificar"/>" style="font-size: 1em;" />
+																			<input type="submit" class="button_h"  value="<s:text name="salida.modificar"/>" style="font-size: 1em; text-transform: none;" />
 																		</form>
 																	</td>
 																	<td style="margin: 0; padding: 0;">
@@ -281,7 +298,7 @@
 																			<s:hidden name="id_servicio_informacion"/>
 																			<s:hidden name="id_funcionalidad"/>
 																			<s:hidden name="id_entrada_salida"/>
-																			<input type="submit" value="<s:text name="salida.eliminar"/>" style="font-size: 1em;" style="font-size: 1em;" onclick="eliminar_Salida(<s:property value="id_entrada_salida"/>,'<s:property value="nombre" />');" />
+																			<input type="submit" class="button_h"  value="<s:text name="salida.eliminar"/>" style="font-size: 1em; text-transform: none;" onclick="eliminar_Salida(<s:property value="id_entrada_salida"/>,'<s:property value="nombre" />');" />
 																		</form>
 																	</td>
 																</tr>
@@ -302,6 +319,7 @@
 								</tbody>
 							</s:else>
 						</table>
+						</div>
 					</div>
 				</div>
 			</div>

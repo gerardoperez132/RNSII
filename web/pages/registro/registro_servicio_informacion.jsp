@@ -159,53 +159,117 @@
 				</div>
 				<div class="tab_container_height tab_container">
 					<div id="tab1" class="tab_content">	
-							<h5 class="formulario">
-								<label for="sector">
-								<s:text name="sector.title" />
-								</label>
-							</h5>
-							<s:fielderror>
-								<s:param>sector</s:param>
-							</s:fielderror>
-							<s:select name="sector" id="sector" list="sectores" listKey="id_sector"
-								listValue="nombre" headerKey="-1"
-								headerValue="%{getText('sector.select')}"></s:select>
-							<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t1" id="t1" onmouseover="tip(this);" title="">
-							<h5 class="formulario">
-								<s:text name="nombre.title"></s:text>
-							</h5>
-							<s:fielderror>
-								<s:param>servicio.nombre</s:param>
-							</s:fielderror>
+						<h5 class="requerido">
+							<s:text name="usuario.modificar.requerido" />
+						</h5>
+						<table>
+							<tr>
+							<!-- 1° col -->
+							<td>
+								<h5 class="formulario">
+									<span style="color:red;">*</span>
+									<label for="sector">
+									<s:text name="sector.title" />
+									</label>									 
+									<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t1" id="t1" 
+									onmouseover="tip(this);" title="">									
+								</h5>
+								
+								<s:fielderror>
+									<s:param>sector</s:param>
+								</s:fielderror>
+							</td>							
+							<td style="width:60px;">
+								<!-- td vacio -->
+							</td>
+							<td>
+								<h5 class="formulario">
+									<span style="color:red;">*</span>
+									<s:text name="estado.title"></s:text>
+									<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" 
+									name="t5" id="t5" onmouseover="tip(this);" title="">
+								</h5>
+								<s:fielderror>
+									<s:param>estado</s:param>
+								</s:fielderror>
+							</td>							
+							</tr>
+							<tr>
+							<!-- 2° col -->
+							<td>
+								<s:select name="sector" id="sector" list="sectores" listKey="id_sector"
+									listValue="nombre" headerKey="-1" headerValue="%{getText('sector.select')}">
+								</s:select>
+							</td>								
+							<td style="width:60px;">
+								<!-- td vacio -->
+							</td>						
+							<td>
+								<s:select name="estado" id="estado" list="estados" listKey="id_estado"
+									listValue="nombre" headerKey="-1"
+									headerValue="%{getText('estado.select')}"/>								
+							</td>							
+							</tr>
+						</table>
+						
+						<!-- 2° tabla -->
+						<table>
+							<tr>
+							<!-- 1° col -->
+							<td>
+								<h5 class="formulario">
+									<span style="color:red;">*</span>
+									<s:text name="nombre.title"></s:text>
+									<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" 
+										name="t2" id="t2" onmouseover="tip(this);" title="">
+								</h5>
+								<s:fielderror>
+									<s:param>servicio.nombre</s:param>
+								</s:fielderror>
+							</td>							
+							<td style="width:60px;">
+								<!-- td vacio -->
+							</td>
+							<td>
+								<h5 class="formulario">
+									<span style="color:red;">*</span>
+									<s:text name="area.title"></s:text>
+									<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" 
+									name="t4" id="t4" onmouseover="tip(this);" title="">
+								</h5>
+								<s:fielderror>
+									<s:param>area</s:param>
+								</s:fielderror>
+							</td>							
+							</tr>
+							<tr>
+							<!-- 2° col -->
+							<td>
+								<s:textfield name="servicio.nombre" id='servicio.nombre' style="width: 221px;"/>
+							</td>								
+							<td style="width:60px;">
+								<!-- td vacio -->
+							</td>						
+							<td>
+								<s:checkboxlist list="areas" listValue="nombre" name="area" id="area" 
+									listKey="id_area" />							
+							</td>							
+							</tr>
+						</table>	
 							
-							<s:textfield name="servicio.nombre" id='servicio.nombre'/>
-							<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t2" id="t2" onmouseover="tip(this);" title="">							
+							
 							<h5 class="formulario">
+								<span style="color:red;">*</span>
 								<s:text name="descripcion.title"></s:text>
+								<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" 
+									name="t3" id="t3" onmouseover="tip(this);" title="">
 							</h5>
 							<s:fielderror>
 								<s:param>servicio.descripcion</s:param>
 							</s:fielderror>
 							<s:textarea name="servicio.descripcion" id="servicio.descripcion" cols="40" rows="10" />
-							<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t3" id="t3" onmouseover="tip(this);" title="">
-							<h5 class="formulario">
-								<s:text name="area.title"></s:text>
-							</h5>
-							<s:fielderror>
-								<s:param>area</s:param>
-							</s:fielderror>
-							<s:checkboxlist list="areas" listValue="nombre" name="area" id="area" listKey="id_area" />
-							<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t4" id="t4" onmouseover="tip(this);" title="">
-							<h5 class="formulario">
-								<s:text name="estado.title"></s:text>
-							</h5>
-							<s:fielderror>
-								<s:param>estado</s:param>
-							</s:fielderror>
-							<s:select name="estado" id="estado" list="estados" listKey="id_estado"
-								listValue="nombre" headerKey="-1"
-								headerValue="%{getText('estado.select')}"/>
-							<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t5" id="t5" onmouseover="tip(this);" title="">
+														
+							
 							<s:token name="token" />
 							<s:hidden name="tab" value="1" />
 							<s:hidden name="id_servicio_informacion" />
@@ -247,29 +311,64 @@
 					<div id="tab2" class="tab_content">
 						<form action="<s:property value="#action"/>" method="post"
 							enctype="multipart/form-data" id="formSI_Tab2" name="formSI_Tab2">
+						
 							<h5 class="formulario">
 								<s:text name="tab2.info"/>
-							</h5>							
-							<h5 class="formulario">
-								<s:text name="documento.name" />
+							</h5>	
+							<h5 class="requerido" style="margin-left: 10px;">
+								<s:text name="usuario.modificar.requerido" />
 							</h5>
-							<s:if test="#id_servicio > 0">
-								<span class="errorMessage"><s:text
-										name="struts.messages.error.file.too.large" /></span>
-							</s:if>
-							<s:fielderror>
-								<s:param>name</s:param>
-							</s:fielderror>
-							<s:textfield name="name" id="name"/>
-							<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t1" id="t1" onmouseover="tip(this);" title="">
-							<h5 class="formulario">
-								<s:text name="documento.file"></s:text>
-							</h5>
-							<s:fielderror>
-								<s:param>file</s:param>
-							</s:fielderror>
-							<s:file name="file" id="file"/>
-							<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t2" id="t2" onmouseover="tip(this);" title="">
+							
+						<table>
+							<tr>
+							<!-- 1° col -->
+							<td>
+							
+								<h5 class="formulario">
+									<span style="color:red;">*</span>
+									<s:text name="documento.name" />
+									<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" 
+									name="t1" id="t1" onmouseover="tip(this);" title="">
+							
+								</h5>
+								<s:if test="#id_servicio > 0">
+									<span class="errorMessage"><s:text
+											name="struts.messages.error.file.too.large" /></span>
+								</s:if>
+								<s:fielderror>
+									<s:param>name</s:param>
+								</s:fielderror>								
+							</td>							
+							<td style="width:60px;">
+								<!-- td vacio -->
+							</td>
+							<td>
+								<h5 class="formulario">
+									<span style="color:red;">*</span>
+									<s:text name="documento.file"></s:text>
+									<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" 
+									name="t2" id="t2" onmouseover="tip(this);" title="">
+								</h5>
+								<s:fielderror>
+									<s:param>file</s:param>
+								</s:fielderror>
+								
+								
+							</td>							
+							</tr>
+							<tr>
+							<!-- 2° col -->
+							<td>
+								<s:textfield name="name" id="name"/>
+							</td>								
+							<td style="width:60px;">
+								<!-- td vacio -->
+							</td>						
+							<td>
+								<s:file name="file" id="file"/>							
+							</td>							
+							</tr>
+						</table>
 							<s:token name="token" />
 							<s:hidden name="tab" value="2" />
 							<s:if test="#id_servicio > 0">
@@ -280,7 +379,7 @@
 								<s:hidden name="id_servicio_informacion" />
 							</s:else>
 							<s:hidden name="modificar"></s:hidden>
-							<input type="submit" value="<s:text name="upload"/>" />
+							<input class="button_h" type="submit" value="<s:text name="upload"/>" />
 						</form>
 						<br>
 						<s:if test="files.size() > 0">
@@ -354,75 +453,131 @@
 				</div>	
 				<div class="tab_container_height tab_container">			
 					<div id="tab3" class="tab_content">
-							<h5 class="formulario">
-								<s:text name="seguridad.title"></s:text>
-							</h5>
-							<s:fielderror>
-								<s:param>seguridad</s:param>
-							</s:fielderror>
-							<s:select list="niveles" listKey="id_seguridad"
-								listValue="nombre" headerKey="-1"
-								headerValue="%{getText('seguridad.select')}" name="seguridad"
-								id="seguridad"/>
-							<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t1" id="t1" onmouseover="tip(this);" title="">
-							<h5 class="formulario">
-								<s:text name="arquitectura.title"></s:text>
-							</h5>
-							<s:fielderror>
-								<s:param>arquitectura</s:param>
-							</s:fielderror>
-							<s:checkboxlist list="arquitecturas" listValue="nombre"
-								name="arquitectura" id="arquitectura" listKey="id_arquitectura" />
-								<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t2" id="t2" onmouseover="tip(this);" title="">
-							<br>
-							<h5 class="formulario">
-								<s:text name="version.title"></s:text>
-							</h5>
-							<s:fielderror>
-								<s:param>servicio.version</s:param>
-							</s:fielderror>
-							<s:textfield name="servicio.version" id="servicio.version"
-								onkeyup="var pattern = /[^0-9\.]/g;
-						this.value = this.value.replace(pattern, '');"
-								maxlength="7" />
-							<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t3" id="t3" onmouseover="tip(this);" title="">									
-							<br>
-							<h5 class="formulario">
-								<s:text name="intercambio.title"></s:text>
-							</h5>
-							<s:fielderror>
-								<s:param>intercambio</s:param>
-							</s:fielderror>
-							<select name="intercambio" id="intercambio">
-								<optgroup label="">
-									<option value="-1">
-										<s:text name="intercambio.select"></s:text>
-									</option>
-								</optgroup>
-								<s:iterator value="parents">
-									<s:set name="padre" value="id_intercambio"></s:set>
-									<s:set name="nombrePadre" value="nombre"></s:set>
-									<optgroup label="<s:property value="nombre"/>">
-										<s:iterator value="children">
-											<s:if test="%{#padre == id_padre}">
-												<option value="<s:property value="id_intercambio"/>"
-													<s:if test="intercambio == id_intercambio"> selected="selected"</s:if>>
-													<s:property value="nombre" />
-												</option>
-											</s:if>
-										</s:iterator>
+						<h5 class="requerido">
+							<s:text name="usuario.modificar.requerido" />
+						</h5>
+						<table>
+							<tr>
+							<!-- 1° col -->
+							<td>
+								<h5 class="formulario">
+									<span style="color:red;">*</span>
+									<s:text name="seguridad.title"></s:text>
+									<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" 
+									name="t1" id="t1" onmouseover="tip(this);" title="">
+								</h5>
+								<s:fielderror>
+									<s:param>seguridad</s:param>
+								</s:fielderror>							
+							</td>							
+							<td style="width:60px;">
+								<!-- td vacio -->
+							</td>
+							<td>
+								<h5 class="formulario">
+									<span style="color:red;">*</span>
+									<s:text name="arquitectura.title"></s:text>
+									<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" 
+										name="t2" id="t2" onmouseover="tip(this);" title="">
+								</h5>
+								<s:fielderror>
+									<s:param>arquitectura</s:param>
+								</s:fielderror>								
+							</td>							
+							</tr>
+							<tr>
+							<!-- 2° col -->
+							<td>
+								<s:select list="niveles" listKey="id_seguridad" listValue="nombre" 
+									headerKey="-1" headerValue="%{getText('seguridad.select')}" 
+									name="seguridad" id="seguridad"/>
+							</td>								
+							<td style="width:60px;">
+								<!-- td vacio -->
+							</td>						
+							<td>
+								<s:checkboxlist list="arquitecturas" listValue="nombre"
+									name="arquitectura" id="arquitectura" listKey="id_arquitectura" />						
+							</td>							
+							</tr>
+						</table>
+						
+						<table>
+							<tr>
+							<!-- 1° col -->
+							<td>
+								<h5 class="formulario">
+									<span style="color:red;">*</span>
+									<s:text name="version.title"></s:text>
+									<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" 
+									name="t3" id="t3" onmouseover="tip(this);" title="">
+								</h5>
+								<s:fielderror>
+									<s:param>servicio.version</s:param>
+								</s:fielderror>		
+							</td>							
+							<td style="width:60px;">
+								<!-- td vacio -->
+							</td>
+							<td>
+								<h5 class="formulario">
+									<span style="color:red;">*</span>
+									<s:text name="intercambio.title"></s:text>
+									<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" 
+									name="t4" id="t4" onmouseover="tip(this);" title="">
+								</h5>
+								<s:fielderror>
+									<s:param>intercambio</s:param>
+								</s:fielderror>
+							</td>							
+							</tr>
+							<tr>
+							<!-- 2° col -->
+							<td>
+								<s:textfield name="servicio.version" id="servicio.version"
+										onkeyup="var pattern = /[^0-9\.]/g;
+								this.value = this.value.replace(pattern, '');"
+										maxlength="7" style="width:214px;"/>
+							</td>								
+							<td style="width:60px;">
+								<!-- td vacio -->
+							</td>						
+							<td>
+								<select name="intercambio" id="intercambio">
+									<optgroup label="">
+										<option value="-1">
+											<s:text name="intercambio.select"></s:text>
+										</option>
 									</optgroup>
-								</s:iterator>
-							</select>
-							<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t4" id="t4" onmouseover="tip(this);" title="">
+									<s:iterator value="parents">
+										<s:set name="padre" value="id_intercambio"></s:set>
+										<s:set name="nombrePadre" value="nombre"></s:set>
+										<optgroup label="<s:property value="nombre"/>">
+											<s:iterator value="children">
+												<s:if test="%{#padre == id_padre}">
+													<option value="<s:property value="id_intercambio"/>"
+														<s:if test="intercambio == id_intercambio"> selected="selected"</s:if>>
+														<s:property value="nombre" />
+													</option>
+												</s:if>
+											</s:iterator>
+										</optgroup>
+									</s:iterator>
+								</select>						
+							</td>							
+							</tr>
+						</table>
+							
+							
 							<h5 class="formulario">
 								<s:text name="wsdl.title"/>
+								<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" 
+								name="t5" id="t5" onmouseover="tip(this);" title="">
 							</h5>
 							<s:fielderror>
 								<s:param>wsdl</s:param>
 							</s:fielderror>
-							<s:textfield name="wsdl" id="wsdl"/>
-							<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t5" id="t5" onmouseover="tip(this);" title="">
+							<s:textfield name="wsdl" id="wsdl"/>							
 							<s:token name="token" />
 							<s:hidden name="tab" value="3" />
 							<s:hidden name="id_servicio_informacion" />
@@ -464,36 +619,71 @@
 				<div class="tab_container_height tab_container">	
 				<!-- START TAB 4 -->
 					<div id="tab4" class="tab_content">
+						<h5 class="requerido">
+							<s:text name="usuario.modificar.requerido" />
+						</h5>
+						<table>
+							<tr>
+							<!-- 1° col -->
+							<td>
+								<h5 class="formulario">
+									<span style="color:red;">*</span>
+									<s:text name="responsable.title"></s:text>
+									<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" 
+									name="t1" id="t1" onmouseover="tip(this);" title="">
+								</h5>
+								<s:fielderror>
+									<s:param>servicio.responsable</s:param>
+								</s:fielderror>	
+							</td>							
+							<td style="width:60px;">
+								<!-- td vacio -->
+							</td>
+							<td>
+								<h5 class="formulario">
+									<span style="color:red;">*</span>
+									<s:text name="telefono.title"></s:text>
+									<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" 
+													name="t2" id="t2" onmouseover="tip(this);" title="">
+								</h5>
+								<s:fielderror>
+									<s:param>telefono</s:param>
+								</s:fielderror>															
+							</td>							
+							</tr>
+							<tr>
+							<!-- 2° col -->
+							<td>
+								<s:textfield name="servicio.responsable" id="servicio.responsable" 
+									labelposition="top" />
+							</td>								
+							<td style="width:60px;">
+								<!-- td vacio -->
+							</td>						
+							<td>
+								<table>
+									<tr>
+										<td><s:select name="codigo" list="codigos" /></td>
+										<td><s:textfield name="telefono" labelposition="top"
+												maxlength="7" id="telefono"	/>												
+										</td>
+									</tr>
+								</table>						
+							</td>							
+							</tr>
+						</table>							
+							
 							<h5 class="formulario">
-								<s:text name="responsable.title"></s:text>
-							</h5>
-							<s:fielderror>
-								<s:param>servicio.responsable</s:param>
-							</s:fielderror>
-							<s:textfield name="servicio.responsable" id="servicio.responsable" labelposition="top" />
-							<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t1" id="t1" onmouseover="tip(this);" title="">
-							<h5 class="formulario">
-								<s:text name="telefono.title"></s:text>
-							</h5>
-							<s:fielderror>
-								<s:param>telefono</s:param>
-							</s:fielderror>
-							<table>
-								<tr>
-									<td><s:select name="codigo" list="codigos" /></td>
-									<td><s:textfield name="telefono" labelposition="top"
-											maxlength="7" id="telefono"	/><img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t2" id="t2" onmouseover="tip(this);" title="">
-									</td>
-								</tr>
-							</table>
-							<h5 class="formulario">
+								<span style="color:red;">*</span>
 								<s:text name="correo.title"/>
+								<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" 
+								name="t3" id="t3" onmouseover="tip(this);" title="">
 							</h5>
 							<s:fielderror>
 								<s:param>correo</s:param>
 							</s:fielderror>
 							<s:textfield name="correo" id="correo"/>
-							<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t3" id="t3" onmouseover="tip(this);" title="">
+							
 							<s:token name="token" />
 							<s:hidden name="tab" value="4" />
 							<s:hidden name="id_servicio_informacion" />
