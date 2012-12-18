@@ -65,16 +65,19 @@
 						<a href="prepararFuncionalidades"><s:text name="funcionalidades"></s:text></a>
 					</li>										
 				</ul>
+				
+				<div class="tab_description">
+					<div class="tab_description_left">
+						<h3 class="formulario">
+							<s:text name="funcionalidad.registro" />
+						</h3>
+						<small><s:text name="funcionalidad.registro.description"></s:text></small>
+					</div>															
+				</div>
 		
 				<div class="tab_container_height tab_container">					
 					<div class="tab_content">
-					
-					<h3 class="formulario">
-						<s:text name="funcionalidad.registro" />
-					</h3>
-					<small><s:text name="funcionalidad.registro.description"></s:text></small>
-					<hr>
-				
+														
 					<ul class="tabs">
 						<li>
 							<form action="prepararFuncionalidad" method="POST">

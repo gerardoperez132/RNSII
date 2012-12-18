@@ -65,14 +65,17 @@
 					</li>										
 				</ul>
 				
-				<div class="tab_container_height tab_container">					
-					<div class="tab_content">
-					
-					<h3 class="formulario">
+				<div class="tab_description">
+					<div class="tab_description_left">
+						<h3 class="formulario">
 						<s:text name="funcionalidades.title" />
 					</h3>
 					<small><s:text name="funcionalidades.description"></s:text></small>
-					<hr>
+					</div>															
+				</div>
+				
+				<div class="tab_container_height tab_container">					
+					<div class="tab_content">		
 					
 					<s:fielderror>
 						<s:param>funcionalidades</s:param>

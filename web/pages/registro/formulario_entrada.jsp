@@ -28,10 +28,23 @@
 <script type="text/javascript" src="res/js/plugins/sexy-alert-box-1.2.2/jquery.easing.1.3.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/plugins/sexy-alert-box-1.2.2/sexyalertbox.v1.2.jquery.js" charset="UTF-8"></script>
 <%@include file="../layout/header_joomla.jsp" %>
-
 <title><s:text name="form.entrada.registro.title"></s:text></title>
 </head>
 <body class="bg clearfix">
+	<s:if test="!modificar">
+		<s:set name="action" var="action">registrarEntrada</s:set>
+		<s:set name="modificar" value="%{false}" />
+		<s:set name="submit" var="submit">
+			<s:text name="form.entrada.guardar"/>
+		</s:set>
+	</s:if>
+	<s:else>
+		<s:set name="action" var="action">modificarEntrada</s:set>
+		<s:set name="modificar" value="%{true}" />
+		<s:set name="submit" var="submit">
+			<s:text name="form.entrada.modificar"/>
+		</s:set>
+	</s:else>	
 	<div class="bg1">
 		<div class="sp-wrap main-bg clearfix" style="width: 960px;">
 		<%@include file="../layout/menus.jsp"%>
@@ -68,32 +81,15 @@
 				<a href="prepararFuncionalidades"><s:text name="funcionalidades"></s:text></a>
 			</li>										
 		</ul>
-
-		<div class="tab_container" style="height: 450px;">					
-			<div class="tab_content">	
-			<s:if test="!modificar">
-				<s:set name="action" var="action">registrarEntrada</s:set>
-				<s:set name="modificar" value="%{false}" />
-				<s:set name="submit" var="submit">
-					<s:text name="form.entrada.guardar"/>
-				</s:set>
-			</s:if>
-			<s:else>
-				<s:set name="action" var="action">modificarEntrada</s:set>
-				<s:set name="modificar" value="%{true}" />
-				<s:set name="submit" var="submit">
-					<s:text name="form.entrada.modificar"/>
-				</s:set>
-			</s:else>		
-			
-			<div class="tab_description_io">
-				<div class="tab_description_left">
+		
+		<div class="tab_description">
+			<div class="tab_description_left">
 				<h3 class="formulario">
 					<s:text name="funcionalidad.registro" />
 				</h3>
 				<small><s:text name="funcionalidad.registro.description"></s:text></small>
-				</div>
-				<div class="tab_description_right">
+			</div>	
+			<div class="tab_description_right_2">
 					<table>
 						<tr>
 							<td>
@@ -106,9 +102,12 @@
 							</td>
 						</tr>
 					</table>				
-				</div>					
-			</div>
-										
+				</div>														
+		</div>
+
+		<div class="tab_container" style="height: 450px;">					
+			<div class="tab_content">		
+													
 			<ul class="tabs">
 				<li><a href="#tab1"><s:text name="tab1.title"></s:text> </a>
 				</li>

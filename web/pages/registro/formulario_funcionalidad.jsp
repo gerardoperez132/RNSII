@@ -61,13 +61,18 @@
 						<li><a href="prepararDescripcionSoporte"><s:text name="tab4.title"/></a></li>
 						<li class="active"><a href="prepararFuncionalidades"><s:text name="funcionalidades"/></a></li>
 					</ul>
-					<div class="tab_container_height tab_container">
-						<div class="tab_content">
+					
+					<div class="tab_description">
+						<div class="tab_description_left">
 							<h3 class="formulario">
 								<s:text name="funcionalidad.registro" />
 							</h3>
-							<small><s:text name="funcionalidad.registro.description"/></small>
-							<hr>
+							<small><s:text name="funcionalidad.registro.description"></s:text></small>
+						</div>																				
+					</div>
+					
+					<div class="tab_container_height tab_container">
+						<div class="tab_content">						
 							<ul class="tabs">
 								<li class="active"><a><s:text name="tab1.title"/>
 								</a></li>
@@ -131,6 +136,7 @@
 					</div>
 				</s:if>
 				<s:elseif test="resumen">
+					
 					<ul class="tabs">
 						<li><a href="prepararDescripcionGeneral"><s:text name="tab1.title"/></a></li>
 						<li><a href="prepararAspectosLegales"><s:text name="tab2.title"/></a></li>
@@ -138,13 +144,16 @@
 						<li><a href="prepararDescripcionSoporte"><s:text name="tab4.title"/></a></li>
 						<li class="active"><a href="prepararFuncionalidades"><s:text name="funcionalidades"/></a></li>
 					</ul>
-					<div class="tab_container" style="height: 450px;">
-						<div class="tab_content">
+					<div class="tab_description">
+						<div class="tab_description_left">
 							<h3 class="formulario">
 								<s:text name="funcionalidad.registro" />
 							</h3>
-							<small><s:text name="funcionalidad.registro.description"/></small>
-							<hr>
+							<small><s:text name="funcionalidad.registro.description"></s:text></small>
+						</div>																				
+					</div>
+					<div class="tab_container" style="height: 450px;">
+						<div class="tab_content">							
 							<ul class="tabs">
 								<li>
 									<form action="prepararFuncionalidad" method="POST">
@@ -219,13 +228,16 @@
 						<li><a href="prepararDescripcionSoporte"><s:text name="tab4.title"/></a></li>
 						<li class="active"><a href="prepararFuncionalidades"><s:text name="funcionalidades"/></a></li>
 					</ul>
-					<div class="tab_container" style="height: 450px;">
-						<div class="tab_content">
+					<div class="tab_description">
+						<div class="tab_description_left">
 							<h3 class="formulario">
 								<s:text name="funcionalidad.registro" />
 							</h3>
-							<small><s:text name="funcionalidad.registro.description"/></small>
-							<hr>
+							<small><s:text name="funcionalidad.registro.description"></s:text></small>
+						</div>																				
+					</div>
+					<div class="tab_container" style="height: 450px;">
+						<div class="tab_content">							
 							<ul class="tabs">
 								<li class="active"><a><s:text name="tab1.title"/></a></li>
 								<li><a><s:text name="tab.entrada"/> </a></li>
