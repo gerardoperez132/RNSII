@@ -26,7 +26,7 @@ td.tb_td {
 	border-right: 1px solid #e0e0e0;
 	border-bottom: 1px solid #e0e0e0;
 	padding: 6px 6px 6px 12px;
-	color: #4f6b72;
+	color: #12768E;
 }
 
 tr.tb_alt {
@@ -37,9 +37,21 @@ tr.tb_alt {
 td.tb_alt {
 	border-right: 1px solid #e0e0e0;
 	border-bottom: 1px solid #e0e0e0;
-	background: #e0e0e0;
+	background: #12768E;
+	color:white;
 	text-align: right;
-	width: 200px;
+	width: 180px;
+	padding-right: 10px;
+}
+
+td.tb_alt_f {
+	border-right: 1px solid #e0e0e0;
+	border-bottom: 1px solid #e0e0e0;
+	background: #12768E;
+	color:white;
+	text-align: right;
+	width: 100px;
+	padding-right: 10px;
 }
 
 .txt_small {
@@ -99,7 +111,7 @@ td.tb_alt {
 .alt {
 	background: #12768E;
 	text-align: right;
-	width: 200px;
+	width: 135px;
 	font-size: small;
 	font-weight: bold;
 	color: white;	
@@ -118,7 +130,7 @@ td.tb_alt {
 }
 
 .results_width_user_datos {
-	width: 590px;
+	width: 560px;
 }
 
 .results_width_user_detalles {

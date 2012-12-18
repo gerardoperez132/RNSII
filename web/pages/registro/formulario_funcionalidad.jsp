@@ -76,7 +76,7 @@
 										<s:hidden name="id_servicio_informacion"/>
 										<s:hidden name="id_funcionalidad"/>
 										<s:hidden name="modificar"/>
-										<input type="submit" value='<s:text name="tab.entrada"/>' style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
+										<input type="submit" value='<s:text name="tab.entrada"/>' style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px; text-transform: none;">
 									</form>
 								</li>
 								<li>
@@ -84,7 +84,7 @@
 										<s:hidden name="id_servicio_informacion"/>
 										<s:hidden name="id_funcionalidad"/>
 										<s:hidden name="modificar"/>
-										<input type="submit" value='<s:text name="tab.salida"/>' style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
+										<input type="submit" value='<s:text name="tab.salida"/>' style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px; text-transform: none;">
 									</form>
 								</li>
 								<li>
@@ -92,7 +92,7 @@
 										<s:hidden name="id_servicio_informacion"/>
 										<s:hidden name="id_funcionalidad"/>
 										<s:hidden name="modificar"/>
-										<input type="submit" value="<s:text name="tab.resumen" />" style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
+										<input type="submit" value="<s:text name="tab.resumen" />" style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px; text-transform: none;">
 									</form>
 								</li>
 							</ul>
@@ -100,11 +100,11 @@
 								<div id="tab1" class="tab_content">
 									<table class="results_width_user_datos tb">
 										<tr>
-											<td class="tb_alt"><span class="txt_small"> <s:text name="nombre.title" /></span></td>
+											<td class="tb_alt_f"><span class="txt_small"> <s:text name="nombre.title" /></span></td>
 											<td class="tb_td"><span class="txt_small"> <s:property value="funcionalidad.nombre" /></span></td>
 										</tr>
 										<tr>
-											<td class="tb_alt"><span class="txt_small"> <s:text name="descripcion.title" /></span></td>
+											<td class="tb_alt_f"><span class="txt_small"> <s:text name="descripcion.title" /></span></td>
 											<td class="tb_td"><span class="txt_small"> <s:property value="funcionalidad.descripcion" /></span></td>
 										</tr>
 									</table>
@@ -113,7 +113,7 @@
 										<s:hidden name="id_funcionalidad"/>
 										<s:hidden name="modificar"/>
 										<s:hidden name="modificarf" value="%{true}"/>
-										<input type="submit" value='<s:text name="modificar"/>'>
+										<input type="submit" value='<s:text name="modificar"/>' class="button_h">
 									</form>
 								</div>
 							</div>
@@ -143,7 +143,7 @@
 										<s:hidden name="id_funcionalidad"/>
 										<s:hidden name="modificar"/>
 										<s:hidden name="mostrarTabla" value="%{true}"/>
-										<input type="submit" value="<s:text name="tab1.title"/>" style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
+										<input type="submit" value="<s:text name="tab1.title"/>" style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px; text-transform: none;">
 									</form>
 								</li>
 								<li>
@@ -152,7 +152,7 @@
 										<s:hidden name="id_funcionalidad"/>
 										<s:hidden name="modificar"/>
 										<input type="submit" value='<s:text name="tab.entrada"/>'
-											style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
+											style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;text-transform: none;">
 									</form>
 								</li>
 								<li>
@@ -160,7 +160,7 @@
 										<s:hidden name="id_servicio_informacion"/>
 										<s:hidden name="id_funcionalidad"/>
 										<s:hidden name="modificar"/>
-										<input type="submit" value='<s:text name="tab.salida"/>' style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;">
+										<input type="submit" value='<s:text name="tab.salida"/>' style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px; text-transform: none;">
 									</form>
 								</li>
 								<li class="active"><a><s:text name="tab.resumen"/>
@@ -218,9 +218,7 @@
 							<div class="tab_container">
 								<div id="tab1" class="tab_content">
 									<s:if test="modificarf">
-										<form action="modificarFuncionalidad" method="POST" id="formFunc" name="formFunc">
-											<p><s:text name="tab1.title"/></p>
-											<hr>
+										<form action="modificarFuncionalidad" method="POST" id="formFunc" name="formFunc">											
 											<!-- Nombre de la funcionalidad u operación del servicio. -->
 											<h5 class="formulario">
 												<s:text name="nombre.title"/>
@@ -245,15 +243,12 @@
 											<s:hidden name="id_funcionalidad"/>
 											<s:hidden name="modificar"/>
 											<s:hidden name="modificarf"/>
-											<input type="submit" value="<s:text name="guardar"/>" />
+											<input type="submit" value="<s:text name="guardar"/>" class="button_h"/>
 										</form>											
 									</s:if>
 									<s:else>
 										<form action="registrarFuncionalidad" method="POST"
-											id="formFunc" name="formFunc">
-											<p>
-												<s:text name="tab1.title"/>
-											</p>
+											id="formFunc" name="formFunc">											
 											<!-- Nombre de la funcionalidad u operación del servicio. -->
 											<h5 class="formulario">
 												<s:text name="nombre.title"/>
@@ -276,7 +271,7 @@
 											<br>
 											<s:hidden name="id_servicio_informacion"/>
 											<s:hidden name="modificar"/>
-											<input type="submit" value='<s:text name="guardar"/>' />
+											<input type="submit" value='<s:text name="guardar"/>' class="button_h"/>
 										</form>
 									</s:else>
 								</div>
