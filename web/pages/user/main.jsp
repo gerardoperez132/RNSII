@@ -116,7 +116,7 @@
 									style="vertical-align: middle;text-align: center;"
 									 id="node-<s:property value="#result_datos.index"/>">
 									<td style="vertical-align: middle;text-align: center;"><s:property value="servicio.id_servicio_informacion" /></td>
-									<td style="vertical-align: middle;text-align: center;"><s:property value="servicio.nombre" /></td>
+									<td style="vertical-align: middle;text-align: left;"><s:property value="servicio.nombre" /></td>
 									<td style="vertical-align: middle;text-align: center;"><s:set name="estado" value="servicio.id_estado"/>
 										<s:iterator value="estados">
 											<s:if test="#estado == id_estado">

@@ -84,31 +84,36 @@
 									<s:hidden name="id_servicio_informacion"></s:hidden>
 									<s:hidden name="modificar"></s:hidden>
 									<s:token name="token" />
-									<input type="submit" value="<s:text name="funcionalidad.add"/>" <s:if test="funcionalidades.size == 0">disabled="disabled"</s:if>/>
+									<input type="submit" class="button_h" value="<s:text name="funcionalidad.add"/>" <s:if test="funcionalidades.size == 0">disabled="disabled"</s:if>/>
 								</form>
 							</td>							
 						</tr>
 					</table>
-					<table class="results">
-						<tbody>
+					<div id="adminForm">
+					<table class="category">
+						<thead>
 							<tr>
-								<th colspan="4"><s:text name="funcionalidades.title" /></th>
+								<th class="list-title" style="vertical-align: middle;text-align: center;" colspan="4"><s:text name="funcionalidades.title" /></th>
 							</tr>
 							<tr>
-								<th><s:text name="id"></s:text></th>
-								<th><s:text name="nombre"></s:text></th>
-								<th><s:text name="fecha"></s:text></th>
-								<th><s:text name="acciones"></s:text></th>
+								<th class="list-title" style="vertical-align: middle;text-align: center;"><s:text name="id"></s:text></th>
+								<th class="list-title" style="vertical-align: middle;text-align: center;"><s:text name="nombre"></s:text></th>
+								<th class="list-title" style="vertical-align: middle;text-align: center;"><s:text name="fecha"></s:text></th>
+								<th class="list-title" style="vertical-align: middle;text-align: center;"><s:text name="acciones"></s:text></th>
 							</tr>
+						</thead>
+						<tbody>							
 							<s:if test="funcionalidadesPublicables.size() > 0">
 								<s:set name="contador" value="%{0}" />
 								<s:iterator value="funcionalidadesPublicables"
 									status="result_Status">
-									<tr id="node-<s:property value="#result_Status.index"/>">
-										<th><s:property value="funcionalidad.id_funcionalidad" /></th>
-										<td><s:property value="funcionalidad.nombre" /></td>
-										<td><s:date name="funcionalidad.fecha_creado" format="d'/'MM'/'yyyy" /></td>
-										<td>
+									<tr class="cat-list-<s:if test="#result_Status.odd == true ">row0</s:if><s:else>row1</s:else>"
+										style="vertical-align: middle;text-align: center;"
+										id="node-<s:property value="#result_Status.index"/>">
+										<td style="width: 30px; vertical-align: middle;"><s:property value="funcionalidad.id_funcionalidad" /></td>
+										<td style="text-align: left; vertical-align: middle;"><s:property value="funcionalidad.nombre" /></td>
+										<td style="width: 60px; vertical-align: middle;"><s:date name="funcionalidad.fecha_creado" format="d'/'MM'/'yyyy" /></td>
+										<td style="width: 180px; vertical-align: middle;">
 											<table style="margin: 0; padding: 0;">
 												<tr style="margin: 0; padding: 0;">
 													<td style="margin: 0; padding: 0;">
@@ -116,7 +121,7 @@
 															<s:hidden name="id_funcionalidad" value="%{funcionalidad.id_funcionalidad}"></s:hidden>
 															<s:hidden name="id_servicio_informacion"></s:hidden>
 															<s:hidden name="mostrarTabla" value="%{true}"/>
-															<input type="submit" value="<s:text name="modificar"/>" style="font-size: 0.9em;" />
+															<input type="submit" class="button_h" value="<s:text name="modificar"/>" style="font-size: 0.9em;text-transform: none;" />
 														</form>
 													</td>
 													<td style="margin: 0; padding: 0;">
@@ -126,7 +131,7 @@
 															<s:hidden name="id_funcionalidad" value="%{funcionalidad.id_funcionalidad}"></s:hidden>
 															<s:hidden name="id_servicio_informacion"></s:hidden>
 															<s:token name="token" />
-															<input type="submit" value="<s:text name="eliminar" />" style="font-size: 0.9em;" onclick="eliminar_Fun(<s:property value="#result_Status.index"/>,'<s:property value="funcionalidad.nombre" />');" />
+															<input type="submit" class="button_h" value="<s:text name="eliminar" />" style="font-size: 0.9em;text-transform: none;" onclick="eliminar_Fun(<s:property value="#result_Status.index"/>,'<s:property value="funcionalidad.nombre" />');" />
 														</form>
 													</td>
 													<s:if test="!salidas.size()>0 || !entradas.size()>0">
@@ -165,7 +170,8 @@
 								</tr>
 							</s:else>
 						</tbody>
-					</table>					
+					</table>
+					</div>					
 					</div>
 				</div>				
 			</div>
