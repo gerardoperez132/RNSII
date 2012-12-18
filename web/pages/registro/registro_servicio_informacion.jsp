@@ -453,75 +453,131 @@
 				</div>	
 				<div class="tab_container_height tab_container">			
 					<div id="tab3" class="tab_content">
-							<h5 class="formulario">
-								<s:text name="seguridad.title"></s:text>
-							</h5>
-							<s:fielderror>
-								<s:param>seguridad</s:param>
-							</s:fielderror>
-							<s:select list="niveles" listKey="id_seguridad"
-								listValue="nombre" headerKey="-1"
-								headerValue="%{getText('seguridad.select')}" name="seguridad"
-								id="seguridad"/>
-							<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t1" id="t1" onmouseover="tip(this);" title="">
-							<h5 class="formulario">
-								<s:text name="arquitectura.title"></s:text>
-							</h5>
-							<s:fielderror>
-								<s:param>arquitectura</s:param>
-							</s:fielderror>
-							<s:checkboxlist list="arquitecturas" listValue="nombre"
-								name="arquitectura" id="arquitectura" listKey="id_arquitectura" />
-								<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t2" id="t2" onmouseover="tip(this);" title="">
-							<br>
-							<h5 class="formulario">
-								<s:text name="version.title"></s:text>
-							</h5>
-							<s:fielderror>
-								<s:param>servicio.version</s:param>
-							</s:fielderror>
-							<s:textfield name="servicio.version" id="servicio.version"
-								onkeyup="var pattern = /[^0-9\.]/g;
-						this.value = this.value.replace(pattern, '');"
-								maxlength="7" />
-							<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t3" id="t3" onmouseover="tip(this);" title="">									
-							<br>
-							<h5 class="formulario">
-								<s:text name="intercambio.title"></s:text>
-							</h5>
-							<s:fielderror>
-								<s:param>intercambio</s:param>
-							</s:fielderror>
-							<select name="intercambio" id="intercambio">
-								<optgroup label="">
-									<option value="-1">
-										<s:text name="intercambio.select"></s:text>
-									</option>
-								</optgroup>
-								<s:iterator value="parents">
-									<s:set name="padre" value="id_intercambio"></s:set>
-									<s:set name="nombrePadre" value="nombre"></s:set>
-									<optgroup label="<s:property value="nombre"/>">
-										<s:iterator value="children">
-											<s:if test="%{#padre == id_padre}">
-												<option value="<s:property value="id_intercambio"/>"
-													<s:if test="intercambio == id_intercambio"> selected="selected"</s:if>>
-													<s:property value="nombre" />
-												</option>
-											</s:if>
-										</s:iterator>
+						<h5 class="requerido">
+							<s:text name="usuario.modificar.requerido" />
+						</h5>
+						<table>
+							<tr>
+							<!-- 1° col -->
+							<td>
+								<h5 class="formulario">
+									<span style="color:red;">*</span>
+									<s:text name="seguridad.title"></s:text>
+									<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" 
+									name="t1" id="t1" onmouseover="tip(this);" title="">
+								</h5>
+								<s:fielderror>
+									<s:param>seguridad</s:param>
+								</s:fielderror>							
+							</td>							
+							<td style="width:60px;">
+								<!-- td vacio -->
+							</td>
+							<td>
+								<h5 class="formulario">
+									<span style="color:red;">*</span>
+									<s:text name="arquitectura.title"></s:text>
+									<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" 
+										name="t2" id="t2" onmouseover="tip(this);" title="">
+								</h5>
+								<s:fielderror>
+									<s:param>arquitectura</s:param>
+								</s:fielderror>								
+							</td>							
+							</tr>
+							<tr>
+							<!-- 2° col -->
+							<td>
+								<s:select list="niveles" listKey="id_seguridad" listValue="nombre" 
+									headerKey="-1" headerValue="%{getText('seguridad.select')}" 
+									name="seguridad" id="seguridad"/>
+							</td>								
+							<td style="width:60px;">
+								<!-- td vacio -->
+							</td>						
+							<td>
+								<s:checkboxlist list="arquitecturas" listValue="nombre"
+									name="arquitectura" id="arquitectura" listKey="id_arquitectura" />						
+							</td>							
+							</tr>
+						</table>
+						
+						<table>
+							<tr>
+							<!-- 1° col -->
+							<td>
+								<h5 class="formulario">
+									<span style="color:red;">*</span>
+									<s:text name="version.title"></s:text>
+									<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" 
+									name="t3" id="t3" onmouseover="tip(this);" title="">
+								</h5>
+								<s:fielderror>
+									<s:param>servicio.version</s:param>
+								</s:fielderror>		
+							</td>							
+							<td style="width:60px;">
+								<!-- td vacio -->
+							</td>
+							<td>
+								<h5 class="formulario">
+									<span style="color:red;">*</span>
+									<s:text name="intercambio.title"></s:text>
+									<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" 
+									name="t4" id="t4" onmouseover="tip(this);" title="">
+								</h5>
+								<s:fielderror>
+									<s:param>intercambio</s:param>
+								</s:fielderror>
+							</td>							
+							</tr>
+							<tr>
+							<!-- 2° col -->
+							<td>
+								<s:textfield name="servicio.version" id="servicio.version"
+										onkeyup="var pattern = /[^0-9\.]/g;
+								this.value = this.value.replace(pattern, '');"
+										maxlength="7" style="width:214px;"/>
+							</td>								
+							<td style="width:60px;">
+								<!-- td vacio -->
+							</td>						
+							<td>
+								<select name="intercambio" id="intercambio">
+									<optgroup label="">
+										<option value="-1">
+											<s:text name="intercambio.select"></s:text>
+										</option>
 									</optgroup>
-								</s:iterator>
-							</select>
-							<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t4" id="t4" onmouseover="tip(this);" title="">
+									<s:iterator value="parents">
+										<s:set name="padre" value="id_intercambio"></s:set>
+										<s:set name="nombrePadre" value="nombre"></s:set>
+										<optgroup label="<s:property value="nombre"/>">
+											<s:iterator value="children">
+												<s:if test="%{#padre == id_padre}">
+													<option value="<s:property value="id_intercambio"/>"
+														<s:if test="intercambio == id_intercambio"> selected="selected"</s:if>>
+														<s:property value="nombre" />
+													</option>
+												</s:if>
+											</s:iterator>
+										</optgroup>
+									</s:iterator>
+								</select>						
+							</td>							
+							</tr>
+						</table>
+							
+							
 							<h5 class="formulario">
 								<s:text name="wsdl.title"/>
+								<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" 
+								name="t5" id="t5" onmouseover="tip(this);" title="">
 							</h5>
 							<s:fielderror>
 								<s:param>wsdl</s:param>
 							</s:fielderror>
-							<s:textfield name="wsdl" id="wsdl"/>
-							<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t5" id="t5" onmouseover="tip(this);" title="">
+							<s:textfield name="wsdl" id="wsdl"/>							
 							<s:token name="token" />
 							<s:hidden name="tab" value="3" />
 							<s:hidden name="id_servicio_informacion" />
