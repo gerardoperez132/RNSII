@@ -249,24 +249,33 @@
 									<s:if test="modificarf">
 										<form action="modificarFuncionalidad" method="POST" id="formFunc" name="formFunc">											
 											<!-- Nombre de la funcionalidad u operación del servicio. -->
+											<h5 class="requerido">
+												<s:text name="usuario.modificar.requerido" />
+											</h5>
 											<h5 class="formulario">
+												<span style="color:red;">*</span>
 												<s:text name="nombre.title"/>
+												<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" 
+												name="t1" id="t1" onmouseover="tip(this);" title="">
 											</h5>
 											<s:fielderror>
 												<s:param>funcionalidad.nombre</s:param>
 											</s:fielderror>
 											<s:textfield name="funcionalidad.nombre" id="funcionalidad.nombre" />
-											<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t1" id="t1" onmouseover="tip(this);" title="">
+											
 											<br>
 											<!-- Descripción de la funcionalidad u operación del servicio. -->
 											<h5 class="formulario">
+												<span style="color:red;">*</span>
 												<s:text name="descripcion.title"/>
+												<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" 
+												name="t2" id="t2" onmouseover="tip(this);" title="">
 											</h5>
 											<s:fielderror>
 												<s:param>funcionalidad.descripcion</s:param>
 											</s:fielderror>
 											<s:textarea name="funcionalidad.descripcion" cols="30" rows="5" id="funcionalidad.descripcion" />
-											<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t2" id="t2" onmouseover="tip(this);" title="">
+											
 											<br>
 											<s:hidden name="id_servicio_informacion"/>
 											<s:hidden name="id_funcionalidad"/>
@@ -279,24 +288,33 @@
 										<form action="registrarFuncionalidad" method="POST"
 											id="formFunc" name="formFunc">											
 											<!-- Nombre de la funcionalidad u operación del servicio. -->
+											<h5 class="requerido">
+												<s:text name="usuario.modificar.requerido" />
+											</h5>
 											<h5 class="formulario">
+												<span style="color:red;">*</span>
 												<s:text name="nombre.title"/>
+												<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" 
+												name="t1" id="t1" onmouseover="tip(this);" title="">
 											</h5>
 											<s:fielderror>
 												<s:param>funcionalidad.nombre</s:param>
 											</s:fielderror>
 											<s:textfield labelposition="top" name="funcionalidad.nombre" id="funcionalidad.nombre" />
-											<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t1" id="t1" onmouseover="tip(this);" title="">
+											
 											<br>
 											<!-- Descripción de la funcionalidad u operación del servicio. -->
 											<h5 class="formulario">
+												<span style="color:red;">*</span>
 												<s:text name="descripcion.title"/>
+												<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" 
+											name="t2" id="t2" onmouseover="tip(this);" title="">
 											</h5>
 											<s:fielderror>
 												<s:param>funcionalidad.descripcion</s:param>
 											</s:fielderror>
 											<s:textarea name="funcionalidad.descripcion" cols="30" rows="5" id="funcionalidad.descripcion" />
-											<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t2" id="t2" onmouseover="tip(this);" title="">
+											
 											<br>
 											<s:hidden name="id_servicio_informacion"/>
 											<s:hidden name="modificar"/>
