@@ -76,7 +76,10 @@
 										<s:hidden name="id_servicio_informacion"/>
 										<s:hidden name="id_funcionalidad"/>
 										<s:hidden name="modificar"/>
-										<input type="submit" value='<s:text name="tab.entrada"/>' style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px; text-transform: none;">
+										<input type="submit" value='<s:text name="tab.entrada"/>' 
+									style="background: none; border: none; font-size: 12px; padding: 0 20px; 
+									height: 31px; text-transform: none; font-family: sans-serif; color:black;
+									font-weight: normal;">
 									</form>
 								</li>
 								<li>
@@ -84,7 +87,10 @@
 										<s:hidden name="id_servicio_informacion"/>
 										<s:hidden name="id_funcionalidad"/>
 										<s:hidden name="modificar"/>
-										<input type="submit" value='<s:text name="tab.salida"/>' style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px; text-transform: none;">
+										<input type="submit" value='<s:text name="tab.salida"/>' 
+									style="background: none; border: none; font-size: 12px; padding: 0 20px; 
+									height: 31px; text-transform: none; font-family: sans-serif; color:black;
+									font-weight: normal;">
 									</form>
 								</li>
 								<li>
@@ -92,7 +98,10 @@
 										<s:hidden name="id_servicio_informacion"/>
 										<s:hidden name="id_funcionalidad"/>
 										<s:hidden name="modificar"/>
-										<input type="submit" value="<s:text name="tab.resumen" />" style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px; text-transform: none;">
+										<input type="submit" value="<s:text name="tab.resumen" />" 
+									style="background: none; border: none; font-size: 12px; padding: 0 20px; 
+									height: 31px; text-transform: none; font-family: sans-serif; color:black;
+									font-weight: normal;">
 									</form>
 								</li>
 							</ul>
@@ -143,7 +152,10 @@
 										<s:hidden name="id_funcionalidad"/>
 										<s:hidden name="modificar"/>
 										<s:hidden name="mostrarTabla" value="%{true}"/>
-										<input type="submit" value="<s:text name="tab1.title"/>" style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px; text-transform: none;">
+										<input type="submit" value="<s:text name="tab1.title"/>" 
+									style="background: none; border: none; font-size: 12px; padding: 0 20px; 
+									height: 31px; text-transform: none; font-family: sans-serif; color:black;
+									font-weight: normal;">
 									</form>
 								</li>
 								<li>
@@ -151,8 +163,10 @@
 										<s:hidden name="id_servicio_informacion"/>
 										<s:hidden name="id_funcionalidad"/>
 										<s:hidden name="modificar"/>
-										<input type="submit" value='<s:text name="tab.entrada"/>'
-											style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px;text-transform: none;">
+										<input type="submit" value='<s:text name="tab.entrada"/>'											
+									style="background: none; border: none; font-size: 12px; padding: 0 20px; 
+									height: 31px; text-transform: none; font-family: sans-serif; color:black;
+									font-weight: normal;">
 									</form>
 								</li>
 								<li>
@@ -160,7 +174,10 @@
 										<s:hidden name="id_servicio_informacion"/>
 										<s:hidden name="id_funcionalidad"/>
 										<s:hidden name="modificar"/>
-										<input type="submit" value='<s:text name="tab.salida"/>' style="background: none; border: none; font-size: 0.8em; padding: 0 20px; height: 31px; text-transform: none;">
+										<input type="submit" value='<s:text name="tab.salida"/>' 
+									style="background: none; border: none; font-size: 12px; padding: 0 20px; 
+									height: 31px; text-transform: none; font-family: sans-serif; color:black;
+									font-weight: normal;">
 									</form>
 								</li>
 								<li class="active"><a><s:text name="tab.resumen"/>
