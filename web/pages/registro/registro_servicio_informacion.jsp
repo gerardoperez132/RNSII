@@ -259,15 +259,15 @@
 							
 							
 							<h5 class="formulario">
-									<span style="color:red;">*</span>
-									<s:text name="descripcion.title"></s:text>
-									<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" 
-										name="t3" id="t3" onmouseover="tip(this);" title="">
-								</h5>
-								<s:fielderror>
-									<s:param>servicio.descripcion</s:param>
-								</s:fielderror>
-								<s:textarea name="servicio.descripcion" id="servicio.descripcion" cols="40" rows="10" />
+								<span style="color:red;">*</span>
+								<s:text name="descripcion.title"></s:text>
+								<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" 
+									name="t3" id="t3" onmouseover="tip(this);" title="">
+							</h5>
+							<s:fielderror>
+								<s:param>servicio.descripcion</s:param>
+							</s:fielderror>
+							<s:textarea name="servicio.descripcion" id="servicio.descripcion" cols="40" rows="10" />
 														
 							
 							<s:token name="token" />
@@ -311,29 +311,64 @@
 					<div id="tab2" class="tab_content">
 						<form action="<s:property value="#action"/>" method="post"
 							enctype="multipart/form-data" id="formSI_Tab2" name="formSI_Tab2">
+						
 							<h5 class="formulario">
 								<s:text name="tab2.info"/>
-							</h5>							
-							<h5 class="formulario">
-								<s:text name="documento.name" />
+							</h5>	
+							<h5 class="requerido" style="margin-left: 10px;">
+								<s:text name="usuario.modificar.requerido" />
 							</h5>
-							<s:if test="#id_servicio > 0">
-								<span class="errorMessage"><s:text
-										name="struts.messages.error.file.too.large" /></span>
-							</s:if>
-							<s:fielderror>
-								<s:param>name</s:param>
-							</s:fielderror>
-							<s:textfield name="name" id="name"/>
-							<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t1" id="t1" onmouseover="tip(this);" title="">
-							<h5 class="formulario">
-								<s:text name="documento.file"></s:text>
-							</h5>
-							<s:fielderror>
-								<s:param>file</s:param>
-							</s:fielderror>
-							<s:file name="file" id="file"/>
-							<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t2" id="t2" onmouseover="tip(this);" title="">
+							
+						<table>
+							<tr>
+							<!-- 1° col -->
+							<td>
+							
+								<h5 class="formulario">
+									<span style="color:red;">*</span>
+									<s:text name="documento.name" />
+									<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" 
+									name="t1" id="t1" onmouseover="tip(this);" title="">
+							
+								</h5>
+								<s:if test="#id_servicio > 0">
+									<span class="errorMessage"><s:text
+											name="struts.messages.error.file.too.large" /></span>
+								</s:if>
+								<s:fielderror>
+									<s:param>name</s:param>
+								</s:fielderror>								
+							</td>							
+							<td style="width:60px;">
+								<!-- td vacio -->
+							</td>
+							<td>
+								<h5 class="formulario">
+									<span style="color:red;">*</span>
+									<s:text name="documento.file"></s:text>
+									<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" 
+									name="t2" id="t2" onmouseover="tip(this);" title="">
+								</h5>
+								<s:fielderror>
+									<s:param>file</s:param>
+								</s:fielderror>
+								
+								
+							</td>							
+							</tr>
+							<tr>
+							<!-- 2° col -->
+							<td>
+								<s:textfield name="name" id="name"/>
+							</td>								
+							<td style="width:60px;">
+								<!-- td vacio -->
+							</td>						
+							<td>
+								<s:file name="file" id="file"/>							
+							</td>							
+							</tr>
+						</table>
 							<s:token name="token" />
 							<s:hidden name="tab" value="2" />
 							<s:if test="#id_servicio > 0">
@@ -344,7 +379,7 @@
 								<s:hidden name="id_servicio_informacion" />
 							</s:else>
 							<s:hidden name="modificar"></s:hidden>
-							<input type="submit" value="<s:text name="upload"/>" />
+							<input class="button_h" type="submit" value="<s:text name="upload"/>" />
 						</form>
 						<br>
 						<s:if test="files.size() > 0">
