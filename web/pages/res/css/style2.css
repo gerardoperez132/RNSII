@@ -732,7 +732,6 @@ div.middleContent {
 }
 
 .enlace_home a {
-	color: #1A5398;
 	float: left;
 	font-weight: 700;
 	margin: 0 6px 0 0;
@@ -740,7 +739,6 @@ div.middleContent {
 }
 
 .enlace_home a:hover {
-	color: #0E2B7C;
 	text-decoration: underline;
 }
 
