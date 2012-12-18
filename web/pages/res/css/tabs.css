@@ -33,6 +33,12 @@
 	padding-right: 20px;
 }
 
+.tab_description_right_2 {
+	float: right;
+	padding-top: 20px;
+	padding-right: 20px;
+}
+
 .tab_content {
 	padding: 20px;
 	font-size: 1.2em;

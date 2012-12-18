@@ -97,17 +97,18 @@
 					<table>
 						<tr>
 							<td>
-								<input type="button" id="sub_regresar" value="<s:text name="regresar"></s:text>" class="btn_oculto">
-							</td>
+								<input type="button" id="sub_regresar" class="button_h" value="<s:text name="regresar"></s:text>" class="btn_oculto">
+							</td>							
+						</tr>
+						<tr>
 							<td>
-								<input type="button" id="sub_guardar_entrada" value="<s:property value="#submit"></s:property>" class="btn_oculto">
+								<input type="button" id="sub_guardar_entrada" class="button_h" value="<s:property value="#submit"></s:property>" class="btn_oculto">
 							</td>
 						</tr>
 					</table>				
 				</div>					
 			</div>
-			
-							
+										
 			<ul class="tabs">
 				<li><a href="#tab1"><s:text name="tab1.title"></s:text> </a>
 				</li>

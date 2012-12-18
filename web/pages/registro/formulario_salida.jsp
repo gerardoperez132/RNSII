@@ -100,6 +100,8 @@
 							<td>
 								<input type="button" id="sub_regresar" value="<s:text name="regresar"></s:text>" class="btn_oculto">
 							</td>
+						</tr>
+						<tr>
 							<td>
 								<input type="button" id="sub_guardar_salida" value="<s:property value="#submit"></s:property>" class="btn_oculto">
 							</td>
@@ -107,8 +109,7 @@
 					</table>				
 				</div>					
 			</div>			
-			
-			<hr>
+						
 			<ul class="tabs">
 				<li><a href="#tab1"><s:text name="tab1.title"></s:text> </a>
 				</li>
