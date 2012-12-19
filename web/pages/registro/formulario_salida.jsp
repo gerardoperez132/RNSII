@@ -123,17 +123,7 @@
 				<!-- Formulario para registrar o modificar entrada -->				
 				<div id="tab2" class="tab_content">
 				<table>
-					<tr>
-						<td>
-						<h5 class="formulario">
-							<s:if test="modificar!=true">
-								<s:text name="registro.title"></s:text>
-							</s:if>
-							<s:else>
-								<s:text name="modificar"></s:text>
-							</s:else>
-						</h5>
-						</td>						
+					<tr>												
 						<td align="right">
 						<form action="prepararSalidas" method="POST" name="f_regresar">
 							<s:hidden name="id_servicio_informacion"></s:hidden>
@@ -143,7 +133,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2">
+						<td>
 						<h6 class="formulario">
 							<s:text name="funcionalidad.title">
 								<s:param>
@@ -154,102 +144,158 @@
 						</td>
 					</tr>			
 				</table>
-				
+				<hr>
+				<h5 class="requerido">
+					<s:text name="usuario.modificar.requerido" />
+				</h5>
 				<form action="<s:property value="#action"></s:property>"
 					method="post" name="formES" id="formES">
-						
-						<hr>
-						<!-- Nombre de la salida. -->
-						<h5 class="formulario">
-							<s:text name="nombre.title"></s:text>
-						</h5>
-						<s:fielderror>
-							<s:param>salida.nombre</s:param>
-						</s:fielderror>
-						<s:textfield name="salida.nombre" id="salida.nombre" />
-						<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t1" id="t1" onmouseover="tip(this);" title="">
-						<br>
-						<!-- Descripción de la salida. -->
-						<h5 class="formulario">
-							<s:text name="descripcion.title"></s:text>
-						</h5>
-						<s:fielderror>
-							<s:param>salida.descripcion</s:param>
-						</s:fielderror>
-						<s:textarea name="salida.descripcion" id="salida.descripcion" cols="30" rows="5" />
-						<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t2" id="t2" onmouseover="tip(this);" title="">
-						<br>
-						<h5 class="formulario">
-							<s:text name="dato.title"></s:text>
-						</h5>
-						<s:fielderror>
-							<s:param>tipodato</s:param>
-						</s:fielderror>
-						<s:select name="salida.id_tipo_dato" id="salida.id_tipo_dato" list="tipoDatos"
-							listKey="id_tipo_dato" listValue="nombre" headerKey="-1"
-							headerValue="%{getText('dato.select')}"></s:select>
-						<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t3" id="t3" onmouseover="tip(this);" title="">
-						<br> 
-						
-						
-						<s:if test="complejo!=true">
-						<div id="capa_formato" style="visibility: visible; position:relative;">
+					
+					<table>
+					<tr>
+						<!-- Etiquetas -->
+						<td>
 							<h5 class="formulario">
-								<s:text name="form.salida.formato"/>
+								<span style="color:red;">*</span>
+								<s:text name="nombre.title"></s:text>								
+								<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" 
+								name="t1" id="t1" onmouseover="tip(this);" title="">
 							</h5>
 							<s:fielderror>
-								<s:param>formato</s:param>
-							</s:fielderror>								
-							<select name="salida.id_formato" id="salida.id_formato" class="<s:property value='salida.id_formato'/>">
-								<s:set var="idF" value="salida.id_formato"/>
-								<optgroup label="">
-									<option value="-1">
-										<s:text name="form.salida.formato.select"></s:text>
-									</option>
-								</optgroup>
-								<s:iterator value="tipoDatos" status="td_status">										
-									<s:set var="id_td" value="id_tipo_dato"/>
-									<s:if test="hasformatted == true">
-									<optgroup label="<s:property value="nombre"/>"
-									id="opt_group_<s:property value="id_tipo_dato"/>">
-										<s:iterator value="formatos">
-											<s:if test="%{#id_td==id_tipo_dato}">
-												<s:set var="cen" value="true"/>
-												<option class="opt_element" id="opt_element_<s:property value="id_formato"/>" 
-													value="<s:property value="id_formato"/>" 
-												<s:if test="%{#idF == id_formato}">selected="selected"</s:if>>
-													<s:property value="formato"/>
-												</option>
-											</s:if>										
-										</s:iterator>											
-									</optgroup>
-									</s:if>										
-								</s:iterator>
-							</select>
-							<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t4" id="t4" onmouseover="tip(this);" title="">
-						</div>
-						<div id="capa_longitud" style="visibility: visible; position:relative;">
-							<h5 class="formulario">
-								<s:text name="form.salida.longitud"/>
-							</h5>
-							<s:fielderror>
-								<s:param>longitud</s:param>
+								<s:param>salida.nombre</s:param>
 							</s:fielderror>
-							<s:textfield name="salida.longitud" id="salida.longitud" maxlength="10"/>
-							<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" name="t5" id="t5" onmouseover="tip(this);" title="">
-								<span id="longitud_msj"></span>
-						</div>
+						</td>
+						<td style="width:60px;"><!-- td vacio --></td>
+						<td>
+							<h5 class="formulario">
+								<span style="color:red;">*</span>
+								<s:text name="descripcion.title"></s:text>
+								<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" 
+								name="t2" id="t2" onmouseover="tip(this);" title="">
+							</h5>
+							<s:fielderror>
+								<s:param>salida.descripcion</s:param>
+							</s:fielderror>
+						</td>
+					</tr>
+					<tr>
+						<!-- Elementos del formularios -->
+						<td>
+							<s:textfield name="salida.nombre" id="salida.nombre"/>
+						</td>
+						<td style="width:60px;"><!-- td vacio --></td>
+						<td rowspan="4">
+							<s:textarea name="salida.descripcion" id="salida.descripcion" cols="30" rows="6" />
+						</td>
+					</tr>	
+					<tr>
+						<!-- Etiquetas -->
+						<td>
+							<h5 class="formulario">
+								<span style="color:red;">*</span>
+								<s:text name="dato.title"></s:text>
+								<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" 
+								name="t3" id="t3" onmouseover="tip(this);" title="">
+							</h5>
+							<s:fielderror>
+								<s:param>tipodato</s:param>
+							</s:fielderror>
+						</td>
+						<td style="width:60px;"><!-- td vacio --></td>						
+					</tr>
+					<tr>
+						<!-- Elementos del formularios -->
+						<td><s:select name="salida.id_tipo_dato" id="salida.id_tipo_dato" list="tipoDatos"
+								listKey="id_tipo_dato" listValue="nombre" headerKey="-1"
+								headerValue="%{getText('form.salida.dato.select')}" >
+							</s:select></td>
+						<td style="width:60px;"><!-- td vacio --></td>						
+					</tr>
+					</table>
+					<s:if test="!complejo"> 
+					<table>
+					<tr>
+						<!-- Etiquetas -->
+						<td>
+							<div id="capa_formato_label" style="visibility: visible; position:relative;">
+								<h5 class="formulario">
+									<span style="color:red;">*</span>
+									<s:text name="form.salida.formato"/>
+									<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" 
+									name="t4" id="t4" onmouseover="tip(this);" title="">
+								</h5>
+								<s:fielderror>
+									<s:param>formato</s:param>
+								</s:fielderror>
+							</div>									
+						</td>
+						<td style="width:60px;"><!-- td vacio --></td>
+						<td>
+							<div id="capa_longitud_label" style="visibility: visible; position:relative;">
+								<h5 class="formulario">
+									<span style="color:red;">*</span>
+									<s:text name="form.salida.longitud"/>
+									<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip"
+									 name="t5" id="t5" onmouseover="tip(this);" title="">
+								</h5>
+								<s:fielderror>
+									<s:param>longitud</s:param>
+								</s:fielderror>
+								<span id="longitud_msj"></span>								
+							</div>
+							
+						</td>
+					</tr>
+					<tr>
+						<!-- Elementos del formularios -->
+						<td>
+							<div id="capa_formato_element_form" style="visibility: visible; position:relative;">
+								<select name="salida.id_formato" id="salida.id_formato" class="<s:property value='salida.id_formato'/>">
+									<s:set var="idF" value="salida.id_formato" />
+									<optgroup label="">
+										<option value="-1">
+											<s:text name="form.salida.formato.select"></s:text>
+										</option>
+									</optgroup>
+									<s:iterator value="tipoDatos" status="td_status">										
+										<s:set var="id_td" value="id_tipo_dato"/>
+										<s:if test="hasformatted">
+										<optgroup label="<s:property value="nombre"/>" 
+										id="opt_group_<s:property value="id_tipo_dato"/>">
+											<s:iterator value="formatos">
+												<s:if test="%{#id_td==id_tipo_dato}">
+													<s:set var="cen" value="true"/>
+													<option class="opt_element" id="opt_element_<s:property value="id_formato"/>"  
+														value="<s:property value="id_formato"/>" 
+													<s:if test="%{#idF == id_formato}">selected="selected"</s:if>>
+														<s:property value="formato"/>
+													</option>
+												</s:if>		
+											</s:iterator>											
+										</optgroup>
+										</s:if>										
+									</s:iterator>
+								</select>							
+							</div>
+							
+						</td>
+						<td style="width:60px;"><!-- td vacio --></td>
+						<td>
+							<div id="capa_longitud_element_form" style="visibility: visible; position:relative;">								
+								<s:textfield name="salida.longitud" maxlength="10" id="salida.longitud"/>
+							</div>
+						</td>
+					</tr>
+					</table>	
+					</s:if>
 						
-						</s:if>
-						
-						<br>
-						<s:hidden name="id_servicio_informacion"></s:hidden>
-						<s:hidden name="id_funcionalidad"></s:hidden>
-						<s:hidden name="id_entrada_salida"></s:hidden>
-						<s:hidden name="id_salida_padre"></s:hidden>
-						<s:hidden name="modificar"></s:hidden>
-						<s:hidden name="complejo"></s:hidden>
-						<input type="submit" value="<s:property value="#submit"></s:property>" id="btn_guardar_salida"/>
+					<s:hidden name="id_servicio_informacion"></s:hidden>
+					<s:hidden name="id_funcionalidad"></s:hidden>
+					<s:hidden name="id_entrada_salida"></s:hidden>
+					<s:hidden name="id_salida_padre"></s:hidden>
+					<s:hidden name="modificar"></s:hidden>
+					<s:hidden name="complejo"></s:hidden>
+					<input type="submit" value="<s:property value="#submit"></s:property>" id="btn_guardar_salida"/>
 					
 				</form>
 				</div>

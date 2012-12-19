@@ -123,17 +123,7 @@
 				<!-- Formulario para registrar o modificar entrada -->
 				<div id="tab2" class="tab_content">				
 				<table>
-					<tr>
-						<td>
-							<h5 class="formulario">
-								<s:if test="modificar!=true">
-									<s:text name="form.entrada.registro.title"></s:text>
-								</s:if>
-								<s:else>
-									<s:text name="form.entrada.modificar.title"></s:text>
-								</s:else>
-							</h5>
-						</td>						
+					<tr>												
 						<td align="right">
 						<form action="prepararEntradas" method="POST" name="f_regresar">
 							<s:hidden name="id_servicio_informacion"></s:hidden>
@@ -143,7 +133,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2">
+						<td>
 						<h6 class="formulario">
 							<s:text name="form.entrada.funcionalidad.title">
 								<s:param>
