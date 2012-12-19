@@ -79,8 +79,8 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 
 	public static Messages message = new Messages();
 	public static Errors error = new Errors();
-	private static Session session;
-	private static Transaction transaction;
+	private Session session;
+	private Transaction transaction;
 
 	private long blame() {
 		Usuario usuario = (Usuario) ActionContext.getContext().getSession()
