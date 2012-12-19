@@ -171,26 +171,18 @@ $(document).ready(function() {
 	$('#entrada\\.longitud').keyup(
 			function(e) {
 				if ($("#entrada\\.id_tipo_dato").val() == 4) {// decimales
-					if ($.isNumeric($("#entrada\\.longitud")
-							.val()) == false) {
-						this.value = this.value.substring(0,
-								(this.value.length - 1));
-						$('#longitud_msj').html(
-								data['errores']['error.num']);
-						$('#longitud_msj').attr('class',
-								'error_pass');
+					if ($.isNumeric($("#entrada\\.longitud").val()) == false) {
+						this.value = this.value.substring(0,(this.value.length - 1));
+						$('#longitud_msj').html(data['errores']['error.num']);
+						$('#longitud_msj').attr('class','error_pass');
 					} else {
 						$('#longitud_msj').html('');
 					}
 				} else { // Naturales
-					if (!/^([0-9])*$/.test($(
-							"#entrada\\.longitud").val())) {
-						this.value = this.value.substring(0,
-								(this.value.length - 1));
-						$('#longitud_msj').html(
-								data['errores']['error.num']);
-						$('#longitud_msj').attr('class',
-								'error_pass');
+					if (!/^([0-9])*$/.test($("#entrada\\.longitud").val())) {
+						this.value = this.value.substring(0,(this.value.length - 1));
+						$('#longitud_msj').html(data['errores']['error.num']);
+						$('#longitud_msj').attr('class','error_pass');
 					} else {
 						$('#longitud_msj').html('');
 					}
@@ -217,102 +209,66 @@ $(document).ready(function() {
 		 * selecciona ningún tipo de dato.
 		 */
 		if ($("#entrada\\.id_tipo_dato").val() == -1) {
-			$('#capa_formato').attr('style',
-					'visibility: hidden; position:fixed;');
-			$('#capa_longitud').attr('style',
-					'visibility: hidden; position:fixed;');
+			$('#capa_formato_label').attr('style','visibility: hidden; position:fixed;');
+			$('#capa_formato_element_form').attr('style','visibility: hidden; position:fixed;');
+			$('#capa_longitud_label').attr('style','visibility: hidden; position:fixed;');
+			$('#capa_longitud_element_form').attr('style','visibility: hidden; position:fixed;');
 		} else {
 			// Muestra la capa longitud si el dato posse esta
 			// caracteristica
-			$
-					.ajax({
-						type : 'GET',
-						url : 'dato_haslength.action',
-						cache : false,
-						async : false,
-						data : {
-							id_tipo_dato : $(
-									"#entrada\\.id_tipo_dato")
-									.val()
-						},
+			$.ajax({
+				type : 'GET',
+				url : 'dato_haslength.action',
+				cache : false,
+				async : false,
+				data : {
+					id_tipo_dato : $("#entrada\\.id_tipo_dato").val()},
 						success : function(result) {
-							var boleano = new String(''
-									+ result);
-							if (boleano.toLowerCase().indexOf(
-									'l=true') != -1) {
-								$('#capa_longitud')
-										.attr('style',
-												'visibility: visible; position:relative;')
-										.data("longitud", true);
+							var boleano = new String(''	+ result);
+							if (boleano.toLowerCase().indexOf('l=true') != -1) {
+								$('#capa_longitud_label').attr('style','visibility: visible; position:relative;').data("longitud", true);
+								$('#capa_longitud_element_form').attr('style','visibility: visible; position:relative;');
 							} else {
-								$('#capa_longitud')
-										.attr('style',
-												'visibility: hidden; position:fixed;')
-										.data("longitud", false);
+								$('#capa_longitud_label').attr('style','visibility: hidden; position:fixed;').data("longitud", false);
+								$('#capa_longitud_element_form').attr('style','visibility: hidden; position:fixed;');
 							}
 						}
 					});
 			// Muestra la capa formato si el dato posse esta
 			// caracteristica
-			$
-					.ajax({
-						type : 'GET',
-						url : 'dato_hasformatted.action',
-						cache : false,
-						async : false,
-						data : {
-							id_tipo_dato : $(
-									"#entrada\\.id_tipo_dato")
-									.val()
-						},
+			$.ajax({
+				type : 'GET',
+				url : 'dato_hasformatted.action',
+				cache : false,
+				async : false,
+				data : {					
+					id_tipo_dato : $("#entrada\\.id_tipo_dato").val()},					
 						success : function(result2) {
-							var boleano = new String(''
-									+ result2);
-							if (boleano.toLowerCase().indexOf(
-									'f=true') != -1) {
-								$('#capa_formato')
-										.attr('style',
-												'visibility: visible; position:relative;')
-										.data("formato", true);
-								// Crea las opciones del select
-								// formato
-								$
-										.ajax({
-											type : 'GET',
-											url : 'list_format.action',
-											cache : false,
-											async : false,
-											data : {
-												id_tipo_dato : $(
-														"#entrada\\.id_tipo_dato")
-														.val()
-											},
-											success : function(
-													result3) {
-												$(
-														"#entrada\\.id_formato")
-														.append(
-																result3);
-												$(
-														'#opt_element_'
-																+ $(
-																		"#entrada\\.id_formato")
-																		.attr(
-																				'class')
-																+ '')
-														.attr(
-																'selected',
-																'selected');
-											}
-										});
-							} else {
-								$('#capa_formato')
-										.attr('style',
-												'visibility: hidden; position:fixed;')
-										.data("formato", false);
-							}
+						var boleano = new String(''+ result2);
+						if (boleano.toLowerCase().indexOf('f=true') != -1) {
+							$('#capa_formato_label').attr('style','visibility: visible; position:relative;').data("formato", true);
+							$('#capa_formato_element_form').attr('style','visibility: visible; position:relative;');
+							// Crea las opciones del select
+							// formato
+							$.ajax({
+								type : 'GET',
+								url : 'list_format.action',
+								cache : false,
+								async : false,
+								data : {
+									id_tipo_dato : $("#entrada\\.id_tipo_dato").val()
+								},
+								success : function(result3) {
+									$("#entrada\\.id_formato").append(result3);
+									$('#opt_element_'+ $("#entrada\\.id_formato").attr('class')+ '').attr('selected','selected');
+								}
+							});
+						} else {
+							$('#capa_formato_label').attr('style','visibility: hidden; position:fixed;').data("formato", false);
+							$('#capa_formato_element_form').attr('style','visibility: hidden; position:fixed;');
 						}
-					});
+					}
+			});
 		}
 
 	}
