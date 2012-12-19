@@ -540,8 +540,8 @@
 		<div class="clr"></div>
 		<%@include file="layout/breadcrumbs.jsp"%>	
 		<%@include file="layout/links_over_footer.jsp"%>	
-		</div>		
-		</div>		
+		</div>
+		</div>
 		<!-- Footer -->	
 		<%@include file="layout/footer.jsp"%>
 	</body>
