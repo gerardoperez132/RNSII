@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- * This file is part of SRSI. * * SRSI is free software: you can redistribute 
-	it and/or modify * it under the terms of the GNU General Public License as 
-	published by * the Free Software Foundation, either version 3 of the License, 
-	or * (at your option) any later version. * * SRSI is distributed in the hope 
-	that it will be useful, * but WITHOUT ANY WARRANTY; without even the implied 
-	warranty of * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
-	* GNU General Public License for more details. * * You should have received 
-	a copy of the GNU General Public License * along with SRSI. If not, see <http://www.gnu.org/licenses/>. -->
+<!--
+ * This file is part of SRSI.
+ * 
+ * SRSI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * SRSI is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with SRSI. If not, see <http://www.gnu.org/licenses/>.
+-->
 <!DOCTYPE struts PUBLIC
 "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
 "http://struts.apache.org/dtds/struts-2.0.dtd">
@@ -121,7 +129,8 @@
 			</result>
 			<result name="invalid.token">registro/registro_servicio_informacion.jsp
 			</result>
-			<result name="input">registro/registro_servicio_informacion.jsp</result>
+			<result name="input">registro/registro_servicio_informacion.jsp
+			</result>
 			<result name="errorSession">error_sesion.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
@@ -260,7 +269,8 @@
 			<interceptor-ref name="doubleSubmit" />
 			<result name="success">registro/funcionalidades.jsp</result>
 			<result name="error">error.jsp</result>
-			<result name="invalid.token" type="redirectAction">prepararFuncionalidades</result>
+			<result name="invalid.token" type="redirectAction">prepararFuncionalidades
+			</result>
 		</action>
 
 		<!-- Actions para entradas -->
