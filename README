@@ -7,7 +7,7 @@
 |       `-- ve
 |           `-- gob
 |               `-- cnti
-|                   `-- srsi
+|                   `-- rnsii
 |                       |-- controlador
 |                       |   |-- ConsultasControlador$1.class
 |                       |   |-- ConsultasControlador.class
@@ -90,7 +90,7 @@
 |   `-- ve
 |       `-- gob
 |           `-- cnti
-|               `-- srsi
+|               `-- rnsii
 |                   |-- controlador
 |                   |   |-- ConsultasControlador.java
 |                   |   |-- EntradaControlador.java

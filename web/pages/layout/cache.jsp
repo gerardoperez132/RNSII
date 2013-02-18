@@ -1,4 +1,4 @@
-<%@page import="ve.gob.cnti.srsi.modelo.Usuario"%>
+<%@page import="ve.gob.cnti.rnsii.modelo.Usuario"%>
 <%
 	response.setHeader("Pragma", "no-cache");
 	response.addHeader("Cache-Control", "must-revalidate");

@@ -4,11 +4,11 @@
 <%@include file="../layout/cache.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<s:i18n name="ve/gob/cnti/srsi/i18n/messages">
+<s:i18n name="ve/gob/cnti/rnsii/i18n/messages">
 	<head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <!-- CSS (required) -->
-<link rel="stylesheet" type="text/css" href="/SRSI/pages/res/css/style2.css">
+<link rel="stylesheet" type="text/css" href="/RNSII/pages/res/css/style2.css">
 <link rel="stylesheet" type="text/css" href="res/css/menu_vertical.css">
 <link rel="stylesheet" type="text/css" href="res/css/jquery.treeTable.css">
 <link rel="stylesheet" type="text/css" href="res/css/table2.css">
@@ -17,8 +17,8 @@
 <link rel="stylesheet" type="text/css" href="res/js/plugins/sexy-alert-box-1.2.2/sexyalertbox.css" media="all">
 <link rel="stylesheet" type="text/css" href="res/js/plugins/sexy-tooltips/blue.css" media="all">
 <!-- JS (required) -->
-<script type="text/javascript" src="/SRSI/pages/res/js/jquery-1.7.1.js" charset="UTF-8"></script>
-<script type="text/javascript" src="/SRSI/pages/res/js/funciones_ge.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/RNSII/pages/res/js/jquery-1.7.1.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/RNSII/pages/res/js/funciones_ge.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/jquery.treeTable.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/registro/salidas.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/main.js" charset="UTF-8"></script>
@@ -224,7 +224,7 @@
 																			</s:append>
 																			<s:if test="%{#contador_hijos==0}">
 																				<s:set name="contador" value="%{#contador +1}"/>
-																				<s:i18n name="ve/gob/cnti/srsi/i18n/errors">
+																				<s:i18n name="ve/gob/cnti/rnsii/i18n/errors">
 																					<td style="margin: 0; padding: 0;"><img src="res/img/important.png" id="h<s:property value='#contador'/>" alt="ayuda" onmouseover="tip(this);" name="h<s:property value='#contador'/>" height="25" width="30" />
 																						<div class="h<s:property value='#contador'/>" style="visibility: hidden; display: none;">
 																							<p>

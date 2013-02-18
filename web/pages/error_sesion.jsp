@@ -3,13 +3,13 @@
 <%@taglib uri="/struts-tags" prefix="s"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<s:i18n name="ve/gob/cnti/srsi/i18n/messages">
-	<s:i18n name="ve/gob/cnti/srsi/i18n/errors">
+<s:i18n name="ve/gob/cnti/rnsii/i18n/messages">
+	<s:i18n name="ve/gob/cnti/rnsii/i18n/errors">
 		<head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <!-- CSS (required) -->
 <link rel="stylesheet" type="text/css"
-	href="/SRSI/pages/res/css/style2.css">
+	href="/RNSII/pages/res/css/style2.css">
 <link rel="stylesheet" type="text/css"
 	href="res/css/jquery.treeTable.css">
 <link rel="stylesheet" type="text/css" href="res/css/table_tree.css">
@@ -26,7 +26,7 @@
 					<!-- Ruta de navegación -->
 					<div class="main">
 						<div class="RutaNavegacion">
-							<a href="SRSI.action"><s:text name="catalogo" /></a>
+							<a href="RNSII.action"><s:text name="catalogo" /></a>
 						</div>
 						<br> <br>
 						<h1>

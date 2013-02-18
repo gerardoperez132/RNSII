@@ -3,11 +3,11 @@
 <%@include file="../layout/cache.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<s:i18n name="ve/gob/cnti/srsi/i18n/messages">
+<s:i18n name="ve/gob/cnti/rnsii/i18n/messages">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- CSS (required) -->
-<link rel="stylesheet" type="text/css" href="/SRSI/pages/res/css/style2.css">
+<link rel="stylesheet" type="text/css" href="/RNSII/pages/res/css/style2.css">
 <link rel="stylesheet" type="text/css" href="res/css/menu_vertical.css">
 <link rel="stylesheet" type="text/css" href="res/css/jquery.alerts.css">
 <link rel="stylesheet" type="text/css" href="res/css/jquery.treeTable.css">
@@ -15,8 +15,8 @@
 <link rel="stylesheet" type="text/css" href="res/css/table_tree.css">
 <link rel="stylesheet" type="text/css" href="res/css/tabs.css">
 <!-- JS (required) -->
-<script type="text/javascript" src="/SRSI/pages/res/js/jquery-1.7.1.js" charset="UTF-8"></script>
-<script type="text/javascript" src="/SRSI/pages/res/js/funciones_ge.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/RNSII/pages/res/js/jquery-1.7.1.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/RNSII/pages/res/js/funciones_ge.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/jquery.treeTable.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/jquery.alerts.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/jquery.validate.js" charset="UTF-8"></script>
@@ -407,7 +407,7 @@
 							</table>
 						</s:if>
 						<s:if test="#id_servicio > 0">
-							<s:bean	name="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
+							<s:bean	name="ve.gob.cnti.rnsii.controlador.ServicioInformacionControlador">
 								<s:param name="id_servicio_informacion" value="%{id_servicio}"></s:param>
 								<table>
 									<s:iterator value="files2">

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
- * This file is part of SRSI.
+ * This file is part of RNSII.
  * 
- * SRSI is free software: you can redistribute it and/or modify
+ * RNSII is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  * 
- * SRSI is distributed in the hope that it will be useful,
+ * RNSII is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with SRSI. If not, see <http://www.gnu.org/licenses/>.
+ * along with RNSII. If not, see <http://www.gnu.org/licenses/>.
 -->
 <!DOCTYPE struts PUBLIC
 "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
@@ -48,7 +48,7 @@
 
 		<!-- Actions de servicios de información -->
 		<action name="prepararRegistro" method="prepararRegistro"
-			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
+			class="ve.gob.cnti.rnsii.controlador.ServicioInformacionControlador">
 			<result name="success">
 				registro/registro_servicio_informacion.jsp
 			</result>
@@ -57,7 +57,7 @@
 		</action>
 
 		<action name="prepararDescripcionGeneral" method="prepararDescripcionGeneral"
-			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
+			class="ve.gob.cnti.rnsii.controlador.ServicioInformacionControlador">
 			<result name="success">
 				registro/registro_servicio_informacion.jsp
 			</result>
@@ -66,7 +66,7 @@
 		</action>
 
 		<action name="registrarDescripcionGeneral" method="registrarDescripcionGeneral"
-			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
+			class="ve.gob.cnti.rnsii.controlador.ServicioInformacionControlador">
 			<interceptor-ref name="doubleSubmit" />
 			<result name="success" type="redirectAction">prepararAspectosLegales</result>
 			<result name="invalid.token">registro/registro_servicio_informacion.jsp
@@ -78,7 +78,7 @@
 		</action>
 
 		<action name="prepararAspectosLegales" method="prepararAspectosLegales"
-			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
+			class="ve.gob.cnti.rnsii.controlador.ServicioInformacionControlador">
 			<result name="success">registro/registro_servicio_informacion.jsp
 			</result>
 			<result name="errorSession">error_sesion.jsp</result>
@@ -86,7 +86,7 @@
 		</action>
 
 		<action name="registrarAspectosLegales" method="registrarAspectosLegales"
-			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
+			class="ve.gob.cnti.rnsii.controlador.ServicioInformacionControlador">
 			<interceptor-ref name="doubleSubmit" />
 			<result name="success">registro/registro_servicio_informacion.jsp
 			</result>
@@ -99,7 +99,7 @@
 		</action>
 
 		<action name="eliminarAspectoLegal" method="deleteFile"
-			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
+			class="ve.gob.cnti.rnsii.controlador.ServicioInformacionControlador">
 			<interceptor-ref name="doubleSubmit" />
 			<result name="success">
 				registro/registro_servicio_informacion.jsp
@@ -115,7 +115,7 @@
 		</action>
 
 		<action name="prepararDescripcionTecnica" method="prepararDescripcionTecnica"
-			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
+			class="ve.gob.cnti.rnsii.controlador.ServicioInformacionControlador">
 			<result name="success">registro/registro_servicio_informacion.jsp
 			</result>
 			<result name="errorSession">error_sesion.jsp</result>
@@ -123,7 +123,7 @@
 		</action>
 
 		<action name="registrarDescripcionTecnica" method="registrarDescripcionTecnica"
-			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
+			class="ve.gob.cnti.rnsii.controlador.ServicioInformacionControlador">
 			<interceptor-ref name="doubleSubmit" />
 			<result name="success" type="redirectAction">prepararDescripcionSoporte
 			</result>
@@ -136,7 +136,7 @@
 		</action>
 
 		<action name="prepararDescripcionSoporte" method="prepararDescripcionSoporte"
-			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
+			class="ve.gob.cnti.rnsii.controlador.ServicioInformacionControlador">
 			<result name="success">registro/registro_servicio_informacion.jsp
 			</result>
 			<result name="errorSession">error_sesion.jsp</result>
@@ -144,7 +144,7 @@
 		</action>
 
 		<action name="registrarDescripcionSoporte" method="registrarDescripcionSoporte"
-			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
+			class="ve.gob.cnti.rnsii.controlador.ServicioInformacionControlador">
 			<interceptor-ref name="doubleSubmit" />
 			<result name="success" type="redirectAction">prepararFuncionalidades</result>
 			<result name="invalid.token">registro/registro_servicio_informacion.jsp
@@ -156,35 +156,35 @@
 		</action>
 
 		<action name="eliminarServicioInformacion" method="eliminarServicioInformacion"
-			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
+			class="ve.gob.cnti.rnsii.controlador.ServicioInformacionControlador">
 			<result name="success" type="redirectAction">home</result>
 			<result name="errorSession">error_sesion.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="publicarServicioInformacion" method="publicarServicioInformacion"
-			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
+			class="ve.gob.cnti.rnsii.controlador.ServicioInformacionControlador">
 			<result name="success" type="redirectAction">home</result>
 			<result name="errorSession">error_sesion.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="despublicarServicioInformacion" method="despublicarServicioInformacion"
-			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
+			class="ve.gob.cnti.rnsii.controlador.ServicioInformacionControlador">
 			<result name="success" type="redirectAction">home</result>
 			<result name="errorSession">error_sesion.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="examinarServicioInformacion" method="examinarServicioInformacion"
-			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
+			class="ve.gob.cnti.rnsii.controlador.ServicioInformacionControlador">
 			<result name="success">user/examinarServicio.jsp</result>
 			<result name="errorSession">error_sesion.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="prepararModificarServicioInformacion" method="prepararModificarServicioInformacion"
-			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
+			class="ve.gob.cnti.rnsii.controlador.ServicioInformacionControlador">
 			<result name="success">registro/registro_servicio_informacion.jsp
 			</result>
 			<result name="errorSession">error_sesion.jsp</result>
@@ -192,7 +192,7 @@
 		</action>
 
 		<action name="modificarServicioInformacion" method="modificarServicioInformacion"
-			class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
+			class="ve.gob.cnti.rnsii.controlador.ServicioInformacionControlador">
 			<result name="success">registro/funcionalidades.jsp</result>
 			<result name="input">registro/registro_servicio_informacion.jsp
 			</result>
@@ -201,7 +201,7 @@
 		</action>
 
 		<action name="Buscar_Servicio" method="buscarServicio2"
-			class="ve.gob.cnti.srsi.controlador.ConsultasControlador">
+			class="ve.gob.cnti.rnsii.controlador.ConsultasControlador">
 			<result name="success">registro/suscripcion.jsp</result>
 			<result name="input">registro/suscripcion.jsp</result>
 			<result name="errorSession">error_sesion.jsp</result>
@@ -209,7 +209,7 @@
 		</action>
 
 		<action name="Servicio" method="examinarServicioInformacion"
-			class="ve.gob.cnti.srsi.controlador.ConsultasControlador">
+			class="ve.gob.cnti.rnsii.controlador.ConsultasControlador">
 			<result name="success">registro/suscripcion.jsp</result>
 			<result name="errorSession">error_sesion.jsp</result>
 			<result name="error">error.jsp</result>
@@ -217,26 +217,26 @@
 
 		<!-- Actions para funcionalidades -->
 		<action name="prepararModificacionesServicioInformacion"
-			method="prepararModificaciones" class="ve.gob.cnti.srsi.controlador.ServicioInformacionControlador">
+			method="prepararModificaciones" class="ve.gob.cnti.rnsii.controlador.ServicioInformacionControlador">
 			<result name="success">modificar/modificar_servicio_informacion.jsp
 			</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="prepararFuncionalidad" method="prepararFormulario"
-			class="ve.gob.cnti.srsi.controlador.FuncionalidadControlador">
+			class="ve.gob.cnti.rnsii.controlador.FuncionalidadControlador">
 			<result name="success">registro/formulario_funcionalidad.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="prepararModificacionesFuncionalidad" method="prepararModificaciones"
-			class="ve.gob.cnti.srsi.controlador.FuncionalidadControlador">
+			class="ve.gob.cnti.rnsii.controlador.FuncionalidadControlador">
 			<result name="success">registro/formulario_funcionalidad.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="registrarFuncionalidad" method="registrarFuncionalidad"
-			class="ve.gob.cnti.srsi.controlador.FuncionalidadControlador">
+			class="ve.gob.cnti.rnsii.controlador.FuncionalidadControlador">
 			<result name="success" type="chain">
 				<param name="actionName">prepararEntradas</param>
 			</result>
@@ -245,27 +245,27 @@
 		</action>
 
 		<action name="modificarFuncionalidad" method="modificarFuncionalidad"
-			class="ve.gob.cnti.srsi.controlador.FuncionalidadControlador">
+			class="ve.gob.cnti.rnsii.controlador.FuncionalidadControlador">
 			<result name="success">registro/formulario_funcionalidad.jsp</result>
 			<result name="input">registro/formulario_funcionalidad.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="prepararResumen" method="prepararResumen"
-			class="ve.gob.cnti.srsi.controlador.FuncionalidadControlador">
+			class="ve.gob.cnti.rnsii.controlador.FuncionalidadControlador">
 			<result name="success">registro/formulario_funcionalidad.jsp</result>
 			<result name="input">registro/formulario_funcionalidad.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="prepararFuncionalidades" method="prepararFuncionalidades"
-			class="ve.gob.cnti.srsi.controlador.FuncionalidadControlador">
+			class="ve.gob.cnti.rnsii.controlador.FuncionalidadControlador">
 			<result name="success">registro/funcionalidades.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="eliminarFuncionalidad" method="eliminarFuncionalidad"
-			class="ve.gob.cnti.srsi.controlador.FuncionalidadControlador">
+			class="ve.gob.cnti.rnsii.controlador.FuncionalidadControlador">
 			<interceptor-ref name="doubleSubmit" />
 			<result name="success">registro/funcionalidades.jsp</result>
 			<result name="error">error.jsp</result>
@@ -275,25 +275,25 @@
 
 		<!-- Actions para entradas -->
 		<action name="prepararEntradas" method="prepararFormulario"
-			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
+			class="ve.gob.cnti.rnsii.controlador.EntradaControlador">
 			<result name="success">registro/entradas.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="prepararRegistroEntrada" method="prepararRegistroEntrada"
-			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
+			class="ve.gob.cnti.rnsii.controlador.EntradaControlador">
 			<result name="success">registro/formulario_entrada.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="prepararEntradaSimple" method="prepararFormularioSimple"
-			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
+			class="ve.gob.cnti.rnsii.controlador.EntradaControlador">
 			<result name="success">registro/formulario_entrada.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="registrarEntrada" method="registrarEntrada"
-			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
+			class="ve.gob.cnti.rnsii.controlador.EntradaControlador">
 			<result name="success" type="chain">
 				<param name="actionName">prepararEntradas</param>
 			</result>
@@ -302,69 +302,69 @@
 		</action>
 
 		<action name="prepararEntradaCompleja" method="prepararFormularioComplejo"
-			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
+			class="ve.gob.cnti.rnsii.controlador.EntradaControlador">
 			<result name="success">registro/formulario_entrada.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="prepararModificarEntrada" method="prepararModificarEntrada"
-			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
+			class="ve.gob.cnti.rnsii.controlador.EntradaControlador">
 			<result name="success">registro/formulario_entrada.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="prepararModificarEntradaSimple" method="prepararModificarEntradaSimple"
-			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
+			class="ve.gob.cnti.rnsii.controlador.EntradaControlador">
 			<result name="success">registro/formulario_entrada.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="prepararModificarEntradaCompleja" method="prepararModificarEntradaCompleja"
-			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
+			class="ve.gob.cnti.rnsii.controlador.EntradaControlador">
 			<result name="success">registro/formulario_entrada.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="modificarEntrada" method="modificarEntrada"
-			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
+			class="ve.gob.cnti.rnsii.controlador.EntradaControlador">
 			<result name="success">registro/entradas.jsp</result>
 			<result name="input">registro/formulario_entrada.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="eliminarEntradaSimple" method="eliminarEntradaSimple"
-			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
+			class="ve.gob.cnti.rnsii.controlador.EntradaControlador">
 			<result name="success">registro/entradas.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="eliminarEntradaCompleja" method="eliminarEntradaCompleja"
-			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
+			class="ve.gob.cnti.rnsii.controlador.EntradaControlador">
 			<result name="success">registro/entradas.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<!-- Actions para salidas -->
 		<action name="prepararSalidas" method="prepararFormulario"
-			class="ve.gob.cnti.srsi.controlador.SalidaControlador">
+			class="ve.gob.cnti.rnsii.controlador.SalidaControlador">
 			<result name="success">registro/salidas.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="prepararRegistroSalida" method="prepararRegistroSalida"
-			class="ve.gob.cnti.srsi.controlador.SalidaControlador">
+			class="ve.gob.cnti.rnsii.controlador.SalidaControlador">
 			<result name="success">registro/formulario_salida.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="prepararSalidaSimple" method="prepararFormularioSimple"
-			class="ve.gob.cnti.srsi.controlador.SalidaControlador">
+			class="ve.gob.cnti.rnsii.controlador.SalidaControlador">
 			<result name="success">registro/formulario_salida.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="registrarSalida" method="registrarSalida"
-			class="ve.gob.cnti.srsi.controlador.SalidaControlador">
+			class="ve.gob.cnti.rnsii.controlador.SalidaControlador">
 			<result name="success" type="chain">
 				<param name="actionName">prepararSalidas</param>
 			</result>
@@ -373,59 +373,59 @@
 		</action>
 
 		<action name="prepararSalidaCompleja" method="prepararFormularioComplejo"
-			class="ve.gob.cnti.srsi.controlador.SalidaControlador">
+			class="ve.gob.cnti.rnsii.controlador.SalidaControlador">
 			<result name="success">registro/formulario_salida.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="prepararModificarSalida" method="prepararModificarSalida"
-			class="ve.gob.cnti.srsi.controlador.SalidaControlador">
+			class="ve.gob.cnti.rnsii.controlador.SalidaControlador">
 			<result name="success">registro/formulario_salida.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="prepararModificarSalidaSimple" method="prepararModificarSalidaSimple"
-			class="ve.gob.cnti.srsi.controlador.SalidaControlador">
+			class="ve.gob.cnti.rnsii.controlador.SalidaControlador">
 			<result name="success">registro/formulario_salida.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="prepararModificarSalidaCompleja" method="prepararModificarSalidaCompleja"
-			class="ve.gob.cnti.srsi.controlador.SalidaControlador">
+			class="ve.gob.cnti.rnsii.controlador.SalidaControlador">
 			<result name="success">registro/formulario_salida.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="modificarSalida" method="modificarSalida"
-			class="ve.gob.cnti.srsi.controlador.SalidaControlador">
+			class="ve.gob.cnti.rnsii.controlador.SalidaControlador">
 			<result name="success">registro/salidas.jsp</result>
 			<result name="input">registro/formulario_salida.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="eliminarSalidaSimple" method="eliminarSalidaSimple"
-			class="ve.gob.cnti.srsi.controlador.SalidaControlador">
+			class="ve.gob.cnti.rnsii.controlador.SalidaControlador">
 			<result name="success">registro/salidas.jsp</result>
 		</action>
 
 		<action name="eliminarSalidaCompleja" method="eliminarSalidaCompleja"
-			class="ve.gob.cnti.srsi.controlador.SalidaControlador">
+			class="ve.gob.cnti.rnsii.controlador.SalidaControlador">
 			<result name="success">registro/salidas.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<!-- Logins -->
 		<action name="autenticar" method="mostrarLogin"
-			class="ve.gob.cnti.srsi.controlador.LoginControlador">
-			<result name="success" type="redirectAction">SRSI</result>
+			class="ve.gob.cnti.rnsii.controlador.LoginControlador">
+			<result name="success" type="redirectAction">RNSII</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="index" method="autenticarUsuario"
-			class="ve.gob.cnti.srsi.controlador.LoginControlador">
+			class="ve.gob.cnti.rnsii.controlador.LoginControlador">
 			<result name="404ERROR" type="redirectAction">error404</result>
 			<result name="input" type="redirectAction">
-				<param name="actionName">SRSI</param>
+				<param name="actionName">RNSII</param>
 				<param name="msj">true</param>
 				<param name="msj_error">${msj_error}</param>
 			</result>
@@ -435,37 +435,37 @@
 		</action>
 
 		<action name="salir" method="desloguearUsuario"
-			class="ve.gob.cnti.srsi.controlador.LoginControlador">
-			<result name="success" type="redirectAction">SRSI</result>
+			class="ve.gob.cnti.rnsii.controlador.LoginControlador">
+			<result name="success" type="redirectAction">RNSII</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="inicio" method="inicio"
-			class="ve.gob.cnti.srsi.controlador.LoginControlador">
+			class="ve.gob.cnti.rnsii.controlador.LoginControlador">
 			<result name="success" type="redirectAction">autenticar</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="home" method="home"
-			class="ve.gob.cnti.srsi.controlador.LoginControlador">
+			class="ve.gob.cnti.rnsii.controlador.LoginControlador">
 			<result name="success">user/main.jsp</result>
 			<result name="input" type="redirectAction">autenticar</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="cambiarClave" method="modificarClave"
-			class="ve.gob.cnti.srsi.controlador.LoginControlador">
+			class="ve.gob.cnti.rnsii.controlador.LoginControlador">
 			<interceptor-ref name="doubleSubmit" />
 			<result name="success" type="redirectAction">
-				<param name="actionName">SRSI</param>
+				<param name="actionName">RNSII</param>
 				<param name="msj">true</param>
 				<param name="msj_actionInfo">%{msj_actionInfo}</param>
 			</result>
 			<result name="invalid.token" type="redirectAction">
-				<param name="actionName">SRSI</param>
+				<param name="actionName">RNSII</param>
 			</result>
 			<result name="input" type="redirectAction">
-				<param name="actionName">SRSI</param>
+				<param name="actionName">RNSII</param>
 				<param name="recoveryPassForm">true</param>
 				<param name="cuenta">%{cuenta}</param>
 				<param name="msj_error">%{msj_error}</param>
@@ -474,13 +474,13 @@
 		</action>
 
 		<action name="recuperarClave" method="prepararRecuperarPass"
-			class="ve.gob.cnti.srsi.controlador.LoginControlador">
+			class="ve.gob.cnti.rnsii.controlador.LoginControlador">
 			<result name="success" type="redirectAction">
-				<param name="actionName">SRSI</param>
+				<param name="actionName">RNSII</param>
 				<param name="cuenta">%{cuenta}</param>
 			</result>
 			<result name="input" type="redirectAction">
-				<param name="actionName">SRSI</param>
+				<param name="actionName">RNSII</param>
 				<param name="msj">true</param>
 				<param name="msj_error">%{msj_error}</param>
 			</result>
@@ -488,21 +488,21 @@
 		</action>
 
 		<action name="recuperar_clave" method="prepararRecuperarPass"
-			class="ve.gob.cnti.srsi.controlador.ConsultasControlador">
+			class="ve.gob.cnti.rnsii.controlador.ConsultasControlador">
 			<result name="success">index.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="enviarDatos" method="enviarDatos"
-			class="ve.gob.cnti.srsi.controlador.LoginControlador">
+			class="ve.gob.cnti.rnsii.controlador.LoginControlador">
 			<result name="success" type="redirectAction">
-				<param name="actionName">SRSI</param>
+				<param name="actionName">RNSII</param>
 				<param name="msj">true</param>
 				<param name="msj_error">%{msj_error}</param>
 				<param name="msj_actionInfo">${msj_actionInfo}</param>
 			</result>
 			<result name="input" type="redirectAction">
-				<param name="actionName">SRSI</param>
+				<param name="actionName">RNSII</param>
 				<param name="msj">true</param>
 				<param name="msj_error">%{msj_error}</param>
 				<param name="msj_actionInfo">${msj_actionInfo}</param>
@@ -514,7 +514,7 @@
 		<!-- Actions para usuarios -->
 
 		<action name="modificarClave" method="modificarClave"
-			class="ve.gob.cnti.srsi.controlador.UsuarioControlador">
+			class="ve.gob.cnti.rnsii.controlador.UsuarioControlador">
 			<result name="success">registro/formulario_usuario.jsp</result>
 			<result name="input">registro/formulario_usuario.jsp</result>
 			<result name="errorSession" type="redirectAction">home</result>
@@ -522,14 +522,14 @@
 		</action>
 
 		<action name="prepararFormulario" method="prepararFormulario"
-			class="ve.gob.cnti.srsi.controlador.UsuarioControlador">
+			class="ve.gob.cnti.rnsii.controlador.UsuarioControlador">
 			<result name="success">registro/formulario_usuario.jsp</result>
 			<result name="errorSession" type="redirectAction">home</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="modificarClave" method="modificarClave"
-			class="ve.gob.cnti.srsi.controlador.UsuarioControlador">
+			class="ve.gob.cnti.rnsii.controlador.UsuarioControlador">
 			<interceptor-ref name="doubleSubmit" />
 			<result name="invalid.token" type="redirectAction">home</result>
 			<result name="success">registro/formulario_usuario.jsp</result>
@@ -539,7 +539,7 @@
 		</action>
 
 		<action name="modificarDatos" method="modificarDatos"
-			class="ve.gob.cnti.srsi.controlador.UsuarioControlador">
+			class="ve.gob.cnti.rnsii.controlador.UsuarioControlador">
 			<interceptor-ref name="doubleSubmit" />
 			<result name="invalid.token" type="redirectAction">home</result>
 			<result name="success">registro/formulario_usuario.jsp</result>
@@ -550,28 +550,28 @@
 
 		<!-- Actions para suscripciones -->
 		<action name="prepararSolicitarSuscripcion" method="prepararSolicitarSuscripcion"
-			class="ve.gob.cnti.srsi.controlador.SuscripcionControlador">
+			class="ve.gob.cnti.rnsii.controlador.SuscripcionControlador">
 			<result name="success">registro/suscripcion.jsp</result>
 			<result name="input" type="redirectAction">home</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="prepararSuscripcion" method="prepararSuscripcion"
-			class="ve.gob.cnti.srsi.controlador.SuscripcionControlador">
+			class="ve.gob.cnti.rnsii.controlador.SuscripcionControlador">
 			<result name="success">registro/suscripcion.jsp</result>
 			<result name="input" type="redirectAction">home</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="prepararAprobarRechazarSuscripcion" method="prepararAprobarRechazarSuscripcion"
-			class="ve.gob.cnti.srsi.controlador.SuscripcionControlador">
+			class="ve.gob.cnti.rnsii.controlador.SuscripcionControlador">
 			<result name="success">registro/suscripcion.jsp</result>
 			<result name="input" type="redirectAction">home</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="aprobarRechazarSuscripcion" method="aprobarRechazarSuscripcion"
-			class="ve.gob.cnti.srsi.controlador.SuscripcionControlador">
+			class="ve.gob.cnti.rnsii.controlador.SuscripcionControlador">
 			<interceptor-ref name="doubleSubmit" />
 			<result name="success">registro/suscripcion.jsp</result>
 			<result name="input">registro/suscripcion.jsp</result>
@@ -580,7 +580,7 @@
 		</action>
 
 		<action name="solicitarSuscripcion" method="solicitarSuscripcion"
-			class="ve.gob.cnti.srsi.controlador.SuscripcionControlador">
+			class="ve.gob.cnti.rnsii.controlador.SuscripcionControlador">
 			<interceptor-ref name="doubleSubmit" />
 			<result name="success">registro/suscripcion.jsp</result>
 			<result name="input">registro/suscripcion.jsp</result>
@@ -589,99 +589,99 @@
 		</action>
 
 		<action name="ListarSuscricionesPendientes" method="listaSuscripcionesPendientes"
-			class="ve.gob.cnti.srsi.controlador.SuscripcionControlador">
+			class="ve.gob.cnti.rnsii.controlador.SuscripcionControlador">
 			<result name="success">registro/suscripcion.jsp</result>
 			<result name="input" type="redirectAction">home</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="listarSolicitudesAceptadasRechazadas" method="listarSolicitudesAceptadasRechazadas"
-			class="ve.gob.cnti.srsi.controlador.SuscripcionControlador">
+			class="ve.gob.cnti.rnsii.controlador.SuscripcionControlador">
 			<result name="success">registro/suscripcion.jsp</result>
 			<result name="input" type="redirectAction">home</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="examinarSolicitud" method="examinarSolicitud"
-			class="ve.gob.cnti.srsi.controlador.SuscripcionControlador">
+			class="ve.gob.cnti.rnsii.controlador.SuscripcionControlador">
 			<result name="success">registro/suscripcion.jsp</result>
 			<result name="input" type="redirectAction">home</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<!-- Actions para el usuario final -->
-		<action name="SRSI" method="inicio"
-			class="ve.gob.cnti.srsi.controlador.ConsultasControlador">
+		<action name="RNSII" method="inicio"
+			class="ve.gob.cnti.rnsii.controlador.ConsultasControlador">
 			<result name="success">index.jsp</result>
-			<result name="input" type="redirectAction">SRSI</result>
+			<result name="input" type="redirectAction">RNSII</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="" method="inicio"
-			class="ve.gob.cnti.srsi.controlador.ConsultasControlador">
-			<result name="success" type="redirectAction">SRSI</result>
+			class="ve.gob.cnti.rnsii.controlador.ConsultasControlador">
+			<result name="success" type="redirectAction">RNSII</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="listarSector" method="listarSector"
-			class="ve.gob.cnti.srsi.controlador.ConsultasControlador">
+			class="ve.gob.cnti.rnsii.controlador.ConsultasControlador">
 			<result name="success">index.jsp</result>
-			<result name="input" type="redirectAction">SRSI</result>
+			<result name="input" type="redirectAction">RNSII</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="listarSectores" method="listarSectores"
-			class="ve.gob.cnti.srsi.controlador.ConsultasControlador">
+			class="ve.gob.cnti.rnsii.controlador.ConsultasControlador">
 			<result name="success">index.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="servicio" method="examinarServicioInformacion"
-			class="ve.gob.cnti.srsi.controlador.ConsultasControlador">
+			class="ve.gob.cnti.rnsii.controlador.ConsultasControlador">
 			<result name="success">index.jsp</result>
-			<result name="input" type="redirectAction">SRSI</result>
+			<result name="input" type="redirectAction">RNSII</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="listarServicios" method="listarServicios"
-			class="ve.gob.cnti.srsi.controlador.ConsultasControlador">
+			class="ve.gob.cnti.rnsii.controlador.ConsultasControlador">
 			<result name="success">index.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="buscar_servicio" method="buscarServicio"
-			class="ve.gob.cnti.srsi.controlador.ConsultasControlador">
+			class="ve.gob.cnti.rnsii.controlador.ConsultasControlador">
 			<result name="success">index.jsp</result>
 			<result name="input">index.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="error404" method="inicio404"
-			class="ve.gob.cnti.srsi.controlador.ConsultasControlador">
+			class="ve.gob.cnti.rnsii.controlador.ConsultasControlador">
 			<result name="success">index.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<!-- Consultas AJAX -->
 		<action name="dato_haslength" method="dato_haslength"
-			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
+			class="ve.gob.cnti.rnsii.controlador.EntradaControlador">
 			<result name="success">ajax/bool.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="dato_hasformatted" method="dato_hasformatted"
-			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
+			class="ve.gob.cnti.rnsii.controlador.EntradaControlador">
 			<result name="success">ajax/bool.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
 		<action name="list_format" method="list_format"
-			class="ve.gob.cnti.srsi.controlador.EntradaControlador">
+			class="ve.gob.cnti.rnsii.controlador.EntradaControlador">
 			<result name="success">ajax/list_formats.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
 
-		<action name="getCaptcha" class="ve.gob.cnti.srsi.util.Captcha">
+		<action name="getCaptcha" class="ve.gob.cnti.rnsii.util.Captcha">
 			<result name="success" type="stream">
 				<param name="contentType">image/png</param>
 				<param name="inputName">imageStream</param>
@@ -690,7 +690,7 @@
 			<interceptor-ref name="defaultStack" />
 		</action>
 
-		<action name="contact" class="ve.gob.cnti.srsi.util.Contact"
+		<action name="contact" class="ve.gob.cnti.rnsii.util.Contact"
 			method="sendEmail">
 			<result name="success" type="redirectAction">
 				<param name="actionName">servicio</param>
@@ -705,7 +705,7 @@
 	</package>
 
 	<package name="json" extends="json-default">
-		<action name="getJSONResult" class="ve.gob.cnti.srsi.util.JSON"
+		<action name="getJSONResult" class="ve.gob.cnti.rnsii.util.JSON"
 			method="obtenerError">
 			<result type="json" />
 		</action>

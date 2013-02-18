@@ -28,7 +28,7 @@
 				<tr>
 					<td>
 						<div class="enlace_home">
-							<a href="SRSI"> <s:text name="back.home" />
+							<a href="RNSII"> <s:text name="back.home" />
 							</a>
 						</div>
 					</td>
@@ -75,7 +75,7 @@
 					<tr>					
 						<td></td>
 						<td id="captcha_pos" style="height: 35px;"><img src="getCaptcha" id="captcha"></td>
-						<td><a href="SRSI" id="a_refresh"><img src="res/images/refresh.png" alt="Refrescar" id="refrescar"></a></td>
+						<td><a href="RNSII" id="a_refresh"><img src="res/images/refresh.png" alt="Refrescar" id="refrescar"></a></td>
 					</tr>
 					<tr>
 						<td></td>
@@ -176,7 +176,7 @@
 								<img src="getCaptcha" id="captcha" alt="Captcha">									
 							</td>
 							<td style="padding-top: 16px;">
-								<a href="SRSI" id="a_refresh"><img src="res/images/refresh.png" alt="Refrescar" id="refrescar"></a>								
+								<a href="RNSII" id="a_refresh"><img src="res/images/refresh.png" alt="Refrescar" id="refrescar"></a>								
 							</td>
 						</tr>
 						<tr>

@@ -21,7 +21,7 @@
 				</ul></div></div></div></div><div class="menu-bl"><div class="menu-br"><div class="menu-bm"></div></div></div></div>
 			</div>
 		</li>
-		<li class="menu-item active "><a href="http://10.0.207.63:8080/SRSI/pages/SRSI.action" target="_blank" class="menu-item"><span class="menu"><span class="menu-title">Catálogo de Servicios</span></span></a></li>
+		<li class="menu-item active "><a href="http://10.0.207.63:8080/RNSII/pages/RNSII.action" target="_blank" class="menu-item"><span class="menu"><span class="menu-title">Catálogo de Servicios</span></span></a></li>
 		<li class="menu-item"><a href="http://10.8.6.62/interoperabilidad/index.php/de-interes" class="menu-item"><span class="menu"><span class="menu-title">De Interés</span></span></a></li>
 		<li class="menu-item"><a href="http://10.8.6.62/interoperabilidad/index.php/comites" class="menu-item"><span class="menu"><span class="menu-title">Marco Jurídico</span></span></a></li>
 		<li class="menu-item"><a href="http://10.8.6.62/interoperabilidad/index.php/rtl-demos" class="menu-item"><span class="menu"><span class="menu-title">Noticias</span></span></a></li>

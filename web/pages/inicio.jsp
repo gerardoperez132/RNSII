@@ -1,1 +1,1 @@
-<META HTTP-EQUIV="Refresh" CONTENT="0;URL=pages/SRSI.action">
+<META HTTP-EQUIV="Refresh" CONTENT="0;URL=pages/RNSII.action">

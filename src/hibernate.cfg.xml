@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
- * This file is part of SRSI.
+ * This file is part of RNSII.
  * 
- * SRSI is free software: you can redistribute it and/or modify
+ * RNSII is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  * 
- * SRSI is distributed in the hope that it will be useful,
+ * RNSII is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with SRSI. If not, see <http://www.gnu.org/licenses/>.
+ * along with RNSII. If not, see <http://www.gnu.org/licenses/>.
 -->
 <!DOCTYPE hibernate-configuration PUBLIC
 "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
@@ -22,40 +22,40 @@
 <hibernate-configuration>
 	<session-factory>
 		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-		<property name="hibernate.connection.url">jdbc:postgresql://postgres:5432/srsi</property>
-		<property name="hibernate.connection.username">srsi</property>
-		<property name="hibernate.connection.password">srsi</property>
+		<property name="hibernate.connection.url">jdbc:postgresql://postgres:5432/rnsii</property>
+		<property name="hibernate.connection.username">rnsii</property>
+		<property name="hibernate.connection.password">rnsii</property>
 		<property name="hibernate.connection.pool_size">1</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
 		<property name="hibernate.connection.charSet">UTF-8</property>
 		<property name="show_sql">true</property>
 		<property name="hbm2ddl.auto">update</property>
-		<mapping class="ve.gob.cnti.srsi.modelo.Area" />
-		<mapping class="ve.gob.cnti.srsi.modelo.Arquitectura" />
-		<mapping class="ve.gob.cnti.srsi.modelo.AspectoLegal" />
-		<mapping class="ve.gob.cnti.srsi.modelo.Correo" />
-		<mapping class="ve.gob.cnti.srsi.modelo.Ente" />
-		<mapping class="ve.gob.cnti.srsi.modelo.EntradaSalida" />
-		<mapping class="ve.gob.cnti.srsi.modelo.Estado" />
-		<mapping class="ve.gob.cnti.srsi.modelo.Formato" />
-		<mapping class="ve.gob.cnti.srsi.modelo.Funcionalidad" />
-		<mapping class="ve.gob.cnti.srsi.modelo.Intercambio" />
-		<mapping class="ve.gob.cnti.srsi.modelo.RecuperarClave" />
-		<mapping class="ve.gob.cnti.srsi.modelo.Rol" />
-		<mapping class="ve.gob.cnti.srsi.modelo.Sector" />
-		<mapping class="ve.gob.cnti.srsi.modelo.Seguridad" />
-		<mapping class="ve.gob.cnti.srsi.modelo.ServicioInformacion" />
-		<mapping class="ve.gob.cnti.srsi.modelo.SolicitudSuscripcion" />
-		<mapping class="ve.gob.cnti.srsi.modelo.Suscrito" />
-		<mapping class="ve.gob.cnti.srsi.modelo.Telefono" />
-		<mapping class="ve.gob.cnti.srsi.modelo.TipoDato" />
-		<mapping class="ve.gob.cnti.srsi.modelo.UnionAreaServicioInformacion" />
-		<mapping class="ve.gob.cnti.srsi.modelo.UnionArquitecturaServicioInformacion" />
-		<mapping class="ve.gob.cnti.srsi.modelo.UnionSectorEnte" />
-		<mapping class="ve.gob.cnti.srsi.modelo.UnionUsuarioRol" />
-		<mapping class="ve.gob.cnti.srsi.modelo.Url" />
-		<mapping class="ve.gob.cnti.srsi.modelo.Usuario" />
-		<mapping class="ve.gob.cnti.srsi.modelo.Visita" />
-		<mapping class="ve.gob.cnti.srsi.modelo.Nacionalidad" />
+		<mapping class="ve.gob.cnti.rnsii.modelo.Area" />
+		<mapping class="ve.gob.cnti.rnsii.modelo.Arquitectura" />
+		<mapping class="ve.gob.cnti.rnsii.modelo.AspectoLegal" />
+		<mapping class="ve.gob.cnti.rnsii.modelo.Correo" />
+		<mapping class="ve.gob.cnti.rnsii.modelo.Ente" />
+		<mapping class="ve.gob.cnti.rnsii.modelo.EntradaSalida" />
+		<mapping class="ve.gob.cnti.rnsii.modelo.Estado" />
+		<mapping class="ve.gob.cnti.rnsii.modelo.Formato" />
+		<mapping class="ve.gob.cnti.rnsii.modelo.Funcionalidad" />
+		<mapping class="ve.gob.cnti.rnsii.modelo.Intercambio" />
+		<mapping class="ve.gob.cnti.rnsii.modelo.RecuperarClave" />
+		<mapping class="ve.gob.cnti.rnsii.modelo.Rol" />
+		<mapping class="ve.gob.cnti.rnsii.modelo.Sector" />
+		<mapping class="ve.gob.cnti.rnsii.modelo.Seguridad" />
+		<mapping class="ve.gob.cnti.rnsii.modelo.ServicioInformacion" />
+		<mapping class="ve.gob.cnti.rnsii.modelo.SolicitudSuscripcion" />
+		<mapping class="ve.gob.cnti.rnsii.modelo.Suscrito" />
+		<mapping class="ve.gob.cnti.rnsii.modelo.Telefono" />
+		<mapping class="ve.gob.cnti.rnsii.modelo.TipoDato" />
+		<mapping class="ve.gob.cnti.rnsii.modelo.UnionAreaServicioInformacion" />
+		<mapping class="ve.gob.cnti.rnsii.modelo.UnionArquitecturaServicioInformacion" />
+		<mapping class="ve.gob.cnti.rnsii.modelo.UnionSectorEnte" />
+		<mapping class="ve.gob.cnti.rnsii.modelo.UnionUsuarioRol" />
+		<mapping class="ve.gob.cnti.rnsii.modelo.Url" />
+		<mapping class="ve.gob.cnti.rnsii.modelo.Usuario" />
+		<mapping class="ve.gob.cnti.rnsii.modelo.Visita" />
+		<mapping class="ve.gob.cnti.rnsii.modelo.Nacionalidad" />
 	</session-factory>
 </hibernate-configuration>

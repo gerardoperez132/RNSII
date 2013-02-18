@@ -3,10 +3,10 @@
 <%@include file="../layout/cache.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<s:i18n name="ve/gob/cnti/srsi/i18n/messages"><head>
+<s:i18n name="ve/gob/cnti/rnsii/i18n/messages"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <!-- CSS (required) -->
-<link rel="stylesheet" type="text/css" href="/SRSI/pages/res/css/style2.css">
+<link rel="stylesheet" type="text/css" href="/RNSII/pages/res/css/style2.css">
 <link rel="stylesheet" type="text/css" href="res/css/menu_vertical.css">
 <link rel="stylesheet" type="text/css" href="res/css/jquery.treeTable.css">
 <link rel="stylesheet" type="text/css" href="res/css/table2.css">
@@ -15,8 +15,8 @@
 <link rel="stylesheet" type="text/css" href="res/js/plugins/sexy-tooltips/blue.css" media="all">
 <link rel="stylesheet" type="text/css" href="res/js/plugins/sexy-alert-box-1.2.2/sexyalertbox.css" media="all">
 <!-- JS (required) -->
-<script type="text/javascript" src="/SRSI/pages/res/js/jquery-1.7.1.js" charset="UTF-8"></script>
-<script type="text/javascript" src="/SRSI/pages/res/js/funciones_ge.js"	charset="UTF-8"></script>
+<script type="text/javascript" src="/RNSII/pages/res/js/jquery-1.7.1.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/RNSII/pages/res/js/funciones_ge.js"	charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/jquery.treeTable.js"	charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/main.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/plugins/sexy-tooltips.v1.1.jquery.js" charset="UTF-8"></script>
@@ -171,7 +171,7 @@
 												<s:else>
 													<s:set name="action" value="%{'prepararModificarServicioInformacion'}"/>
 													<s:if test="incompletos.size()==1">
-														<s:i18n name="ve/gob/cnti/srsi/i18n/errors">
+														<s:i18n name="ve/gob/cnti/rnsii/i18n/errors">
 															<s:iterator value="incompletos">
 																<s:set name="error">
 																	<s:property />
