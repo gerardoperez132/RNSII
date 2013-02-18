@@ -21,6 +21,7 @@
 |                       |-- dao
 |                       |   |-- Constants$ClaseDato.class
 |                       |   |-- Constants.class
+|                       |   |-- Constants$DateFormatting.class
 |                       |   |-- Constants$ErrorServicio.class
 |                       |   |-- Constants$Estados.class
 |                       |   |-- Constants$Formulario.class
@@ -53,6 +54,7 @@
 |                       |   |-- Formato.class
 |                       |   |-- Funcionalidad.class
 |                       |   |-- Intercambio.class
+|                       |   |-- Nacionalidad.class
 |                       |   |-- RecuperarClave.class
 |                       |   |-- Rol.class
 |                       |   |-- Sector.class
@@ -70,11 +72,14 @@
 |                       |   |-- Usuario.class
 |                       |   `-- Visita.class
 |                       `-- util
+|                           |-- Captcha.class
+|                           |-- Contact.class
 |                           |-- EstadosTiempo.class
 |                           |-- FuncionalidadesPublicables.class
 |                           |-- JSON.class
 |                           |-- ListaServiciosVisitados.class
 |                           |-- MD5Hashing.class
+|                           |-- Pagination.class
 |                           |-- ReadXmlTime.class
 |                           |-- SectoresMasPublicados.class
 |                           |-- ServiciosPublicables.class
@@ -125,6 +130,7 @@
 |                   |   |-- Formato.java
 |                   |   |-- Funcionalidad.java
 |                   |   |-- Intercambio.java
+|                   |   |-- Nacionalidad.java
 |                   |   |-- RecuperarClave.java
 |                   |   |-- Rol.java
 |                   |   |-- Sector.java
@@ -142,11 +148,14 @@
 |                   |   |-- Usuario.java
 |                   |   `-- Visita.java
 |                   `-- util
+|                       |-- Captcha.java
+|                       |-- Contact.java
 |                       |-- EstadosTiempo.java
 |                       |-- FuncionalidadesPublicables.java
 |                       |-- JSON.java
 |                       |-- ListaServiciosVisitados.java
 |                       |-- MD5Hashing.java
+|                       |-- Pagination.java
 |                       |-- ReadXmlTime.java
 |                       |-- SectoresMasPublicados.java
 |                       |-- ServiciosPublicables.java
@@ -162,15 +171,19 @@
     |   |   `-- list_formats.jsp
     |   |-- error404.jsp
     |   |-- error.jsp
+    |   |-- error_sesion.jsp
     |   |-- index.jsp
     |   |-- inicio.jsp
     |   |-- layout
+    |   |   |-- breadcrumbs.jsp
     |   |   |-- cache.jsp
     |   |   |-- footer.jsp
-    |   |   |-- header_ge_error.jsp
-    |   |   |-- header.jsp
+    |   |   |-- header_joomla.jsp
+    |   |   |-- links_over_footer.jsp
+    |   |   |-- menus.jsp
     |   |   |-- sidebar.jsp
     |   |   `-- sidebar_user_final.jsp
+    |   |-- pagination.jsp
     |   |-- plantilla.jsp
     |   |-- registro
     |   |   |-- entradas.jsp
@@ -187,25 +200,54 @@
     |   |   |   |-- jquery.alerts.css
     |   |   |   |-- jquery.treeTable.css
     |   |   |   |-- menu_vertical.css
+    |   |   |   |-- modules.css
     |   |   |   |-- style2.css
     |   |   |   |-- styles.css
     |   |   |   |-- table2.css
     |   |   |   |-- table.css
     |   |   |   |-- table_tree.css
-    |   |   |   `-- tabs.css
+    |   |   |   |-- tabs.css
+    |   |   |   `-- templates_joomla
+    |   |   |       |-- joomla.css
+    |   |   |       |-- menu.css
+    |   |   |       |-- modules.css
+    |   |   |       |-- style1.css
+    |   |   |       |-- template.css
+    |   |   |       `-- typography.css
     |   |   |-- images
     |   |   |   |-- arrow_sub1.gif
     |   |   |   |-- bgbar.png
+    |   |   |   |-- breadcrumbs.png
+    |   |   |   |-- button-bg.gif
+    |   |   |   |-- divider.png
     |   |   |   |-- flecha_clima.png
     |   |   |   |-- flecha_derecha.png
     |   |   |   |-- fnd_destacados.png
+    |   |   |   |-- footer-bg.gif
+    |   |   |   |-- header.gif
+    |   |   |   |-- Icono_atencion_usuario.png
+    |   |   |   |-- Icono_correo_electronico.png
+    |   |   |   |-- icono_identica.png
+    |   |   |   |-- Icono_redes.png
+    |   |   |   |-- Icono_telefono.png
+    |   |   |   |-- icono_twitter.png
     |   |   |   |-- ImgHeader1.png
+    |   |   |   |-- logoCNTI_blanco.png
     |   |   |   |-- logo_derecha.png
+    |   |   |   |-- logo-gob.png
     |   |   |   |-- logoIzquierda.png
+    |   |   |   |-- logo_original.png
     |   |   |   |-- logo_web_interno.png
     |   |   |   |-- menu_interno_es.png
+    |   |   |   |-- nav-active-l.png
+    |   |   |   |-- nav-active-r.png
+    |   |   |   |-- nav-bg.gif
+    |   |   |   |-- nav-border.png
     |   |   |   |-- pie1.png
     |   |   |   |-- pie2.png
+    |   |   |   |-- refresh.png
+    |   |   |   |-- search.png
+    |   |   |   |-- shadow.gif
     |   |   |   |-- tiempo_11.png
     |   |   |   |-- tiempo_13.png
     |   |   |   |-- tiempo_15.png
@@ -222,8 +264,25 @@
     |   |   |   |-- important.png
     |   |   |   |-- info.gif
     |   |   |   |-- Info.png
-    |   |   |   |-- logo_sector.png
     |   |   |   |-- menu_top_bg.gif
+    |   |   |   |-- sector
+    |   |   |   |   |-- logo_sector10.png
+    |   |   |   |   |-- logo_sector11.png
+    |   |   |   |   |-- logo_sector12.png
+    |   |   |   |   |-- logo_sector13.png
+    |   |   |   |   |-- logo_sector14.png
+    |   |   |   |   |-- logo_sector15.png
+    |   |   |   |   |-- logo_sector16.png
+    |   |   |   |   |-- logo_sector17.png
+    |   |   |   |   |-- logo_sector1.png
+    |   |   |   |   |-- logo_sector2.png
+    |   |   |   |   |-- logo_sector3.png
+    |   |   |   |   |-- logo_sector4.png
+    |   |   |   |   |-- logo_sector5.png
+    |   |   |   |   |-- logo_sector6.png
+    |   |   |   |   |-- logo_sector7.png
+    |   |   |   |   |-- logo_sector8.png
+    |   |   |   |   `-- logo_sector9.png
     |   |   |   |-- table
     |   |   |   |   |-- bbar.gif
     |   |   |   |   |-- captop.jpg
@@ -238,83 +297,89 @@
     |   |   |       |-- toggle-collapse-light.png
     |   |   |       |-- toggle-expand-dark.png
     |   |   |       `-- toggle-expand-light.png
-    |   |   `-- js
-    |   |       |-- funciones_ge.js
-    |   |       |-- jquery-1.7.1.js
-    |   |       |-- jquery.alerts.js
-    |   |       |-- jquery.treeTable.js
-    |   |       |-- jquery.validate.js
-    |   |       |-- main.js
-    |   |       |-- messages_es.js
-    |   |       |-- plugins
-    |   |       |   |-- sexy-alert-box-1.2.2
-    |   |       |   |   |-- images
-    |   |       |   |   |   |-- bg-box-body.gif
-    |   |       |   |   |   |-- bg-box-body.png
-    |   |       |   |   |   |-- bg-box-bottom.gif
-    |   |       |   |   |   |-- bg-box-bottom.png
-    |   |       |   |   |   |-- bg-box-top.gif
-    |   |       |   |   |   |-- bg-box-top.png
-    |   |       |   |   |   |-- dialog-error.png
-    |   |       |   |   |   |-- dialog-help.png
-    |   |       |   |   |   |-- dialog-information.png
-    |   |       |   |   |   `-- dialog-warning.png
-    |   |       |   |   |-- jquery.easing.1.3.js
-    |   |       |   |   |-- sexyalertbox.css
-    |   |       |   |   `-- sexyalertbox.v1.2.jquery.js
-    |   |       |   |-- sexy-tooltips
-    |   |       |   |   |-- blue
-    |   |       |   |   |   |-- bca.gif
-    |   |       |   |   |   |-- bca.png
-    |   |       |   |   |   |-- b.gif
-    |   |       |   |   |   |-- bla.gif
-    |   |       |   |   |   |-- bla.png
-    |   |       |   |   |   |-- bl.gif
-    |   |       |   |   |   |-- bl.png
-    |   |       |   |   |   |-- b.png
-    |   |       |   |   |   |-- bra.gif
-    |   |       |   |   |   |-- bra.png
-    |   |       |   |   |   |-- br.gif
-    |   |       |   |   |   |-- br.png
-    |   |       |   |   |   |-- close.gif
-    |   |       |   |   |   |-- close.png
-    |   |       |   |   |   |-- la.gif
-    |   |       |   |   |   |-- la.png
-    |   |       |   |   |   |-- l.gif
-    |   |       |   |   |   |-- l.png
-    |   |       |   |   |   |-- ra.gif
-    |   |       |   |   |   |-- ra.png
-    |   |       |   |   |   |-- r.gif
-    |   |       |   |   |   |-- r.png
-    |   |       |   |   |   |-- tca.gif
-    |   |       |   |   |   |-- tca.png
-    |   |       |   |   |   |-- t.gif
-    |   |       |   |   |   |-- tla.gif
-    |   |       |   |   |   |-- tla.png
-    |   |       |   |   |   |-- tl.gif
-    |   |       |   |   |   |-- tl.png
-    |   |       |   |   |   |-- t.png
-    |   |       |   |   |   |-- tra.gif
-    |   |       |   |   |   |-- tra.png
-    |   |       |   |   |   |-- tr.gif
-    |   |       |   |   |   `-- tr.png
-    |   |       |   |   `-- blue.css
-    |   |       |   `-- sexy-tooltips.v1.1.jquery.js
-    |   |       |-- registro
-    |   |       |   |-- entradas.js
-    |   |       |   |-- formulario_entrada.js
-    |   |       |   |-- formulario_funcionalidad.js
-    |   |       |   |-- formulario_salida.js
-    |   |       |   |-- formulario_usuario.js
-    |   |       |   |-- funcionalidades.js
-    |   |       |   |-- registro_servicio_informacion.js
-    |   |       |   `-- salidas.js
-    |   |       |-- suscripcion.js
-    |   |       |-- tabs.js
-    |   |       |-- usuarios.js
-    |   |       `-- validacion_datos.js
+    |   |   |-- js
+    |   |   |   |-- funciones_ge.js
+    |   |   |   |-- jquery-1.7.1.js
+    |   |   |   |-- jquery.alerts.js
+    |   |   |   |-- jquery.treeTable.js
+    |   |   |   |-- jquery.validate.js
+    |   |   |   |-- js_joomla
+    |   |   |   |   |-- demo.js
+    |   |   |   |   |-- equalheight.js
+    |   |   |   |   |-- menu.js
+    |   |   |   |   `-- totop.js
+    |   |   |   |-- main.js
+    |   |   |   |-- messages_es.js
+    |   |   |   |-- mootools-core.js
+    |   |   |   |-- mootools-more.js
+    |   |   |   |-- plugins
+    |   |   |   |   |-- sexy-alert-box-1.2.2
+    |   |   |   |   |   |-- images
+    |   |   |   |   |   |   |-- bg-box-body.gif
+    |   |   |   |   |   |   |-- bg-box-body.png
+    |   |   |   |   |   |   |-- bg-box-bottom.gif
+    |   |   |   |   |   |   |-- bg-box-bottom.png
+    |   |   |   |   |   |   |-- bg-box-top.gif
+    |   |   |   |   |   |   |-- bg-box-top.png
+    |   |   |   |   |   |   |-- dialog-error.png
+    |   |   |   |   |   |   |-- dialog-help.png
+    |   |   |   |   |   |   |-- dialog-information.png
+    |   |   |   |   |   |   `-- dialog-warning.png
+    |   |   |   |   |   |-- jquery.easing.1.3.js
+    |   |   |   |   |   |-- sexyalertbox.css
+    |   |   |   |   |   `-- sexyalertbox.v1.2.jquery.js
+    |   |   |   |   |-- sexy-tooltips
+    |   |   |   |   |   |-- blue
+    |   |   |   |   |   |   |-- bca.gif
+    |   |   |   |   |   |   |-- bca.png
+    |   |   |   |   |   |   |-- b.gif
+    |   |   |   |   |   |   |-- bla.gif
+    |   |   |   |   |   |   |-- bla.png
+    |   |   |   |   |   |   |-- bl.gif
+    |   |   |   |   |   |   |-- bl.png
+    |   |   |   |   |   |   |-- b.png
+    |   |   |   |   |   |   |-- bra.gif
+    |   |   |   |   |   |   |-- bra.png
+    |   |   |   |   |   |   |-- br.gif
+    |   |   |   |   |   |   |-- br.png
+    |   |   |   |   |   |   |-- close.gif
+    |   |   |   |   |   |   |-- close.png
+    |   |   |   |   |   |   |-- la.gif
+    |   |   |   |   |   |   |-- la.png
+    |   |   |   |   |   |   |-- l.gif
+    |   |   |   |   |   |   |-- l.png
+    |   |   |   |   |   |   |-- ra.gif
+    |   |   |   |   |   |   |-- ra.png
+    |   |   |   |   |   |   |-- r.gif
+    |   |   |   |   |   |   |-- r.png
+    |   |   |   |   |   |   |-- tca.gif
+    |   |   |   |   |   |   |-- tca.png
+    |   |   |   |   |   |   |-- t.gif
+    |   |   |   |   |   |   |-- tla.gif
+    |   |   |   |   |   |   |-- tla.png
+    |   |   |   |   |   |   |-- tl.gif
+    |   |   |   |   |   |   |-- tl.png
+    |   |   |   |   |   |   |-- t.png
+    |   |   |   |   |   |   |-- tra.gif
+    |   |   |   |   |   |   |-- tra.png
+    |   |   |   |   |   |   |-- tr.gif
+    |   |   |   |   |   |   `-- tr.png
+    |   |   |   |   |   `-- blue.css
+    |   |   |   |   `-- sexy-tooltips.v1.1.jquery.js
+    |   |   |   |-- registro
+    |   |   |   |   |-- entradas.js
+    |   |   |   |   |-- formulario_entrada.js
+    |   |   |   |   |-- formulario_funcionalidad.js
+    |   |   |   |   |-- formulario_salida.js
+    |   |   |   |   |-- formulario_usuario.js
+    |   |   |   |   |-- funcionalidades.js
+    |   |   |   |   |-- registro_servicio_informacion.js
+    |   |   |   |   `-- salidas.js
+    |   |   |   |-- suscripcion.js
+    |   |   |   |-- tabs.js
+    |   |   |   `-- usuarios.js
+    |   |   `-- tiempo.xml
     |   `-- user
-    |       |-- captcha.jsp
     |       |-- examinarServicio.jsp
     |       |-- login.jsp
     |       `-- main.jsp
@@ -348,7 +413,7 @@
         |   |-- log4j-1.2.15.jar
         |   |-- mail.jar
         |   |-- ognl-2.6.11.jar
-        |   |-- postgresql-8.3-603.jdbc3.jar
+        |   |-- postgresql-8.4-703.jdbc4.jar
         |   |-- servlet-api-2.5-6.1.4.jar
         |   |-- slf4j-api-1.5.8.jar
         |   |-- slf4j-log4j12-1.5.8.jar
@@ -361,4 +426,4 @@
         |   `-- xwork-core-2.2.1.jar
         `-- web.xml
 
-48 directories, 313 files
+51 directories, 375 files
