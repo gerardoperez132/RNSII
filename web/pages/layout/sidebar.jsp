@@ -20,12 +20,8 @@
 				<a class="m_a_titulo" href="<s:url action="home"/>"> <s:text name="home" /></a>
 			</li>
 			<li class="m_a_fondo">
-				<a class="m_a_titulo"><s:text name="servicio_informacion" /> <span class="m_a_desplegar">+</span></a>
-				<ul class="m_a_top" style="display: block;">
-					<li>
-						<a class="m_a_item"	href="<s:url action="prepararRegistro"/>"><s:text name="registro" /></a>
-					</li>
-				</ul>
+
+						<a class="m_a_titulo" href="<s:url action="prepararRegistro"/>"><s:text name="registro" /></a>
 			</li>
 			<li class="m_a_fondo">
 				<a class="m_a_titulo"><s:text name="configuración" /> <span class="m_a_desplegar">+</span></a>
