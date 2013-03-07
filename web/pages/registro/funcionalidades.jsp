@@ -57,12 +57,12 @@
 					<li>
 						<a href="prepararDescripcionTecnica"><s:text name="tab3.title"></s:text></a>
 					</li>
+					<li class="active">
+						<a><s:text name="funcionalidades"></s:text></a>
+					</li>
 					<li>
 						<a href="prepararDescripcionSoporte"><s:text name="tab4.title"></s:text></a>
 					</li>
-					<li class="active">
-						<a><s:text name="funcionalidades"></s:text></a>
-					</li>										
 				</ul>
 				
 				<div class="tab_description">
@@ -87,7 +87,7 @@
 									<s:hidden name="id_servicio_informacion"></s:hidden>
 									<s:hidden name="modificar"></s:hidden>
 									<s:token name="token" />
-									<input type="submit" class="button_h" value="<s:text name="funcionalidad.add"/>" <s:if test="funcionalidades.size == 0">disabled="disabled"</s:if>/>
+									<input type="submit" class="button_h" value="<s:if test="funcionalidades.size == 0"><s:text name='crear.funcionalidad'/></s:if><s:else><s:text name='funcionalidad.add'/></s:else>"/>
 								</form>
 							</td>							
 						</tr>
@@ -162,13 +162,7 @@
 							</s:if>
 							<s:else>
 								<tr>
-									<th colspan="4"><s:text name="funcionalidades.error" /><br>
-										<form action="prepararFuncionalidad" method="POST">
-											<s:hidden name="id_servicio_informacion"/>
-											<s:hidden name="modificar"/>
-											<s:token name="token" />
-											<input type="submit" value="<s:text name="crear.funcionalidad"/>" <s:if test="funcionalidades.size > 0">disabled="disabled"</s:if> />
-										</form>
+									<th colspan="4" style="text-align:center;"><s:text name="funcionalidades.error" /><br>
 									</th>
 								</tr>
 							</s:else>
