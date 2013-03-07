@@ -74,11 +74,11 @@
 			<li>
 				<a href="prepararDescripcionTecnica"><s:text name="tab3.title"></s:text></a>
 			</li>
-			<li>
-				<a href="prepararDescripcionSoporte"><s:text name="tab4.title"></s:text></a>
-			</li>
 			<li class="active">
 				<a href="prepararFuncionalidades"><s:text name="funcionalidades"></s:text></a>
+			</li>
+			<li>
+				<a href="prepararDescripcionSoporte"><s:text name="tab4.title"></s:text></a>
 			</li>										
 		</ul>
 		

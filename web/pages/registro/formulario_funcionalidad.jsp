@@ -58,8 +58,8 @@
 						<li><a href="prepararDescripcionGeneral"><s:text name="tab1.title"/></a></li>
 						<li><a href="prepararAspectosLegales"><s:text name="tab2.title"/></a></li>
 						<li><a href="prepararDescripcionTecnica"><s:text name="tab3.title"/></a></li>
-						<li><a href="prepararDescripcionSoporte"><s:text name="tab4.title"/></a></li>
 						<li class="active"><a href="prepararFuncionalidades"><s:text name="funcionalidades"/></a></li>
+						<li><a href="prepararDescripcionSoporte"><s:text name="tab4.title"/></a></li>
 					</ul>
 					
 					<div class="tab_description">
@@ -141,8 +141,8 @@
 						<li><a href="prepararDescripcionGeneral"><s:text name="tab1.title"/></a></li>
 						<li><a href="prepararAspectosLegales"><s:text name="tab2.title"/></a></li>
 						<li><a href="prepararDescripcionTecnica"><s:text name="tab3.title"/></a></li>
-						<li><a href="prepararDescripcionSoporte"><s:text name="tab4.title"/></a></li>
 						<li class="active"><a href="prepararFuncionalidades"><s:text name="funcionalidades"/></a></li>
+						<li><a href="prepararDescripcionSoporte"><s:text name="tab4.title"/></a></li>
 					</ul>
 					<div class="tab_description">
 						<div class="tab_description_left">
@@ -214,7 +214,10 @@
 											<td class="tb_alt"><span class="txt_small"> <s:text	name="entradas.cargadas"/></span></td>								
 											<td class="tb_td"><span class="txt_small"> <s:property value="entradas.size" /></span></td>
 										</tr>
-									</table>									
+									</table>
+									<form action="prepararDescripcionSoporte">
+									<input type="submit" value="<s:text name='next'/>" style="margin-left: 45%; position: relative; margin-top: 5%; margin-bottom: 10%;">
+									</form>								
 								</div>
 							</div>
 						</div>
@@ -225,8 +228,8 @@
 						<li><a href="prepararDescripcionGeneral"><s:text name="tab1.title"/></a></li>
 						<li><a href="prepararAspectosLegales"><s:text name="tab2.title"/></a></li>
 						<li><a href="prepararDescripcionTecnica"><s:text name="tab3.title"/></a></li>
-						<li><a href="prepararDescripcionSoporte"><s:text name="tab4.title"/></a></li>
 						<li class="active"><a href="prepararFuncionalidades"><s:text name="funcionalidades"/></a></li>
+						<li><a href="prepararDescripcionSoporte"><s:text name="tab4.title"/></a></li>
 					</ul>
 					<div class="tab_description">
 						<div class="tab_description_left">

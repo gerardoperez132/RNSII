@@ -120,6 +120,16 @@
 				<s:a href="%{prepararFormulario}"><s:text name="tab3.title"></s:text></s:a>
 			</li>
 			</s:else>
+			<s:if test="nuevo">
+				<li>
+					<s:a><s:text name="funcionalidades"></s:text></s:a>
+				</li>
+			</s:if>
+			<s:else>
+				<li>
+					<s:a href="prepararFuncionalidades"><s:text name="funcionalidades"></s:text></s:a>
+				</li>
+			</s:else>	
 			<s:if test="%{tab==4}">
 				<li class="active">
 					<a><s:text name="tab4.title"></s:text> </a>
@@ -133,16 +143,6 @@
 					<s:a href="%{prepararFormulario}"><s:text name="tab4.title"></s:text></s:a>
 				</li>
 			</s:else>
-			<s:if test="nuevo">
-				<li>
-					<s:a href="#"><s:text name="funcionalidades"></s:text></s:a>
-				</li>
-			</s:if>
-			<s:else>
-				<li>
-					<s:a href="prepararFuncionalidades"><s:text name="funcionalidades"></s:text></s:a>
-				</li>
-			</s:else>						
 		</ul>			
 			<s:if test="%{tab==1}">
 				<form action="<s:property value="#action"/>" id="formSI" name="formSI" method="post" enctype="multipart/form-data">
