@@ -125,7 +125,7 @@
 		<action name="registrarDescripcionTecnica" method="registrarDescripcionTecnica"
 			class="ve.gob.cnti.rnsii.controlador.ServicioInformacionControlador">
 			<interceptor-ref name="doubleSubmit" />
-			<result name="success" type="redirectAction">prepararDescripcionSoporte
+			<result name="success" type="redirectAction">prepararFuncionalidades
 			</result>
 			<result name="invalid.token">registro/registro_servicio_informacion.jsp
 			</result>
@@ -146,7 +146,7 @@
 		<action name="registrarDescripcionSoporte" method="registrarDescripcionSoporte"
 			class="ve.gob.cnti.rnsii.controlador.ServicioInformacionControlador">
 			<interceptor-ref name="doubleSubmit" />
-			<result name="success" type="redirectAction">prepararFuncionalidades</result>
+			<result name="success" type="redirectAction">prepararDescripcionSoporte</result>
 			<result name="invalid.token">registro/registro_servicio_informacion.jsp
 			</result>
 			<result name="input">registro/registro_servicio_informacion.jsp
