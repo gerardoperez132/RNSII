@@ -74,7 +74,7 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 	@Override
 	@SkipValidation
 	public String prepararFormulario() {
-		getTiempoFecha();
+
 		System.out.println("EN PREPARAR FORMULARIO");
 		System.out.println("NOMBRE FUN => " + funcionalidad.getNombre());
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
@@ -88,7 +88,7 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 	}
 
 	public String registrarFuncionalidad() {
-		getTiempoFecha();
+
 		Usuario user = new Usuario();
 		session = ActionContext.getContext().getSession();
 		user = (Usuario) session.get("usuario");
@@ -101,7 +101,7 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 
 	@SkipValidation
 	public String prepararModificaciones() {
-		getTiempoFecha();
+
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		return SUCCESS;
 	}
@@ -109,7 +109,7 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararResumen() {
-		getTiempoFecha();
+
 		resumen = true;
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
@@ -126,7 +126,7 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararFuncionalidades() {
-		getTiempoFecha();
+
 		if (id_servicio_informacion == 0) {
 			session = ActionContext.getContext().getSession();
 			servicio = (ServicioInformacion) session.get("servicio");
@@ -172,7 +172,7 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 	}
 
 	public String modificarFuncionalidad() {
-		getTiempoFecha();
+
 		System.out.println("ESTOY EN MODIFICAR FUNCIONALIDAD");
 		System.out.println("NOMBRE FUN => " + funcionalidad.getNombre());
 		Usuario user = new Usuario();
@@ -191,7 +191,7 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String eliminarFuncionalidad() {
-		getTiempoFecha();
+
 		Usuario user = new Usuario();
 		session = ActionContext.getContext().getSession();
 		user = (Usuario) session.get("usuario");
@@ -215,7 +215,7 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 	}
 
 	public void validate() {
-		getTiempoFecha();
+
 		System.out.println("WTF? ESTOY EN VALIDATE");
 		System.out.println("NOMBRE FUN => " + funcionalidad.getNombre());
 		if (funcionalidad.getNombre().trim().isEmpty())
@@ -231,12 +231,6 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 				.matches(REGEX_DESCRIPTION))
 			addFieldError("funcionalidad.descripcion", error.getProperties()
 					.getProperty("error.regex.description"));
-	}
-
-	public void getTiempoFecha() {
-		ReadXmlTime read = new ReadXmlTime();
-		fecha = read.getFechaTiempo();
-		estadosTiempo = read.getEstadosTiempo();
 	}
 
 	public List<EntradaSalida> getEntradas() {

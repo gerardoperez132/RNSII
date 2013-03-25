@@ -81,7 +81,7 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 
 	@SuppressWarnings("unchecked")
 	public String autenticarUsuario() throws Exception {
-		getTiempoFecha();
+
 		session = ActionContext.getContext().getSession();
 		if (correo == null && password == null && captcha == null) {
 			return "404ERROR";
@@ -129,13 +129,13 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 
 	@SkipValidation
 	public String mostrarLogin() {
-		getTiempoFecha();
+
 		return SUCCESS;
 	}
 
 	@SkipValidation
 	public String inicio() {
-		getTiempoFecha();
+
 		return SUCCESS;
 	}
 
@@ -143,7 +143,7 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String home() {
-		getTiempoFecha();
+
 		session = ActionContext.getContext().getSession();
 		boolean publicable = true;
 		if (session.isEmpty()) {
@@ -183,7 +183,7 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 
 	@SkipValidation
 	public String desloguearUsuario() {
-		getTiempoFecha();
+
 		session = ActionContext.getContext().getSession();
 		session.clear();
 		return SUCCESS;
@@ -192,7 +192,7 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 	@SkipValidation
 	public String enviarDatos() throws NoSuchAlgorithmException,
 			UnknownHostException {
-		getTiempoFecha();
+
 		recoveryPass = true;
 		session = ActionContext.getContext().getSession();
 		if (correo.isEmpty() || captcha.isEmpty()) {
@@ -272,7 +272,7 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 
 	@SkipValidation
 	public String prepararRecuperarPass() {
-		getTiempoFecha();
+
 		RecuperarClave r_clave = new RecuperarClave();
 		datosEnviados = true;
 		if (cuenta == null) {
@@ -303,7 +303,7 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 
 	@SkipValidation
 	public String modificarClave() throws NoSuchAlgorithmException {
-		getTiempoFecha();
+
 		RecuperarClave r_clave = new RecuperarClave();
 		r_clave = (RecuperarClave) getUrlRecoveryPass(new RecuperarClave(),
 				cuenta);
@@ -333,12 +333,6 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 		// if the method * does not exist, we will return a "404ERROR" result
 		return "404ERROR";
 
-	}
-
-	public void getTiempoFecha() {
-		ReadXmlTime read = new ReadXmlTime();
-		fecha = read.getFechaTiempo();
-		estadosTiempo = read.getEstadosTiempo();
 	}
 
 	public String getPassword() {

@@ -76,7 +76,7 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 	@Override
 	@SkipValidation
 	public String prepararFormulario() {
-		getTiempoFecha();
+
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,
@@ -89,7 +89,7 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararRegistroEntrada() {
-		getTiempoFecha();
+
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,
@@ -103,7 +103,7 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararFormularioSimple() {
-		getTiempoFecha();
+
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,
@@ -117,7 +117,7 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararFormularioComplejo() {
-		getTiempoFecha();
+
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,
@@ -130,7 +130,7 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararModificarEntrada() {
-		getTiempoFecha();
+
 		entrada = (EntradaSalida) read(entrada, id_entrada_salida);
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
@@ -142,7 +142,7 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararModificarEntradaSimple() {
-		getTiempoFecha();
+
 		entrada = (EntradaSalida) read(entrada, id_entrada_salida);
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
@@ -154,7 +154,7 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararModificarEntradaCompleja() {
-		getTiempoFecha();
+
 		entrada = (EntradaSalida) read(entrada, id_entrada_salida);
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
@@ -163,7 +163,7 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 	}
 
 	public String registrarEntrada() {
-		getTiempoFecha();
+
 		Usuario user = new Usuario();
 		session = ActionContext.getContext().getSession();
 		user = (Usuario) session.get("usuario");
@@ -179,7 +179,7 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 
 	@SuppressWarnings("unchecked")
 	public String modificarEntrada() {
-		getTiempoFecha();
+
 		Usuario user = new Usuario();
 		session = ActionContext.getContext().getSession();
 		user = (Usuario) session.get("usuario");
@@ -203,7 +203,7 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String eliminarEntradaSimple() {
-		getTiempoFecha();
+
 		Usuario user = new Usuario();
 		session = ActionContext.getContext().getSession();
 		user = (Usuario) session.get("usuario");
@@ -222,7 +222,7 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String eliminarEntradaCompleja() {
-		getTiempoFecha();
+
 		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,
 				ENTRADA);
 		Iterator<EntradaSalida> iterator = entradas.iterator();
@@ -243,7 +243,7 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 
 	@Override
 	public void validate() {
-		getTiempoFecha();
+
 		if (entrada.getNombre().trim().isEmpty())
 			addFieldError("entrada.nombre",
 					error.getProperties().getProperty("error.entrada.nombre"));
@@ -333,7 +333,7 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 
 	@SkipValidation
 	public String dato_haslength() {
-		getTiempoFecha();
+
 		TipoDato td = new TipoDato();
 		td = (TipoDato) read(td, id_tipo_dato);
 		hasLength = td.isHasLength();
@@ -342,7 +342,7 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 
 	@SkipValidation
 	public String dato_hasformatted() {
-		getTiempoFecha();
+
 		TipoDato td = new TipoDato();
 		td = (TipoDato) read(td, id_tipo_dato);
 		hasformatted = td.isHasformatted();
@@ -352,16 +352,10 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String list_format() {
-		getTiempoFecha();
+
 		Object[] models = { new Formato(), new TipoDato() };
 		formatos = (List<Formato>) read(models, id_tipo_dato, -1);
 		return SUCCESS;
-	}
-
-	public void getTiempoFecha() {
-		ReadXmlTime read = new ReadXmlTime();
-		fecha = read.getFechaTiempo();
-		estadosTiempo = read.getEstadosTiempo();
 	}
 
 	public List<EntradaSalida> getEntradas() {

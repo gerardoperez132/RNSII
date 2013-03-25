@@ -47,6 +47,26 @@ public interface Constants {
 	public static final String PATH = "/archivos/";
 
 	/**
+	 * Longitud de caracteres mínimos para la contraseña.
+	 */
+	public static final byte MIN_PASSWORD = 6;
+
+	/**
+	 * Longitud de caracteres considerados para una contraseña regular.
+	 */
+	public static final byte MED_PASSWORD = 7;
+
+	/**
+	 * Longitud de caracteres considerados para una contraseña óptima.
+	 */
+	public static final byte MAX_PASSWORD = 8;
+
+	/**
+	 * Longitud máxima de caracteres para una contraseña.
+	 */
+	public static final byte MAX_LENGTH_PASSWORD = 20;
+
+	/**
 	 * Longitud del campo de descripción en la base de datos.
 	 */
 	public static final int DESCRIPTION_LENGTH = 0x400; // 1024
@@ -100,20 +120,24 @@ public interface Constants {
 	 * caracteres, posea al menos un número o caracter especial y esté compuesta
 	 * de minúsculas y mayúsculas.
 	 */
-	public static final String REGEX_PASS_STRONG = "(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{8,})$";
+	public static final String REGEX_PASS_STRONG = "(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{"
+			+ MAX_PASSWORD + ",})$";
 
 	/**
 	 * La expresión regular para validar que una contraseña tenga mínimo 7
 	 * caracteres, posea al menos un número o caracter especial y esté compuesta
 	 * de minúsculas y mayúsculas.
 	 */
-	public static final String REGEX_PASS_MEDIUM = "^(?=.{7,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$";
+	public static final String REGEX_PASS_MEDIUM = "^(?=.{"
+			+ MED_PASSWORD
+			+ ",})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$";
 
 	/**
 	 * La expresión regular para validar que una contraseña tenga mínimo 6
 	 * caracteres.
 	 */
-	public static final String REGEX_PASS_ENOUGH = "(?=.{6,}).*";
+	public static final String REGEX_PASS_ENOUGH = "(?=.{" + MIN_PASSWORD
+			+ ",}).*";
 
 	/**
 	 * Interfaz con los estados de registro en la base de datos.

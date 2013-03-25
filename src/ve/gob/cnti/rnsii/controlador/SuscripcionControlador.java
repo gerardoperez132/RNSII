@@ -79,7 +79,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 
 	@SkipValidation
 	public String prepararSuscripcion() {
-		getTiempoFecha();
+
 		if (!sessionValidate())
 			return INPUT;
 		if (!verificarLong(id_servicio))
@@ -110,7 +110,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 	// TODO Mandar notificación por correo al ente proveedor. Un mensaje
 	// cualquier para ir probando...
 	public String solicitarSuscripcion() {
-		getTiempoFecha();
+
 		if (!sessionValidate())
 			return INPUT;
 		prepareRequest();
@@ -123,7 +123,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 	}
 
 	private void prepareRequest() {
-		getTiempoFecha();
+
 		session = ActionContext.getContext().getSession();
 		Usuario user = (Usuario) session.get("usuario");
 		ente = (Ente) session.get("ente");
@@ -137,7 +137,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 
 	@Override
 	public void validate() {
-		getTiempoFecha();
+
 		if (!isRequested()) {
 			if (solicitud.getSolicitante().trim().isEmpty()) {
 				addFieldError(
@@ -229,7 +229,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 
 	@SkipValidation
 	public String listarSolicitudesAceptadasRechazadas() {
-		getTiempoFecha();
+
 		if (!sessionValidate())
 			return INPUT;
 		// Lista solicitudes en base a las no leidas, pendientes,
@@ -243,7 +243,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 
 	@SkipValidation
 	public String listaSuscripcionesPendientes() {
-		getTiempoFecha();
+
 		if (!sessionValidate())
 			return INPUT;
 		// Lista solicitudes en base a las no leidas, pendientes,
@@ -257,7 +257,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 
 	@SkipValidation
 	public String examinarSolicitud() {
-		getTiempoFecha();
+
 		if (!sessionValidate())
 			return INPUT;
 		session = ActionContext.getContext().getSession();
@@ -291,7 +291,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 
 	@SkipValidation
 	public String prepararAprobarRechazarSuscripcion() {
-		getTiempoFecha();
+
 		if (!sessionValidate())
 			return INPUT;
 		// Lee los detalles de la suscripción
@@ -317,7 +317,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 	// exitoso para la vista
 	@SkipValidation
 	public String aprobarRechazarSuscripcion() {
-		getTiempoFecha();
+
 		if (!sessionValidate())
 			return INPUT;
 		boolean err = false;
@@ -381,7 +381,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 	// TODO Hay que listar los sectores y los servicios publicados
 	@SkipValidation
 	public String prepararSolicitarSuscripcion() {
-		getTiempoFecha();
+
 		if (!sessionValidate())
 			return INPUT;
 		// variable para la vista.
@@ -399,12 +399,6 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 			return false;
 		}
 		return true;
-	}
-
-	public void getTiempoFecha() {
-		ReadXmlTime read = new ReadXmlTime();
-		fecha = read.getFechaTiempo();
-		estadosTiempo = read.getEstadosTiempo();
 	}
 
 	public ServicioInformacion getServicio() {

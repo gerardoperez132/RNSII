@@ -29,7 +29,6 @@ import ve.gob.cnti.rnsii.modelo.Nacionalidad;
 import ve.gob.cnti.rnsii.modelo.Usuario;
 import ve.gob.cnti.rnsii.util.EstadosTiempo;
 import ve.gob.cnti.rnsii.util.MD5Hashing;
-import ve.gob.cnti.rnsii.util.ReadXmlTime;
 
 import com.opensymphony.xwork2.ActionContext;
 
@@ -71,7 +70,7 @@ public class UsuarioControlador extends DAO {
 
 	@SuppressWarnings("unchecked")
 	public String modificarClave() throws NoSuchAlgorithmException {
-		getTiempoFecha();
+
 		if (header().equals("errorSession") == true) {
 			return "errorSession";
 		} else {
@@ -128,14 +127,14 @@ public class UsuarioControlador extends DAO {
 
 	@SuppressWarnings("unchecked")
 	public String modificarDatos() {
-		getTiempoFecha();
+
 		if (header().equals("errorSession") == true) {
 			return "errorSession";
 		} else {
 			Usuario user = (Usuario) session.get("usuario");
 			usuario.setClave(user.getClave());
 			usuario.setId_correo(user.getId_correo());
-			usuario.setId_ente(user.getId_ente());			
+			usuario.setId_ente(user.getId_ente());
 			update(usuario, user.getId_usuario());
 			session.remove("usuario");
 			usuario = (Usuario) read(usuario, user.getId_usuario());
@@ -149,28 +148,27 @@ public class UsuarioControlador extends DAO {
 
 	@SkipValidation
 	public String configuracion() {
-		getTiempoFecha();
+
 		return header();
 	}
 
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararFormulario() {
-		getTiempoFecha();
+
 		if (header().equals("errorSession") == true) {
 			return "errorSession";
-		}		
+		}
 		usuario = (Usuario) session.get("usuario");
 		if (modificarDatos = true) {
-			usuario = (Usuario) read(usuario, usuario.getId_usuario());			
-			nacionalidad = (List<Nacionalidad>) read(new Nacionalidad());			
+			usuario = (Usuario) read(usuario, usuario.getId_usuario());
+			nacionalidad = (List<Nacionalidad>) read(new Nacionalidad());
 		}
 		return SUCCESS;
 	}
 
 	@SuppressWarnings("unchecked")
 	public void validate() {
-		getTiempoFecha();
 		if (modificarDatos) {
 			long ci;
 			if (usuario.getNombre().trim().isEmpty()
@@ -188,28 +186,25 @@ public class UsuarioControlador extends DAO {
 						"apellidos",
 						error.getProperties().getProperty(
 								"error.login.apellido"));
-			}			
+			}
 			try {
 				ci = Integer.parseInt(usuario.getCedula());
-				//Verifica que la cedula sea entero positivo y mayor o igual a 1
-				if (ci < 1 || !usuario.getCedula().equals(""+ci)) {
-					addFieldError("cedula", error.getProperties()
-							.getProperty("error.login.cedula.invalid"));	
-				}				
+				// Verifica que la cedula sea entero positivo y mayor o igual a
+				// 1
+				if (ci < 1 || !usuario.getCedula().equals("" + ci)) {
+					addFieldError(
+							"cedula",
+							error.getProperties().getProperty(
+									"error.login.cedula.invalid"));
+				}
 			} catch (Exception e) {
 				addFieldError(
 						"cedula",
 						error.getProperties().getProperty(
-								"error.login.cedula.regex"));					
-			}		
-			nacionalidad = (List<Nacionalidad>) read(new Nacionalidad());	
+								"error.login.cedula.regex"));
+			}
+			nacionalidad = (List<Nacionalidad>) read(new Nacionalidad());
 		}
-	}
-
-	public void getTiempoFecha() {
-		ReadXmlTime read = new ReadXmlTime();
-		fecha = read.getFechaTiempo();
-		estadosTiempo = read.getEstadosTiempo();
 	}
 
 	public Usuario getUsuario() {
@@ -299,5 +294,5 @@ public class UsuarioControlador extends DAO {
 	public void setNacionalidad(List<Nacionalidad> nacionalidad) {
 		this.nacionalidad = nacionalidad;
 	}
-	
+
 }
