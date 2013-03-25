@@ -52,8 +52,6 @@ import ve.gob.cnti.rnsii.modelo.UnionAreaServicioInformacion;
 import ve.gob.cnti.rnsii.modelo.UnionArquitecturaServicioInformacion;
 import ve.gob.cnti.rnsii.modelo.Url;
 import ve.gob.cnti.rnsii.modelo.Usuario;
-import ve.gob.cnti.rnsii.util.EstadosTiempo;
-import ve.gob.cnti.rnsii.util.ReadXmlTime;
 
 import com.opensymphony.xwork2.ActionContext;
 
@@ -117,7 +115,6 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	private long id_aspecto_legal;
 	private long nVisitas;
 
-	private List<EstadosTiempo> estadosTiempo = new ArrayList<EstadosTiempo>();
 	private Date fecha;
 
 	@SuppressWarnings("unchecked")
@@ -1268,14 +1265,6 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 
 	public void setnVisitas(long nVisitas) {
 		this.nVisitas = nVisitas;
-	}
-
-	public List<EstadosTiempo> getEstadosTiempo() {
-		return estadosTiempo;
-	}
-
-	public void setEstadosTiempo(List<EstadosTiempo> estadosTiempo) {
-		this.estadosTiempo = estadosTiempo;
 	}
 
 	public Date getFecha() {

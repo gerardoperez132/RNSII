@@ -34,8 +34,6 @@ import ve.gob.cnti.rnsii.modelo.Funcionalidad;
 import ve.gob.cnti.rnsii.modelo.ServicioInformacion;
 import ve.gob.cnti.rnsii.modelo.TipoDato;
 import ve.gob.cnti.rnsii.modelo.Usuario;
-import ve.gob.cnti.rnsii.util.EstadosTiempo;
-import ve.gob.cnti.rnsii.util.ReadXmlTime;
 
 import com.opensymphony.xwork2.ActionContext;
 
@@ -66,7 +64,7 @@ public class SalidaControlador extends DAO implements Formulario,
 	private long id_funcionalidad;
 	private boolean complejo;
 	private boolean modificar;
-	private List<EstadosTiempo> estadosTiempo = new ArrayList<EstadosTiempo>();
+
 	private Date fecha;
 
 	@SuppressWarnings("unchecked")
@@ -413,14 +411,6 @@ public class SalidaControlador extends DAO implements Formulario,
 
 	public void setFormatos(List<Formato> formatos) {
 		this.formatos = formatos;
-	}
-
-	public List<EstadosTiempo> getEstadosTiempo() {
-		return estadosTiempo;
-	}
-
-	public void setEstadosTiempo(List<EstadosTiempo> estadosTiempo) {
-		this.estadosTiempo = estadosTiempo;
 	}
 
 	public Date getFecha() {

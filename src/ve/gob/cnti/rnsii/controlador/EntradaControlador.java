@@ -34,8 +34,6 @@ import ve.gob.cnti.rnsii.modelo.Funcionalidad;
 import ve.gob.cnti.rnsii.modelo.ServicioInformacion;
 import ve.gob.cnti.rnsii.modelo.TipoDato;
 import ve.gob.cnti.rnsii.modelo.Usuario;
-import ve.gob.cnti.rnsii.util.EstadosTiempo;
-import ve.gob.cnti.rnsii.util.ReadXmlTime;
 
 import com.opensymphony.xwork2.ActionContext;
 
@@ -69,7 +67,7 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 	private boolean modificar;
 	private boolean hasLength;
 	private boolean hasformatted;
-	private List<EstadosTiempo> estadosTiempo = new ArrayList<EstadosTiempo>();
+
 	private Date fecha;
 
 	@SuppressWarnings("unchecked")
@@ -468,14 +466,6 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 
 	public void setHasformatted(boolean hasformatted) {
 		this.hasformatted = hasformatted;
-	}
-
-	public List<EstadosTiempo> getEstadosTiempo() {
-		return estadosTiempo;
-	}
-
-	public void setEstadosTiempo(List<EstadosTiempo> estadosTiempo) {
-		this.estadosTiempo = estadosTiempo;
 	}
 
 	public Date getFecha() {

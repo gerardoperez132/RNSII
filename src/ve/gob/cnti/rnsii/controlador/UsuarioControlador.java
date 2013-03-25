@@ -27,7 +27,6 @@ import ve.gob.cnti.rnsii.dao.DAO;
 import ve.gob.cnti.rnsii.modelo.Ente;
 import ve.gob.cnti.rnsii.modelo.Nacionalidad;
 import ve.gob.cnti.rnsii.modelo.Usuario;
-import ve.gob.cnti.rnsii.util.EstadosTiempo;
 import ve.gob.cnti.rnsii.util.MD5Hashing;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -53,7 +52,7 @@ public class UsuarioControlador extends DAO {
 	@SuppressWarnings("rawtypes")
 	private Map session;
 	private Ente ente;
-	private List<EstadosTiempo> estadosTiempo = new ArrayList<EstadosTiempo>();
+
 	private Date fecha;
 
 	@SkipValidation
@@ -269,14 +268,6 @@ public class UsuarioControlador extends DAO {
 
 	public void setClave_nueva_confirme(String clave_nueva_confirme) {
 		this.clave_nueva_confirme = clave_nueva_confirme;
-	}
-
-	public List<EstadosTiempo> getEstadosTiempo() {
-		return estadosTiempo;
-	}
-
-	public void setEstadosTiempo(List<EstadosTiempo> estadosTiempo) {
-		this.estadosTiempo = estadosTiempo;
 	}
 
 	public Date getFecha() {

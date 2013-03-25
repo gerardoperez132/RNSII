@@ -32,8 +32,6 @@ import ve.gob.cnti.rnsii.modelo.ServicioInformacion;
 import ve.gob.cnti.rnsii.modelo.SolicitudSuscripcion;
 import ve.gob.cnti.rnsii.modelo.Suscrito;
 import ve.gob.cnti.rnsii.modelo.Usuario;
-import ve.gob.cnti.rnsii.util.EstadosTiempo;
-import ve.gob.cnti.rnsii.util.ReadXmlTime;
 import ve.gob.cnti.rnsii.util.SubscriptionRequest;
 import ve.gob.cnti.rnsii.util.SubscriptionResponse;
 
@@ -74,7 +72,7 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 	private boolean ListarSuscricionesAceptadasRechazadas;
 	private boolean solicitarSuscripcion;
 	private String sentencia[] = { "Aceptado", "Rechazado" };
-	private List<EstadosTiempo> estadosTiempo = new ArrayList<EstadosTiempo>();
+
 	private Date fecha;
 
 	@SkipValidation
@@ -562,14 +560,6 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 
 	public void setSolicitarSuscripcion(boolean solicitarSuscripcion) {
 		this.solicitarSuscripcion = solicitarSuscripcion;
-	}
-
-	public List<EstadosTiempo> getEstadosTiempo() {
-		return estadosTiempo;
-	}
-
-	public void setEstadosTiempo(List<EstadosTiempo> estadosTiempo) {
-		this.estadosTiempo = estadosTiempo;
 	}
 
 	public Date getFecha() {
