@@ -772,3 +772,8 @@ div.middleContent {
 	border: 1px solid #999;
 	text-decoration: underline;
 }
+
+.admin{
+	width: 100%;
+	padding-left: 38%;
+}

@@ -45,6 +45,29 @@
 			<exception-mapping exception="java.lang.NullPointerException"
 				result="error" />
 		</global-exception-mappings>
+		
+		<!-- Actions del módulo de administración -->
+		<!-- Control de acceso -->
+		<action name="admin" method="access"
+			class="ve.gob.cnti.rnsii.admin.Administration">			
+			<result name="success">admin/admin.jsp</result>			
+		</action>
+		
+		<action name="access_control" method="access_control"
+			class="ve.gob.cnti.rnsii.admin.Administration">
+			<result name="404ERROR" type="redirectAction">error404</result>
+			<result name="input">
+				admin/admin.jsp
+			</result>
+			<result name="success" type="redirectAction">admin</result>
+			<result name="accesoInvalido" type="redirectAction">admin</result>
+			<result name="error">error.jsp</result>
+		</action>
+		
+		<action name="admin" method="access"
+			class="ve.gob.cnti.rnsii.admin.Administration">			
+			<result name="success">admin/admin.jsp</result>
+		</action>
 
 		<!-- Actions de servicios de información -->
 		<action name="prepararRegistro" method="prepararRegistro"
