@@ -188,6 +188,7 @@
 							<s:textarea name="entrada.descripcion" id="entrada.descripcion" cols="30" rows="6" />
 						</td>
 					</tr>	
+					<s:if test="!complejo">
 					<tr>
 						<!-- Etiquetas -->
 						<td>
@@ -211,9 +212,10 @@
 							</s:select></td>
 						<td style="width:60px;"><!-- td vacio --></td>						
 					</tr>
+					</s:if>
 					</table>
-					<s:if test="!complejo"> 
-					<table>
+					<s:if test="!complejo">
+					<table>					
 					<tr>
 						<!-- Etiquetas -->
 						<td>
@@ -285,11 +287,12 @@
 								<s:textfield name="entrada.longitud" maxlength="10" id="entrada.longitud"/>
 							</div>
 						</td>
-					</tr>
-					</table>	
+					</tr>					
+					</table>				
 					</s:if>
-														
-					
+					<s:if test="complejo">
+					<s:hidden name="entrada.id_tipo_dato" value="%{entrada.id_tipo_dato}"/>
+					</s:if>	
 					<s:hidden name="id_servicio_informacion"/>
 					<s:hidden name="id_funcionalidad"/>
 					<s:hidden name="id_entrada_salida"/>

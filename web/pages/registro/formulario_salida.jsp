@@ -188,6 +188,7 @@
 							<s:textarea name="salida.descripcion" id="salida.descripcion" cols="30" rows="6" />
 						</td>
 					</tr>	
+					<s:if test="!complejo"> 
 					<tr>
 						<!-- Etiquetas -->
 						<td>
@@ -211,7 +212,8 @@
 							</s:select></td>
 						<td style="width:60px;"><!-- td vacio --></td>						
 					</tr>
-					</table>
+					</s:if>
+					</table>					
 					<s:if test="!complejo"> 
 					<table>
 					<tr>
