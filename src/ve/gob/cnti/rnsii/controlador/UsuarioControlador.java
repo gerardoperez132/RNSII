@@ -27,9 +27,9 @@ import ve.gob.cnti.rnsii.dao.DAO;
 import ve.gob.cnti.rnsii.modelo.Ente;
 import ve.gob.cnti.rnsii.modelo.Nacionalidad;
 import ve.gob.cnti.rnsii.modelo.Usuario;
-import ve.gob.cnti.rnsii.util.EstadosTiempo;
+
 import ve.gob.cnti.rnsii.util.MD5Hashing;
-import ve.gob.cnti.rnsii.util.ReadXmlTime;
+
 
 import com.opensymphony.xwork2.ActionContext;
 
@@ -54,7 +54,7 @@ public class UsuarioControlador extends DAO {
 	@SuppressWarnings("rawtypes")
 	private Map session;
 	private Ente ente;
-	private List<EstadosTiempo> estadosTiempo = new ArrayList<EstadosTiempo>();
+	
 	private Date fecha;
 
 	@SkipValidation
@@ -71,7 +71,7 @@ public class UsuarioControlador extends DAO {
 
 	@SuppressWarnings("unchecked")
 	public String modificarClave() throws NoSuchAlgorithmException {
-		getTiempoFecha();
+		
 		if (header().equals("errorSession") == true) {
 			return "errorSession";
 		} else {
@@ -128,7 +128,7 @@ public class UsuarioControlador extends DAO {
 
 	@SuppressWarnings("unchecked")
 	public String modificarDatos() {
-		getTiempoFecha();
+		
 		if (header().equals("errorSession") == true) {
 			return "errorSession";
 		} else {
@@ -149,14 +149,14 @@ public class UsuarioControlador extends DAO {
 
 	@SkipValidation
 	public String configuracion() {
-		getTiempoFecha();
+		
 		return header();
 	}
 
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararFormulario() {
-		getTiempoFecha();
+		
 		if (header().equals("errorSession") == true) {
 			return "errorSession";
 		}		
@@ -170,7 +170,7 @@ public class UsuarioControlador extends DAO {
 
 	@SuppressWarnings("unchecked")
 	public void validate() {
-		getTiempoFecha();
+		
 		if (modificarDatos) {
 			long ci;
 			if (usuario.getNombre().trim().isEmpty()
@@ -206,11 +206,7 @@ public class UsuarioControlador extends DAO {
 		}
 	}
 
-	public void getTiempoFecha() {
-		ReadXmlTime read = new ReadXmlTime();
-		fecha = read.getFechaTiempo();
-		estadosTiempo = read.getEstadosTiempo();
-	}
+	
 
 	public Usuario getUsuario() {
 		return usuario;
@@ -276,13 +272,7 @@ public class UsuarioControlador extends DAO {
 		this.clave_nueva_confirme = clave_nueva_confirme;
 	}
 
-	public List<EstadosTiempo> getEstadosTiempo() {
-		return estadosTiempo;
-	}
-
-	public void setEstadosTiempo(List<EstadosTiempo> estadosTiempo) {
-		this.estadosTiempo = estadosTiempo;
-	}
+	
 
 	public Date getFecha() {
 		return fecha;

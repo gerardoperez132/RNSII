@@ -34,8 +34,8 @@ import ve.gob.cnti.rnsii.modelo.Funcionalidad;
 import ve.gob.cnti.rnsii.modelo.ServicioInformacion;
 import ve.gob.cnti.rnsii.modelo.TipoDato;
 import ve.gob.cnti.rnsii.modelo.Usuario;
-import ve.gob.cnti.rnsii.util.EstadosTiempo;
-import ve.gob.cnti.rnsii.util.ReadXmlTime;
+
+
 
 import com.opensymphony.xwork2.ActionContext;
 
@@ -66,14 +66,14 @@ public class SalidaControlador extends DAO implements Formulario,
 	private long id_funcionalidad;
 	private boolean complejo;
 	private boolean modificar;
-	private List<EstadosTiempo> estadosTiempo = new ArrayList<EstadosTiempo>();
+	
 	private Date fecha;
 
 	@SuppressWarnings("unchecked")
 	@Override
 	@SkipValidation
 	public String prepararFormulario() {
-		getTiempoFecha();
+		
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		salidas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad, SALIDA);
@@ -85,7 +85,7 @@ public class SalidaControlador extends DAO implements Formulario,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararRegistroSalida() {
-		getTiempoFecha();
+		
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		salidas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad, SALIDA);
@@ -98,7 +98,7 @@ public class SalidaControlador extends DAO implements Formulario,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararFormularioSimple() {
-		getTiempoFecha();
+		
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		salidas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad, SALIDA);
@@ -111,7 +111,7 @@ public class SalidaControlador extends DAO implements Formulario,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararFormularioComplejo() {
-		getTiempoFecha();
+		
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		salidas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad, SALIDA);
@@ -123,7 +123,7 @@ public class SalidaControlador extends DAO implements Formulario,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararModificarSalida() {
-		getTiempoFecha();
+		
 		salida = (EntradaSalida) read(salida, id_entrada_salida);
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
@@ -135,7 +135,7 @@ public class SalidaControlador extends DAO implements Formulario,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararModificarSalidaSimple() {
-		getTiempoFecha();
+		
 		salida = (EntradaSalida) read(salida, id_entrada_salida);
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
@@ -147,7 +147,7 @@ public class SalidaControlador extends DAO implements Formulario,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararModificarSalidaCompleja() {
-		getTiempoFecha();
+		
 		salida = (EntradaSalida) read(salida, id_entrada_salida);
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
@@ -156,7 +156,7 @@ public class SalidaControlador extends DAO implements Formulario,
 	}
 
 	public String registrarSalida() {
-		getTiempoFecha();
+		
 		Usuario user = new Usuario();
 		session = ActionContext.getContext().getSession();
 		user = (Usuario) session.get("usuario");
@@ -172,7 +172,7 @@ public class SalidaControlador extends DAO implements Formulario,
 
 	@SuppressWarnings("unchecked")
 	public String modificarSalida() {
-		getTiempoFecha();
+		
 		Usuario user = new Usuario();
 		session = ActionContext.getContext().getSession();
 		user = (Usuario) session.get("usuario");
@@ -195,7 +195,7 @@ public class SalidaControlador extends DAO implements Formulario,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String eliminarSalidaSimple() {
-		getTiempoFecha();
+		
 		Usuario user = new Usuario();
 		session = ActionContext.getContext().getSession();
 		user = (Usuario) session.get("usuario");
@@ -217,7 +217,7 @@ public class SalidaControlador extends DAO implements Formulario,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String eliminarSalidaCompleja() {
-		getTiempoFecha();
+		
 		salidas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad, SALIDA);
 		Iterator<EntradaSalida> iterator = salidas.iterator();
 		while (iterator.hasNext()) {
@@ -240,7 +240,7 @@ public class SalidaControlador extends DAO implements Formulario,
 
 	@Override
 	public void validate() {
-		getTiempoFecha();
+		
 		if (salida.getNombre().trim().isEmpty())
 			addFieldError("salida.nombre",
 					error.getProperties().getProperty("error.salida.nombre"));
@@ -327,11 +327,7 @@ public class SalidaControlador extends DAO implements Formulario,
 			prepararRegistroSalida();
 	}
 
-	public void getTiempoFecha() {
-		ReadXmlTime read = new ReadXmlTime();
-		fecha = read.getFechaTiempo();
-		estadosTiempo = read.getEstadosTiempo();
-	}
+	
 
 	public List<EntradaSalida> getSalidas() {
 		return salidas;
@@ -421,13 +417,7 @@ public class SalidaControlador extends DAO implements Formulario,
 		this.formatos = formatos;
 	}
 
-	public List<EstadosTiempo> getEstadosTiempo() {
-		return estadosTiempo;
-	}
-
-	public void setEstadosTiempo(List<EstadosTiempo> estadosTiempo) {
-		this.estadosTiempo = estadosTiempo;
-	}
+	
 
 	public Date getFecha() {
 		return fecha;

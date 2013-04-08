@@ -37,9 +37,9 @@ import ve.gob.cnti.rnsii.modelo.Estado;
 import ve.gob.cnti.rnsii.modelo.RecuperarClave;
 import ve.gob.cnti.rnsii.modelo.ServicioInformacion;
 import ve.gob.cnti.rnsii.modelo.Usuario;
-import ve.gob.cnti.rnsii.util.EstadosTiempo;
+
 import ve.gob.cnti.rnsii.util.MD5Hashing;
-import ve.gob.cnti.rnsii.util.ReadXmlTime;
+
 import ve.gob.cnti.rnsii.util.ServiciosPublicables;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -74,14 +74,14 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 	private long peticionesNoLeidas;
 	private long peticionesPendientes;
 	private long solicitudesAceptadasRechazadas;
-	private List<EstadosTiempo> estadosTiempo = new ArrayList<EstadosTiempo>();
+	
 	private Date fecha;
 	private String msj_error;
 	private String msj_actionInfo;
 
 	@SuppressWarnings("unchecked")
 	public String autenticarUsuario() throws Exception {
-		getTiempoFecha();
+		
 		session = ActionContext.getContext().getSession();
 		if (correo == null && password == null && captcha == null) {
 			return "404ERROR";
@@ -129,13 +129,13 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 
 	@SkipValidation
 	public String mostrarLogin() {
-		getTiempoFecha();
+		
 		return SUCCESS;
 	}
 
 	@SkipValidation
 	public String inicio() {
-		getTiempoFecha();
+		
 		return SUCCESS;
 	}
 
@@ -143,7 +143,7 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String home() {
-		getTiempoFecha();
+		
 		session = ActionContext.getContext().getSession();
 		boolean publicable = true;
 		if (session.isEmpty()) {
@@ -183,7 +183,7 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 
 	@SkipValidation
 	public String desloguearUsuario() {
-		getTiempoFecha();
+		
 		session = ActionContext.getContext().getSession();
 		session.clear();
 		return SUCCESS;
@@ -192,7 +192,7 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 	@SkipValidation
 	public String enviarDatos() throws NoSuchAlgorithmException,
 			UnknownHostException {
-		getTiempoFecha();
+		
 		recoveryPass = true;
 		session = ActionContext.getContext().getSession();
 		if (correo.isEmpty() || captcha.isEmpty()) {
@@ -272,7 +272,7 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 
 	@SkipValidation
 	public String prepararRecuperarPass() {
-		getTiempoFecha();
+		
 		RecuperarClave r_clave = new RecuperarClave();
 		datosEnviados = true;
 		if (cuenta == null) {
@@ -303,7 +303,7 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 
 	@SkipValidation
 	public String modificarClave() throws NoSuchAlgorithmException {
-		getTiempoFecha();
+		
 		RecuperarClave r_clave = new RecuperarClave();
 		r_clave = (RecuperarClave) getUrlRecoveryPass(new RecuperarClave(),
 				cuenta);
@@ -335,11 +335,7 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 
 	}
 
-	public void getTiempoFecha() {
-		ReadXmlTime read = new ReadXmlTime();
-		fecha = read.getFechaTiempo();
-		estadosTiempo = read.getEstadosTiempo();
-	}
+	
 
 	public String getPassword() {
 		return password;
@@ -467,13 +463,7 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 		this.captcha = captcha;
 	}
 
-	public List<EstadosTiempo> getEstadosTiempo() {
-		return estadosTiempo;
-	}
-
-	public void setEstadosTiempo(List<EstadosTiempo> estadosTiempo) {
-		this.estadosTiempo = estadosTiempo;
-	}
+	
 
 	public Date getFecha() {
 		return fecha;

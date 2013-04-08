@@ -49,10 +49,10 @@ import ve.gob.cnti.rnsii.modelo.UnionAreaServicioInformacion;
 import ve.gob.cnti.rnsii.modelo.UnionArquitecturaServicioInformacion;
 import ve.gob.cnti.rnsii.modelo.Usuario;
 import ve.gob.cnti.rnsii.modelo.Visita;
-import ve.gob.cnti.rnsii.util.EstadosTiempo;
+
 import ve.gob.cnti.rnsii.util.ListaServiciosVisitados;
 import ve.gob.cnti.rnsii.util.Pagination;
-import ve.gob.cnti.rnsii.util.ReadXmlTime;
+
 import ve.gob.cnti.rnsii.util.SectoresMasPublicados;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -90,7 +90,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 	List<SectoresMasPublicados> listaSectores = new ArrayList<SectoresMasPublicados>();
 	List<SectoresMasPublicados> listaSectores2 = new ArrayList<SectoresMasPublicados>();
 	private List<ListaServiciosVisitados> SI_masVisitados = new ArrayList<ListaServiciosVisitados>();
-	private List<EstadosTiempo> estadosTiempo = new ArrayList<EstadosTiempo>();
+	
 	private Date fecha;
 	@SuppressWarnings("rawtypes")
 	private Map session;
@@ -130,7 +130,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 
 	@SuppressWarnings("unchecked")
 	public String inicio() {
-		getTiempoFecha();
+		
 		listaSectores = listadoSectores(LIMITE_SECTORES, false);
 		// listaSectores2 = listadoSectores(-1, true);
 		SI_masVisitados = listarServiciosVisitados(LIMITE_VISITADOS, false);
@@ -149,7 +149,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 	}
 
 	public String inicio404() {
-		getTiempoFecha();
+		
 		listaSectores = listadoSectores(LIMITE_SECTORES, false);
 		SI_masVisitados = listarServiciosVisitados(LIMITE_VISITADOS, false);
 		error404 = true;
@@ -159,7 +159,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 
 	@SuppressWarnings("unchecked")
 	public String listarSector() {
-		getTiempoFecha();
+		
 		listaSectores = listadoSectores(LIMITE_SECTORES, false);
 		SI_masVisitados = listarServiciosVisitados(LIMITE_VISITADOS, false);
 		if (!verificarLong(id_sector))
@@ -178,7 +178,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 	}
 
 	public String listarSectores() {
-		getTiempoFecha();
+		
 		consulta_listarSectores = true;
 		listaSectores = listadoSectores(LIMITE_SECTORES, false);
 		listaSectores2 = listadoSectores(-1, true);
@@ -188,7 +188,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 
 	@SuppressWarnings("unchecked")
 	public String listarServicios() {
-		getTiempoFecha();
+		
 		listaSectores = listadoSectores(LIMITE_SECTORES, false);
 		SI_masVisitados = listarServiciosVisitados(LIMITE_VISITADOS, false);
 		consulta_listarServicios = true;
@@ -229,7 +229,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 
 	@SuppressWarnings("unchecked")
 	public String buscarServicio2() {
-		getTiempoFecha();
+		
 		session = ActionContext.getContext().getSession();
 		if (session.isEmpty()) {
 			return INPUT;
@@ -266,7 +266,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 			}
 		} catch (Exception e) {
 		}
-		getTiempoFecha();
+		
 		if (!verificarLong(id_servicio))
 			return INPUT;
 		listaSectores = listadoSectores(LIMITE_SECTORES, false);
@@ -342,11 +342,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 		}
 	}
 
-	public void getTiempoFecha() {
-		ReadXmlTime read = new ReadXmlTime();
-		fecha = read.getFechaTiempo();
-		estadosTiempo = read.getEstadosTiempo();
-	}
+	
 
 	// TODO listar sectores
 	// 1 obtener la lista de sectores
@@ -716,13 +712,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 		this.listaSectores2 = listaSectores2;
 	}
 
-	public List<EstadosTiempo> getEstadosTiempo() {
-		return estadosTiempo;
-	}
-
-	public void setEstadosTiempo(List<EstadosTiempo> estadosTiempo) {
-		this.estadosTiempo = estadosTiempo;
-	}
+	
 
 	public Date getFecha() {
 		return fecha;

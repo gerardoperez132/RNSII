@@ -52,8 +52,8 @@ import ve.gob.cnti.rnsii.modelo.UnionAreaServicioInformacion;
 import ve.gob.cnti.rnsii.modelo.UnionArquitecturaServicioInformacion;
 import ve.gob.cnti.rnsii.modelo.Url;
 import ve.gob.cnti.rnsii.modelo.Usuario;
-import ve.gob.cnti.rnsii.util.EstadosTiempo;
-import ve.gob.cnti.rnsii.util.ReadXmlTime;
+
+
 
 import com.opensymphony.xwork2.ActionContext;
 
@@ -117,13 +117,13 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	private long id_aspecto_legal;
 	private long nVisitas;
 
-	private List<EstadosTiempo> estadosTiempo = new ArrayList<EstadosTiempo>();
+	
 	private Date fecha;
 
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararRegistro() {
-		getTiempoFecha();
+		
 		tab = DESCRIPCION_GENERAL;
 		// sectores = (List<Sector>) read(new Sector());
 		sectores = (List<Sector>) getSortedList(new Sector(), ASC);
@@ -141,7 +141,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararDescripcionGeneral() {
-		getTiempoFecha();
+		
 		if (getSessionStack(isValidate).equals("error"))
 			return "errorSession";
 		if (isComplete(servicio))
@@ -157,7 +157,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararAspectosLegales() {
-		getTiempoFecha();
+		
 		if (getSessionStack(isValidate).equals("error"))
 			return "errorSession";
 		try {
@@ -174,7 +174,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararDescripcionTecnica() {
-		getTiempoFecha();
+		
 		if (getSessionStack(isValidate).equals("error"))
 			return "errorSession";
 		if (isComplete(servicio))
@@ -189,7 +189,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 
 	@SkipValidation
 	public String prepararDescripcionSoporte() {
-		getTiempoFecha();
+		
 		if (getSessionStack(isValidate).equals("error"))
 			return "errorSession";
 		if (isComplete(servicio)) {
@@ -203,7 +203,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			throws IllegalArgumentException, SecurityException,
 			IllegalAccessException, InvocationTargetException,
 			NoSuchMethodException {
-		getTiempoFecha();
+		
 		// Obtener de la sesión
 		try {
 			setNuevo((Boolean) session.get("nuevo"));
@@ -286,7 +286,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 
 	@SuppressWarnings("unchecked")
 	public String registrarAspectosLegales() throws IOException {
-		getTiempoFecha();
+		
 		getSessionStack(false);
 		if (name.trim().isEmpty() && file != null) {
 			addFieldError(
@@ -349,7 +349,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	}
 
 	private String saveFile() throws IOException {
-		getTiempoFecha();
+		
 		session = ActionContext.getContext().getSession();
 		String siglas = ((Ente) session.get("ente")).getSiglas().toString()
 				.toLowerCase();
@@ -362,7 +362,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	}
 
 	public String deleteFile() {
-		getTiempoFecha();
+		
 		if (getSessionStack(isValidate).equals("error"))
 			return "errorSession";
 		AspectoLegal documento = (AspectoLegal) read(new AspectoLegal(),
@@ -389,7 +389,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			throws IllegalArgumentException, SecurityException,
 			IllegalAccessException, InvocationTargetException,
 			NoSuchMethodException {
-		getTiempoFecha();
+		
 		try {
 			setModificar((Boolean) session.get("modificar"));
 			setId_servicio_informacion((Long) session
@@ -473,7 +473,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			throws IllegalArgumentException, SecurityException,
 			IllegalAccessException, InvocationTargetException,
 			NoSuchMethodException {
-		getTiempoFecha();
+		
 
 		/*
 		 * Recuperando de la sesión la variables modificar
@@ -578,7 +578,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 
 	@Override
 	public void validate() {
-		getTiempoFecha();
+		
 		isValidate = true;
 		switch (tab) {
 		case DESCRIPCION_GENERAL:
@@ -784,7 +784,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String examinarServicioInformacion() {
-		getTiempoFecha();
+		
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		try {
 			unionareas = (List<UnionAreaServicioInformacion>) readUnion(
@@ -956,11 +956,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		return SUCCESS;
 	}
 
-	public void getTiempoFecha() {
-		ReadXmlTime read = new ReadXmlTime();
-		fecha = read.getFechaTiempo();
-		estadosTiempo = read.getEstadosTiempo();
-	}
+	
 
 	public List<Sector> getSectores() {
 		return sectores;
@@ -1277,13 +1273,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		this.nVisitas = nVisitas;
 	}
 
-	public List<EstadosTiempo> getEstadosTiempo() {
-		return estadosTiempo;
-	}
-
-	public void setEstadosTiempo(List<EstadosTiempo> estadosTiempo) {
-		this.estadosTiempo = estadosTiempo;
-	}
+	
 
 	public Date getFecha() {
 		return fecha;
