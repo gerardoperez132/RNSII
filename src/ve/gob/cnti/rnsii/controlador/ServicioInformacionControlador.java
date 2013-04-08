@@ -464,8 +464,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			servicio.setId_seguridad(seguridad);
 			servicio.setId_intercambio(intercambio);
 			servicio.setVersion(String.valueOf(Float.parseFloat(version)));
-			update(servicio);			
-			//TODO preguntar si existen aqr			
+			update(servicio);					
 			UnionArquitecturaServicioInformacion unionArquitecturaServicioInformacion = new UnionArquitecturaServicioInformacion();
 			unionarquitecturas = (List<UnionArquitecturaServicioInformacion>) readUnion(
 					new UnionArquitecturaServicioInformacion(), servicio, id_servicio_informacion);
