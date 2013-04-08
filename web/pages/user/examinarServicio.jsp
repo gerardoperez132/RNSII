@@ -291,8 +291,7 @@
 						<table class="results">
 							<tr>
 								<td class="alt"><s:text name="responsable" /></td>
-								<td class="alt2"><s:property value="servicio.responsable" />
-								nlsss:<s:property value="#session.ente_sesion.id_ente"/>
+								<td class="alt2"><s:property value="servicio.responsable" />								
 								</td>
 							</tr>
 							<tr>
