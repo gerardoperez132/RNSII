@@ -230,6 +230,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		servicio.setId_ente(ente.getId_ente());
 		servicio.setId_estado(estado);
 		servicio.setId_sector(sector);
+		
 		if (isModificar() && isComplete(servicio)) {
 			update(servicio, id_servicio_informacion);
 			Usuario user = (Usuario) session.get("usuario");
@@ -385,6 +386,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public String registrarDescripcionTecnica()
 			throws IllegalArgumentException, SecurityException,
 			IllegalAccessException, InvocationTargetException,
@@ -397,16 +399,25 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		} catch (Exception e) {
 			// Exception.
 		}
+		
 		Url url = new Url();
 		url.setId_servicio_informacion(id_servicio_informacion);
 		url.setUrl(wsdl);
+		
 		String version = servicio.getVersion();
+		
 		List<Long> arq = new ArrayList<Long>();
+		
 		long seguridad_tmp = seguridad;
+		
 		long intercambio_tmp = intercambio;
+		
 		String wsdl_tmp = wsdl;
+		
 		arq = arquitectura;
+		
 		getSessionStack(false);
+		
 		servicio.setId_seguridad(seguridad);
 		servicio.setId_intercambio(intercambio);
 		servicio.setVersion(String.valueOf(Float.parseFloat(version)));
@@ -414,6 +425,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		seguridad = seguridad_tmp;
 		intercambio = intercambio_tmp;
 		wsdl = wsdl_tmp;
+		
 		if (isModificar()) {
 			url = getUrl(servicio, id_servicio_informacion);
 			if (url != null) {
@@ -432,12 +444,13 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			url.setUrl(wsdl);
 			create(url);
 		}
+		
+		
 		if (isModificar() && isComplete(servicio)) {
-			update(servicio, id_servicio_informacion);
+			update(servicio, id_servicio_informacion);			
 			Usuario user = (Usuario) session.get("usuario");
 			UnionArquitecturaServicioInformacion unionArquitecturaServicioInformacion = new UnionArquitecturaServicioInformacion();
-			unionArquitecturaServicioInformacion.setId_usuario(user
-					.getId_usuario());
+			unionArquitecturaServicioInformacion.setId_usuario(user.getId_usuario());
 			try {
 				updateUnion(unionArquitecturaServicioInformacion,
 						new ServicioInformacion(), new Arquitectura(),
@@ -451,18 +464,34 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			servicio.setId_seguridad(seguridad);
 			servicio.setId_intercambio(intercambio);
 			servicio.setVersion(String.valueOf(Float.parseFloat(version)));
-			update(servicio);
-		}
-		UnionArquitecturaServicioInformacion unionArquitecturaServicioInformacion = new UnionArquitecturaServicioInformacion();
-		for (int i = 0; i < arquitectura.size(); i++) {
-			Usuario user = (Usuario) session.get("usuario");
-			unionArquitecturaServicioInformacion
-					.setId_arquitectura(arquitectura.get(i));
-			unionArquitecturaServicioInformacion
-					.setId_servicio_informacion(id_servicio_informacion);
-			unionArquitecturaServicioInformacion.setId_usuario(user
-					.getId_usuario());
-			createUnion(unionArquitecturaServicioInformacion);
+			update(servicio);			
+			//TODO preguntar si existen aqr			
+			UnionArquitecturaServicioInformacion unionArquitecturaServicioInformacion = new UnionArquitecturaServicioInformacion();
+			unionarquitecturas = (List<UnionArquitecturaServicioInformacion>) readUnion(
+					new UnionArquitecturaServicioInformacion(), servicio, id_servicio_informacion);
+			if(unionarquitecturas.size()==0){
+				for (int i = 0; i < arquitectura.size(); i++) {
+					Usuario user = (Usuario) session.get("usuario");
+					unionArquitecturaServicioInformacion
+							.setId_arquitectura(arquitectura.get(i));
+					unionArquitecturaServicioInformacion
+							.setId_servicio_informacion(id_servicio_informacion);
+					unionArquitecturaServicioInformacion.setId_usuario(user
+							.getId_usuario());
+					createUnion(unionArquitecturaServicioInformacion);
+				}
+			}else{
+				Usuario user = (Usuario) session.get("usuario");
+				unionArquitecturaServicioInformacion.setId_usuario(user.getId_usuario());
+				try {
+					updateUnion(unionArquitecturaServicioInformacion,
+							new ServicioInformacion(), new Arquitectura(),
+							id_servicio_informacion, arquitectura);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+			
 		}
 		if (setSessionStack().equals("error"))
 			return "errorSession";
