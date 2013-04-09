@@ -179,3 +179,8 @@ ul#pagination-flickr {
 	border: 1px solid #999;
 	text-decoration: underline;
 }
+
+.tab_button_disable{
+	border: 2px solid #e7e7e7;
+	color: #e7e7e7;
+}
