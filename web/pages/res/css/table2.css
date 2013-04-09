@@ -125,6 +125,16 @@ td.tb_alt_f {
 	color: #12768E;
 }
 
+.alt3 {
+	background: #12768E;
+	text-align: right;
+	width: 220px;
+	font-size: small;
+	font-weight: bold;
+	color: white;	
+	vertical-align: middle;
+}
+
 .results_width_user {
 	width: 690px;
 }

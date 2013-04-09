@@ -348,6 +348,21 @@
 							<!-- FORMULARIO DE CONTACTO -->
 							<div id="tab4" class="tab_content">
 								<div style="display: none;" id="form_tab4_errors"><s:property value="%{#session.errors.size()}"/></div>
+								<table class="results">
+								<tr>
+									<td class="alt3"><s:text name="responsable" /></td>
+									<td class="alt2"><s:property value="servicio.responsable" />								
+									</td>
+								</tr>
+								<tr>
+									<td class="alt3"><s:text name="telefono" /></td>
+									<td class="alt2"><s:property value="telefono" /></td>
+								</tr>
+								<tr>
+									<td class="alt3"><s:text name="correo" /></td>
+									<td class="alt2"><s:property value="correo" /></td>
+								</tr>
+							</table>
 								<form action="contact" method="POST">
 								<table>
 									<tr>
