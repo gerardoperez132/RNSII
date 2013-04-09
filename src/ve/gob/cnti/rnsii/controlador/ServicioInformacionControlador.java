@@ -117,6 +117,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	private long id_aspecto_legal;
 	private long nVisitas;
 
+	private String submit;	
 	
 	private Date fecha;
 
@@ -145,7 +146,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		if (getSessionStack(isValidate).equals("error"))
 			return "errorSession";
 		if (isComplete(servicio))
-			setModificar(true);
+			setModificar(true);		
 		tab = DESCRIPCION_GENERAL;
 		// sectores = (List<Sector>) read(new Sector());
 		sectores = (List<Sector>) getSortedList(new Sector(), ASC);
@@ -282,6 +283,10 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		}
 		if (setSessionStack().equals("error"))
 			return "errorSession";
+		
+		if(submit.contentEquals(message.getProperties().getProperty("registro.finalizar")))
+			return "end";
+			
 		return SUCCESS;
 	}
 
@@ -346,6 +351,10 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		create(documento);
 		files = (List<AspectoLegal>) read(ALSI, id_servicio_informacion, -1);
 		name = "";
+		
+		if(submit.contentEquals(message.getProperties().getProperty("registro.finalizar")))
+			return "end";
+		
 		return SUCCESS;
 	}
 
@@ -492,8 +501,13 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			}
 			
 		}
+		
 		if (setSessionStack().equals("error"))
 			return "errorSession";
+		
+		if(submit.contentEquals(message.getProperties().getProperty("registro.finalizar")))
+			return "end";
+		
 		return SUCCESS;
 	}
 
@@ -601,6 +615,10 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		 */
 		if (setSessionStack().equals("error"))
 			return "errorSession";
+		
+		if(submit.contentEquals(message.getProperties().getProperty("registro.finalizar")))
+			return "end";
+		
 		return SUCCESS;
 	}
 
@@ -983,8 +1001,18 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		prepararDescripcionGeneral();
 		return SUCCESS;
 	}
-
 	
+	public String terminar_registro_si() {		
+		session = ActionContext.getContext().getSession();
+		if (session.isEmpty()) {
+			return "errorSession";
+		}
+		Usuario usuario = (Usuario) session.get("usuario");
+		if (usuario == null) {
+			return "errorSession";
+		}	
+		return SUCCESS;
+	}
 
 	public List<Sector> getSectores() {
 		return sectores;
@@ -1318,4 +1346,13 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	public void setWsdl(String wsdl) {
 		this.wsdl = wsdl;
 	}
+
+	public String getSubmit() {
+		return submit;
+	}
+
+	public void setSubmit(String submit) {
+		this.submit = submit;
+	}
+	
 }

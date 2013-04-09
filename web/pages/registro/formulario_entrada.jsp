@@ -101,6 +101,13 @@
 								<input type="button" id="sub_guardar_entrada" class="button_h" value="<s:property value="#submit"></s:property>" class="btn_oculto">
 							</td>
 						</tr>
+						<tr>
+							<td>
+								<form action="terminar_registro_si">
+									<input type="submit" class="tab_button" name="submit" value='<s:text name="registro.finalizar"></s:text>' id="btn_submit_2"/>
+								</form>
+							</td>
+						</tr>
 					</table>				
 				</div>														
 		</div>

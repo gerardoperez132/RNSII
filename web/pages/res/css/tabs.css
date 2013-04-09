@@ -18,6 +18,7 @@
 	float: left;
 	width: 98%;
 	background: #fff;
+	padding-bottom: 10px;
 }
 
 .tab_description_left {
@@ -29,14 +30,14 @@
 
 .tab_description_right {
 	float: right;
-	padding-top: 30px;
-	padding-right: 20px;
+	padding-top: 20px;
+	padding-right: 2px;
 }
 
 .tab_description_right_2 {
 	float: right;
 	padding-top: 20px;
-	padding-right: 20px;
+	padding-right: 2px;
 }
 
 .tab_content {

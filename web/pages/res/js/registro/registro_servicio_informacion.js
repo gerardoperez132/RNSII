@@ -5,12 +5,10 @@ var data;
 
 $(document).ready(function() {	
 	
-	/*
+	/*btn_submit_2
 	 * Desabilitando el boton de enviar formulario
 	 */
-	$("#btn_submit").attr('disabled',true);
-	$("#btn_submit").removeClass("tab_button");
-	$("#btn_submit").addClass("tab_button_disable");
+	habilitar_desabilitar_submit(false);
 		
 	/*
 	 * habilitando el boton submit si alguno de los campos es presionado
@@ -244,11 +242,17 @@ $(document).ready(function() {
 		if(iscomplete){
 			$("#btn_submit").attr('disabled',false);
 			$("#btn_submit").removeClass("tab_button_disable");
-			$("#btn_submit").addClass("tab_button");						
+			$("#btn_submit").addClass("tab_button");	
+//			$("#btn_submit_2").attr('disabled',false);
+//			$("#btn_submit_2").removeClass("tab_button_disable");
+//			$("#btn_submit_2").addClass("tab_button");
 		}else{
 			$("#btn_submit").attr('disabled',true);
 			$("#btn_submit").removeClass("tab_button");
 			$("#btn_submit").addClass("tab_button_disable");
+//			$("#btn_submit_2").attr('disabled',true);
+//			$("#btn_submit_2").removeClass("tab_button");
+//			$("#btn_submit_2").addClass("tab_button_disable");
 		}
 	}
 	

@@ -154,7 +154,9 @@
 					<small class="form_small"><s:text name="tab1.description"></s:text> </small>
 					</div>
 					<div class="tab_description_right">
-					<input type="submit" class="tab_button" value='<s:property value="#submit"/>' id="btn_submit"/>
+					<input type="submit" class="tab_button" name="submit" value='<s:property value="#submit"/>' id="btn_submit"/>
+					<br>
+					<input type="submit" class="tab_button" name="submit" value='<s:text name="registro.finalizar"></s:text>' id="btn_submit_2"/>
 					</div>					
 				</div>
 				<div class="tab_container_height tab_container">
@@ -304,7 +306,8 @@
 					<small class="form_small"><s:text name="tab2.description"></s:text> </small>
 					</div>
 					<div class="tab_description_right">
-					<!-- No available -->
+					<br>
+					<input type="submit" class="tab_button" name="submit" value='<s:text name="registro.finalizar"></s:text>' id="btn_submit_2"/>
 					</div>
 				</div>
 				<div class="tab_container_height tab_container">
@@ -449,6 +452,8 @@
 					</div>
 					<div class="tab_description_right">
 					<input type="submit" class="tab_button" value='<s:property value="#submit"/>' id="btn_submit" />
+					<br>
+					<input type="submit" class="tab_button" name="submit" value='<s:text name="registro.finalizar"></s:text>' id="btn_submit_2"/>
 					</div>					
 				</div>	
 				<div class="tab_container_height tab_container">			
@@ -614,6 +619,8 @@
 					</div>
 					<div class="tab_description_right">
 					<input type="submit" class="tab_button" value='<s:property value="#submit"/>' id="btn_submit" />
+					<br>
+					<input type="submit" class="tab_button" name="submit" value='<s:text name="registro.finalizar"></s:text>' id="btn_submit_2"/>
 					</div>					
 				</div>	
 				<div class="tab_container_height tab_container">	

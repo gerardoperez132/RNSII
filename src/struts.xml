@@ -69,12 +69,13 @@
 			class="ve.gob.cnti.rnsii.controlador.ServicioInformacionControlador">
 			<interceptor-ref name="doubleSubmit" />
 			<result name="success" type="redirectAction">prepararAspectosLegales</result>
+			<result name="end" type="redirectAction">home</result>
 			<result name="invalid.token">registro/registro_servicio_informacion.jsp
 			</result>
 			<result name="input">registro/registro_servicio_informacion.jsp
 			</result>
 			<result name="errorSession">error_sesion.jsp</result>
-			<result name="error">error.jsp</result>
+			<result name="error">error.jsp</result>			
 		</action>
 
 		<action name="prepararAspectosLegales" method="prepararAspectosLegales"
@@ -90,6 +91,7 @@
 			<interceptor-ref name="doubleSubmit" />
 			<result name="success">registro/registro_servicio_informacion.jsp
 			</result>
+			<result name="end" type="redirectAction">home</result>
 			<result name="invalid.token">registro/registro_servicio_informacion.jsp
 			</result>
 			<result name="input">registro/registro_servicio_informacion.jsp
@@ -127,6 +129,7 @@
 			<interceptor-ref name="doubleSubmit" />
 			<result name="success" type="redirectAction">prepararFuncionalidades
 			</result>
+			<result name="end" type="redirectAction">home</result>
 			<result name="invalid.token">registro/registro_servicio_informacion.jsp
 			</result>
 			<result name="input">registro/registro_servicio_informacion.jsp
@@ -149,6 +152,7 @@
 			<result name="success" type="redirectAction">prepararDescripcionSoporte</result>
 			<result name="invalid.token">registro/registro_servicio_informacion.jsp
 			</result>
+			<result name="end" type="redirectAction">home</result>
 			<result name="input">registro/registro_servicio_informacion.jsp
 			</result>
 			<result name="errorSession">error_sesion.jsp</result>
@@ -211,6 +215,13 @@
 		<action name="Servicio" method="examinarServicioInformacion"
 			class="ve.gob.cnti.rnsii.controlador.ConsultasControlador">
 			<result name="success">registro/suscripcion.jsp</result>
+			<result name="errorSession">error_sesion.jsp</result>
+			<result name="error">error.jsp</result>
+		</action>
+		
+		<action name="terminar_registro_si" method="terminar_registro_si"
+			class="ve.gob.cnti.rnsii.controlador.ServicioInformacionControlador">
+			<result name="success" type="redirectAction">home</result>
 			<result name="errorSession">error_sesion.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>

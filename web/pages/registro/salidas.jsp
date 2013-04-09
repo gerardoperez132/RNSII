@@ -72,7 +72,13 @@
 							<s:text name="funcionalidad.registro" />
 						</h3>
 						<small><s:text name="funcionalidad.registro.description"></s:text></small>
-					</div>															
+					</div>
+					<div class="tab_description_right">
+					<br>
+					<form action="terminar_registro_si">
+						<input type="submit" class="tab_button" name="submit" value='<s:text name="registro.finalizar"></s:text>' id="btn_submit_2"/>
+					</form>
+					</div>																
 				</div>
 		
 				<div class="tab_container_height  tab_container">					
