@@ -29,6 +29,7 @@ import ve.gob.cnti.rnsii.util.ListaServiciosVisitados;
 import ve.gob.cnti.rnsii.util.SectoresMasPublicados;
 import ve.gob.cnti.rnsii.util.SubscriptionRequest;
 import ve.gob.cnti.rnsii.util.SubscriptionResponse;
+import ve.gob.cnti.rnsii.util.Tabs_incompletes;
 
 /**
  * Definición de métodos para las operaciones en la base de datos.
@@ -691,4 +692,14 @@ public interface CRUD {
 	 */
 	public boolean entradaSalidaDuplicada(long idParent, long idChild,
 			int type, String name);
+	
+	/**
+	 * Este método permite saber si un servicio de información está completo,
+	 * de no estarlo especifica que pestañas están incompletas	 
+	 * 
+	 * @param servicio
+	 *            Servicio de información a verificar.
+	 * @return Referencia a Pestañas incompletas.
+	 */
+	public List<Tabs_incompletes> getIncompleteFields2(ServicioInformacion servicio);
 }

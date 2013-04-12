@@ -22,6 +22,7 @@
 <script type="text/javascript" src="res/js/jquery.validate.js" charset="UTF-8"></script>
 <script src="res/js/messages_es.js" type="text/javascript" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/registro/registro_servicio_informacion.js" charset="UTF-8"></script>
+<script type="text/javascript" src="res/js/main.js" charset="UTF-8"></script>
 
 <!-- Added... -->
 <link rel="stylesheet" type="text/css" href="res/js/plugins/sexy-tooltips/blue.css" media="all">
@@ -31,6 +32,8 @@
 <script type="text/javascript" src="res/js/plugins/sexy-alert-box-1.2.2/jquery.easing.1.3.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/plugins/sexy-alert-box-1.2.2/sexyalertbox.v1.2.jquery.js" charset="UTF-8"></script>
 <%@include file="../layout/header_joomla.jsp" %>
+
+
 
 <s:if test="modificar">
 	<s:set name="submit" value="%{getText('actualizar')}" />
@@ -49,7 +52,7 @@
 <s:if test="tab==3">
 	<s:set name="action" value="%{'registrarDescripcionTecnica'}" />
 </s:if>
-<s:if test="tab==4">
+<s:if test="tab==5">
 	<s:set name="action" value="%{'registrarDescripcionSoporte'}" />
 </s:if>
 <s:if test="tab==0">
@@ -60,11 +63,30 @@
 <title><s:text name="title" /></title>
 	</head>
 	<body class="bg clearfix">
+	
+	<s:iterator value="tabs_incompletas" status="status">			
+		<div class="h<s:property value="tab" />" style="visibility: hidden; display: none;">	
+			<s:if test="detalles.size()>0">
+				<s:iterator value="detalles">
+					<p><s:property/></p>
+				</s:iterator>
+			</s:if>		
+			<s:else>
+				<p><s:text name="servicio.tab.complete"></s:text></p>
+			</s:else>			
+		</div>						
+	</s:iterator>
+	<div class="h2" style="visibility: hidden; display: none;">
+			<p><s:text name="servicio.tab.complete"></s:text></p>
+	</div>
+	<div class="n" style="visibility: hidden; display: none;">
+		<s:property value="tabs_incompletas.size()+1" />
+	</div>
+		
 	<div class="bg1">
 		<div class="sp-wrap main-bg clearfix" style="width: 960px;">
 		<%@include file="../layout/menus.jsp"%>
-		<div class="content">
-			
+		<div class="content">		
 		
 		<!-- Esta es la barra lateral -->
 		<%@include file="../layout/sidebar.jsp"%>			
@@ -75,15 +97,28 @@
 		<div class="pasos">
 			<table><tr><td>
 				<span style="font-weight: bolder;">
-					<s:text name="registro.title"/>							
+					<s:text name="registro.title"/>				
 				</span></td>
 			<td></tr></table>				
-		</div>
-				
+		</div>		
 		<ul class="tabs">
 			<s:if test="%{tab==1}">
 				<li class="active">
-					<a><s:text	name="tab1.title"></s:text></a>
+					<a>
+						<s:text	name="tab1.title"></s:text>
+						<s:iterator value="tabs_incompletas" status="status">
+						<s:if test="tab==1">
+							<s:if test="detalles.size()>0">
+								<img src="res/img/important.png" id="h1" alt="ayuda" 
+								onmouseover="tip(this);" name="h1" height="15" width="15" />
+							</s:if>							
+							<s:else>
+								<img src="res/img/correcto.png" id="h1" alt="ayuda" 
+								onmouseover="tip(this);" name="h1" height="15" width="15" />
+							</s:else>
+						</s:if>					
+						</s:iterator>
+					</a>
 				</li>
 			</s:if>
 			<s:else>
@@ -91,12 +126,30 @@
 					<s:url id="prepararFormulario" action="prepararDescripcionGeneral" />
 				</s:if>
 				<li>
-					<s:a href="%{prepararFormulario}"><s:text name="tab1.title"></s:text></s:a>
+					<s:a href="%{prepararFormulario}">
+						<s:text name="tab1.title"></s:text>
+						<s:iterator value="tabs_incompletas" status="status">
+						<s:if test="tab==1">
+							<s:if test="detalles.size()>0">
+								<img src="res/img/important.png" id="h1" alt="ayuda" 
+								onmouseover="tip(this);" name="h1" height="15" width="15" />
+							</s:if>							
+							<s:else>
+								<img src="res/img/correcto.png" id="h1" alt="ayuda" 
+								onmouseover="tip(this);" name="h1" height="15" width="15" />
+							</s:else>
+						</s:if>					
+						</s:iterator>					
+					</s:a>
 				</li>
 			</s:else>
 			<s:if test="%{tab==2}">
 				<li class="active">
-					<a><s:text	name="tab2.title"></s:text> </a>
+					<a>
+						<s:text name="tab2.title"></s:text>
+						<img src="res/img/correcto.png" id="h2" alt="ayuda" 
+								onmouseover="tip(this);" name="h2" height="15" width="15" />						
+					</a>
 				</li>
 			</s:if>
 			<s:else>
@@ -104,12 +157,32 @@
 					<s:url id="prepararFormulario" action="prepararAspectosLegales" />
 				</s:if>
 				<li>
-					<s:a href="%{prepararFormulario}"><s:text name="tab2.title"></s:text></s:a>
+					<s:a href="%{prepararFormulario}">
+						<s:text name="tab2.title"></s:text>
+						<s:if test="!nuevo">
+						<img src="res/img/correcto.png" id="h2" alt="ayuda" 
+								onmouseover="tip(this);" name="h2" height="15" width="15" />
+						</s:if>						
+					</s:a>
 				</li>
 			</s:else>
 			<s:if test="%{tab==3}">
 				<li class="active">
-					<a><s:text	name="tab3.title"></s:text> </a>
+					<a>
+						<s:text	name="tab3.title"></s:text>
+						<s:iterator value="tabs_incompletas" status="status">
+						<s:if test="tab==3">
+							<s:if test="detalles.size()>0">
+								<img src="res/img/important.png" id="h3" alt="ayuda" 
+								onmouseover="tip(this);" name="h3" height="15" width="15" />
+							</s:if>							
+							<s:else>
+								<img src="res/img/correcto.png" id="h3" alt="ayuda" 
+								onmouseover="tip(this);" name="h3" height="15" width="15" />
+							</s:else>
+						</s:if>					
+						</s:iterator>						 
+					</a>
 				</li>
 			</s:if>
 			<s:else>
@@ -117,22 +190,78 @@
 				<s:url id="prepararFormulario" action="prepararDescripcionTecnica" />
 			</s:if>
 			<li>
-				<s:a href="%{prepararFormulario}"><s:text name="tab3.title"></s:text></s:a>
+				<s:a href="%{prepararFormulario}">
+					<s:text name="tab3.title"></s:text>
+					<s:iterator value="tabs_incompletas" status="status">
+					<s:if test="tab==3">
+						<s:if test="detalles.size()>0">
+							<img src="res/img/important.png" id="h3" alt="ayuda" 
+							onmouseover="tip(this);" name="h3" height="15" width="15" />
+						</s:if>							
+						<s:else>
+							<img src="res/img/correcto.png" id="h3" alt="ayuda" 
+							onmouseover="tip(this);" name="h3" height="15" width="15" />
+						</s:else>
+					</s:if>					
+					</s:iterator>
+				</s:a>
 			</li>
 			</s:else>
 			<s:if test="nuevo">
 				<li>
-					<s:a><s:text name="funcionalidades"></s:text></s:a>
+					<s:a>
+						<s:text name="funcionalidades"></s:text>
+						<s:iterator value="tabs_incompletas" status="status">
+						<s:if test="tab==4">
+							<s:if test="detalles.size()>0">
+								<img src="res/img/important.png" id="h4" alt="ayuda" 
+								onmouseover="tip(this);" name="h4" height="15" width="15" />
+							</s:if>							
+							<s:else>
+								<img src="res/img/correcto.png" id="h4" alt="ayuda" 
+								onmouseover="tip(this);" name="h4" height="15" width="15" />
+							</s:else>
+						</s:if>					
+						</s:iterator>
+					</s:a>
 				</li>
 			</s:if>
 			<s:else>
 				<li>
-					<s:a href="prepararFuncionalidades"><s:text name="funcionalidades"></s:text></s:a>
+					<s:a href="prepararFuncionalidades">
+						<s:text name="funcionalidades"></s:text>
+						<s:iterator value="tabs_incompletas" status="status">
+						<s:if test="tab==4">
+							<s:if test="detalles.size()>0">
+								<img src="res/img/important.png" id="h4" alt="ayuda" 
+								onmouseover="tip(this);" name="h4" height="15" width="15" />
+							</s:if>							
+							<s:else>
+								<img src="res/img/correcto.png" id="h4" alt="ayuda" 
+								onmouseover="tip(this);" name="h4" height="15" width="15" />
+							</s:else>
+						</s:if>					
+						</s:iterator>
+					</s:a>
 				</li>
 			</s:else>	
-			<s:if test="%{tab==4}">
+			<s:if test="%{tab==5}">
 				<li class="active">
-					<a><s:text name="tab4.title"></s:text> </a>
+					<a>
+						<s:text name="tab4.title"></s:text>
+						<s:iterator value="tabs_incompletas" status="status">
+						<s:if test="tab==5">
+							<s:if test="detalles.size()>0">
+								<img src="res/img/important.png" id="h5" alt="ayuda" 
+								onmouseover="tip(this);" name="h5" height="15" width="15" />
+							</s:if>							
+							<s:else>
+								<img src="res/img/correcto.png" id="h5" alt="ayuda" 
+								onmouseover="tip(this);" name="h5" height="15" width="15" />
+							</s:else>
+						</s:if>					
+						</s:iterator>
+					 </a>
 				</li>
 			</s:if>
 			<s:else>
@@ -140,10 +269,25 @@
 					<s:url id="prepararFormulario"	action="prepararDescripcionSoporte" />
 				</s:if>
 				<li>
-					<s:a href="%{prepararFormulario}"><s:text name="tab4.title"></s:text></s:a>
+					<s:a href="%{prepararFormulario}">
+						<s:text name="tab4.title"></s:text>
+						<s:iterator value="tabs_incompletas" status="status">
+						<s:if test="tab==5">
+							<s:if test="detalles.size()>0">
+								<img src="res/img/important.png" id="h5" alt="ayuda" 
+								onmouseover="tip(this);" name="h5" height="15" width="15" />
+							</s:if>							
+							<s:else>
+								<img src="res/img/correcto.png" id="h5" alt="ayuda" 
+								onmouseover="tip(this);" name="h5" height="15" width="15" />
+							</s:else>
+						</s:if>					
+						</s:iterator>
+					</s:a>
 				</li>
 			</s:else>
-		</ul>			
+		</ul>
+<!-- START TAB 1 -->			
 			<s:if test="%{tab==1}">
 				<form action="<s:property value="#action"/>" id="formSI" name="formSI" method="post" enctype="multipart/form-data">
 				<div class="tab_description">
@@ -296,7 +440,7 @@
 					</div>
 				</s:if>						
 				<s:if test="%{tab==2}">
-				<!-- START TAB 2 -->
+<!-- START TAB 2 -->
 				
 				<div class="tab_description">
 					<div class="tab_description_left">
@@ -307,7 +451,9 @@
 					</div>
 					<div class="tab_description_right">
 					<br>
-					<input type="submit" class="tab_button" name="submit" value='<s:text name="registro.finalizar"></s:text>' id="btn_submit_2"/>
+					<form action="terminar_registro_si" id="formSI" name="formSI" method="post" enctype="multipart/form-data">
+						<input type="submit" class="tab_button" name="submit" value='<s:text name="registro.finalizar"></s:text>' id="btn_submit_2"/>
+					</form>
 					</div>
 				</div>
 				<div class="tab_container_height tab_container">
@@ -607,7 +753,7 @@
 					</div>
 				<!-- END TAB 3 -->
 				</s:if>						
-				<s:if test="%{tab==4}">
+				<s:if test="%{tab==5}">
 				<form action="<s:property value="#action"/>" method="post"
 							enctype="multipart/form-data" id="formSI_Tab4" name="formSI_Tab4">
 				<div class="tab_description">
@@ -624,7 +770,7 @@
 					</div>					
 				</div>	
 				<div class="tab_container_height tab_container">	
-				<!-- START TAB 4 -->
+				<!-- START TAB 45-->
 					<div id="tab4" class="tab_content">
 						<h5 class="requerido">
 							<s:text name="usuario.modificar.requerido" />
@@ -706,8 +852,11 @@
 					<div class="t3" style="visibility: hidden; display: none;">
 						<s:text name="tooltip.registro.correo"/>
 					</div>
+					<div class="n" style="visibility: hidden; display: none;">
+						<s:property value="ListaServicios.size()" />
+					</div>
 				</s:if>
-				<!-- END TAB 4 -->
+				<!-- END TAB 5 -->
 			</div>
 			</div>
 		<div class="clr"></div>

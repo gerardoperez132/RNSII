@@ -34,6 +34,7 @@ import ve.gob.cnti.rnsii.modelo.Funcionalidad;
 import ve.gob.cnti.rnsii.modelo.ServicioInformacion;
 import ve.gob.cnti.rnsii.modelo.TipoDato;
 import ve.gob.cnti.rnsii.modelo.Usuario;
+import ve.gob.cnti.rnsii.util.Tabs_incompletes;
 
 
 
@@ -68,6 +69,8 @@ public class SalidaControlador extends DAO implements Formulario,
 	private boolean modificar;
 	
 	private Date fecha;
+	
+	private List<Tabs_incompletes> tabs_incompletas = new ArrayList<Tabs_incompletes>();
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -79,6 +82,7 @@ public class SalidaControlador extends DAO implements Formulario,
 		salidas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad, SALIDA);
 		tipoDatos = (List<TipoDato>) read(new TipoDato());
 		complejo = false;
+		tabs_incompletas = getIncompleteFields2(servicio);
 		return SUCCESS;
 	}
 
@@ -92,71 +96,71 @@ public class SalidaControlador extends DAO implements Formulario,
 		tipoDatos = (List<TipoDato>) read(new TipoDato());
 		formatos = (ArrayList<Formato>) read(new Formato());
 		complejo = false;
+		tabs_incompletas = getIncompleteFields2(servicio);
 		return SUCCESS;
 	}
 
 	@SuppressWarnings("unchecked")
 	@SkipValidation
-	public String prepararFormularioSimple() {
-		
+	public String prepararFormularioSimple() {		
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		salidas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad, SALIDA);
 		tipoDatos = (List<TipoDato>) getSimple();
 		formatos = (ArrayList<Formato>) read(new Formato());
 		complejo = false;
+		tabs_incompletas = getIncompleteFields2(servicio);
 		return SUCCESS;
 	}
 
 	@SuppressWarnings("unchecked")
 	@SkipValidation
-	public String prepararFormularioComplejo() {
-		
+	public String prepararFormularioComplejo() {		
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		salidas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad, SALIDA);
 		tipoDatos = (List<TipoDato>) getComplex();
 		complejo = true;
+		tabs_incompletas = getIncompleteFields2(servicio);
 		return SUCCESS;
 	}
 
 	@SuppressWarnings("unchecked")
 	@SkipValidation
-	public String prepararModificarSalida() {
-		
+	public String prepararModificarSalida() {		
 		salida = (EntradaSalida) read(salida, id_entrada_salida);
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		tipoDatos = (List<TipoDato>) read(new TipoDato());
 		formatos = (ArrayList<Formato>) read(new Formato());
+		tabs_incompletas = getIncompleteFields2(servicio);
 		return SUCCESS;
 	}
 
 	@SuppressWarnings("unchecked")
 	@SkipValidation
-	public String prepararModificarSalidaSimple() {
-		
+	public String prepararModificarSalidaSimple() {		
 		salida = (EntradaSalida) read(salida, id_entrada_salida);
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		tipoDatos = (List<TipoDato>) getSimple();
 		formatos = (ArrayList<Formato>) read(new Formato());
+		tabs_incompletas = getIncompleteFields2(servicio);
 		return SUCCESS;
 	}
 
 	@SuppressWarnings("unchecked")
 	@SkipValidation
-	public String prepararModificarSalidaCompleja() {
-		
+	public String prepararModificarSalidaCompleja() {		
 		salida = (EntradaSalida) read(salida, id_entrada_salida);
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		tipoDatos = (List<TipoDato>) getComplex();
+		tabs_incompletas = getIncompleteFields2(servicio);
 		return SUCCESS;
 	}
 
-	public String registrarSalida() {
-		
+	public String registrarSalida() {		
 		Usuario user = new Usuario();
 		session = ActionContext.getContext().getSession();
 		user = (Usuario) session.get("usuario");
@@ -167,12 +171,13 @@ public class SalidaControlador extends DAO implements Formulario,
 			salida.setId_padre(id_salida_padre);
 		}
 		create(salida);
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		tabs_incompletas = getIncompleteFields2(servicio);
 		return SUCCESS;
 	}
 
 	@SuppressWarnings("unchecked")
-	public String modificarSalida() {
-		
+	public String modificarSalida() {		
 		Usuario user = new Usuario();
 		session = ActionContext.getContext().getSession();
 		user = (Usuario) session.get("usuario");
@@ -189,13 +194,13 @@ public class SalidaControlador extends DAO implements Formulario,
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		salidas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad, SALIDA);
 		tipoDatos = (List<TipoDato>) read(new TipoDato());
+		tabs_incompletas = getIncompleteFields2(servicio);
 		return SUCCESS;
 	}
 
 	@SuppressWarnings("unchecked")
 	@SkipValidation
-	public String eliminarSalidaSimple() {
-		
+	public String eliminarSalidaSimple() {		
 		Usuario user = new Usuario();
 		session = ActionContext.getContext().getSession();
 		user = (Usuario) session.get("usuario");
@@ -209,6 +214,7 @@ public class SalidaControlador extends DAO implements Formulario,
 			update(servicio, id_servicio_informacion);
 		}
 		tipoDatos = (List<TipoDato>) read(new TipoDato());
+		tabs_incompletas = getIncompleteFields2(servicio);
 		return SUCCESS;
 	}
 
@@ -216,8 +222,7 @@ public class SalidaControlador extends DAO implements Formulario,
 	// directamente del metodo del dao
 	@SuppressWarnings("unchecked")
 	@SkipValidation
-	public String eliminarSalidaCompleja() {
-		
+	public String eliminarSalidaCompleja() {		
 		salidas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad, SALIDA);
 		Iterator<EntradaSalida> iterator = salidas.iterator();
 		while (iterator.hasNext()) {
@@ -235,12 +240,12 @@ public class SalidaControlador extends DAO implements Formulario,
 			update(servicio, id_servicio_informacion);
 		}
 		tipoDatos = (List<TipoDato>) read(new TipoDato());
+		tabs_incompletas = getIncompleteFields2(servicio);
 		return SUCCESS;
 	}
 
 	@Override
-	public void validate() {
-		
+	public void validate() {		
 		if (salida.getNombre().trim().isEmpty())
 			addFieldError("salida.nombre",
 					error.getProperties().getProperty("error.salida.nombre"));
@@ -433,6 +438,14 @@ public class SalidaControlador extends DAO implements Formulario,
 
 	public void setId_salida_padre(long id_salida_padre) {
 		this.id_salida_padre = id_salida_padre;
+	}
+
+	public List<Tabs_incompletes> getTabs_incompletas() {
+		return tabs_incompletas;
+	}
+
+	public void setTabs_incompletas(List<Tabs_incompletes> tabs_incompletas) {
+		this.tabs_incompletas = tabs_incompletas;
 	}
 
 }

@@ -19,6 +19,7 @@
 <script type="text/javascript" src="res/js/jquery-1.7.1.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/jquery.validate.js" charset="UTF-8"></script>
 <script src="res/js/messages_es.js" type="text/javascript" charset="UTF-8"></script>
+<script src="res/js/main.js" type="text/javascript" charset="UTF-8"></script>
 <script src="res/js/registro/formulario_salida.js" type="text/javascript" charset="UTF-8"></script>
 <!-- Added... -->
 <link rel="stylesheet" type="text/css" href="res/js/plugins/sexy-tooltips/blue.css" media="all">
@@ -31,6 +32,24 @@
 <title><s:text name="registro.title"></s:text></title>
 </head>
 <body class="bg clearfix">
+	<s:iterator value="tabs_incompletas" status="status">			
+		<div class="h<s:property value="tab" />" style="visibility: hidden; display: none;">	
+			<s:if test="detalles.size()>0">
+				<s:iterator value="detalles">
+					<p><s:property/></p>
+				</s:iterator>
+			</s:if>		
+			<s:else>
+				<p><s:text name="servicio.tab.complete"></s:text></p>
+			</s:else>			
+		</div>						
+	</s:iterator>
+	<div class="h2" style="visibility: hidden; display: none;">
+			<p><s:text name="servicio.tab.complete"></s:text></p>
+	</div>
+	<div class="n" style="visibility: hidden; display: none;">
+		<s:property value="tabs_incompletas.size()+1" />
+	</div>
 	<s:if test="modificar!=true">
 		<s:set name="action" var="action">registrarSalida</s:set>
 		<s:set name="modificar" value="%{false}" />
@@ -67,19 +86,79 @@
 				
 		<ul class="tabs">					
 			<li>
-				<a href="prepararDescripcionGeneral"><s:text name="tab1.title"></s:text></a>
+				<a href="prepararDescripcionGeneral">
+					<s:text name="tab1.title"></s:text>
+					<s:iterator value="tabs_incompletas" status="status">
+					<s:if test="tab==1">
+						<s:if test="detalles.size()>0">
+							<img src="res/img/important.png" id="h1" alt="ayuda" 
+							onmouseover="tip(this);" name="h1" height="15" width="15" />
+						</s:if>							
+						<s:else>
+							<img src="res/img/correcto.png" id="h1" alt="ayuda" 
+							onmouseover="tip(this);" name="h1" height="15" width="15" />
+						</s:else>
+					</s:if>					
+					</s:iterator>
+				</a>
 			</li>
 			<li>
-				<a href="prepararAspectosLegales"><s:text name="tab2.title"></s:text></a>
+				<a href="prepararAspectosLegales">
+					<s:text name="tab2.title"></s:text>							
+					<img src="res/img/correcto.png" id="h2" alt="ayuda" 
+					onmouseover="tip(this);" name="h2" height="15" width="15" />								
+				</a>
 			</li>
 			<li>
-				<a href="prepararDescripcionTecnica"><s:text name="tab3.title"></s:text></a>
+				<a href="prepararDescripcionTecnica">
+					<s:text name="tab3.title"></s:text>
+					<s:iterator value="tabs_incompletas" status="status">
+					<s:if test="tab==3">
+						<s:if test="detalles.size()>0">
+							<img src="res/img/important.png" id="h3" alt="ayuda" 
+							onmouseover="tip(this);" name="h3" height="15" width="15" />
+						</s:if>							
+						<s:else>
+							<img src="res/img/correcto.png" id="h3" alt="ayuda" 
+							onmouseover="tip(this);" name="h3" height="15" width="15" />
+						</s:else>
+					</s:if>					
+					</s:iterator>
+				</a>
 			</li>
 			<li class="active">
-				<a href="prepararFuncionalidades"><s:text name="funcionalidades"></s:text></a>
+				<a>
+					<s:text name="funcionalidades"></s:text>
+					<s:iterator value="tabs_incompletas" status="status">
+					<s:if test="tab==4">
+						<s:if test="detalles.size()>0">
+							<img src="res/img/important.png" id="h4" alt="ayuda" 
+							onmouseover="tip(this);" name="h4" height="15" width="15" />
+						</s:if>							
+						<s:else>
+							<img src="res/img/correcto.png" id="h4" alt="ayuda" 
+							onmouseover="tip(this);" name="h4" height="15" width="15" />
+						</s:else>
+					</s:if>					
+					</s:iterator>
+				</a>
 			</li>
 			<li>
-				<a href="prepararDescripcionSoporte"><s:text name="tab4.title"></s:text></a>
+				<a href="prepararDescripcionSoporte">
+					<s:text name="tab4.title"></s:text>
+					<s:iterator value="tabs_incompletas" status="status">
+					<s:if test="tab==5">
+						<s:if test="detalles.size()>0">
+							<img src="res/img/important.png" id="h5" alt="ayuda" 
+							onmouseover="tip(this);" name="h5" height="15" width="15" />
+						</s:if>							
+						<s:else>
+							<img src="res/img/correcto.png" id="h5" alt="ayuda" 
+							onmouseover="tip(this);" name="h5" height="15" width="15" />
+						</s:else>
+					</s:if>					
+					</s:iterator>
+				</a>
 			</li>
 		</ul>
 		

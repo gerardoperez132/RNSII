@@ -196,8 +196,7 @@
 																style="font-size: 0.9em; text-transform: none;" />
 														</form>
 													</td>
-													<td style="margin: 0; padding: 0;">
-													<!-- ADVERTENCIA => CONTENIDO NO INTERNACIONALIZADO. -->
+													<td style="margin: 0; padding: 0;">													
 														<img src="res/img/important.png" id="h<s:property value='#result_datos.index'/>" alt="ayuda" onmouseover="tip(this);" name="h<s:property value='#result_datos.index'/>" height="25" width="30" />
 														<div class="h<s:property value='#result_datos.index'/>" style="visibility: hidden; display: none;">
 															<s:iterator value="incompletos">

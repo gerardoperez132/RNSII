@@ -74,9 +74,10 @@ ul.tabs li a {
 	text-decoration: none;
 	color: #000;
 	display: block;
-	font-size: 1em;
-	padding: 0 10px;
+	font-size: 11px;	
 	border: 1px solid #fff;
+	padding-left: 3px;
+	padding-right: 3px;
 }
 
 ul.tabs li a:hover {

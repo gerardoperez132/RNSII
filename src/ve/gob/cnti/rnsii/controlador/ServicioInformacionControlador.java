@@ -52,6 +52,7 @@ import ve.gob.cnti.rnsii.modelo.UnionAreaServicioInformacion;
 import ve.gob.cnti.rnsii.modelo.UnionArquitecturaServicioInformacion;
 import ve.gob.cnti.rnsii.modelo.Url;
 import ve.gob.cnti.rnsii.modelo.Usuario;
+import ve.gob.cnti.rnsii.util.Tabs_incompletes;
 
 
 
@@ -120,6 +121,8 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	private String submit;	
 	
 	private Date fecha;
+	
+	private List<Tabs_incompletes> tabs_incompletas = new ArrayList<Tabs_incompletes>(); 
 
 	@SuppressWarnings("unchecked")
 	@SkipValidation
@@ -152,13 +155,14 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		sectores = (List<Sector>) getSortedList(new Sector(), ASC);
 		estados = (List<Estado>) read(new Estado());
 		areas = (List<Area>) read(new Area());
+		if(servicio.getId_servicio_informacion()!=0)
+			tabs_incompletas = getIncompleteFields2(servicio);
 		return SUCCESS;
 	}
 
 	@SuppressWarnings("unchecked")
 	@SkipValidation
-	public String prepararAspectosLegales() {
-		
+	public String prepararAspectosLegales() {		
 		if (getSessionStack(isValidate).equals("error"))
 			return "errorSession";
 		try {
@@ -168,6 +172,8 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		} catch (Exception e) {
 			return "error";
 		}
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		tabs_incompletas = getIncompleteFields2(servicio);
 		tab = ASPECTOS_LEGALES;
 		return SUCCESS;
 	}
@@ -185,6 +191,8 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		arquitecturas = (List<Arquitectura>) read(new Arquitectura());
 		parents = (List<Intercambio>) getParents(new Intercambio());
 		children = (List<Intercambio>) getChildren(new Intercambio());
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		tabs_incompletas = getIncompleteFields2(servicio);
 		return SUCCESS;
 	}
 
@@ -197,6 +205,8 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			setModificar(true);
 		}
 		tab = DESCRIPCION_SOPORTE;
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		tabs_incompletas = getIncompleteFields2(servicio);
 		return SUCCESS;
 	}
 
@@ -205,7 +215,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			IllegalAccessException, InvocationTargetException,
 			NoSuchMethodException {
 		
-		// Obtener de la sesión
+		// Obtener de la sesión		
 		try {
 			setNuevo((Boolean) session.get("nuevo"));
 			setModificar((Boolean) session.get("modificar"));
@@ -280,11 +290,12 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			} catch (Exception e) {
 				System.out.println("Error guardando las áreas");
 			}
-		}
+		}		
+		servicio.setId_servicio_informacion(id_servicio_informacion);
 		if (setSessionStack().equals("error"))
 			return "errorSession";
 		
-		if(submit.contentEquals(message.getProperties().getProperty("registro.finalizar")))
+		if(submit != null && submit.contentEquals(message.getProperties().getProperty("registro.finalizar")))
 			return "end";
 			
 		return SUCCESS;
@@ -352,7 +363,10 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		files = (List<AspectoLegal>) read(ALSI, id_servicio_informacion, -1);
 		name = "";
 		
-		if(submit.contentEquals(message.getProperties().getProperty("registro.finalizar")))
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		tabs_incompletas = getIncompleteFields2(servicio);
+		
+		if(submit != null && submit.contentEquals(message.getProperties().getProperty("registro.finalizar")))
 			return "end";
 		
 		return SUCCESS;
@@ -505,7 +519,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		if (setSessionStack().equals("error"))
 			return "errorSession";
 		
-		if(submit.contentEquals(message.getProperties().getProperty("registro.finalizar")))
+		if(submit != null && submit.contentEquals(message.getProperties().getProperty("registro.finalizar")))
 			return "end";
 		
 		return SUCCESS;
@@ -616,7 +630,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		if (setSessionStack().equals("error"))
 			return "errorSession";
 		
-		if(submit.contentEquals(message.getProperties().getProperty("registro.finalizar")))
+		if(submit != null && submit.contentEquals(message.getProperties().getProperty("registro.finalizar")))
 			return "end";
 		
 		return SUCCESS;
@@ -997,7 +1011,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		setModificar(true);
 		files = (List<AspectoLegal>) read(ALSI, id_servicio_informacion, -1);
 		if (setSessionStack().equals("error"))
-			return "errorSession";
+			return "errorSession";		
 		prepararDescripcionGeneral();
 		return SUCCESS;
 	}
@@ -1353,6 +1367,14 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 
 	public void setSubmit(String submit) {
 		this.submit = submit;
+	}
+
+	public List<Tabs_incompletes> getTabs_incompletas() {
+		return tabs_incompletas;
+	}
+
+	public void setTabs_incompletas(List<Tabs_incompletes> tabs_incompletas) {
+		this.tabs_incompletas = tabs_incompletas;
 	}
 	
 }

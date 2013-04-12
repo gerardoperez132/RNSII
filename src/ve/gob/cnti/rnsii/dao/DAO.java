@@ -38,6 +38,7 @@ import ve.gob.cnti.rnsii.dao.Constants.Estados;
 import ve.gob.cnti.rnsii.dao.Constants.Modelos;
 import ve.gob.cnti.rnsii.dao.Constants.Sentencias;
 import ve.gob.cnti.rnsii.dao.Constants.Status;
+import ve.gob.cnti.rnsii.dao.Constants.Tabs;
 import ve.gob.cnti.rnsii.dao.Constants.TipoEntradaSalida;
 import ve.gob.cnti.rnsii.i18n.Errors;
 import ve.gob.cnti.rnsii.i18n.Messages;
@@ -57,6 +58,7 @@ import ve.gob.cnti.rnsii.util.ListaServiciosVisitados;
 import ve.gob.cnti.rnsii.util.SectoresMasPublicados;
 import ve.gob.cnti.rnsii.util.SubscriptionRequest;
 import ve.gob.cnti.rnsii.util.SubscriptionResponse;
+import ve.gob.cnti.rnsii.util.Tabs_incompletes;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -75,7 +77,7 @@ import com.opensymphony.xwork2.ActionSupport;
 @SuppressWarnings("serial")
 public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		ClaseDato, TipoEntradaSalida, Sentencias, ErrorServicio, Estados,
-		Modelos {
+		Modelos, Tabs{
 
 	public static Messages message = new Messages();
 	public static Errors error = new Errors();
@@ -836,6 +838,156 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		}
 		return incompletos;
 	}
+	
+	@Override
+	@SuppressWarnings({ "unchecked" })
+	public List<Tabs_incompletes> getIncompleteFields2(ServicioInformacion servicio) {		
+		
+		//Mensajes de los campos incompletos de una pestaña
+		Tabs_incompletes mensajes = new Tabs_incompletes();
+		
+		//Lista con los mensajes de los campos incompletos
+		List<Tabs_incompletes> mensajes_lista = new ArrayList<Tabs_incompletes>();
+		
+		//Lista temporal con los mensajes de los campos incompletos
+		List<String> incompletos = new ArrayList<String>();		
+		
+		//Diferentes lecturas para verificar que el servicio de información 
+		List<UnionAreaServicioInformacion> unionareas;
+		unionareas = (List<UnionAreaServicioInformacion>) readUnion(
+				new UnionAreaServicioInformacion(), servicio,
+				servicio.getId_servicio_informacion());
+		List<UnionArquitecturaServicioInformacion> unionarquitecturas;
+		unionarquitecturas = (List<UnionArquitecturaServicioInformacion>) readUnion(
+				new UnionArquitecturaServicioInformacion(), servicio,
+				servicio.getId_servicio_informacion());
+		Url wsdl = new Url();		
+		wsdl = (Url) getUrl(servicio,servicio.getId_servicio_informacion());
+		Object[] models = { new Funcionalidad(), new ServicioInformacion() };
+		List<Funcionalidad> funcionalidades = new ArrayList<Funcionalidad>();
+		funcionalidades = (List<Funcionalidad>) read(models,
+				servicio.getId_servicio_informacion(), -1);
+		Telefono phone = new Telefono();
+		phone = (Telefono) getPhone(servicio, servicio.getId_servicio_informacion());		
+		Correo email = new Correo();
+		email = (Correo) getEmail(servicio,	servicio.getId_servicio_informacion());
+		
+		
+		//Validaciones para llenar la lista con los campos que estan incompletos
+		//TAB1
+		if (servicio.getId_sector() == 0 || servicio.getId_estado() == DESARROLLO || 
+				servicio.getNombre()== null || unionareas.isEmpty() || 
+				servicio.getDescripcion()== null) {			
+			incompletos.add(error.getProperties().getProperty(
+					"error.servicio.incomplete.tab"));
+			if (servicio.getId_sector() == 0) {			
+				incompletos.add(error.getProperties().getProperty(
+						"error.servicio.incomplete.sector"));
+			}if (servicio.getId_estado() == DESARROLLO) {			
+				incompletos.add(error.getProperties().getProperty(
+						"error.servicio.incomplete.estado"));
+			}if (servicio.getNombre()==null) {			
+				incompletos.add(error.getProperties().getProperty(
+						"error.servicio.incomplete.nombre"));
+			}if (servicio.getDescripcion()==null) {			
+				incompletos.add(error.getProperties().getProperty(
+						"error.servicio.incomplete.descripcion"));
+			}if (unionareas.isEmpty()) {			
+				incompletos.add(error.getProperties().getProperty(
+						"error.servicio.incomplete.area"));
+			}				
+		}
+		mensajes.setTab(DESCRIPCION_GENERAL);
+		mensajes.setDetalles(incompletos);
+		mensajes_lista.add(mensajes);
+		incompletos = new ArrayList<String>();mensajes = new Tabs_incompletes();
+			
+		
+		//TAB3
+		if (servicio.getId_seguridad() == 0 || unionarquitecturas.isEmpty() || 
+				servicio.getId_intercambio() == 0 || servicio.getVersion()== null || 
+				(servicio.getId_estado() == IMPLEMENTADO && wsdl==null)) {
+			incompletos.add(error.getProperties().getProperty(
+					"error.servicio.incomplete.tab"));
+			if (servicio.getId_seguridad() == 0) {
+				incompletos.add(error.getProperties().getProperty(
+						"error.servicio.incomplete.seguridad"));
+			}if (unionarquitecturas.isEmpty()) {
+				incompletos.add(error.getProperties().getProperty(
+						"error.servicio.incomplete.seguridad"));
+			}if (servicio.getId_intercambio() == 0) {
+				incompletos.add(error.getProperties().getProperty(
+						"error.servicio.incomplete.intercambio"));
+			}if (servicio.getVersion()==null) {
+				incompletos.add(error.getProperties().getProperty(
+						"error.servicio.incomplete.version"));
+			}if ((servicio.getId_estado() == IMPLEMENTADO && wsdl==null)) {
+				incompletos.add(error.getProperties().getProperty(
+						"error.servicio.wsdl"));
+			}	
+		}
+		mensajes.setTab(DESCRIPCION_TECNICA);
+		mensajes.setDetalles(incompletos);
+		mensajes_lista.add(mensajes);
+		incompletos = new ArrayList<String>();mensajes = new Tabs_incompletes();
+				
+		//TAB4		
+		if (funcionalidades.isEmpty()) {			
+			incompletos.add(error.getProperties().getProperty(
+					"error.servicio.incomplete.tab"));
+			incompletos.add(error.getProperties().getProperty(
+					"error.servicio.incomplete.funcionalidades"));			
+			mensajes.setTab(Funcionalidades);
+			mensajes.setDetalles(incompletos);			
+		} else {
+			Iterator<Funcionalidad> fxIterado = funcionalidades.iterator();
+			Funcionalidad fx = new Funcionalidad();
+			while (fxIterado.hasNext()) {
+				fx = fxIterado.next();
+				Object[] models2 = { new EntradaSalida(), new Funcionalidad() };
+				List<EntradaSalida> salidas_tmp = new ArrayList<EntradaSalida>();
+				salidas_tmp = (List<EntradaSalida>) read(models2,
+						fx.getId_funcionalidad(), SALIDA);
+				if (salidas_tmp.isEmpty()) {	
+					incompletos.add(error.getProperties().getProperty(
+							"error.servicio.incomplete.tab"));					
+					incompletos.add(error.getProperties().getProperty(
+							"error.servicio.incomplete.salidas"));
+					mensajes.setTab(Funcionalidades);
+					mensajes.setDetalles(incompletos);					
+					break;
+				}
+			}
+		}
+		if(incompletos.isEmpty()){
+			mensajes.setTab(Funcionalidades);
+			mensajes.setDetalles(incompletos);
+		}
+		mensajes_lista.add(mensajes);
+		incompletos = new ArrayList<String>();mensajes = new Tabs_incompletes();
+		
+		//TAB5
+		if (phone == null || email == null || servicio.getResponsable()== null) {
+			incompletos.add(error.getProperties().getProperty(
+					"error.servicio.incomplete.tab"));
+			if (phone == null) {
+				incompletos.add(error.getProperties().getProperty(
+						"error.servicio.incomplete.telefono"));
+			}if (email == null) {
+				incompletos.add(error.getProperties().getProperty(
+						"error.servicio.incomplete.correo"));
+			}if (servicio.getResponsable()==null) {
+				incompletos.add(error.getProperties().getProperty(
+						"error.servicio.incomplete.responsable"));
+			}					
+		}	
+		mensajes.setTab(DESCRIPCION_SOPORTE);
+		mensajes.setDetalles(incompletos);
+		mensajes_lista.add(mensajes);
+		incompletos = new ArrayList<String>();mensajes = new Tabs_incompletes();
+		
+		return mensajes_lista;
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -893,7 +1045,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		return result;
 	}
 
-	@SuppressWarnings("unchecked")
+
 	@Override
 	public ArrayList<ServicioInformacion> buscarServicio(String cadena,
 			byte orderBy) {
@@ -902,6 +1054,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		try {
 			startConnection();
 			// TODO Arreglar la búsqueda
+			@SuppressWarnings("rawtypes")
 			List result = session
 					.createSQLQuery(
 							"SELECT s.id, s.nombre, s.descripcion, s.id_servicio_informacion, s.id_ente, s.id_estado, s.id_intercambio, s.id_sector, s.id_seguridad, s.id_usuario, s.publicado, s.responsable, s.version, s.fecha_creado, s.fecha_modificado, s.mod_user, s.status"
@@ -919,6 +1072,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 									+ cadena
 									+ "%', 'áéíóúÁÉÍÓÚ', 'aeiouAEIOU'))) ORDER BY s.nombre "
 									+ order).list();
+			@SuppressWarnings("rawtypes")
 			Iterator iterator = result.iterator();
 			while (iterator.hasNext()) {
 				Object[] set = (Object[]) iterator.next();
