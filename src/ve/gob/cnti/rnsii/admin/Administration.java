@@ -42,31 +42,31 @@ public class Administration extends DAO implements ServletRequestAware {
 //			msj_error = error.getProperties().getProperty("error.regex.email");
 //			return INPUT;
 //		}
-//		// user_email = (email) getUserEmail(email);
-//		// if (user_email == null) {
-//		// msj_error = error.getProperties()
-//		// .getProperty("error.login.invalid");
-//		// return INPUT;
-//		// } else {
-//		// usuario = (Usuario) read(usuario, user_email.getId_usuario());
-//		// if (usuario == null) {
-//		// msj_error = error.getProperties().getProperty(
-//		// "error.login.invalid");
-//		// return INPUT;
-//		// } else if (!usuario.getClave().equals(
-//		// new MD5Hashing(password).getPassword().toString())) {
-//		// msj_error = error.getProperties().getProperty(
-//		// "error.login.invalid");
-//		// return INPUT;
-//		// } else {
-//		// Ente ente = new Ente();
-//		// ente = (Ente) read(ente, usuario.getId_ente());
-//		// session.put("logueado", true);
-//		// session.put("usuario", usuario);
-//		// session.put("ente_sesion", ente);
-//		// return SUCCESS;
-//		// }
-//		// }
+//		 user_email = (email) getUserEmail(email);
+//		 if (user_email == null) {
+//		 msj_error = error.getProperties()
+//		 .getProperty("error.login.invalid");
+//		 return INPUT;
+//		 } else {
+//		 usuario = (Usuario) read(usuario, user_email.getId_usuario());
+//		 if (usuario == null) {
+//		 msj_error = error.getProperties().getProperty(
+//		 "error.login.invalid");
+//		 return INPUT;
+//		 } else if (!usuario.getClave().equals(
+//		 new MD5Hashing(password).getPassword().toString())) {
+//		 msj_error = error.getProperties().getProperty(
+//		 "error.login.invalid");
+//		 return INPUT;
+//		 } else {
+//		 Ente ente = new Ente();
+//		 ente = (Ente) read(ente, usuario.getId_ente());
+//		 session.put("logueado", true);
+//		 session.put("usuario", usuario);
+//		 session.put("ente_sesion", ente);
+//		 return SUCCESS;
+//		 }
+//		 }
 //		return SUCCESS;
 //	}
 
