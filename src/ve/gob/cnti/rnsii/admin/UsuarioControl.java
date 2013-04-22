@@ -39,7 +39,7 @@ public class UsuarioControl extends DAO  {
 			accion_usuario = 0;
 			String code = RandomStringUtils.randomAlphanumeric(8);
 			Correo email = new Correo();
-			MD5Hashing pass = new MD5Hashing(code.toString());
+			MD5Hashing pass = new MD5Hashing(code.toUpperCase().toString());
 			
 			//1- Enviar al usuario un correo con la clave generada aleatoriamente 
 			EnviarCorreo enviarMail = new EnviarCorreo();
