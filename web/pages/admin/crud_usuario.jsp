@@ -36,12 +36,12 @@
 			<%@include file="sidebar_admin.jsp"%>
 			<!-- Este es el div de contenidos -->
 			<div class="contenido">
-				<h1><a><s:text name="titulo2" /></a></h1>
-				<div class="pasos">
-					<label class="pasos_lbl"><s:text name="configuración" /></label>
-				</div>
+				<h1><a><s:text name="titulo2" /></a></h1>				
 				<s:if test="accion_usuario==1">
 <!-- CREAR USUARIO -->
+					<div class="pasos">
+						<label class="pasos_lbl"><s:text name="configuración" /> - <s:text name="usuario.registro" /></label>
+					</div>	
 					<form action="registrar_usuario_execute" method="post"	id="registrar_usuario" name="crud_usuario">
 						<%@include file="layout/formulario_usuario.jsp"%>
 					</form>
