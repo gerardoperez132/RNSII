@@ -52,6 +52,7 @@ import ve.gob.cnti.rnsii.modelo.UnionAreaServicioInformacion;
 import ve.gob.cnti.rnsii.modelo.UnionArquitecturaServicioInformacion;
 import ve.gob.cnti.rnsii.modelo.Url;
 import ve.gob.cnti.rnsii.modelo.Usuario;
+import ve.gob.cnti.rnsii.util.Tabs_incompletes;
 
 import com.opensymphony.xwork2.ActionContext;
 
@@ -115,7 +116,11 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	private long id_aspecto_legal;
 	private long nVisitas;
 
+	private String submit;	
+
 	private Date fecha;
+	
+	private List<Tabs_incompletes> tabs_incompletas = new ArrayList<Tabs_incompletes>(); 
 
 	@SuppressWarnings("unchecked")
 	@SkipValidation
@@ -142,18 +147,20 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		if (getSessionStack(isValidate).equals("error"))
 			return "errorSession";
 		if (isComplete(servicio))
-			setModificar(true);
+			setModificar(true);		
 		tab = DESCRIPCION_GENERAL;
 		// sectores = (List<Sector>) read(new Sector());
 		sectores = (List<Sector>) getSortedList(new Sector(), ASC);
 		estados = (List<Estado>) read(new Estado());
 		areas = (List<Area>) read(new Area());
+		if(servicio.getId_servicio_informacion()!=0)
+			tabs_incompletas = getIncompleteFields2(servicio);
 		return SUCCESS;
 	}
 
 	@SuppressWarnings("unchecked")
 	@SkipValidation
-	public String prepararAspectosLegales() {
+	public String prepararAspectosLegales() {		
 
 		if (getSessionStack(isValidate).equals("error"))
 			return "errorSession";
@@ -164,6 +171,8 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		} catch (Exception e) {
 			return "error";
 		}
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		tabs_incompletas = getIncompleteFields2(servicio);
 		tab = ASPECTOS_LEGALES;
 		return SUCCESS;
 	}
@@ -181,6 +190,8 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		arquitecturas = (List<Arquitectura>) read(new Arquitectura());
 		parents = (List<Intercambio>) getParents(new Intercambio());
 		children = (List<Intercambio>) getChildren(new Intercambio());
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		tabs_incompletas = getIncompleteFields2(servicio);
 		return SUCCESS;
 	}
 
@@ -193,6 +204,8 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			setModificar(true);
 		}
 		tab = DESCRIPCION_SOPORTE;
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		tabs_incompletas = getIncompleteFields2(servicio);
 		return SUCCESS;
 	}
 
@@ -201,7 +214,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			IllegalAccessException, InvocationTargetException,
 			NoSuchMethodException {
 
-		// Obtener de la sesión
+		// Obtener de la sesión	
 		try {
 			setNuevo((Boolean) session.get("nuevo"));
 			setModificar((Boolean) session.get("modificar"));
@@ -227,6 +240,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		servicio.setId_ente(ente.getId_ente());
 		servicio.setId_estado(estado);
 		servicio.setId_sector(sector);
+		
 		if (isModificar() && isComplete(servicio)) {
 			update(servicio, id_servicio_informacion);
 			Usuario user = (Usuario) session.get("usuario");
@@ -275,9 +289,14 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			} catch (Exception e) {
 				System.out.println("Error guardando las áreas");
 			}
-		}
+		}		
+		servicio.setId_servicio_informacion(id_servicio_informacion);
 		if (setSessionStack().equals("error"))
 			return "errorSession";
+		
+		if(submit != null && submit.contentEquals(message.getProperties().getProperty("registro.finalizar")))
+			return "end";
+			
 		return SUCCESS;
 	}
 
@@ -342,6 +361,13 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		create(documento);
 		files = (List<AspectoLegal>) read(ALSI, id_servicio_informacion, -1);
 		name = "";
+		
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		tabs_incompletas = getIncompleteFields2(servicio);
+		
+		if(submit != null && submit.contentEquals(message.getProperties().getProperty("registro.finalizar")))
+			return "end";
+		
 		return SUCCESS;
 	}
 
@@ -382,6 +408,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public String registrarDescripcionTecnica()
 			throws IllegalArgumentException, SecurityException,
 			IllegalAccessException, InvocationTargetException,
@@ -394,16 +421,25 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		} catch (Exception e) {
 			// Exception.
 		}
+		
 		Url url = new Url();
 		url.setId_servicio_informacion(id_servicio_informacion);
 		url.setUrl(wsdl);
+		
 		String version = servicio.getVersion();
+		
 		List<Long> arq = new ArrayList<Long>();
+		
 		long seguridad_tmp = seguridad;
+		
 		long intercambio_tmp = intercambio;
+		
 		String wsdl_tmp = wsdl;
+		
 		arq = arquitectura;
+		
 		getSessionStack(false);
+		
 		servicio.setId_seguridad(seguridad);
 		servicio.setId_intercambio(intercambio);
 		servicio.setVersion(String.valueOf(Float.parseFloat(version)));
@@ -411,6 +447,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		seguridad = seguridad_tmp;
 		intercambio = intercambio_tmp;
 		wsdl = wsdl_tmp;
+		
 		if (isModificar()) {
 			url = getUrl(servicio, id_servicio_informacion);
 			if (url != null) {
@@ -429,12 +466,13 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			url.setUrl(wsdl);
 			create(url);
 		}
+		
+		
 		if (isModificar() && isComplete(servicio)) {
-			update(servicio, id_servicio_informacion);
+			update(servicio, id_servicio_informacion);			
 			Usuario user = (Usuario) session.get("usuario");
 			UnionArquitecturaServicioInformacion unionArquitecturaServicioInformacion = new UnionArquitecturaServicioInformacion();
-			unionArquitecturaServicioInformacion.setId_usuario(user
-					.getId_usuario());
+			unionArquitecturaServicioInformacion.setId_usuario(user.getId_usuario());
 			try {
 				updateUnion(unionArquitecturaServicioInformacion,
 						new ServicioInformacion(), new Arquitectura(),
@@ -448,21 +486,41 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			servicio.setId_seguridad(seguridad);
 			servicio.setId_intercambio(intercambio);
 			servicio.setVersion(String.valueOf(Float.parseFloat(version)));
-			update(servicio);
+			update(servicio);					
+			UnionArquitecturaServicioInformacion unionArquitecturaServicioInformacion = new UnionArquitecturaServicioInformacion();
+			unionarquitecturas = (List<UnionArquitecturaServicioInformacion>) readUnion(
+					new UnionArquitecturaServicioInformacion(), servicio, id_servicio_informacion);
+			if(unionarquitecturas.size()==0){
+				for (int i = 0; i < arquitectura.size(); i++) {
+					Usuario user = (Usuario) session.get("usuario");
+					unionArquitecturaServicioInformacion
+							.setId_arquitectura(arquitectura.get(i));
+					unionArquitecturaServicioInformacion
+							.setId_servicio_informacion(id_servicio_informacion);
+					unionArquitecturaServicioInformacion.setId_usuario(user
+							.getId_usuario());
+					createUnion(unionArquitecturaServicioInformacion);
+				}
+			}else{
+				Usuario user = (Usuario) session.get("usuario");
+				unionArquitecturaServicioInformacion.setId_usuario(user.getId_usuario());
+				try {
+					updateUnion(unionArquitecturaServicioInformacion,
+							new ServicioInformacion(), new Arquitectura(),
+							id_servicio_informacion, arquitectura);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+			
 		}
-		UnionArquitecturaServicioInformacion unionArquitecturaServicioInformacion = new UnionArquitecturaServicioInformacion();
-		for (int i = 0; i < arquitectura.size(); i++) {
-			Usuario user = (Usuario) session.get("usuario");
-			unionArquitecturaServicioInformacion
-					.setId_arquitectura(arquitectura.get(i));
-			unionArquitecturaServicioInformacion
-					.setId_servicio_informacion(id_servicio_informacion);
-			unionArquitecturaServicioInformacion.setId_usuario(user
-					.getId_usuario());
-			createUnion(unionArquitecturaServicioInformacion);
-		}
+		
 		if (setSessionStack().equals("error"))
 			return "errorSession";
+		
+		if(submit != null && submit.contentEquals(message.getProperties().getProperty("registro.finalizar")))
+			return "end";
+		
 		return SUCCESS;
 	}
 
@@ -569,6 +627,10 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		 */
 		if (setSessionStack().equals("error"))
 			return "errorSession";
+		
+		if(submit != null && submit.contentEquals(message.getProperties().getProperty("registro.finalizar")))
+			return "end";
+		
 		return SUCCESS;
 	}
 
@@ -947,8 +1009,20 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		setModificar(true);
 		files = (List<AspectoLegal>) read(ALSI, id_servicio_informacion, -1);
 		if (setSessionStack().equals("error"))
-			return "errorSession";
+			return "errorSession";		
 		prepararDescripcionGeneral();
+		return SUCCESS;
+	}
+	
+	public String terminar_registro_si() {		
+		session = ActionContext.getContext().getSession();
+		if (session.isEmpty()) {
+			return "errorSession";
+		}
+		Usuario usuario = (Usuario) session.get("usuario");
+		if (usuario == null) {
+			return "errorSession";
+		}	
 		return SUCCESS;
 	}
 
@@ -1282,4 +1356,21 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	public void setWsdl(String wsdl) {
 		this.wsdl = wsdl;
 	}
+
+	public String getSubmit() {
+		return submit;
+	}
+
+	public void setSubmit(String submit) {
+		this.submit = submit;
+	}
+
+	public List<Tabs_incompletes> getTabs_incompletas() {
+		return tabs_incompletas;
+	}
+
+	public void setTabs_incompletas(List<Tabs_incompletes> tabs_incompletas) {
+		this.tabs_incompletas = tabs_incompletas;
+	}
+	
 }

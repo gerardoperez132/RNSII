@@ -30,6 +30,21 @@
 <title><s:text name="entrada.entradas"></s:text></title>
 	</head>
 	<body class="bg clearfix">
+	<s:iterator value="tabs_incompletas" status="status">			
+		<div class="h<s:property value="tab" />" style="visibility: hidden; display: none;">	
+			<s:if test="detalles.size()>0">
+				<s:iterator value="detalles">
+					<p><s:property/></p>
+				</s:iterator>
+			</s:if>		
+			<s:else>
+				<p><s:text name="servicio.tab.complete"></s:text></p>
+			</s:else>			
+		</div>						
+	</s:iterator>
+	<div class="h2" style="visibility: hidden; display: none;">
+			<p><s:text name="servicio.tab.complete"></s:text></p>
+	</div>	
 	<div class="bg1">
 		<div class="sp-wrap main-bg clearfix" style="width: 960px;">
 		<%@include file="../layout/menus.jsp"%>
@@ -50,20 +65,80 @@
 				
 				<ul class="tabs">					
 					<li>
-						<a href="prepararDescripcionGeneral"><s:text name="tab1.title"></s:text></a>
+						<a href="prepararDescripcionGeneral">
+							<s:text name="tab1.title"></s:text>
+							<s:iterator value="tabs_incompletas" status="status">
+							<s:if test="tab==1">
+								<s:if test="detalles.size()>0">
+									<img src="res/img/important.png" id="h1" alt="ayuda" 
+									onmouseover="tip(this);" name="h1" height="15" width="15" />
+								</s:if>							
+								<s:else>
+									<img src="res/img/correcto.png" id="h1" alt="ayuda" 
+									onmouseover="tip(this);" name="h1" height="15" width="15" />
+								</s:else>
+							</s:if>					
+							</s:iterator>
+						</a>
 					</li>
 					<li>
-						<a href="prepararAspectosLegales"><s:text name="tab2.title"></s:text></a>
+						<a href="prepararAspectosLegales">
+							<s:text name="tab2.title"></s:text>							
+							<img src="res/img/correcto.png" id="h2" alt="ayuda" 
+							onmouseover="tip(this);" name="h2" height="15" width="15" />								
+						</a>
 					</li>
 					<li>
-						<a href="prepararDescripcionTecnica"><s:text name="tab3.title"></s:text></a>
+						<a href="prepararDescripcionTecnica">
+							<s:text name="tab3.title"></s:text>
+							<s:iterator value="tabs_incompletas" status="status">
+							<s:if test="tab==3">
+								<s:if test="detalles.size()>0">
+									<img src="res/img/important.png" id="h3" alt="ayuda" 
+									onmouseover="tip(this);" name="h3" height="15" width="15" />
+								</s:if>							
+								<s:else>
+									<img src="res/img/correcto.png" id="h3" alt="ayuda" 
+									onmouseover="tip(this);" name="h3" height="15" width="15" />
+								</s:else>
+							</s:if>					
+							</s:iterator>
+						</a>
 					</li>
 					<li class="active">
-						<a href="prepararFuncionalidades"><s:text name="funcionalidades"></s:text></a>
+						<a>
+							<s:text name="funcionalidades"></s:text>
+							<s:iterator value="tabs_incompletas" status="status">
+							<s:if test="tab==4">
+								<s:if test="detalles.size()>0">
+									<img src="res/img/important.png" id="h4" alt="ayuda" 
+									onmouseover="tip(this);" name="h4" height="15" width="15" />
+								</s:if>							
+								<s:else>
+									<img src="res/img/correcto.png" id="h4" alt="ayuda" 
+									onmouseover="tip(this);" name="h4" height="15" width="15" />
+								</s:else>
+							</s:if>					
+							</s:iterator>
+						</a>
 					</li>
 					<li>
-						<a href="prepararDescripcionSoporte"><s:text name="tab4.title"></s:text></a>
-					</li>										
+						<a href="prepararDescripcionSoporte">
+							<s:text name="tab4.title"></s:text>
+							<s:iterator value="tabs_incompletas" status="status">
+							<s:if test="tab==5">
+								<s:if test="detalles.size()>0">
+									<img src="res/img/important.png" id="h5" alt="ayuda" 
+									onmouseover="tip(this);" name="h5" height="15" width="15" />
+								</s:if>							
+								<s:else>
+									<img src="res/img/correcto.png" id="h5" alt="ayuda" 
+									onmouseover="tip(this);" name="h5" height="15" width="15" />
+								</s:else>
+							</s:if>					
+							</s:iterator>
+						</a>
+					</li>
 				</ul>
 				
 				<div class="tab_description">
@@ -72,7 +147,13 @@
 							<s:text name="funcionalidad.registro" />
 						</h3>
 						<small><s:text name="funcionalidad.registro.description"></s:text></small>
-					</div>															
+					</div>		
+					<div class="tab_description_right">
+					<br>
+					<form action="terminar_registro_si">
+						<input type="submit" class="tab_button" name="submit" value='<s:text name="registro.finalizar"></s:text>' id="btn_submit_2"/>
+					</form>
+					</div>														
 				</div>
 		
 				<div class="tab_container_height tab_container">					
@@ -223,8 +304,8 @@
 																				<s:if test="%{#contador_hijos==0}">
 																					<s:set name="contador" value="%{#contador +1}"/>
 																					<s:i18n name="ve/gob/cnti/rnsii/i18n/errors">
-																						<td style="margin: 0; padding: 0;"><img src="res/img/important.png" id="h<s:property value='#contador'/>" alt="ayuda" onmouseover="tip(this);" name="h<s:property value='#contador'/>" height="25" width="30" />
-																							<div class="h<s:property value='#contador'/>" style="visibility: hidden; display: none;">
+																						<td style="margin: 0; padding: 0;"><img src="res/img/important.png" id="h<s:property value='tabs_incompletas.size()+1+#contador'/>" alt="ayuda" onmouseover="tip(this);" name="h<s:property value='tabs_incompletas.size()+1+#contador'/>" height="25" width="30" />
+																							<div class="h<s:property value='tabs_incompletas.size()+1+#contador'/>" style="visibility: hidden; display: none;">
 																								<p>
 																									<s:text name="error.servicio.incomplete.hijos" />
 																								</p>
@@ -325,8 +406,8 @@
 			</div>
 		</div>
 		<div class="n" style="visibility: hidden; display: none;">
-			<s:property value="#contador" />
-		</div>		
+			<s:property value="tabs_incompletas.size()+1+#contador" />
+		</div>	
 	
 		<div class="clr"></div>
 		<%@include file="../layout/breadcrumbs.jsp"%>	

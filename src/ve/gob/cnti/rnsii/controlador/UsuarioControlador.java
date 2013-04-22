@@ -29,6 +29,7 @@ import ve.gob.cnti.rnsii.modelo.Nacionalidad;
 import ve.gob.cnti.rnsii.modelo.Usuario;
 import ve.gob.cnti.rnsii.util.MD5Hashing;
 
+
 import com.opensymphony.xwork2.ActionContext;
 
 /**
@@ -168,6 +169,7 @@ public class UsuarioControlador extends DAO {
 
 	@SuppressWarnings("unchecked")
 	public void validate() {
+
 		if (modificarDatos) {
 			long ci;
 			if (usuario.getNombre().trim().isEmpty()

@@ -5,11 +5,11 @@ var data;
 
 $(document).ready(function() {	
 	
-	/*
+	/*btn_submit_2
 	 * Desabilitando el boton de enviar formulario
 	 */
-	$("#btn_submit").attr('disabled',true);
-	
+	habilitar_desabilitar_submit(false);
+		
 	/*
 	 * habilitando el boton submit si alguno de los campos es presionado
 	 * y todos los demas campos estan completos.
@@ -185,11 +185,7 @@ $(document).ready(function() {
 		if($("#estado").val()==-1){
 			iscomplete =  false;
 		}		
-		if(iscomplete){
-			$("#btn_submit").attr('disabled',false);
-		}else{
-			$("#btn_submit").attr('disabled',true);
-		}
+		habilitar_desabilitar_submit(iscomplete);
 	}
 	
 	//Valida que todos los campos del tab3 esten completos antes de activar el boton submit.
@@ -207,11 +203,7 @@ $(document).ready(function() {
 		if($("#intercambio").val()==-1){
 			iscomplete =  false;
 		}		
-		if(iscomplete){
-			$("#btn_submit").attr('disabled',false);
-		}else{
-			$("#btn_submit").attr('disabled',true);
-		}
+		habilitar_desabilitar_submit(iscomplete);
 	}
 	
 	//Valida que todos los campos del tab4 esten completos antes de activar el boton submit.
@@ -226,11 +218,7 @@ $(document).ready(function() {
 		if($("#correo").val()==""){
 			iscomplete =  false;
 		}
-		if(iscomplete){
-			$("#btn_submit").attr('disabled',false);
-		}else{
-			$("#btn_submit").attr('disabled',true);
-		}
+		habilitar_desabilitar_submit(iscomplete);
 	}
 	
 	//Función que valida de que almenos un elemento de un grupo de checkbox este
@@ -247,6 +235,25 @@ $(document).ready(function() {
 	        }
 	    }
 	    return false;
+	}
+	
+	//Función que habilita el btn submit del formulario.
+	function habilitar_desabilitar_submit(iscomplete){
+		if(iscomplete){
+			$("#btn_submit").attr('disabled',false);
+			$("#btn_submit").removeClass("tab_button_disable");
+			$("#btn_submit").addClass("tab_button");	
+//			$("#btn_submit_2").attr('disabled',false);
+//			$("#btn_submit_2").removeClass("tab_button_disable");
+//			$("#btn_submit_2").addClass("tab_button");
+		}else{
+			$("#btn_submit").attr('disabled',true);
+			$("#btn_submit").removeClass("tab_button");
+			$("#btn_submit").addClass("tab_button_disable");
+//			$("#btn_submit_2").attr('disabled',true);
+//			$("#btn_submit_2").removeClass("tab_button");
+//			$("#btn_submit_2").addClass("tab_button_disable");
+		}
 	}
 	
 });

@@ -19,6 +19,7 @@
 <script type="text/javascript" src="res/js/jquery-1.7.1.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/jquery.validate.js" charset="UTF-8"></script>
 <script src="res/js/messages_es.js" type="text/javascript" charset="UTF-8"></script>
+<script src="res/js/main.js" type="text/javascript" charset="UTF-8"></script>
 <script src="res/js/registro/formulario_entrada.js" type="text/javascript" charset="UTF-8"></script>
 <!-- Added... -->
 <link rel="stylesheet" type="text/css" href="res/js/plugins/sexy-tooltips/blue.css" media="all">
@@ -31,6 +32,24 @@
 <title><s:text name="form.entrada.registro.title"></s:text></title>
 </head>
 <body class="bg clearfix">
+	<s:iterator value="tabs_incompletas" status="status">			
+		<div class="h<s:property value="tab" />" style="visibility: hidden; display: none;">	
+			<s:if test="detalles.size()>0">
+				<s:iterator value="detalles">
+					<p><s:property/></p>
+				</s:iterator>
+			</s:if>		
+			<s:else>
+				<p><s:text name="servicio.tab.complete"></s:text></p>
+			</s:else>			
+		</div>						
+	</s:iterator>
+	<div class="h2" style="visibility: hidden; display: none;">
+			<p><s:text name="servicio.tab.complete"></s:text></p>
+	</div>
+	<div class="n" style="visibility: hidden; display: none;">
+		<s:property value="tabs_incompletas.size()+1" />
+	</div>
 	<s:if test="!modificar">
 		<s:set name="action" var="action">registrarEntrada</s:set>
 		<s:set name="modificar" value="%{false}" />
@@ -65,22 +84,82 @@
 		</div>			
 				
 		<ul class="tabs">					
-			<li>
-				<a href="prepararDescripcionGeneral"><s:text name="tab1.title"></s:text></a>
-			</li>
-			<li>
-				<a href="prepararAspectosLegales"><s:text name="tab2.title"></s:text></a>
-			</li>
-			<li>
-				<a href="prepararDescripcionTecnica"><s:text name="tab3.title"></s:text></a>
-			</li>
-			<li class="active">
-				<a href="prepararFuncionalidades"><s:text name="funcionalidades"></s:text></a>
-			</li>
-			<li>
-				<a href="prepararDescripcionSoporte"><s:text name="tab4.title"></s:text></a>
-			</li>										
-		</ul>
+					<li>
+						<a href="prepararDescripcionGeneral">
+							<s:text name="tab1.title"></s:text>
+							<s:iterator value="tabs_incompletas" status="status">
+							<s:if test="tab==1">
+								<s:if test="detalles.size()>0">
+									<img src="res/img/important.png" id="h1" alt="ayuda" 
+									onmouseover="tip(this);" name="h1" height="15" width="15" />
+								</s:if>							
+								<s:else>
+									<img src="res/img/correcto.png" id="h1" alt="ayuda" 
+									onmouseover="tip(this);" name="h1" height="15" width="15" />
+								</s:else>
+							</s:if>					
+							</s:iterator>
+						</a>
+					</li>
+					<li>
+						<a href="prepararAspectosLegales">
+							<s:text name="tab2.title"></s:text>							
+							<img src="res/img/correcto.png" id="h2" alt="ayuda" 
+							onmouseover="tip(this);" name="h2" height="15" width="15" />								
+						</a>
+					</li>
+					<li>
+						<a href="prepararDescripcionTecnica">
+							<s:text name="tab3.title"></s:text>
+							<s:iterator value="tabs_incompletas" status="status">
+							<s:if test="tab==3">
+								<s:if test="detalles.size()>0">
+									<img src="res/img/important.png" id="h3" alt="ayuda" 
+									onmouseover="tip(this);" name="h3" height="15" width="15" />
+								</s:if>							
+								<s:else>
+									<img src="res/img/correcto.png" id="h3" alt="ayuda" 
+									onmouseover="tip(this);" name="h3" height="15" width="15" />
+								</s:else>
+							</s:if>					
+							</s:iterator>
+						</a>
+					</li>
+					<li class="active">
+						<a>
+							<s:text name="funcionalidades"></s:text>
+							<s:iterator value="tabs_incompletas" status="status">
+							<s:if test="tab==4">
+								<s:if test="detalles.size()>0">
+									<img src="res/img/important.png" id="h4" alt="ayuda" 
+									onmouseover="tip(this);" name="h4" height="15" width="15" />
+								</s:if>							
+								<s:else>
+									<img src="res/img/correcto.png" id="h4" alt="ayuda" 
+									onmouseover="tip(this);" name="h4" height="15" width="15" />
+								</s:else>
+							</s:if>					
+							</s:iterator>
+						</a>
+					</li>
+					<li>
+						<a href="prepararDescripcionSoporte">
+							<s:text name="tab4.title"></s:text>
+							<s:iterator value="tabs_incompletas" status="status">
+							<s:if test="tab==5">
+								<s:if test="detalles.size()>0">
+									<img src="res/img/important.png" id="h5" alt="ayuda" 
+									onmouseover="tip(this);" name="h5" height="15" width="15" />
+								</s:if>							
+								<s:else>
+									<img src="res/img/correcto.png" id="h5" alt="ayuda" 
+									onmouseover="tip(this);" name="h5" height="15" width="15" />
+								</s:else>
+							</s:if>					
+							</s:iterator>
+						</a>
+					</li>
+				</ul>
 		
 		<div class="tab_description">
 			<div class="tab_description_left">
@@ -99,6 +178,13 @@
 						<tr>
 							<td>
 								<input type="button" id="sub_guardar_entrada" class="button_h" value="<s:property value="#submit"></s:property>" class="btn_oculto">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<form action="terminar_registro_si">
+									<input type="submit" class="tab_button" name="submit" value='<s:text name="registro.finalizar"></s:text>' id="btn_submit_2"/>
+								</form>
 							</td>
 						</tr>
 					</table>				
@@ -188,6 +274,7 @@
 							<s:textarea name="entrada.descripcion" id="entrada.descripcion" cols="30" rows="6" />
 						</td>
 					</tr>	
+					<s:if test="!complejo">
 					<tr>
 						<!-- Etiquetas -->
 						<td>
@@ -211,9 +298,10 @@
 							</s:select></td>
 						<td style="width:60px;"><!-- td vacio --></td>						
 					</tr>
+					</s:if>
 					</table>
-					<s:if test="!complejo"> 
-					<table>
+					<s:if test="!complejo">
+					<table>					
 					<tr>
 						<!-- Etiquetas -->
 						<td>
@@ -285,11 +373,12 @@
 								<s:textfield name="entrada.longitud" maxlength="10" id="entrada.longitud"/>
 							</div>
 						</td>
-					</tr>
-					</table>	
+					</tr>					
+					</table>				
 					</s:if>
-														
-					
+					<s:if test="complejo">
+					<s:hidden name="entrada.id_tipo_dato" value="%{entrada.id_tipo_dato}"/>
+					</s:if>	
 					<s:hidden name="id_servicio_informacion"/>
 					<s:hidden name="id_funcionalidad"/>
 					<s:hidden name="id_entrada_salida"/>

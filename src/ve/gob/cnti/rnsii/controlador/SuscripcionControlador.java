@@ -72,7 +72,6 @@ public class SuscripcionControlador extends DAO implements Constants, Order,
 	private boolean ListarSuscricionesAceptadasRechazadas;
 	private boolean solicitarSuscripcion;
 	private String sentencia[] = { "Aceptado", "Rechazado" };
-
 	private Date fecha;
 
 	@SkipValidation

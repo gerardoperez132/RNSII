@@ -220,7 +220,9 @@ public interface Constants {
 		/** Pestaña de descripción técnica. */
 		public static final int DESCRIPCION_TECNICA = 3;
 		/** Pestaña de descripción de soporte. */
-		public static final int DESCRIPCION_SOPORTE = 4;
+		public static final int Funcionalidades = 4;
+		/** Pestaña de descripción de soporte. */
+		public static final int DESCRIPCION_SOPORTE = 5;
 	}
 
 	/**

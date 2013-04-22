@@ -772,3 +772,11 @@ div.middleContent {
 	border: 1px solid #999;
 	text-decoration: underline;
 }
+
+.complete_tab{
+	color:green;
+}
+
+.incomplete_tab{
+	color:yellow;
+}
