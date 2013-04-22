@@ -46,30 +46,62 @@
 				result="error" />
 		</global-exception-mappings>
 		
-		<!-- Actions del módulo de administración -->
-		<!-- Control de acceso -->
+<!-- Actions del módulo de administración -->
+<!-- Control de acceso -->
 		<action name="admin" method="access"
 			class="ve.gob.cnti.rnsii.admin.Administration">			
-			<result name="success">admin/admin.jsp</result>			
+			<result name="success">admin/admin.jsp</result>
+			<result name="error">error.jsp</result>			
 		</action>
 		
 		<action name="access_control" method="access_control"
 			class="ve.gob.cnti.rnsii.admin.Administration">
 			<result name="404ERROR" type="redirectAction">error404</result>
-			<result name="input">
-				admin/admin.jsp
-			</result>
-			<result name="success" type="redirectAction">admin</result>
+			<result name="input" type="redirectAction">admin</result>
+			<result name="success" type="redirectAction">administrator</result>
 			<result name="accesoInvalido" type="redirectAction">admin</result>
 			<result name="error">error.jsp</result>
 		</action>
 		
-		<action name="admin" method="access"
+		<action name="administrator" method="admin"
 			class="ve.gob.cnti.rnsii.admin.Administration">			
-			<result name="success">admin/admin.jsp</result>
-		</action>
+			<result name="success">admin/admin_home.jsp</result>
+			<result name="error">error.jsp</result>			
+		</action>	
+		
+<!-- ADMIN CRUD USUARIO -->
+		<action name="registrar_usuario" method="registrar_usuario"
+			class="ve.gob.cnti.rnsii.admin.UsuarioControl">			
+			<result name="success">admin/crud_usuario.jsp</result>
+			<result name="error">error.jsp</result>			
+		</action>		
+		
+		<action name="registrar_usuario_execute" method="registrar_usuario_execute"
+			class="ve.gob.cnti.rnsii.admin.UsuarioControl">		
+			<interceptor-ref name="doubleSubmit" />	
+			<result name="success">admin/crud_usuario.jsp</result>
+			<result name="invalid.token" type="redirectAction">administrator</result>
+			<result name="input">admin/crud_usuario.jsp</result>
+			<result name="error">error.jsp</result>			
+		</action>	
+		
+<!-- ADMIN CRUD ENTE -->
+		<action name="registrar_ente" method="registrar_ente"
+			class="ve.gob.cnti.rnsii.admin.EnteControl">			
+			<result name="success">admin/crud_ente.jsp</result>
+			<result name="error">error.jsp</result>			
+		</action>		
+		
+		<action name="registrar_ente_execute" method="registrar_ente_execute"
+			class="ve.gob.cnti.rnsii.admin.EnteControl">		
+			<interceptor-ref name="doubleSubmit" />	
+			<result name="success">admin/crud_ente.jsp</result>
+			<result name="invalid.token" type="redirectAction">administrator</result>
+			<result name="input">admin/crud_ente.jsp</result>
+			<result name="error">error.jsp</result>			
+		</action>	
 
-		<!-- Actions de servicios de información -->
+<!-- Actions de servicios de información -->
 		<action name="prepararRegistro" method="prepararRegistro"
 			class="ve.gob.cnti.rnsii.controlador.ServicioInformacionControlador">
 			<result name="success">
@@ -238,7 +270,7 @@
 			<result name="error">error.jsp</result>
 		</action>
 
-		<!-- Actions para funcionalidades -->
+<!-- Actions para funcionalidades -->
 		<action name="prepararModificacionesServicioInformacion"
 			method="prepararModificaciones" class="ve.gob.cnti.rnsii.controlador.ServicioInformacionControlador">
 			<result name="success">modificar/modificar_servicio_informacion.jsp
@@ -296,7 +328,7 @@
 			</result>
 		</action>
 
-		<!-- Actions para entradas -->
+<!-- Actions para entradas -->
 		<action name="prepararEntradas" method="prepararFormulario"
 			class="ve.gob.cnti.rnsii.controlador.EntradaControlador">
 			<result name="success">registro/entradas.jsp</result>
@@ -437,7 +469,7 @@
 			<result name="error">error.jsp</result>
 		</action>
 
-		<!-- Logins -->
+<!-- Logins -->
 		<action name="autenticar" method="mostrarLogin"
 			class="ve.gob.cnti.rnsii.controlador.LoginControlador">
 			<result name="success" type="redirectAction">RNSII</result>
@@ -534,7 +566,7 @@
 			<result name="error">error.jsp</result>
 		</action>
 
-		<!-- Actions para usuarios -->
+<!-- Actions para usuarios -->
 
 		<action name="modificarClave" method="modificarClave"
 			class="ve.gob.cnti.rnsii.controlador.UsuarioControlador">
@@ -632,7 +664,7 @@
 			<result name="error">error.jsp</result>
 		</action>
 
-		<!-- Actions para el usuario final -->
+<!-- Actions para el usuario final -->
 		<action name="RNSII" method="inicio"
 			class="ve.gob.cnti.rnsii.controlador.ConsultasControlador">
 			<result name="success">index.jsp</result>
@@ -685,7 +717,7 @@
 			<result name="error">error.jsp</result>
 		</action>
 
-		<!-- Consultas AJAX -->
+<!-- Consultas AJAX -->
 		<action name="dato_haslength" method="dato_haslength"
 			class="ve.gob.cnti.rnsii.controlador.EntradaControlador">
 			<result name="success">ajax/bool.jsp</result>
