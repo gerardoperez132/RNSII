@@ -8,12 +8,14 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import ve.gob.cnti.rnsii.dao.DAO;
 import ve.gob.cnti.rnsii.modelo.Ente;
 import ve.gob.cnti.rnsii.modelo.Nacionalidad;
+import ve.gob.cnti.rnsii.modelo.ServicioInformacion;
 import ve.gob.cnti.rnsii.modelo.Usuario;
 import ve.gob.cnti.rnsii.util.MD5Hashing;
 import com.opensymphony.xwork2.ActionContext;
 
 @SuppressWarnings("serial")
-public class Administration extends DAO implements ServletRequestAware {
+public class Administration extends DAO implements ServletRequestAware {	
+	private int pg_si;
 	@SuppressWarnings("rawtypes")
 	private Map session;	
 	private String password;
@@ -24,18 +26,24 @@ public class Administration extends DAO implements ServletRequestAware {
 	private Ente ente = new Ente();
 	private List<Nacionalidad> nacionalidad = new ArrayList<Nacionalidad>();
 	private List<Ente> entes = new ArrayList<Ente>();	
+	private List<ServicioInformacion> servicios = new ArrayList<ServicioInformacion>();
 	
-	public String access(){
+	
+	//Da acceso al formulario de control de acceso
+	public String access(){			
 		return SUCCESS;
 	}
 	
-	//Da acceso al formulario de control de acceso
-	public String admin(){
-		
+	
+	//Da acceso a la vista principal del administrador
+	@SuppressWarnings("unchecked")
+	public String admin(){		
+		servicios = getSIListPorPublicar(pg_si);
+		entes = (List<Ente>) read(new Ente());		
 		return SUCCESS;
 	}	
 
-	//Controla el acceso al modulo de administracción
+	//Controla el acceso al modulo de administracción	
 	@SuppressWarnings("unchecked")
 	public String access_control() throws Exception {		
 		session = ActionContext.getContext().getSession();
@@ -159,6 +167,24 @@ public class Administration extends DAO implements ServletRequestAware {
 
 	public void setAccion_usuario(int accion_usuario) {
 		this.accion_usuario = accion_usuario;
+	}
+
+	public List<ServicioInformacion> getServicios() {
+		return servicios;
+	}
+
+	public void setServicios(List<ServicioInformacion> servicios) {
+		this.servicios = servicios;
+	}
+
+
+	public int getPg_si() {
+		return pg_si;
+	}
+
+
+	public void setPg_si(int pg_si) {
+		this.pg_si = pg_si;
 	}
 
 }

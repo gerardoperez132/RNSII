@@ -68,6 +68,14 @@
 			<result name="success">admin/admin_home.jsp</result>
 			<result name="error">error.jsp</result>			
 		</action>	
+
+<!-- Publicar/Despublicar servicio de información -->		
+		<action name="publicarSI" method="publicarServicioInformacion"
+			class="ve.gob.cnti.rnsii.controlador.ServicioInformacionControlador">
+			<result name="success" type="redirectAction">administrator</result>
+			<result name="errorSession">error_sesion.jsp</result>
+			<result name="error">error.jsp</result>
+		</action>
 		
 <!-- ADMIN CRUD USUARIO -->
 		<action name="registrar_usuario" method="registrar_usuario"

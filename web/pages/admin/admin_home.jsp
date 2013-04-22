@@ -37,7 +37,8 @@
 			<%@include file="sidebar_admin.jsp"%>
 			<div class="contenido">		
 				<h3>Modulo de Administración</h3>	
-				Listar Servicios listos para públicar
+				<!-- Lista completa de todos los servicios publicados -->
+				<%@include file="layout/listado_si_implementados.jsp"%>
 			</div>
 		</div>
 		<div class="clr"></div>

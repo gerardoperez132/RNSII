@@ -1608,4 +1608,35 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		}
 	}	
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public ArrayList<ServicioInformacion> getSIListPorPublicar(int pagina) {
+		ArrayList<ServicioInformacion> list;		
+		try {
+			startConnection();
+			list = (ArrayList<ServicioInformacion>) session
+					.createQuery(
+							" FROM ServicioInformacion s WHERE s.status = "
+									+ ACTIVO
+									+ " AND "
+									+ " s.publicado = FALSE "
+									+ " AND "
+									+ " s.id_estado = 2 "
+									+ " AND EXISTS "
+									+ "   (FROM Funcionalidad as f "
+									+ "	   where s.id_servicio_informacion = f.id_servicio_informacion "
+									+ "	   AND f.status = 0 "
+									+ "	   AND EXISTS "
+									+ "         (FROM EntradaSalida as io "
+									+ "			WHERE io.id_funcionalidad = f.id_funcionalidad "
+									+ "			AND io.status = 0 AND io.tipo = 1))"
+									).setMaxResults(10).setFirstResult(pagina).list();
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+		return list;
+	}
 }

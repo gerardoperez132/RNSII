@@ -702,5 +702,17 @@ public interface CRUD {
 	 * @return Referencia a Pestañas incompletas.
 	 */
 	public List<Tabs_incompletes> getIncompleteFields2(ServicioInformacion servicio);
-
+	
+	/**
+	 * Permite consultar los servicios de información implementados y que no están
+	 * publicados.
+	 * 
+	 * @author Joaquín Pereira
+	 * @param pagina
+	 *            Numero para limitar los resultados de la consulta
+	 * 
+	 * @return Retorna una lista con los servicios de información implemantados
+	 *         y públicados.
+	 */
+	public ArrayList<ServicioInformacion> getSIListPorPublicar(int pagina);
 }
