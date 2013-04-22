@@ -64,9 +64,7 @@
 		</s:else>			
 		<tr class="cat-list-row0">
 			<td class="list-title">
-				<a href="listarServicios" style="font-weight:bold;"><s:text name="ver_servicios"/></a>
-				<td class="list-hits">
-				</td>
+				<a href="listarServicios" style="font-weight:bold;"><s:text name="ver_servicios"/></a>				
 			</td>
 		</tr>
 		</tbody>

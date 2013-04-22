@@ -36,7 +36,7 @@
 			<%@include file="../layout/sidebar.jsp"%>
 			<!-- Este es el div de contenidos -->
 			<div class="contenido">				
-				<h1><a><s:text name="titulo2" /></a></h1>
+				<h1><a><s:text name="titulo" /></a></h1>
 				<s:if test="peticionesNoLeidas > 0 || peticionesPendientes > 0">
 					<!-- Peticiones de suscripción no leídas y pendientes   -->
 					<s:if test="peticionesNoLeidas > 0">
