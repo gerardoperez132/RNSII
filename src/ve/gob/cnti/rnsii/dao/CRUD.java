@@ -702,4 +702,5 @@ public interface CRUD {
 	 * @return Referencia a Pestañas incompletas.
 	 */
 	public List<Tabs_incompletes> getIncompleteFields2(ServicioInformacion servicio);
+
 }
