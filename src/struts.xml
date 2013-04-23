@@ -77,6 +77,13 @@
 			<result name="error">error.jsp</result>
 		</action>
 		
+		<action name="despublicarSI" method="despublicarServicioInformacion"
+			class="ve.gob.cnti.rnsii.controlador.ServicioInformacionControlador">
+			<result name="success" type="redirectAction">administrator</result>
+			<result name="errorSession">error_sesion.jsp</result>
+			<result name="error">error.jsp</result>
+		</action>
+		
 <!-- ADMIN CRUD USUARIO -->
 		<action name="registrar_usuario" method="registrar_usuario"
 			class="ve.gob.cnti.rnsii.admin.UsuarioControl">			
