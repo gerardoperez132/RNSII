@@ -24,6 +24,7 @@ import ve.gob.cnti.rnsii.modelo.EntradaSalida;
 import ve.gob.cnti.rnsii.modelo.ServicioInformacion;
 import ve.gob.cnti.rnsii.modelo.Telefono;
 import ve.gob.cnti.rnsii.modelo.Url;
+import ve.gob.cnti.rnsii.modelo.Usuario;
 import ve.gob.cnti.rnsii.modelo.Visita;
 import ve.gob.cnti.rnsii.util.ListaServiciosVisitados;
 import ve.gob.cnti.rnsii.util.SectoresMasPublicados;
@@ -718,4 +719,15 @@ public interface CRUD {
 	 *         y públicados.
 	 */
 	public ArrayList<ServicioInformacion> getSIListPorPublicarDespublicar(int pagina,boolean publicado);
+	
+	/**
+	 * Permite obtener los datos de un usuario con la cédula como parametro.
+	 * 
+	 * @author Richard Ricciardelli
+	 * @author Joaquín Pereira
+	 * @param ci
+	 *          cédula para buscar dentro de los usuarios
+	 * @return {@code correo} asociado a un usuario.
+	 */
+	public Usuario getUserCI(String ci);
 }

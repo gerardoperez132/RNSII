@@ -1640,4 +1640,22 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		return list;
 	}
 	
+	@Override
+	public Usuario getUserCI(String ci) {
+		Usuario result;
+		try {
+			startConnection();
+			result = (Usuario) session.createQuery(
+					"FROM " + new Usuario().getClass().getSimpleName()
+							+ " WHERE cedula = '" + ci + "' AND status = "
+							+ ACTIVO + " AND id_usuario != 0").uniqueResult();
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+		return result;
+	}
+	
 }
