@@ -145,11 +145,7 @@
 			</s:else>
 			<s:if test="%{tab==2}">
 				<li class="active">
-					<a>
-						<s:text name="tab2.title"></s:text>
-						<img src="res/img/correcto.png" id="h2" alt="ayuda" 
-								onmouseover="tip(this);" name="h2" height="15" width="15" />						
-					</a>
+					<a><s:text	name="tab2.title"></s:text> </a>
 				</li>
 			</s:if>
 			<s:else>
@@ -157,13 +153,7 @@
 					<s:url id="prepararFormulario" action="prepararAspectosLegales" />
 				</s:if>
 				<li>
-					<s:a href="%{prepararFormulario}">
-						<s:text name="tab2.title"></s:text>
-						<s:if test="!nuevo">
-						<img src="res/img/correcto.png" id="h2" alt="ayuda" 
-								onmouseover="tip(this);" name="h2" height="15" width="15" />
-						</s:if>						
-					</s:a>
+					<s:a href="%{prepararFormulario}"><s:text name="tab2.title"></s:text></s:a>
 				</li>
 			</s:else>
 			<s:if test="%{tab==3}">

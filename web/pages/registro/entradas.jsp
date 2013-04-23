@@ -83,9 +83,7 @@
 					</li>
 					<li>
 						<a href="prepararAspectosLegales">
-							<s:text name="tab2.title"></s:text>							
-							<img src="res/img/correcto.png" id="h2" alt="ayuda" 
-							onmouseover="tip(this);" name="h2" height="15" width="15" />								
+							<s:text name="tab2.title"></s:text>
 						</a>
 					</li>
 					<li>
