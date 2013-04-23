@@ -1610,18 +1610,18 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public ArrayList<ServicioInformacion> getSIListPorPublicar(int pagina) {
+	public ArrayList<ServicioInformacion> getSIListPorPublicarDespublicar(int pagina,boolean publicado) {
 		ArrayList<ServicioInformacion> list;		
 		try {
-			startConnection();
+			startConnection();			
 			list = (ArrayList<ServicioInformacion>) session
 					.createQuery(
 							" FROM ServicioInformacion s WHERE s.status = "
 									+ ACTIVO
 									+ " AND "
-									+ " s.publicado = FALSE "
+									+ " s.publicado = "+publicado
 									+ " AND "
-									+ " s.id_estado = 2 "
+									+ " s.id_estado = 2" 
 									+ " AND EXISTS "
 									+ "   (FROM Funcionalidad as f "
 									+ "	   where s.id_servicio_informacion = f.id_servicio_informacion "
@@ -1630,7 +1630,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 									+ "         (FROM EntradaSalida as io "
 									+ "			WHERE io.id_funcionalidad = f.id_funcionalidad "
 									+ "			AND io.status = 0 AND io.tipo = 1))"
-									).setMaxResults(10).setFirstResult(pagina).list();
+									).setMaxResults(100).setFirstResult(pagina).list();
 		} catch (HibernateException he) {
 			handleException(he);
 			throw he;
@@ -1639,4 +1639,5 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		}
 		return list;
 	}
+	
 }

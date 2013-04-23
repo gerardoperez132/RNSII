@@ -710,9 +710,12 @@ public interface CRUD {
 	 * @author Joaquín Pereira
 	 * @param pagina
 	 *            Numero para limitar los resultados de la consulta
-	 * 
+	 * @param publicado
+	 * 			  Corresponde a si va a listar los servicios por publicar o los servicios por despublicar           
+	 * 				true para listar los servicios por publicar o los servicios por despublicar 
+	 * 				false para listar los servicios por despublicar
 	 * @return Retorna una lista con los servicios de información implemantados
 	 *         y públicados.
 	 */
-	public ArrayList<ServicioInformacion> getSIListPorPublicar(int pagina);
+	public ArrayList<ServicioInformacion> getSIListPorPublicarDespublicar(int pagina,boolean publicado);
 }
