@@ -105,6 +105,8 @@ public class UsuarioControl extends DAO  {
 				// 1
 				if (ci < 1 || !usuario.getCedula().equals("" + ci)) {
 					addFieldError("cedula",	error.getProperties().getProperty("error.login.cedula.invalid"));
+				}else if(getUserCI(usuario.getCedula())!=null){
+					addFieldError("cedula",error.getProperties().getProperty("error.ci.repeated"));
 				}
 			} catch (Exception e) {
 				addFieldError("cedula",error.getProperties().getProperty("error.login.cedula.regex"));
@@ -116,6 +118,8 @@ public class UsuarioControl extends DAO  {
 			addFieldError("correo",error.getProperties().getProperty("error.required"));
 		}else if (!correo.matches(REGEX_EMAIL)) {
 			addFieldError("correo",error.getProperties().getProperty("error.regex.email"));			
+		}else if(getUserEmail(correo)!=null){
+			addFieldError("correo",error.getProperties().getProperty("error.email.repeated"));
 		}	
 		
 		if(usuario.getId_ente() == -1 && accion_usuario==1){
