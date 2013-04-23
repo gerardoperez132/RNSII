@@ -67,6 +67,8 @@ public class EnteControl extends DAO {
 				int rif = Integer.parseInt(ente.getRif());				
 				if (rif < 1 || ente.getRif().length()<9) {
 					addFieldError("rif",error.getProperties().getProperty("error.ente.rif.range"));
+				}else if(getEnteRIF(tipo_rif+"-"+ente.getRif())!=null){
+					addFieldError("rif",error.getProperties().getProperty("error.ente.rif.repeated"));
 				}
 			} catch (Exception e) {
 				addFieldError("rif",error.getProperties().getProperty("error.ente.rif.range"));

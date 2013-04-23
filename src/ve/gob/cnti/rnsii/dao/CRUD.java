@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ve.gob.cnti.rnsii.modelo.Correo;
+import ve.gob.cnti.rnsii.modelo.Ente;
 import ve.gob.cnti.rnsii.modelo.EntradaSalida;
 import ve.gob.cnti.rnsii.modelo.ServicioInformacion;
 import ve.gob.cnti.rnsii.modelo.Telefono;
@@ -723,11 +724,20 @@ public interface CRUD {
 	/**
 	 * Permite obtener los datos de un usuario con la cédula como parametro.
 	 * 
-	 * @author Richard Ricciardelli
 	 * @author Joaquín Pereira
 	 * @param ci
 	 *          cédula para buscar dentro de los usuarios
-	 * @return {@code correo} asociado a un usuario.
+	 * @return {@code usuario}
 	 */
 	public Usuario getUserCI(String ci);
+	
+	/**
+	 * Permite obtener los datos de un Ente con el rif como parametro.
+	 * 
+	 * @author Joaquín Pereira
+	 * @param rif
+	 *          rif para buscar dentro de los entes registrados
+	 * @return {@code ente}
+	 */
+	public Ente getEnteRIF(String rif);
 }

@@ -43,6 +43,7 @@ import ve.gob.cnti.rnsii.dao.Constants.TipoEntradaSalida;
 import ve.gob.cnti.rnsii.i18n.Errors;
 import ve.gob.cnti.rnsii.i18n.Messages;
 import ve.gob.cnti.rnsii.modelo.Correo;
+import ve.gob.cnti.rnsii.modelo.Ente;
 import ve.gob.cnti.rnsii.modelo.EntradaSalida;
 import ve.gob.cnti.rnsii.modelo.Funcionalidad;
 import ve.gob.cnti.rnsii.modelo.ServicioInformacion;
@@ -1658,4 +1659,21 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		return result;
 	}
 	
+	@Override
+	public Ente getEnteRIF(String rif) {
+		Ente result;
+		try {
+			startConnection();
+			result = (Ente) session.createQuery(
+					"FROM " + new Ente().getClass().getSimpleName()
+							+ " WHERE rif = '" + rif + "' AND status = "
+							+ ACTIVO).uniqueResult();
+		} catch (HibernateException he) {
+			handleException(he);
+			throw he;
+		} finally {
+			closeConnection();
+		}
+		return result;
+	}
 }
