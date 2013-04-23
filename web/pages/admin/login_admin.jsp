@@ -44,6 +44,7 @@
 					</table>	
 					
 					</fieldset>
+					<s:hidden name="listarPublicados" value="%{true}"/>
 				</form>								
 				</div>
 			</div>

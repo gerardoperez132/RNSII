@@ -3,7 +3,14 @@
 <table class="category">
 	<thead>
 	<tr>
-		<th colspan="4" class="list-title" style="vertical-align: middle;text-align: center;" id="tableOrdering1"><s:text name="listaServiciosPorPublicar" /></th>
+		<th colspan="4" class="list-title" style="vertical-align: middle;text-align: center;" id="tableOrdering1">			
+			<s:if test="listarPublicados==true">
+				<s:text name="listaServiciosPublicados" />	
+			</s:if>
+			<s:else>
+				<s:text name="listaServiciosPorPublicar" />								
+			</s:else>
+		</th>
 	</tr>
 	<tr>
 		<th class="list-title" style="vertical-align: middle;text-align: center;" id="tableOrdering"><s:text name="n_servicio" /></th>
@@ -29,10 +36,18 @@
 					</s:if>
 				</s:iterator></td>
 				<td>
-					<form action="publicarSI" method="POST">
-						<s:hidden name="id_servicio_informacion" value="%{id_servicio_informacion}"/>
-						<input type="submit" style="font-size: 0.9em;" value="<s:text name="publicar"/>"/>
-					</form>
+					<s:if test="listarPublicados==true">
+						<form action="depublicarSI" method="POST">
+							<s:hidden name="id_servicio_informacion" value="%{id_servicio_informacion}"/>
+							<input type="submit" style="font-size: 0.9em;" value="<s:text name="despublicar"/>"/>
+						</form>
+					</s:if>
+					<s:else>
+						<form action="publicarSI" method="POST">
+							<s:hidden name="id_servicio_informacion" value="%{id_servicio_informacion}"/>
+							<input type="submit" style="font-size: 0.9em;" value="<s:text name="publicar"/>"/>
+						</form>											
+					</s:else>					
 				</td>
 			</tr>
 		</tbody>
@@ -40,7 +55,12 @@
 	</s:if>
 	<s:else>
 		<tr>
-			<td colspan="4"><s:text name="sis_null4" /></td>
+			<s:if test="listarPublicados==true">
+				<td colspan="4"><s:text name="sis_null5" /></td>
+			</s:if>
+			<s:else>
+				<td colspan="4"><s:text name="sis_null4" /></td>						
+			</s:else>			
 		</tr>
 	</s:else>
 </table>

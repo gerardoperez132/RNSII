@@ -36,7 +36,10 @@
 			<!-- Esta es la barra lateral -->
 			<%@include file="sidebar_admin.jsp"%>
 			<div class="contenido">		
-				<h3>Modulo de Administración</h3>	
+				<h1><a><s:text name="titulo" /></a></h1>	
+				<div class="pasos">
+					<label class="pasos_lbl"><s:text name="configuración" /></label>
+				</div>
 				<!-- Lista completa de todos los servicios publicados -->
 				<%@include file="layout/listado_si_implementados.jsp"%>
 			</div>
