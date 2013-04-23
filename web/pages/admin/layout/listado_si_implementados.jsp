@@ -24,10 +24,10 @@
 		<tbody>
 			<tr class="cat-list-row0">
 				<td align="center" class="list-title" style="vertical-align: middle;text-align: center;">
-					<a href="servicio?id_servicio=<s:property value="id_servicio_informacion"/>"><s:property value="id_servicio_informacion" /></a>
+					<a href="servicio_view?id_servicio=<s:property value="id_servicio_informacion"/>"><s:property value="id_servicio_informacion" /></a>
 				</td>
 				<td class="list-title" style="vertical-align: middle;text-align: left;">
-					<a href="servicio?id_servicio=<s:property value="id_servicio_informacion"/>"><s:property value="nombre" /></a>
+					<a href="servicio_view?id_servicio=<s:property value="id_servicio_informacion"/>"><s:property value="nombre" /></a>
 				</td>
 				<td class="list-hits"><s:set name="id_e" value="id_ente" />
 				<s:iterator value="entes">
@@ -37,7 +37,7 @@
 				</s:iterator></td>
 				<td>
 					<s:if test="listarPublicados==true">
-						<form action="depublicarSI" method="POST">
+						<form action="despublicarSI" method="POST">
 							<s:hidden name="id_servicio_informacion" value="%{id_servicio_informacion}"/>
 							<input type="submit" style="font-size: 0.9em;" value="<s:text name="despublicar"/>"/>
 						</form>
