@@ -94,6 +94,10 @@
 				</s:if>
 				<!-- Tabla en árbol. -->
 				<div id="adminForm">
+				<form action="prepararRegistro" method="POST">	
+						<input type="submit" class="button_h" value='<s:text name="registro"/>'>
+				</form>
+				<br>
 				<table class="category" style="width: 690px;">
 					<tbody>
 						<thead>
