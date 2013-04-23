@@ -16,6 +16,7 @@ import com.opensymphony.xwork2.ActionContext;
 @SuppressWarnings("serial")
 public class Administration extends DAO implements ServletRequestAware {	
 	private int pg_si;
+	private boolean listarPublicados;
 	@SuppressWarnings("rawtypes")
 	private Map session;	
 	private String password;
@@ -38,11 +39,11 @@ public class Administration extends DAO implements ServletRequestAware {
 	//Da acceso a la vista principal del administrador
 	@SuppressWarnings("unchecked")
 	public String admin(){		
-		servicios = getSIListPorPublicar(pg_si);
+		servicios = getSIListPorPublicarDespublicar(pg_si,listarPublicados);
 		entes = (List<Ente>) read(new Ente());		
 		return SUCCESS;
 	}	
-
+	
 	//Controla el acceso al modulo de administracción	
 	@SuppressWarnings("unchecked")
 	public String access_control() throws Exception {		
@@ -177,14 +178,22 @@ public class Administration extends DAO implements ServletRequestAware {
 		this.servicios = servicios;
 	}
 
-
 	public int getPg_si() {
 		return pg_si;
 	}
 
-
 	public void setPg_si(int pg_si) {
 		this.pg_si = pg_si;
+	}
+
+
+	public boolean isListarPublicados() {
+		return listarPublicados;
+	}
+
+
+	public void setListarPublicados(boolean listarPublicados) {
+		this.listarPublicados = listarPublicados;
 	}
 
 }
