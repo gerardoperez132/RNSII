@@ -41,27 +41,13 @@
 	<div class="m_a">
 		<ul>
 			<li class="m_a_fondo">
+				<a class="m_a_titulo" href="<s:url action="administrator"/>"> <s:text name="listar_si_x_publicar" /></a>
+			</li>
+			<li class="m_a_fondo">
 				<a class="m_a_titulo" href="<s:url action="registrar_ente"/>"> <s:text name="registro_ente" /></a>
 			</li>
 			<li class="m_a_fondo">
 				<a class="m_a_titulo" href="<s:url action="registrar_usuario"/>"><s:text name="registro_usuario" /></a>
-			</li>			
-			<li class="m_a_fondo">
-				<a class="m_a_titulo"><s:text name="configuración" /> <span class="m_a_desplegar">+</span></a>
-				<ul class="m_a_top" style="display: block;">
-					<li>
-						<form action="prepararFormulario" method="POST">
-							<s:hidden name="modificarClave" value="%{true}" />
-							<input style="text-transform: none; border: none;padding-left: 20px;border-bottom: 1px dotted #CCC;" class="btn_menu" type="submit" value="<s:text name="usuario.modificar.clave"/>">
-						</form>
-					</li>
-					<li>
-						<form action="prepararFormulario" method="POST">
-							<s:hidden name="modificarDatos" value="%{true}" />
-							<input style="text-transform: none; border: none;padding-left: 20px;border-bottom: 1px dotted #CCC;" class="btn_menu" type="submit" value="<s:text name="usuario.modificar.datos"/>">
-						</form>
-					</li>
-				</ul>
 			</li>			
 		</ul>				
 	</div>

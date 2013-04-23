@@ -40,7 +40,7 @@
 	</s:if>
 	<s:else>
 		<tr>
-			<td colspan="4"><s:text name="sis_null2" /></td>
+			<td colspan="4"><s:text name="sis_null4" /></td>
 		</tr>
 	</s:else>
 </table>
