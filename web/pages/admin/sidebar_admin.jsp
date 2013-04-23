@@ -21,8 +21,8 @@
 			<tr>
 				<td>
 					<h4 style="margin: 0;">
-						<s:text name="ente" />
-						<s:property value="%{#session.ente_sesion.nombre}" />
+						<s:text name="ente" />  
+						<s:text name="administrador" />
 					</h4>
 				</td>
 			</tr>		
@@ -41,7 +41,10 @@
 	<div class="m_a">
 		<ul>
 			<li class="m_a_fondo">
-				<a class="m_a_titulo" href="<s:url action="administrator"/>"> <s:text name="listar_si_x_publicar" /></a>
+				<a class="m_a_titulo" href="<s:url action="administrator"/>?listarPublicados=false"> <s:text name="listar_si_x_publicar" /></a>
+			</li>
+			<li class="m_a_fondo">
+				<a class="m_a_titulo" href="<s:url action="administrator"/>?listarPublicados=true"> <s:text name="listar_si_publicados" /></a>
 			</li>
 			<li class="m_a_fondo">
 				<a class="m_a_titulo" href="<s:url action="registrar_ente"/>"> <s:text name="registro_ente" /></a>
