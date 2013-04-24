@@ -174,16 +174,6 @@
 															style="font-size: 0.9em;text-transform: none;" />
 													</form>
 												</td>		
-												<td style="margin: 0; padding: 0;">	
-													<img src="res/img/correcto.png" id="h<s:property value='#result_datos.index'/>" alt="ayuda" onmouseover="tip(this);" name="h<s:property value='#result_datos.index'/>" height="20" width="20" />
-													<div class="h<s:property value='#result_datos.index'/>" style="visibility: hidden; display: none;">
-														<p>
-															<s:text name="si_completo2"/>
-														</p>	
-													</div>
-												</td>										
-												</s:elseif>
-												
 												<s:if test="!servicio.publicado">
 												<td style="margin: 0; padding: 0;">
 													<form action="eliminarServicioInformacion" method="POST" id="id_<s:property value="#result_datos.index" />" onsubmit="return false;">
@@ -192,7 +182,25 @@
 															style="font-size: 0.9em;text-transform: none;" onclick="eliminar_SI(<s:property value="#i"/>,'<s:property value="servicio.nombre" />');" />
 													</form>
 												</td>
-												</s:if>												
+												</s:if>
+												<td style="margin: 0; padding: 0;">	
+													<img src="res/img/correcto.png" id="h<s:property value='#result_datos.index'/>" alt="ayuda" onmouseover="tip(this);" name="h<s:property value='#result_datos.index'/>" height="20" width="20" />
+													<div class="h<s:property value='#result_datos.index'/>" style="visibility: hidden; display: none;">
+														<p>
+															<s:text name="si_completo2"/>
+														</p>	
+													</div>
+												</td>										
+												</s:elseif>	
+												<s:else>
+												<td style="margin: 0; padding: 0;">
+													<form action="eliminarServicioInformacion" method="POST" id="id_<s:property value="#result_datos.index" />" onsubmit="return false;">
+														<s:hidden name="id_servicio_informacion" value="%{servicio.id_servicio_informacion}"/>
+														<input type="submit" value="<s:text name="eliminar" />" class="tab_button"
+															style="font-size: 0.9em;text-transform: none;" onclick="eliminar_SI(<s:property value="#i"/>,'<s:property value="servicio.nombre" />');" />
+													</form>
+												</td>
+												</s:else>								
 											</tr>
 											<tr>
 												<s:if test="!publicable">																			
