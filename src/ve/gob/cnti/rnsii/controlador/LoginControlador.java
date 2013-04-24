@@ -137,7 +137,7 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 		return SUCCESS;
 	}
 
-	// TODO Leer cantidad de peticiones a servicios
+	// TODO borrar la lecturas de mensajes de los campos incompletos
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String home() {
