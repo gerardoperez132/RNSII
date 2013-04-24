@@ -285,7 +285,8 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 							+ getField(models[1]) + " = " + idParent + " AND "
 							+ getField(models[0]) + " != " + idChild
 							+ " AND nombre = '" + name + "' AND status = "
-							+ ACTIVO).uniqueResult() != null)
+							+ ACTIVO 
+							+ " AND tipo ="+type).uniqueResult() != null)
 				result = true;
 		} catch (HibernateException he) {
 			handleException(he);
