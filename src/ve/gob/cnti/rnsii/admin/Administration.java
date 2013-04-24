@@ -47,59 +47,23 @@ public class Administration extends DAO implements ServletRequestAware {
 	//Controla el acceso al modulo de administracción	
 	@SuppressWarnings("unchecked")
 	public String access_control() throws Exception {		
-		session = ActionContext.getContext().getSession();
-		session.put("logueado", true);
+		session = ActionContext.getContext().getSession();	
+		if (password == null && captcha == null) {
+			return "404ERROR";
+		}
+		if (password.isEmpty() || captcha.isEmpty()) {
+			msj_error = error.getProperties().getProperty("error.login.fields");
+			return INPUT;
+		}
+		if (!password.equals("123456")) {
+			 msj_error = error.getProperties().getProperty(
+			 "error.login.invalid");			 
+			 return INPUT;
+		 } 
+		 session.put("logueado", true);
 		 session.put("usuario", usuario);
 		 session.put("admin", true);
-		 return SUCCESS;
-		
-		
-//		if (password == null && captcha == null) {
-//			return "404ERROR";
-//		}
-//		if (password.isEmpty() || captcha.isEmpty()) {
-//			msj_error = error.getProperties().getProperty("error.login.fields");
-//			return INPUT;
-//		}
-//		if (!((String) session.get("captcha")).toUpperCase().equals(
-//				captcha.toUpperCase())) {
-//			msj_error = error.getProperties()
-//					.getProperty("error.login.captcha");
-//			return INPUT;
-//		}	 
-//		 
-////		 usuario = (Usuario) read(usuario, 100000);
-////		 if (usuario == null) {
-////			 msj_error = error.getProperties().getProperty(
-////			 "error.login.invalid");
-////			 return INPUT;
-////		 } else if (!usuario.getClave().equals( new MD5Hashing(password).getPassword().toString())) {
-////			 msj_error = error.getProperties().getProperty(
-////			 "error.login.invalid");
-////			 return INPUT;
-////		 } else {
-////		 
-////		 session.put("logueado", true);
-////		 session.put("usuario", usuario);
-////		 session.put("admin", true);
-////		 return SUCCESS;
-////		 }	 		
-//		
-//		 if (!password.equals("123456")) {
-//			 msj_error = error.getProperties().getProperty(
-//			 "error.login.invalid");			 
-//			 return INPUT;
-//		 } 			  
-//		 
-//		 //TODO 
-//		 //1 Listar Servicios de información Completos e implementados
-//		 
-//		 
-//		 session.put("logueado", true);
-//		 session.put("usuario", usuario);
-//		 session.put("admin", true);
-//		 return SUCCESS;		 
-		
+		 return SUCCESS;	
 	}
 	
 	//Cierra la sesión del administrador
