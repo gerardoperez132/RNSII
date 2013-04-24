@@ -24,7 +24,8 @@ $(document).ready(function() {
 	$("#seguridad").change(function(){tab3_validate();});
 	$('[name="arquitectura"]').click(function(){tab3_validate();});
 	$("#servicio\\.version").keypress(function(){tab3_validate();});
-	$("#intercambio").change(function(){tab3_validate();});	
+	$("#intercambio").change(function(){tab3_validate();});
+	$("#wsdl").keyup(function(){tab3_validate();});
 	//tab4
 	$("#servicio\\.responsable").keyup(function(){tab4_validate();});
 	$("#telefono").keyup(function(){
@@ -33,6 +34,8 @@ $(document).ready(function() {
 		tab4_validate();
 	});
 	$("#correo").keyup(function(){tab4_validate();});
+	$("#codigo").change(function(){tab4_validate();});
+	
 	
 	/*
 	 * Obteniendo los valores de intercionalización del archivo JSON
