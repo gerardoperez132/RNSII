@@ -682,57 +682,54 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 	public boolean isComplete(ServicioInformacion servicio) {
 		List<UnionAreaServicioInformacion> unionareas;
 		List<UnionArquitecturaServicioInformacion> unionarquitecturas;
-		if (servicio.getId_sector() == 0) {
-			System.out.println("FALLÓ EN SECTOR");
+		if (servicio.getId_sector() == 0) {			
 			return false;
 		}
 		unionareas = (List<UnionAreaServicioInformacion>) readUnion(
 				new UnionAreaServicioInformacion(), servicio,
 				servicio.getId_servicio_informacion());
-		if (unionareas.isEmpty()) {
-			System.out.println("FALLÓ EN UNIÓN ÁREAS");
+		if (unionareas.isEmpty()) {			
 			return false;
 		}
-		if (servicio.getId_estado() == DESARROLLO) {
-			System.out.println("FALLÓ EN ESTADO");
+		if (servicio.getId_estado() == DESARROLLO) {			
 			return false;
 		}
-		if (servicio.getId_seguridad() == 0) {
-			System.out.println("FALLÓ EN SEGURIDAD");
+		if (servicio.getId_seguridad() == 0) {			
 			return false;
 		}
 		unionarquitecturas = (List<UnionArquitecturaServicioInformacion>) readUnion(
 				new UnionArquitecturaServicioInformacion(), servicio,
 				servicio.getId_servicio_informacion());
 		if (unionarquitecturas.isEmpty()) {
-			System.out.println("FALLÓ EN UNIÓN ARQUITECTURAS");
+			
 			return false;
 		}
-		if (servicio.getId_intercambio() == 0) {
-			System.out.println("FALLÓ EN INTERCAMBIO");
+		if (servicio.getId_intercambio() == 0) {			
 			return false;
 		}
 		Telefono phone = new Telefono();
 		phone = (Telefono) getPhone(servicio,
 				servicio.getId_servicio_informacion());
-		if (phone == null) {
-			System.out.println("FALLÓ EN TELÉFONO");
+		if (phone == null) {			
 			return false;
 		}
 		Correo email = new Correo();
 		email = (Correo) getEmail(servicio,
 				servicio.getId_servicio_informacion());
-		if (email == null) {
-			System.out.println("FALLÓ EN CORREO");
+		if (email == null) {			
 			return false;
 		}
-
+		
+		Url wsdl = new Url();		
+		wsdl = (Url) getUrl(servicio,servicio.getId_servicio_informacion());
+		if ((servicio.getId_estado() == IMPLEMENTADO && wsdl==null)) {
+			return false;
+		}	
 		Object[] models = { new Funcionalidad(), new ServicioInformacion() };
 		List<Funcionalidad> funcionalidades = new ArrayList<Funcionalidad>();
 		funcionalidades = (List<Funcionalidad>) read(models,
 				servicio.getId_servicio_informacion(), -1);
-		if (funcionalidades.isEmpty()) {
-			System.out.println("FALLÓ EN FUNCIONALIDADES");
+		if (funcionalidades.isEmpty()) {			
 			return false;
 		} else {
 			Iterator<Funcionalidad> fxIterado = funcionalidades.iterator();
@@ -743,8 +740,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 				List<EntradaSalida> salidas_tmp = new ArrayList<EntradaSalida>();
 				salidas_tmp = (List<EntradaSalida>) read(models2,
 						fx.getId_funcionalidad(), SALIDA);
-				if (salidas_tmp.isEmpty()) {
-					System.out.println("FALLÓ EN DATOS DE SALIDAS");
+				if (salidas_tmp.isEmpty()) {					
 					return false;
 				}
 			}
@@ -758,57 +754,54 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		List<UnionAreaServicioInformacion> unionareas;
 		List<UnionArquitecturaServicioInformacion> unionarquitecturas;
 		List<String> incompletos = new ArrayList<String>();
-		if (servicio.getId_sector() == 0) {
-			System.out.println("FALLÓ EN SECTOR");
+		if (servicio.getId_sector() == 0) {			
 			incompletos.add(error.getProperties().getProperty(
 					"error.servicio.incomplete.sector"));
 		}
 		unionareas = (List<UnionAreaServicioInformacion>) readUnion(
 				new UnionAreaServicioInformacion(), servicio,
 				servicio.getId_servicio_informacion());
-		if (unionareas.isEmpty()) {
-			System.out.println("FALLÓ EN UNIÓN ÁREAS");
+		if (unionareas.isEmpty()) {			
 			incompletos.add(error.getProperties().getProperty(
 					"error.servicio.incomplete.area"));
-		}
-		System.out.println("EL OBJETO SERVICIO (ID ESTADO) => "
-				+ servicio.getId_estado());
-		if (servicio.getId_estado() == DESARROLLO) {
-			System.out.println("FALLÓ EN ESTADO");
+		}		
+		if (servicio.getId_estado() == DESARROLLO) {		
 			incompletos.add(error.getProperties().getProperty(
 					"error.servicio.incomplete.estado"));
 		}
 		if (servicio.getId_seguridad() == 0) {
-			System.out.println("FALLÓ EN SEGURIDAD");
+			
 			incompletos.add(error.getProperties().getProperty(
 					"error.servicio.incomplete.seguridad"));
 		}
 		unionarquitecturas = (List<UnionArquitecturaServicioInformacion>) readUnion(
 				new UnionArquitecturaServicioInformacion(), servicio,
 				servicio.getId_servicio_informacion());
-		if (unionarquitecturas.isEmpty()) {
-			System.out.println("FALLÓ EN UNIÓN ARQUITECTURAS");
+		if (unionarquitecturas.isEmpty()) {			
 			incompletos.add(error.getProperties().getProperty(
 					"error.servicio.incomplete.arquitectura"));
 		}
 		if (servicio.getId_intercambio() == 0) {
-			System.out.println("FALLÓ EN INTERCAMBIO");
 			incompletos.add(error.getProperties().getProperty(
 					"error.servicio.incomplete.intercambio"));
+		}
+		Url wsdl = new Url();		
+		wsdl = (Url) getUrl(servicio,servicio.getId_servicio_informacion());
+		if ((servicio.getId_estado() == IMPLEMENTADO && wsdl==null)) {
+			incompletos.add(error.getProperties().getProperty(
+					"error.servicio.wsdl"));
 		}
 		Telefono phone = new Telefono();
 		phone = (Telefono) getPhone(servicio,
 				servicio.getId_servicio_informacion());
-		if (phone == null) {
-			System.out.println("FALLÓ EN TELÉFONO");
+		if (phone == null) {			
 			incompletos.add(error.getProperties().getProperty(
 					"error.servicio.incomplete.telefono"));
 		}
 		Correo email = new Correo();
 		email = (Correo) getEmail(servicio,
 				servicio.getId_servicio_informacion());
-		if (email == null) {
-			System.out.println("FALLÓ EN CORREO");
+		if (email == null) {			
 			incompletos.add(error.getProperties().getProperty(
 					"error.servicio.incomplete.correo"));
 		}
@@ -816,8 +809,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		List<Funcionalidad> funcionalidades = new ArrayList<Funcionalidad>();
 		funcionalidades = (List<Funcionalidad>) read(models,
 				servicio.getId_servicio_informacion(), -1);
-		if (funcionalidades.isEmpty()) {
-			System.out.println("FALLÓ EN FUNCIONALIDADES");
+		if (funcionalidades.isEmpty()) {			
 			incompletos.add(error.getProperties().getProperty(
 					"error.servicio.incomplete.funcionalidades"));
 		} else {
@@ -829,8 +821,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 				List<EntradaSalida> salidas_tmp = new ArrayList<EntradaSalida>();
 				salidas_tmp = (List<EntradaSalida>) read(models2,
 						fx.getId_funcionalidad(), SALIDA);
-				if (salidas_tmp.isEmpty()) {
-					System.out.println("FALLÓ EN DATOS DE SALIDAS");
+				if (salidas_tmp.isEmpty()) {					
 					incompletos.add(error.getProperties().getProperty(
 							"error.servicio.incomplete.salidas"));
 					break;
