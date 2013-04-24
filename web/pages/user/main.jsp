@@ -103,12 +103,13 @@
 						<thead>
 							<tr>
 							<!-- ADVERTENCIA => CONTENIDO NO INTERNACIONALIZADO -->
-								<th class="list-title" colspan="5" style="text-align: center;">Servicios de Información</th>
+								<th class="list-title" colspan="6" style="text-align: center;">Servicios de Información</th>
 							</tr>
 							<tr>
 								<th class="list-title" style="vertical-align: middle;text-align: center;"><s:text name="id"/></th>
 								<th class="list-title" style="vertical-align: middle;text-align: center;"><s:text name="nombre"/></th>
 								<th class="list-title" style="vertical-align: middle;text-align: center;"><s:text name="estado"/></th>
+								<th class="list-title" style="vertical-align: middle;text-align: center;"><s:text name="publicado"/></th>
 								<th class="list-title" style="vertical-align: middle;text-align: center;"><s:text name="fecha"/></th>
 								<th class="list-title" style="vertical-align: middle;text-align: center;"><s:text name="acciones"/></th>
 							</tr>
@@ -127,6 +128,14 @@
 												<s:property value="nombre" />
 											</s:if>
 										</s:iterator>
+									</td>
+									<td style="vertical-align: middle;text-align: center;">
+										<s:if test="servicio.publicado==true">
+											<s:text name="si"/>
+										</s:if>
+										<s:else>
+											<s:text name="no"/>
+										</s:else>											
 									</td>
 									<td style="vertical-align: middle;text-align: center;"><s:date name="servicio.fecha_creado" format="d'/'MM'/'yyyy" /></td>
 									<td style="vertical-align: middle;text-align: center;">
@@ -147,34 +156,19 @@
 														<input type="submit" value="<s:text name="modificar"/>" class="tab_button" 
 															style="font-size: 0.9em;text-transform: none;" />
 													</form>
-												</td>
-												</s:if>
-												<td style="margin: 0; padding: 0;">
-													<form action="eliminarServicioInformacion" method="POST" id="id_<s:property value="#result_datos.index" />" onsubmit="return false;">
-														<s:hidden name="id_servicio_informacion" value="%{servicio.id_servicio_informacion}"/>
-														<input type="submit" value="<s:text name="eliminar" />" class="tab_button"
-															style="font-size: 0.9em;text-transform: none;" onclick="eliminar_SI(<s:property value="#i"/>,'<s:property value="servicio.nombre" />');" />
-													</form>
-												</td>
+												</td>		
+												<td style="margin: 0; padding: 0;">	
+													<img src="res/img/correcto.png" id="h<s:property value='#result_datos.index'/>" alt="ayuda" onmouseover="tip(this);" name="h<s:property value='#result_datos.index'/>" height="20" width="20" />
+													<div class="h<s:property value='#result_datos.index'/>" style="visibility: hidden; display: none;">
+														<p>
+															<s:text name="si_completo"/>
+														</p>	
+													</div>
+												</td>										
+												</s:if>												
 											</tr>
 											<tr>
-												<s:if test="publicable">
-													<td style="margin: 0; padding: 0;">
-														<s:if test="!servicio.publicado">
-															<!-- <form action="publicarServicioInformacion" method="POST" id="id_pub_<s:property value="#result_datos.index"/>" onsubmit="return false;">
-																<s:hidden name="id_servicio_informacion" value="%{servicio.id_servicio_informacion}"/>
-																<input type="submit" style="font-size: 0.9em;" value="<s:text name="publicar"/>" onclick="publicar_SI(<s:property value="#i"/>,'<s:property value="servicio.nombre" />');" />
-															</form>-->
-														</s:if>
-														<s:else>
-															<!-- <form action="despublicarServicioInformacion" method="POST" id="id_despub_<s:property value="#result_datos.index"/>" onsubmit="return false;">
-																<s:hidden name="id_servicio_informacion" value="%{servicio.id_servicio_informacion}"/>
-																<input type="submit" value="<s:text name="despublicar" />" style="font-size: 0.9em;" onclick="despublicar_SI(<s:property value="#i"/>,'<s:property value="servicio.nombre" />');" />
-															</form>-->
-														</s:else>
-													</td>
-												</s:if>
-												<s:else>
+												<s:if test="!publicable">																			
 													<s:set name="action" value="%{'prepararModificarServicioInformacion'}"/>
 													<s:if test="incompletos.size()==1">
 														<s:i18n name="ve/gob/cnti/rnsii/i18n/errors">
@@ -201,7 +195,7 @@
 														</form>
 													</td>
 													<td style="margin: 0; padding: 0;">													
-														<img src="res/img/important.png" id="h<s:property value='#result_datos.index'/>" alt="ayuda" onmouseover="tip(this);" name="h<s:property value='#result_datos.index'/>" height="25" width="30" />
+														<img src="res/img/important.png" id="h<s:property value='#result_datos.index'/>" alt="ayuda" onmouseover="tip(this);" name="h<s:property value='#result_datos.index'/>" height="20" width="20" />
 														<div class="h<s:property value='#result_datos.index'/>" style="visibility: hidden; display: none;">
 															<s:iterator value="incompletos">
 																<p>
@@ -210,7 +204,7 @@
 															</s:iterator>
 														</div>
 													</td>
-												</s:else>
+												</s:if>												
 											</tr>
 										</table>
 									</td>
