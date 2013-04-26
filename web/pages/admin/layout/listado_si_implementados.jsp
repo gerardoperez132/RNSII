@@ -1,4 +1,5 @@
 <%@taglib uri="/struts-tags" prefix="s"%>
+<div class="main">
 <div id="adminForm">
 <table class="category">
 	<thead>
@@ -64,4 +65,5 @@
 		</tr>
 	</s:else>
 </table>
+</div>
 </div>
