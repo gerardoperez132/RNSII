@@ -453,18 +453,14 @@
 						
 							<h5 class="formulario">
 								<s:text name="tab2.info"/>
-							</h5>	
-							<h5 class="requerido" style="margin-left: 10px;">
-								<s:text name="usuario.modificar.requerido" />
-							</h5>
+							</h5>								
 							
 						<table>
 							<tr>
 							<!-- 1° col -->
 							<td>
 							
-								<h5 class="formulario">
-									<span style="color:red;">*</span>
+								<h5 class="formulario">									
 									<s:text name="documento.name" />
 									<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" 
 									name="t1" id="t1" onmouseover="tip(this);" title="">
@@ -482,8 +478,7 @@
 								<!-- td vacio -->
 							</td>
 							<td>
-								<h5 class="formulario">
-									<span style="color:red;">*</span>
+								<h5 class="formulario">									
 									<s:text name="documento.file"></s:text>
 									<img src="res/img/ayuda.gif" alt="ayuda" class="m_tip" 
 									name="t2" id="t2" onmouseover="tip(this);" title="">
