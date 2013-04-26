@@ -149,14 +149,7 @@
 															style="font-size: 0.9em;text-transform: none;" />
 													</form>
 												</td>
-												<s:if test="servicio.publicado">
-													<td style="margin: 0; padding: 0;">
-														<form action="prepararModificarServicioInformacion" method="POST">
-															<s:hidden name="id_servicio_informacion" value="%{servicio.id_servicio_informacion}"/>
-															<input type="submit" value="<s:text name="modificar"/>" class="tab_button" 
-																style="font-size: 0.9em;text-transform: none;" />
-														</form>
-													</td>
+												<s:if test="servicio.publicado">													
 													<td style="margin: 0; padding: 0;">	
 														<img src="res/img/correcto.png" id="h<s:property value='#result_datos.index'/>" alt="ayuda" onmouseover="tip(this);" name="h<s:property value='#result_datos.index'/>" height="20" width="20" />
 														<div class="h<s:property value='#result_datos.index'/>" style="visibility: hidden; display: none;">
