@@ -899,31 +899,27 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		//TAB3
 		if (servicio.getId_seguridad() == 0 || unionarquitecturas.isEmpty() || 
 				servicio.getId_intercambio() == 0 || servicio.getVersion()== null || 
-				(servicio.getId_estado() == IMPLEMENTADO && wsdl==null)) {
-			incompletos.add(error.getProperties().getProperty(
-					"error.servicio.incomplete.tab"));
+				(servicio.getId_estado() == IMPLEMENTADO && wsdl==null) ||
+				servicio.getId_estado() == DESARROLLO && wsdl.getUrl().length()==0) {
+			incompletos.add(error.getProperties().getProperty("error.servicio.incomplete.tab"));
 			if (servicio.getId_seguridad() == 0) {
-				incompletos.add(error.getProperties().getProperty(
-						"error.servicio.incomplete.seguridad"));
+				incompletos.add(error.getProperties().getProperty("error.servicio.incomplete.seguridad"));
 			}if (unionarquitecturas.isEmpty()) {
-				incompletos.add(error.getProperties().getProperty(
-						"error.servicio.incomplete.seguridad"));
+				incompletos.add(error.getProperties().getProperty("error.servicio.incomplete.seguridad"));
 			}if (servicio.getId_intercambio() == 0) {
-				incompletos.add(error.getProperties().getProperty(
-						"error.servicio.incomplete.intercambio"));
+				incompletos.add(error.getProperties().getProperty("error.servicio.incomplete.intercambio"));
 			}if (servicio.getVersion()==null) {
-				incompletos.add(error.getProperties().getProperty(
-						"error.servicio.incomplete.version"));
+				incompletos.add(error.getProperties().getProperty("error.servicio.incomplete.version"));
 			}if ((servicio.getId_estado() == IMPLEMENTADO && wsdl==null)) {
-				incompletos.add(error.getProperties().getProperty(
-						"error.servicio.wsdl"));
+				incompletos.add(error.getProperties().getProperty("error.servicio.wsdl"));
+			}else if ((servicio.getId_estado() == DESARROLLO && wsdl.getUrl().length()==0)){
+				incompletos.add(error.getProperties().getProperty("error.servicio.incomplete.wsdl"));
 			}	
 		}
 		mensajes.setTab(DESCRIPCION_TECNICA);
 		mensajes.setDetalles(incompletos);
 		mensajes_lista.add(mensajes);
-		incompletos = new ArrayList<String>();mensajes = new Tabs_incompletes();
-				
+		incompletos = new ArrayList<String>();mensajes = new Tabs_incompletes();		
 		//TAB4		
 		if (funcionalidades.isEmpty()) {			
 			incompletos.add(error.getProperties().getProperty(

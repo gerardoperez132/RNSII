@@ -32,12 +32,14 @@
 <script type="text/javascript" src="res/js/plugins/sexy-alert-box-1.2.2/jquery.easing.1.3.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/plugins/sexy-alert-box-1.2.2/sexyalertbox.v1.2.jquery.js" charset="UTF-8"></script>
 <%@include file="../layout/header_joomla.jsp" %>
+<s:if test="!nuevo">
 <s:set name="finalizar" value="true" />
 <s:iterator value="tabs_incompletas" status="status">
 <s:if test="detalles.size()>0">
 	<s:set name="finalizar" value="false" />
 </s:if>		
 </s:iterator>
+</s:if>
 <s:if test="modificar">
 	<s:set name="submit" value="%{getText('actualizar')}" />
 	<s:set name="title" value="%{getText('actualizar.title')}" />
@@ -723,7 +725,7 @@
 							<s:fielderror>
 								<s:param>wsdl</s:param>
 							</s:fielderror>							
-							<s:if test='servicio.id_estado==2'>
+							<s:if test='servicio.id_estado==2 && wsdl==null'>
 								<s:textfield name="wsdl" id="wsdl" value="http://"/>
 							</s:if>
 							<s:else><s:textfield name="wsdl" id="wsdl"/></s:else>							
