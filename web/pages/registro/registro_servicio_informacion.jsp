@@ -579,7 +579,7 @@
 				<!-- END TAB 2 -->
 				</s:if>
 				<s:if test="%{tab==3}">
-<!-- START TAB 3 -->
+<!-- START TAB 3 -->				
 				<form action="<s:property value="#action"/>" method="post"
 							enctype="multipart/form-data" id="formSI_Tab3" name="formSI_Tab3">
 				<div class="tab_description">
@@ -722,8 +722,11 @@
 							</h5>
 							<s:fielderror>
 								<s:param>wsdl</s:param>
-							</s:fielderror>
-							<s:textfield name="wsdl" id="wsdl"/>							
+							</s:fielderror>							
+							<s:if test='servicio.id_estado==2'>
+								<s:textfield name="wsdl" id="wsdl" value="http://"/>
+							</s:if>
+							<s:else><s:textfield name="wsdl" id="wsdl"/></s:else>							
 							<s:token name="token" />
 							<s:hidden name="tab" value="3" />
 							<s:hidden name="id_servicio_informacion" />

@@ -91,7 +91,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	private long seguridad;
 	private List<Long> arquitectura = new ArrayList<Long>();
 	private long intercambio;
-	private String wsdl = "http://";
+	private String wsdl;
 	private String telefono;
 	private String correo;
 	private String codigo;
@@ -693,20 +693,14 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 						.getProperty("error.servicio.version.format"));
 			}
 			if (intercambio < 0)
-				addFieldError(
-						"intercambio",
-						error.getProperties().getProperty(
+				addFieldError("intercambio",error.getProperties().getProperty(
 								"error.servicio.intercambio"));
 			// TODO FIX THIS!
-			long estado = ((ServicioInformacion) read(servicio,
-					id_servicio_informacion)).getId_estado();
+			long estado = ((ServicioInformacion) read(servicio,id_servicio_informacion)).getId_estado();
 			if (wsdl.trim().isEmpty() && estado == IMPLEMENTADO)
-				addFieldError("wsdl",
-						error.getProperties()
-								.getProperty("error.servicio.wsdl"));
+				addFieldError("wsdl",error.getProperties().getProperty("error.servicio.wsdl"));
 			else if (!wsdl.matches(REGEX_URL) && !wsdl.trim().isEmpty())
-				addFieldError("wsdl",
-						error.getProperties().getProperty("error.regex.url"));
+				addFieldError("wsdl",error.getProperties().getProperty("error.regex.url"));
 			prepararDescripcionTecnica();
 			break;
 		case DESCRIPCION_SOPORTE:
