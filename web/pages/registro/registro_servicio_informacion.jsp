@@ -32,9 +32,12 @@
 <script type="text/javascript" src="res/js/plugins/sexy-alert-box-1.2.2/jquery.easing.1.3.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/plugins/sexy-alert-box-1.2.2/sexyalertbox.v1.2.jquery.js" charset="UTF-8"></script>
 <%@include file="../layout/header_joomla.jsp" %>
-
-
-
+<s:set name="finalizar" value="true" />
+<s:iterator value="tabs_incompletas" status="status">
+<s:if test="detalles.size()>0">
+	<s:set name="finalizar" value="false" />
+</s:if>		
+</s:iterator>
 <s:if test="modificar">
 	<s:set name="submit" value="%{getText('actualizar')}" />
 	<s:set name="title" value="%{getText('actualizar.title')}" />
@@ -288,9 +291,11 @@
 					<small class="form_small"><s:text name="tab1.description"></s:text> </small>
 					</div>
 					<div class="tab_description_right">
-					<input type="submit" class="tab_button" name="submit" value='<s:property value="#submit"/>' id="btn_submit"/>
+					<input type="submit" class="tab_button" name="submit" value='<s:property value="#submit"/>' id="btn_submit"/>								
+					<s:if test="finalizar">					
 					<br>
 					<input type="submit" class="tab_button" name="submit" value='<s:text name="registro.finalizar"></s:text>' id="btn_submit_2"/>
+					</s:if>				
 					</div>					
 				</div>
 				<div class="tab_container_height tab_container">
@@ -441,9 +446,12 @@
 					</div>
 					<div class="tab_description_right">
 					<br>
+					<s:if test="finalizar">					
+					<br>
 					<form action="terminar_registro_si" id="formSI" name="formSI" method="post" enctype="multipart/form-data">
 						<input type="submit" class="tab_button" name="submit" value='<s:text name="registro.finalizar"></s:text>' id="btn_submit_2"/>
 					</form>
+					</s:if>					
 					</div>
 				</div>
 				<div class="tab_container_height tab_container">
@@ -571,7 +579,7 @@
 				<!-- END TAB 2 -->
 				</s:if>
 				<s:if test="%{tab==3}">
-				<!-- START TAB 3 -->
+<!-- START TAB 3 -->
 				<form action="<s:property value="#action"/>" method="post"
 							enctype="multipart/form-data" id="formSI_Tab3" name="formSI_Tab3">
 				<div class="tab_description">
@@ -583,8 +591,10 @@
 					</div>
 					<div class="tab_description_right">
 					<input type="submit" class="tab_button" value='<s:property value="#submit"/>' id="btn_submit" />
+					<s:if test="finalizar">					
 					<br>
 					<input type="submit" class="tab_button" name="submit" value='<s:text name="registro.finalizar"></s:text>' id="btn_submit_2"/>
+					</s:if>
 					</div>					
 				</div>	
 				<div class="tab_container_height tab_container">			
@@ -750,8 +760,10 @@
 					</div>
 					<div class="tab_description_right">
 					<input type="submit" class="tab_button" value='<s:property value="#submit"/>' id="btn_submit" />
+					<s:if test="finalizar">					
 					<br>
 					<input type="submit" class="tab_button" name="submit" value='<s:text name="registro.finalizar"></s:text>' id="btn_submit_2"/>
+					</s:if>
 					</div>					
 				</div>	
 				<div class="tab_container_height tab_container">	

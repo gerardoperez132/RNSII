@@ -26,7 +26,12 @@
 <script type="text/javascript" src="res/js/plugins/sexy-alert-box-1.2.2/jquery.easing.1.3.js" charset="UTF-8"></script>
 <script type="text/javascript" src="res/js/plugins/sexy-alert-box-1.2.2/sexyalertbox.v1.2.jquery.js" charset="UTF-8"></script>
 <%@include file="../layout/header_joomla.jsp" %>
-
+<s:set name="finalizar" value="true" />
+<s:iterator value="tabs_incompletas" status="status">
+<s:if test="detalles.size()>0">
+	<s:set name="finalizar" value="false" />
+</s:if>		
+</s:iterator>
 <title><s:text name="inicio" /></title>
 	</head>
 	<body class="bg clearfix">
@@ -146,10 +151,12 @@
 					<small><s:text name="funcionalidades.description"></s:text></small>
 					</div>	
 					<div class="tab_description_right">
+					<s:if test="finalizar">					
 					<br>
-					<form action="terminar_registro_si">
+					<form action="terminar_registro_si" id="formSI" name="formSI" method="post" enctype="multipart/form-data">
 						<input type="submit" class="tab_button" name="submit" value='<s:text name="registro.finalizar"></s:text>' id="btn_submit_2"/>
 					</form>
+					</s:if>	
 					</div>																			
 				</div>
 				
