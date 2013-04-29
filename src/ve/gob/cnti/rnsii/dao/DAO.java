@@ -900,7 +900,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		if (servicio.getId_seguridad() == 0 || unionarquitecturas.isEmpty() || 
 				servicio.getId_intercambio() == 0 || servicio.getVersion()== null || 
 				(servicio.getId_estado() == IMPLEMENTADO && wsdl==null) ||
-				servicio.getId_estado() == DESARROLLO && wsdl.getUrl().length()==0) {
+				wsdl.getUrl().length()==0) {
 			incompletos.add(error.getProperties().getProperty("error.servicio.incomplete.tab"));
 			if (servicio.getId_seguridad() == 0) {
 				incompletos.add(error.getProperties().getProperty("error.servicio.incomplete.seguridad"));
@@ -912,7 +912,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 				incompletos.add(error.getProperties().getProperty("error.servicio.incomplete.version"));
 			}if ((servicio.getId_estado() == IMPLEMENTADO && wsdl==null)) {
 				incompletos.add(error.getProperties().getProperty("error.servicio.wsdl"));
-			}else if ((servicio.getId_estado() == DESARROLLO && wsdl.getUrl().length()==0)){
+			}else if ((wsdl.getUrl().length()==0)){
 				incompletos.add(error.getProperties().getProperty("error.servicio.incomplete.wsdl"));
 			}	
 		}
