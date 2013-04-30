@@ -743,6 +743,26 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 						fx.getId_funcionalidad(), SALIDA);
 				if (salidas_tmp.isEmpty()) {					
 					return false;
+				}else{
+					Iterator<EntradaSalida> iterador_salidas = salidas_tmp.iterator();
+					EntradaSalida out_tmp = new EntradaSalida();
+					while(iterador_salidas.hasNext()){
+						out_tmp = iterador_salidas.next();
+						if(out_tmp.getId_tipo_dato()==1){							
+							boolean hijos_error = true;
+							Iterator<EntradaSalida> hijos = salidas_tmp.iterator();
+							EntradaSalida hijos_tmp = new EntradaSalida();
+							while (hijos.hasNext()) {
+								hijos_tmp = hijos.next();
+								if(out_tmp.getId_entrada_salida()==hijos_tmp.getId_padre()){
+									hijos_error = false;
+								}
+							}
+							if(hijos_error){
+								return false;								
+							}				
+						}
+					}
 				}
 			}
 		}

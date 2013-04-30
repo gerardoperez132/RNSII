@@ -146,7 +146,7 @@
 			class="ve.gob.cnti.rnsii.controlador.ServicioInformacionControlador">
 			<interceptor-ref name="doubleSubmit" />
 			<result name="success" type="redirectAction">prepararAspectosLegales</result>
-			<result name="end" type="redirectAction">home</result>
+			<result name="end" type="redirectAction">terminar_registro_si</result>
 			<result name="invalid.token">registro/registro_servicio_informacion.jsp
 			</result>
 			<result name="input">registro/registro_servicio_informacion.jsp
@@ -168,7 +168,7 @@
 			<interceptor-ref name="doubleSubmit" />
 			<result name="success">registro/registro_servicio_informacion.jsp
 			</result>
-			<result name="end" type="redirectAction">home</result>
+			<result name="end" type="redirectAction">terminar_registro_si</result>
 			<result name="invalid.token">registro/registro_servicio_informacion.jsp
 			</result>
 			<result name="input">registro/registro_servicio_informacion.jsp
@@ -206,7 +206,7 @@
 			<interceptor-ref name="doubleSubmit" />
 			<result name="success" type="redirectAction">prepararFuncionalidades
 			</result>
-			<result name="end" type="redirectAction">home</result>
+			<result name="end" type="redirectAction">terminar_registro_si</result>
 			<result name="invalid.token">registro/registro_servicio_informacion.jsp
 			</result>
 			<result name="input">registro/registro_servicio_informacion.jsp
@@ -229,7 +229,7 @@
 			<result name="success" type="redirectAction">prepararDescripcionSoporte</result>
 			<result name="invalid.token">registro/registro_servicio_informacion.jsp
 			</result>
-			<result name="end" type="redirectAction">home</result>
+			<result name="end" type="redirectAction">terminar_registro_si</result>
 			<result name="input">registro/registro_servicio_informacion.jsp
 			</result>
 			<result name="errorSession">error_sesion.jsp</result>
@@ -298,7 +298,7 @@
 		
 		<action name="terminar_registro_si" method="terminar_registro_si"
 			class="ve.gob.cnti.rnsii.controlador.ServicioInformacionControlador">
-			<result name="success" type="redirectAction">home</result>
+			<result name="success">layout/mensajes/mensaje_final_registro_si.jsp</result>
 			<result name="errorSession">error_sesion.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>

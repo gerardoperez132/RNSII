@@ -35,6 +35,7 @@ import ve.gob.cnti.rnsii.dao.Constants.Modelos;
 import ve.gob.cnti.rnsii.dao.Constants.Order;
 import ve.gob.cnti.rnsii.dao.Constants.Tabs;
 import ve.gob.cnti.rnsii.dao.DAO;
+import ve.gob.cnti.rnsii.i18n.Messages;
 import ve.gob.cnti.rnsii.modelo.Area;
 import ve.gob.cnti.rnsii.modelo.Arquitectura;
 import ve.gob.cnti.rnsii.modelo.AspectoLegal;
@@ -121,6 +122,8 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	private Date fecha;
 	
 	private List<Tabs_incompletes> tabs_incompletas = new ArrayList<Tabs_incompletes>(); 
+	
+	public static Messages message = new Messages();
 
 	@SuppressWarnings("unchecked")
 	@SkipValidation
@@ -294,8 +297,10 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		if (setSessionStack().equals("error"))
 			return "errorSession";
 		
-		if(submit != null && submit.contentEquals(message.getProperties().getProperty("registro.finalizar")))
+		if(submit != null && submit.contentEquals(message.getProperties().getProperty("registro.finalizar"))){			
+				addActionMessage(message.getProperties().getProperty("registro.servicio.success"));
 			return "end";
+		}
 			
 		return SUCCESS;
 	}
@@ -305,30 +310,19 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 
 		getSessionStack(false);
 		if (name.trim().isEmpty() && file != null) {
-			addFieldError(
-					"name",
-					error.getProperties().getProperty(
-							"error.servicio.file.name"));
-			addFieldError("file",
-					error.getProperties().getProperty("error.servicio.file"));
+			addFieldError("name",error.getProperties().getProperty("error.servicio.file.name"));
+			addFieldError("file",error.getProperties().getProperty("error.servicio.file"));
 			files = (List<AspectoLegal>) read(ALSI, id_servicio_informacion, -1);
 			return INPUT;
 		}
 		if (!name.trim().isEmpty() && file == null) {
-			addFieldError(
-					"name",
-					error.getProperties().getProperty(
-							"error.servicio.file.file"));
-			addFieldError("file",
-					error.getProperties().getProperty("error.servicio.file"));
+			addFieldError("name",error.getProperties().getProperty("error.servicio.file.file"));
+			addFieldError("file",error.getProperties().getProperty("error.servicio.file"));
 			files = (List<AspectoLegal>) read(ALSI, id_servicio_informacion, -1);
 			return INPUT;
 		}
 		if (name.trim().isEmpty() && file == null) {
-			addFieldError(
-					"name",
-					error.getProperties().getProperty(
-							"error.servicio.file.save"));
+			addFieldError("name",error.getProperties().getProperty(	"error.servicio.file.save"));
 			files = (List<AspectoLegal>) read(ALSI, id_servicio_informacion, -1);
 			return INPUT;
 		}
@@ -336,18 +330,12 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 				&& !fileContentType.equals("application/x-pdf")
 				&& !fileContentType.equals("application/x-bzpdf")
 				&& !fileContentType.equals("application/x-gzpdf")) {
-			addFieldError(
-					"file",
-					error.getProperties().getProperty(
-							"error.servicio.file.format"));
+			addFieldError("file",error.getProperties().getProperty("error.servicio.file.format"));
 			files = (List<AspectoLegal>) read(ALSI, id_servicio_informacion, -1);
 			return INPUT;
 		}
 		if (read(ALSI, id_servicio_informacion, name)) {
-			addFieldError(
-					"name",
-					error.getProperties().getProperty(
-							"error.servicio.file.repeated"));
+			addFieldError("name",error.getProperties().getProperty("error.servicio.file.repeated"));
 			files = (List<AspectoLegal>) read(ALSI, id_servicio_informacion, -1);
 			return INPUT;
 		}
@@ -365,44 +353,37 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		tabs_incompletas = getIncompleteFields2(servicio);
 		
-		if(submit != null && submit.contentEquals(message.getProperties().getProperty("registro.finalizar")))
+		if(submit != null && submit.contentEquals(message.getProperties().getProperty("registro.finalizar"))){			
+				addActionMessage(message.getProperties().getProperty("registro.servicio.success"));
 			return "end";
+		}
 		
 		return SUCCESS;
 	}
 
 	private String saveFile() throws IOException {
-
 		session = ActionContext.getContext().getSession();
-		String siglas = ((Ente) session.get("ente")).getSiglas().toString()
-				.toLowerCase();
-		String path = servletRequest.getSession().getServletContext()
-				.getRealPath(PATH + siglas + "/");
-		String filename = name.replace(" ", "_") + "_" + new Date().getTime()
-				+ ".pdf";
+		String siglas = ((Ente) session.get("ente")).getSiglas().toString().toLowerCase();
+		String path = servletRequest.getSession().getServletContext().getRealPath(PATH + siglas + "/");
+		String filename = name.replace(" ", "_") + "_" + new Date().getTime() + ".pdf";
 		FileUtils.copyFile(file, new File(path, filename));
 		return PATH + siglas + "/" + filename;
 	}
 
 	public String deleteFile() {
-
 		if (getSessionStack(isValidate).equals("error"))
 			return "errorSession";
 		AspectoLegal documento = (AspectoLegal) read(new AspectoLegal(),
 				id_aspecto_legal);
 		if (id_servicio_informacion == documento.getId_servicio_informacion()) {
-			String path = servletRequest.getSession().getServletContext()
-					.getRealPath(documento.getUrl());
+			String path = servletRequest.getSession().getServletContext().getRealPath(documento.getUrl());
 			File file = new File(path);
 			file.delete();
 			delete(documento, documento.getId_aspecto_legal());
 			prepararAspectosLegales();
 			return SUCCESS;
 		} else {
-			addFieldError(
-					"file",
-					error.getProperties().getProperty(
-							"error.servicio.file.invalid"));
+			addFieldError("file",error.getProperties().getProperty("error.servicio.file.invalid"));
 			prepararAspectosLegales();
 			return INPUT;
 		}
@@ -518,8 +499,10 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		if (setSessionStack().equals("error"))
 			return "errorSession";
 		
-		if(submit != null && submit.contentEquals(message.getProperties().getProperty("registro.finalizar")))
+		if(submit != null && submit.contentEquals(message.getProperties().getProperty("registro.finalizar"))){			
+				addActionMessage(message.getProperties().getProperty("registro.servicio.success"));
 			return "end";
+		}
 		
 		return SUCCESS;
 	}
@@ -628,8 +611,10 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		if (setSessionStack().equals("error"))
 			return "errorSession";
 		
-		if(submit != null && submit.contentEquals(message.getProperties().getProperty("registro.finalizar")))
+		if(submit != null && submit.contentEquals(message.getProperties().getProperty("registro.finalizar"))){			
+				addActionMessage(message.getProperties().getProperty("registro.servicio.success"));
 			return "end";
+		}
 		
 		return SUCCESS;
 	}
@@ -1009,6 +994,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 	}
 	
 	public String terminar_registro_si() {		
+		addActionMessage(message.getProperties().getProperty("registro.servicio.success"));
 		session = ActionContext.getContext().getSession();
 		if (session.isEmpty()) {
 			return "errorSession";

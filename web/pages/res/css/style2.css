@@ -791,3 +791,18 @@ div.middleContent {
 	margin-top: 10%;
 	margin-bottom: 6%;
 }
+
+.register_success{
+	border: 2px solid rgb(3, 104, 3);
+	background-color: rgb(179, 245, 177);
+	float: left;
+	font-family: sans-serif;	
+	margin: 1px 0pt 0pt;
+	width: 678px;
+	margin-bottom: 10px;
+	padding-left: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-size: 20px;
+	color: rgb(3,104,3);
+}
