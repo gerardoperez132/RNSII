@@ -256,37 +256,27 @@ public class SalidaControlador extends DAO implements Formulario,
 	public void validate() {		
 
 		if (salida.getNombre().trim().isEmpty())
-			addFieldError("salida.nombre",
-					error.getProperties().getProperty("error.salida.nombre"));
+			addFieldError("salida.nombre",error.getProperties().getProperty("error.salida.nombre"));
 		if (!salida.getNombre().toUpperCase().matches(REGEX_TITLE))
-			addFieldError("salida.nombre",
-					error.getProperties().getProperty("error.regex.title"));
+			addFieldError("salida.nombre",error.getProperties().getProperty("error.regex.title"));
 		if (salida.getDescripcion().trim().isEmpty())
-			addFieldError("salida.descripcion", error.getProperties()
-					.getProperty("error.salida.descripcion"));
+			addFieldError("salida.descripcion", error.getProperties().getProperty("error.salida.descripcion"));
 		if (!salida.getDescripcion().toUpperCase().matches(REGEX_DESCRIPTION))
-			addFieldError("salida.descripcion", error.getProperties()
-					.getProperty("error.regex.description"));
+			addFieldError("salida.descripcion", error.getProperties().getProperty("error.regex.description"));
 		if (salida.getId_tipo_dato() == -1) {
-			addFieldError("tipodato",
-					error.getProperties().getProperty("error.salida.tipodato"));
+			addFieldError("tipodato",error.getProperties().getProperty("error.salida.tipodato"));
 			salida.setId_formato((long) -1);
 			salida.setLongitud("");
-		} else {
-			TipoDato td = (TipoDato) read(new TipoDato(),
-					salida.getId_tipo_dato());
+		} else {	
+			System.out.println(salida.toString());
+			TipoDato td = (TipoDato) read(new TipoDato(),salida.getId_tipo_dato());
 			if (td.isHasformatted()) {
 				if (salida.getId_formato() == -1) {
-					addFieldError(
-							"formato",
-							error.getProperties().getProperty(
-									"error.salida.format"));
+					addFieldError("formato",error.getProperties().getProperty("error.salida.format"));
 				} else {
-					Formato f = (Formato) read(new Formato(),
-							salida.getId_formato());
+					Formato f = (Formato) read(new Formato(),salida.getId_formato());
 					if (f.getId_tipo_dato() != salida.getId_tipo_dato())
-						addFieldError("formato", error.getProperties()
-								.getProperty("error.salida.format"));
+						addFieldError("formato", error.getProperties().getProperty("error.salida.format"));
 				}
 			} else {
 				salida.setId_formato((long) -1);
@@ -298,40 +288,30 @@ public class SalidaControlador extends DAO implements Formulario,
 							float num = Float.parseFloat(salida.getLongitud()
 									.toString());
 							if (num <= 0) {
-								addFieldError("longitud", error.getProperties()
-										.getProperty("error.salida.longitud"));
+								addFieldError("longitud", error.getProperties().getProperty("error.salida.longitud"));
 							}
 						} catch (Exception e) {
-							addFieldError("longitud", error.getProperties()
-									.getProperty("error.salida.longitud"));
+							addFieldError("longitud", error.getProperties().getProperty("error.salida.longitud"));
 						}
 					} else {
 						try {
-							Long num = Long.parseLong(salida.getLongitud()
-									.toString());
+							Long num = Long.parseLong(salida.getLongitud().toString());
 							if (num <= 0) {
-								addFieldError("longitud", error.getProperties()
-										.getProperty("error.salida.longitud"));
+								addFieldError("longitud", error.getProperties().getProperty("error.salida.longitud"));
 							}
 						} catch (Exception e) {
-							addFieldError("longitud", error.getProperties()
-									.getProperty("error.salida.longitud"));
+							addFieldError("longitud", error.getProperties().getProperty("error.salida.longitud"));
 						}
 					}
 				} else {
-					addFieldError("longitud", error.getProperties()
-							.getProperty("error.salida.digit"));
+					addFieldError("longitud", error.getProperties().getProperty("error.salida.digit"));
 				}
 			} else {
-				salida.setLongitud(error.getProperties().getProperty(
-						"error.length"));
+				salida.setLongitud(error.getProperties().getProperty("error.length"));
 			}
 		}
-		if (entradaSalidaDuplicada(id_funcionalidad, id_entrada_salida, SALIDA,
-				salida.getNombre())) {
-			addFieldError("salida.nombre",
-					error.getProperties()
-							.getProperty("error.salida.duplicated"));
+		if (entradaSalidaDuplicada(id_funcionalidad, id_entrada_salida, SALIDA,salida.getNombre())) {
+			addFieldError("salida.nombre",error.getProperties().getProperty("error.salida.duplicated"));
 		}
 		if (complejo) {
 			prepararFormularioComplejo();

@@ -400,7 +400,9 @@
 					</tr>
 					</table>	
 					</s:if>
-						
+					<s:else>
+						<s:hidden name="salida.id_tipo_dato"></s:hidden>
+					</s:else>						
 					<s:hidden name="id_servicio_informacion"></s:hidden>
 					<s:hidden name="id_funcionalidad"></s:hidden>
 					<s:hidden name="id_entrada_salida"></s:hidden>
