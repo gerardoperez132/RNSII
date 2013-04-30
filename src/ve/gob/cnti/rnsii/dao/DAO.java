@@ -931,9 +931,10 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 				incompletos.add(error.getProperties().getProperty("error.servicio.incomplete.version"));
 			}if ((servicio.getId_estado() == IMPLEMENTADO && wsdl==null)) {
 				incompletos.add(error.getProperties().getProperty("error.servicio.wsdl"));
-			}else if ((wsdl.getUrl().length()==0)){
-				incompletos.add(error.getProperties().getProperty("error.servicio.incomplete.wsdl"));
-			}	
+			}else if(wsdl!=null){
+				if ((wsdl.getUrl().length()==0))
+					incompletos.add(error.getProperties().getProperty("error.servicio.incomplete.wsdl"));				
+			}
 		}
 		mensajes.setTab(DESCRIPCION_TECNICA);
 		mensajes.setDetalles(incompletos);
