@@ -223,6 +223,8 @@ public interface Constants {
 		public static final int Funcionalidades = 4;
 		/** Pestaña de descripción de soporte. */
 		public static final int DESCRIPCION_SOPORTE = 5;
+		/** Pestaña de descripción de soporte. */
+		public static final int SALIDAS_TAB = 6;
 	}
 
 	/**

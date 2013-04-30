@@ -196,6 +196,18 @@
 									style="background: none; border: none; font-size: 12px; padding: 0 20px; 
 									height: 31px; text-transform: none; font-family: sans-serif; color:black;
 									font-weight: normal;">
+										<s:iterator value="tabs_incompletas" status="status">
+										<s:if test="tab==6">
+											<s:if test="detalles.size()>0">
+												<img src="res/img/important.png" id="h6" alt="ayuda" 
+												onmouseover="tip(this);" name="h6" height="15" width="15" />
+											</s:if>							
+											<s:else>
+												<img src="res/img/correcto.png" id="h6" alt="ayuda" 
+												onmouseover="tip(this);" name="h6" height="15" width="15" />
+											</s:else>
+										</s:if>					
+										</s:iterator>
 									</form>
 								</li>
 								<li>
@@ -363,6 +375,18 @@
 									style="background: none; border: none; font-size: 12px; padding: 0 20px; 
 									height: 31px; text-transform: none; font-family: sans-serif; color:black;
 									font-weight: normal;">
+										<s:iterator value="tabs_incompletas" status="status">
+										<s:if test="tab==6">
+											<s:if test="detalles.size()>0">
+												<img src="res/img/important.png" id="h6" alt="ayuda" 
+												onmouseover="tip(this);" name="h6" height="15" width="15" />
+											</s:if>							
+											<s:else>
+												<img src="res/img/correcto.png" id="h6" alt="ayuda" 
+												onmouseover="tip(this);" name="h6" height="15" width="15" />
+											</s:else>
+										</s:if>					
+										</s:iterator>
 									</form>
 								</li>
 								<li class="active"><a><s:text name="tab.resumen"/>
@@ -488,7 +512,23 @@
 							<ul class="tabs">
 								<li class="active"><a><s:text name="tab1.title"/></a></li>
 								<li><a><s:text name="tab.entrada"/> </a></li>
-								<li><a><s:text name="tab.salida"/> </a></li>
+								<li>
+									<a>
+										<s:text name="tab.salida"/>
+										<s:iterator value="tabs_incompletas" status="status">
+										<s:if test="tab==6">
+											<s:if test="detalles.size()>0">
+												<img src="res/img/important.png" id="h6" alt="ayuda" 
+												onmouseover="tip(this);" name="h6" height="15" width="15" />
+											</s:if>							
+											<s:else>
+												<img src="res/img/correcto.png" id="h6" alt="ayuda" 
+												onmouseover="tip(this);" name="h6" height="15" width="15" />
+											</s:else>
+										</s:if>					
+										</s:iterator> 
+									</a>
+								</li>
 								<li><a><s:text name="tab.resumen"/> </a></li>
 							</ul>
 							<div class="tab_container">

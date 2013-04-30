@@ -209,7 +209,22 @@
 				</li>
 				<li><a><s:text name="tab.entrada"></s:text>
 				</a></li>
-				<li  class="active"><a href="#tab3"><s:text name="tab.salida"></s:text> </a>
+				<li class="active">
+					<a href="#tab3">
+						<s:text name="tab.salida"></s:text>
+						<s:iterator value="tabs_incompletas" status="status">
+						<s:if test="tab==6">
+							<s:if test="detalles.size()>0">
+								<img src="res/img/important.png" id="h6" alt="ayuda" 
+								onmouseover="tip(this);" name="h6" height="15" width="15" />
+							</s:if>							
+							<s:else>
+								<img src="res/img/correcto.png" id="h6" alt="ayuda" 
+								onmouseover="tip(this);" name="h6" height="15" width="15" />
+							</s:else>
+						</s:if>					
+						</s:iterator> 
+					</a>
 				</li>
 				<li><a href="#tab4"><s:text name="tab.resumen"></s:text> </a>
 				</li>

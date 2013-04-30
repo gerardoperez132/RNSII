@@ -46,10 +46,7 @@
 				<p><s:text name="servicio.tab.complete"></s:text></p>
 			</s:else>			
 		</div>						
-	</s:iterator>
-	<div class="h2" style="visibility: hidden; display: none;">
-			<p><s:text name="servicio.tab.complete"></s:text></p>
-	</div>	
+	</s:iterator>	
 	<div class="bg1">
 		<div class="sp-wrap main-bg clearfix" style="width: 960px;">
 		<%@include file="../layout/menus.jsp"%>
@@ -184,9 +181,21 @@
 								<s:hidden name="id_funcionalidad"/>
 								<s:hidden name="modificar"/>
 								<input type="submit" value="<s:text name="entrada.tab3.title"/>"
-									style="background: none; border: none; font-size: 12px; padding: 0 20px; 
+									style="background: none; border: none; font-size: 12px; padding: 0 15px; 
 									height: 31px; text-transform: none; font-family: sans-serif; color:black;
 									font-weight: normal;">
+								<s:iterator value="tabs_incompletas" status="status">
+								<s:if test="tab==6">
+									<s:if test="detalles.size()>0">
+										<img src="res/img/important.png" id="h6" alt="ayuda" 
+										onmouseover="tip(this);" name="h6" height="15" width="15" />
+									</s:if>							
+									<s:else>
+										<img src="res/img/correcto.png" id="h6" alt="ayuda" 
+										onmouseover="tip(this);" name="h6" height="15" width="15" />
+									</s:else>
+								</s:if>					
+								</s:iterator>
 							</form>
 						</li>
 						<li>
@@ -234,9 +243,9 @@
 										<th><s:text name="entrada.acciones" /></th>
 									</tr>
 								</thead>
-								<tbody>									
-									<s:if test="entradas.size > 0">
-										<s:set name="contador" value="%{0}"/>
+								<tbody>								
+									<s:set name="contador" value="%{0}"/>	
+									<s:if test="entradas.size > 0">										
 										<!-- Iterador con todas las entradas cargadas. -->
 										<s:iterator value="entradas" status="result_entradas">
 											<!-- Condición que asegura que sólo se impriman datos sin padres. -->

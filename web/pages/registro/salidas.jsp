@@ -47,9 +47,6 @@
 			</s:else>			
 		</div>						
 	</s:iterator>
-	<div class="h2" style="visibility: hidden; display: none;">
-			<p><s:text name="servicio.tab.complete"></s:text></p>
-	</div>	
 	<div class="bg1">
 		<div class="sp-wrap main-bg clearfix" style="width: 960px;">
 		<%@include file="../layout/menus.jsp"%>
@@ -189,8 +186,25 @@
 									font-weight: normal;">
 						</form>
 					</li>
-					<li class="active"><a><s:text name="salida.tab3.title"/></a></li>
-					<li>
+					<li class="active">
+						<a>
+							<s:text name="salida.tab3.title"/>
+							<s:iterator value="tabs_incompletas" status="status">
+							<s:if test="tab==6">
+								<s:if test="detalles.size()>0">
+									<img src="res/img/important.png" id="h6" alt="ayuda" 
+									onmouseover="tip(this);" name="h6" height="15" width="15" />
+								</s:if>							
+								<s:else>
+									<img src="res/img/correcto.png" id="h6" alt="ayuda" 
+									onmouseover="tip(this);" name="h6" height="15" width="15" />
+								</s:else>
+							</s:if>					
+							</s:iterator>
+						</a>
+							
+					</li>
+					<li>						
 						<form action="prepararResumen" method="POST">
 							<s:hidden name="id_servicio_informacion"/>
 							<s:hidden name="id_funcionalidad"/>
@@ -236,9 +250,9 @@
 									<th><s:text name="salida.acciones" /></th>
 								</tr>
 							</thead>
-							<tbody>								
-								<s:if test="salidas.size > 0">
-									<s:set name="contador" value="%{0}"/>
+							<tbody>			
+								<s:set name="contador" value="0"/>					
+								<s:if test="salidas.size > 0">									
 									<!-- Iterador con todas las salidas cargadas. -->
 									<s:iterator value="salidas" status="result_entradas">
 										<!-- Condición que asegura que sólo se impriman datos sin padres. -->
@@ -320,6 +334,7 @@
 																					</td>
 																				</s:i18n>
 																			</s:if>
+																		</td>
 																</table>
 															</s:if>
 															<s:else>
@@ -415,6 +430,7 @@
 		<div class="n" style="visibility: hidden; display: none;">
 			<s:property value="tabs_incompletas.size()+1+#contador" />
 		</div>	
+
 		
 		<div class="clr"></div>
 		<%@include file="../layout/breadcrumbs.jsp"%>	
