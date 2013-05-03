@@ -242,8 +242,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 	}
 
 	@SuppressWarnings("unchecked")
-	@SkipValidation
-	public String examinarServicioInformacion() {
+	public String examinarServicioInformacion() {		
 		session = ActionContext.getContext().getSession();
 		try {
 			int id_error = (Integer) session.get("id_error");
@@ -320,7 +319,7 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 		if (verifyClientAccess(ipAddress, id_servicio))
 			saveVisit(visita);
 		nVisitas = getVisits(id_servicio);
-		SI_masVisitados = listarServiciosVisitados(LIMITE_VISITADOS, false);
+		SI_masVisitados = listarServiciosVisitados(LIMITE_VISITADOS, false);		
 		return SUCCESS;
 	}
 
@@ -410,6 +409,66 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 			}
 		}
 		return sisVisitados2;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public String examinarServicioInformacionAdmin() {		
+		if (!verificarLong(id_servicio))
+			return INPUT;
+		listaSectores = listadoSectores(LIMITE_SECTORES, false);
+		examinarServicio = true;
+		servicio = (ServicioInformacion) read(servicio, id_servicio);
+		sector = (Sector) read(new Sector(), servicio.getId_sector());		
+		if (!isComplete(servicio))
+			return INPUT;
+		try {
+			unionareas = (List<UnionAreaServicioInformacion>) readUnion(
+					new UnionAreaServicioInformacion(), servicio, id_servicio);
+		} catch (Exception e) {
+			return "error";
+		}
+		try {
+			unionarquitecturas = (List<UnionArquitecturaServicioInformacion>) readUnion(
+					new UnionArquitecturaServicioInformacion(), servicio,
+					id_servicio);
+		} catch (Exception e) {
+			return "error";
+		}
+		Telefono phone = new Telefono();
+		phone = (Telefono) getPhone(servicio, id_servicio);
+		try {
+			telefono = phone.getTelefono();
+		} catch (Exception e) {
+			return "error";
+		}
+		Correo email = new Correo();
+		email = (Correo) getEmail(servicio, id_servicio);
+		try {
+			correo = email.getCorreo();
+		} catch (Exception e) {
+			return "error";
+		}
+		funcionalidades = (List<Funcionalidad>) read(FSI, id_servicio, -1);
+		Iterator<Funcionalidad> iterador = funcionalidades.iterator();
+		while (iterador.hasNext()) {
+			funcionalidad = iterador.next();
+			try {
+				List<EntradaSalida> es_tmp = (List<EntradaSalida>) read(ESF,
+						funcionalidad.getId_funcionalidad(), -1);
+				ios.add(es_tmp);
+			} catch (Exception e) {
+				return "error";
+			}
+		}
+		ente = (Ente) read(ente, servicio.getId_ente());
+		sectores = (List<Sector>) getSortedList(new Sector(), ASC);
+		estados = (List<Estado>) read(new Estado());
+		areas = (List<Area>) read(new Area());
+		niveles = (List<Seguridad>) read(new Seguridad());
+		arquitecturas = (List<Arquitectura>) read(new Arquitectura());
+		children = (List<Intercambio>) read(new Intercambio());
+		files = (List<AspectoLegal>) read(ALSI, id_servicio, -1);				
+		return SUCCESS;
 	}
 
 	@SkipValidation

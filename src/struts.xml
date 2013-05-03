@@ -84,10 +84,10 @@
 			<result name="error">error.jsp</result>
 		</action>
 		
-		<action name="servicio_view" method="examinarServicioInformacion"
+		<action name="servicio_view" method="examinarServicioInformacionAdmin"
 			class="ve.gob.cnti.rnsii.controlador.ConsultasControlador">
 			<result name="success">admin/layout/examinar_servicio.jsp</result>
-			<result name="input" type="redirectAction">Administrator</result>
+			<result name="input" type="redirectAction">administrator</result>
 			<result name="error">error.jsp</result>
 		</action>
 		
