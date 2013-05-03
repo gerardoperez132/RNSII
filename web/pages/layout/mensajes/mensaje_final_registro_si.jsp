@@ -49,9 +49,9 @@
 						</tr>
 					</table>				
 				</div>
-				<form action="home" method="post">
-					<input type="submit" class="button_h" value="<s:text name='home'/>">
-				</form>		
+				<form action="prepararRegistro" method="POST">	
+						<input type="submit" class="button_h" value='<s:text name="registro"/>'>
+				</form>	
 			</div>
 		</div>
 		<div class="clr"></div>
