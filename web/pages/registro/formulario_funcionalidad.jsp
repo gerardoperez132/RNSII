@@ -515,6 +515,7 @@
 								<li>
 									<a>
 										<s:text name="tab.salida"/>
+										<s:if test="funcionalidad == null">
 										<s:iterator value="tabs_incompletas" status="status">
 										<s:if test="tab==6">
 											<s:if test="detalles.size()>0">
@@ -526,7 +527,8 @@
 												onmouseover="tip(this);" name="h6" height="15" width="15" />
 											</s:else>
 										</s:if>					
-										</s:iterator> 
+										</s:iterator>										
+										</s:if>										 
 									</a>
 								</li>
 								<li><a><s:text name="tab.resumen"/> </a></li>
