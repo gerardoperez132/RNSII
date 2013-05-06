@@ -77,12 +77,10 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		if (id_funcionalidad > 0) {
-			funcionalidad = (Funcionalidad) read(funcionalidad,
-					id_funcionalidad);
-			funcionalidades = (List<Funcionalidad>) read(FSI, id_funcionalidad,
-					-1);
+			funcionalidad = (Funcionalidad) read(funcionalidad,id_funcionalidad);
+			funcionalidades = (List<Funcionalidad>) read(FSI, id_funcionalidad,-1);
 		}
-		tabs_incompletas = getIncompleteFields2(servicio);
+		tabs_incompletas = getIncompleteFields2(servicio,id_funcionalidad);
 		return SUCCESS;
 	}
 
@@ -95,15 +93,16 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 		funcionalidad.setId_servicio_informacion(id_servicio_informacion);
 		funcionalidad.setId_usuario(user.getId_usuario());
 		create(funcionalidad);
-		tabs_incompletas = getIncompleteFields2(servicio);
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		tabs_incompletas = getIncompleteFields2(servicio,id_funcionalidad);
 		return SUCCESS;
 	}
 
 	@SkipValidation
 	public String prepararModificaciones() {
-
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
-		tabs_incompletas = getIncompleteFields2(servicio);
+		tabs_incompletas = getIncompleteFields2(servicio,id_funcionalidad);
 		return SUCCESS;
 	}
 
@@ -117,7 +116,7 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,
 				ENTRADA);
 		salidas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad, SALIDA);
-		tabs_incompletas = getIncompleteFields2(servicio);
+		tabs_incompletas = getIncompleteFields2(servicio,id_funcionalidad);
 		if (salidas.size() < 1) {
 			addFieldError("Salidas", "Aún no ha cargado datos de salidas");
 			return INPUT;
@@ -170,8 +169,8 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 			funcionalidadesPublicables.add(new FuncionalidadesPublicables(
 					entradas, salidas, true, hijos, funcionalidad));			
 		}
-		System.out.println(servicio.toString());
-		tabs_incompletas = getIncompleteFields2(servicio);
+		
+		tabs_incompletas = getIncompleteFields2(servicio,id_funcionalidad);
 		return SUCCESS;
 	}
 
@@ -185,7 +184,8 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 		update(funcionalidad, id_funcionalidad);
 		modificarf = false;
 		mostrarTabla = true;
-		tabs_incompletas = getIncompleteFields2(servicio);
+		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
+		tabs_incompletas = getIncompleteFields2(servicio,id_funcionalidad);
 		return SUCCESS;
 	}
 
@@ -212,7 +212,7 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 			delete(io, io.getId_entrada_salida());
 		delete(funcionalidad, id_funcionalidad);
 		prepararFuncionalidades();
-		tabs_incompletas = getIncompleteFields2(servicio);
+		tabs_incompletas = getIncompleteFields2(servicio,id_funcionalidad);
 		return SUCCESS;
 	}
 
@@ -232,7 +232,7 @@ public class FuncionalidadControlador extends DAO implements Formulario,
 			addFieldError("funcionalidad.descripcion", error.getProperties()
 					.getProperty("error.regex.description"));
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
-		tabs_incompletas = getIncompleteFields2(servicio);
+		tabs_incompletas = getIncompleteFields2(servicio,id_funcionalidad);
 
 	}
 

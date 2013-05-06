@@ -854,7 +854,7 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 	
 	@Override
 	@SuppressWarnings({ "unchecked" })
-	public List<Tabs_incompletes> getIncompleteFields2(ServicioInformacion servicio) {		
+	public List<Tabs_incompletes> getIncompleteFields2(ServicioInformacion servicio,long id_funcionalidad) {		
 		
 		//Mensajes de los campos incompletos de una pestaña
 		Tabs_incompletes mensajes = new Tabs_incompletes();
@@ -1016,55 +1016,48 @@ public class DAO extends ActionSupport implements Constants, CRUD, Status,
 		mensajes_lista.add(mensajes);
 		incompletos = new ArrayList<String>();mensajes = new Tabs_incompletes();
 		
-		//TAB SALIDAS
-		funcionalidades = (List<Funcionalidad>) read(models,servicio.getId_servicio_informacion(), -1);
-		if (!funcionalidades.isEmpty()) {
-			Iterator<Funcionalidad> fxIterado = funcionalidades.iterator();
-			Funcionalidad fx = new Funcionalidad();
-			while (fxIterado.hasNext()) {
-				fx = fxIterado.next();
-				Object[] models2 = { new EntradaSalida(), new Funcionalidad() };
-				List<EntradaSalida> salidas_tmp = new ArrayList<EntradaSalida>();
-				salidas_tmp = (List<EntradaSalida>) read(models2,fx.getId_funcionalidad(), SALIDA);
-				if (salidas_tmp.isEmpty()) {	
-					incompletos.add(error.getProperties().getProperty("error.servicio.incomplete.tab"));					
-					incompletos.add(error.getProperties().getProperty("error.servicio.incomplete.salidas"));
-					mensajes.setTab(SALIDAS_TAB);
-					mensajes.setDetalles(incompletos);					
-					break;
-				}else{
-					Iterator<EntradaSalida> iterador_salidas = salidas_tmp.iterator();
-					EntradaSalida out_tmp = new EntradaSalida();
-					while(iterador_salidas.hasNext()){
-						out_tmp = iterador_salidas.next();
-						if(out_tmp.getId_tipo_dato()==1){
-							boolean hijos_error = true;
-							Iterator<EntradaSalida> hijos = salidas_tmp.iterator();
-							EntradaSalida hijos_tmp = new EntradaSalida();
-							while (hijos.hasNext()) {
-								hijos_tmp = hijos.next();
-								if(out_tmp.getId_entrada_salida()==hijos_tmp.getId_padre()){
-									hijos_error = false;
-								}
-							}
-							if(hijos_error){
-								incompletos.add(error.getProperties().getProperty("error.servicio.incomplete.tab"));					
-								incompletos.add(error.getProperties().getProperty("error.servicio.incomplete.hijos"));
-								mensajes.setTab(SALIDAS_TAB);
-								mensajes.setDetalles(incompletos);					
-								break;
-							}
+		//TAB SALIDAS	
+		if(id_funcionalidad>0){
+		Object[] models2 = { new EntradaSalida(), new Funcionalidad() };
+		List<EntradaSalida> salidas_tmp = new ArrayList<EntradaSalida>();
+		salidas_tmp = (List<EntradaSalida>) read(models2,id_funcionalidad, SALIDA);
+		if (salidas_tmp.isEmpty()) {	
+			incompletos.add(error.getProperties().getProperty("error.servicio.incomplete.tab"));					
+			incompletos.add(error.getProperties().getProperty("error.servicio.incomplete.salidas"));
+			mensajes.setTab(SALIDAS_TAB);
+			mensajes.setDetalles(incompletos);
+		}else{
+			Iterator<EntradaSalida> iterador_salidas = salidas_tmp.iterator();
+			EntradaSalida out_tmp = new EntradaSalida();
+			while(iterador_salidas.hasNext()){
+				out_tmp = iterador_salidas.next();
+				if(out_tmp.getId_tipo_dato()==1){
+					boolean hijos_error = true;
+					Iterator<EntradaSalida> hijos = salidas_tmp.iterator();
+					EntradaSalida hijos_tmp = new EntradaSalida();
+					while (hijos.hasNext()) {
+						hijos_tmp = hijos.next();
+						if(out_tmp.getId_entrada_salida()==hijos_tmp.getId_padre()){
+							hijos_error = false;
 						}
+					}
+					if(hijos_error){
+						incompletos.add(error.getProperties().getProperty("error.servicio.incomplete.tab"));					
+						incompletos.add(error.getProperties().getProperty("error.servicio.incomplete.hijos"));
+						mensajes.setTab(SALIDAS_TAB);
+						mensajes.setDetalles(incompletos);					
+						break;
 					}
 				}
 			}
-		}		
+		}			
 		if(incompletos.isEmpty()){
 			mensajes.setTab(SALIDAS_TAB);
 			mensajes.setDetalles(incompletos);
 		}
 		mensajes_lista.add(mensajes);
 		incompletos = new ArrayList<String>();mensajes = new Tabs_incompletes();
+		}
 		
 		return mensajes_lista;
 	}

@@ -157,7 +157,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		estados = (List<Estado>) read(new Estado());
 		areas = (List<Area>) read(new Area());
 		if(servicio.getId_servicio_informacion()!=0)
-			tabs_incompletas = getIncompleteFields2(servicio);
+			tabs_incompletas = getIncompleteFields2(servicio,0);
 		return SUCCESS;
 	}
 
@@ -175,7 +175,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 			return "error";
 		}
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
-		tabs_incompletas = getIncompleteFields2(servicio);
+		tabs_incompletas = getIncompleteFields2(servicio,0);
 		tab = ASPECTOS_LEGALES;
 		return SUCCESS;
 	}
@@ -194,7 +194,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		parents = (List<Intercambio>) getParents(new Intercambio());
 		children = (List<Intercambio>) getChildren(new Intercambio());
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
-		tabs_incompletas = getIncompleteFields2(servicio);
+		tabs_incompletas = getIncompleteFields2(servicio,0);
 		return SUCCESS;
 	}
 
@@ -208,7 +208,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		}
 		tab = DESCRIPCION_SOPORTE;
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
-		tabs_incompletas = getIncompleteFields2(servicio);
+		tabs_incompletas = getIncompleteFields2(servicio,0);
 		return SUCCESS;
 	}
 
@@ -351,7 +351,7 @@ public class ServicioInformacionControlador extends DAO implements Constants,
 		name = "";
 		
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
-		tabs_incompletas = getIncompleteFields2(servicio);
+		tabs_incompletas = getIncompleteFields2(servicio,0);
 		
 		if(submit != null && submit.contentEquals(message.getProperties().getProperty("registro.finalizar"))){			
 				addActionMessage(message.getProperties().getProperty("registro.servicio.success"));

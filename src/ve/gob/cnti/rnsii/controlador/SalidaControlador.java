@@ -79,7 +79,7 @@ public class SalidaControlador extends DAO implements Formulario,
 		salidas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad, SALIDA);
 		tipoDatos = (List<TipoDato>) read(new TipoDato());
 		complejo = false;
-		tabs_incompletas = getIncompleteFields2(servicio);
+		tabs_incompletas = getIncompleteFields2(servicio,id_funcionalidad);
 		return SUCCESS;
 	}
 
@@ -93,7 +93,7 @@ public class SalidaControlador extends DAO implements Formulario,
 		tipoDatos = (List<TipoDato>) read(new TipoDato());
 		formatos = (ArrayList<Formato>) read(new Formato());
 		complejo = false;
-		tabs_incompletas = getIncompleteFields2(servicio);
+		tabs_incompletas = getIncompleteFields2(servicio,id_funcionalidad);
 		return SUCCESS;
 	}
 
@@ -108,7 +108,7 @@ public class SalidaControlador extends DAO implements Formulario,
 		tipoDatos = (List<TipoDato>) getSimple();
 		formatos = (ArrayList<Formato>) read(new Formato());
 		complejo = false;
-		tabs_incompletas = getIncompleteFields2(servicio);
+		tabs_incompletas = getIncompleteFields2(servicio,id_funcionalidad);
 		return SUCCESS;
 	}
 
@@ -121,7 +121,7 @@ public class SalidaControlador extends DAO implements Formulario,
 		salidas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad, SALIDA);
 		tipoDatos = (List<TipoDato>) getComplex();
 		complejo = true;
-		tabs_incompletas = getIncompleteFields2(servicio);
+		tabs_incompletas = getIncompleteFields2(servicio,id_funcionalidad);
 		return SUCCESS;
 	}
 
@@ -134,7 +134,7 @@ public class SalidaControlador extends DAO implements Formulario,
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		tipoDatos = (List<TipoDato>) read(new TipoDato());
 		formatos = (ArrayList<Formato>) read(new Formato());
-		tabs_incompletas = getIncompleteFields2(servicio);
+		tabs_incompletas = getIncompleteFields2(servicio,id_funcionalidad);
 		return SUCCESS;
 	}
 
@@ -147,7 +147,7 @@ public class SalidaControlador extends DAO implements Formulario,
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		tipoDatos = (List<TipoDato>) getSimple();
 		formatos = (ArrayList<Formato>) read(new Formato());
-		tabs_incompletas = getIncompleteFields2(servicio);
+		tabs_incompletas = getIncompleteFields2(servicio,id_funcionalidad);
 		return SUCCESS;
 	}
 
@@ -159,7 +159,7 @@ public class SalidaControlador extends DAO implements Formulario,
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		tipoDatos = (List<TipoDato>) getComplex();
-		tabs_incompletas = getIncompleteFields2(servicio);
+		tabs_incompletas = getIncompleteFields2(servicio,id_funcionalidad);
 		return SUCCESS;
 	}
 
@@ -177,7 +177,7 @@ public class SalidaControlador extends DAO implements Formulario,
 		}
 		create(salida);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
-		tabs_incompletas = getIncompleteFields2(servicio);
+		tabs_incompletas = getIncompleteFields2(servicio,id_funcionalidad);
 		return SUCCESS;
 	}
 
@@ -200,7 +200,7 @@ public class SalidaControlador extends DAO implements Formulario,
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		salidas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad, SALIDA);
 		tipoDatos = (List<TipoDato>) read(new TipoDato());
-		tabs_incompletas = getIncompleteFields2(servicio);
+		tabs_incompletas = getIncompleteFields2(servicio,id_funcionalidad);
 		return SUCCESS;
 	}
 
@@ -221,7 +221,7 @@ public class SalidaControlador extends DAO implements Formulario,
 			update(servicio, id_servicio_informacion);
 		}
 		tipoDatos = (List<TipoDato>) read(new TipoDato());
-		tabs_incompletas = getIncompleteFields2(servicio);
+		tabs_incompletas = getIncompleteFields2(servicio,id_funcionalidad);
 		return SUCCESS;
 	}
 
@@ -248,7 +248,7 @@ public class SalidaControlador extends DAO implements Formulario,
 			update(servicio, id_servicio_informacion);
 		}
 		tipoDatos = (List<TipoDato>) read(new TipoDato());
-		tabs_incompletas = getIncompleteFields2(servicio);
+		tabs_incompletas = getIncompleteFields2(servicio,id_funcionalidad);
 		return SUCCESS;
 	}
 

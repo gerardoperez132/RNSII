@@ -701,9 +701,11 @@ public interface CRUD {
 	 * 
 	 * @param servicio
 	 *            Servicio de información a verificar.
+	 * @param id_funcionalidad
+	 * 			  para buscar si una funcionalidad tiene por lo menos una salida	           
 	 * @return Referencia a Pestañas incompletas.
 	 */
-	public List<Tabs_incompletes> getIncompleteFields2(ServicioInformacion servicio);
+	public List<Tabs_incompletes> getIncompleteFields2(ServicioInformacion servicio,long id_funcionalidad);
 	
 	/**
 	 * Permite consultar los servicios de información implementados y que no están

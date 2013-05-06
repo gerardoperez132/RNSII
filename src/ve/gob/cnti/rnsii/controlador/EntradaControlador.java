@@ -82,7 +82,7 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 				ENTRADA);
 		tipoDatos = (ArrayList<TipoDato>) read(new TipoDato());
 		complejo = false;
-		tabs_incompletas = getIncompleteFields2(servicio);
+		tabs_incompletas = getIncompleteFields2(servicio,id_funcionalidad);
 		return SUCCESS;
 	}
 
@@ -97,7 +97,7 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 		tipoDatos = (List<TipoDato>) read(new TipoDato());
 		formatos = (ArrayList<Formato>) read(new Formato());
 		complejo = false;
-		tabs_incompletas = getIncompleteFields2(servicio);
+		tabs_incompletas = getIncompleteFields2(servicio,id_funcionalidad);
 		return SUCCESS;
 	}
 
@@ -112,7 +112,7 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 		tipoDatos = (List<TipoDato>) getSimple();
 		formatos = (ArrayList<Formato>) read(new Formato());
 		complejo = false;
-		tabs_incompletas = getIncompleteFields2(servicio);
+		tabs_incompletas = getIncompleteFields2(servicio,id_funcionalidad);
 		return SUCCESS;
 	}
 
@@ -126,7 +126,7 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 				ENTRADA);
 		tipoDatos = (List<TipoDato>) getComplex();
 		complejo = true;
-		tabs_incompletas = getIncompleteFields2(servicio);
+		tabs_incompletas = getIncompleteFields2(servicio,id_funcionalidad);
 		return SUCCESS;
 	}
 
@@ -139,7 +139,7 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		tipoDatos = (ArrayList<TipoDato>) read(new TipoDato());
 		formatos = (ArrayList<Formato>) read(new Formato());
-		tabs_incompletas = getIncompleteFields2(servicio);
+		tabs_incompletas = getIncompleteFields2(servicio,id_funcionalidad);
 		return SUCCESS;
 	}
 
@@ -152,7 +152,7 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		tipoDatos = (List<TipoDato>) getSimple();
 		formatos = (ArrayList<Formato>) read(new Formato());
-		tabs_incompletas = getIncompleteFields2(servicio);
+		tabs_incompletas = getIncompleteFields2(servicio,id_funcionalidad);
 		return SUCCESS;
 	}
 
@@ -164,7 +164,7 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		tipoDatos = (List<TipoDato>) getComplex();
-		tabs_incompletas = getIncompleteFields2(servicio);
+		tabs_incompletas = getIncompleteFields2(servicio,id_funcionalidad);
 		return SUCCESS;
 	}
 
@@ -182,7 +182,7 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 		}
 		create(entrada);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
-		tabs_incompletas = getIncompleteFields2(servicio);
+		tabs_incompletas = getIncompleteFields2(servicio,id_funcionalidad);
 		return SUCCESS;
 	}
 
