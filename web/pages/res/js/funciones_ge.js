@@ -84,121 +84,64 @@ $(document).ready(function() {
 	// con cualquier selector
 	$.fn.lksMenu = function() {
 		// para mantener la posibilidad de concatenar metodos es que retornamos
-		// la función en
-		// lugar de solo ejecutar algo y ya.
-		// en este caso usamos un each, porque el selector sobre el que
-		// aplicamos la funcion
+		// la función en lugar de solo ejecutar algo y ya. en este caso usamos un each, 
+		// porque el selector sobre el que aplicamos la funcion
 		// podria contener mas de un elemento , esto es , aplicaria
-		// $('.menu').menu() lo cual
-		// ejecutaria el codigo para todos los elementos que tengan la clase
-		// menu, como puede
-		// haber mas de uno es que ejecutamos el each para que corra sobre todos
-		// ellos
-		return this
-				.each(function() {
-					// obtenemos el elemento que se esta analizando en esta
-					// vuelta del each
-					var menu = $(this);
-					// localizamos los links principales y le asignamos un
-					// evento click
-					menu
-							.find('ul li > a')
-							.bind(
-									'click',
-									function(event) {
-										// identificamos el elemento sobre el
-										// que se hizo click
-										var currentlink = $(event.currentTarget);
-										// los ul que tengan la clase active
-										// seran los que estan abiertos
-										// si el link sobre que presionamos ya
-										// estaba abierto , es decir tenia
-										// la clase active, lo cerramos y nada
-										// mas
-										if (currentlink.parent().find(
-												'ul.active').size() == 1) {
-											// cerramos el link porque apretamos
-											// sobre el mismo abierto
-											currentlink
-													.parent()
-													.find('ul.active')
-													.slideUp(
-															'medium',
-															function() {
-																// le quitamos
-																// la clase
-																currentlink
-																		.parent()
-																		.find(
-																				'ul.active')
-																		.removeClass(
-																				'active');
-															});
-										}
-										// si ningun link estaba apretado
-										else if (menu.find('ul li ul.active')
-												.size() == 0) {
-											// no hace falta cerrar ninguno y
-											// solo abrimos el elemento al
-											// cual se le hizo click
-											show(currentlink);
-										} else {
-											// si ya habia un item abierto ,
-											// simplemente lo localizamos
-											// con find, y lo cerramos con
-											// slideup,
-											menu
-													.find('ul li ul.active')
-													.slideUp(
-															'medium',
-															function() {
-																// una vez que
-																// cerramos el
-																// que estaba
-																// abierto
-																// le quitamos
-																// la clase
-																// active
-																menu
-																		.find(
-																				'ul li ul')
-																		.removeClass(
-																				'active');
-																// abrimos uno
-																// nuevo que
-																// corresponde
-																// al que se
-																// clickeo
-																show(currentlink);
-															});
-										}
-									});
+		// $('.menu').menu() lo cual ejecutaria el codigo para todos los elementos que tengan la clase
+		// menu, como puede haber mas de uno es que ejecutamos el each para que corra sobre todos ellos
+		return this	.each(function() {
+			// obtenemos el elemento que se esta analizando en esta
+			// vuelta del each
+			var menu = $(this);
+			// localizamos los links principales y le asignamos un
+			// evento click
+			menu.find('ul li > a').bind('click',function(event) {
+				// identificamos el elemento sobre el
+				// que se hizo click
+				var currentlink = $(event.currentTarget);
+				// los ul que tengan la clase active seran los que estan abiertos
+				// si el link sobre que presionamos ya estaba abierto , es decir tenia
+				// la clase active, lo cerramos y nada mas
+					if (currentlink.parent().find('ul.active').size() == 1) {
+						// cerramos el link porque apretamos sobre el mismo abierto
+						currentlink.parent().find('ul.active').slideUp('medium',function() {
+							// le quitamos la clase
+							currentlink.parent().find('ul.active').removeClass('active');
+						});
+					}
+					// si ningun link estaba apretado
+					else if (menu.find('ul li ul.active').size() == 0) {
+					// no hace falta cerrar ninguno y solo abrimos el elemento al
+					// cual se le hizo click
+						show(currentlink);
+					} else {
+					// si ya habia un item abierto, simplemente lo localizamos
+					// con find, y lo cerramos con slideup,
+						menu.find('ul li ul.active').slideUp('medium',function() {
+							// una vez que cerramos el que estaba abierto le quitamos
+							// la clase active
+							menu.find('ul li ul').removeClass('active');
+							// abrimos uno nuevo que corresponde al que se clickeo
+							show(currentlink);
+						});
+					}
+			});
 
-					menu
-							.find('ul li > a')
-							.bind(
-									'click',
-									function(event) {
+			menu.find('ul li > a').bind('click',function(event) {
 
-										var currentlink = $(event.currentTarget);
+				var currentlink = $(event.currentTarget);
 
-										if (currentlink.parent().find(
-												'span.active').size() == 1) {
-											currentlink.parent().find(
-													'span.active').html("+");
-											currentlink.parent().find(
-													'span.active').removeClass(
-													'active');
-										} else if (menu.find('span.active')
-												.size() == 0) {
-											show2(currentlink);
-										} else {
-											menu.find('span').html("+");
-											menu.find('span').removeClass(
-													'active');
-											show2(currentlink);
-										}
-									});
+					if (currentlink.parent().find('span.active').size() == 1) {
+						currentlink.parent().find('span.active').html("+");
+						currentlink.parent().find('span.active').removeClass('active');
+					} else if (menu.find('span.active').size() == 0) {
+						show2(currentlink);
+					} else {
+						menu.find('span').html("+");
+						menu.find('span').removeClass('active');
+						show2(currentlink);
+					}
+				});
 
 					// esta funcion es de soporte
 					// todo lo que hace es abrir el elemento y asignarle la

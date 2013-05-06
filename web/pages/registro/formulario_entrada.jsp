@@ -202,7 +202,12 @@
 			<div class="tab_content">		
 													
 			<ul class="tabs">
-				<li><a href="#tab1"><s:text name="tab1.title"></s:text> </a>
+				<li>
+					<a href="#tab1">
+					<s:text name="tab1.title"></s:text>
+					 <img src="res/img/correcto.png" id="h2" alt="ayuda" 
+								onmouseover="tip(this);" name="h2" height="15" width="15" />
+				</a>
 				</li>
 				<li class="active"><a><s:text name="tab.entrada"></s:text>
 				</a></li>
