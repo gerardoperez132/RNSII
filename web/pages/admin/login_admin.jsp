@@ -11,7 +11,7 @@
 							<td>
 								<p id="form-login-password">
 									<label for="modlgn-passwd"><s:text name="pass" /></label>
-									<input type="password" name="password" maxlength="6" />
+									<input type="password" name="password" />
 								</p>	
 							</td>
 							<td>
