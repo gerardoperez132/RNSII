@@ -49,6 +49,7 @@ import ve.gob.cnti.rnsii.modelo.UnionAreaServicioInformacion;
 import ve.gob.cnti.rnsii.modelo.UnionArquitecturaServicioInformacion;
 import ve.gob.cnti.rnsii.modelo.Usuario;
 import ve.gob.cnti.rnsii.modelo.Visita;
+import ve.gob.cnti.rnsii.util.Bootstrap;
 import ve.gob.cnti.rnsii.util.ListaServiciosVisitados;
 import ve.gob.cnti.rnsii.util.Pagination;
 import ve.gob.cnti.rnsii.util.SectoresMasPublicados;
@@ -126,8 +127,19 @@ public class ConsultasControlador extends DAO implements Constants, Order,
 	private String cuenta;
 
 	@SuppressWarnings("unchecked")
-	public String inicio() {
-		listaSectores = listadoSectores(LIMITE_SECTORES, false);
+	public String inicio() {		
+		try {
+			listaSectores = listadoSectores(LIMITE_SECTORES, false);
+		} catch (Exception e) {
+			return "failBD";
+		}		
+		
+		if(listaSectores.size()<1){
+			Bootstrap bootstrap = new Bootstrap();
+			if(bootstrap.isBDEmpty()){
+				bootstrap.bootstrap_execute();
+			}
+		}
 		// listaSectores2 = listadoSectores(-1, true);
 		SI_masVisitados = listarServiciosVisitados(LIMITE_VISITADOS, false);
 		List<SectoresMasPublicados> lista = listadoSectores(-1, true);

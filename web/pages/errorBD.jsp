@@ -38,6 +38,9 @@
 						<div class="error500">
 							<h1>Detalles técnicos</h1>
 							<p>
+								Existe un problema de conexión con la Base de Datos.
+							</p>
+							<p>
 								<s:property value="%{exceptionStack}" />
 							</p>
 						</div>

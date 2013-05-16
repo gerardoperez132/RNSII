@@ -699,6 +699,7 @@
 <!-- Actions para el usuario final -->
 		<action name="RNSII" method="inicio"
 			class="ve.gob.cnti.rnsii.controlador.ConsultasControlador">
+			<result name="failBD">errorBD.jsp</result>
 			<result name="success">index.jsp</result>
 			<result name="input" type="redirectAction">RNSII</result>
 			<result name="error">error.jsp</result>

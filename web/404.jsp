@@ -1,9 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@taglib uri="/struts-tags" prefix="s"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<s:i18n name="ve/gob/cnti/rnsii/i18n/messages">
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <!-- CSS (required) -->
@@ -23,7 +21,7 @@
 	});
 </script>
 	
-<title><s:text name="inicio" /></title>
+<title>RNSII - Inicio</title>
 <!-- Donde dice inicio debería ir una var que identifique el lugar -->
 </head>
 <body class="bg clearfix">
@@ -31,14 +29,13 @@
 	<div id="sombra">
 		<!-- Este es el div contenedor del maquetado de la página -->
 		<div id="container">			
-			<%@include file="pages/layout/sidebar_user_final.jsp"%>
+			
 			<!-- Este es el div de contenidos -->			
 			<div id="content">			
-			<h1 style="color:red"><s:text name="404"></s:text></h1>			
-			<h4><s:text name="pageNotFound"></s:text></h4>						
+			<h1 style="color:red">ERROR 404</h1>			
+			<h4>No se ha podido encontrar la página solicitada.</h4>						
 			</div>			
 		</div>		
 	</div>
 </body>
-</s:i18n>
 </html>
