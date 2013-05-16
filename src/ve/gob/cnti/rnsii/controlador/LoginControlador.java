@@ -155,8 +155,7 @@ public class LoginControlador extends DAO implements ServletRequestAware {
 			session.put("ente", ente);
 			estados = (List<Estado>) read(new Estado());
 			Object[] objetos = { new ServicioInformacion(), new Ente() };
-			servicios = (ArrayList<ServicioInformacion>) read(objetos,
-					ente.getId_ente(), -1);
+			servicios = (ArrayList<ServicioInformacion>) read(objetos,ente.getId_ente(), -1);
 			Iterator<ServicioInformacion> siIterado = servicios.iterator();
 			ServicioInformacion servicio = new ServicioInformacion();
 			while (siIterado.hasNext()) {

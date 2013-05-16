@@ -6,10 +6,11 @@
 			<div class="mod-inner clearfix">
 				<form action="access_control" method="post">
 					<fieldset class="userdata">
+					<span><s:property value="msj_error"/></span>
 					<table style="width: 200px;">						
 						<tr>
-							<td>
-								<p id="form-login-password">
+							<td>																
+								<p id="form-login-password">									
 									<label for="modlgn-passwd"><s:text name="pass" /></label>
 									<input type="password" name="password" />
 								</p>	

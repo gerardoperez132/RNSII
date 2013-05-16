@@ -55,9 +55,8 @@
 		</action>
 		
 		<action name="access_control" method="access_control"
-			class="ve.gob.cnti.rnsii.admin.Administration">
-			<result name="404ERROR" type="redirectAction">error404</result>
-			<result name="input" type="redirectAction">admin</result>
+			class="ve.gob.cnti.rnsii.admin.Administration">			
+			<result name="input">admin/admin.jsp</result>
 			<result name="success" type="redirectAction">administrator</result>
 			<result name="accesoInvalido" type="redirectAction">admin</result>
 			<result name="error">error.jsp</result>
@@ -510,8 +509,8 @@
 		</action>
 
 		<action name="index" method="autenticarUsuario"
-			class="ve.gob.cnti.rnsii.controlador.LoginControlador">
-			<result name="404ERROR" type="redirectAction">error404</result>
+			class="ve.gob.cnti.rnsii.controlador.LoginControlador">	
+			<result name="404ERROR" type="redirectAction">RNSII</result>		
 			<result name="input" type="redirectAction">
 				<param name="actionName">RNSII</param>
 				<param name="msj">true</param>

@@ -49,10 +49,11 @@ public class Administration extends DAO implements ServletRequestAware {
 	public String access_control() throws Exception {		
 		session = ActionContext.getContext().getSession();	
 		if (password == null && captcha == null) {
-			return "404ERROR";
+			msj_error = error.getProperties().getProperty("error.login.fields");			
+			return INPUT;
 		}
 		if (password.isEmpty() || captcha.isEmpty()) {
-			msj_error = error.getProperties().getProperty("error.login.fields");
+			msj_error = error.getProperties().getProperty("error.login.fields");			
 			return INPUT;
 		}
 		if (!password.equals("123456")) {
