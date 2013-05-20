@@ -44,9 +44,9 @@
 						<div class="administracion_capa">
 							<table>
 								<tr>
-									<td colspan="4"><s:fielderror>
-											<s:param>password</s:param>
-										</s:fielderror></td>
+									<td colspan="4">
+									<s:fielderror><s:param>password</s:param></s:fielderror>
+								</td>
 								</tr>
 								<tr>
 									<td colspan="4">
@@ -57,21 +57,29 @@
 								</tr>
 								<tr>
 									<td><s:text name="usuario.modificar.clave.actual" /></td>
-									<td><input type="password" name="clave_actual"
-										id="clave_actual" /></td>
-									<td><h5 class="requerido">*</h5></td>
+									<td>
+										<input type="password" name="clave_actual" id="clave_actual" />
+										<span class="requerido">*</span>				
+									</td>
+									<td></td>
 									<td><span id="passrequired"></span></td>
 								</tr>
 								<tr>
 									<td><s:text name="usuario.modificar.clave.nueva" /></td>
-									<td><input type="password" name="clave_nueva" id="pass" /></td>
-									<td><h5 class="requerido">*</h5></td>
+									<td>
+										<input type="password" name="clave_nueva" id="pass" />
+										<span class="requerido">*</span>
+									</td>
+									<td></td>
 									<td><span id="passstrength"></span></td>
 								</tr>
 								<tr>
 									<td><s:text name="usuario.modificar.clave.confirma" /></td>
-									<td><input type="password" name="clave_nueva_confirme" id="pass2" /></td>
-									<td><h5 class="requerido">*</h5></td>
+									<td>
+										<input type="password" name="clave_nueva_confirme" id="pass2" />
+										<span class="requerido">*</span>
+									</td>
+									<td></td>
 									<td><span id="passequal"></span> <br></td>
 								</tr>
 								<tr>

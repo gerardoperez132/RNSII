@@ -70,36 +70,19 @@ public class UsuarioControlador extends DAO {
 
 	@SuppressWarnings("unchecked")
 	public String modificarClave() throws NoSuchAlgorithmException {
-
 		if (header().equals("errorSession") == true) {
 			return "errorSession";
 		} else {
+			session = ActionContext.getContext().getSession();
+			Usuario usuario = new Usuario();
 			usuario = (Usuario) session.get("usuario");
-			if (clave_actual.isEmpty() || clave_nueva.isEmpty()
-					|| clave_nueva_confirme.isEmpty()) {
-				addFieldError("password",
-						error.getProperties().getProperty("error.login.fields"));
-				return INPUT;
-			} else if (usuario.getClave().equals(
-					new MD5Hashing(clave_actual).getPassword().toString())) {
-				if (!clave_nueva.equals(clave_nueva_confirme)) {
-					addFieldError("password", error.getProperties()
-							.getProperty("error.login.password.match"));
-					return INPUT;
-				} else if (clave_nueva.length() < 6) {
-					addFieldError("password", error.getProperties()
-							.getProperty("error.login.password.length"));
-					return INPUT;
-				} else {
-					MD5Hashing pass = new MD5Hashing(clave_nueva);
-					usuario.setClave(pass.getPassword());
-					update(usuario, usuario.getId_usuario());
-					modificarClave = false;
-					addActionMessage(message.getProperties().getProperty(
-							"usuario.update.password.success"));
-					return SUCCESS;
-				}
-			} else {
+			if(usuario.getClave().equals(new MD5Hashing(clave_actual).getPassword().toString())) {
+				MD5Hashing pass = new MD5Hashing(clave_nueva);
+				usuario.setClave(pass.getPassword());
+				update(usuario, usuario.getId_usuario());
+				modificarClave = false;
+				addActionMessage(message.getProperties().getProperty("usuario.update.password.success"));
+			}else {
 				try {
 					intentos_fallidos = (Integer) session
 							.get("intentos_fallidos");
@@ -113,15 +96,13 @@ public class UsuarioControlador extends DAO {
 					return "errorSession";
 				}
 				session.put("intentos_fallidos", intentos_fallidos);
-				addFieldError(
-						"password",
-						error.getProperties()
-								.getProperty("error.login.password.attempt")
-								.replace("{0}",
-										String.valueOf(intentos_fallidos)));
+				addFieldError("password",error.getProperties().getProperty("error.login.password.attempt")
+					.replace("{0}",String.valueOf(intentos_fallidos)));
 				// TODO Agregar intentos_fallidos
 				return INPUT;
 			}
+			
+			return SUCCESS;
 		}
 	}
 
@@ -140,22 +121,19 @@ public class UsuarioControlador extends DAO {
 			usuario = (Usuario) read(usuario, user.getId_usuario());
 			session.put("usuario", usuario);
 			modificarDatos = false;
-			addActionMessage(message.getProperties().getProperty(
-					"usuario.update.info.success"));
+			addActionMessage(message.getProperties().getProperty("usuario.update.info.success"));
 		}
 		return SUCCESS;
 	}
 
 	@SkipValidation
 	public String configuracion() {
-
 		return header();
 	}
 
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String prepararFormulario() {
-
 		if (header().equals("errorSession") == true) {
 			return "errorSession";
 		}
@@ -172,39 +150,66 @@ public class UsuarioControlador extends DAO {
 
 		if (modificarDatos) {
 			long ci;
-			if (usuario.getNombre().trim().isEmpty()
-					|| usuario.getApellido().trim().isEmpty()
+			if(usuario.getNombre().trim().isEmpty()|| usuario.getApellido().trim().isEmpty()
 					|| usuario.getCedula().trim().isEmpty()) {
-				addFieldError("datos",
-						error.getProperties().getProperty("error.login.fields"));
+				addFieldError("datos",error.getProperties().getProperty("error.login.fields"));
 			}
-			if (usuario.getNombre().length() < 4) {
-				addFieldError("nombres",
-						error.getProperties().getProperty("error.login.nombre"));
+			
+			if (usuario.getNombre().trim().isEmpty()) {
+				addFieldError("nombres",error.getProperties().getProperty("error.required"));
+			}else if (usuario.getNombre().length() < 4) {
+				addFieldError("nombres",error.getProperties().getProperty("error.login.nombre"));
+			}else if (!usuario.getNombre().toUpperCase().matches(REGEX_TITLE)) {
+				addFieldError("nombres",error.getProperties().getProperty("error.regex.title"));
 			}
-			if (usuario.getApellido().length() < 4) {
-				addFieldError(
-						"apellidos",
-						error.getProperties().getProperty(
-								"error.login.apellido"));
+			
+			if (usuario.getApellido().trim().isEmpty()) {
+				addFieldError("apellidos",error.getProperties().getProperty("error.required"));
+			}else if (usuario.getApellido().length() < 4) {
+				addFieldError("apellidos",error.getProperties().getProperty("error.login.apellido"));
+			}else if (!usuario.getApellido().toUpperCase().matches(REGEX_TITLE)) {
+				addFieldError("apellidos",error.getProperties().getProperty("error.regex.title"));
 			}
-			try {
-				ci = Integer.parseInt(usuario.getCedula());
-				// Verifica que la cedula sea entero positivo y mayor o igual a
-				// 1
-				if (ci < 1 || !usuario.getCedula().equals("" + ci)) {
-					addFieldError(
-							"cedula",
-							error.getProperties().getProperty(
-									"error.login.cedula.invalid"));
+			
+			if(usuario.getCedula().trim().isEmpty()) {
+				addFieldError("cedula",error.getProperties().getProperty("error.required"));
+			}else{
+				try {
+					ci = Integer.parseInt(usuario.getCedula());
+					// Verifica que la cedula sea entero positivo y mayor o igual a 1
+					if (ci < 1 || !usuario.getCedula().equals("" + ci)) {
+						addFieldError("cedula",	error.getProperties().getProperty("error.login.cedula.invalid"));
+					}else if(getUserCI(usuario.getCedula())!=null){
+						addFieldError("cedula",error.getProperties().getProperty("error.ci.repeated"));
+					}
+				} catch (Exception e) {
+					addFieldError("cedula",error.getProperties().getProperty("error.login.cedula.regex"));
 				}
-			} catch (Exception e) {
-				addFieldError(
-						"cedula",
-						error.getProperties().getProperty(
-								"error.login.cedula.regex"));
 			}
+						
 			nacionalidad = (List<Nacionalidad>) read(new Nacionalidad());
+		}else if(modificarClave){			
+		try {
+			if (clave_actual.isEmpty() || clave_nueva.isEmpty()	|| clave_nueva_confirme.isEmpty()) {
+				addFieldError("password", error.getProperties().getProperty("error.login.fields"));				
+			} else{
+				session = ActionContext.getContext().getSession();
+				Usuario usuario = new Usuario();
+				usuario = (Usuario) session.get("usuario");
+				if (!usuario.getClave().equals(new MD5Hashing(clave_actual).getPassword().toString()))
+					addFieldError("password", error.getProperties().getProperty("error.login.present.password.match"));
+				
+				if (!clave_nueva.equals(clave_nueva_confirme)) 
+					addFieldError("password", error.getProperties().getProperty("error.login.password.match"));
+				
+				if(!clave_nueva.matches(REGEX_PASS_MEDIUM))
+					addFieldError("password", error.getProperties().getProperty("error.login.password.weak"));	
+								
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+			
 		}
 	}
 
