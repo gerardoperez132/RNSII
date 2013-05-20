@@ -57,10 +57,13 @@ public class Administration extends DAO implements ServletRequestAware {
 			return INPUT;
 		}
 		if (!password.equals("123456")) {
-			 msj_error = error.getProperties().getProperty(
-			 "error.login.invalid");			 
+			 msj_error = error.getProperties().getProperty( "error.login.invalid");			 
 			 return INPUT;
 		 } 
+		if (!((String) session.get("captcha")).toUpperCase().equals(captcha.toUpperCase())) {
+			msj_error = error.getProperties().getProperty("error.login.captcha");
+			return INPUT;
+		}	
 		 session.put("logueado", true);
 		 session.put("usuario", usuario);
 		 session.put("admin", true);
