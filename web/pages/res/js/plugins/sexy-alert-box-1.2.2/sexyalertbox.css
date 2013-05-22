@@ -19,14 +19,14 @@
 #SexyAlertBox-BoxContenedor {
   padding: 0px 0px 5px 55px;
   text-align: left;
-  font-family:Verdana;
+  font-family:Liberation Sans;
   font-size:12px;
   color:#000;
 }
 
 #SexyAlertBox-BoxContenedor h1,#SexyAlertBox-BoxContenedor h2,#SexyAlertBox-BoxContenedor h3,#SexyAlertBox-BoxContenedor b,#SexyAlertBox-BoxContenedor strong{
   text-align: left;
-  font-family:Verdana;
+  font-family:Liberation Sans;
   font-size:12px;
   color:#000;
   font-weight:bold;

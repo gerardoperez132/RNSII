@@ -11,7 +11,7 @@
 	background-repeat: no-repeat;
 	cursor: pointer;
 	padding: 0;
-	zoom: 1; /* IE7 Hack */
+	/*zoom: 1;  IE7 Hack */
 }
 
 .treeTable tr.collapsed td .expander {

@@ -74,7 +74,7 @@ tfoot td,tfoot th {
 }
 
 .nohover:HOVER {
-	color: none;
+	opacity: 0.0;
 }
 
 table.resultHijos {
