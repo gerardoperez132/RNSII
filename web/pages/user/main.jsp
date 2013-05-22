@@ -99,21 +99,22 @@
 				</form>
 				<br>
 				<table class="category" style="width: 690px;">
+					<thead>
+						<tr>
+						<!-- ADVERTENCIA => CONTENIDO NO INTERNACIONALIZADO -->
+							<th class="list-title" colspan="6" style="text-align: center;">Servicios de Información</th>
+						</tr>
+						<tr>
+							<th class="list-title" style="vertical-align: middle;text-align: center;"><s:text name="id"/></th>
+							<th class="list-title" style="vertical-align: middle;text-align: center;"><s:text name="nombre"/></th>
+							<th class="list-title" style="vertical-align: middle;text-align: center;"><s:text name="estado"/></th>
+							<th class="list-title" style="vertical-align: middle;text-align: center;"><s:text name="publicado"/></th>
+							<th class="list-title" style="vertical-align: middle;text-align: center;"><s:text name="fecha"/></th>
+							<th class="list-title" style="vertical-align: middle;text-align: center;"><s:text name="acciones"/></th>
+						</tr>
+					</thead>
 					<tbody>
-						<thead>
-							<tr>
-							<!-- ADVERTENCIA => CONTENIDO NO INTERNACIONALIZADO -->
-								<th class="list-title" colspan="6" style="text-align: center;">Servicios de Información</th>
-							</tr>
-							<tr>
-								<th class="list-title" style="vertical-align: middle;text-align: center;"><s:text name="id"/></th>
-								<th class="list-title" style="vertical-align: middle;text-align: center;"><s:text name="nombre"/></th>
-								<th class="list-title" style="vertical-align: middle;text-align: center;"><s:text name="estado"/></th>
-								<th class="list-title" style="vertical-align: middle;text-align: center;"><s:text name="publicado"/></th>
-								<th class="list-title" style="vertical-align: middle;text-align: center;"><s:text name="fecha"/></th>
-								<th class="list-title" style="vertical-align: middle;text-align: center;"><s:text name="acciones"/></th>
-							</tr>
-						</thead>
+						
 						
 						<s:if test="ListaServicios.size() > 0">
 							<s:iterator value="ListaServicios" status="result_datos">
@@ -195,8 +196,9 @@
 												</td>
 												</s:else>								
 											</tr>
+											<s:if test="!publicable">
 											<tr>
-												<s:if test="!publicable">																			
+																															
 													<s:set name="action" value="%{'prepararModificarServicioInformacion'}"/>
 													<s:if test="incompletos.size()==1">
 														<s:i18n name="ve/gob/cnti/rnsii/i18n/errors">
@@ -230,8 +232,9 @@
 																</p>															
 														</div>
 													</td>
-												</s:if>												
+																								
 											</tr>
+											</s:if>
 										</table>
 									</td>
 								</tr>

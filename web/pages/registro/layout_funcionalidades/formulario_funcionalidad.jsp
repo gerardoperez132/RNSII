@@ -69,6 +69,7 @@
 						<s:textarea name="funcionalidad.descripcion" cols="30" rows="5" id="funcionalidad.descripcion" />
 						
 						<br>
+						<s:token name="token" />
 						<s:hidden name="id_servicio_informacion"/>
 						<s:hidden name="id_funcionalidad"/>
 						<s:hidden name="modificar"/>
@@ -110,6 +111,8 @@
 						<br>
 						<s:hidden name="id_servicio_informacion"/>
 						<s:hidden name="modificar"/>
+						<s:hidden name="registrado"/>
+						<s:token name="token" />
 						<input type="submit" value='<s:text name="guardar"/>' class="button_h"/>
 					</form>
 				</s:else>

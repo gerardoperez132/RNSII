@@ -6,7 +6,7 @@
 			<div class="mod-inner clearfix">
 				<form action="access_control" method="post">
 					<fieldset class="userdata">
-					<span style="color:red;"><s:property value="msj_error"/></span>
+					<span style="color:red;"><s:property value="msj_error"/></span>					
 					<table style="width: 200px;">						
 						<tr>
 							<td>																

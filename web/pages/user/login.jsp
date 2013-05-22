@@ -74,7 +74,7 @@
 					</tr>
 					<tr>					
 						<td></td>
-						<td id="captcha_pos" style="height: 35px;"><img src="getCaptcha" id="captcha"></td>
+						<td id="captcha_pos" style="height: 35px;"><img src="getCaptcha" id="captcha" alt="catcha"></td>
 						<td><a href="RNSII" id="a_refresh"><img src="res/images/refresh.png" alt="Refrescar" id="refrescar"></a></td>
 					</tr>
 					<tr>
@@ -134,7 +134,7 @@
 			<div class="mod-content clearfix">	
 			<div class="mod-inner clearfix">
 				<form action="index" method="post">
-					<fieldset class="userdata">
+					
 					<table style="width: 200px;">
 						<tr>
 							<td>
@@ -153,7 +153,7 @@
 						<tr>
 							<td>
 								<p id="form-login-password">
-									<label for="modlgn-passwd"><s:text name="pass" /></label>
+									<label><s:text name="pass" /></label>
 									<input type="password" name="password"/>
 								</p>	
 							</td>
@@ -163,9 +163,9 @@
 						</tr>
 						<tr>
 							<td>
-								<p id="form-login-password">
-									<label for="modlgn-passwd"><s:text name="captcha" /></label>
-									<input id="modlgn-passwd" type="text" name="captcha" maxlength="6" />
+								<p id="form-login-captcha">
+									<label ><s:text name="captcha" /></label>
+									<input type="text" name="captcha" maxlength="6" />
 								</p>	
 							</td>
 							<td>								
@@ -186,7 +186,7 @@
 						</tr>
 					</table>	
 					
-					</fieldset>
+					
 				</form>
 				<ul class="userlinks">					
 					<li><a href="recuperar_clave"><s:text name="accessSystem" /></a></li>

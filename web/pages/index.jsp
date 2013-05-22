@@ -40,14 +40,14 @@
 						<table class="category">
 							<thead>
 								<tr>
-									<th class="list-title" style="vertical-align: middle;text-align: center;" colspan="3" id="tableOrdering1"><s:text name="listarSector" />
+									<th class="list-title" style="vertical-align: middle;text-align: center;" colspan="3" ><s:text name="listarSector" />
 										<span style="color: #A1C7D0;">"<s:property value="sector.nombre" />"</span>
 									</th>
 								</tr>
 								<tr>
-									<th class="list-title" style="vertical-align: middle;text-align: center;" id="tableOrdering"><s:text name="nombre" /></th>
-									<th class="list-title" style="vertical-align: middle;text-align: center;" id="tableOrdering"><s:text name="ente1" /></th>
-									<th class="list-title" style="vertical-align: middle;text-align: center;" id="tableOrdering"><s:text name="fecha" /></th>
+									<th class="list-title" style="vertical-align: middle;text-align: center;" ><s:text name="nombre" /></th>
+									<th class="list-title" style="vertical-align: middle;text-align: center;" ><s:text name="ente1" /></th>
+									<th class="list-title" style="vertical-align: middle;text-align: center;" ><s:text name="fecha" /></th>
 								</tr>
 							</thead>
 							<s:if test="servicios.size() > 0">
@@ -87,11 +87,11 @@
 						<table class="category">
 							<thead>
 								<tr>
-									<th colspan="2" class="list-title" style="vertical-align: middle;text-align: center;" id="tableOrdering1"><s:text name="listarSectores" /></th>
+									<th colspan="2" class="list-title" style="vertical-align: middle;text-align: center;" ><s:text name="listarSectores" /></th>
 								</tr>
 								<tr>
-									<th class="list-title" style="vertical-align: middle;text-align: center;" id="tableOrdering"><s:text name="nombre" /></th>
-									<th class="list-title" style="vertical-align: middle;text-align: center;" id="tableOrdering4"><s:text name="numero_si" /></th>
+									<th class="list-title" style="vertical-align: middle;text-align: center;" ><s:text name="nombre" /></th>
+									<th class="list-title" style="vertical-align: middle;text-align: center;" ><s:text name="numero_si" /></th>
 								</tr>
 							</thead>
 							<s:iterator value="listaSectores2" status="index">
@@ -417,7 +417,7 @@
 									</tr>
 									<tr>
 										<td class="width_230">
-											<img src="getCaptcha" id="captcha">											
+											<img src="getCaptcha" alt="captcha">											
 										</td>
 										<td class="width_230">
 											<s:hidden name="id_servicio_informacion" value="%{servicio.id_servicio_informacion}"/>
@@ -435,13 +435,13 @@
 						<table class="category">
 							<thead>
 							<tr>
-								<th colspan="4" class="list-title" style="vertical-align: middle;text-align: center;" id="tableOrdering1"><s:text name="listaServicios" /></th>
+								<th colspan="4" class="list-title" style="vertical-align: middle;text-align: center;" ><s:text name="listaServicios" /></th>
 							</tr>
 							<tr>
-								<th class="list-title" style="vertical-align: middle;text-align: center;" id="tableOrdering"><s:text name="n_servicio" /></th>
-								<th class="list-title" style="vertical-align: middle;text-align: center;" id="tableOrdering"><s:text name="nombre" /></th>
-								<th class="list-title" style="vertical-align: middle;text-align: center;" id="tableOrdering"><s:text name="ente1" /></th>
-								<th class="list-title" style="vertical-align: middle;text-align: center;" id="tableOrdering"><s:text name="fecha" /></th>
+								<th class="list-title" style="vertical-align: middle;text-align: center;" ><s:text name="n_servicio" /></th>
+								<th class="list-title" style="vertical-align: middle;text-align: center;" ><s:text name="nombre" /></th>
+								<th class="list-title" style="vertical-align: middle;text-align: center;" ><s:text name="ente1" /></th>
+								<th class="list-title" style="vertical-align: middle;text-align: center;" ><s:text name="fecha" /></th>
 							</tr>
 							</thead>
 							<s:if test="servicios.size()>0">
@@ -480,16 +480,16 @@
 						<table class="category">
 							<thead>
 								<tr>
-									<th colspan="3" class="list-title" style="vertical-align: middle;text-align: center;" id="tableOrdering1"><s:text name="listaServiciosEncontrados" /></th>
+									<th colspan="3" class="list-title" style="vertical-align: middle;text-align: center;" ><s:text name="listaServiciosEncontrados" /></th>
 								</tr>
 								<tr>
-									<th class="list-title" style="vertical-align: middle;text-align: center;" id="tableOrdering2"><s:text name="argumentoConsultado" /></th>
+									<th class="list-title" style="vertical-align: middle;text-align: center;" ><s:text name="argumentoConsultado" /></th>
 									<td colspan="2"><span style="color: #A1C7D0">"<s:property value="cadena" />"</span></td>
 								</tr>
 								<tr>
-									<th class="list-title" style="vertical-align: middle;text-align: center;" id="tableOrdering"><s:text name="nombre" /></th>
-									<th class="list-title" style="vertical-align: middle;text-align: center;" id="tableOrdering"><s:text name="ente1" /></th>
-									<th class="list-title" style="vertical-align: middle;text-align: center;" id="tableOrdering"><s:text name="fecha" /></th>
+									<th class="list-title" style="vertical-align: middle;text-align: center;" ><s:text name="nombre" /></th>
+									<th class="list-title" style="vertical-align: middle;text-align: center;" ><s:text name="ente1" /></th>
+									<th class="list-title" style="vertical-align: middle;text-align: center;" ><s:text name="fecha" /></th>
 								</tr>
 							</thead>
 							<s:if test="servicios.size()>0">

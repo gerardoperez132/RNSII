@@ -23,19 +23,19 @@
 	<div style="clear: both"></div>
 	<%@include file="../user/login.jsp"%>
 	<div style="clear: both"></div>
-	<div id="adminForm">
+	<div class="adminForm">
 	<table class="category">
 		<thead>
 			<tr>
-			<th class="list-title" id="tableOrdering1" colspan="2">
+			<th class="list-title" colspan="2">
 				<s:text name="si_mas_Visitados" />
 			</th>
 			</tr>
 			<tr>
-				<th class="list-title" id="tableOrdering">
+				<th class="list-title">
 					Servicio
 				</th>
-				<th class="list-hits" id="tableOrdering4">
+				<th class="list-hits">
 					Visto	
 				</th>							
 			</tr>
@@ -72,15 +72,15 @@
 	<table class="category">
 		<thead>
 			<tr>
-			<th class="list-title" id="tableOrdering1" colspan="2">
+			<th class="list-title" colspan="2">
 				<s:text name="sectores_list" />
 			</th>
 			</tr>
 			<tr>
-				<th class="list-title" id="tableOrdering">
+				<th class="list-title">
 					Sector
 				</th>
-				<th class="list-hits" id="tableOrdering4">
+				<th class="list-hits">
 					Visto	
 				</th>							
 			</tr>
@@ -110,9 +110,7 @@
 		</s:else>
 		<tr class="cat-list-row0">
 			<td class="list-title">
-				<a href="listarSectores" style="font-weight:bold;"><s:text name="ver_sectores"/></a>
-				<td class="list-hits">
-				</td>
+				<a href="listarSectores" style="font-weight:bold;"><s:text name="ver_sectores"/></a>				
 			</td>
 		</tr>
 		</tbody>

@@ -35,7 +35,7 @@ h4 { font-size: 110%; }
 h5 { font-size: 100%; }
 h6 { font-size: 90%; }
 h1{font-size:175%;font-weight:400;line-height:normal;border-bottom:1px dashed #d3d3d3;margin:0 0 10px;padding:0 0 10px}
-h2{font-family:Georgia,"Times New Roman",Times,serif;font-size:16px;font-weight:400;line-height:110%;margin:0;padding:0 0 4px}
+h2{font-family:Liberation Serif;font-size:16px;font-weight:400;line-height:110%;margin:0;padding:0 0 4px}
 p,ul,ol,h1,h2,h3,h4,h5,h6{margin:0.7em 0;padding:0}
 
 /* forms */
@@ -46,11 +46,11 @@ form label{cursor:pointer}
 fieldset a{font-weight:700}
 legend{font-size:125%;font-weight:700;line-height:1.2}
 form{display:inline;margin:0;padding:0}
-input,select,textarea,.inputbox{border-color:#C1C1C1 #E1E1E1 #E1E1E1;border-right:1px solid #E1E1E1;border-style:solid;border-width:1px;color:#656565;font-family:Arial,Helvetica,sans-serif;padding:6px}
+input,select,textarea,.inputbox{border-color:#C1C1C1 #E1E1E1 #E1E1E1;border-right:1px solid #E1E1E1;border-style:solid;border-width:1px;color:#656565;font-family:Liberation Sans;padding:6px}
 hr{background-color:#CCC;border:#CCC;color:#CCC;height:1px}
 
 /* Button */
-a.readmore,a.fs-sp1-morein,.adminform button,#adminForm button,.button,button[type=submit],input[type=submit],input[type=button]{cursor:pointer;text-align:center;font:bold 10px Arial, Helvetica, sans-serif;text-decoration:none;text-transform:uppercase;background:url(../../images/button-bg.gif) repeat-x 0 100%;border:1px solid #e7e7e7;margin:0;padding:5px 9px;float:left}
+a.readmore,a.fs-sp1-morein,.adminform button,#adminForm button,.button,button[type=submit],input[type=submit],input[type=button]{cursor:pointer;text-align:center;font:bold 10px Liberation Sans;text-decoration:none;text-transform:uppercase;background:url(../../images/button-bg.gif) repeat-x 0 100%;border:1px solid #e7e7e7;margin:0;padding:5px 9px;float:left}
 
 
 /* misc */
@@ -70,6 +70,8 @@ table.contenttoc{float:right;margin:5px 10px;padding:5px}
 table.contenttoc td{padding:0 5px}
 #adminForm table thead tr,#adminForm table thead tr th{background:#12768E;color:#fff;text-align:left;border-bottom:1px solid #b4b4b4;font-weight:700;padding:5px 10px}
 #adminForm table thead tr th a{color:#FFF}
+.adminForm table thead tr,.adminForm table thead tr th{background:#12768E;color:#fff;text-align:left;border-bottom:1px solid #b4b4b4;font-weight:700;padding:5px 10px}
+.adminForm table thead tr th a{color:#FFF}
 .cat-list-row0 td,.cat-list-row1 td{border-bottom:1px dotted #DADADA;border-left:1px dotted #DADADA;padding:6px 10px}
 .cat-list-row1 td{background:#FBFBFB}
 .cat-list-row0:hover,.cat-list-row1:hover{background:none repeat scroll 0 0 #FFFDF1}
@@ -149,9 +151,11 @@ span.contact-image { margin-bottom:10px; overflow:hidden; display:block }
 /* User Profile */
 #form-login-username label,
 #form-login-password label,
+#form-login-captcha label,
 #form-login-remember label{display:block;float:left;font-weight:700;width:100px;text-align:left}
 
 #form-login-username input,
+#form-login-captcha input,
 #form-login-password input{background:#EAEAEA;border-bottom:1px solid #FFF;border-left:1px solid #C0C0C0;border-top:1px solid #C0C0C0;color:#B7B7B7;height:20px;width:160px;padding:2px 5px;margin:0}
 div.mod-inner fieldset {padding:0!important}
 

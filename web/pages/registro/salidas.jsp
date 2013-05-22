@@ -165,9 +165,9 @@
 									<th><s:text name="salida.acciones" /></th>
 								</tr>
 							</thead>
-							<tbody>			
-								<s:set name="contador" value="0"/>					
-								<s:if test="salidas.size > 0">									
+							<s:set name="contador" value="0"/>					
+							<s:if test="salidas.size > 0">
+							<tbody>																				
 									<!-- Iterador con todas las salidas cargadas. -->
 									<s:iterator value="salidas" status="result_entradas">
 										<!-- Condición que asegura que sólo se impriman datos sin padres. -->
@@ -324,9 +324,9 @@
 												</s:if>
 											</s:iterator>
 										</s:if>
-									</s:iterator>
-								</s:if>
+									</s:iterator>								
 							</tbody>
+							</s:if>
 							<s:else>
 								<tbody>
 									<tr>

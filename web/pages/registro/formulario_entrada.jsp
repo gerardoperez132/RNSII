@@ -176,12 +176,12 @@
 					<table>
 						<tr>
 							<td>
-								<input type="button" id="sub_regresar" class="button_h" value="<s:text name="regresar"></s:text>" class="btn_oculto">
+								<input type="button" id="sub_regresar" class="button_h btn_oculto" value="<s:text name="regresar"></s:text>">
 							</td>							
 						</tr>
 						<tr>
 							<td>
-								<input type="button" id="sub_guardar_entrada" class="button_h" value="<s:property value="#submit"></s:property>" class="btn_oculto">
+								<input type="button" id="sub_guardar_entrada" class="button_h btn_oculto" value="<s:property value="#submit"></s:property>">
 							</td>
 						</tr>
 						<tr>

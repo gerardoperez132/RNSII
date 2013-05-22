@@ -40,7 +40,7 @@
 					<label class="pasos_lbl"><s:text name="configuración" /></label>
 				</div>
 				<s:if test="modificarClave">
-					<form action="modificarClave" method="post" id="formModificarClave" name="modificarClave">
+					<form action="modificarClave" method="post">
 						<div class="administracion_capa">
 							<table>
 								<tr>
@@ -94,8 +94,7 @@
 				</s:if>
 				<s:elseif test="modificarDatos">
 					<div class="administracion_capa">
-						<form action="modificarDatos" method="post"
-							id="formModificarDatos" name="modificarDatos">
+						<form action="modificarDatos" method="post">
 							<table style="margin-top: 50px; margin-left: 20px;">
 								<tr>
 									<td colspan="4"><s:fielderror>

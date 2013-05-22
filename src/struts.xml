@@ -323,10 +323,12 @@
 		</action>
 
 		<action name="registrarFuncionalidad" method="registrarFuncionalidad"
-			class="ve.gob.cnti.rnsii.controlador.FuncionalidadControlador">
+			class="ve.gob.cnti.rnsii.controlador.FuncionalidadControlador">			
+		    <interceptor-ref name="doubleSubmit" />			
 			<result name="success" type="chain">
 				<param name="actionName">prepararEntradas</param>
 			</result>
+			<result name="invalid.token" type="redirectAction">home</result>
 			<result name="input">registro/formulario_funcionalidad.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>

@@ -75,11 +75,10 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 	@Override
 	@SkipValidation
 	public String prepararFormulario() {
-
+		
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
-		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,
-				ENTRADA);
+		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,ENTRADA);
 		tipoDatos = (ArrayList<TipoDato>) read(new TipoDato());
 		complejo = false;
 		tabs_incompletas = getIncompleteFields2(servicio,id_funcionalidad);
@@ -92,8 +91,7 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
-		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,
-				ENTRADA);
+		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,ENTRADA);
 		tipoDatos = (List<TipoDato>) read(new TipoDato());
 		formatos = (ArrayList<Formato>) read(new Formato());
 		complejo = false;
@@ -107,8 +105,7 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
-		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,
-				ENTRADA);
+		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,ENTRADA);
 		tipoDatos = (List<TipoDato>) getSimple();
 		formatos = (ArrayList<Formato>) read(new Formato());
 		complejo = false;
@@ -122,8 +119,7 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
-		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,
-				ENTRADA);
+		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,ENTRADA);
 		tipoDatos = (List<TipoDato>) getComplex();
 		complejo = true;
 		tabs_incompletas = getIncompleteFields2(servicio,id_funcionalidad);
@@ -204,8 +200,7 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
-		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,
-				ENTRADA);
+		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,ENTRADA);
 		tipoDatos = (List<TipoDato>) read(new TipoDato());
 		return SUCCESS;
 	}
@@ -221,21 +216,17 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 		delete(entrada, id_entrada_salida);
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
-		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,
-				ENTRADA);
+		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,ENTRADA);
 		tipoDatos = (List<TipoDato>) read(new TipoDato());
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		return SUCCESS;
 	}
-
-	// TODO hay que borrar con le id del usuario, seria bueno que sea
-	// directamente del metodo del dao
+	
 	@SuppressWarnings("unchecked")
 	@SkipValidation
 	public String eliminarEntradaCompleja() {		
 
-		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,
-				ENTRADA);
+		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,ENTRADA);
 		Iterator<EntradaSalida> iterator = entradas.iterator();
 		while (iterator.hasNext()) {
 			entrada = iterator.next();
@@ -246,8 +237,7 @@ public class EntradaControlador extends DAO implements TipoEntradaSalida,
 		delete(entrada, id_entrada_salida);
 		funcionalidad = (Funcionalidad) read(funcionalidad, id_funcionalidad);
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
-		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,
-				ENTRADA);
+		entradas = (ArrayList<EntradaSalida>) read(ESF, id_funcionalidad,ENTRADA);
 		tipoDatos = (List<TipoDato>) read(new TipoDato());
 		servicio = (ServicioInformacion) read(servicio, id_servicio_informacion);
 		return SUCCESS;
