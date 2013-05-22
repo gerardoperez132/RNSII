@@ -92,7 +92,7 @@
 <p><span><img src="res/images/Icono_telefono.png" border="0" alt="master" title="master" width="12" height="9" style="float: left; margin: 0px;">&nbsp; Master: +58 (212) 509-4211</span></p>
 <p><span><img src="res/images/Icono_atencion_usuario.png" border="0" alt="atención usuario" title="atención usuario" width="12" height="11" style="float: left; margin: 0px;">&nbsp; Atención Usuario: 0500-CNTI-000 (0500-2684-000) ó (0212) 576-6312</span></p>
 <p><a href="https://twitter.com/"><span><img src="res/images/icono_twitter.png" border="0" alt="@cnti" width="35" height="35" style="float: left; margin: 0px;"></span></a>
-<a href="http://identi.ca/cnti" target="_blank"><img src="res/images/icono_identica.png" border="0" style="float: left; margin: 0px;">
+<a href="http://identi.ca/cnti" target="_blank"><img src="res/images/icono_identica.png" alt="identica_cnti" border="0" style="float: left; margin: 0px;">
 </a><a href="http://www.cnti.gob.ve/" target="_blank"><img src="res/images/logoCNTI_blanco.png" border="0" alt="logo cnti" width="78" height="39" style="float: right; margin: 5px;"></a></p>
 <p>&nbsp;</p></div>
 		</div>
