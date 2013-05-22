@@ -38,23 +38,27 @@
   <div class="sp-inner-logo">
                                           
 	<div style="width:50%" class="sp-block  separator">
-	
-		<div id="slidelogo" class="mod-block equal first">	<div class="module">	
+		<div id="slidelogo" class="mod-block equal first">
+		<div class="module">	
 		<div class="mod-wrapper-flat clearfix">		
-					<div class="random-image">
-<a href="http://10.8.6.62/interoperabilidad/index.php">
-	<img src="res/images/logo_original.png" alt="logo_original.png" width="318" height="271"></a>
+		<div class="random-image">
+			<a href="http://10.8.6.62/interoperabilidad/index.php">
+			<img src="res/images/logo_original.png" alt="logo_original.png" width="318" height="271"></a>
+		</div>
+		</div>
+		</div>
+		</div>
+		</div>		
+		<div style="width:50%" class="sp-block ">
+			<div class="mod-block equal last">	
+				<div class="module">	
+				<div class="mod-wrapper-flat clearfix">		
+							
+				</div>
+			</div>
+			</div>
+		</div>                                  
+	</div>
 </div>
-		</div>
-	</div>
-	</div></div>
-	
-	<div style="width:50%" class="sp-block "><div id="slides" class="mod-block equal last">	<div class="module">	
-		<div class="mod-wrapper-flat clearfix">		
-					
-		</div>
-	</div>
-	</div></div>                                  </div>
-                          </div>
 <br>                    
 <div id="sp-userpos" class="clearfix"><br></div>
