@@ -27,7 +27,7 @@ body{color:black;font-family:Liberation Sans;font-size:12px;line-height:150%}
 .sp-block{float:left;display:inline}
 .mod-block {padding:0px}
 .sp-inner{padding-left:10px;padding-right:10px}
-.sp-inner-logo{padding-left:0px;padding-right:0px,width:318px}
+.sp-inner-logo{padding-left:0px;padding-right:0px;width:318px}
 .sp-block .first {margin-left:0px}
 .sp-block .last {margin-right:-10px}
 .sp-block .single {margin-left:-10px;margin-right:-10px}
@@ -91,4 +91,3 @@ a#topofpage{float:right!important;background:none!important;margin:0!important;p
 /* Clearfix */
 .clr{clear:both;display:block;overflow:hidden;visibility:hidden;width:0;height:0}
 .clearfix:after{clear:both;content:' ';display:block;font-size:0;line-height:0;visibility:hidden;width:0;height:0}
-* html .clearfix,:first-child+html .clearfix{zoom:1}
