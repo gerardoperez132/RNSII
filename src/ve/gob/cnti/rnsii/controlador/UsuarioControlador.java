@@ -202,7 +202,7 @@ public class UsuarioControlador extends DAO {
 				if (!clave_nueva.equals(clave_nueva_confirme)) 
 					addFieldError("password", error.getProperties().getProperty("error.login.password.match"));
 				
-				if(!clave_nueva.matches(REGEX_PASS_MEDIUM))
+				if(!clave_nueva.matches(REGEX_PASS_STRONG))
 					addFieldError("password", error.getProperties().getProperty("error.login.password.weak"));	
 								
 			}
