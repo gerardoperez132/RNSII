@@ -5,6 +5,9 @@
 <html>
 <s:i18n name="ve/gob/cnti/rnsii/i18n/messages"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="robots" content="index, follow">
+<meta name="description" content="Registro Nacional de Servicios Interoperables del Estado Venezolano" />
+<meta name="keywords" content="Servicios Interoperables del Estado Venezolano, rnsii, servicios web, interoperabilidad Venezuela, interoperabilidad Gobierno de Venezuela,UDDI Venezuela" />
 <!-- CSS (required) -->
 <link rel="stylesheet" type="text/css" href="/RNSII/pages/res/css/style2.css">
 <link rel="stylesheet" type="text/css" href="res/css/menu_vertical.css">
