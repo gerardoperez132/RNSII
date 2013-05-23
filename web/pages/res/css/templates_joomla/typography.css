@@ -9,8 +9,8 @@
 -----------------------------------------------------------------*/
 
 /* TYPOGRAPHY */
-pre.typo{background:transparent!important;font-size-adjust:none;font-stretch:normal;font:normal normal normal 1em/1.5 "Courier News",monospace;margin:0!important;padding:0!important;border:none!important;border-left:none!important}
-pre,.code{background:#ededed;font-size-adjust:none;font-stretch:normal;font:normal normal normal 1em/1.5 "Courier News",monospace;margin:5px 0 15px;padding:10px 15px;border:1px solid #d3d3d3;border-left:5px solid #888}
+pre.typo{background:transparent!important;font-size-adjust:none;font-stretch:normal;font:normal normal normal 1em/1.5 Liberation Mono;margin:0!important;padding:0!important;border:none!important;border-left:none!important}
+pre,.code{background:#ededed;font-size-adjust:none;font-stretch:normal;font:normal normal normal 1em/1.5 Liberation Mono;margin:5px 0 15px;padding:10px 15px;border:1px solid #d3d3d3;border-left:5px solid #888}
 blockquote{padding:1em 40px 1em 15px}
 blockquote span.open{background:url(../images/typo/quote-open.png) no-repeat left top;padding:3px 0 0 30px}
 blockquote span.close{background:url(../images/typo/quote-close.png) no-repeat bottom right;padding:0 30px 3px 0}
@@ -31,7 +31,7 @@ img.border{background:#f5f5f5;border:1px solid #e5e5e5;padding: 4px}
 img.image-margin{margin:.5em}
 /* Dropcap */
 .dropcap{overflow:hidden}
-.dropcap:first-letter{color:#666;display:block;float:left;font:50px/40px Georgia,Times,serif;padding:4px 8px 0 0}
+.dropcap:first-letter{color:#666;display:block;float:left;font:50px/40px Liberation Serif,serif;padding:4px 8px 0 0}
 /* Tips,Error,Message,Hightlight*/
 p.error{background:url(../images/typo/error.png) no-repeat 0 5px;padding:0 0 5px 24px}
 p.warn{background:url(../images/typo/warn.png) no-repeat 0 5px;padding:0 0 5px 24px}
@@ -72,7 +72,7 @@ ul.add li {background:url(../images/typo/add.png) no-repeat 0 2px;}
 ul.star li {background:url(../images/typo/star.png) no-repeat 0 2px;}
 
 /* Bignumber */
-.bignumber{background:transparent url(../images/typo/bignumber.png) no-repeat 0 0;color:#FFF;display:block;float:left;font-size-adjust:none;font-stretch:normal;font:normal normal bold 20px/normal Arial,sans-serif;margin-right:8px;padding:6px 7px}
+.bignumber{background:transparent url(../images/typo/bignumber.png) no-repeat 0 0;color:#FFF;display:block;float:left;font-size-adjust:none;font-stretch:normal;font:normal normal bold 20px/normal Liberation Sans,sans-serif;margin-right:8px;padding:6px 7px}
 /* Legend */
 .legend-title{background:#fff;display:inline-block;font-size:100%;font-weight:bold;left:7px;margin:0;padding:0 5px;position:absolute;top:-10px}
 .legend{border:1px solid #e7e7e7;margin:20px 0;padding:10px;position:relative}

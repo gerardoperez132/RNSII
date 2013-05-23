@@ -330,7 +330,7 @@ a.footer:hover {
 }
 
 .results th {
-	font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+	font: bold 11px Liberation Sans, Helvetica, sans-serif;
 	color: #4f6b72;
 	border-right: 1px solid #e0e0e0;
 	border-bottom: 1px solid #e0e0e0;
