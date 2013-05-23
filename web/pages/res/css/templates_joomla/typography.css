@@ -15,7 +15,7 @@ blockquote{padding:1em 40px 1em 15px}
 blockquote span.open{background:url(../images/typo/quote-open.png) no-repeat left top;padding:3px 0 0 30px}
 blockquote span.close{background:url(../images/typo/quote-close.png) no-repeat bottom right;padding:0 30px 3px 0}
 blockquote.testimonial{padding:0 0 15px;border-bottom:1px solid #E6E6E6}
-blockquote.testimonial span.author{background:url(../images/typo/author.gif) no-repeat 5px center;display:block;font-weight:bold;margin-top:5px;padding-left:20px}
+blockquote.testimonial span.author{background:url(../images/typo/author.png) no-repeat 5px center;display:block;font-weight:bold;margin-top:5px;padding-left:20px}
 p.quote {background:url(../images/typo/quote.png) no-repeat left top;min-height:35px;padding:3px 0 0 40px;font-size:90%;font-style:italic}
 
 small{font-size:0.85em}
@@ -42,7 +42,7 @@ p.email{background:url(../images/typo/email.png) no-repeat 0 5px;padding:0 0 5px
 p.print{background:url(../images/typo/print.png) no-repeat 0 5px;padding:0 0 5px 24px}
 p.rss{background:url(../images/typo/rss.png) no-repeat 0 5px;padding:0 0 5px 24px}
 p.save{background:url(../images/typo/save.png) no-repeat 0 5px;padding:0 0 5px 24px}
-p.lock{background:url(../images/typo/lock.gif) no-repeat 0 5px;padding:0 0 5px 24px}
+p.lock{background:url(../images/typo/lock.png) no-repeat 0 5px;padding:0 0 5px 24px}
 p.user{background:url(../images/typo/user.png) no-repeat 0 5px;padding:0 0 5px 24px}
 p.new{background:url(../images/typo/new.png) no-repeat 0 5px;padding:0 0 5px 24px}
 p.house{background:url(../images/typo/house.png) no-repeat 0 5px;padding:0 0 5px 24px}
@@ -61,7 +61,7 @@ ol {list-style-type: decimal;list-style-position:inside}
 ol li {margin-left:0;padding:0}
 ul, ul.rss, ul.minus, ul.delete, ul.check, ul.arrow, ul.arrow-2, ul.add, ul.star {list-style:none}
 ul.rss li, ul.minus li, ul.delete li, ul.check li, ul.arrow li, ul.arrow-2 li, ul.add li, ul.star li {margin-left:0;padding:0 0 0 20px}
-ul li {background:url(../images/typo/bullet.gif) no-repeat 0 6px;margin-left:0;padding:0 0 0 10px}
+ul li {background:url(../images/typo/bullet.png) no-repeat 0 6px;margin-left:0;padding:0 0 0 10px}
 ul.rss li {background:url(../images/typo/rss_list.png) no-repeat 0 2px;}
 ul.minus li {background:url(../images/typo/minus.png) no-repeat 0 2px;}
 ul.delete li {background:url(../images/typo/delete.png) no-repeat 0 2px;}

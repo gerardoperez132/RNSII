@@ -1,5 +1,5 @@
 table.result {
-	font: 65% Verdana, Arial, Helvetica, sans-serif;
+	font: 65% Liberations Sans, sans-serif;
 	color: #000;
 	text-align: left;
 	border-collapse: collapse;
@@ -36,18 +36,18 @@ caption {
 	width: 500px;
 	margin: 0;
 	padding: 0;
-	background: #ffffff url(../img/table/bbar.gif) repeat-x;
+	background: #ffffff;
 }
 
 thead th {
 	font-size: 105%;
 	color: #000;
-	background: #ffffff url(../img/table/tbar.gif) repeat-x;
+	background: #ffffff;
 	height: 33px;
 }
 
 thead th:hover {
-	background: #ffffff url(../img/table/tbov.gif) repeat-x;
+	background: #ffffff;
 }
 
 tr {
@@ -65,7 +65,7 @@ td {
 tfoot tr {
 	font-size: 90%;
 	color: #000;
-	background: #ffffff url(../img/table/bbar.gif) repeat-x;
+	background: #ffffff;
 }
 
 tfoot td,tfoot th {
@@ -78,7 +78,7 @@ tfoot td,tfoot th {
 }
 
 table.resultHijos {
-	font: 65% Verdana, Arial, Helvetica, sans-serif;
+	font: 65% Liberations Sans, sans-serif;
 	color: #000;
 	text-align: left;
 	border-collapse: collapse;

@@ -50,7 +50,7 @@ input,select,textarea,.inputbox{border-color:#C1C1C1 #E1E1E1 #E1E1E1;border-righ
 hr{background-color:#CCC;border:#CCC;color:#CCC;height:1px}
 
 /* Button */
-a.readmore,a.fs-sp1-morein,.adminform button,#adminForm button,.button,button[type=submit],input[type=submit],input[type=button]{cursor:pointer;text-align:center;font:bold 10px Liberation Sans;text-decoration:none;text-transform:uppercase;background:url(../../images/button-bg.gif) repeat-x 0 100%;border:1px solid #e7e7e7;margin:0;padding:5px 9px;float:left}
+a.readmore,a.fs-sp1-morein,.adminform button,#adminForm button,.button,button[type=submit],input[type=submit],input[type=button]{cursor:pointer;text-align:center;font:bold 10px Liberation Sans;text-decoration:none;text-transform:uppercase;background:url(../../images/button-bg.png) repeat-x 0 100%;border:1px solid #e7e7e7;margin:0;padding:5px 9px;float:left}
 
 
 /* misc */

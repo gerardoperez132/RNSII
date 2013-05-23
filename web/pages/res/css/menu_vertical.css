@@ -182,12 +182,12 @@ ul.pureCssMenu a:hover ul ul {
 
 ul.pureCssMenu span {
 	display: block;
-	background-image: url(../images/arrow_sub1.gif);
+	background-image: url(../images/arrow_sub1.png);
 	background-position: center right;
 	background-repeat: no-repeat;
 	padding-right: 12px;
 }
 
 ul.pureCssMenu ul span,ul.pureCssMenu a:hover table span {
-	background-image: url(../images/arrow_sub1.gif);
+	background-image: url(../images/arrow_sub1.png);
 }

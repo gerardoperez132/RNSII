@@ -14,7 +14,7 @@
 	text-align: center;
 	line-height: 1.75em;
 	color: #666;
-	background: #CCC url(images/title.gif) top repeat-x;
+	background: #CCC url(images/title.png) top repeat-x;
 	border: solid 1px #FFF;
 	border-bottom: solid 1px #999;
 	cursor: default;
@@ -23,21 +23,21 @@
 }
 
 #popup_content {
-	background: 16px 16px no-repeat url(../img/info.gif);
+	background: 16px 16px no-repeat url(../img/info.png);
 	padding: 1em 1.75em;
 	margin: 0em;
 }
 
 #popup_content.alert {
-	background-image: url(../img/info.gif);
+	background-image: url(../img/info.png);
 }
 
 #popup_content.confirm {
-	background-image: url(../img/important.gif);
+	background-image: url(../img/important.png);
 }
 
 #popup_content.prompt {
-	background-image: url(../img/help.gif);
+	background-image: url(../img/help.png);
 }
 
 #popup_message {

@@ -14,7 +14,7 @@
 #sublevel ul.empty,#sublevel li.empty {height:0px!important;display:none} 
 #hornav ul li,#sublevel ul li{background:none;padding:0;margin:0} 
 /*Top Level*/
-#hornav{background: #efefef url(../images/nav-bg.gif) repeat-x 0 0;padding:0 3px;border-top:1px solid #e5e5e5;border-bottom:1px solid #e5e5e5}
+#hornav{background: #efefef url(../images/nav-bg.png) repeat-x 0 0;padding:0 3px;border-top:1px solid #e5e5e5;border-bottom:1px solid #e5e5e5}
 
 #sublevel{margin-top:-1px}
 
